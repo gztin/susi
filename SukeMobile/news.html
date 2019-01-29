@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="stylesheet" type="text/css" href="./css/style.css">
+<link rel="stylesheet" type="text/css" href="./css/framework.css">
+<link rel="stylesheet" type="text/css" href="./css/owl.theme.css">
+<link rel="stylesheet" type="text/css" href="./css/swipebox.css">
+<link rel="stylesheet" type="text/css" href="./css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="./css/animate.css">
+<link rel="stylesheet" type="text/css" href="./css/swiper.min.css">
+
+<!-- Demo styles -->
+<style>
+    html, body {
+        position: relative;
+        height: 100%;
+    }
+    body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+    }
+    .swiper-container {
+        width: 90%;
+        height: 90%;
+        margin-left: auto;
+        margin-right: auto;
+		margin-top:8%;
+    }
+    .swiper-slide {
+	 width: 100%;
+        height: 100%;
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+</style>
+
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/jqueryui.js"></script>
+	<script type="text/javascript" src="./js/framework.plugins.js"></script>
+	<script type="text/javascript" src="./js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script type="text/javascript" src="./js/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript" src="./js/jquery.smoothdivscroll-1.3-min.js"></script>
+	<script type="text/javascript" src="./js/custom.js"></script>
+
+</head>
+<body> 
+
+<div id="preloader" style="display: none;">
+	<div id="status" style="display: none;">
+    	<p class="center-text">
+			Loading the content...
+            <em>Loading depends on your connection speed!</em>
+        </p>
+    </div>
+</div> 
+    
+<div class="all-elements">
+    <div class="snap-drawers">
+        <!-- Left Sidebar-->
+        <div class="snap-drawer snap-drawer-left">
+            <div class="sidebar-header">
+                <div class="sidebar-left-logo"></div>
+            </div>
+            <div class="clear"></div>
+            <ul class="sidebar-navigation full-bottom">
+                <li><a href="./sukesushi_mobile.html">		<img src="./images/menu_01_welcome.png" class="left-menu-icon" /></a></li>
+				<li><a href="./news.html">		<img src="./images/menu_02_news.png" 	class="left-menu-icon" /></a></li>
+				<li><a href="./about.html">		<img src="./images/menu_03_about.png" 	class="left-menu-icon" /></a></li>
+				<li><a href="./gallery.html">	<img src="./images/menu_04_gallery.png" class="left-menu-icon" /></a></li>
+				<li><a href="./dishes.html">	<img src="./images/menu_05_dishes.png" 	class="left-menu-icon" /></a></li>
+				<li><a href="./service.html">	<img src="./images/menu_06_service.png"class="left-menu-icon" /></a></li>
+				<li><a href="./location.html">	<img src="./images/menu_07_location.png"class="left-menu-icon" /></a></li>
+				<li><a href="./article.html">	<img src="./images/menu_08_articles.png"class="left-menu-icon" /></a></li>
+            </ul>
+            <div class="sidebar-decoration"></div>
+            <div class="sidebar-socials">
+                <a href="https://www.facebook.com/ZhuShouSi?fref=ts" style="margin-left:60px;">
+					<img src="./images/menu_facebook.png" style="36px; height:36px; margin:7px 0 0 7px;" />
+				</a>
+				<a href="../indexmobile.html" style="margin-left:8px;">
+					<img src="./images/menu_pc.png" style="36px; height:36px; margin:7px 0 0 7px;" />
+				</a>
+            </div>
+            <div class="sidebar-decoration"></div>
+            <p class="sidebar-copyright">Copyright 2015. All rights reserved.</p>
+        </div>
+        <!-- Right Sidebar -->
+        <div class="snap-drawer snap-drawer-right">
+            <div class="sidebar-header">
+				<p style="color:#ffffff; font-size:2.4em; font-weight:bolder; padding:16px 0 0 24px;">連絡我們</p>
+			</div>
+			<div style="height:210px;">
+				<p style="color:#ffffff; font-weight:bolder; font-size:1.4em; padding:8px 0 0 24px; margin:0 0 0 0;">您滿意的笑容<br>是我們不斷進步的原動力</p>
+				<p style="color:#bbbbbb; font-size:1.2em; padding:16px 28px 0 24px; margin:0 0 0 0; line-height:1.4em;">請將您寶貴意見分享給我們，讓我們能夠為您提供更好的用餐品質。</p>
+				<p style="color:#bbbbbb; font-size:1.2em; padding:8px 28px 0 24px; margin:0 0 0 0; line-height:1.4em;">您可以在下方留言版留下您想對我們表達的心情或鼓勵，我們會盡快地向您回覆。</p>
+			</div>
+			<div style="height:260px;">
+				<div style="position: absolute; height: 40px; width: 100%; background-color: #000000;">
+				</div>
+				<div style="height:100%;">
+					<iframe src="../contact_test.html" style="height:100%; width:100%;" scrolling="no" frameborder="0"></iframe>
+				</div>
+			</div>
+            <p class="sidebar-copyright" style="margin:0 0 0 12px;">Copyright 2015. All rights reserved.</p>
+        </div>
+    </div>
+    
+    <div class="page-header">
+        <div class="open-left"></div>
+        <div class="page-logo"></div>
+        <div class="open-right"></div>
+		<div class="decoration"></div>
+    </div>
+    
+    <!-- Page Content-->
+    <div id="content" class="snap-content" style="background-color: #dddddd; margin-top:60px;">
+
+			<div class="swiper-container" style="height:480px; width: 300px;">
+				<div class="swiper-wrapper"style="height:100%; width:100%;">
+					<div class="swiper-slide" style="height:100%; width:100%;"><img src="./images/news_poster_01.jpg" style="height:100%; width:100%;"></div>
+					<div class="swiper-slide" style="height:100%; width:100%;"><img src="./images/news_poster_02.jpg" style="height:100%; width:100%;"></div>
+					<div class="swiper-slide" style="height:100%; width:100%;"><img src="./images/news_poster_03.jpg" style="height:100%; width:100%;"></div>
+					<div class="swiper-slide" style="height:100%; width:100%;"><img src="./images/news_poster_01.jpg" style="height:100%; width:100%;"></div>
+					<div class="swiper-slide" style="height:100%; width:100%;"><img src="./images/news_poster_02.jpg" style="height:100%; width:100%;"></div>
+				</div>
+				<!-- Add Arrows -->
+
+			</div>
+			<div class="swiper-button-next" style="right:4px; width: 24px; height: 24px; background-size: 24px 24px; background-image:url(./images/arrow_right.png)"></div>
+			<div class="swiper-button-prev" style="right:4px; width: 24px; height: 24px; background-size: 24px 24px; background-image:url(./images/arrow_left.png)"></div>
+			<div style="width:100%; text-align:center; margin:4% auto 4% auto;">
+				<a href="./about.html"><img src="./images/02_to_next_page.png" style="display:inline-block; vertical-align:middle; width:31%; max-width:85px;"></a>
+			</div>
+		<!--
+            <div class="decoration"></div>
+            <div class="container" style="margin: 84px 0 0 0;">
+                <img src="./images/03_history.png" style="height:50%; width:50%;">
+				<p style="margin:12px 0 12px 0; color:#ffffff; line-height:1.6em; font-size:1.6em; font-weight: bolder;">
+					品味當季最海洋的鮮甜風味
+				</p>
+                <p style="margin:12px 0 20px 0; color:#5b5b5b; line-height:1.6em; font-size:1.2em;">
+                    助壽司板前長阿助師傅歷經廿年學藝生涯，在跟隨多位日本料理名店老師傅歷練之中打下堅實的日本料理基礎與功夫。由於技術的傳承交替中一路受到許多提攜，進而轉念開啟了投入經營的想法，秉持著提升自我和提高社會責任的理念，一圓成立自己團隊並同心經營的夢想。
+2012年助壽司創業，阿助師傅用一身扎實的料理技藝，以親民為初衷，搭配每日嚴選食材，堅持提供「新鮮、平價、 美味」的日式料理，並以高雄首創的豪華海鮮丼飯為特色打出知名度。助壽司用對待料理的究極精神，讓消費者能從最細微的感動中，品嘗屬於當季最鮮美甘甜的海洋風味。
+鑒於現代社會對於家庭日的注重，及工商聚餐的需求，2015年助壽司拓展第二家分店，不僅增加包廂提供合菜以服務團體和大家庭，更要以自身自豪的強項──最新鮮的各式食材──針對不同消費需求，提供客製化的特色料理。
+                </p>
+            </div>
+            <div class="decoration"></div>
+			 <img src="./images/03_insists.png" style="height:50%; width:50%;">
+				<p style="margin:12px 0 12px 0; color:#ffffff; line-height:1.6em; font-size:1.6em; font-weight: bolder;">
+					食材若是五十分，而人能有個三十分，那我們再多磨磨技術，再往上追求提升一點服務，那就慢慢圓滿了。
+				</p>
+                <p style="margin:12px 0 20px 0; color:#5b5b5b; line-height:1.6em; font-size:1.2em;">
+                    板前長阿助師傅在漫長的學徒生涯中，累積出扎實的手藝與豐富的經驗，也因而瞭解「人」的重要性。助壽司除了重視對顧客的服務，也相當關注和員工的互動關係，阿助師傅希望在這群員工陪伴自己圓夢的過程中，不僅要發掘志同道合的合作夥伴，更要帶領這群好夥伴，彼此同心合力傳遞助壽司的真材實料的優質美味及服務精神。
+未來助壽司期許能往服務導向發展，落實服務和提升阿助師傅對於善盡社會責任的理念，繼續用誠摯的雙手料理出一道道鮮香的自慢味。
+                </p>
+				
+				
+			-->
+
+    </div>
+</div>
+
+
+<script src="./js/swiper.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        slidesPerView: 1,
+        paginationClickable: true,
+        spaceBetween: 30,
+        loop: true
+    });
+</script>
+</body></html>

@@ -1,0 +1,40 @@
+body {
+        font: Georgia, Serif;
+}
+h1, h2 {
+    color: #fff;
+    text-shadow: -2px 2px 0 #000;
+    text-align: center;
+    margin: 10px;
+}
+h1 {
+    font-size: 50px;
+}
+h2 {
+    font-size: 30px;
+}
+h3 {
+    font-size: 18px;
+    margin: 3px 5px;
+    color: #333;
+}
+.toolbar {
+    text-align:center;
+}
+#container {
+    margin: 20px auto;
+}
+#container > div {
+    -webkit-box-shadow: 0 4px 15px -5px #555;
+    box-shadow: 0 4px 15px -5px #555;
+    background-color: #fff;
+    width:220px;
+    padding:2px;
+    border:2px solid rgba(0,0,0,0.8);
+}
+#container > div img {
+    padding: 0px;
+    display: block;
+    width: 80%;
+	margin-left:10%;
+}
