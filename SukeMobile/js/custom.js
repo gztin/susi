@@ -75,16 +75,7 @@ $(document).ready(function() {
 		return false;
 	});
 		
-	// $('.open-right').click(function() {
- //        $('.page-header').toggleClass('page-header-left');
- //        $('.show-left-sidebar, .show-right-sidebar').toggleClass('hide-sidebar-buttons');
-	// 	if( snapper.state().state=="right" ){
-	// 		snapper.close();
-	// 	} else {
-	// 		snapper.open('right');
-	// 	}
-	// 	return false;
-	// });
+	
     
     $('#content, .snap-content, .content, .container, .sidebar-logo-close').click(function(){
         $('.show-left-sidebar, .show-right-sidebar').removeClass('hide-sidebar-buttons');
