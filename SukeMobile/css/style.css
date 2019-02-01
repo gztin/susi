@@ -231,7 +231,7 @@ h6{
     font-size:14px;
 }
 
-.open-right{
+.open-right1{
 	background-image: url(../images/icon_mail.png);
     background-size: 45% 35%;
     background-repeat: no-repeat;
@@ -242,7 +242,7 @@ h6{
     border-left:solid 1px rgba(0,0,0,0.1);
 }
 
-.open-right i{
+.open-right1 i{
     text-align:center;
     line-height:60px;
     width:60px;
