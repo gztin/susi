@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="助壽司日式料理，高雄在地的美味，平價日式丼飯、壽司、生魚片">
+<meta name="keywords" content="助壽司日式料理，高雄在地的美味，平價日式丼飯、壽司、生魚片">
+<meta property="og:image" content="https://www.sukesushi.com/images/index_background.jpg"></meta>
+<title>助壽司 獻給您最親切的服務與美味</title>
+
+<script>
+var tap = ("ontouchstart" in document.documentElement);
+if(tap == true){
+	window.location = "./SukeMobile/sukesushi_mobile.html";
+	//window.location="http://192.168.0.101:8090/SukeMobile/index.html";
+}
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="./images/style.css" media="screen" title="products (screen)">
+<link rel="stylesheet" type="text/css" href="./images/magnific-popup.css">
+<link rel="stylesheet" href="./images/demo.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+<style type="text/css">
+body {
+-moz-user-select : none;
+-webkit-user-select: none;
+}
+</style>
+
+<script type="text/javascript" src="./images/jquery.js"></script>
+
+<script type="text/javascript" src="./images/jquery.scroll.events.js"></script>
+<script type="text/javascript" src="./images/jquery.touchSwipe.js"></script>
+<script type="text/javascript" src="./images/jquery.lazyload.js"></script>
+<script type="text/javascript" src="./images/detectmobilebrowser.c.js"></script>
+<script type="text/javascript" src="./images/site.js"></script>
+
+<script type="text/javascript" src="./images/jquery.localscroll-min.js"></script>
+<script type="text/javascript" src="./images/easySlider1.7.c.js"></script>
+<script type="text/javascript" src="./images/jquery.shadowbox.js"></script>
+<script type="text/javascript" src="./images/jquery.bxSlider.min.js"></script>
+<script src='http://connect.facebook.net/en_US/all.js'></script>
+<script type="text/javascript" src="./images/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="./images/StackBlur.js"></script>
+<script type="text/javascript" src="./images/jquery.gaussian-blur.js"></script>
+<script type="text/javascript" src="./images/scroll.js"></script>
+
+
+
+
+<!-- 造成滑移後會瞬間跳回前一頁 -->
+<!-- <script type="text/javascript">
+jQuery(window).load(function(){ //we're using load because if we'll use ready then we can't get the image size
+	$("#closeTV").click(function(){
+		$("#TV").slideUp();
+		var youtubeInit = "https://www.youtube.com/embed/z7K0Iq9CUFA";
+		document.getElementById('youtubevideo').setAttribute('src', youtubeInit);
+	});
+});
+
+function iEsc(){ return false; }
+function iRec(){ return true; }
+function DisableKeys() {
+	if(event.ctrlKey || event.shiftKey || event.altKey) {
+		window.event.returnValue=false;
+		iEsc();
+	}
+}
+document.ondragstart=iEsc;
+document.onkeydown=DisableKeys;
+document.oncontextmenu=iEsc;
+
+if (typeof document.onselectstart !="undefined"){
+	document.onselectstart=iEsc;
+}else{
+	document.onmousedown=iEsc;
+	document.onmouseup=iRec;
+}
+
+function DisableRightClick(qsyzDOTnet){
+	if (window.Event){
+		if (qsyzDOTnet.which == 2 || qsyzDOTnet.which == 3){
+			iEsc();
+		}
+	}else if (event.button == 2 || event.button == 3){
+		event.cancelBubble = true
+		event.returnValue = false;
+		iEsc();
+	}
+}
+</script> -->
+
+<!-- 造成滑移後畫面閃動 -->
+<!-- <script type="text/javascript" src="./images/jquery.scrollTo-min.js"></script> -->
+
+
+
+<script type="text/javascript" src="./images/coin-slider.js"></script>
+<link rel="stylesheet" href="./images/coin-slider-styles.css" type="text/css" />
+
+
+
+<script type="text/javascript">
+	Shadowbox.init();
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".showImage").magnificPopup({type:'image'});
+
+	var tap = ("ontouchstart" in document.documentElement);
+	if(tap == true){
+		$("#galleryparallex").width(1080);
+		$('#gallery').coinslider({width:1080, height:1080, navigation:false, links:false, hoverPause:false, delay:5600});
+	}else{
+		$('#gallery').coinslider({width:1920, height:1080, navigation:false, links:false, hoverPause:false, delay:5600});
+	}
+	
+	$("#TV").slideUp();
+	$("img.lazy").lazyload();
+});
+
+$(function(){
+	var youtubeInit = "https://www.youtube.com/embed/z7K0Iq9CUFA";
+	var youtubeHref01 = "https://www.youtube.com/embed/z7K0Iq9CUFA";
+	var youtubeHref02 = "https://www.youtube.com/embed/_BUH3tccY84";
+	var youtubeHref03 = "https://www.youtube.com/embed/zeMtWtoJz9s";
+	var youtubeHref04 = "https://www.youtube.com/embed/SDxA8lBYZmk";
+	var youtubeHref05 = "https://www.youtube.com/embed/DaY5CsQyY-k";
+	
+	
+	
+
+	//$(".tv").hide();
+	
+	var thumbSize = 'large',			// 設定要取得的縮圖是大圖還是小圖
+										// 大圖寬高為 480X360；小圖寬高為 120X90
+		imgWidth = '120',				// 限制圖片的寬
+		imgHeight = '90',				// 限制圖片的高
+		swfWidth = '640',				// 指定 YouTube 影片的寬
+		swfHeight = '480',				// 指定 YouTube 影片的高
+		autoPlay = '&autoplay=0',		// 是否載入 YouTube 影片後自動播放；若不要自動播放則設成 0
+		fullScreen = '&fs=1',			// 是否允許播放 YouTube 影片時能全螢幕播放
+		$video = $('.video'),			// 用來放置 Youtube 影片的區塊
+		_videoOffset = $video.offset(),	// 取得 $video 區塊的座標
+		_speed = 600;					// 縮圖移動到 $video 區塊的速度
+	
+	var _first = true;
+	
+	$('.playlist>li>a').each(function(){
+		// 取得要連結轉換的網址及訊息內容
+		var _this =  $(this),
+			_url = _this.attr('href'),
+			_info = _this.text(),
+			_type = (thumbSize == 'large') ? 0 : 2;
+		
+		// 取得 vid
+		var vid = _url.match('[\\?&]v=([^&#]*)')[1];
+
+		// 取得縮圖
+		var thumbUrl = "http://img.youtube.com/vi/"+vid+"/" + _type + ".jpg";
+		
+		// 把目前超連結的內容轉換成圖片並加入 click 事件
+		_this.html('<img src="'+thumbUrl+'" alt="'+_info+'" title="'+_info+'" width="'+imgWidth+'" height="'+imgHeight+'" />').click(function(){
+			return false;
+		}).focus(function(){
+			this.blur();
+		}).children('img').click(function(){
+		
+		
+		
+			var autoPlayVideo = '?autoplay=1';
+			//var loc = this.parentNode.href;
+			
+			var parentId = this.parentNode.id;
+			switch(parentId){
+				case "youtubehref01":
+					var loc = youtubeHref01;
+					break;
+				case "youtubehref02":
+					var loc = youtubeHref02;
+					break;
+				case "youtubehref03":
+					var loc = youtubeHref03;
+					break;		
+				case "youtubehref04":
+					var loc = youtubeHref04;
+					break;
+				case "youtubehref05":
+					var loc = youtubeHref05;
+					break;
+			}
+			
+			
+			var newHref = loc + autoPlayVideo;
+			document.getElementById('youtubevideo').setAttribute('src', newHref);
+			$("#TV").slideDown();
+			return false;
+		});
+	});
+
+	function showYoutube(vid){
+		// 當點擊到圖片時就轉換成 YouTube 影片
+		var swf  = '<object width="'+swfWidth+'" height="'+swfHeight+'">';
+		swf += '<param name="movie" value="http://www.youtube.com/v/'+vid+autoPlay+fullScreen+'"></param>';
+		swf += '<param name="wmode" value="transparent"></param>';
+		swf += (fullScreen == '&fs=1') ? '<param name="allowfullscreen" value="true"></param>' : '';
+					
+		swf += '<embed type="application/x-shockwave-flash" src="http://www.youtube.com/v/'+vid+autoPlay+fullScreen+'" ';
+		swf += (fullScreen == '&fs=1') ? 'allowfullscreen="true" ' : '';
+		swf += 'wmode="transparent" width="'+swfWidth+'" height="'+swfHeight+'"></embed>';
+
+		swf += '</object/>';
+					
+		return swf;
+	}
+
+	// 先載入第一個影片
+	//$('.playlist>li>a').eq(0).children('img').click();
+
+	// 變更影片播放為自動播放
+	autoPlay = '&autoplay=1';
+	
+});
+</script>
+
+<style >
+#mubox:hover{
+	-webkit-transition:0.5s; 
+	-o-transition:0.5s; 
+	-moz-transition:0.5s; 
+	transition:0.5s; 
+	right:0px;
+}
+img.mfp-img {
+	/*width:660px; */
+	/*height:900px;*/
+	display:block;
+	line-height:0;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+#submitImg:hover{
+	cursor:pointer;
+}
+#imgmap01:hover{
+	cursor:pointer;
+}
+#imgmap02:hover{
+	cursor:pointer;
+}
+#pmap01:hover{
+	cursor:pointer;
+}
+#pmap02:hover{
+	cursor:pointer;
+}
+#pmap03:hover{
+	cursor:pointer;
+}
+#accessFB:hover{
+	cursor:pointer;
+}
+
+ul.playlist {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+ul.playlist li {
+	margin: 0 3px;
+	float: left;
+}
+ul.playlist li a img {
+	border: 0;
+	vertical-align: middle;
+}
+
+.tv {
+	padding: 10px;
+	width: 640px;
+	height: 480px;
+}
+.video {
+	float: left;
+	width: 640px;
+	height: 480px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!--============================== wrap start ==============================-->
+<div class="wrap">
+	<div id="mubox" >
+		<div class="logo" style="height:56%; width:auto;"><img src="./images/menu_sukesushi.png" style="height:auto; max-height:100%; width:auto; max-width:100%;"><div id="test"></div></div>
+		<ul id="menu" style="left:auto; right:12%;">
+			<li style="width:126px; height:32px; margin-bottom:8px;" id="li_welcome">
+				<a class="welcome" href="#">welcome</a>
+				<div style="position:absolute; width:64px; height:16px; right:106px; top:8px;" id="wrap_welcome"><img src="./images/menu_ct_welcome.png" style="width:100%; height:100%;"></div>
+			</li>
+			<li style="width:126px; height:32px; margin-bottom:8px;" id="li_news">
+				<a class="news" href="#">news</a>
+				<div style="position:absolute; width:64px; height:16px; right:106px; top:48px;" id="wrap_news"><img src="./images/menu_ct_news.png" style="width:100%; height:100%;"></div>
+			</li>
+			<li style="width:126px; height:34px; margin-bottom:8px;" id="li_about">
+				<a class="about_us" href="#">about</a>
+				<div style="position:absolute; width:64px; height:16px; right:106px; top:88px;" id="wrap_about"><img src="./images/menu_ct_about.png" style="width:100%; height:100%;"></div>
+			</li>
+			<li style="width:126px; height:32px; margin-bottom:8px;" id="li_gallery">
+				<a class="gallerysection" href="#">gallery</a>
+				<div style="position:absolute; width:64px; height:16px; right:106px; top:129px;" id="wrap_gallery"><img src="./images/menu_ct_gallery.png" style="width:100%; height:100%;"></div>
+			</li>
+			<li style="width:126px; height:32px; margin-bottom:8px;" id="li_dishes">
+				<a class="dishes" href="#">dishes</a>
+				<div style="position:absolute; width:64px; height:16px; right:106px; top:168px;" id="wrap_dishes"><img src="./images/menu_ct_dishes.png" style="width:100%; height:100%;"></div>
+			</li>
+			<li style="width:126px; height:32px; margin-bottom:8px;" id="li_service">
+				<a class="service" href="#">service</a>
+				<div style="position:absolute; width:64px; height:16px; right:106px; top:210px;" id="wrap_service"><img src="./images/menu_ct_service.png" style="width:100%; height:100%;"></div>
+			</li>
+			<li style="width:126px; height:32px; margin-bottom:8px;" id="li_location">
+				<a class="location" href="#">location</a>
+				<div style="position:absolute; width:64px; height:16px; right:106px; top:250px;" id="wrap_location"><img src="./images/menu_ct_location.png" style="width:100%; height:100%;"></div>
+			</li>
+		</ul>
+		<div class="menuarrow" style="top:56%;"><img src="./images/menu_arrow.png" style="width:100%; hieght:100%;"></div>
+		<div class="icomu" id="icomu"><img src="./images/menu_share_us.png" style="width:100%; hieght:100%;"></div>
+		<div class="tolamer" id="tolamer" style="cursor:pointer;"><a target="_blank"></a></div>
+	</div>
+</div>
+<!--============================== wrap close ==============================-->
+
+<div id="wrapper" style="height:7500px; background-color:#ffffff;">
+
+<!--============================== wrapcon start ==============================-->
+<div class="wrapcon" id="inner">
+
+	<!--============================== aquamarine start ==============================-->
+	<div class="mainbox idx access" id="home" menumark="cat">
+	  <div class="parallex">
+			<div class="mainbg" data-parallex-distance="2">
+				<img src="./images/index_background.jpg" style="width:100%; min-width:1560px;">
+			</div>
+			<div class="welcomeline" style="width:100%; left:0; top:30%;">
+				<img src="./images/index_title.png" style="width:100%; min-width:640px;">
+			</div>
+			<div class="hline" style="height:160px; width:100%; min-width: 640px; position:absolute; top:auto; bottom:20%; text-align:center; left:-32px;">
+				<div class="goto-News" style="width: 10%; display: inline-block; vertical-align:middle;">
+					<a class="unit1" href="#news" style="left: auto; bottom: auto; height: auto; width: 3%; margin-left: 3.4%;"><img src="./images/icon_pagedown.png" style="width: 100%;"></a>
+					<img src="./images/index_to_news.png" style="width: 100%; margin: 40% 0 0 0;">
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!--============================== aquamarine close ==============================-->
+	
+	<!--============================== agenda start ==============================-->
+	<div class="mainbox idx agenda" id="news" menumark="cat">
+		<div class="mainbg"><img src="./images/news_background.jpg" style="min-height:auto; min-width:1560px;"></div>
+		<div class="ptbg" data-parallex-distance="1.5" style="position:relative; z-index:5; margin:36% auto auto 2%; width:14%;">
+			<a href="./article.html"><img src="./images/news_to_articles.png" style="width:100%; margin-left:2%;"></a>
+		</div>
+		<div class="ptslide" style="top:8%;">
+			<div class="viewport">
+				<div class="title" style="width: 20%; margin:-96px 0 0 -24px;"><img src="./images/news_title.png"  style="width:90%;"></div>
+				<div class="bx-wrapper" style="width:1800px; position:relative; height:720px;">
+					<div class="bx-window" style="position:relative; overflow:hidden; width:74%; height:780px; margin-left:4%;">
+						<ul class="overview" id="slider3" style="width:999999px; position:relative; left:0; height:640px;">
+							<li class="pager" style="width:440px; height:640px; float:left; list-style:none;"><a class="showImage" href="./images/news_poster_01.jpg" style="width:96%; height:96%;"><img class="lazy" data-original="./images/news_poster_01.jpg" style="width:96%; height:96%;" /></a></li>
+							<li class="pager" style="width:440px; height:640px; float:left; list-style:none;"><a class="showImage" href="./images/news_poster_02.jpg" style="width:96%; height:96%;"><img class="lazy" data-original="./images/news_poster_02.jpg" style="width:96%; height:96%;" /></a></li>
+							<li class="pager" style="width:440px; height:640px; float:left; list-style:none;"><a class="showImage" href="./images/news_poster_03.jpg" style="width:96%; height:96%;"><img class="lazy" data-original="./images/news_poster_03.jpg" style="width:96%; height:96%;" /></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hline" style="height:160px; width:100%; min-width: 640px; position:absolute; top:auto; bottom:15%; text-align:center; left:-32px;">
+			<div class="goto-About" style="width: 10%; display: inline-block; vertical-align:middle;">
+				<a class="unit1" href="#about" style="left: auto; bottom: auto; height: auto; width: 3%; margin-left: 3.4%;" id="btnOpacity">
+					<img src="./images/icon_pagedown.png" style="width: 100%;">
+				</a>
+				<img src="./images/news_to_about.png" style="width: 100%; margin: 40% 0 0 0;">
+			</div>
+		</div>
+	</div>
+	<!--============================== agenda close ==============================-->
+	
+	<!--============================== about start ==============================-->
+	<div class="mainbox idx" id="about" style="height:1080px;">
+	    <div class="parallex" style="text-align: center; min-width: 640px;">
+			<div class="mainbg " data-parallex-distance="2" style="top: -1.5px;">
+				<img src="./images/about_background.jpg" style="width:100%; min-width:1560px;" id="opacityImg">
+			</div>
+			<div class="mainbg" data-parallex-distance="2" style="top: -1.5px;">
+				<canvas id="canvas"></canvas>
+			</div>
+			<div class="ptbg" data-parallex-distance="1.5" style="position: relative; z-index: 5; top: 35px; width: 100%; float: left;">
+				<img src="./images/about_title1.png" style="width: 40%; margin-left: -12%;">
+			</div>
+			<div style="display:inline-block; width: 80%; float: left; margin: 2% auto auto 10%;">
+				<div style="position: relative; width: 100%; top: 26%; z-index: 3; float: left; margin-top: 1%;">
+					<div style="position: relative; width: 20%; left: 20px; float: left;">
+						<img src="./images/about_our_history.png" style="width:90%;" />
+					</div>
+					<div style="position: relative; width:64%; float: left; margin: 2.5% auto auto 2.5%;">
+						<img src="./images/about_our_history_text.png" style="width:100%;" />
+					</div>
+				</div>
+				<div style="position: relative; width: 100%; z-index: 3; float: left; margin-top: 1%;">
+					<div style="position:relative; width:20%; left:12px; float: left;">
+						<img src="./images/about_our_insists.png" style="width:90%;" />
+					</div>
+					<div style="position:relative; width:64%; float: left; margin: 2.5% auto auto 2.5%;">
+						<img src="./images/about_our_insists_text.png" style="width:100%;" />
+					</div>
+				</div>
+			</div>
+	    </div>
+		<div style="text-align:center; height:100%; width: 100%; position: absolute;"></div>		
+		<div class="hline" style="height:160px; width:100%; min-width: 640px; position:absolute; top:auto; bottom:8%; text-align:center; left:-32px;">
+			<div class="goto-Gallery" style="width: 10%; display: inline-block; vertical-align:middle;">
+				<a class="unit1" href="#gallery" style="left: auto; bottom: auto; height: auto; width: 3%; margin-left: 3.4%;"><img src="./images/icon_pagedown.png" style="width: 100%;"></a>
+				<img src="./images/about_to_gallery.png" style="width: 100%; margin: 40% 0 0 0;">
+			</div>
+		</div>
+	</div>
+	<!--============================== about close ==============================-->
+
+	<!--============================== gallery start ==============================-->
+	<div class="mainbox idx" id="gallerysection">
+		<div class="parallex" id="galleryparallex">
+			<div data-parallex-distance="2" id="gallery">
+				<a><img src="./images/gallery_001.jpg" style="width:100%;"></a>
+				<a><img src="./images/gallery_002.jpg" style="width:100%;"></a>
+				<a><img src="./images/gallery_003.jpg" style="width:100%;"></a>
+				<a><img src="./images/gallery_004.jpg" style="width:100%;"></a>
+				<a><img src="./images/gallery_005.jpg" style="width:100%;"></a>
+				<a><img src="./images/gallery_006.jpg" style="width:100%;"></a>
+				<a><img src="./images/gallery_007.jpg" style="width:100%;"></a>
+				<a><img src="./images/gallery_008.jpg" style="width:100%;"></a>
+				<a><img src="./images/gallery_009.jpg" style="width:100%;"></a>
+				<a><img src="./images/gallery_010.jpg" style="width:100%;"></a>
+				<a><img src="./images/gallery_011.jpg" style="width:100%;"></a>
+				<a><img src="./images/gallery_012.jpg" style="width:100%;"></a>
+			</div>
+		</div>
+		<div class="hline" style="width:100%; position:absolute; top:16%; text-align:center; left: -32px;" id="TV">
+			<div class="" style="background: rgba(16, 16, 16, 0.8); display:inline-block; position:relative; padding:18px;">
+				<a style="left:auto; right:0px; top:-0.6%;" id="closeTV">
+					<img src="./images/fancybox_sprite.png" style="width:36px; height:36px;"></a>
+				<iframe id="youtubevideo" width="640px;" height="480px;" src="https://www.youtube.com/watch?v=z7K0Iq9CUFA&feature=youtu.be" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+		
+		<div class="hline" style="height:120px; width:100%; position:absolute; top:65%; text-align:center; background: rgba(16, 16, 16, 0.3); left: -32px;">
+			<ul class="playlist" style="display:inline-block; margin-top:12px">
+				<li><a class="showImage" style="display:inline; position:static;" id="youtubehref01" href="https://www.youtube.com/watch?v=z7K0Iq9CUFA"></a></li>
+				<li><a class="showImage" style="display:inline; position:static;" id="youtubehref02" href="https://www.youtube.com/watch?v=_BUH3tccY84"></a></li>
+				<li><a class="showImage" style="display:inline; position:static;" id="youtubehref03" href="https://www.youtube.com/watch?v=zeMtWtoJz9s"></a></li>
+				<li><a class="showImage" style="display:inline; position:static;" id="youtubehref04" href="https://www.youtube.com/watch?v=SDxA8lBYZmk"></a></li>
+				<li><a class="showImage" style="display:inline; position:static;" id="youtubehref05" href="https://www.youtube.com/watch?v=DaY5CsQyY-k"></a></li>
+			</ul>
+		</div>
+		<div class="hline" style="height:160px; width:100%; min-width: 640px; position:absolute; top:auto; bottom:8%; text-align:center; left:-32px;">
+			<div class="goto-Dishes" style="width: 10%; display: inline-block; vertical-align:middle;">
+				<a class="goto-Location" class="unit1" href="#dishes" style="left: auto; bottom: auto; height: auto; width: 3%; margin-left: 3.4%;" id="btnWave"><img src="./images/icon_pagedown.png" style="width: 100%;"></a>
+				<img src="./images/gallery_to_dishes.png" style="width: 100%; margin: 40% 0 0 0;">
+			</div>
+		</div>
+	</div>
+	<!--============================== gallery close ==============================-->
+	
+	<!--============================== instantly_ct start ==============================-->
+	<div class="mainbox unit2" id="dishes">
+		<div class="mainbg" data-parallex-distance="2">
+			<img src="./images/news_background.jpg" style="min-height:auto; min-width:1560px;">
+		</div>
+		<div class="parallex" style="text-align:center;">			
+			<div class="ptbg" data-parallex-distance="2.0" style="width:100%; z-index:5;">
+				<img src="./images/dishes_title.png" style="width:60%; margin-bottom:1%;">
+			</div>			
+			<div class="ptbg" data-parallex-distance="1.5" style="width:100%; top:30px;">
+				<div class="ptslide" style="position:static; margin-top: 6%;">
+					<div class="viewport" id="slider" style="position:absolute; overflow:hidden; width:100%; height:640px;">
+						<ul class="overview" style="width:10339px; margin-left:-5000px;">
+							<li><img src="./images/dishes_pic_01.png" style="width:70%;"></li>
+							<li><img src="./images/dishes_pic_02.png" style="width:70%;"></li>
+							<li><img src="./images/dishes_pic_03.png" style="width:70%;"></li>
+							<li><img src="./images/dishes_pic_04.png" style="width:70%;"></li>
+							<li><img src="./images/dishes_pic_05.png" style="width:70%;"></li>
+							<li><img src="./images/dishes_pic_06.png" style="width:70%;"></li>
+							<li><img src="./images/dishes_pic_07.png" style="width:70%;"></li>
+							<li><img src="./images/dishes_pic_08.png" style="width:70%;"></li>
+							<li><img src="./images/dishes_pic_09.png" style="width:70%;"></li>
+							<li><img src="./images/dishes_pic_10.png" style="width:70%;"></li>
+							<li><img src="./images/dishes_pic_11.png" style="width:70%;"></li>
+							<li><img src="./images/dishes_pic_12.png" style="width:70%;"></li>
+						</ul>
+					</div>
+					<img src="./images/dishes_text_02.png" style="width:14%; z-index:4; position: absolute; left:70%; top:520%;">
+				</div>
+			</div>
+		</div>
+		<div class="dishesptbg" data-parallex-distance="1.5" style="width:30%; z-index:4; bottom:0;">
+			<img src="./images/dishes_text_01.png" style="width:100%; margin-left:4%; float: left;">
+			<img id="wave" src="./images/dishes_wave.png" style="width:110%; left:0px; float: left; position: relative; bottom:0px; left: -110%;">
+		</div>
+		<div class="hline" style="height:160px; width:100%; min-width: 640px; position:absolute; top:auto; bottom:10%; text-align:center; left:-32px; z-index: 5;">
+			<div class="goto-Service" style="width: 12%; display: inline-block; vertical-align:middle;">
+				<a class="unit1" href="#service" style="left: auto; bottom: auto; width: 3%; margin-left: 4.6%; position: absolute;"><img src="./images/icon_pagedown.png" style="width: 100%; margin-top:30%;"></a>
+				<img src="./images/dishes_to_service.png" style="width: 100%; margin: 40% 0 0 0;">
+			</div>
+		</div>
+	</div>
+	<!--============================== instantly_ct close ==============================-->
+	
+	<!--============================== service start ==============================-->	
+	<div class="mainbox unit2" id="service">
+		<div class="parallex">
+
+			
+			<div class="mainbg" data-parallex-distance="2">
+				<img src="./images/service_background.jpg" style="width:100%; min-width:1560px; min-height:auto;">
+			</div>
+			
+			<div id="ad">
+	        	<div id="view">
+	            	<ul>
+	                	<li><img id="pic3" src="./images/serevice_staff_01.jpg" width="287" height="403" /></li>
+	                    <li><img id="pic2" src="./images/serevice_staff_02.jpg" width="287" height="403" /></li>
+	                    <li><img id="pic1" src="./images/serevice_staff_03.jpg" width="287" height="403" /></li>
+	                    <li><img id="pic4" src="./images/serevice_staff_04.jpg" width="287" height="403" /></li>
+	                    <li><img id="pic5" src="./images/serevice_staff_05.jpg" width="287" height="403" /></li>
+	                    <li><img id="pic6" src="./images/serevice_staff_06.jpg" width="287" height="403" /></li>
+	                    <li><img id="pic7" src="./images/serevice_staff_07.jpg" width="287" height="403" /></li>
+	                    <li><img id="pic8" src="./images/serevice_staff_08.jpg" width="287" height="403" /></li>
+	                    <li><img id="pic9" src="./images/serevice_staff_09.jpg" width="287" height="403" /></li>
+	                </ul>
+	        	</div>
+   	 		</div><!--end ad-->
+
+
+			<!-- 壽司師傅 -->
+			<style>
+				#ad{
+					width:921px;
+					height:403px;
+					padding-top:299px;
+					margin:0 auto;
+					position:relative;
+					overflow:hidden;
+					margin-left: 100px;
+					z-index: 999;
+					/*background-color:rgba(43, 100, 217, 0.75);*/
+				}
+				#view{
+					margin-top:1px;
+			    	width:4000px;
+					height:400px;
+					display:block;
+					z-index:0;
+					position:absolute;
+				}
+
+				#view ul{}
+				#view ul li{float:left;margin-left:20px;}
+			</style>
+			
+				
+			<script>
+				$(function(){
+					var move=0;
+					var count =0;
+					var Times=0;
+					// 自動播放的部分
+					function changeAuto(){
+						$("#view").animate({left:move},750);
+						$("#btn li").removeClass().eq(count).addClass("choice");
+						if(count<2){
+							count++;
+							move=count*-921;}
+						else{
+							count=0;
+							move=0;}
+						
+						Times = setTimeout(changeAuto,5000);
+					}
+					changeAuto();
+					//----時間停止機制----
+					$("#ad,#btn").hover(function(){
+						clearTimeout(Times);
+					},function(){
+						Times = setTimeout(changeAuto,5000);
+					});
+					//-------------------
+					//點選播放的部分
+					$("#btn li").click(function(){
+						count = $(this).index();
+						move = -921	*count;
+						$("#view").animate({left:move},750);
+						$("#btn li").removeClass().eq(count).addClass("choice");	
+					});
+				});
+			</script>
+			
+
+			
+
+			<img src="./images/service_text_03.png" style="position:absolute; top:72%; left:8%; z-index:6; /*float:left;*/ /*margin-top:6%;*/ width:16%;">
+			<div class="ptbga" data-parallex-distance="1.5" style="top:420px; height:400px; width:68%;"></div>
+			<div class="ptbg" data-parallex-distance="1.5" style="top:880px; left:6%; width:16%; height:140px; z-index:4;"></div>
+			<div class="ptbg" data-parallex-distance="1.5" style="top:96px; left:60%; width:28%; height:820px; z-index:6; background:rgba(100%,100%,100%,0.4);">
+				<img src="./images/service_text_01.png" style="width:80%; margin-top:10%;">
+				<img src="./images/service_text_02.png" style="width:70%; margin:10% 0 1% -4%;">
+				<p style="width:80%; margin:6% 0 0 12%; color:#FFFFFF; text-align:left; font-size:0.8em;line-height: 20px;">
+					請將您的寶貴意見分享給我們，讓我們能夠為您提供更好的用餐品質。您可以在下方留言版留下您想對我們表達的心情或鼓勵，我們會盡快地向您回覆。
+				</p>
+				<p style="width:80%; margin:2% 0 0 12%; color:#FFFFFF; text-align:left; font-size:0.8em;line-height: 20px;">
+					Please send your comments to share with us, so that we can provide you with better quality dining. You can leave a message on our board below to share your opinion or encouragement. we will send you a reply as soon as possible.
+				</p>
+				<div style="height:32%; width:76%; margin:0 0 0 12%; position:relative;">
+					<form method="POST" action="https://formspree.io/rafaelbien@gmail.com" class="field">
+						<input type="name" name="guest" required="true" placeholder="如何稱呼您?"><br>
+  						<input type="email" name="email" required="true" placeholder="您的電子信箱?"><br>
+  						<textarea name="message" required="true" placeholder="Test Message" placeholder="您寶貴的意見"></textarea><br>
+  						<button type="submit">送出您的意見 / send</button>
+					</form>
+				</div>
+			</div>
+		</div>		
+		<div class="hline" style="height:160px; width:100%; min-width: 640px; position:absolute; top:auto; bottom:8%; text-align:center; left:-32px; z-index: 5;">
+			<div class="goto-Location" style="width: 10%; display: inline-block; vertical-align:middle;">
+				<a class="unit1" href="#location" style="left: auto; bottom: auto; height: auto; width: 3%; margin-left: 3.4%; position: absolute;"><img src="./images/icon_pagedown.png" style="width: 100%;"></a>
+				<img src="./images/serevice_to_lacation.png" style="width: 100%; margin: 40% 0 0 0;">
+			</div>
+		</div>
+	</div>
+	<!--============================== service close ==============================-->
+
+	<!--============================== access start ==============================-->
+	<div class="mainbox idx access" id="location" menumark="cat">
+	  <div class="parallex">
+			<div class="mainbg" data-parallex-distance="2">
+				<img src="./images/location_background.jpg" style="width:100%; min-width:1560px;">
+			</div>			
+			<div class="ptbg" data-parallex-distance="1.5" style="top:10%; position:absolute; left:14%; width:68%; height:760px; color:rgb(117, 107, 95); font-size:12px; line-height:18px; z-index:3; text-align:left; background:rgba(0, 0, 0, 0.4);">
+				<div style="float:left; width:30%; height:720px; margin-left:12%;">
+					<div style="width: 100%;">
+						<a href="https://www.facebook.com/ZhuShouSi?fref=ts">
+							<img src="./images/location_sukesushi_01.png" style="width:70%; margin: -4% 0 0 -6%;">
+						</a>
+					</div>
+					<div style="width: 100%;"><img src="./images/location_map_01.png" id="imgmap01" style="width:100%;"></div>
+					<div>
+						<p style="color:#FFFFFF; font-size:1.4em; font-family:Microsoft JhengHei; padding-top:8px;">助 壽 司 ( 明 誠 店 )</p>
+						<p style="color:#DDDDDD; font-size:1.2em; font-family:Microsoft JhengHei; padding-top:8px; font-weight:bold;" id="pmap01">高 雄 市 三 民 區 明 誠 一 路 377,379號</p>
+						<p style="color:#FFFFFF; font-size:1.4em; font-family:Microsoft JhengHei; padding-top:8px;">訂位專線：(07)380-1682</p>
+						<img src="./images/location_info_01.png" style="margin-top:12px; width:100%; cursor: pointer;"/>
+					</div>
+					<div style="width:100%; text-align:center;">
+						<div class="fb-page" data-href="https://www.facebook.com/ZhuShouSi" data-width="300" data-height="70" data-small-header="true" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/ZhuShouSi"><a href="https://www.facebook.com/ZhuShouSi">助壽司</a></blockquote></div></div>
+					</div>
+				</div>
+				<div style="float:left; width:30%; height:720px; margin-left:12%;">
+					<div style="width: 100%;">
+						<a href="https://www.facebook.com/%E5%8A%A9%E5%A3%BD%E5%8F%B8%E6%96%87%E5%B1%B1%E6%97%97%E8%89%A6%E5%BA%97-953321804730456">
+							<img src="./images/location_sukesushi_02.png" style="width:100%; margin:4px 0 0 -6%;">
+						</a>
+					</div>
+					<div style="width: 100%;"><img src="./images/location_map_02.png" id="imgmap02" style="width:100%;"></div>
+					<div style="">
+						<p style="color:#FFFFFF; font-size:1.4em; font-family:Microsoft JhengHei; padding-top:8px;">助 壽 司 丼 傳 奇( 文 山 旗 艦 店 )</p>
+						<p style="color:#CCCCCC; font-size:1.2em; font-family:Microsoft JhengHei; padding-top:8px; font-weight:bold;" id="pmap03">高雄市三民區褒揚東街80號(Google街景)</p>
+						<p style="color:#FFFFFF; font-size:1.4em; font-family:Microsoft JhengHei; padding-top:8px;">訂位專線：(07)780-8333</p>
+						<img src="./images/location_info_02.png" style="margin-top:12px; width:100%;" />
+					</div>
+					<div style="width:100%; text-align:center;">
+					<div class="fb-page" data-href="https://www.facebook.com/pages/&#x52a9;&#x58fd;&#x53f8;&#x6587;&#x5c71;&#x65d7;&#x8266;&#x5e97;/953321804730456" data-width="300" data-height="70" data-small-header="true" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/pages/&#x52a9;&#x58fd;&#x53f8;&#x6587;&#x5c71;&#x65d7;&#x8266;&#x5e97;/953321804730456"><a href="https://www.facebook.com/pages/&#x52a9;&#x58fd;&#x53f8;&#x6587;&#x5c71;&#x65d7;&#x8266;&#x5e97;/953321804730456">助壽司文山旗艦店</a></blockquote></div></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--============================== access close ==============================-->
+	
+</div>
+
+<!--============================== wrapcon close ==============================-->
+</div>
+<!-- 表單 -->
+
+<style type="text/css" >
+	.field > input {
+        width: 80%;
+		height: 35px;
+		margin-top: 10px;
+		border-radius: 5px;
+		border: 0px;
+	}
+	.field > textarea {
+		margin-top: 10px;
+		width: 400px;
+		height: 80px;
+		border-radius: 5px;
+		border: 0px;
+		resize : none;
+	}
+	::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  		padding-left: 20px;
+  		color: #c6c6c6;
+	}
+	::-moz-placeholder { /* Firefox 19+ */
+	  	padding-left: 20px;
+	  	color: #c6c6c6;
+	}
+	:-ms-input-placeholder { /* IE 10+ */
+	  	padding-left: 20px;
+	  	color: #c6c6c6;
+	}
+	:-moz-placeholder { /* Firefox 18- */
+	  	padding-left: 20px;
+	  	color: #595959;
+	}
+	.field > button {
+		margin-top: 10px;
+		width: 400px;
+		height: 35px;
+		color: #fff;
+		border: 0px;
+		border-radius: 5px;
+		background-color: #990000;
+		box-shadow: 1px 1px 10px #3333;
+	}
+
+	.field > button:hover{
+		cursor:pointer;
+	}
+
+</style>
+
+<!-- 表單 end -->
+
+<script>
+
+var fbhtml_url=window.location.toString();
+var shop_1 = "https://www.google.com.tw/maps/place/807%E9%AB%98%E9%9B%84%E5%B8%82%E4%B8%89%E6%B0%91%E5%8D%80%E6%98%8E%E8%AA%A0%E4%B8%80%E8%B7%AF377%E8%99%9F/@22.659797,120.323306,17z/data=!3m1!4b1!4m2!3m1!1s0x346e05222ac411c9:0xf9c28099f947a7e5";
+var shop_2 = "https://www.google.com.tw/maps/place/807%E9%AB%98%E9%9B%84%E5%B8%82%E4%B8%89%E6%B0%91%E5%8D%80%E8%A4%92%E6%8F%9A%E6%9D%B1%E8%A1%9780%E8%99%9F/@22.6414249,120.3457476,18z/data=!4m2!3m1!1s0x346e1b2d72ddae83:0x45c4aed7dcb22be7";
+var shop_3 = "https://www.google.com.tw/maps/@22.6398719,120.3476547,3a,76.8y,11.26h,91.86t/data=!3m6!1e1!3m4!1s5kAF8TwC9zgAAAQvxcRdQQ!2e0!7i11014!8i5507!6m1!1e1";
+
+
+$("#wrap_welcome").hide();
+$("#wrap_news").hide();
+$("#wrap_about").hide();
+$("#wrap_gallery").hide();
+$("#wrap_dishes").hide();
+$("#wrap_service").hide();
+$("#wrap_location").hide();
+
+$(".welcome").hover(
+	function() { $("#wrap_welcome").show(); },
+	function() { $("#wrap_welcome").hide(); }
+);
+$(".news").hover(
+	function() { $("#wrap_news").show(); },
+	function() { $("#wrap_news").hide(); }
+);
+$(".gallerysection").hover(
+  function() { $("#wrap_gallery").show(); },
+  function() { $("#wrap_gallery").hide(); }
+);
+$(".about_us").hover(
+	function() { 
+		$(".about_us").css({'background-image' :'url(./images/menu_jp_about_on.png)', 'background-repeat':'no-repeat'});
+		$("#wrap_about").show();
+	},
+	function() {
+		$(".about_us").css({'background-image' :'url(./images/menu_jp_about_off.png)', 'background-repeat':'no-repeat'});
+		$("#wrap_about").hide();
+	}
+);
+$(".dishes").hover(
+  function() { $("#wrap_dishes").show(); },
+  function() { $("#wrap_dishes").hide(); }
+);
+$(".service").hover(
+  function() { $("#wrap_service").show(); },
+  function() { $("#wrap_service").hide(); }
+);
+$(".location").hover(
+  function() { $("#wrap_location").show(); },
+  function() { $("#wrap_location").hide(); }
+);
+
+$(".dishes").click(function(){
+	$("#wave").delay(1500).animate({left:0},300);
+});
+$("#btnWave").click(function(){
+	$("#wave").delay(1500).animate({left:0},300);
+});
+
+$("#tolamer").hover(function(){
+	for(var i=0; i< 2; i++){
+		$("#icomu").animate({opacity:0.2},600).animate({opacity:0.7},600);
+	}
+});
+
+
+$("#accessFB01").click(function(){
+	window.open('https://www.facebook.com/ZhuShouSi?fref=ts');
+});
+$("#accessFB02").click(function(){
+	window.open('https://www.facebook.com/pages/%E5%8A%A9%E5%A3%BD%E5%8F%B8%E6%96%87%E5%B1%B1%E6%97%97%E8%89%A6%E5%BA%97/953321804730456?fref=ts');
+});
+$("#tolamer").click(function(){
+	window.open('http://www.facebook.com/sharer/sharer.php?u='+fbhtml_url);
+});
+
+$("#imgmap01").click(function(){
+	window.open(shop_1);
+});
+$("#imgmap02").click(function(){
+	window.open(shop_2);
+});
+$("#imgmap03").click(function(){
+	window.open(shop_3);
+});
+$("#pmap01").click(function(){
+	window.open(shop_1);
+});
+$("#pmap02").click(function(){
+	window.open(shop_2);
+});
+$("#pmap03").click(function(){
+	window.open(shop_3);
+});
+
+
+//service images
+//number of stuff
+// var image01 = 3;
+// var image02 = 4;
+// var image03 = 5;
+// var imageTotal = 16;	
+
+// function switchImage(){
+// 	var temp01 = (image01 % imageTotal) + 1;
+// 	var temp02 = (image02 % imageTotal) + 1;
+// 	var temp03 = (image03 % imageTotal) + 1;
+// 	var temp01Str, temp02Str, temp03Str;
+	
+// 	if(temp01 <= 9){
+// 		temp01Str = "0" + temp01;
+// 	}else{
+// 		temp01Str = temp01;
+// 	}
+// 	if(temp02 <= 9){
+// 		temp02Str = "0" + temp02;
+// 	}else{
+// 		temp02Str = temp02;
+// 	}
+// 	if(temp03 <= 9){
+// 		temp03Str = "0" + temp03;
+// 	}else{
+// 		temp03Str = temp03;
+// 	}
+
+// 	$("#stuffImg01").fadeOut(1000,function(){
+// 		$("#stuffImg01").attr('src', "./images/serevice_staff_" + temp01Str + ".jpg");
+// 		$("#stuffImg01").fadeIn(1200);
+// 	});
+// 	$("#stuffImg02").fadeOut(1360,function(){
+// 		$("#stuffImg02").attr('src', "./images/serevice_staff_" + temp02Str + ".jpg");
+// 		$("#stuffImg02").fadeIn(1200);
+// 	});
+// 	$("#stuffImg03").fadeOut(1720,function(){
+// 		$("#stuffImg03").attr('src', "./images/serevice_staff_" + temp03Str + ".jpg");
+// 		$("#stuffImg03").fadeIn(1200);
+// 	});
+	
+// 	image01 += 3;
+// 	image02 += 3;
+// 	image03 += 3;
+// }
+
+// setInterval(function(){
+// 	switchImage();
+// }, 5600);
+
+
+
+</script>
+
+</body>
+</html>
