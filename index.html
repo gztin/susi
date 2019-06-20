@@ -42,7 +42,14 @@
     .block:nth-child(3){height:150px;background: rgba(0,0,0,0.7);border-radius: 10px;margin-bottom: 20px;justify-content: space-between;}
     .block:nth-child(4){height:125px;background: rgba(0,0,0,0.7);border-radius: 10px;margin-bottom: 20px;}
     
-    .save{width: 200px;height: 100px;background: url(img/saveit.png)no-repeat center;background-size: contain;position: absolute;bottom: 10px;}
+    .save{
+        width: 200px;
+        height: 100px;
+        background: url(img/saveit.png)no-repeat center;
+        background-size: contain;position: absolute;
+        bottom: 10px;
+        animation: gogo 1s infinite linear;
+    }
     .step{width:100%;display: flex;flex-direction: row;align-items: center;justify-content: space-between;}
     .pic{width:70%;display: flex;flex-direction: row;justify-content: space-around;}
     .block:nth-child(2) .step{flex-direction: row;}
@@ -65,6 +72,30 @@
     .option{width:235px;height:82px;background-size: contain;background: url("img/hint.png")no-repeat center;background-size: contain;}
     h2{color:#fff;}
    
+    @keyframes gogo{
+         0%{bottom: 30px;}
+        50%{bottom: 10px;}
+       100%{bottom: 30px;}
+    }
+
+    @-moz-keyframes gogo /* Firefox */{
+         0%{bottom: 30px;}
+        50%{bottom: 10px;}
+       100%{bottom: 30px;}
+    }
+
+    @-webkit-keyframes gogo /* Safari 和 Chrome */{
+         0%{bottom: 30px;}
+        50%{bottom: 10px;}
+       100%{bottom: 30px;}
+    }
+
+    @-o-keyframes gogo /* Opera */{
+          0%{bottom: 30px;}
+        50%{bottom: 10px;}
+       100%{bottom: 30px;}
+    }
+
     
 </style>
 <body>
