@@ -6,9 +6,7 @@
 <title>测试页面</title>
 </head>
 <style>
-    @media screen and (orientation: Landscape){
-        .addFavorite{height:min-content;}
-    }
+   
      @media (min-width: 319px) {
         .block{
             width:85%;
@@ -19,6 +17,7 @@
         .hint h2{font-size:1em;color:#fff;}
     }
     @media (min-width: 760px) {
+        .addFavorite{height: auto;}
         .block{
             width:70%;
         }
@@ -26,6 +25,9 @@
         .block:nth-child(4) .step h2{height:40px;font-size: 1.2em;}
         .block:nth-child(5) .step h2{width:80%;font-size: 1.2em;text-align:center;}
         .hint h2{font-size:1.2em;}
+    }
+     @media (max-height: 415px) and (orientation: Landscape){
+        .addFavorite{height:min-content;}
     }
     *{margin:0;padding:0;}
     body {font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;height:100%;
@@ -56,13 +58,15 @@
     .hint{width: 100%; border-radius: 25px;display: flex;flex-direction: row;justify-content:center;align-items: center;}
     .number{width: 27px;height: 24px;border-radius: 13px;background: #E94D4F;color: #fff;display: flex;justify-content: center;align-items: center;margin-left: 2%;}
     .title{font-weight: bold;}
-    .close{width:30px;height:30px;border-radius: 15px;display: flex;justify-content: center;background: #fff;font-size: 1.3em;cursor: pointer;font-weight: bold;}
+    .close{width:30px;height:30px;border-radius: 15px;display: flex;justify-content: center;background: #fff;font-size: 1.3em;cursor: pointer;font-weight: bold;
+    z-index: 99999;margin-left: 20px;}
     .option{width:235px;height:82px;background-size: contain;background: url("img/hint.png")no-repeat center;background-size: contain;}
     h2{color:#fff;}
    
     
 </style>
 <body>
+    
     <div class="addFavorite">
         <div class="block">
             <h1 style="color:#fff;font-size: 1.5em;">如何修复游戏无法启动</h1>
@@ -106,9 +110,11 @@
         </div>
     </div>
     <div id="view"></div>
-    
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-        
+        $('.close').click(function(){
+            $('.addFavorite').css('display','none');
+        });
     </script>
     
 </body>
