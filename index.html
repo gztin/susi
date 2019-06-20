@@ -6,6 +6,28 @@
 <title>测试页面</title>
 </head>
 <style>
+    @media screen and (orientation: Landscape){
+        .addFavorite{height:min-content;}
+    }
+     @media (min-width: 319px) {
+        .block{
+            width:85%;
+        }
+        .block:nth-child(3) .step h2{height:40px;}
+        .block:nth-child(4) .step h2{font-size: 0.9em;height:40px;}
+        .block:nth-child(5) .step h2{width:80%;font-size: 1em;text-align: center;}
+        .hint h2{font-size:1em;color:#fff;}
+    }
+    @media (min-width: 760px) {
+        .addFavorite{height:auto!important;}
+        .block{
+            width:70%;
+        }
+        .block:nth-child(3) .step h2{height:40px;}
+        .block:nth-child(4) .step h2{height:40px;font-size: 1.2em;}
+        .block:nth-child(5) .step h2{width:80%;font-size: 1.2em;text-align:center;}
+        .hint h2{font-size:1.2em;}
+    }
     *{margin:0;padding:0;}
     body {font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;height:100%;
     margin:0;}
@@ -38,28 +60,8 @@
     .close{width:30px;height:30px;border-radius: 15px;display: flex;justify-content: center;background: #fff;font-size: 1.3em;cursor: pointer;font-weight: bold;}
     .option{width:235px;height:82px;background-size: contain;background: url("img/hint.png")no-repeat center;background-size: contain;}
     h2{color:#fff;}
-    @media (min-width: 319px) {
-        .block{
-            width:85%;
-        }
-        .block:nth-child(3) .step h2{height:40px;}
-        .block:nth-child(4) .step h2{font-size: 0.9em;height:40px;}
-        .block:nth-child(5) .step h2{width:80%;font-size: 1em;text-align: center;}
-        .hint h2{font-size:1em;color:#fff;}
-    }
-    @media (min-width: 760px) {
-        .addFavorite{height:auto!important;}
-        .block{
-            width:70%;
-        }
-        .block:nth-child(3) .step h2{height:40px;}
-        .block:nth-child(4) .step h2{height:40px;font-size: 1.2em;}
-        .block:nth-child(5) .step h2{width:80%;font-size: 1.2em;text-align:center;}
-        .hint h2{font-size:1.2em;}
-    }
-    @media screen and (orientation: Landscape){
-        .addFavorite{height:min-content;}
-    }
+   
+    
 </style>
 <body>
     <div class="addFavorite">
