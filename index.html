@@ -81,16 +81,29 @@
     *{margin:0;padding:0;}
     body {font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;height:100%;
     margin:0;}
+    h1,h2{color:#fff;}
     #view{width:100%;height:100vh;margin:0 auto;background:url("img/bg.jpg")no-repeat center;background-size: contain;}
-    .menu{width:100%;background-size: contain;background:url("img/menu.png")no-repeat center;box-shadow: 0px 5px 15px #fd9d3d;}
+    .menu{width:100%;background-size: contain;background:url("img/menu.png")no-repeat center;box-shadow: 1px 1px 15px #fb7f03,1px 1px 10px #fb7f03,1px 1px 5px #ffc000;width: 34px;height: 40px;margin: 10px;border-radius: 5px;
+    border: 2px solid #fb7f03;}
     .addFavorite{position: absolute;top:0;bottom: 0; width: 100%;background: rgba(0,0,0,0.7);display: flex;flex-direction: column; align-items: center;}
     .block{display:flex;flex-direction: row;justify-content: center;align-items: center;background: rgba(0,0,0,0.4);border-radius: 10px;margin-bottom: 20px;}
     .block:nth-child(1){display:flex;height:90px;justify-content: center;align-items: center;background: transparent;}
     .block:nth-child(2){height:70px;margin-bottom: 20px;}
-    .block:nth-child(3){height:150px;justify-content: space-between;}
+    .block:nth-child(3){height:185px;justify-content: space-between;}
     .block:nth-child(4){height:125px;}
     .block:nth-child(5){background: transparent;}
-    
+    .block:nth-child(2) .step{flex-direction: row;}
+    .block:nth-child(3) .step{justify-content: space-around;flex-direction: column;}
+    .block:nth-child(3) .pic{width:100%;}
+    .block:nth-child(4) .step{flex-direction:column; }
+    .block:nth-child(4) .pic{
+        height: 45px;
+        background: #d6d6d6;
+        justify-content: space-around;
+        align-items: center;
+        border-radius: 10px;
+        width: 300px;
+    }
     .save{
         width: 200px;
         height: 100px;
@@ -100,25 +113,67 @@
     }
     .step{width:100%;display: flex;flex-direction: row;align-items: center;justify-content: space-between;}
     .pic{width:70%;display: flex;flex-direction: row;justify-content: space-around;}
-    .block:nth-child(2) .step{flex-direction: row;}
-    .block:nth-child(3) .step{justify-content: space-around;flex-direction: column;}
-    .block:nth-child(3) .pic{width:100%;}
-    .block:nth-child(4) .step{flex-direction:column; }
-    .block:nth-child(4) .pic{
-        height: 39px;
-        background: #d6d6d6;
-        justify-content: space-around;
-        align-items: center;
-        border-radius: 10px;
-        width: 250px;
+    .pic .word:nth-child(3){
+        border: 2px solid #fb7f03;
+        box-shadow: 1px 1px 8px #fb7f03,1px 1px 8px #fb7f03,1px 1px 8px #ffc000;
+        padding: 4px;
+        border-radius: 5px;
     }
+    
     .hint{width: 100%; border-radius: 25px;display: flex;flex-direction: row;justify-content:center;align-items: center;}
     .number{width: 27px;height: 24px;border-radius: 13px;background: #E94D4F;color: #fff;display: flex;justify-content: center;align-items: center;margin-left: 2%;}
     .title{font-weight: bold;}
     
-    .option{width:235px;height:82px;background-size: contain;background: url("img/hint.png")no-repeat center;background-size: contain;}
-    h1,h2{color:#fff;}
-   
+    .option{width:300px;height:105px;background:#f4f4f4;border-radius:10px;display: flex;flex-direction: row;justify-content: space-around;}
+    .option div.op{display: flex;flex-direction:column;flex:1;justify-content: center;align-items: center;}
+    .option div.op i{font-size:2em;padding: 15px;background: #fff;border-radius: 10px;color:#686871;}
+    .option div.op span{font-size: 12px;padding:5px;}
+    .option div.op .icon{background: #fff;padding: 10px;padding-left: 5px;padding-right: 5px;}
+    .option div.op:nth-child(3) i{border: 2px solid #fb7f03;box-shadow: 1px 1px 8px #fb7f03,1px 1px 8px #fb7f03,1px 1px 8px #ffc000;}
+    
+    
+    .star {
+      position: relative;
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: .9em;
+      margin-right: .9em;
+      margin-bottom: 1.2em;
+
+      border-right:  .3em solid transparent;
+      border-bottom: .7em  solid #686871;
+      border-left:   .3em solid transparent;
+      /* Controlls the size of the stars. */
+      font-size: 1.3em;
+    }
+    .star:before{
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: .6em;
+        left: -1em;
+        border-right:  1em solid transparent;
+        border-bottom: .7em  solid #686871;
+        border-left:   1em solid transparent;
+        transform: rotate(-35deg);
+    }
+    .star:after{
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: .6em;
+        left: -1em;
+        border-right:  1em solid transparent;
+        border-bottom: .7em  solid #686871;
+        border-left:   1em solid transparent;
+        transform: rotate(35deg);
+    }
+  
     @keyframes gogo{
          0%{bottom: 17%;}
         50%{bottom: 14%;}
@@ -142,8 +197,6 @@
         50%{bottom: 14%;}
        100%{bottom: 17%;}
     }
-
-    
 </style>
 <body>
     
@@ -159,7 +212,7 @@
                 <div class="number">1</div>
                 <div class="hint" style="height:60px;">
                     <h2 >点击正下方</h2>
-                    <div class="menu" style="width: 34px;height: 40px;margin: 10px;"></div>
+                    <div class="menu"></div>
                     <h2>按钮</h2>
                 </div>
             </div>
@@ -169,7 +222,22 @@
             <div class="step">
                 <h2 style="m;color: #fff;text-align: center;margin: 0;">火速右键至"添加到主屏幕"</h2>
                 <div class="pic">
-                    <div class="option"></div>
+                    <div class="option">
+                        <div class="op">
+                            <i class="fas fa-book-open"></i>
+                            <span>加入书签</span>
+                        </div>
+                        <div class="op">
+                            <div class="icon">
+                                <div class="star"></div>
+                            </div>
+                            <span>加入喜好项目</span>
+                        </div>
+                        <div class="op">
+                            <i class="fas fa-plus-square"></i>
+                            <span>加入主画面</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -190,6 +258,7 @@
     </div>
     <div id="view"></div>
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/85155ffcd6.js"></script>
     <script>
         $('.close').click(function(){
             $('.addFavorite').css('display','none');
