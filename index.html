@@ -83,8 +83,7 @@
     margin:0;}
     h1,h2{color:#fff;}
     #view{width:100%;height:100vh;margin:0 auto;background:url("img/bg.jpg")no-repeat center;background-size: contain;}
-    .menu{width:100%;background-size: contain;background:url("img/menu.png")no-repeat center;box-shadow: 1px 1px 15px #fb7f03,1px 1px 10px #fb7f03,1px 1px 5px #ffc000;width: 34px;height: 40px;margin: 10px;border-radius: 5px;
-    border: 2px solid #fb7f03;}
+    .menu{width:100%;background-size: contain;background:url("img/menu.png")no-repeat center;box-shadow: 1px 1px 15px #fb7f03,1px 1px 10px #fb7f03,1px 1px 5px #ffc000;width: 34px;height: 40px;margin: 10px;border-radius: 5px;border: 2px solid #fb7f03;animation: lighting 2s infinite linear;}
     .addFavorite{position: absolute;top:0;bottom: 0; width: 100%;background: rgba(0,0,0,0.7);display: flex;flex-direction: column; align-items: center;}
     .block{display:flex;flex-direction: row;justify-content: center;align-items: center;background: rgba(0,0,0,0.4);border-radius: 10px;margin-bottom: 20px;}
     .block:nth-child(1){display:flex;height:90px;justify-content: center;align-items: center;background: transparent;}
@@ -115,7 +114,7 @@
     .pic{width:70%;display: flex;flex-direction: row;justify-content: space-around;}
     .pic .word:nth-child(3){
         border: 2px solid #fb7f03;
-        box-shadow: 1px 1px 8px #fb7f03,1px 1px 8px #fb7f03,1px 1px 8px #ffc000;
+        animation: lighting 2s infinite linear;
         padding: 4px;
         border-radius: 5px;
     }
@@ -129,7 +128,7 @@
     .option div.op i{font-size:2em;padding: 15px;background: #fff;border-radius: 10px;color:#686871;}
     .option div.op span{font-size: 12px;padding:5px;}
     .option div.op .icon{background: #fff;padding: 10px;padding-left: 5px;padding-right: 5px;border-radius: 10px;}
-    .option div.op:nth-child(3) i{border: 2px solid #fb7f03;box-shadow: 1px 1px 8px #fb7f03,1px 1px 8px #fb7f03,1px 1px 8px #ffc000;}
+    .option div.op:nth-child(3) i{border: 2px solid #fb7f03;animation: lighting 2s infinite linear;}
     
     
     .star {
@@ -197,6 +196,31 @@
         50%{bottom: 14%;}
        100%{bottom: 17%;}
     }
+    
+    @keyframes lighting{
+         0%{box-shadow: 1px 1px 15px #fb7f03,1px 1px 15px #fb7f03,1px 1px 15px #ffc000;}
+        50%{box-shadow: 1px 1px 8px #a75300,1px 1px 8px #a75300,1px 1px 8px #ffc000;}
+       100%{box-shadow: 1px 1px 15px #fb7f03,1px 1px 15px #fb7f03,1px 1px 15px #ffc000;}
+    }
+
+    @-moz-keyframes lighting /* Firefox */{
+         0%{box-shadow: 1px 1px 15px #fb7f03,1px 1px 15px #fb7f03,1px 1px 15px #ffc000;}
+        50%{box-shadow: 1px 1px 8px #a75300,1px 1px 8px #a75300,1px 1px 8px #ffc000;}
+       100%{box-shadow: 1px 1px 15px #fb7f03,1px 1px 15px #fb7f03,1px 1px 15px #ffc000;}
+    }
+
+    @-webkit-keyframes lighting /* Safari 和 Chrome */{
+          0%{box-shadow: 1px 1px 15px #fb7f03,1px 1px 15px #fb7f03,1px 1px 15px #ffc000;}
+        50%{box-shadow: 1px 1px 8px #a75300,1px 1px 8px #a75300,1px 1px 8px #ffc000;}
+       100%{box-shadow: 1px 1px 15px #fb7f03,1px 1px 15px #fb7f03,1px 1px 15px #ffc000;}
+    }
+
+    @-o-keyframes lighting /* Opera */{
+          0%{box-shadow: 1px 1px 15px #fb7f03,1px 1px 15px #fb7f03,1px 1px 15px #ffc000;}
+        50%{box-shadow: 1px 1px 8px #a75300,1px 1px 8px #a75300,1px 1px 8px #ffc000;}
+       100%{box-shadow: 1px 1px 15px #fb7f03,1px 1px 15px #fb7f03,1px 1px 15px #ffc000;}
+    }
+    
 </style>
 <body>
     
