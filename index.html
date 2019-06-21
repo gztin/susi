@@ -13,6 +13,7 @@
         .block:nth-child(1){flex-direction: column; }
         .block:nth-child(1) h1{font-size: 2em;margin-top: 50px;line-height: 20px;text-align: center;}
         .block:nth-child(3) .step h2{height:40px;}
+         .block:nth-child(3) .pic{width:260px;}
         .block:nth-child(4) .step h2{font-size: 1em;height:40px;}
         .block:nth-child(5){height:135px;}
         .hint h2{color:#fff;}
@@ -45,8 +46,10 @@
         }
         .block:nth-child(1){flex-direction: row-reverse;}
         .block:nth-child(3) .step h2{height:40px;}
+        .block:nth-child(3) .pic{width:260px;}
         .block:nth-child(4) .step h2{height:40px;font-size: 1.2em;}
         .block:nth-child(5) .step h2{width:80%;font-size: 1.2em;text-align:center;}
+        
         h2{font-size:1.2em;}
         .close{
             border-bottom: 0px;
@@ -93,7 +96,6 @@
     .block:nth-child(5){background: transparent;}
     .block:nth-child(2) .step{flex-direction: row;}
     .block:nth-child(3) .step{justify-content: space-around;flex-direction: column;}
-    .block:nth-child(3) .pic{width:100%;}
     .block:nth-child(4) .step{flex-direction:column; }
     .block:nth-child(4) .pic{
         height: 45px;
@@ -101,7 +103,7 @@
         justify-content: space-around;
         align-items: center;
         border-radius: 10px;
-        width: 300px;
+        width: 260px;
     }
     .save{
         width: 200px;
@@ -125,9 +127,9 @@
     
     .option{width:300px;height:105px;background:#f4f4f4;border-radius:10px;display: flex;flex-direction: row;justify-content: space-around;}
     .option div.op{display: flex;flex-direction:column;flex:1;justify-content: center;align-items: center;}
-    .option div.op i{font-size:2em;padding: 15px;background: #fff;border-radius: 10px;color:#686871;}
+    .option div.op i{font-size:2em;padding: 10px;background: #fff;border-radius: 10px;color:#686871;}
     .option div.op span{font-size: 12px;padding:5px;}
-    .option div.op .icon{background: #fff;padding: 10px;padding-left: 5px;padding-right: 5px;border-radius: 10px;}
+    .option div.op .icon{background: #fff;padding: 7px;padding-left: 5px;padding-right: 5px;border-radius: 10px;}
     .option div.op:nth-child(3) i{border: 2px solid #fb7f03;animation: lighting 1.7s infinite ease;}
     
     
@@ -144,7 +146,7 @@
       border-bottom: .7em  solid #686871;
       border-left:   .3em solid transparent;
       /* Controlls the size of the stars. */
-      font-size: 1.3em;
+      font-size: 1.2em;
     }
     .star:before{
         content: '';
