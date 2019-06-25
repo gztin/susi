@@ -1,0 +1,55 @@
+@charset "utf-8";
+/* CSS Document */
+
+.adleft{
+        width:150px;
+        height:150px;
+        position: absolute;
+        top:0;
+        left:0;
+        background: url('lefttopAD.png')no-repeat center;
+        z-index: 20000;
+        cursor: pointer;
+    }
+    .adright{
+        width:150px;
+        height:150px;
+        position: absolute;
+        top:0;
+        right:0;
+        background: url('righttopAD.png')no-repeat center;
+        z-index: 20000;
+        cursor: pointer;
+    }
+    .closead1,.closead2{
+        width:25px;
+        height:25px;
+        display:block;
+        top:0;
+        z-index:9200;
+        background: url('icon_close_n.png')no-repeat center;
+    }
+    .closead1{left:0;}
+    .closead2{right:0;}
+    .adleftlink{
+        width:230px;
+        height:800px;
+        position: absolute;
+        display: none;
+        top:160px;
+        left:0;
+        background: url('left_ad.png')no-repeat center;
+        z-index: 5000;
+        cursor: pointer;
+    }
+    .adrightlink{
+        width:230px;
+        height:800px;
+        position: absolute;
+        display: none;
+        top:160px;
+        right:0;
+        background: url('right_ad.png')no-repeat center;
+        z-index: 5000;
+        cursor: pointer;
+    }
