@@ -1,6 +1,19 @@
 @charset "utf-8";
 /* CSS Document */
-
+body{
+    font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;
+    background: #1b1b1b;
+}
+*{
+    margin:0;
+    padding:0;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
     .adleft{
         width:150px;
         height:150px;
@@ -55,3 +68,11 @@
         z-index: 5000;
         cursor: pointer;
     }
+.block{
+    width:1000px;
+    margin:10% auto;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.link{color:#fff;}
