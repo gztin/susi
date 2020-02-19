@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" >
+    <title>台鐵時刻表查詢</title>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="bookmark" href="/favicon.ico"/>
+    <link rel="stylesheet" href="./css/weatherInf.css?v=6">
+    <link rel="stylesheet" href="./css/style_train.css?v=37">
+    <link rel="stylesheet" href="./css/dayView.css?v=2">
+    
+    <script data-ad-client="ca-pub-8237624738906861" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" >
+</head>
+
+<body>
+    
+    <div class="hint"><p>請使用行動裝置瀏覽</p></div>
+    <div class="waiting"><p>查詢中，請稍候...</p></div>
+    <div class="listView">
+        <div class="tripInf">
+            <div class="tripContent">
+                <div class="tripPlace"><div class="close"><</div></div>
+                <div class="tripPlace">
+                    <p class="tripStart"></p>
+                    <span></span>
+                    <p class="tripEnd"></p>
+                </div>
+            </div>
+            <div class="tripContent">
+                <p class="tripDate"></p>
+                <p class="tripDay"></p>
+                <p class="tripTime"></p>
+            </div>
+            <div class="tripContent">
+                <span class="infAll cur">全列車</span>
+                <span class="infSpeed1">區間車</span>
+                <span class="infSpeed3">自強號</span>
+                <span class="infSpeed4">普悠瑪</span>
+            </div>
+        </div>
+        <ul></ul>
+    </div>
+    <div class="calender" style="display:none;">
+        <p class="title">選擇日期</p>
+        <div>
+            <ul class="list"></ul>
+        </div>
+    </div>
+    <div class="bg" style="display:none;"></div>
+    <div id="app" class="searchInf">
+        <div class="codeInf"></div>
+        <form id="plan" class="plan" name="plan" action="" method="post">
+            <div class="trainClass">
+                <select id="start" class="start">
+                    <option v-for="option in station" v-bind:value="option.stationNumber">{{option.stationName}}</option>
+                </select>
+                <div class="switch"></div>
+                <select id="end" class="end">
+                    <option v-for="option in station" v-bind:value="option.stationNumber">{{option.stationName}}</option>
+                </select>
+            </div>
+            <div class="timeInf">
+                <span id="selectDay"><p class="go"></p><span></span></span>
+                <div>
+                    <select id="startTime" name="startTime"></select>
+                    <p>搭車</p>
+                </div>
+            </div>
+            
+            <a href="javascript:;" type="submit" id="sendMsg" class="sendMsg">查詢</a>
+        </form>
+    </div>
+
+    <div id="weather">
+        <div class="container">
+            <div class="weatherInf">
+                <div class="tempInf"></div>
+                <div class="weatherIcon"></div>
+                <div class="location">
+                    <select id="place" class="place" onchange="changeLocation()"></select>
+                    <div class="chanceRain"></div>
+                </div>
+            </div>
+        </div>
+        <div class="linkArea">
+            <a class="gotoThsr" href="tshrTrain.html"><span >高鐵時刻表查詢</span></a>
+            <a class="pokenews" href="index.html"><span>POKENEWS</span></a>
+        </div>
+        <div class="ad"></div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/train.js"></script>
+<script src="js/tripDay.js"></script>
+<script src="js/weather.js"></script>
+<script src="js/loadTrainData_t.js"></script>
+</html>

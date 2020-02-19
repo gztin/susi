@@ -1,0 +1,15 @@
+*{margin:0;padding:0;list-style: none;}
+body{font-family:Microsoft JhengHei,Noto Sans TC,sans-serif;}
+#calender{width:60%;margin: 100px auto;display: flex;flex-direction: column;background: #fff;position: absolute;left: 20%;z-index: 999;margin-top: 20%;}
+#calender ul{width:100%;display: flex;flex-flow: row wrap;}
+#calender li{width:14.2857142857143%;box-sizing: border-box;padding:4px;text-align: center;height:30px;}
+#title-year{color:#fff;font-size: 1.5em;height:45px;align-items: center;justify-content: center;}
+#dayctl{color:#fff;font-size: 1.3em;height:45px;}
+#prev,#next{cursor: pointer;}
+.block{display: flex;}
+.block:nth-child(2){flex-direction: row;justify-content: space-around;height: 60px;align-items: center;}
+.w-list{background: #095751;color:#fff;}
+.d-list li {height:36px;}
+.passDay{color:#5a92a7;}
+.toDay{color:#fff;background: #D05C5C;}
+.future{color:#fff;}

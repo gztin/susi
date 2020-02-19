@@ -1,0 +1,562 @@
+html, body {
+    height:100%;
+    margin:0;
+  }
+#weather{
+    width:100%;
+    margin:0 auto;
+    height:290px;
+    bottom: 0;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    left: 0px;
+    background: #D3D0CB;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: 1px 10px 30px #8ab5dc;
+}
+
+.container{
+    width:92%;
+    margin:0 auto;
+    padding-top:5%;
+    display: flex;
+    flex-direction: column;
+}
+.weatherInf{
+    display: flex;
+    color: #000;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+/* .weatherInf > div:nth-child(1){
+    display: flex;
+} */
+.weatherDetail{
+    display: flex;
+    height: 30px;
+    padding-top: 3%;
+    align-items: center;
+    justify-content: space-around;
+}
+.content{
+    padding:20px;
+    font-size: 12px;
+    border:1px solid #c6c6c6;
+}
+.place{
+    border:none;
+    background: #172733;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 17px;
+    padding: 3% 0 3% 30%;
+    font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;
+}
+.indexPlace{
+    border:none;
+    background: #172733;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 17px;
+    font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;
+    width: 50%;
+    padding: 3% 0 3% 13%;
+}
+.location{
+    display: flex;
+    padding-left: 5%;
+    flex-direction: column;
+    flex: 1;
+}
+.tempInf,.tempContent,.status{
+    font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;
+}
+.tempContent{
+    font-size: 15px;
+    color:#0f0909;
+}
+.tempInf{
+    display: flex;
+    border-right: 1px solid #afafaf;
+    padding-right: 5%;
+    color:#000;
+    align-items: center;
+    justify-content: space-around;
+    height:70px;
+    flex:1;
+}
+.tempInf > p{
+    width:10px;
+}
+.tempInf > div{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+}
+.tempInf > div > p{
+    font-size: 43px;
+}
+.status{
+    font-size: 15px;
+    color:#0f0909;
+}
+.weatherIcon{
+    border-right: 1px solid #afafaf;
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+}
+.weatherIcon > p{
+    width:10px;
+}
+/*
+day1:多雲時晴
+day2:多雲
+day3:下雨
+*/
+.day1{background: url(../img/day1.png)no-repeat;}
+.day2{background: url(../img/day2.png)no-repeat;}
+.day3{background: url(../img/day3.png)no-repeat;}
+.day1,.day2,.day3{
+    width: 55px;
+    height: 55px;
+    margin: 2px;
+    display: block;
+    background-size: contain;
+}
+
+.cUnit{
+    font-size: 20px;
+}
+/*  額外連結*/
+    .linkArea{
+        height: 100px;
+        padding-left: 4%;
+        padding-right: 4%;
+        margin-top:3%;
+        overflow-y:auto;
+    }
+
+    .ad{
+        margin:10px;
+        height: 65px;
+        background: url(../img/ad1.jpg)no-repeat center center; 
+        background-size: cover;
+        padding: 0%;
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+@media screen and (max-width:480px){
+    /* 側邊攔 */
+    .sideBlock:nth-child(1){
+        display:flex;
+        flex-direction: column;
+        height:30%;
+        background: #c3c3c3;
+    }
+    .sideBlock:nth-child(2){
+        display:flex;
+        height: 30%;
+        background: #e8e8e8;
+    }
+    .sideBlock:nth-child(3){
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+    }
+    .placeInf{
+        display: flex;
+        justify-content: center;
+    }
+    .dayBlock{
+        flex:1;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    #weather{
+        width:100%;
+        margin:0 auto;
+        height:43%;
+        position: fixed;
+        left: 0px;
+        background:#D3D0CB;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        box-shadow: 1px 10px 30px #8ab5dc;
+        z-index:999;
+    }
+
+    .container{
+        width:92%;
+        margin:0 auto;
+        padding-top:5%;
+        display: flex;
+        flex-direction: column;
+    }
+    .weatherInf{
+        display: flex;
+        color: #000;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .weatherDetail{
+        display: flex;
+        height: 30px;
+        padding-top: 3%;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .content{
+        padding:20px;
+        font-size: 12px;
+        border:1px solid #c6c6c6;
+    }
+    .place{
+        border:none;
+        background: #172733;
+        border-radius: 10px;
+        color: #fff;
+        padding: 3% 0 3% 30%;
+        font-size: 17px;
+        font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;
+    }
+    .location{
+        display: flex;
+        padding-left: 5%;
+        flex-direction: column;
+        flex: 1;
+    }
+    .tempInf,.tempContent,.status{
+        font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;
+    }
+    .tempContent{
+        font-size: 15px;
+        color:#0f0909;
+    }
+    .tempInf{
+        display: flex;
+        border-right: 1px solid #afafaf;
+        padding-right: 0%;
+        color:#000;
+        align-items: center;
+        justify-content: space-around;
+        height:70px;
+        flex:1;
+    }
+    .tempInf > p{
+        width:10px;
+    }
+    .tempInf > div{
+        display: flex;
+        align-items: baseline;
+        justify-content: space-around;
+    }
+    .tempInf > div > p{
+        font-size: 43px;
+    }
+    .chanceRain{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding-top: 7%;
+    }
+    .chanceRain > p:nth-child(1){
+        font-size:15px; 
+    }
+    .status{
+        display: flex;
+        justify-content: center;
+    }
+    .weatherIcon{
+        border-right: 1px solid #afafaf;
+        flex: 1;
+        display: flex;
+        justify-content: space-around;
+    }
+    .weatherIcon > p{
+        width:10px;
+    }
+    /*
+    day1:多雲時晴
+    day2:多雲
+    day3:下雨
+    */
+    .day1{background: url(../img/day1.png)no-repeat;}
+    .day2{background: url(../img/day2.png)no-repeat;}
+    .day3{background: url(../img/day3.png)no-repeat;}
+    
+    .day1,.day2,.day3{
+        width: 55px;
+        height: 55px;
+        margin: 2px;
+        display: block;
+        background-size: contain;
+    }
+    
+    /*
+    day1:多雲時晴
+    day2:多雲
+    day3:下雨
+    */
+    .day1,.detailDay1,.index-day1{background: url(../img/day1.png)no-repeat;}
+    .day2,.detailDay2,.index-day2{background: url(../img/day2.png)no-repeat;}
+    .day3,.detailDay3,.index-day3{background: url(../img/day3.png)no-repeat;}
+    .day4,.detailDay4,.index-day4{background: url(../img/day4.png)no-repeat;}
+    
+    .day1,.day2,.day3{
+        width: 55px;
+        height: 55px;
+        margin: 2px;
+        display: block;
+        background-size: contain;
+    }
+    
+    .index-day1,
+    .index-day2,
+    .index-day3,
+    .index-day4{
+        width: 120px;
+        height: 120px;
+        margin: 5%;
+        display: block;
+        background-size: contain;
+    }
+
+    .detailDay1,
+    .detailDay2,
+    .detailDay3,
+    .detailDay4{
+        width: 55px;
+        height: 55px;
+        /* margin: 12%; */
+        display: block;
+        background-size: contain;
+    }
+    
+    
+
+    .cUnit{
+        font-size: 20px;
+    }
+    /*  額外連結*/
+    .linkArea{
+        height: 100px;
+        padding-left: 4%;
+        padding-right: 4%;
+        margin-top:3%;
+        overflow-y:auto;
+    }
+    
+    .ad{
+        margin:10px;
+        height: 65px;
+         background: url(../img/ad1.jpg)no-repeat center center; 
+        background-size: cover;
+        padding: 0%;
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+}
+@media screen and (max-width:375px) and (max-height:600px){
+    
+    /* 側邊攔 */
+    .sideBlock:nth-child(1){
+        display:flex;
+        flex-direction: column;
+        height:30%;
+        background: #c3c3c3;
+    }
+    .sideBlock:nth-child(2){
+        display:flex;
+        height: 30%;
+        background: #e8e8e8;
+    }
+    .sideBlock:nth-child(3){
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+    }
+    .placeInf{
+        display: flex;
+        justify-content: center;
+    }
+    .dayBlock{
+        flex:1;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    /* end */
+    
+    #weather{
+        width:100%;
+        margin:0 auto;
+        height:43%;
+        bottom: 0;
+        position: absolute;
+        left: 0px;
+        background:#D3D0CB;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        box-shadow: 1px 10px 30px #8ab5dc;
+    }
+
+    .container{
+        width:92%;
+        margin:0 auto;
+        padding-top:5%;
+        display: flex;
+        flex-direction: column;
+    }
+    .weatherInf{
+        display: flex;
+        color: #000;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .weatherDetail{
+        display: flex;
+        height: 30px;
+        padding-top: 3%;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .content{
+        padding:20px;
+        font-size: 12px;
+        border:1px solid #c6c6c6;
+    }
+    .place{
+        border:none;
+        background: #172733;
+        padding: 3% 0 3% 30%;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 14px;
+        font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;
+    }
+    .location{
+        display: flex;
+        padding-left: 5%;
+        flex-direction: column;
+        flex: 1;
+    }
+    .tempInf,.tempContent,.status{
+        font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;
+    }
+    .tempContent{
+        font-size: 15px;
+        color:#0f0909;
+    }
+    .tempInf{
+        display: flex;
+        border-right: 1px solid #afafaf;
+        padding-right: 5%;
+        color:#000;
+        align-items: center;
+        justify-content: space-around;
+        height:70px;
+        flex:1;
+    }
+    .tempInf > p{
+        width:10px;
+    }
+    .tempInf > div{
+        display: flex;
+        align-items: baseline;
+        justify-content: space-around;
+    }
+    .tempInf > div > p{
+        font-size: 43px;
+    }
+    .status{
+        font-size: 15px;
+        color:#0f0909;
+    }
+    .weatherIcon{
+        border-right: 1px solid #afafaf;
+        flex: 1;
+        display: flex;
+        justify-content: space-around;
+    }
+    .weatherIcon > p{
+        width:10px;
+    }
+    /*
+    day1:多雲時晴
+    day2:多雲
+    day3:下雨
+    */
+    .day1,.detailDay1,.index-day1{background: url(../img/day1.png)no-repeat;}
+    .day2,.detailDay2,.index-day2{background: url(../img/day2.png)no-repeat;}
+    .day3,.detailDay3,.index-day3{background: url(../img/day3.png)no-repeat;}
+    .day4,.detailDay4,.index-day4{background: url(../img/day4.png)no-repeat;}
+    
+    .day1,.day2,.day3{
+        width: 55px;
+        height: 55px;
+        margin: 2px;
+        display: block;
+        background-size: contain;
+    }
+    
+    .index-day1,
+    .index-day2,
+    .index-day3,
+    .index-day4{
+        width: 120px;
+        height: 120px;
+        margin: 5%;
+        display: block;
+        background-size: contain;
+    }
+
+    .detailDay1,
+    .detailDay2,
+    .detailDay3,
+    .detailDay4{
+        width: 55px;
+        height: 55px;
+        /* margin: 12%; */
+        display: block;
+        background-size: contain;
+    }
+    
+    .cUnit{
+        font-size: 20px;
+    }
+    
+    /*  額外連結*/
+    .linkArea{
+        height: 100px;
+        padding-left: 4%;
+        padding-right: 4%;
+        margin-top:3%;
+        overflow-y:auto;
+    }
+    
+    .ad{
+        margin:10px;
+        height: 50px;
+        background: url(../img/ad1.jpg)no-repeat center center; 
+        background-size: cover;
+        padding: 0%;
+        margin-left: 4%;
+        margin-right: 4%;
+    }
+}
