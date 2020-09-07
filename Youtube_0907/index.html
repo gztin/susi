@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title影片播放清單</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="reset.css"> 	
+  <link rel="stylesheet" href="style.css?v=4">
+  <script src="https://unpkg.com/vue@next"></script>
+  
+</head>
+
+<body>
+  
+  <div id="app">
+	<header>
+		<p class="pop-title">My Music</p>
+		<div class="tabMenu">
+			<span class="showPage"><a href="" >播放清單</a></span>
+			<span><a href="">收藏清單</a></span>
+		</div>
+	</header>
+    <p class="dataSearch"><input type="text" placeholder="輸入影片名稱" v-model="searchTitle"></p>
+    <div class="dataList">
+		<div class="container">
+			<div class="show" v-if="sliceData.length === 0"><p class="hint">找不到符合的歌曲，請重新輸入</p></div>
+			
+			<div class="v-data" v-for="v of sliceData" :key="v.snippet.publishedAt">
+				<div class="data-pic">
+					<a v-bind:href="'https://www.youtube.com/embed/'+v.id" target="_blank">
+						<img v-bind:src="v.snippet.thumbnails.medium.url" alt="">
+						<span class="data-time">{{timeFormat(v.contentDetails.duration)}}</span>
+					</a>
+				</div>
+				<div class="data-title"><p>{{v.snippet.title}}</p></div>
+				<div class="data-desc">{{v.snippet.description}}</div>
+				<div class="favorite">
+					<div class="addButton">加入收藏<input type="checkbox"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+    <div class="page-block" >
+		<ul class="show" v-if="sliceData.length !=0">
+			<li class="pager" :class="{'disable':currentPage===1}">
+				<a  @click.prevent="setPage(currentPage - 1)" href="#">上一頁</a></li>
+			<li 
+				v-for="n of pageEnd"
+				:class="{active: n + pageAddmount===currentPage}" 
+				:key="n"
+				@click.prevent="setPage( n + pageAddmount )"
+				class="page-item"
+			>	
+				<!-- n 從 1 開始計算 -->
+				<a href="#">{{ n + pageAddmount }}</a>
+			</li>
+			<li class="pager" :class="{'disable':currentPage===totalPage}"><a @click.prevent="setPage(currentPage + 1)" href="#">下一頁</a></li>
+		  </ul>
+	</div>
+	<div class="cell-page-block">
+		<ul class="show" v-if="sliceData.length !=0">
+			<li class="pager" :class="{'disable':currentPage===1}">
+				<a  @click.prevent="setPage(currentPage - 1)" href="#">上一頁</a></li>
+			<li 
+				v-for="n of pageEnd"
+				:class="{active: n + pageAddmount===currentPage}" 
+				:key="n"
+				@click.prevent="setPage( n + pageAddmount )"
+				class="page-item"
+			>	
+				<!-- n 從 1 開始計算 -->
+				<a href="#">{{ n + pageAddmount }}</a>
+			</li>
+			<li class="pager" :class="{'disable':currentPage===totalPage}"><a @click.prevent="setPage(currentPage + 1)" href="#">下一頁</a></li>
+		  </ul>
+	</div>
+  </div>
+  <script src="video.js?v=1"></script>
+</body>
+
+</html>
