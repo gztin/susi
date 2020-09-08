@@ -11,7 +11,7 @@
     integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="reset.css"> 	
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
   <script src="https://unpkg.com/vue@next"></script>
   
 </head>
@@ -21,13 +21,58 @@
   <div id="app">
 	<header>
 		<p class="pop-title">My Music</p>
+		<span class="gotoFav">
+			<div class="sandwich"></div>
+			<div class="sandwich"></div>
+			<div class="sandwich"></div>
+		</span>
+		<!-- <div class="playList"><a href="#" @click="isLikeList = !isLikeList">播放清單</a></div> -->
 		<div class="tabMenu">
 			<span class="showPage"><a href="" >播放清單</a></span>
 			<span><a href="">收藏清單</a></span>
 		</div>
 	</header>
     <p class="dataSearch"><input type="text" placeholder="輸入影片名稱" v-model="searchTitle"></p>
-    <div class="dataList">
+	
+	<div class="listPage">
+		
+		<div class="favList-submenu" :class="{showList:isLikeList}" v-for="e of favoriteList" :key="e.snippet.publishedAt">
+			<div class="favorite">
+				<div class="choiceBtn">
+					<input v-model="e.isChoice" type="checkbox">
+				</div>
+			</div>
+			<div class="data-list-pic">
+				<a v-bind:href="'https://www.youtube.com/embed/'+e.id" target="_blank">
+					<img v-bind:src="e.snippet.thumbnails.default.url" alt="">
+					<span class="data-time">{{timeFormat(e.contentDetails.duration)}}</span>
+				</a>
+			</div>
+			<div class="data-subTitle"><p>{{e.snippet.title}}</p></div>
+		</div>
+
+	</div>
+
+
+	<!-- <div class="favList" :class="{showList:isLikeList}">
+		<div class="container">
+			<div class="v-data" v-for="e of favoriteList" :key="e.snippet.publishedAt">
+				<div class="data-pic">
+					<a v-bind:href="'https://www.youtube.com/embed/'+e.id" target="_blank">
+						<img v-bind:src="e.snippet.thumbnails.medium.url" alt="">
+						<span class="data-time">{{timeFormat(e.contentDetails.duration)}}</span>
+					</a>
+				</div>
+				<div class="data-title"><p>{{e.snippet.title}}</p></div>
+				<div class="data-desc">{{e.snippet.description}}</div>
+				<div class="favorite">
+					<div class="addButton">加入收藏<input v-model="e.isLike" type="checkbox"></div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	
+	<div class="dataList">
 		<div class="container">
 			<div class="show" v-if="sliceData.length === 0"><p class="hint">找不到符合的歌曲，請重新輸入</p></div>
 			
@@ -41,7 +86,7 @@
 				<div class="data-title"><p>{{v.snippet.title}}</p></div>
 				<div class="data-desc">{{v.snippet.description}}</div>
 				<div class="favorite">
-					<div class="addButton">加入收藏<input type="checkbox"></div>
+					<div class="addButton">加入收藏<input v-model="v.isLike" type="checkbox"></div>
 				</div>
 			</div>
 		</div>
