@@ -5,13 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title影片播放清單</title>
+  <title>影片播放清單</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
     integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="reset.css"> 	
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=8">
   <script src="https://unpkg.com/vue@next"></script>
   
 </head>
@@ -21,7 +21,7 @@
   <div id="app">
 	<header>
 		<p class="pop-title">My Music</p>
-		<span class="gotoFav">
+		<span @click.prevent="isShow =!isShow" class="gotoFav" >
 			<div class="sandwich"></div>
 			<div class="sandwich"></div>
 			<div class="sandwich"></div>
@@ -34,21 +34,24 @@
 	</header>
     <p class="dataSearch"><input type="text" placeholder="輸入影片名稱" v-model="searchTitle"></p>
 	
-	<div class="listPage">
-		
-		<div class="favList-submenu" :class="{showList:isLikeList}" v-for="e of favoriteList" :key="e.snippet.publishedAt">
-			<div class="btn-submenu">
-				<div class="choiceBtn">
-					<input v-model="e.isChoice" type="checkbox">
+	<div v-bind:class="{showPage:isShow}" class="listPage">
+		<div class="sub-page-title">
+			<p>收藏清單</p>
+		</div>
+		<div class="list-submenu">
+			<div class="favList-submenu" :class="{showList:isLikeList}" v-for="e of favoriteList" :key="e.snippet.publishedAt">
+				<div class="btn-submenu">
+					<div class="choiceBtn">
+						<input v-model="e.isLike" type="checkbox">
+					</div>
 				</div>
+				<div class="data-list-pic">
+					<a v-bind:href="'https://www.youtube.com/embed/'+e.id" target="_blank">
+						<img v-bind:src="e.snippet.thumbnails.default.url" alt="">
+					</a>
+				</div>
+				<div class="data-subTitle"><p>{{e.snippet.title}}</p></div>
 			</div>
-			<div class="data-list-pic">
-				<a v-bind:href="'https://www.youtube.com/embed/'+e.id" target="_blank">
-					<img v-bind:src="e.snippet.thumbnails.default.url" alt="">
-					<span class="data-time">{{timeFormat(e.contentDetails.duration)}}</span>
-				</a>
-			</div>
-			<div class="data-subTitle"><p>{{e.snippet.title}}</p></div>
 		</div>
 
 	</div>
@@ -127,7 +130,7 @@
 		  </ul>
 	</div>
   </div>
-  <script src="video.js?v=1"></script>
+  <script src="video.js?v=5"></script>
 </body>
 
 </html>

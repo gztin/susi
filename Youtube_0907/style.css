@@ -10,14 +10,20 @@
   ::-ms-input-placeholder { /* Microsoft Edge */
     color: #929292;
   }
+  #app{
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .choiceBtn{color:#fff;}
 @media (max-width: 480px) {
     body{
         height: 100vh;
         background: #151515;
     }
     header{
-        width:100%;
-        height:90px;
+        width: 100%;
+        height: 100px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -26,9 +32,7 @@
         position: fixed;
         z-index: 99;
     }
-    #app{
-        padding-top:90px;
-    }
+    
     .hide{
         display:none;
     }
@@ -41,36 +45,40 @@
         padding-top: 90px;
     }
     .pop-title{
-        color:#fff;
-        margin-top:20px;
-        font-size:1.5em;
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        font-size: 1.5em;
     }
     .dataList{
-        padding-top:75px;
+        padding-top:160px;
     }
     .dataSearch{
         width: 100%;
-        height: 75px;
+        height: 55px;
         margin: 0 auto;
         display: flex;
         justify-content: center;
         align-items: center;
         background: #151515;
         position: fixed;
-        z-index:99;
+        z-index: 99;
+        margin-top: 100px;
     }
     .dataSearch > input{
-        width: 92%;
+        width: 85%;
         margin: 0 auto;
-        height: 40px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        border:0px;
+        height: 35px;
+        margin-top: 20px;
+        margin-bottom: 15px;
+        border: 0px;
         border-radius: 5px;
         background: #292929;
         text-indent: 10px;
     }
-    .data-pic img {width:100%;height:170px;}
+    .data-pic img {
+        width: 100%;
+        height: 150px;}
     .container{
         width: 100%;
         margin: 0 auto;
@@ -80,13 +88,14 @@
         background: #151515;
     }
     .v-data{
-        width: 100%;
-        height: 230px;
+        width: 90%;
+        height: 193px;
         display: flex;
         flex-direction: column;
-        margin-bottom: 5%;
+        margin-bottom: 10%;
+        /* margin-left: -10%; */
         border-radius: 10px;
-        background: #fff;
+        background: #2b2b2b;
         overflow: hidden;
         border: 2px solid #ff7625;
     }
@@ -110,12 +119,12 @@
         border:1px solid #545454;
     }
     .data-title {
-        width: 345px;
-        height: 55px;
+        width: 343px;
+        height: 40px;
         display: flex;
         background: rgba(0,0,0,0.5);
         position: absolute;
-        margin-top: 115px;
+        margin-top: 110px;
     }
     .data-title > p{
         width: 90%;
@@ -133,8 +142,9 @@
     .data-desc{
         font-size: 12px;
         width: 240px;
-        height: 40px;
-        padding: 10px;
+        height: 25px;
+        padding-top: 10px;
+        padding-left: 10px;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -151,12 +161,12 @@
     .addButton{
         display: flex;
         width: 90px;
-        height:30px;
+        height: 30px;
         justify-content: space-around;
         font-size: 14px;
         margin-right: 10px;
         align-items: center;
-        margin-top: -35px;
+        margin-top: -25px;
     }
     
     .gotoPage{
@@ -246,6 +256,9 @@
     
 }
 @media (min-width: 768px) and (max-width: 979px) {
+    body{
+        background: #151515;
+    }
     header{
         width:100%;
         height:90px;
@@ -285,7 +298,9 @@
         margin-top: 20px;
         margin-bottom: 10px;
         border-radius: 5px;
-        border: 1px solid #d6d6d6;
+        background: #292929;
+        text-indent: 10px;
+        border:0px;
     }
     .data-pic img {width:100%;height:170px;}
     .data-list{
@@ -307,9 +322,8 @@
         margin-right: 2%;
         margin-bottom: 5%;
         border-radius: 10px;
-        background: #fff;
+        background: #2b2b2b;
         overflow: hidden;
-        box-shadow: 1px 1px 3px #d8d8d8;
     }
     .data-time{
         z-index: 9;
@@ -418,6 +432,7 @@
     .gotoFav{
         position: absolute;
         right: 5%;
+        cursor: pointer;
     }
     .sandwich {
         width: 35px;
@@ -427,17 +442,25 @@
     }
     .listPage{
         width: 600px;
-        height: 100vh;
+        height: auto;
         background: #1f1f1f;
         position: absolute;
-        right: -160px;
+        right: -600px;
         z-index: 99;
         top: 90px;
         border: 1px solid #000;
+        transition: 0.5s;
+    }
+    .showPage{
+        right:0px;
+        transition: 0.5s;
     }
     .favList-submenu{
         display:flex;
         border-bottom: 1px solid #3a3a3a;
+    }
+    .favList-submenu:first-child{
+        margin-top:60px!important;
     }
     .btn-submenu{
         display: flex;
@@ -446,6 +469,7 @@
         width:50px;
         height:79px;
     }
+    
     .data-subTitle{
         width: 300px;
         display: flex;
@@ -460,8 +484,41 @@
         white-space: nowrap;
         color:#fff;
     }
+    .sub-page-title{
+        height: 55px;
+        width: 100%;
+        display: flex;
+        position: fixed;
+        justify-content: flex-start;
+        align-items: center;
+        border-bottom: 1px solid #777;
+        margin-bottom: 10px;
+        background: #1f1f1f;
+    }
+    .sub-page-title p{
+        color:#fff;
+        margin-left: 5%;
+    }
+    .list-submenu{
+        height: 600px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    .needDelete{
+        color: #fff;
+        width: 75px;
+        height: 30px;
+        border: 1px solid #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 55%;
+    }
 }
 @media (min-width: 980px) {
+    body{
+        background: #151515;
+    }
     header{
         width:100%;
         height:90px;
@@ -501,7 +558,9 @@
         margin-top: 20px;
         margin-bottom: 10px;
         border-radius: 5px;
-        border: 1px solid #d6d6d6;
+        background: #292929;
+        text-indent: 10px;
+        border:0px;
     }
     .data-pic img {width:100%;height:150px;}
     .container{
@@ -518,9 +577,8 @@
         flex-direction: column;
         margin: 10px;
         border-radius: 10px;
-        background: #fff;
+        background: #2b2b2b;
         overflow: hidden;
-        box-shadow: 1px 1px 3px #d8d8d8;
     }
     .data-time{
         z-index: 9;
@@ -653,6 +711,7 @@
     .gotoFav{
         position: absolute;
         right: 5%;
+        cursor: pointer;
     }
     .sandwich {
         width: 35px;
@@ -662,17 +721,25 @@
     }
     .listPage{
         width: 600px;
-        height: 100vh;
+        height: auto;
         background: #1f1f1f;
         position: absolute;
-        right: -160px;
+        right: -600px;
         z-index: 99;
         top: 90px;
         border: 1px solid #000;
+        transition: 0.5s;
+    }
+    .showPage{
+        right:0px;
+        transition: 0.5s;
     }
     .favList-submenu{
         display:flex;
         border-bottom: 1px solid #3a3a3a;
+    }
+    .favList-submenu:first-child{
+        margin-top:60px!important;
     }
     .btn-submenu{
         display: flex;
@@ -695,8 +762,40 @@
         white-space: nowrap;
         color:#fff;
     }
+    .sub-page-title{
+        height: 55px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-bottom: 1px solid #777;
+        margin-bottom: 10px;
+        background: #1f1f1f;
+    }
+    .sub-page-title p{
+        color:#fff;
+        margin-left: 5%;
+    }
+    .list-submenu{
+        height: 600px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    .needDelete{
+        color: #fff;
+        width: 75px;
+        height: 30px;
+        border: 1px solid #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 55%;
+    }
 }
 @media (min-width: 1200px) {
+    body{
+        background: #151515;
+    }
     header{
         width:100%;
         height:90px;
@@ -736,7 +835,9 @@
         margin-top: 20px;
         margin-bottom: 10px;
         border-radius: 5px;
-        border: 1px solid #d6d6d6;
+        background: #292929;
+        text-indent: 10px;
+        border:0px;
     }
     .data-pic img {width:100%;height:170px;}
     .container{
@@ -753,9 +854,8 @@
         flex-direction: column;
         margin: 10px;
         border-radius: 10px;
-        background: #fff;
+        background: #2b2b2b;
         overflow: hidden;
-        box-shadow: 1px 1px 3px #d8d8d8;
     }
     .data-time{
         z-index: 9;
@@ -868,6 +968,7 @@
     .gotoFav{
         position: absolute;
         right: 5%;
+        cursor: pointer;
     }
     .sandwich {
         width: 35px;
@@ -877,20 +978,25 @@
     }
     .listPage{
         width: 600px;
-        height: 100vh;
+        height: auto;
         background: #1f1f1f;
         position: absolute;
-        right: -160px;
+        right: -600px;
         z-index: 99;
         top: 90px;
         border: 1px solid #000;
+        transition: 0.5s;
+    }
+    .showPage{
+        right:0px;
+        transition: 0.5s;
     }
     .favList-submenu{
         display:flex;
         border-bottom: 1px solid #3a3a3a;
     }
-    .data-list-pic{
-
+    .favList-submenu:first-child{
+        margin-top:60px!important;
     }
     .data-list-pic img{
         width:100%;
@@ -902,6 +1008,7 @@
         width:50px;
         height:79px;
     }
+    
     .data-subTitle{
         width: 300px;
         display: flex;
@@ -915,5 +1022,35 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         color:#fff;
+    }
+    .sub-page-title{
+        height: 55px;
+        width: 100%;
+        display: flex;
+        position: fixed;
+        justify-content: flex-start;
+        align-items: center;
+        border-bottom: 1px solid #777;
+        margin-bottom: 10px;
+        background: #1f1f1f;
+    }
+    .sub-page-title p{
+        color:#fff;
+        margin-left: 5%;
+    }
+    .list-submenu{
+        height: 600px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    .needDelete{
+        color: #fff;
+        width: 75px;
+        height: 30px;
+        border: 1px solid #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 55%;
     }
 }

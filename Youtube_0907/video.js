@@ -17,6 +17,8 @@
 				// 預設收藏清單是空的
 				isLike:false,
 
+				isShow:false,
+
 				// 預設沒被選擇
 				isChoice:false,
 
@@ -36,14 +38,15 @@
 					"&key=AIzaSyANiT18nS9RT0-torVr8FwzPYHPLe61a50";
 
 					// 測試
-					// "https://www.googleapis.com/youtube/v3/playlistItems" +
-					// // "id=UC_XRq7JriAORvDe1lI1RAsA"+
-					// "part=snippet,id,contentDetails"+
-					// "&maxResults=50"+
-					// "&playlistId=PLqivELodHt3iL9PgGHg0_EF86FwdiqCre"+
-					// "&key=AIzaSyANiT18nS9RT0-torVr8FwzPYHPLe61a50";
 
-			fetch(url,{method: 'get'})
+					// "https://www.googleapis.com/youtube/v3/playlistItems?" +
+					// "part=snippet,contentDetails"+
+					// // "id=UC_XRq7JriAORvDe1lI1RAsA"+
+					// "&playlistId=PLCI2CZySgOeLJbgxOs7DtnU6F7YvFObJa"+
+					// "&key=AIzaSyC8Dq2_fJ5NI5iCVdZ_ZLEFsH6cegLegz0";
+					// "&maxResults=50";
+					
+			fetch(url,{method:'get'})
 				.then(res => res.json())
 				.then(json => {
 					console.log(json);
@@ -92,6 +95,7 @@
 			favoriteList(){
 				return this.sortData.filter(d => d.isLike);
 			},
+			
 			pageAddmount(){
 				// 處理換頁頁數的位移
 				const tmp = 
@@ -110,47 +114,47 @@
 		methods:{
 			timeFormat(val){
 				// 處理播放時間的格式
-				var videoTime = val.match(/\d+/g);
+				// var videoTime = val.match(/\d+/g);
 		
-				if(videoTime.length===3){
-					if(videoTime[0] < 10){
-						videoTime[0] = "0"+videoTime[0];
-					}else{
-						videoTime[0] = videoTime[0];
-					}
-					if(videoTime[1] < 10){
-						videoTime[1] = "0"+videoTime[1];
-					}else{
-						videoTime[1] = videoTime[1];
-					}
-					if(videoTime[2] < 10){
-						videoTime[2] = "0"+videoTime[2];
-					}else{
-						videoTime[2] = videoTime[2];
-					}
-					return videoTime = videoTime[0] +":"+ videoTime[1] +":"+ videoTime[2];
-				}
-				else if(videoTime.length===2){
-					if(videoTime[0] < 10){
-						videoTime[0] = "0"+videoTime[0];
-					}else{
-						videoTime[0] = videoTime[0];
-					}
-					if(videoTime[1] < 10){
-						videoTime[1] = "0"+videoTime[1];
-					}else{
-						videoTime[1] = videoTime[1];
-					}
-					return videoTime = videoTime[0] +":"+ videoTime[1];
-				}
-				else if(videoTime.length===1){
-					if(videoTime[0] < 10){
-						videoTime[0] = "0:0"+videoTime[0];
-					}else{
-						videoTime[0] = videoTime[0];
-					}
-					return videoTime = videoTime[0] ;
-				}
+				// if(videoTime.length===3){
+				// 	if(videoTime[0] < 10){
+				// 		videoTime[0] = "0"+videoTime[0];
+				// 	}else{
+				// 		videoTime[0] = videoTime[0];
+				// 	}
+				// 	if(videoTime[1] < 10){
+				// 		videoTime[1] = "0"+videoTime[1];
+				// 	}else{
+				// 		videoTime[1] = videoTime[1];
+				// 	}
+				// 	if(videoTime[2] < 10){
+				// 		videoTime[2] = "0"+videoTime[2];
+				// 	}else{
+				// 		videoTime[2] = videoTime[2];
+				// 	}
+				// 	return videoTime = videoTime[0] +":"+ videoTime[1] +":"+ videoTime[2];
+				// }
+				// else if(videoTime.length===2){
+				// 	if(videoTime[0] < 10){
+				// 		videoTime[0] = "0"+videoTime[0];
+				// 	}else{
+				// 		videoTime[0] = videoTime[0];
+				// 	}
+				// 	if(videoTime[1] < 10){
+				// 		videoTime[1] = "0"+videoTime[1];
+				// 	}else{
+				// 		videoTime[1] = videoTime[1];
+				// 	}
+				// 	return videoTime = videoTime[0] +":"+ videoTime[1];
+				// }
+				// else if(videoTime.length===1){
+				// 	if(videoTime[0] < 10){
+				// 		videoTime[0] = "0:0"+videoTime[0];
+				// 	}else{
+				// 		videoTime[0] = videoTime[0];
+				// 	}
+				// 	return videoTime = videoTime[0] ;
+				// }
 			},
 			URL(){
 				return this.youtubeLink+this.id;
