@@ -243,6 +243,7 @@
     .listPage{
         display:none;
     }
+    
 }
 @media (min-width: 768px) and (max-width: 979px) {
     header{
@@ -427,12 +428,37 @@
     .listPage{
         width: 600px;
         height: 100vh;
-        background: #fff;
+        background: #1f1f1f;
         position: absolute;
         right: -160px;
         z-index: 99;
         top: 90px;
         border: 1px solid #000;
+    }
+    .favList-submenu{
+        display:flex;
+        border-bottom: 1px solid #3a3a3a;
+    }
+    .btn-submenu{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:50px;
+        height:79px;
+    }
+    .data-subTitle{
+        width: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 3%;
+    }
+    .data-subTitle > p{
+        line-height: 23px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color:#fff;
     }
 }
 @media (min-width: 980px) {
@@ -637,12 +663,37 @@
     .listPage{
         width: 600px;
         height: 100vh;
-        background: #fff;
+        background: #1f1f1f;
         position: absolute;
         right: -160px;
         z-index: 99;
         top: 90px;
         border: 1px solid #000;
+    }
+    .favList-submenu{
+        display:flex;
+        border-bottom: 1px solid #3a3a3a;
+    }
+    .btn-submenu{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:50px;
+        height:79px;
+    }
+    .data-subTitle{
+        width: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 3%;
+    }
+    .data-subTitle > p{
+        line-height: 23px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color:#fff;
     }
 }
 @media (min-width: 1200px) {
@@ -827,7 +878,7 @@
     .listPage{
         width: 600px;
         height: 100vh;
-        background: #fff;
+        background: #1f1f1f;
         position: absolute;
         right: -160px;
         z-index: 99;
@@ -836,11 +887,33 @@
     }
     .favList-submenu{
         display:flex;
+        border-bottom: 1px solid #3a3a3a;
     }
     .data-list-pic{
 
     }
     .data-list-pic img{
         width:100%;
+    }
+    .btn-submenu{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:50px;
+        height:79px;
+    }
+    .data-subTitle{
+        width: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 3%;
+    }
+    .data-subTitle > p{
+        line-height: 23px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color:#fff;
     }
 }

@@ -37,7 +37,7 @@
 	<div class="listPage">
 		
 		<div class="favList-submenu" :class="{showList:isLikeList}" v-for="e of favoriteList" :key="e.snippet.publishedAt">
-			<div class="favorite">
+			<div class="btn-submenu">
 				<div class="choiceBtn">
 					<input v-model="e.isChoice" type="checkbox">
 				</div>
