@@ -25,7 +25,7 @@ li{
         position: absolute;
         top:0;
         left:0;
-        background: url('img/lefttopAD.png')no-repeat center;
+        background: url('../img/lefttopAD.png')no-repeat center;
         z-index: 20000;
         cursor: pointer;
     }
@@ -35,7 +35,7 @@ li{
         position: absolute;
         top:0;
         right:0;
-        background: url('img/righttopAD.png')no-repeat center;
+        background: url('../img/righttopAD.png')no-repeat center;
         z-index: 20000;
         cursor: pointer;
     }
@@ -45,7 +45,7 @@ li{
         display:block;
         top:0;
         z-index:9200;
-        background: url('img/icon_close_n.png')no-repeat center;
+        background: url('../img/icon_close_n.png')no-repeat center;
     }
     .closead1{left:0;}
     .closead2{right:0;}
@@ -56,7 +56,7 @@ li{
         display: none;
         top:160px;
         left:0;
-        background: url('img/leftPic.png')no-repeat center;
+        background: url('./img/leftPic.png')no-repeat center;
         background-size: contain;
         z-index: 5000;
         cursor: pointer;
@@ -68,7 +68,7 @@ li{
         display: none;
         top:160px;
         right:0;
-        background: url('img/rightPic.png')no-repeat center;
+        background: url('./img/rightPic.png')no-repeat center;
         background-size: contain;
         z-index: 5000;
         cursor: pointer;
