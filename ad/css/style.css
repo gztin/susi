@@ -1,0 +1,83 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+    font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;
+    background: #1b1b1b;
+}
+*{
+    margin:0;
+    padding:0;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+.bg{
+    width:100%;
+    height:100vh;
+    background: #1b1b1b;
+}
+    .adleft{
+        width:150px;
+        height:150px;
+        position: absolute;
+        top:0;
+        left:0;
+        background: url('../img/lefttopAD.png')no-repeat center;
+        z-index: 20000;
+        cursor: pointer;
+    }
+    .adright{
+        width:150px;
+        height:150px;
+        position: absolute;
+        top:0;
+        right:0;
+        background: url('../img/righttopAD.png')no-repeat center;
+        z-index: 20000;
+        cursor: pointer;
+    }
+    .closead1,.closead2{
+        width:25px;
+        height:25px;
+        display:block;
+        top:0;
+        z-index:9200;
+        background: url('../img/icon_close_n.png')no-repeat center;
+    }
+    .closead1{left:0;}
+    .closead2{right:0;}
+    .adleftlink{
+        width:230px;
+        height:800px;
+        position: absolute;
+        display: none;
+        top:160px;
+        left:0;
+        background: url('../img/leftPic.png')no-repeat center;
+        background-size: contain;
+        z-index: 5000;
+        cursor: pointer;
+    }
+    .adrightlink{
+        width:230px;
+        height:800px;
+        position: absolute;
+        display: none;
+        top:160px;
+        right:0;
+        background: url('../img/rightPic.png')no-repeat center;
+        background-size: contain;
+        z-index: 5000;
+        cursor: pointer;
+    }
+.block{
+    width:1000px;
+    margin:10% auto;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.link{color:#fff;}
