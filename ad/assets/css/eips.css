@@ -661,11 +661,17 @@ picture img {
 .block-salesJob .text-content span {
   font-size: 2em;
   font-weight: bold;
+  margin-right: 10px;
 }
 
 .block-salesJob .text-content .content {
   font-size: 1.5em;
   text-align: justify;
+}
+
+.block-salesJob .text-content .action {
+  display: flex;
+  justify-content: space-around;
 }
 
 .FAQ {
