@@ -116,8 +116,16 @@
             }
         }
         .block-center {
-            background: #f3f3f3;
             margin-top: 50px;
+            .content{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                .hint{
+                    background-color: #fff;
+                    text-align: right;
+                }
+            }
         }
     }
 }
@@ -196,6 +204,18 @@
                         margin: 0 auto;
                         align-items: center;
                         justify-content: center;
+                        .number{
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 50%;
+                            background: #fff;
+                            color: #175f8a;
+                            display: flex;
+                            font-size: 1.4em;
+                            align-items: center;
+                            justify-content: center;
+                            margin-right:35px;
+                        }
                     }
                     h5{
                         font-size: 1.2em;
@@ -398,6 +418,12 @@ picture{
     }
     .aboutCEIP-pic02{
         width:100%;
+    }
+    .title{
+        a{
+            font-size: 1.5em;
+            font-weight: bold;
+        }
     }
 }
 
@@ -673,10 +699,15 @@ picture{
         span{
             font-size: 2em;
             font-weight: bold;
+            margin-right: 10px;
         }
         .content{
             font-size: 1.5em;
             text-align:justify;
+        }
+        .action{
+            display:flex;
+            justify-content: space-around;
         }
     }
     
@@ -688,8 +719,6 @@ picture{
 // FAQ
 .FAQ{
     margin: 0 auto;
-    width: 100%;
-    min-height: 5200px;
     margin-top: 160px;
 }
 // FAQ end
@@ -711,11 +740,5 @@ picture{
             flex-direction: column;
             align-items: center;
         }
-    }
-    .FAQ{
-        margin: 0 auto;
-        width: 100%;
-        min-height: 4000px;
-        margin-top: 100px;
     }
 }

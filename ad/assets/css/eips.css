@@ -6,13 +6,11 @@
   background-size: cover;
   position: relative;
 }
-
 #hero01 .container {
   position: relative;
   padding-top: 74px;
   text-align: center;
 }
-
 #hero01 .container h1 {
   margin: 0;
   font-size: 56px;
@@ -21,11 +19,9 @@
   color: #fff;
   font-family: "Poppins", sans-serif;
 }
-
 #hero01 .container h1 span {
   color: #ffc451;
 }
-
 #hero01 .container h2 {
   color: rgba(255, 255, 255, 0.9);
   margin: 10px 0 0 0;
@@ -62,7 +58,6 @@
 .reason h3 {
   font-size: 2.7em !important;
 }
-
 .reason p {
   text-align: justify;
   font-size: 1.5em;
@@ -71,17 +66,14 @@
 .services {
   padding: 30px 0 !important;
 }
-
 .services .advance .subAdvance .icon-box {
   border: none;
   padding: 30px 20px !important;
   background: none !important;
 }
-
 .services .advance .subAdvance .icon-box .title {
   color: #ffc451;
 }
-
 .services .advance .subAdvance .description {
   text-align: justify;
 }
@@ -92,33 +84,35 @@
   padding-bottom: 40px;
   justify-content: center;
 }
-
 .serviceInf .container .block-inf h4 {
   padding-bottom: 20px;
   border-bottom: 1px solid #ffdc84;
 }
-
 .serviceInf .container .block-inf .leftBlock {
   padding-right: 50px;
 }
-
 .serviceInf .container .block-inf .leftBlock .title {
   font-size: 1.7em;
 }
-
 .serviceInf .container .block-inf .leftBlock .description {
   font-size: 1.3em;
   text-align: justify;
 }
-
 .serviceInf .container .block-inf .rightBlock img {
   width: 100%;
   height: max-content;
 }
-
 .serviceInf .container .block-center {
-  background: #f3f3f3;
   margin-top: 50px;
+}
+.serviceInf .container .block-center .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.serviceInf .container .block-center .content .hint {
+  background-color: #fff;
+  text-align: right;
 }
 
 .eipsNews .icon-box h5 {
@@ -132,13 +126,11 @@
   background-size: cover;
   position: relative;
 }
-
 #hero00 .container {
   position: relative;
   padding-top: 74px;
   text-align: center;
 }
-
 #hero00 .container h1 {
   margin: 0;
   font-size: 56px;
@@ -147,11 +139,9 @@
   color: #fff;
   font-family: "Poppins", sans-serif;
 }
-
 #hero00 .container h1 span {
   color: #ffc451;
 }
-
 #hero00 .container h2 {
   color: rgba(255, 255, 255, 0.9);
   margin: 10px 0 0 0;
@@ -174,17 +164,14 @@
   font-size: 3em;
   font-weight: bold;
 }
-
 .stepBlock .block-step .step {
   display: flex;
 }
-
 .stepBlock .block-step .step .subStep .thumbnail {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .stepBlock .block-step .step .subStep .thumbnail .stepTitle {
   width: 80%;
   height: 50px;
@@ -197,19 +184,28 @@
   align-items: center;
   justify-content: center;
 }
-
+.stepBlock .block-step .step .subStep .thumbnail .stepTitle .number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  color: #175f8a;
+  display: flex;
+  font-size: 1.4em;
+  align-items: center;
+  justify-content: center;
+  margin-right: 35px;
+}
 .stepBlock .block-step .step .subStep .thumbnail h5 {
   font-size: 1.2em;
   padding-top: 20px;
   text-align: center;
 }
-
 .stepBlock .block-step .step .subStep .thumbnail p {
   font-size: 1.1em;
   text-align: center;
   text-align: justify;
 }
-
 .stepBlock .block-step .step .subStep .thumbnail img {
   width: 250px;
 }
@@ -230,7 +226,6 @@
   display: flex;
   flex-direction: column;
 }
-
 .mallEips .titleContent .adformLink {
   width: 150px;
   height: 50px;
@@ -246,18 +241,15 @@
 #cityInf {
   padding-bottom: 0px;
 }
-
 #cityInf .container .block-bottom .inf-bottom {
   display: flex;
   flex-direction: column;
   align-items: center !important;
   justify-content: center;
 }
-
 #cityInf .container .block-bottom .inf-bottom h5 {
   font-size: 2em;
 }
-
 #cityInf .container .block-bottom .inf-bottom p {
   font-size: 2em;
   font-weight: bold;
@@ -273,7 +265,6 @@
   height: 212px;
   background-repeat: no-repeat;
 }
-
 .picCity .linkTitle {
   text-align: center;
   font-size: 1.5em;
@@ -281,12 +272,10 @@
   margin-top: 40px;
   padding-bottom: 40px;
 }
-
 .picCity .link {
   display: flex;
   width: 380px;
 }
-
 .picCity .link .bookingLink {
   width: 150px;
   height: 50px;
@@ -305,7 +294,6 @@
   margin-bottom: 40px;
   background-color: #f1f1f1;
 }
-
 .mallEipsInf div img {
   width: 120px;
   margin-left: 35%;
@@ -325,7 +313,6 @@ picture img {
   padding-bottom: 40px;
   justify-content: center;
 }
-
 #services .block-center {
   background: #fff;
 }
@@ -340,14 +327,12 @@ picture img {
   height: 205px;
   background-repeat: no-repeat;
 }
-
 .picCityBottom .linkBlock {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-
 .picCityBottom .linkBlock .linkTitle {
   text-align: center;
   font-size: 1.5em;
@@ -355,12 +340,10 @@ picture img {
   margin-top: 40px;
   padding-bottom: 15px;
 }
-
 .picCityBottom .linkBlock .link {
   display: flex;
   width: 380px;
 }
-
 .picCityBottom .linkBlock .link .bookingLink {
   width: 150px;
   height: 50px;
@@ -382,11 +365,9 @@ picture img {
   background-size: cover;
   position: relative;
 }
-
 #hero03 .landingPageTitle {
   color: #fff;
 }
-
 #hero03 .landingPageTitle .adformLink {
   margin: inherit;
 }
@@ -395,13 +376,15 @@ picture img {
   font-size: 1.3em;
   text-align: justify;
 }
-
 .aboutCEIP .aboutCEIP-pic01 {
   width: 100%;
 }
-
 .aboutCEIP .aboutCEIP-pic02 {
   width: 100%;
+}
+.aboutCEIP .title a {
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 .advanceEIP {
@@ -409,25 +392,21 @@ picture img {
   flex-direction: column;
   background: #f1f1f1;
 }
-
 .advanceEIP .block-inf .block01 {
   display: flex;
   align-items: center;
   height: 280px;
 }
-
 .advanceEIP .block-inf .block01 img {
   width: 100%;
   height: inherit;
 }
-
 .advanceEIP .block-inf .block02 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 280px;
 }
-
 .advanceEIP .block-inf .block02 img {
   width: 100%;
 }
@@ -439,19 +418,16 @@ picture img {
 .block-accCommunity {
   padding: 0 30px 50px;
 }
-
 .block-accCommunity .title {
   display: flex;
   justify-content: center;
   padding: 0 30px 0;
 }
-
 .block-accCommunity .title span {
   font-size: 1.4em;
   padding: 0 40px 15px 40px;
   border-bottom: 3px solid #ffc107;
 }
-
 .block-accCommunity div .buildPic {
   width: 100%;
   height: 170px;
@@ -464,11 +440,9 @@ picture img {
   background-size: cover;
   position: relative;
 }
-
 #hero05 .container .row .landingPageTitle .titleContent h1 {
   color: #ffc451;
 }
-
 #hero05 .container .row .landingPageTitle .titleContent .adformLink {
   width: 150px;
   height: 50px;
@@ -484,12 +458,10 @@ picture img {
 .aboutmallEIPS {
   background: #f1f1f1;
 }
-
 .aboutmallEIPS .eipitemPic img {
   width: 200px;
   height: inherit;
 }
-
 .aboutmallEIPS .eipContent {
   display: flex;
   flex-direction: column;
@@ -501,18 +473,15 @@ picture img {
   justify-content: center;
   padding: 0 30px 0;
 }
-
 #block-plan .title span {
   font-size: 2em;
   font-weight: bold;
   padding: 0 40px 15px 40px;
 }
-
 #block-plan .row .machinePic {
   flex-direction: column;
   justify-content: center;
 }
-
 #block-plan .row .machinePic span {
   text-align: center;
   padding: 10px;
@@ -524,12 +493,10 @@ picture img {
   justify-content: center;
   padding: 0 30px 0;
 }
-
 #block-eipsAdvance .title span {
   font-size: 2em;
   font-weight: bold;
 }
-
 #block-eipsAdvance .row .eipsAdvance img {
   width: 100%;
 }
@@ -537,19 +504,16 @@ picture img {
 .block-community {
   padding: 0 30px 50px;
 }
-
 .block-community .title {
   display: flex;
   justify-content: center;
   padding: 0 30px 0;
 }
-
 .block-community .title span {
   font-size: 1.4em;
   padding: 0 40px 15px 40px;
   border-bottom: 3px solid #ffc107;
 }
-
 .block-community div .buildPic {
   width: 100%;
   height: 170px;
@@ -563,14 +527,12 @@ picture img {
   padding-top: 120px;
   background: #e6e6e6;
 }
-
 .bossView .title {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
-
 .bossView .title p {
   font-size: 2.5em;
   font-weight: bold;
@@ -581,7 +543,6 @@ picture img {
   font-weight: bold;
   color: #ffc173;
 }
-
 .about-content .content {
   font-size: 1.2em;
   text-align: justify;
@@ -591,13 +552,11 @@ picture img {
 .about-history {
   padding: 60px 0 0;
 }
-
 .about-history .title {
   font-size: 1.8em;
   font-weight: bold;
   color: #ffc173;
 }
-
 .about-history .content li {
   list-style-type: disc;
   font-size: 1.2em;
@@ -608,12 +567,10 @@ picture img {
 .footer-logo {
   padding: 0 0 60px;
 }
-
 .footer-logo .row {
   display: flex;
   justify-content: flex-end;
 }
-
 .footer-logo .row img {
   width: 250px;
 }
@@ -622,7 +579,6 @@ picture img {
   padding-top: 120px;
   background: #e6e6e6;
 }
-
 .etView img {
   width: 100%;
 }
@@ -630,13 +586,11 @@ picture img {
 .ceo-content {
   padding: 60px 0 0;
 }
-
 .ceo-content .title {
   font-size: 1.8em;
   font-weight: bold;
   color: #ffc173;
 }
-
 .ceo-content .content {
   list-style-type: disc;
   font-size: 1.2em;
@@ -646,29 +600,24 @@ picture img {
 .block-salesJob img {
   width: 100%;
 }
-
 .block-salesJob .text-content {
   display: flex;
   flex-direction: column;
 }
-
 .block-salesJob .text-content .title {
   font-size: 3em;
   font-weight: bold;
   color: #ffc173;
 }
-
 .block-salesJob .text-content span {
   font-size: 2em;
   font-weight: bold;
   margin-right: 10px;
 }
-
 .block-salesJob .text-content .content {
   font-size: 1.5em;
   text-align: justify;
 }
-
 .block-salesJob .text-content .action {
   display: flex;
   justify-content: space-around;
@@ -686,7 +635,6 @@ picture img {
     height: 300px !important;
   }
 }
-
 @media screen and (max-width: 576px) {
   .mallEips .titleContent {
     display: flex;
