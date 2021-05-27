@@ -39,6 +39,21 @@
     left: 0;
     right: 0;
 }
+.counts{
+    .content{
+        .count-box{
+            span{
+                margin-left:0px!important;
+            }
+            p{
+                margin-left:0px!important;;
+            }
+        }
+    }
+    .setPoint{
+        justify-content: center;
+    }
+}
 #contact{
     .contactInf{
         .info{
@@ -67,11 +82,15 @@
     border-radius: 4px;
 }
 .reason{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
     h3{
-        font-size:2.7em!important;
+        font-size:2.2em!important;
     }
     p{
         text-align: justify;
+        padding-top:40px;
         font-size:1.5em;
     }
 }
@@ -96,52 +115,95 @@
 }
 
 .serviceInf{
-    .container{
-        .block-inf{
-            display: flex;
-            padding-top: 40px;
-            padding-bottom: 40px;
-            justify-content: center;
-            h4{
-                padding-bottom: 20px;
-                border-bottom: 1px solid rgb(255, 220, 132);
+    .block-inf{
+        display: flex;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        justify-content: center;
+        h4{
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgb(255, 220, 132);
+        }
+        .leftBlock {
+            padding-right: 50px;
+            .title{
+                font-size:2.5em;
             }
-            .leftBlock {
-                padding-right: 50px;
-                .title{
-                    font-size:1.7em;
-                }
-                .description{
-                    font-size:1.3em;
-                    text-align: justify;
-                }
-            }
-            .rightBlock{
-                img{
-                    width: 100%;
-                    height: max-content;
-                }
+            .description{
+                font-size:1.9em;
+                text-align: justify;
             }
         }
-        .block-center {
-            margin-top: 50px;
-            .content{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                .hint{
-                    background-color: #fff;
-                    text-align: right;
-                }
+        .rightBlock{
+            img{
+                width: 100%;
+                height: max-content;
+            }
+        }
+    }  
+    .block-center {
+        margin-top: 50px;
+        .content{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .hint{
+                background-color: #fff;
+                text-align: right;
             }
         }
     }
+    
 }
-
+.serviceInfMall{
+    .block-inf{
+        display: flex;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        justify-content: center;
+        h4{
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgb(255, 220, 132);
+        }
+        .leftBlock {
+            padding-right: 50px;
+            align-items: center!important;
+            .title{
+                font-size:2.5em;
+            }
+            .description{
+                font-size:1.9em;
+                text-align: justify;
+            }
+        }
+        .rightBlock{
+            align-items: center!important;
+            img{
+                width: 100%;
+                height: max-content;
+            }
+        }
+    }  
+    .block-center {
+        margin-top: 50px;
+        .content{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .hint{
+                background-color: #fff;
+                text-align: right;
+            }
+        }
+    }
+    
+}
 
 
 .eipsNews{
     .icon-box{
+        padding:20px 20px;
+        margin-top:20px;
         h5{
             font-size: 1.2em;
         }
@@ -194,9 +256,10 @@
             font-size: 3em;
             font-weight: bold;
         }
-        .step {
+        picture.step {
             display: flex;
             .subStep {
+                padding: 0px 20px 0px 20px;
                 .thumbnail{
                     display: flex;
                     flex-direction: column;
@@ -234,9 +297,10 @@
                         font-size: 1.1em;
                         text-align: center;
                         text-align: justify;
+                        height:70px;
                     }
                     img{
-                        width:250px;
+                        width: 200px !important;;
                     }
                 }
             }
@@ -260,6 +324,9 @@
     .titleContent{
         display:flex;
         flex-direction: column;
+        h1{
+            color:#fff;
+        }
         .adformLink {
             width: 150px;
             height: 50px;
@@ -340,11 +407,7 @@
         }
     }
 }
-picture{
-    img{
-        width:100%;
-    }
-}
+
 .eipsAdvance{
     margin-top:50px;
 }
@@ -402,6 +465,9 @@ picture{
 }
 
 // 社區eip申請
+.eipsCommunity-header{
+    background:#000;
+}
 #hero03{
     width: 100%;
     height: 100vh;
@@ -480,7 +546,7 @@ picture{
     div{
         .buildPic{
             width:100%;
-            height:170px;
+            // height:170px;
         }
     }
 }
@@ -519,17 +585,48 @@ picture{
 
 .aboutmallEIPS{
     background:#f1f1f1;
-    .eipitemPic{
-        img{
-            width:200px;
-            height:inherit;
-        }
-    }
+    padding:60px 0px;
     .eipContent{
         display:flex;
         flex-direction: column;
         justify-content: center;
-
+        .block-title{
+            font-size: 2.2em;
+        }
+        .block-content{
+            padding-top:40px;
+            font-size: 1.9em;
+        }
+    }
+    .eipitemPic{
+        justify-content: flex-end;
+        img{
+            width:300px;
+            height:inherit;
+        }
+    }
+}
+.advancePic{
+    width: 100%;
+    height: 250px;
+    background: url(../img/mall.jpg) top center;
+    background-size: cover;
+}
+.advanceList{
+    .eipsAdvance{
+        .subAdvance{
+            justify-content: center;
+            .icon-box{
+                text-align: center;
+                .title{
+                    font-size: 2.2em;
+                    font-weight: bold;
+                }
+                .description{
+                    font-size: 1.6em;
+                }
+            }
+        }
     }
 }
 
@@ -590,8 +687,13 @@ picture{
     }
     div{
         .buildPic{
-            width:100%;
-            height:170px;
+            margin-top:40px;
+            display: flex;
+            justify-content: center;
+            img{
+                width:400px;
+                // height:170px;
+            }
         }
     }
 }
@@ -612,6 +714,9 @@ picture{
             font-size: 2.5em;
             font-weight: bold;
         }
+    }
+    img{
+        width:100%;
     }
 }
 
@@ -727,7 +832,8 @@ picture{
 // FAQ
 .FAQ{
     margin: 0 auto;
-    margin-top: 160px;
+    overflow: scroll;
+    overflow-y: hidden;
 }
 // FAQ end
 
@@ -739,6 +845,13 @@ picture{
             height: 300px!important;
         }
     }
+    .count{
+        .content{
+            h3.title-setPoint{
+                text-align: center!important;
+            }
+        }
+    }
 }
 
 @media screen and  (max-width: 576px) {
@@ -747,6 +860,25 @@ picture{
             display:flex;
             flex-direction: column;
             align-items: center;
+            h1{
+                color:#fff;
+            }
+        }
+    }
+}
+@media screen and  (max-width: 376px) {
+    .counts{
+        padding:0px 0px;
+        .image{
+            background-size: contain!important;
+        }
+    }
+    
+    .contact{
+        .section-title{
+            p{
+                font-size: 2em;
+            }
         }
     }
 }

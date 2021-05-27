@@ -38,16 +38,6 @@
   right: 0;
 }
 
-.counts .content .count-box span {
-  margin-left: 0px !important;
-}
-.counts .content .count-box p {
-  margin-left: 0px !important;
-}
-.counts .setPoint {
-  justify-content: center;
-}
-
 #contact .contactInf .info {
   width: 100%;
   background: transparent !important;
@@ -74,17 +64,11 @@
   border-radius: 4px;
 }
 
-.reason {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 .reason h3 {
-  font-size: 2.2em !important;
+  font-size: 2.7em !important;
 }
 .reason p {
   text-align: justify;
-  padding-top: 40px;
   font-size: 1.5em;
 }
 
@@ -103,88 +87,43 @@
   text-align: justify;
 }
 
-.serviceInf .block-inf {
+.serviceInf .container .block-inf {
   display: flex;
   padding-top: 40px;
   padding-bottom: 40px;
   justify-content: center;
 }
-.serviceInf .block-inf h4 {
+.serviceInf .container .block-inf h4 {
   padding-bottom: 20px;
   border-bottom: 1px solid #ffdc84;
 }
-.serviceInf .block-inf .leftBlock {
+.serviceInf .container .block-inf .leftBlock {
   padding-right: 50px;
 }
-.serviceInf .block-inf .leftBlock .title {
-  font-size: 2.5em;
+.serviceInf .container .block-inf .leftBlock .title {
+  font-size: 1.7em;
 }
-.serviceInf .block-inf .leftBlock .description {
-  font-size: 1.9em;
+.serviceInf .container .block-inf .leftBlock .description {
+  font-size: 1.3em;
   text-align: justify;
 }
-.serviceInf .block-inf .rightBlock img {
+.serviceInf .container .block-inf .rightBlock img {
   width: 100%;
   height: max-content;
 }
-.serviceInf .block-center {
+.serviceInf .container .block-center {
   margin-top: 50px;
 }
-.serviceInf .block-center .content {
+.serviceInf .container .block-center .content {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.serviceInf .block-center .content .hint {
+.serviceInf .container .block-center .content .hint {
   background-color: #fff;
   text-align: right;
 }
 
-.serviceInfMall .block-inf {
-  display: flex;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  justify-content: center;
-}
-.serviceInfMall .block-inf h4 {
-  padding-bottom: 20px;
-  border-bottom: 1px solid #ffdc84;
-}
-.serviceInfMall .block-inf .leftBlock {
-  padding-right: 50px;
-  align-items: center !important;
-}
-.serviceInfMall .block-inf .leftBlock .title {
-  font-size: 2.5em;
-}
-.serviceInfMall .block-inf .leftBlock .description {
-  font-size: 1.9em;
-  text-align: justify;
-}
-.serviceInfMall .block-inf .rightBlock {
-  align-items: center !important;
-}
-.serviceInfMall .block-inf .rightBlock img {
-  width: 100%;
-  height: max-content;
-}
-.serviceInfMall .block-center {
-  margin-top: 50px;
-}
-.serviceInfMall .block-center .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.serviceInfMall .block-center .content .hint {
-  background-color: #fff;
-  text-align: right;
-}
-
-.eipsNews .icon-box {
-  padding: 20px 20px;
-  margin-top: 20px;
-}
 .eipsNews .icon-box h5 {
   font-size: 1.2em;
 }
@@ -234,18 +173,15 @@
   font-size: 3em;
   font-weight: bold;
 }
-.stepBlock .block-step picture.step {
+.stepBlock .block-step .step {
   display: flex;
 }
-.stepBlock .block-step picture.step .subStep {
-  padding: 0px 20px 0px 20px;
-}
-.stepBlock .block-step picture.step .subStep .thumbnail {
+.stepBlock .block-step .step .subStep .thumbnail {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.stepBlock .block-step picture.step .subStep .thumbnail .stepTitle {
+.stepBlock .block-step .step .subStep .thumbnail .stepTitle {
   width: 80%;
   height: 50px;
   background: #277bca;
@@ -257,7 +193,7 @@
   align-items: center;
   justify-content: center;
 }
-.stepBlock .block-step picture.step .subStep .thumbnail .stepTitle .number {
+.stepBlock .block-step .step .subStep .thumbnail .stepTitle .number {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -269,19 +205,18 @@
   justify-content: center;
   margin-right: 35px;
 }
-.stepBlock .block-step picture.step .subStep .thumbnail h5 {
+.stepBlock .block-step .step .subStep .thumbnail h5 {
   font-size: 1.2em;
   padding-top: 20px;
   text-align: center;
 }
-.stepBlock .block-step picture.step .subStep .thumbnail p {
+.stepBlock .block-step .step .subStep .thumbnail p {
   font-size: 1.1em;
   text-align: center;
   text-align: justify;
-  height: 70px;
 }
-.stepBlock .block-step picture.step .subStep .thumbnail img {
-  width: 200px !important;
+.stepBlock .block-step .step .subStep .thumbnail img {
+  width: 250px;
 }
 
 .eipsMall-header {
@@ -299,9 +234,6 @@
 .mallEips .titleContent {
   display: flex;
   flex-direction: column;
-}
-.mallEips .titleContent h1 {
-  color: #fff;
 }
 .mallEips .titleContent .adformLink {
   width: 150px;
@@ -376,6 +308,10 @@
   margin-left: 35%;
 }
 
+picture img {
+  width: 100%;
+}
+
 .eipsAdvance {
   margin-top: 50px;
 }
@@ -429,10 +365,6 @@
   margin: 0px auto;
   color: #000 !important;
   border-radius: 4px;
-}
-
-.eipsCommunity-header {
-  background: #000;
 }
 
 #hero03 {
@@ -507,6 +439,7 @@
 }
 .block-accCommunity div .buildPic {
   width: 100%;
+  height: 170px;
 }
 
 #hero05 {
@@ -533,47 +466,15 @@
 
 .aboutmallEIPS {
   background: #f1f1f1;
-  padding: 60px 0px;
+}
+.aboutmallEIPS .eipitemPic img {
+  width: 200px;
+  height: inherit;
 }
 .aboutmallEIPS .eipContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-.aboutmallEIPS .eipContent .block-title {
-  font-size: 2.2em;
-}
-.aboutmallEIPS .eipContent .block-content {
-  padding-top: 40px;
-  font-size: 1.9em;
-}
-.aboutmallEIPS .eipitemPic {
-  justify-content: flex-end;
-}
-.aboutmallEIPS .eipitemPic img {
-  width: 300px;
-  height: inherit;
-}
-
-.advancePic {
-  width: 100%;
-  height: 250px;
-  background: url(../img/mall.jpg) top center;
-  background-size: cover;
-}
-
-.advanceList .eipsAdvance .subAdvance {
-  justify-content: center;
-}
-.advanceList .eipsAdvance .subAdvance .icon-box {
-  text-align: center;
-}
-.advanceList .eipsAdvance .subAdvance .icon-box .title {
-  font-size: 2.2em;
-  font-weight: bold;
-}
-.advanceList .eipsAdvance .subAdvance .icon-box .description {
-  font-size: 1.6em;
 }
 
 #block-plan .title {
@@ -623,12 +524,8 @@
   border-bottom: 3px solid #ffc107;
 }
 .block-community div .buildPic {
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-}
-.block-community div .buildPic img {
-  width: 400px;
+  width: 100%;
+  height: 170px;
 }
 
 .about-header {
@@ -648,9 +545,6 @@
 .bossView .title p {
   font-size: 2.5em;
   font-weight: bold;
-}
-.bossView img {
-  width: 100%;
 }
 
 .about-content .title {
@@ -740,8 +634,7 @@
 
 .FAQ {
   margin: 0 auto;
-  overflow: scroll;
-  overflow-y: hidden;
+  margin-top: 160px;
 }
 
 /*如果螢幕寬度為 768px（含） 以下，就套用 css 設定*/
@@ -750,30 +643,11 @@
     width: 100%;
     height: 300px !important;
   }
-
-  .count .content h3.title-setPoint {
-    text-align: center !important;
-  }
 }
 @media screen and (max-width: 576px) {
   .mallEips .titleContent {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .mallEips .titleContent h1 {
-    color: #fff;
-  }
-}
-@media screen and (max-width: 376px) {
-  .counts {
-    padding: 0px 0px;
-  }
-  .counts .image {
-    background-size: contain !important;
-  }
-
-  .contact .section-title p {
-    font-size: 2em;
   }
 }

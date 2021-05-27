@@ -1,17 +1,17 @@
 $(function(){
 	var community={
 		el:$(".community"),
-		max:14331,
+		max:"14,331",
 		start:100//增加开始的初始值
 	}
 	var device={
 		el:$(".device"),
-		max:18027,
+		max:"18,027",
 		start:100//减少到最小的值
 	}
 	var family={
 		el:$(".family"),
-		max:550649,
+		max:"550,649",
 		start:100//减少到最小的值
 	}
 	up01(community);
