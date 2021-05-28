@@ -74,15 +74,15 @@
   border-radius: 4px;
 }
 
-.reason {
+.about .container .reason {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.reason h3 {
-  font-size: 2.2em !important;
+.about .container .reason .title {
+  font-size: 2.2em;
 }
-.reason p {
+.about .container .reason .description {
   text-align: justify;
   padding-top: 40px;
   font-size: 1.5em;
@@ -127,9 +127,6 @@
   width: 100%;
   height: max-content;
 }
-.serviceInf .block-center {
-  margin-top: 50px;
-}
 .serviceInf .block-center .content {
   display: flex;
   flex-direction: column;
@@ -167,9 +164,6 @@
 .serviceInfMall .block-inf .rightBlock img {
   width: 100%;
   height: max-content;
-}
-.serviceInfMall .block-center {
-  margin-top: 50px;
 }
 .serviceInfMall .block-center .content {
   display: flex;
@@ -246,8 +240,8 @@
   align-items: center;
 }
 .stepBlock .block-step picture.step .subStep .thumbnail .stepTitle {
-  width: 80%;
-  height: 50px;
+  width: 85%;
+  height: 40px;
   background: #277bca;
   color: #fff;
   border-radius: 20px;
@@ -255,7 +249,7 @@
   display: flex;
   margin: 0 auto;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
 }
 .stepBlock .block-step picture.step .subStep .thumbnail .stepTitle .number {
   width: 30px;
@@ -281,7 +275,7 @@
   height: 70px;
 }
 .stepBlock .block-step picture.step .subStep .thumbnail img {
-  width: 200px !important;
+  width: 200px;
 }
 
 .eipsMall-header {
@@ -371,7 +365,7 @@
   margin-bottom: 40px;
   background-color: #f1f1f1;
 }
-.mallEipsInf div img {
+.mallEipsInf .eipitemPic img {
   width: 120px;
   margin-left: 35%;
 }
@@ -505,7 +499,7 @@
   padding: 0 40px 15px 40px;
   border-bottom: 3px solid #ffc107;
 }
-.block-accCommunity div .buildPic {
+.block-accCommunity .buildPic img {
   width: 100%;
 }
 
@@ -622,12 +616,12 @@
   padding: 0 40px 15px 40px;
   border-bottom: 3px solid #ffc107;
 }
-.block-community div .buildPic {
+.block-community .buildPic {
   margin-top: 40px;
   display: flex;
   justify-content: center;
 }
-.block-community div .buildPic img {
+.block-community .buildPic img {
   width: 400px;
 }
 
@@ -746,13 +740,133 @@
 
 /*如果螢幕寬度為 768px（含） 以下，就套用 css 設定*/
 @media screen and (max-width: 768px) {
-  .block-community .buildPic {
+  #hero00, #hero01, #hero02, #hero03, #hero05 {
+    height: 50vh;
+  }
+
+  #hero00 .container h1 {
+    font-size: 2.5em;
+  }
+
+  .about .container .reason .title {
+    font-size: 2em;
+  }
+  .about .container .reason .description {
+    font-size: 1.7em;
+  }
+
+  .eipsNews .icon-box h5 {
+    font-size: 1.5em;
+  }
+
+  .advanceList {
+    padding: 0px 0px;
+  }
+
+  #services .block-inf {
+    padding-top: 10px;
+    padding-bottom: 0px;
+  }
+  #services .block-inf .leftBlock, #services .block-inf .rightBlock {
+    padding-right: 0px;
+    justify-content: center;
+  }
+  #services .block-inf .leftBlock img, #services .block-inf .rightBlock img {
+    width: 90%;
+  }
+  #services .block-inf .leftBlock .title, #services .block-inf .rightBlock .title {
+    font-size: 1.8em;
+  }
+  #services .block-inf .leftBlock .description, #services .block-inf .rightBlock .description {
+    font-size: 1.3em;
+  }
+
+  #contact .contactInf .info {
+    padding-top: 60px;
+  }
+
+  .serviceInf .block-inf {
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .serviceInf .block-inf .leftBlock .title {
+    font-size: 1.5em;
+  }
+  .serviceInf .block-inf .leftBlock .description {
+    font-size: 1.2em;
+  }
+
+  .serviceInfMall .block-inf .leftBlock .title {
+    font-size: 2em;
+  }
+  .serviceInfMall .block-inf .leftBlock .description {
+    font-size: 1.7em;
+  }
+  .serviceInfMall .block-center .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .serviceInfMall .block-center .content .hint {
+    background-color: #fff;
+    text-align: right;
+  }
+
+  .stepBlock .block-step .block-title-step {
+    text-align: center;
+    padding-bottom: 40px;
+    font-size: 3em;
+    font-weight: bold;
+  }
+  .stepBlock .block-step picture.step .subStep {
+    padding: 0px 10px 0px 10px;
+  }
+  .stepBlock .block-step picture.step .subStep .thumbnail .stepTitle {
     width: 100%;
-    height: 300px !important;
+  }
+  .stepBlock .block-step picture.step .subStep .thumbnail h5 {
+    font-size: 1.2em;
+    padding-top: 20px;
+  }
+  .stepBlock .block-step picture.step .subStep .thumbnail p {
+    font-size: 1.1em;
+    height: 70px;
+  }
+  .stepBlock .block-step picture.step .subStep .thumbnail img {
+    width: 200px;
   }
 
   .count .content h3.title-setPoint {
-    text-align: center !important;
+    text-align: center;
+  }
+
+  .block-community .buildPic {
+    margin-top: 10px;
+  }
+  .block-community .buildPic img {
+    width: 230px;
+  }
+
+  .advanceEIP .block-inf .title {
+    font-size: 2em;
+  }
+  .advanceEIP .block-inf .description {
+    font-size: 1.7em;
+  }
+
+  .aboutmallEIPS {
+    padding: 0px 0px;
+  }
+  .aboutmallEIPS .eipContent .block-title {
+    font-size: 2em;
+  }
+  .aboutmallEIPS .eipContent .block-content {
+    padding-top: 40px;
+    font-size: 1.5em;
+  }
+  .aboutmallEIPS .eipitemPic img {
+    width: 200px;
   }
 }
 @media screen and (max-width: 576px) {
@@ -770,7 +884,7 @@
     padding: 0px 0px;
   }
   .counts .image {
-    background-size: contain !important;
+    background-size: contain;
   }
 
   .contact .section-title p {
