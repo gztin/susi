@@ -856,7 +856,7 @@
   }
 
   .aboutmallEIPS {
-    padding: 30px 0px;
+    padding: 60px 0px;
   }
   .aboutmallEIPS .eipContent .block-title {
     font-size: 2em;
@@ -867,6 +867,20 @@
   }
   .aboutmallEIPS .eipitemPic img {
     width: 200px;
+  }
+
+  .block-salesJob .salesPic {
+    display: flex;
+    align-items: center;
+  }
+  .block-salesJob .text-content .title {
+    font-size: 2em;
+  }
+  .block-salesJob .text-content span {
+    font-size: 1.5em;
+  }
+  .block-salesJob .text-content .content {
+    font-size: 1.3em;
   }
 }
 @media screen and (max-width: 576px) {
