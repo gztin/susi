@@ -129,6 +129,12 @@
             border-bottom: 1px solid rgb(255, 220, 132);
         }
         .leftBlock {
+            img{
+                width: 100%;
+                height: max-content;
+            }
+        }
+        .rightBlock{
             padding-right: 50px;
             .title{
                 font-size:2.5em;
@@ -136,26 +142,23 @@
             .description{
                 font-size:1.9em;
                 text-align: justify;
-            }
-        }
-        .rightBlock{
-            img{
-                width: 100%;
-                height: max-content;
-            }
-        }
-    }  
-    .block-center {
-        .content{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            .hint{
-                background-color: #fff;
-                text-align: right;
-            }
+            } 
         }
     }
+    .b-reverse{
+        flex-direction: row-reverse;
+    }  
+    // .block-center {
+    //     .content{
+    //         display: flex;
+    //         flex-direction: column;
+    //         justify-content: center;
+    //         .hint{
+    //             background-color: #fff;
+    //             text-align: right;
+    //         }
+    //     }
+    // }
     
 }
 .serviceInfMall{
@@ -169,6 +172,13 @@
             border-bottom: 1px solid rgb(255, 220, 132);
         }
         .leftBlock {
+            align-items: center!important;
+            img{
+                width: 100%;
+                height: max-content;
+            }
+        }
+        .rightBlock{
             padding-right: 50px;
             align-items: center!important;
             .title{
@@ -179,25 +189,21 @@
                 text-align: justify;
             }
         }
-        .rightBlock{
-            align-items: center!important;
-            img{
-                width: 100%;
-                height: max-content;
-            }
-        }
-    }  
-    .block-center {
-        .content{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            .hint{
-                background-color: #fff;
-                text-align: right;
-            }
-        }
     }
+    .b-reverse{
+        flex-direction: row-reverse;
+    }  
+    // .block-center {
+    //     .content{
+    //         display: flex;
+    //         flex-direction: column;
+    //         justify-content: center;
+    //         .hint{
+    //             background-color: #fff;
+    //             text-align: right;
+    //         }
+    //     }
+    // }
     
 }
 
@@ -258,7 +264,7 @@
             font-size: 3em;
             font-weight: bold;
         }
-        picture.step {
+        .step {
             display: flex;
             .subStep {
                 padding: 0px 20px 0px 20px;
@@ -797,6 +803,7 @@
     } 
 }
 // 創辦人的話end
+
 .block-salesJob{
     img{
         width:100%;
@@ -823,7 +830,6 @@
             justify-content: space-around;
         }
     }
-    
 }
 // 整合行銷企劃
 
@@ -902,7 +908,7 @@
             align-items: center;
             padding-top: 20px;
             padding-bottom: 20px;
-            .leftBlock{
+            .rightBlock{
                 .title{
                     font-size:1.5em;
                 }
@@ -944,9 +950,9 @@
                 font-size: 3em;
                 font-weight: bold;
             }
-            picture.step {
+            .step {
                 .subStep {
-                    padding: 0px 10px 0px 10px;
+                    padding: 0px 10px 60px 10px;
                     .thumbnail{
                         .stepTitle {
                             width: 100%;
@@ -968,7 +974,6 @@
             }
         }
     }
-
     .count{
         .content{
             h3.title-setPoint{
@@ -1012,25 +1017,38 @@
         }
     }
     .block-salesJob{
-        .salesPic{
-            display:flex;
-            align-items: center;
+        .row{
+            .salesPic{
+                display:flex;
+                align-items: center;
+            }
+            .text-content{
+                .title{
+                    font-size: 2em;
+                }
+                span{
+                    font-size: 1.5em;
+                }
+                .content{
+                    font-size: 1.3em;
+                }
+            }
         }
-        .text-content{
-            .title{
-                font-size: 2em;
-            }
-            span{
-                font-size: 1.5em;
-            }
-            .content{
-                font-size: 1.3em;
-            }
+        .b-reverse{
+            flex-direction: row-reverse;
         }
     }  
 }
 
 @media screen and (max-width: 576px) {
+    #hero00{
+        .container{
+            h1 {
+                font-size: 2em;
+                line-height: 40px;
+            }
+        }
+    } 
     .mallEips{
         .titleContent{
             display:flex;
@@ -1038,6 +1056,158 @@
             align-items: center;
             h1{
                 color:#fff;
+            }
+        }
+    }
+    #services{
+        .block-inf{
+            padding-top: 10px;
+            padding-bottom: 0px;
+            .rightBlock{
+                padding-right:10px;
+                .title{
+                    text-align: center;
+                }
+                .description{
+                    text-align: center;
+                }
+            }
+            .leftBlock{
+                justify-content: center;
+                img{
+                    width:90%;
+                }
+                
+            }
+        }
+    }
+    .aboutmallEIPS{
+        .eipitemPic{
+            justify-content: center;
+            padding-bottom: 60px;
+            img{
+                width:200px;
+                margin-left:0px;
+            }
+        }
+    }
+    .services{
+        .subAdvance{
+            .icon-box{
+                .description{
+                    font-size: 1.3em;
+                    text-align: center;
+                }
+            }
+        } 
+    }
+    .serviceInf{
+        .block-inf{
+            .rightBlock{
+                padding-right: 10px;
+                padding-top:30px;
+                .title{
+                    text-align: center;
+                }
+                .description{
+                    text-align: center;
+                }
+                .hint{
+                    text-align: center;
+                }
+            }
+        }
+    }
+    .stepBlock{
+        .block-step{
+            .block-title-step{
+                font-size: 2.5em;
+            }
+            .step{
+                flex-direction: column;
+                .subStep {
+                    .thumbnail{
+                        .stepTitle{
+                            width:85%;
+                            height: 50px;
+                            border-radius: 25px;
+                            .number{
+                                width: 40px;
+                                height: 40px;
+                                margin-right:50px;
+                            }
+                            .step-title{
+                                font-size: 1.5em;
+                            }
+                        }
+                        h5{
+                            font-size:1.4em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .advancePic{
+        background-repeat:no-repeat;
+    }
+    .aboutCEIP{
+        .title{
+            text-align: center;
+        }
+    }
+    .advanceEIP{
+        .block-inf{
+            .title{
+                text-align: center;
+            }
+            .description{
+                font-size: 1.5em;
+                text-align: center;
+            }
+        }
+    }
+    #block-plan{
+        .title{
+            span{
+                font-size: 2.2em;
+                text-align: center;
+                padding: 0 0px 15px 0px;
+            }
+        }
+    }
+    #block-plan{
+        .row{
+            .machinePic{
+                span{
+                    padding: 20px 0px 0px 0px;
+                    font-size: 1.9em;
+                }
+            }
+        }
+    }
+    .block-community{
+        .title{
+            span{
+                font-size: 2.1em;
+            }
+        }
+        .buildPic{
+            img{
+                width:350px;
+            }
+        }
+    }
+    .block-salesJob{
+        .row,.b-reverse{
+            flex-direction: inherit;
+            .text-content{
+                .title,span,.content{
+                    text-align: center;
+                }
+            }
+            .content{
+                padding-top:30px;
             }
         }
     }

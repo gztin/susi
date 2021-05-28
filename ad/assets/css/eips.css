@@ -113,28 +113,22 @@
   padding-bottom: 20px;
   border-bottom: 1px solid #ffdc84;
 }
-.serviceInf .block-inf .leftBlock {
-  padding-right: 50px;
-}
-.serviceInf .block-inf .leftBlock .title {
-  font-size: 2.5em;
-}
-.serviceInf .block-inf .leftBlock .description {
-  font-size: 1.9em;
-  text-align: justify;
-}
-.serviceInf .block-inf .rightBlock img {
+.serviceInf .block-inf .leftBlock img {
   width: 100%;
   height: max-content;
 }
-.serviceInf .block-center .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.serviceInf .block-inf .rightBlock {
+  padding-right: 50px;
 }
-.serviceInf .block-center .content .hint {
-  background-color: #fff;
-  text-align: right;
+.serviceInf .block-inf .rightBlock .title {
+  font-size: 2.5em;
+}
+.serviceInf .block-inf .rightBlock .description {
+  font-size: 1.9em;
+  text-align: justify;
+}
+.serviceInf .b-reverse {
+  flex-direction: row-reverse;
 }
 
 .serviceInfMall .block-inf {
@@ -148,31 +142,25 @@
   border-bottom: 1px solid #ffdc84;
 }
 .serviceInfMall .block-inf .leftBlock {
-  padding-right: 50px;
   align-items: center !important;
 }
-.serviceInfMall .block-inf .leftBlock .title {
-  font-size: 2.5em;
-}
-.serviceInfMall .block-inf .leftBlock .description {
-  font-size: 1.9em;
-  text-align: justify;
-}
-.serviceInfMall .block-inf .rightBlock {
-  align-items: center !important;
-}
-.serviceInfMall .block-inf .rightBlock img {
+.serviceInfMall .block-inf .leftBlock img {
   width: 100%;
   height: max-content;
 }
-.serviceInfMall .block-center .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.serviceInfMall .block-inf .rightBlock {
+  padding-right: 50px;
+  align-items: center !important;
 }
-.serviceInfMall .block-center .content .hint {
-  background-color: #fff;
-  text-align: right;
+.serviceInfMall .block-inf .rightBlock .title {
+  font-size: 2.5em;
+}
+.serviceInfMall .block-inf .rightBlock .description {
+  font-size: 1.9em;
+  text-align: justify;
+}
+.serviceInfMall .b-reverse {
+  flex-direction: row-reverse;
 }
 
 .eipsNews .icon-box {
@@ -228,18 +216,18 @@
   font-size: 3em;
   font-weight: bold;
 }
-.stepBlock .block-step picture.step {
+.stepBlock .block-step .step {
   display: flex;
 }
-.stepBlock .block-step picture.step .subStep {
+.stepBlock .block-step .step .subStep {
   padding: 0px 20px 0px 20px;
 }
-.stepBlock .block-step picture.step .subStep .thumbnail {
+.stepBlock .block-step .step .subStep .thumbnail {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.stepBlock .block-step picture.step .subStep .thumbnail .stepTitle {
+.stepBlock .block-step .step .subStep .thumbnail .stepTitle {
   width: 85%;
   height: 40px;
   background: #277bca;
@@ -251,7 +239,7 @@
   align-items: center;
   justify-content: end;
 }
-.stepBlock .block-step picture.step .subStep .thumbnail .stepTitle .number {
+.stepBlock .block-step .step .subStep .thumbnail .stepTitle .number {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -263,18 +251,18 @@
   justify-content: center;
   margin-right: 35px;
 }
-.stepBlock .block-step picture.step .subStep .thumbnail h5 {
+.stepBlock .block-step .step .subStep .thumbnail h5 {
   font-size: 1.2em;
   padding-top: 20px;
   text-align: center;
 }
-.stepBlock .block-step picture.step .subStep .thumbnail p {
+.stepBlock .block-step .step .subStep .thumbnail p {
   font-size: 1.1em;
   text-align: center;
   text-align: justify;
   height: 70px;
 }
-.stepBlock .block-step picture.step .subStep .thumbnail img {
+.stepBlock .block-step .step .subStep .thumbnail img {
   width: 200px;
 }
 
@@ -790,10 +778,10 @@
     padding-top: 20px;
     padding-bottom: 20px;
   }
-  .serviceInf .block-inf .leftBlock .title {
+  .serviceInf .block-inf .rightBlock .title {
     font-size: 1.5em;
   }
-  .serviceInf .block-inf .leftBlock .description {
+  .serviceInf .block-inf .rightBlock .description {
     font-size: 1.2em;
   }
 
@@ -819,21 +807,21 @@
     font-size: 3em;
     font-weight: bold;
   }
-  .stepBlock .block-step picture.step .subStep {
-    padding: 0px 10px 0px 10px;
+  .stepBlock .block-step .step .subStep {
+    padding: 0px 10px 60px 10px;
   }
-  .stepBlock .block-step picture.step .subStep .thumbnail .stepTitle {
+  .stepBlock .block-step .step .subStep .thumbnail .stepTitle {
     width: 100%;
   }
-  .stepBlock .block-step picture.step .subStep .thumbnail h5 {
+  .stepBlock .block-step .step .subStep .thumbnail h5 {
     font-size: 1.2em;
     padding-top: 20px;
   }
-  .stepBlock .block-step picture.step .subStep .thumbnail p {
+  .stepBlock .block-step .step .subStep .thumbnail p {
     font-size: 1.1em;
     height: 70px;
   }
-  .stepBlock .block-step picture.step .subStep .thumbnail img {
+  .stepBlock .block-step .step .subStep .thumbnail img {
     width: 200px;
   }
 
@@ -869,21 +857,29 @@
     width: 200px;
   }
 
-  .block-salesJob .salesPic {
+  .block-salesJob .row .salesPic {
     display: flex;
     align-items: center;
   }
-  .block-salesJob .text-content .title {
+  .block-salesJob .row .text-content .title {
     font-size: 2em;
   }
-  .block-salesJob .text-content span {
+  .block-salesJob .row .text-content span {
     font-size: 1.5em;
   }
-  .block-salesJob .text-content .content {
+  .block-salesJob .row .text-content .content {
     font-size: 1.3em;
+  }
+  .block-salesJob .b-reverse {
+    flex-direction: row-reverse;
   }
 }
 @media screen and (max-width: 576px) {
+  #hero00 .container h1 {
+    font-size: 2em;
+    line-height: 40px;
+  }
+
   .mallEips .titleContent {
     display: flex;
     flex-direction: column;
@@ -891,6 +887,121 @@
   }
   .mallEips .titleContent h1 {
     color: #fff;
+  }
+
+  #services .block-inf {
+    padding-top: 10px;
+    padding-bottom: 0px;
+  }
+  #services .block-inf .rightBlock {
+    padding-right: 10px;
+  }
+  #services .block-inf .rightBlock .title {
+    text-align: center;
+  }
+  #services .block-inf .rightBlock .description {
+    text-align: center;
+  }
+  #services .block-inf .leftBlock {
+    justify-content: center;
+  }
+  #services .block-inf .leftBlock img {
+    width: 90%;
+  }
+
+  .aboutmallEIPS .eipitemPic {
+    justify-content: center;
+    padding-bottom: 60px;
+  }
+  .aboutmallEIPS .eipitemPic img {
+    width: 200px;
+    margin-left: 0px;
+  }
+
+  .services .subAdvance .icon-box .description {
+    font-size: 1.3em;
+    text-align: center;
+  }
+
+  .serviceInf .block-inf .rightBlock {
+    padding-right: 10px;
+    padding-top: 30px;
+  }
+  .serviceInf .block-inf .rightBlock .title {
+    text-align: center;
+  }
+  .serviceInf .block-inf .rightBlock .description {
+    text-align: center;
+  }
+  .serviceInf .block-inf .rightBlock .hint {
+    text-align: center;
+  }
+
+  .stepBlock .block-step .block-title-step {
+    font-size: 2.5em;
+  }
+  .stepBlock .block-step .step {
+    flex-direction: column;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail .stepTitle {
+    width: 85%;
+    height: 50px;
+    border-radius: 25px;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail .stepTitle .number {
+    width: 40px;
+    height: 40px;
+    margin-right: 50px;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail .stepTitle .step-title {
+    font-size: 1.5em;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail h5 {
+    font-size: 1.4em;
+  }
+
+  .advancePic {
+    background-repeat: no-repeat;
+  }
+
+  .aboutCEIP .title {
+    text-align: center;
+  }
+
+  .advanceEIP .block-inf .title {
+    text-align: center;
+  }
+  .advanceEIP .block-inf .description {
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  #block-plan .title span {
+    font-size: 2.2em;
+    text-align: center;
+    padding: 0 0px 15px 0px;
+  }
+
+  #block-plan .row .machinePic span {
+    padding: 20px 0px 0px 0px;
+    font-size: 1.9em;
+  }
+
+  .block-community .title span {
+    font-size: 2.1em;
+  }
+  .block-community .buildPic img {
+    width: 350px;
+  }
+
+  .block-salesJob .row, .block-salesJob .b-reverse {
+    flex-direction: inherit;
+  }
+  .block-salesJob .row .text-content .title, .block-salesJob .row .text-content span, .block-salesJob .row .text-content .content, .block-salesJob .b-reverse .text-content .title, .block-salesJob .b-reverse .text-content span, .block-salesJob .b-reverse .text-content .content {
+    text-align: center;
+  }
+  .block-salesJob .row .content, .block-salesJob .b-reverse .content {
+    padding-top: 30px;
   }
 }
 @media screen and (max-width: 376px) {
