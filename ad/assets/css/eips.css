@@ -284,6 +284,7 @@
 }
 .mallEips .titleContent h1 {
   color: #fff;
+  text-shadow: 1px 1px 3px #171717;
 }
 .mallEips .titleContent .adformLink {
   width: 150px;
@@ -884,9 +885,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .mallEips .titleContent h1 {
-    color: #fff;
   }
 
   #services .block-inf {
