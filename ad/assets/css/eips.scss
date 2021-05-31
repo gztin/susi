@@ -1141,6 +1141,14 @@
         }
     }
     .aboutmallEIPS {
+        .eipContent {
+            .block-title {
+                text-align: center;
+            }
+            .block-content {
+                text-align: center;
+            }
+        } 
         .eipitemPic {
             justify-content: center;
             padding-bottom: 60px;
@@ -1148,7 +1156,7 @@
                 width:200px;
                 margin-left:0px;
             }
-        }
+        }    
     }
     .services {
         .subAdvance {

@@ -983,6 +983,12 @@
     width: 90%;
   }
 
+  .aboutmallEIPS .eipContent .block-title {
+    text-align: center;
+  }
+  .aboutmallEIPS .eipContent .block-content {
+    text-align: center;
+  }
   .aboutmallEIPS .eipitemPic {
     justify-content: center;
     padding-bottom: 60px;
