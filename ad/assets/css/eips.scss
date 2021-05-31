@@ -765,6 +765,7 @@
     background-repeat:no-repeat;
     .container {
         h1 {
+            font-size:3em;
             color:#fff;
             text-shadow: 1px 1px 3px #171717;
         }
@@ -860,6 +861,32 @@
                 .description{
                     font-size: 1.7em;
                 }
+            }
+        }
+    }
+    .etView {
+        padding-top:300px;
+        width:100%;
+        height:70vh;
+        background: url(../img/sales.jpg);
+        background-size: cover;
+        background-repeat:no-repeat;
+        .container {
+            h1 {
+                font-size:3em;
+                color:#fff;
+                text-shadow: 1px 1px 3px #171717;
+            }
+            .adformLink {
+                width: 150px;
+                height: 50px;
+                display: flex;
+                margin-top:40px;
+                align-items: center;
+                justify-content: center;
+                background: #f2c976;
+                color: #000 !important;
+                border-radius: 4px;   
             }
         }
     }
@@ -1056,7 +1083,34 @@
                 }
             }
         }
-    } 
+    }
+    .etView {
+        padding-top:160px;
+        width:100%;
+        height:50vh;
+        background: url(../img/sales.jpg);
+        background-size: cover;
+        background-repeat:no-repeat;
+        .container {
+            text-align: center;
+            h1 {
+                font-size:2.2em;
+                color:#fff;
+                text-shadow: 1px 1px 3px #171717;
+            }
+            .adformLink {
+                width: 150px;
+                height: 50px;
+                display: flex;
+                margin:40px auto;
+                align-items: center;
+                justify-content: center;
+                background: #f2c976;
+                color: #000 !important;
+                border-radius: 4px;   
+            }
+        }
+    }
     .mallEips {
         .titleContent {
             display:flex;
