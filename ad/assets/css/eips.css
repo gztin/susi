@@ -11,18 +11,18 @@
   padding-top: 74px;
   text-align: center;
 }
-#hero01 .container h1 {
+#hero01 .container .row h1 {
   margin: 0;
-  font-size: 56px;
+  font-size: 3em;
   font-weight: 700;
   line-height: 64px;
   color: #fff;
   font-family: "Poppins", sans-serif;
 }
-#hero01 .container h1 span {
+#hero01 .container .row h1 span {
   color: #ffc451;
 }
-#hero01 .container h2 {
+#hero01 .container .row h2 {
   color: rgba(255, 255, 255, 0.9);
   margin: 10px 0 0 0;
   font-size: 24px;
@@ -59,18 +59,6 @@
   padding: 10px 24px;
   color: #151515;
   transition: 0.4s;
-  border-radius: 4px;
-}
-
-.adformLink {
-  width: 150px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f2c976;
-  margin: 40px auto;
-  color: #000 !important;
   border-radius: 4px;
 }
 
@@ -200,6 +188,17 @@
   margin: 10px 0 0 0;
   font-size: 24px;
 }
+#hero00 .container .adformLink {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px auto;
+  background: #f2c976;
+  color: #000 !important;
+  border-radius: 4px;
+}
 
 #hero00:before {
   content: "";
@@ -279,21 +278,22 @@
   position: relative;
 }
 
-.mallEips .titleContent {
+.mallEips .container .landingPageTitle .titleContent {
   display: flex;
   flex-direction: column;
 }
-.mallEips .titleContent h1 {
+.mallEips .container .landingPageTitle .titleContent h1 {
   color: #fff;
   text-shadow: 1px 1px 3px #171717;
 }
-.mallEips .titleContent .adformLink {
+.mallEips .container .landingPageTitle .titleContent .adformLink {
   width: 150px;
   height: 50px;
   margin: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 40px;
   background: #f2c976;
   color: #000 !important;
   border-radius: 4px;
@@ -426,12 +426,6 @@
   background-size: cover;
   position: relative;
 }
-#hero03 .landingPageTitle {
-  color: #fff;
-}
-#hero03 .landingPageTitle .adformLink {
-  margin: inherit;
-}
 
 .aboutCEIP p {
   font-size: 1.3em;
@@ -501,13 +495,13 @@
   position: relative;
 }
 #hero05 .container .row .landingPageTitle .titleContent h1 {
-  color: #ffc451;
+  color: #fff;
 }
 #hero05 .container .row .landingPageTitle .titleContent .adformLink {
   width: 150px;
   height: 50px;
   display: flex;
-  margin: inherit;
+  margin-top: 40px;
   align-items: center;
   justify-content: center;
   background: #f2c976;
@@ -675,11 +669,27 @@
 }
 
 .etView {
-  padding-top: 120px;
-  background: #e6e6e6;
-}
-.etView img {
+  padding-top: 260px;
   width: 100%;
+  height: 100vh;
+  background: url(../img/sales.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.etView .container h1 {
+  color: #fff;
+  text-shadow: 1px 1px 3px #171717;
+}
+.etView .container .adformLink {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+  background: #f2c976;
+  color: #000 !important;
+  border-radius: 4px;
 }
 
 .ceo-content {
@@ -704,12 +714,12 @@
   flex-direction: column;
 }
 .block-salesJob .text-content .title {
-  font-size: 3em;
+  font-size: 2.2em;
   font-weight: bold;
   color: #ffc173;
 }
 .block-salesJob .text-content span {
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bold;
   margin-right: 10px;
 }
@@ -882,6 +892,17 @@
     line-height: 40px;
   }
 
+  #hero01 .container {
+    padding-top: 10px;
+  }
+  #hero01 .container .row {
+    padding-top: 10px;
+  }
+  #hero01 .container .row h1 {
+    font-size: 2.2em;
+    line-height: 50px;
+  }
+
   .mallEips .titleContent {
     display: flex;
     flex-direction: column;
@@ -1004,6 +1025,17 @@
   }
 }
 @media screen and (max-width: 376px) {
+  #hero01 .container {
+    padding-top: 0px;
+  }
+  #hero01 .container .row {
+    padding-top: 10px;
+  }
+  #hero01 .container .row h1 {
+    font-size: 2.2em;
+    line-height: 50px;
+  }
+
   .counts {
     padding: 0px 0px;
   }
