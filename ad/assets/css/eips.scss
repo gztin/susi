@@ -1,7 +1,6 @@
 // index
 // hero01
 
-
 #hero01{
     width: 100%;
     height: 100vh;
@@ -136,6 +135,7 @@
         }
         .rightBlock{
             padding-right: 50px;
+            align-items: center!important;
             .title{
                 font-size:2.5em;
             }
@@ -1223,11 +1223,6 @@
             p{
                 font-size: 2em;
             }
-        }
-    }
-    .buildPic{
-        img{
-
         }
     }
 }

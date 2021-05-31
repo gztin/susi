@@ -119,6 +119,7 @@
 }
 .serviceInf .block-inf .rightBlock {
   padding-right: 50px;
+  align-items: center !important;
 }
 .serviceInf .block-inf .rightBlock .title {
   font-size: 2.5em;
