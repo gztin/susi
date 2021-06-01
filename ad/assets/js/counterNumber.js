@@ -23,9 +23,9 @@
 })(jQuery);
  $(document).ready(function() {
     
-            $(".community").animateNumbers(14331, true, 4000);
-            $(".device").animateNumbers(18027, true, 4000);
-			$(".family").animateNumbers(550649, true, 4000);
+            $(".community").animateNumbers(14331, true, 8000);
+            $(".device").animateNumbers(18027, true, 8000);
+			$(".family").animateNumbers(550649, true, 8000);
             $("#clickEvent").on("click", function() {
                 $(this).animateNumbers(1234, false);
             });
