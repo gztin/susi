@@ -57,6 +57,21 @@ function up03(family){
 		item.text(start);
 	},1)
 }
+
+var thousandComma = function(community)
+{
+ var num = community.toString();
+ var pattern = /(-?\d+)(\d{3})/;
+  
+ while(pattern.test(num))
+ {
+  num = num.replace(pattern, "$1,$2");
+  
+ }
+ return num;
+ 
+}
+console.log(thousandComma(1234567.89));
   
 	//   降低
 	// function down(obj){
