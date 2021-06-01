@@ -12,7 +12,7 @@ $(function(){
 	var family={
 		el:$(".family"),
 		max:"550649",
-		start:540500//减少到最小的值
+		start:550100//减少到最小的值
 	}
 	up01(community);
 	up02(device);
@@ -58,20 +58,6 @@ function up03(family){
 	},1)
 }
 
-var thousandComma = function(community)
-{
- var num = community.toString();
- var pattern = /(-?\d+)(\d{3})/;
-  
- while(pattern.test(num))
- {
-  num = num.replace(pattern, "$1,$2");
-  
- }
- return num;
- 
-}
-console.log(thousandComma(1234567.89));
   
 	//   降低
 	// function down(obj){
