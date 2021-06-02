@@ -800,6 +800,15 @@
         text-align:justify;
     } 
 }
+.bottom-logo{
+    .row {
+        display: flex;
+        lex-direction: row-reverse;
+        img {
+            width:100%;
+        }
+    }
+}
 // 創辦人的話end
 
 .block-salesJob {

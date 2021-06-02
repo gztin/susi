@@ -701,6 +701,14 @@
   text-align: justify;
 }
 
+.bottom-logo .row {
+  display: flex;
+  lex-direction: row-reverse;
+}
+.bottom-logo .row img {
+  width: 100%;
+}
+
 .block-salesJob .b-reverse {
   flex-direction: row-reverse;
 }
