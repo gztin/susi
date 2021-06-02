@@ -761,6 +761,7 @@
 .block-salesJob .row .text-content .action {
   display: flex;
   justify-content: space-around;
+  font-size: 1.4em;
 }
 
 .FAQ {
@@ -938,8 +939,15 @@
   .block-salesJob .row .text-content .content {
     font-size: 1.3em;
   }
+  .block-salesJob .row .text-content .action {
+    font-size: 1em;
+  }
   .block-salesJob .b-reverse {
     flex-direction: row-reverse;
+  }
+
+  .aboutET {
+    padding-top: 120px;
   }
 }
 @media screen and (max-width: 576px) {

@@ -865,6 +865,7 @@
             .action {
                 display:flex;
                 justify-content: space-around;
+                font-size: 1.4em;
             }
         }
     }
@@ -1096,11 +1097,17 @@
                 .content {
                     font-size: 1.3em;
                 }
+                .action {
+                    font-size: 1em;
+                }
             }
         }
         .b-reverse {
             flex-direction: row-reverse;
         }
+    }
+    .aboutET {
+        padding-top:120px;
     }  
 }
 
