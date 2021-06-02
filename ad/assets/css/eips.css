@@ -1130,6 +1130,44 @@
     line-height: 50px;
   }
 
+  .about .container .reason .title {
+    text-align: center;
+  }
+  .about .container .reason .description {
+    font-size: 1.4em;
+    text-align: center;
+  }
+
+  #hero00 {
+    padding-top: 100px;
+    height: 100vh;
+  }
+
+  #hero01 {
+    padding-top: 120px;
+    height: 80vh;
+  }
+
+  #hero02 {
+    padding-top: 100px;
+    height: 80vh;
+  }
+
+  #hero03 {
+    padding-top: 150px;
+    height: 80vh;
+  }
+
+  #hero05 {
+    padding-top: 100px;
+    height: 80vh;
+  }
+
+  .etView {
+    padding-top: 160px;
+    height: 80vh;
+  }
+
   .counts {
     padding: 0px 0px;
   }
@@ -1143,5 +1181,37 @@
 
   .aboutET {
     padding-top: 120px;
+  }
+
+  .stepBlock .block-step .block-title-step {
+    font-size: 2em;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail .stepTitle .number {
+    margin-right: 20px;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail .stepTitle .step-title {
+    font-size: 1.3em;
+  }
+
+  .aboutmallEIPS .eipContent .block-title {
+    font-size: 1.6em;
+  }
+  .aboutmallEIPS .eipContent .blcok-content {
+    font-size: 1.3em;
+  }
+
+  #services .block-inf .rightBlock .title {
+    font-size: 1.6em;
+  }
+
+  #block-plan .title span {
+    font-size: 1.5em;
+  }
+
+  .block-community .title span {
+    font-size: 1.4em;
+  }
+  .block-community .buildPic img {
+    width: -webkit-fill-available;
   }
 }
