@@ -713,6 +713,18 @@
   text-align: justify;
 }
 
+.relation {
+  padding: 60px 0 0;
+}
+.relation .title {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #ffc173;
+}
+.relation ul li {
+  font-size: 1.2em;
+}
+
 .bottom-logo .row {
   display: flex;
   flex-direction: row-reverse;
