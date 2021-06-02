@@ -657,15 +657,9 @@
   line-height: 45px;
 }
 
-.footer-logo {
-  padding: 0 0 60px;
-}
-.footer-logo .row {
-  display: flex;
-  justify-content: flex-end;
-}
-.footer-logo .row img {
-  width: 250px;
+#footer .footer-info .logo img {
+  width: 120px;
+  padding-bottom: 20px;
 }
 
 .etView {
@@ -707,28 +701,32 @@
   text-align: justify;
 }
 
-.block-salesJob img {
+.block-salesJob .b-reverse {
+  flex-direction: row-reverse;
+}
+.block-salesJob .row img {
   width: 100%;
 }
-.block-salesJob .text-content {
+.block-salesJob .row .text-content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
-.block-salesJob .text-content .title {
+.block-salesJob .row .text-content .title {
   font-size: 2.2em;
   font-weight: bold;
   color: #ffc173;
 }
-.block-salesJob .text-content span {
+.block-salesJob .row .text-content span {
   font-size: 1.5em;
   font-weight: bold;
   margin-right: 10px;
 }
-.block-salesJob .text-content .content {
+.block-salesJob .row .text-content .content {
   font-size: 1.5em;
   text-align: justify;
 }
-.block-salesJob .text-content .action {
+.block-salesJob .row .text-content .action {
   display: flex;
   justify-content: space-around;
 }
