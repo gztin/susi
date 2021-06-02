@@ -757,6 +757,17 @@
 // aboutus 關於我們 end
 
 // 關於東森
+.aboutET {
+    padding-top:260px;
+    width:100%;
+    height:auto;
+    background:#d7d7d7;
+    background-size: cover;
+    background-repeat:no-repeat;
+    img {
+        width:100%;
+    }
+}
 .etView {
     padding-top:260px;
     width:100%;
@@ -803,9 +814,9 @@
 .bottom-logo{
     .row {
         display: flex;
-        lex-direction: row-reverse;
+        flex-direction: row-reverse;
         img {
-            width:100%;
+            width:200px;
         }
     }
 }
