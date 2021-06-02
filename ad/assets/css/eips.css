@@ -1113,6 +1113,10 @@
   .block-salesJob .row .content, .block-salesJob .b-reverse .content {
     padding-top: 30px;
   }
+
+  .aboutET {
+    padding-top: 120px;
+  }
 }
 @media screen and (max-width: 376px) {
   #hero01 .container {
@@ -1135,5 +1139,9 @@
 
   .contact .section-title p {
     font-size: 2em;
+  }
+
+  .aboutET {
+    padding-top: 120px;
   }
 }
