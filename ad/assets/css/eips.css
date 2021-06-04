@@ -1061,6 +1061,10 @@
   .serviceInf .block-inf .rightBlock .hint {
     text-align: center;
   }
+  .serviceInf .block-inf .leftBlock img {
+    width: 100%;
+    height: 264px;
+  }
 
   .stepBlock .block-step .block-title-step {
     font-size: 2.5em;
