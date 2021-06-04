@@ -44,6 +44,12 @@
 .counts .content .count-box p {
   margin-left: 0px !important;
 }
+.counts .content .count-community p, .counts .content .count-community span {
+  color: #48a3f2;
+}
+.counts .content .count-mall p, .counts .content .count-mall span {
+  color: #ff923f;
+}
 .counts .setPoint {
   justify-content: center;
 }
