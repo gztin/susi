@@ -1144,6 +1144,11 @@
   .aboutET {
     padding-top: 120px;
   }
+
+  .bottom-logo .row img {
+    width: 200px;
+    height: 91px;
+  }
 }
 @media screen and (max-width: 376px) {
   #hero01 .container {
