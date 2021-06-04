@@ -1435,37 +1435,6 @@
                 }
             }
         }
-        // .row {
-        //     .salesPic {
-        //         img {
-        //             height:inherit;
-        //         }    
-        //     }
-        //     .text-content {
-        //         display: flex;
-        //         flex-direction: column;
-        //         justify-content: center;
-        //         .title {
-        //             font-size: 2.2em;
-        //             font-weight: bold;
-        //             color:#ffc173;
-        //         }
-        //         span {
-        //             font-size: 1.5em;
-        //             font-weight: bold;
-        //             margin-right: 10px;
-        //         }
-        //         .content {
-        //             font-size: 1.5em;
-        //             text-align:justify;
-        //         }
-        //         .action {
-        //             display:flex;
-        //             justify-content: space-around;
-        //             font-size: 1.4em;
-        //         }
-        //     }
-        // }
     }
     .aboutET {
         padding-top:120px;
@@ -1476,6 +1445,36 @@
                 width:200px;
                 height:inherit;
             }
+        }
+    }
+    .about-content {
+        padding: 20px 0 0;
+        .content {
+        line-height: 30px; 
+        }
+    }
+    .about-history {
+        padding: 20px 0 0;
+        .row {
+            margin-left:5px;
+            margin-right: 5px;
+            .title{
+                font-size: 1.8em;
+                font-weight: bold;
+                color:#ffc173;
+            }
+            .content {
+                li{
+                    line-height: 30px;
+                } 
+            } 
+        }
+    }
+    
+    .relation {
+        .row {
+            margin-left:5px;
+            margin-right:6px;    
         }
     }
 }

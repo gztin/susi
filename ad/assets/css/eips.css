@@ -1204,6 +1204,34 @@
     width: 200px;
     height: inherit;
   }
+
+  .about-content {
+    padding: 20px 0 0;
+  }
+  .about-content .content {
+    line-height: 30px;
+  }
+
+  .about-history {
+    padding: 20px 0 0;
+  }
+  .about-history .row {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .about-history .row .title {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ffc173;
+  }
+  .about-history .row .content li {
+    line-height: 30px;
+  }
+
+  .relation .row {
+    margin-left: 5px;
+    margin-right: 6px;
+  }
 }
 @media screen and (max-width: 376px) {
   #hero01 .container {
