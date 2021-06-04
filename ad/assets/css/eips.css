@@ -1241,4 +1241,9 @@
   .block-community .buildPic img {
     width: -webkit-fill-available;
   }
+
+  .bottom-logo .row img {
+    width: 200px;
+    height: 91px;
+  }
 }
