@@ -649,7 +649,6 @@
             }
             img {
                 width:100%;
-                height:264px;
             }
         }
     }
@@ -855,8 +854,11 @@
         flex-direction: row-reverse;
     }
     .row {
-        img {
-            width:100%;
+        .salesPic {
+            img {
+                width:100%;
+                height:inherit;
+            }    
         }
         .text-content {
             display: flex;
@@ -1096,10 +1098,20 @@
         }
     }
     .block-salesJob {
+        .b-reverse {
+            flex-direction: row-reverse;
+            .content {
+                padding-top:30px;
+            }
+        }
         .row {
             .salesPic {
                 display:flex;
                 align-items: center;
+                img {
+                    width:100%;
+                    height:inherit;
+                }
             }
             .text-content {
                 .title {
@@ -1115,9 +1127,6 @@
                     font-size: 1em;
                 }
             }
-        }
-        .b-reverse {
-            flex-direction: row-reverse;
         }
     }
     .aboutET {
@@ -1142,6 +1151,22 @@
                 h1 {
                     font-size: 2.2em;
                     line-height: 50px;
+                }
+            }
+        }
+    }
+    #data-statistics {
+        img {
+            width:100%;
+            height: inherit;
+        }
+    }
+    #block-eipsAdvance {
+        .row {
+            .eipsAdvance {
+                img {
+                    width:100%;
+                    height: inherit;
                 }
             }
         }
@@ -1173,6 +1198,14 @@
             }
         }
     }
+    .block-accCommunity {
+        .buildPic {
+            img {
+                width:100%;
+                height:inherit;
+            } 
+        }
+    }
     .mallEips {
         .titleContent {
             display:flex;
@@ -1197,7 +1230,7 @@
                 justify-content: center;
                 img{
                     width:90%;
-                    height:264px;
+                    height:inherit;
                 }
                 
             }
@@ -1220,6 +1253,39 @@
                 margin-left:0px;
             }
         }    
+    }
+    .advanceEIP {
+        .block-inf {
+            .block01 {
+                img{
+                    width:100%;
+                    height: inherit;
+                }
+            }
+            .block02 {
+                img {
+                    width:100%;
+                    height:inherit;
+                }
+            }
+        }
+    }
+    .aboutCEIP {
+       
+        .aboutCEIP-pic01 {
+            width:100%;
+            height: 692px;
+        }
+        .aboutCEIP-pic02 {
+            width:100%;
+            height:159px;
+        }
+        .title {
+            a{
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+        }
     }
     .services {
         .subAdvance {
@@ -1249,7 +1315,7 @@
             .leftBlock {
                 img {
                     width:100%;
-                    height:264px;
+                    height:inherit;
                 }
             }
         }
@@ -1315,7 +1381,7 @@
             .machinePic {
                 img {
                     width:100%;
-                    height:264px;
+                    height:inherit;
                 }
             }
         }
@@ -1339,11 +1405,12 @@
         .buildPic {
             img {
                 width:350px;
+                height:inherit;
             }
         }
     }
     .block-salesJob {
-        .row,.b-reverse {
+        .b-reverse {
             flex-direction: inherit;
             .text-content {
                 .title,span,.content {
@@ -1354,6 +1421,51 @@
                 padding-top:30px;
             }
         }
+        .row {
+            .text-content {
+                .title {
+                    text-align: center;
+                }
+                span {
+                    text-align: center;
+                }
+                .content {
+                    padding-top:30px;
+                    text-align: center;
+                }
+            }
+        }
+        // .row {
+        //     .salesPic {
+        //         img {
+        //             height:inherit;
+        //         }    
+        //     }
+        //     .text-content {
+        //         display: flex;
+        //         flex-direction: column;
+        //         justify-content: center;
+        //         .title {
+        //             font-size: 2.2em;
+        //             font-weight: bold;
+        //             color:#ffc173;
+        //         }
+        //         span {
+        //             font-size: 1.5em;
+        //             font-weight: bold;
+        //             margin-right: 10px;
+        //         }
+        //         .content {
+        //             font-size: 1.5em;
+        //             text-align:justify;
+        //         }
+        //         .action {
+        //             display:flex;
+        //             justify-content: space-around;
+        //             font-size: 1.4em;
+        //         }
+        //     }
+        // }
     }
     .aboutET {
         padding-top:120px;
@@ -1362,7 +1474,7 @@
         .row {
             img {
                 width:200px;
-                height:91px;
+                height:inherit;
             }
         }
     }
@@ -1412,6 +1524,22 @@
     #hero05 {
         padding-top:100px;
         height:80vh;
+    }
+    .advanceEIP {
+        .block-inf {
+            .block01 {
+                img{
+                    width:100%;
+                    height: inherit;
+                }
+            }
+            .block02 {
+                img {
+                    width:100%;
+                    height:inherit;
+                }
+            }
+        }
     }
     .etView {
         padding-top:160px;
@@ -1497,7 +1625,7 @@
         .row {
             img {
                 width:200px;
-                height:91px;
+                height:inherit;
             }
         }
     }

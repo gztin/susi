@@ -581,7 +581,6 @@
 }
 #block-plan .row .machinePic img {
   width: 100%;
-  height: 264px;
 }
 
 #block-eipsAdvance .title {
@@ -746,8 +745,9 @@
 .block-salesJob .b-reverse {
   flex-direction: row-reverse;
 }
-.block-salesJob .row img {
+.block-salesJob .row .salesPic img {
   width: 100%;
+  height: inherit;
 }
 .block-salesJob .row .text-content {
   display: flex;
@@ -936,9 +936,19 @@
     width: 200px;
   }
 
+  .block-salesJob .b-reverse {
+    flex-direction: row-reverse;
+  }
+  .block-salesJob .b-reverse .content {
+    padding-top: 30px;
+  }
   .block-salesJob .row .salesPic {
     display: flex;
     align-items: center;
+  }
+  .block-salesJob .row .salesPic img {
+    width: 100%;
+    height: inherit;
   }
   .block-salesJob .row .text-content .title {
     font-size: 2em;
@@ -951,9 +961,6 @@
   }
   .block-salesJob .row .text-content .action {
     font-size: 1em;
-  }
-  .block-salesJob .b-reverse {
-    flex-direction: row-reverse;
   }
 
   .aboutET {
@@ -975,6 +982,16 @@
   #hero01 .container .row h1 {
     font-size: 2.2em;
     line-height: 50px;
+  }
+
+  #data-statistics img {
+    width: 100%;
+    height: inherit;
+  }
+
+  #block-eipsAdvance .row .eipsAdvance img {
+    width: 100%;
+    height: inherit;
   }
 
   .etView {
@@ -1005,6 +1022,11 @@
     border-radius: 4px;
   }
 
+  .block-accCommunity .buildPic img {
+    width: 100%;
+    height: inherit;
+  }
+
   .mallEips .titleContent {
     display: flex;
     flex-direction: column;
@@ -1029,7 +1051,7 @@
   }
   #services .block-inf .leftBlock img {
     width: 90%;
-    height: 264px;
+    height: inherit;
   }
 
   .aboutmallEIPS .eipContent .block-title {
@@ -1045,6 +1067,28 @@
   .aboutmallEIPS .eipitemPic img {
     width: 200px;
     margin-left: 0px;
+  }
+
+  .advanceEIP .block-inf .block01 img {
+    width: 100%;
+    height: inherit;
+  }
+  .advanceEIP .block-inf .block02 img {
+    width: 100%;
+    height: inherit;
+  }
+
+  .aboutCEIP .aboutCEIP-pic01 {
+    width: 100%;
+    height: 692px;
+  }
+  .aboutCEIP .aboutCEIP-pic02 {
+    width: 100%;
+    height: 159px;
+  }
+  .aboutCEIP .title a {
+    font-size: 1.5em;
+    font-weight: bold;
   }
 
   .services .subAdvance .icon-box .description {
@@ -1067,7 +1111,7 @@
   }
   .serviceInf .block-inf .leftBlock img {
     width: 100%;
-    height: 264px;
+    height: inherit;
   }
 
   .stepBlock .block-step .block-title-step {
@@ -1116,7 +1160,7 @@
   }
   #block-plan .row .machinePic img {
     width: 100%;
-    height: 264px;
+    height: inherit;
   }
 
   #block-plan .row .machinePic span {
@@ -1129,16 +1173,27 @@
   }
   .block-community .buildPic img {
     width: 350px;
+    height: inherit;
   }
 
-  .block-salesJob .row, .block-salesJob .b-reverse {
+  .block-salesJob .b-reverse {
     flex-direction: inherit;
   }
-  .block-salesJob .row .text-content .title, .block-salesJob .row .text-content span, .block-salesJob .row .text-content .content, .block-salesJob .b-reverse .text-content .title, .block-salesJob .b-reverse .text-content span, .block-salesJob .b-reverse .text-content .content {
+  .block-salesJob .b-reverse .text-content .title, .block-salesJob .b-reverse .text-content span, .block-salesJob .b-reverse .text-content .content {
     text-align: center;
   }
-  .block-salesJob .row .content, .block-salesJob .b-reverse .content {
+  .block-salesJob .b-reverse .content {
     padding-top: 30px;
+  }
+  .block-salesJob .row .text-content .title {
+    text-align: center;
+  }
+  .block-salesJob .row .text-content span {
+    text-align: center;
+  }
+  .block-salesJob .row .text-content .content {
+    padding-top: 30px;
+    text-align: center;
   }
 
   .aboutET {
@@ -1147,7 +1202,7 @@
 
   .bottom-logo .row img {
     width: 200px;
-    height: 91px;
+    height: inherit;
   }
 }
 @media screen and (max-width: 376px) {
@@ -1193,6 +1248,15 @@
   #hero05 {
     padding-top: 100px;
     height: 80vh;
+  }
+
+  .advanceEIP .block-inf .block01 img {
+    width: 100%;
+    height: inherit;
+  }
+  .advanceEIP .block-inf .block02 img {
+    width: 100%;
+    height: inherit;
   }
 
   .etView {
@@ -1249,6 +1313,6 @@
 
   .bottom-logo .row img {
     width: 200px;
-    height: 91px;
+    height: inherit;
   }
 }
