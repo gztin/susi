@@ -304,6 +304,20 @@
     }
 }
 
+.theNews {
+    padding:60px 0px 0px;
+    .newsPic {
+        .swiper-slide {
+             margin-left: 5px;
+             margin-right:0px;
+             max-width:200px;
+             img {
+                width:100%;
+            }
+        }
+    }
+}
+
 // 社區EIPS聯播網 end
 
 // hero02

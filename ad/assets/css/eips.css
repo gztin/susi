@@ -272,6 +272,18 @@
   width: 200px;
 }
 
+.theNews {
+  padding: 60px 0px 0px;
+}
+.theNews .newsPic .swiper-slide {
+  margin-left: 5px;
+  margin-right: 0px;
+  max-width: 200px;
+}
+.theNews .newsPic .swiper-slide img {
+  width: 100%;
+}
+
 .eipsMall-header {
   background: #000;
 }
