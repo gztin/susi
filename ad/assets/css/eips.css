@@ -1202,7 +1202,7 @@
 
   .bottom-logo .row img {
     width: 200px;
-    height: auto;
+    max-height: 91px;
   }
 
   .about-content {
