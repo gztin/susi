@@ -1024,7 +1024,7 @@
 
   .block-accCommunity .buildPic img {
     width: 100%;
-    height: auto;
+    max-height: 229px;
   }
 
   .mallEips .titleContent {
@@ -1173,7 +1173,7 @@
   }
   .block-community .buildPic img {
     width: 350px;
-    height: auto;
+    max-height: 263px;
   }
 
   .block-salesJob .b-reverse {

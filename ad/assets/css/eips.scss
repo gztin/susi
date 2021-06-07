@@ -1202,7 +1202,7 @@
         .buildPic {
             img {
                 width:100%;
-                height:auto;
+                max-height: 229px;
             } 
         }
     }
@@ -1405,7 +1405,7 @@
         .buildPic {
             img {
                 width:350px;
-                height:auto;
+                max-height:263px;
             }
         }
     }
