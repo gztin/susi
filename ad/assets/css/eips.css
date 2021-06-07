@@ -536,7 +536,7 @@
 }
 .aboutmallEIPS .eipitemPic img {
   width: 300px;
-  height: inherit;
+  height: auto;
 }
 
 .advancePic {
@@ -747,7 +747,7 @@
 }
 .block-salesJob .row .salesPic img {
   width: 100%;
-  height: inherit;
+  height: auto;
 }
 .block-salesJob .row .text-content {
   display: flex;
@@ -948,7 +948,7 @@
   }
   .block-salesJob .row .salesPic img {
     width: 100%;
-    height: inherit;
+    height: auto;
   }
   .block-salesJob .row .text-content .title {
     font-size: 2em;
@@ -1024,7 +1024,7 @@
 
   .block-accCommunity .buildPic img {
     width: 100%;
-    height: inherit;
+    height: auto;
   }
 
   .mallEips .titleContent {
@@ -1051,7 +1051,7 @@
   }
   #services .block-inf .leftBlock img {
     width: 90%;
-    height: inherit;
+    height: auto;
   }
 
   .aboutmallEIPS .eipContent .block-title {
@@ -1075,7 +1075,7 @@
   }
   .advanceEIP .block-inf .block02 img {
     width: 100%;
-    height: inherit;
+    height: auto;
   }
 
   .aboutCEIP .aboutCEIP-pic01 {
@@ -1111,7 +1111,7 @@
   }
   .serviceInf .block-inf .leftBlock img {
     width: 100%;
-    height: inherit;
+    height: auto;
   }
 
   .stepBlock .block-step .block-title-step {
@@ -1160,7 +1160,7 @@
   }
   #block-plan .row .machinePic img {
     width: 100%;
-    height: inherit;
+    height: auto;
   }
 
   #block-plan .row .machinePic span {
@@ -1173,7 +1173,7 @@
   }
   .block-community .buildPic img {
     width: 350px;
-    height: inherit;
+    height: auto;
   }
 
   .block-salesJob .b-reverse {
@@ -1202,7 +1202,7 @@
 
   .bottom-logo .row img {
     width: 200px;
-    height: inherit;
+    height: auto;
   }
 
   .about-content {
@@ -1284,7 +1284,7 @@
   }
   .advanceEIP .block-inf .block02 img {
     width: 100%;
-    height: inherit;
+    height: auto;
   }
 
   .etView {
@@ -1341,6 +1341,6 @@
 
   .bottom-logo .row img {
     width: 200px;
-    height: inherit;
+    height: auto;
   }
 }
