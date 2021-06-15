@@ -1380,6 +1380,15 @@
             }
         }
     }
+    .theNews {
+        padding:60px 0px 0px;
+        .news-content {
+            img{
+                width:100%;
+                max-height: 219px;
+            }
+        }
+    }
     .etView {
         padding-top:160px;
         width:100%;
@@ -1407,6 +1416,18 @@
             }
         }
     }
+    .about {
+        .container {
+            .need{
+                
+                img {
+                    max-width:100%;
+                    max-height: 520px;
+                }
+            }
+            
+        }
+    }
     .goodPoint{
         .title{
             font-size: 2.5em;
@@ -1419,6 +1440,7 @@
             .point-pic{
                 img{
                     width:100%;
+                    max-height: 91px;
                 }
             }
             .point-content{
@@ -1465,7 +1487,7 @@
             justify-content: center;
             img{
                 width:100%;
-                height:inherit;
+                max-height:532px;
             }
         }
     }
@@ -1576,6 +1598,7 @@
             .leftBlock{
                 img{
                     width:100%;
+                    max-height: 323px;
                 }
             }
             .rightBlock{
@@ -1598,6 +1621,7 @@
             .pic-tw {
                 img{
                     width:100%;
+                    max-height: 390px;
                 }
             }
         }

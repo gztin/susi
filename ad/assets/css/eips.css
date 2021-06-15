@@ -1184,6 +1184,14 @@
     height: inherit;
   }
 
+  .theNews {
+    padding: 60px 0px 0px;
+  }
+  .theNews .news-content img {
+    width: 100%;
+    max-height: 219px;
+  }
+
   .etView {
     padding-top: 160px;
     width: 100%;
@@ -1212,6 +1220,11 @@
     border-radius: 4px;
   }
 
+  .about .container .need img {
+    max-width: 100%;
+    max-height: 520px;
+  }
+
   .goodPoint .title {
     font-size: 2.5em;
     font-weight: bold;
@@ -1223,6 +1236,7 @@
   }
   .goodPoint .point .point-pic img {
     width: 100%;
+    max-height: 91px;
   }
   .goodPoint .point .point-content {
     display: flex;
@@ -1267,7 +1281,7 @@
   }
   #ad-specification .rightBlock img {
     width: 100%;
-    height: inherit;
+    max-height: 532px;
   }
 
   .block-accCommunity .buildPic img {
@@ -1351,6 +1365,7 @@
   }
   .serviceInf .block-inf .leftBlock img {
     width: 100%;
+    max-height: 323px;
   }
   .serviceInf .block-inf .rightBlock .content .title {
     font-size: 2.2em;
@@ -1367,6 +1382,7 @@
   }
   .serviceInf .block-inf .pic-tw img {
     width: 100%;
+    max-height: 390px;
   }
 
   .stepBlock .block-step .block-title-step {
