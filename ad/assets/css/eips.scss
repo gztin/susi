@@ -83,6 +83,13 @@
 }
 .about {
     .container {
+        .need{
+            display: flex;
+            justify-content: center;
+            img {
+                max-width:400px;
+            }
+        }
         .reason {
             display: flex;
             flex-direction:column;
@@ -95,6 +102,41 @@
                 padding-top:40px;
                 font-size:1.5em;
             }
+        }
+    }
+}
+#ad-specification{
+    .leftBlock{
+        align-items: center!important;
+        .title{
+            font-size: 3em;
+            font-weight: bold;
+        }
+        .hint{
+            width: 80%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            background: #b3b3b3;
+            color: #fff;
+            margin-bottom:30px;
+        }
+        .description{
+            display: flex;
+            font-size: 1.4em;
+            p{
+                span{
+                    font-weight: bold;
+                }
+                .rule{}
+            }
+        }
+    }
+    .rightBlock{
+        img{
+            max-width:300px;
         }
     }
 }
@@ -124,26 +166,43 @@
         padding-top: 40px;
         padding-bottom: 40px;
         justify-content: center;
-        h4 {
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgb(255, 220, 132);
-        }
-        .leftBlock {
+        .leftBlock{
             img{
-                width: 100%;
-                height: max-content;
+                width:100%;
             }
         }
-        .rightBlock {
-            padding-right: 50px;
-            align-items: center!important;
-            .title {
-                font-size:2.5em;
+        .rightBlock{
+            .content{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                .title{
+                    font-size: 2.2em;
+                }
+                .description{
+                    font-size: 1.4em;
+                    margin-bottom: 2px;
+                }
+                .hint{
+                    padding-top:20px;
+                }
             }
-            .description {
-                font-size:1.9em;
-                text-align: justify;
-            } 
+        }
+        .title {
+            font-size:2.2em;
+            font-weight:bold;
+            text-align: center;
+            padding-bottom: 30px;
+            .count{
+                color:#ffb200;
+            }
+        }
+        .pic-tw {
+            display: flex;
+            justify-content: center;
+            img{
+                width:70%;
+            }
         }
     }
     .b-reverse {
@@ -306,14 +365,9 @@
 
 .theNews {
     padding:60px 0px 0px;
-    .newsPic {
-        .swiper-slide {
-             margin-left: 5px;
-             margin-right:0px;
-             max-width:200px;
-             img {
-                width:100%;
-            }
+    .news-content {
+        img{
+            width:100%;
         }
     }
 }
@@ -438,6 +492,17 @@
     }
     .block-center {
         background: #fff;
+    }
+}
+.ad-service {
+    padding:60px 0px 0px 0px;
+    .icon-box{
+        .title{
+            font-size:1.8em;
+        }
+        p{
+            font-size:1.4em;
+        }
     }
 }
 .picCityBottom {
@@ -731,6 +796,42 @@
         width:100%;
     }
 }
+.goodPoint{
+    .title{
+        font-size: 2.5em;
+        font-weight: bold;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 30px;
+    }
+    .point{
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 30px;
+        .point-pic{
+            width:25%;
+            img{
+                width:100%;
+            }
+        }
+        .point-content{
+            width:65%;
+            display:flex;
+            flex-direction: column;
+            span{
+                font-size:1.8em;
+                padding-bottom: 10px;
+                color: #ffbe00;
+                border-bottom: 0.5px solid #d4d4d4;
+            }
+            p{
+                font-size:1.2em;
+                padding-top: 10px;
+            }
+        }
+    }
+}
+
 
 // about content
 .about-content {
@@ -926,12 +1027,25 @@
     }
     .about {
         .container {
-            .reason {
-                .title {
-                    font-size:2em;
+            .need{
+                display: flex;
+                justify-content: center;
+                img {
+                    max-width:100%;
+                    height: inherit;
                 }
-                .description{
-                    font-size: 1.7em;
+            }
+            .reason {
+                display: flex;
+                flex-direction:column;
+                justify-content: center;
+                .title {
+                    font-size:2.2em;
+                }
+                .description {
+                    text-align: justify;
+                    padding-top:40px;
+                    font-size:1.5em;
                 }
             }
         }
@@ -999,16 +1113,37 @@
         } 
     }
     .serviceInf {
+        padding:20px 0px;
         .block-inf {
             align-items: center;
             padding-top: 20px;
             padding-bottom: 20px;
-            .rightBlock {
-                .title {
-                    font-size:1.5em;
+            .leftBlock{
+                img{
+                    width:100%;
                 }
-                .description {
-                    font-size:1.2em;
+            }
+            .rightBlock{
+                .content{
+                    .title{
+                        font-size: 1.3em;
+                    }
+                    .description{
+                        font-size: 1em;
+                        margin-bottom: 2px;
+                    }
+                    .hint{
+                        padding-top:20px;
+                    }
+                }
+            }
+            .title {
+                font-size:1.8em;
+                padding-bottom: 10px;
+            }
+            .pic-tw {
+                img{
+                    width:80%;
                 }
             }
         }
@@ -1036,6 +1171,27 @@
             }
         }
         
+    }
+    .goodPoint{
+        padding:20px 0px;
+        .title{
+            font-size: 2.5em;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+        }
+        .point{
+            display: flex;
+            .point-pic{
+                img{
+                    width:100%;
+                }
+            }
+            .point-content{
+                display:flex;
+                flex-direction: column;
+            }
+        }
     }
     .stepBlock {
         .block-step {
@@ -1143,6 +1299,45 @@
             }
         }
     }
+    #ad-specification{
+        .leftBlock{
+            align-items: center!important;
+            .title{
+                font-size: 2.2em;
+                font-weight: bold;
+            }
+            .hint{
+                width: 100%;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size:1.6em;
+                background: #b3b3b3;
+                color: #fff;
+                margin-bottom:30px;
+            }
+            .description{
+                font-size: 1em;
+                display: flex;
+                .type{
+                    color:#000;
+                    font-weight: bold;
+                    font-size: 1.2em;
+                }
+                .detail{
+                    color:#464646;
+                    font-size: 1.2em;
+                }
+            }
+        }
+        .rightBlock{
+            img{
+                width:100%;
+                height:fit-content;
+            }
+        }
+    }
     .aboutET {
         padding-top:120px;
     }  
@@ -1209,6 +1404,68 @@
                 background: #f2c976;
                 color: #000 !important;
                 border-radius: 4px;   
+            }
+        }
+    }
+    .goodPoint{
+        .title{
+            font-size: 2.5em;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+        }
+        .point{
+            display: flex;
+            .point-pic{
+                img{
+                    width:100%;
+                }
+            }
+            .point-content{
+                display:flex;
+                flex-direction: column;
+            }
+        }
+    }
+    #ad-specification{
+        .leftBlock{
+            align-items: center!important;
+            .title{
+                font-size: 2.2em;
+                font-weight: bold;
+            }
+            .hint{
+                width: 100%;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size:1.6em;
+                background: #b3b3b3;
+                color: #fff;
+                margin-bottom:30px;
+            }
+            .description{
+                font-size: 1em;
+                display: flex;
+                .type{
+                    color:#000;
+                    font-weight: bold;
+                    font-size: 1.2em;
+                    width:25%;
+                }
+                .detail{
+                    color:#464646;
+                    font-size: 1.2em;
+                    width:75%;
+                }
+            }
+        }
+        .rightBlock{
+            justify-content: center;
+            img{
+                width:100%;
+                height:inherit;
             }
         }
     }
@@ -1313,23 +1570,34 @@
     }
     .serviceInf {
         .block-inf {
-            .rightBlock {
-                padding-right: 10px;
-                padding-top:30px;
-                .title {
-                    text-align: center;
-                }
-                .description {
-                    text-align: center;
-                }
-                .hint {
-                    text-align: center;
+            align-items: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            .leftBlock{
+                img{
+                    width:100%;
                 }
             }
-            .leftBlock {
-                img {
+            .rightBlock{
+                .content{
+                    .title{
+                        font-size: 2.2em;
+                    }
+                    .description{
+                        font-size: 1.4em;
+                        margin-bottom: 2px;
+                    }
+                    .hint{
+                        padding-top:20px;
+                    }
+                }
+            }
+            .title {
+                font-size:1.5em;
+            }
+            .pic-tw {
+                img{
                     width:100%;
-                    max-height:260px;
                 }
             }
         }

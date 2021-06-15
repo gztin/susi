@@ -68,6 +68,13 @@
   border-radius: 4px;
 }
 
+.about .container .need {
+  display: flex;
+  justify-content: center;
+}
+.about .container .need img {
+  max-width: 400px;
+}
 .about .container .reason {
   display: flex;
   flex-direction: column;
@@ -80,6 +87,35 @@
   text-align: justify;
   padding-top: 40px;
   font-size: 1.5em;
+}
+
+#ad-specification .leftBlock {
+  align-items: center !important;
+}
+#ad-specification .leftBlock .title {
+  font-size: 3em;
+  font-weight: bold;
+}
+#ad-specification .leftBlock .hint {
+  width: 80%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  background: #b3b3b3;
+  color: #fff;
+  margin-bottom: 30px;
+}
+#ad-specification .leftBlock .description {
+  display: flex;
+  font-size: 1.4em;
+}
+#ad-specification .leftBlock .description p span {
+  font-weight: bold;
+}
+#ad-specification .rightBlock img {
+  max-width: 300px;
 }
 
 .services {
@@ -103,24 +139,39 @@
   padding-bottom: 40px;
   justify-content: center;
 }
-.serviceInf .block-inf h4 {
-  padding-bottom: 20px;
-  border-bottom: 1px solid #ffdc84;
-}
 .serviceInf .block-inf .leftBlock img {
   width: 100%;
-  height: max-content;
 }
-.serviceInf .block-inf .rightBlock {
-  padding-right: 50px;
-  align-items: center !important;
+.serviceInf .block-inf .rightBlock .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.serviceInf .block-inf .rightBlock .title {
-  font-size: 2.5em;
+.serviceInf .block-inf .rightBlock .content .title {
+  font-size: 2.2em;
 }
-.serviceInf .block-inf .rightBlock .description {
-  font-size: 1.9em;
-  text-align: justify;
+.serviceInf .block-inf .rightBlock .content .description {
+  font-size: 1.4em;
+  margin-bottom: 2px;
+}
+.serviceInf .block-inf .rightBlock .content .hint {
+  padding-top: 20px;
+}
+.serviceInf .block-inf .title {
+  font-size: 2.2em;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 30px;
+}
+.serviceInf .block-inf .title .count {
+  color: #ffb200;
+}
+.serviceInf .block-inf .pic-tw {
+  display: flex;
+  justify-content: center;
+}
+.serviceInf .block-inf .pic-tw img {
+  width: 70%;
 }
 .serviceInf .b-reverse {
   flex-direction: row-reverse;
@@ -275,12 +326,7 @@
 .theNews {
   padding: 60px 0px 0px;
 }
-.theNews .newsPic .swiper-slide {
-  margin-left: 5px;
-  margin-right: 0px;
-  max-width: 200px;
-}
-.theNews .newsPic .swiper-slide img {
+.theNews .news-content img {
   width: 100%;
 }
 
@@ -390,6 +436,16 @@
 }
 #services .block-center {
   background: #fff;
+}
+
+.ad-service {
+  padding: 60px 0px 0px 0px;
+}
+.ad-service .icon-box .title {
+  font-size: 1.8em;
+}
+.ad-service .icon-box p {
+  font-size: 1.4em;
 }
 
 .picCityBottom {
@@ -652,6 +708,40 @@
   width: 100%;
 }
 
+.goodPoint .title {
+  font-size: 2.5em;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 30px;
+}
+.goodPoint .point {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30px;
+}
+.goodPoint .point .point-pic {
+  width: 25%;
+}
+.goodPoint .point .point-pic img {
+  width: 100%;
+}
+.goodPoint .point .point-content {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+}
+.goodPoint .point .point-content span {
+  font-size: 1.8em;
+  padding-bottom: 10px;
+  color: #ffbe00;
+  border-bottom: 0.5px solid #d4d4d4;
+}
+.goodPoint .point .point-content p {
+  font-size: 1.2em;
+  padding-top: 10px;
+}
+
 .about-content .title {
   font-size: 1.8em;
   font-weight: bold;
@@ -802,11 +892,26 @@
     font-size: 2.5em;
   }
 
+  .about .container .need {
+    display: flex;
+    justify-content: center;
+  }
+  .about .container .need img {
+    max-width: 100%;
+    height: inherit;
+  }
+  .about .container .reason {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .about .container .reason .title {
-    font-size: 2em;
+    font-size: 2.2em;
   }
   .about .container .reason .description {
-    font-size: 1.7em;
+    text-align: justify;
+    padding-top: 40px;
+    font-size: 1.5em;
   }
 
   .etView {
@@ -864,16 +969,33 @@
     padding-top: 60px;
   }
 
+  .serviceInf {
+    padding: 20px 0px;
+  }
   .serviceInf .block-inf {
     align-items: center;
     padding-top: 20px;
     padding-bottom: 20px;
   }
-  .serviceInf .block-inf .rightBlock .title {
-    font-size: 1.5em;
+  .serviceInf .block-inf .leftBlock img {
+    width: 100%;
   }
-  .serviceInf .block-inf .rightBlock .description {
-    font-size: 1.2em;
+  .serviceInf .block-inf .rightBlock .content .title {
+    font-size: 1.3em;
+  }
+  .serviceInf .block-inf .rightBlock .content .description {
+    font-size: 1em;
+    margin-bottom: 2px;
+  }
+  .serviceInf .block-inf .rightBlock .content .hint {
+    padding-top: 20px;
+  }
+  .serviceInf .block-inf .title {
+    font-size: 1.8em;
+    padding-bottom: 10px;
+  }
+  .serviceInf .block-inf .pic-tw img {
+    width: 80%;
   }
 
   .serviceInfMall .block-inf .leftBlock .title {
@@ -890,6 +1012,26 @@
   .serviceInfMall .block-center .content .hint {
     background-color: #fff;
     text-align: right;
+  }
+
+  .goodPoint {
+    padding: 20px 0px;
+  }
+  .goodPoint .title {
+    font-size: 2.5em;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+  }
+  .goodPoint .point {
+    display: flex;
+  }
+  .goodPoint .point .point-pic img {
+    width: 100%;
+  }
+  .goodPoint .point .point-content {
+    display: flex;
+    flex-direction: column;
   }
 
   .stepBlock .block-step .block-title-step {
@@ -975,6 +1117,42 @@
     font-size: 1em;
   }
 
+  #ad-specification .leftBlock {
+    align-items: center !important;
+  }
+  #ad-specification .leftBlock .title {
+    font-size: 2.2em;
+    font-weight: bold;
+  }
+  #ad-specification .leftBlock .hint {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6em;
+    background: #b3b3b3;
+    color: #fff;
+    margin-bottom: 30px;
+  }
+  #ad-specification .leftBlock .description {
+    font-size: 1em;
+    display: flex;
+  }
+  #ad-specification .leftBlock .description .type {
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  #ad-specification .leftBlock .description .detail {
+    color: #464646;
+    font-size: 1.2em;
+  }
+  #ad-specification .rightBlock img {
+    width: 100%;
+    height: fit-content;
+  }
+
   .aboutET {
     padding-top: 120px;
   }
@@ -1032,6 +1210,64 @@
     background: #f2c976;
     color: #000 !important;
     border-radius: 4px;
+  }
+
+  .goodPoint .title {
+    font-size: 2.5em;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+  }
+  .goodPoint .point {
+    display: flex;
+  }
+  .goodPoint .point .point-pic img {
+    width: 100%;
+  }
+  .goodPoint .point .point-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #ad-specification .leftBlock {
+    align-items: center !important;
+  }
+  #ad-specification .leftBlock .title {
+    font-size: 2.2em;
+    font-weight: bold;
+  }
+  #ad-specification .leftBlock .hint {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6em;
+    background: #b3b3b3;
+    color: #fff;
+    margin-bottom: 30px;
+  }
+  #ad-specification .leftBlock .description {
+    font-size: 1em;
+    display: flex;
+  }
+  #ad-specification .leftBlock .description .type {
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2em;
+    width: 25%;
+  }
+  #ad-specification .leftBlock .description .detail {
+    color: #464646;
+    font-size: 1.2em;
+    width: 75%;
+  }
+  #ad-specification .rightBlock {
+    justify-content: center;
+  }
+  #ad-specification .rightBlock img {
+    width: 100%;
+    height: inherit;
   }
 
   .block-accCommunity .buildPic img {
@@ -1108,22 +1344,29 @@
     text-align: center;
   }
 
-  .serviceInf .block-inf .rightBlock {
-    padding-right: 10px;
-    padding-top: 30px;
-  }
-  .serviceInf .block-inf .rightBlock .title {
-    text-align: center;
-  }
-  .serviceInf .block-inf .rightBlock .description {
-    text-align: center;
-  }
-  .serviceInf .block-inf .rightBlock .hint {
-    text-align: center;
+  .serviceInf .block-inf {
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
   .serviceInf .block-inf .leftBlock img {
     width: 100%;
-    max-height: 260px;
+  }
+  .serviceInf .block-inf .rightBlock .content .title {
+    font-size: 2.2em;
+  }
+  .serviceInf .block-inf .rightBlock .content .description {
+    font-size: 1.4em;
+    margin-bottom: 2px;
+  }
+  .serviceInf .block-inf .rightBlock .content .hint {
+    padding-top: 20px;
+  }
+  .serviceInf .block-inf .title {
+    font-size: 1.5em;
+  }
+  .serviceInf .block-inf .pic-tw img {
+    width: 100%;
   }
 
   .stepBlock .block-step .block-title-step {
