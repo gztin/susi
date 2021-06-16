@@ -1006,11 +1006,27 @@
 // 整合行銷企劃 end 
 
 // FAQ
+.adservice-community {
+    height: 4229px;
+}
+.adservice-mall {
+    height: 1845px;
+}
+.eips-community {
+    height: 5200px;
+}
+.eips-mall{
+    height:5200px;
+}
+.faq-sales{
+    height:2000px;
+}
 .FAQ {
     margin: 0 auto;
     overflow: scroll;
     overflow-y: hidden;
 }
+
 // FAQ end
 
 /*如果螢幕寬度為 768px（含） 以下，就套用 css 設定*/
@@ -1340,6 +1356,21 @@
     }
     .aboutET {
         padding-top:120px;
+    }
+    .adservice-community {
+        height: 4229px;
+    }
+    .adservice-mall {
+        height: 4100px;
+    }
+    .eips-mall {
+        height: 4100px;
+    }
+    .eips-community {
+        height: 5200px;
+    }
+    .faq-sales{
+        height:1900px;
     }  
 }
 
@@ -1786,6 +1817,21 @@
             margin-left:5px;
             margin-right:6px;    
         }
+    }
+    .adservice-community {
+        height: 3500px;
+    }
+    .adservice-mall {
+        height: 3900px;
+    }
+    .eips-mall {
+        height: 4100px;
+    }
+    .eips-community {
+        height: 4100px;
+    }
+    .faq-sales{
+        height:1800px;
     }
 }
 @media screen and (max-width: 376px) {
