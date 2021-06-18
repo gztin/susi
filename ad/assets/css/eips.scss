@@ -29,6 +29,19 @@
                     margin: 10px 0 0 0;
                     font-size: 28px;
                 }
+                .gotoeips{
+                    color: #fff;
+                    background: #000;
+                    /* padding: 20px; */
+                    width: 150px;
+                    height: 50px;
+                    border-radius: 5px;
+                    display: flex;
+                    margin: 30px auto;
+                    justify-content: center;
+                    align-items: center;
+                    border: 1px solid #fff;
+                }
             }
         }
     }
@@ -1384,6 +1397,7 @@
             padding-top:15px;
             .row {
                 .slogan-eips{
+                    padding-top:60px;
                     h1 {
                         margin: 0;
                         font-size: 1.8em;
