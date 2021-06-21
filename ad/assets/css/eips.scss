@@ -723,6 +723,10 @@
 }
 .advanceList {
     .eipsAdvance {
+        span{
+            text-align: center;
+            padding-bottom: 30px;
+        }
         .subAdvance {
             justify-content: center;
             .icon-box {

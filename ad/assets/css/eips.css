@@ -645,6 +645,10 @@
   background-size: cover;
 }
 
+.advanceList .eipsAdvance span {
+  text-align: center;
+  padding-bottom: 30px;
+}
 .advanceList .eipsAdvance .subAdvance {
   justify-content: center;
 }
