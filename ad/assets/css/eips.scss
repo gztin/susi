@@ -85,6 +85,31 @@
         .info {
             width: 100%;
             background: transparent !important;
+            .address{
+                a{
+                    margin-left: 15px;
+                    color: #0099f7;
+                }
+            }
+            .email{
+                a{
+                    margin-left: 15px;
+                    color: #0099f7;
+                }
+            }
+            .phone{
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    a{
+                        margin-left: 15px;
+                        color: #0099f7;
+                    }
+                }
+            }
+        }
+        iframe{
+            height:250px;
         }
     }
 }
@@ -1066,8 +1091,17 @@
 .EiPsNews{
     .icon-box{
         margin-top:20px;
+        padding: 20px 20px;
         iframe{
             height:240px;
+        }
+    }
+}
+.relation{
+    .relation-list{
+        text-align: center;
+        span{
+            font-size: 2em;
         }
     }
 }

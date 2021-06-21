@@ -71,6 +71,25 @@
   width: 100%;
   background: transparent !important;
 }
+#contact .contactInf .info .address a {
+  margin-left: 15px;
+  color: #0099f7;
+}
+#contact .contactInf .info .email a {
+  margin-left: 15px;
+  color: #0099f7;
+}
+#contact .contactInf .info .phone div {
+  display: flex;
+  flex-direction: column;
+}
+#contact .contactInf .info .phone div a {
+  margin-left: 15px;
+  color: #0099f7;
+}
+#contact .contactInf iframe {
+  height: 250px;
+}
 
 .sendmail {
   background: #ffc451;
@@ -939,9 +958,17 @@
 
 .EiPsNews .icon-box {
   margin-top: 20px;
+  padding: 20px 20px;
 }
 .EiPsNews .icon-box iframe {
   height: 240px;
+}
+
+.relation .relation-list {
+  text-align: center;
+}
+.relation .relation-list span {
+  font-size: 2em;
 }
 
 /*如果螢幕寬度為 768px（含） 以下，就套用 css 設定*/
