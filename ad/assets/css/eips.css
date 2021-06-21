@@ -937,6 +937,13 @@
   overflow-y: hidden;
 }
 
+.EiPsNews .icon-box {
+  margin-top: 20px;
+}
+.EiPsNews .icon-box iframe {
+  height: 240px;
+}
+
 /*如果螢幕寬度為 768px（含） 以下，就套用 css 設定*/
 @media screen and (max-width: 768px) {
   #hero00, #hero01, #hero02, #hero03, #hero05 {
@@ -1222,6 +1229,10 @@
 
   .eips-mall {
     height: 2200px;
+  }
+
+  .EiPsNews .icon-box iframe {
+    height: 240px;
   }
 }
 @media screen and (max-width: 576px) {

@@ -1063,7 +1063,14 @@
     overflow: scroll;
     overflow-y: hidden;
 }
-
+.EiPsNews{
+    .icon-box{
+        margin-top:20px;
+        iframe{
+            height:240px;
+        }
+    }
+}
 // FAQ end
 
 /*如果螢幕寬度為 768px（含） 以下，就套用 css 設定*/
@@ -1402,6 +1409,13 @@
     }
     .eips-mall {
         height: 2200px;
+    }
+    .EiPsNews{
+        .icon-box{
+            iframe{
+                height:240px;
+            }
+        }
     } 
 }
 
