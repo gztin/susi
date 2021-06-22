@@ -106,13 +106,14 @@ $(document).on("click", ".pick-start > .block > #d-list > li", function () {
     $(".timeData").html("");
     let year = $("#title-year").text();
     let month = $("#title-month").text();
-    
     let day = $(this).text();
     let blockStart = year + "-" + month + "-" + day;
+
     $(".time-start").val(blockStart);
     console.log("選取的起始日期是" + year + "-" + month + "-" + day);
     $(this).addClass('toDay').siblings().removeClass('toDay');
     $(".calendarView").hide();
+    checkTime();
     rentTime();
 });
 
@@ -122,47 +123,73 @@ $(document).on("click", ".pick-end > .block > #d-list > li", function () {
     let month = $("#title-month").text();
     let day = $(this).text();
     let blockEnd = year + "-" + month + "-" + day;
+
     $(".time-end").val(blockEnd);
     console.log("選取的結束日期是" + year + "-" + month + "-" + day);
     $(this).addClass('toDay').siblings().removeClass('toDay');
     $(".calendarView").hide();
+    checkTime();
     rentTime();
 });
 
 // 算走期以及租金
 function rentTime(timeStart,timeEnd){
     var startDt = $(".time-start").val();
-    let parstime = new Date(Date.parse(startDt));
-    console.log("起始日期是"+parstime);
     var endDt = $(".time-end").val();
     var diff = new Date(Date.parse(endDt) - Date.parse(startDt));
     var monthTime = (((diff / 1000 / 60 / 60 / 24) + 1)/30);
-    
     let dataTitle = '';
     let price = $('.price').val();
     let staging = Math.round(price*1.033/24);
     podcastTime = Math.round(monthTime);
-    if(podcastTime ==0){
-        $(".rentTime").html("最小走期為1個月，所以一共是"+parseInt(podcastTime+1)+"個月");
-        countPrice();
-    }
-    else if(podcastTime < 0){
-        alert("日期有錯誤，須重新選擇");
-        $(".time-start").val(timeStart2);
-        $(".time-end").val(timeEnd2);
+
+    if(podcastTime <= 0){
+        alert("走期不能小於一個月，請重新選擇");
+        let b1 = $(".time-end").val();
+        $(".time-start").val(b1);
     }
     else{
         $(".rentTime").html("走期一共"+podcastTime+"個月");
         $(".staging").html("每個月攤提租金為"+staging+"元");
-        for(var i = 1;i<=35;i++){
-            let timeY = parstime.getFullYear();
-            let timeM = parstime.getMonth()+i;
-            let timeD = parstime.getDate();
+        for(var i = 0;i<35;i++){
+            let parstime = new Date(Date.parse(startDt));
+            var nextTime =new Date(parstime.setMonth(parstime.getMonth()+(i+1)));
+            console.log("當月是："+nextTime);
+            let timeY = nextTime.getFullYear();
+            let timeM = nextTime.getMonth();
+            let timeD = nextTime.getDate();
             let totlePrice = staging+staging*i;
-            console.log("i="+i+"，timeM="+timeM);
-            dataTitle+="<tr><th>"+i+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+            if(timeM==0){
+                timeM=timeM+12;
+                dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+            }
+            else{
+                dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+            }
+            
             $('.bbb').html(dataTitle);
         }
+    }
+}
+function checkTime(){
+    let a1 = $(".time-start").val();
+    let a2 = $(".time-end").val();
+    let startDtTemp = a1.split("-");
+    let endDtTemp = a2.split("-");
+    let time1 = new Date(startDtTemp[0],startDtTemp[1],startDtTemp[2]);
+    let time2 = new Date(endDtTemp[0],endDtTemp[1],endDtTemp[2]);
+   
+    if(time2.getTime() < time1.getTime()){
+        alert("起始日期不能晚於結束日期，須重新選擇");
+        let tempData = new Date(time2);
+        let tempY = tempData.getFullYear();
+        let tempM = tempData.getMonth();
+        let tempD = tempData.getDate();
+        tmp = tempY+"-"+tempM+"-"+tempD;
+        $(".time-start").val(tmp);
+    }
+    else{
+        rentTime();
     }
 }
 
