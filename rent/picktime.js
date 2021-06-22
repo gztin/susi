@@ -174,20 +174,19 @@ function rentTime(timeStart,timeEnd){
                 totlePrice = totlePrice-staging;
             }
             else{
-                dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"/"+timeM+"/"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+                dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'/'+timeM+'/'+timeD+'</td><td>'+staging+'</td><td>'+totlePrice+'</td></tr>';
                 $('.rentData').html(dataTitle);
             }
-            dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"/"+timeM+"/"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'/'+timeM+'/'+timeD+'</td><td>'+staging+'</td><td>'+totlePrice+'</td></tr>';
             $('.rentData').html(dataTitle);
-
         }
     }
 }
 function checkTime(){
     let a1 = $(".time-start").val();
     let a2 = $(".time-end").val();
-    let startDtTemp = a1.split("-");
-    let endDtTemp = a2.split("-");
+    let startDtTemp = a1.split("/");
+    let endDtTemp = a2.split("/");
     let time1 = new Date(startDtTemp[0],startDtTemp[1],startDtTemp[2]);
     let time2 = new Date(endDtTemp[0],endDtTemp[1],endDtTemp[2]);
    
