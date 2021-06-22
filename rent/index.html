@@ -18,7 +18,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">設定租金</label>
-                    <input type="text" class="form-control price"  placeholder="0">
+                    <input type="text" class="form-control price"  placeholder="請填寫租金">
                 </div>
                 <div class="mb-3 block-start">
                     <label for="exampleFormControlInput1" class="form-label">起始日期</label>
@@ -29,6 +29,25 @@
                     <input type="text" class="form-control time-end" readonly="readonly">
                 </div>
                 <span class="rentTime"></span>
+                <span class="staging"></span>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary count" type="button">計算租金</button>
+                </div>
+                <div class="data">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">期數</th>
+                                <th scope="col">月份</th>
+                                <th scope="col">當月租金</th>
+                                <th scope="col">總額</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bbb">
+                            
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>

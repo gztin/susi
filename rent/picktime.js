@@ -106,6 +106,7 @@ $(document).on("click", ".pick-start > .block > #d-list > li", function () {
     $(".timeData").html("");
     let year = $("#title-year").text();
     let month = $("#title-month").text();
+    
     let day = $(this).text();
     let blockStart = year + "-" + month + "-" + day;
     $(".time-start").val(blockStart);
@@ -131,22 +132,19 @@ $(document).on("click", ".pick-end > .block > #d-list > li", function () {
 // 算走期以及租金
 function rentTime(timeStart,timeEnd){
     var startDt = $(".time-start").val();
+    let parstime = new Date(Date.parse(startDt));
+    console.log("起始日期是"+parstime);
     var endDt = $(".time-end").val();
     var diff = new Date(Date.parse(endDt) - Date.parse(startDt));
     var monthTime = (((diff / 1000 / 60 / 60 / 24) + 1)/30);
     
-    let data2 = new Date();
-    let theYear2 = data1.getFullYear();
-    let theMonth2 = data1.getMonth() + 1;
-    let nextMonth2 = data1.getMonth() + 2;
-    var theDay2 = data2.getDate();
-
-    let timeStart2 = theYear2 + "-" + theMonth2 + "-" + theDay2;
-    let timeEnd2 = theYear2 + "-" + nextMonth2 + "-" + theDay2;
-
+    let dataTitle = '';
+    let price = $('.price').val();
+    let staging = Math.round(price*1.033/24);
     podcastTime = Math.round(monthTime);
     if(podcastTime ==0){
         $(".rentTime").html("最小走期為1個月，所以一共是"+parseInt(podcastTime+1)+"個月");
+        countPrice();
     }
     else if(podcastTime < 0){
         alert("日期有錯誤，須重新選擇");
@@ -155,5 +153,23 @@ function rentTime(timeStart,timeEnd){
     }
     else{
         $(".rentTime").html("走期一共"+podcastTime+"個月");
+        $(".staging").html("每個月攤提租金為"+staging+"元");
+        for(var i = 1;i<=35;i++){
+            let timeY = parstime.getFullYear();
+            let timeM = parstime.getMonth()+i;
+            let timeD = parstime.getDate();
+            let totlePrice = staging+staging*i;
+            console.log("i="+i+"，timeM="+timeM);
+            dataTitle+="<tr><th>"+i+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+            $('.bbb').html(dataTitle);
+        }
     }
 }
+
+$('.count').click(function(){
+    if($('.price').val()==""){
+        alert("請填寫租金金額");
+    }else{
+        rentTime();
+    }
+});

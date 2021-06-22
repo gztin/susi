@@ -8,4 +8,3 @@ $(".time-end").click(function(){
     $("#calender01").addClass("pick-end").removeClass("pick-start");
     $(".calendarView").show();
 });
-
