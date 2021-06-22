@@ -192,12 +192,12 @@ function checkTime(){
     let a2 = $(".time-end").val();
     let startDtTemp = a1.split("/");
     let endDtTemp = a2.split("/");
-    let time1 = new Date((startDtTemp[0],startDtTemp[1],startDtTemp[2]).replace(/-/g,"/"));
-    let time2 = new Date(endDtTemp[0],endDtTemp[1],endDtTemp[2].replace(/-/g,"/"));
+    let time1 = new Date((startDtTemp[0],startDtTemp[1],startDtTemp[2]));
+    let time2 = new Date(endDtTemp[0],endDtTemp[1],endDtTemp[2]);
    
     if(time2.getTime() < time1.getTime()){
         alert("起始日期不能晚於結束日期，須重新選擇");
-        let tempData = new Date(time2);
+        let tempData = new Date(time2.replace(/-/g,"/"));
         let tempY = tempData.getFullYear();
         let tempM = tempData.getMonth();
         let tempD = tempData.getDate();
