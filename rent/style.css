@@ -176,6 +176,10 @@
 ol,ul{
     padding-left:0px;
 }
+.form-title{
+    padding-top: 50px;
+    text-align: center;
+}
 @media screen and (max-width: 768px) {
     
 }
