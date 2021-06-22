@@ -141,6 +141,7 @@ function rentTime(timeStart,timeEnd){
     let dataTitle = '';
     let price = $('.price').val();
     let staging = Math.round(price*1.033/24);
+    let totlePrice = 0;
     podcastTime = Math.round(monthTime);
 
     if(podcastTime <= 0){
@@ -154,18 +155,30 @@ function rentTime(timeStart,timeEnd){
         for(var i = 0;i<35;i++){
             let parstime = new Date(Date.parse(startDt));
             var nextTime =new Date(parstime.setMonth(parstime.getMonth()+(i+1)));
-            console.log("當月是："+nextTime);
             let timeY = nextTime.getFullYear();
             let timeM = nextTime.getMonth();
             let timeD = nextTime.getDate();
-            let totlePrice = staging+staging*i;
-            if(timeM==0){
-                timeM=timeM+12;
+            if(i<12){
+                totlePrice = staging+staging*i;
+                dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+            }
+            // while(timeM==0){
+            //     timeM=timeM+12;
+            //     dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+            // }
+            else if((11<i) && (i<22)){
+                totlePrice = totlePrice;
+                dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+            }else if((23<i) && (i<35)){
+                console.log("staging目前的值是："+staging+"而i目前的值是："+i);
+                console.log("totlePrice目前的值是："+totlePrice);
+                totlePrice = totlePrice-staging;
                 dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
             }
             else{
                 dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
             }
+            
             
             $('.bbb').html(dataTitle);
         }
