@@ -142,7 +142,7 @@ function rentTime(timeStart,timeEnd){
     let price = $('.price').val();
     let staging = Math.round(price*1.033/24);
     let totlePrice = 0;
-    podcastTime = Math.round(monthTime);
+    podcastTime = parsInt(Math.round(monthTime));
 
     if(podcastTime <= 0){
         alert("走期不能小於一個月，請重新選擇");
