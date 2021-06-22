@@ -157,30 +157,29 @@ function rentTime(timeStart,timeEnd){
             var nextTime =new Date(parstime.setMonth(parstime.getMonth()+(i+1)));
             let timeY = nextTime.getFullYear();
             let timeM = nextTime.getMonth();
+            console.log("timeM目前的值是"+timeM);
             let timeD = nextTime.getDate();
+            if((timeM==0) && ((i ==6)||(i ==18)||(i ==30))){
+                timeM=12;
+                console.log("目前的日期是"+nextTime);
+            }
             if(i<12){
                 totlePrice = staging+staging*i;
-                dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
             }
-            // while(timeM==0){
-            //     timeM=timeM+12;
-            //     dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
-            // }
             else if((11<i) && (i<22)){
                 totlePrice = totlePrice;
-                dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
             }else if((23<i) && (i<35)){
-                console.log("staging目前的值是："+staging+"而i目前的值是："+i);
-                console.log("totlePrice目前的值是："+totlePrice);
+                // console.log("staging目前的值是："+staging+"而i目前的值是："+i);
+                // console.log("totlePrice目前的值是："+totlePrice);
                 totlePrice = totlePrice-staging;
-                dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
             }
             else{
                 dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+                $('.rentData').html(dataTitle);
             }
-            
-            
-            $('.bbb').html(dataTitle);
+            dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+            $('.rentData').html(dataTitle);
+
         }
     }
 }
