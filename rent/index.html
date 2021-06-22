@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>租金試算</title>
+</head>
+<body>
+    
+    <section>
+        <div class="container-fluid">
+            <div class="row rentBlock">
+                <div class="mb-3 form-title">
+                    <h2>租金試算</h2>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">設定租金</label>
+                    <input type="text" class="form-control" placeholder="0">
+                </div>
+                <div class="mb-3 block-start">
+                    <label for="exampleFormControlInput1" class="form-label">起始日期</label>
+                    <input type="text" class="form-control time-start">
+                </div>
+                <div class="mb-3 block-end">
+                    <label for="exampleFormControlInput1" class="form-label">結束日期</label>
+                    <input type="text" class="form-control time-end" >
+                </div>
+                <span class="rentTime"></span>
+            </div>
+        </div>
+    </section>
+    <div class="calendarView">
+        <div id="calender01">
+            <div id="timeBlock" class="block">
+                <div id="prev" class="headInf">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="timeInf">
+                    <div id="title-year" class="block"></div>
+                    <span>-</span>
+                    <div id="title-month" class="headInf"></div>
+                </div>
+                <div id="next" class="headInf">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            <div class="block">
+                <ul class="w-list">
+                    <li>日</li>
+                    <li>一</li>
+                    <li>二</li>
+                    <li>三</li>
+                    <li>四</li>
+                    <li>五</li>
+                    <li>六</li>
+                </ul>
+            </div>
+            <div class="block">
+                <ul id="d-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div id="calender02">
+        <div id="timeBlock2" class="block">
+            <div id="prev2" class="headInf">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="timeInf">
+                <div id="title-year2" class="block"></div>
+                <span>-</span>
+                <div id="title-month2" class="headInf"></div>
+            </div>
+            <div id="next2" class="headInf">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+        <div class="block">
+            <ul class="w-list">
+                <li>日</li>
+                <li>一</li>
+                <li>二</li>
+                <li>三</li>
+                <li>四</li>
+                <li>五</li>
+                <li>六</li>
+            </ul>
+        </div>
+        <div class="block">
+            <ul id="d-list02"></ul>
+        </div>
+    </div> -->
+    
+</body>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="picktime.js"></script>
+    <script src="opendate.js"></script>
+</html>
