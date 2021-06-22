@@ -161,7 +161,7 @@ function rentTime(timeStart,timeEnd){
             let timeD = nextTime.getDate();
             if((timeM==0) && ((i ==6)||(i ==18)||(i ==30))){
                 timeM=12;
-                console.log("目前的日期是"+nextTime);
+                // console.log("目前的日期是"+nextTime);
             }
             if(i<12){
                 totlePrice = staging+staging*i;
@@ -174,11 +174,16 @@ function rentTime(timeStart,timeEnd){
                 totlePrice = totlePrice-staging;
             }
             else{
-                dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'/'+timeM+'/'+timeD+'</td><td>'+staging+'</td><td>'+totlePrice+'</td></tr>';
+                dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td>'+staging+'</td><td>'+totlePrice+'</td></tr>';
                 $('.rentData').html(dataTitle);
+                let ccc = $('.time').html();
+                ccc = 
+                console.log(ccc);
             }
-            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'/'+timeM+'/'+timeD+'</td><td>'+staging+'</td><td>'+totlePrice+'</td></tr>';
+            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td>'+staging+'</td><td>'+totlePrice+'</td></tr>';
             $('.rentData').html(dataTitle);
+            let ccc = $('.time').html();
+            console.log(ccc);
         }
     }
 }
@@ -187,8 +192,8 @@ function checkTime(){
     let a2 = $(".time-end").val();
     let startDtTemp = a1.split("/");
     let endDtTemp = a2.split("/");
-    let time1 = new Date(startDtTemp[0],startDtTemp[1],startDtTemp[2]);
-    let time2 = new Date(endDtTemp[0],endDtTemp[1],endDtTemp[2]);
+    let time1 = new Date((startDtTemp[0],startDtTemp[1],startDtTemp[2]).replace(/-/g,"/"));
+    let time2 = new Date(endDtTemp[0],endDtTemp[1],endDtTemp[2].replace(/-/g,"/"));
    
     if(time2.getTime() < time1.getTime()){
         alert("起始日期不能晚於結束日期，須重新選擇");
