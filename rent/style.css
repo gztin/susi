@@ -172,6 +172,21 @@
 .table{
     margin-top:15px;
     border: 1px solid #d4d4d4;
+    display: none;
+}
+thead{
+    background:#252422;
+    color:#fff;
+}
+.gototop{
+    padding:20px;
+    background:rgb(0,0,0,0.6);
+    z-index: 9999;
+    position: fixed;
+    bottom: 10%;
+}
+.rentData > tr:nth-child(even) {
+    background: #f3f3f3;
 }
 ol,ul{
     padding-left:0px;

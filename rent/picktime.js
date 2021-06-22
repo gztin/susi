@@ -210,5 +210,6 @@ $('.count').click(function(){
         alert("請填寫租金金額");
     }else{
         rentTime();
+        $('.table').show();
     }
 });
