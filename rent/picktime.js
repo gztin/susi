@@ -122,10 +122,10 @@ $(document).on("click", ".pick-end > .block > #d-list > li", function () {
     let year = $("#title-year").text();
     let month = $("#title-month").text();
     let day = $(this).text();
-    let blockEnd = year + "-" + month + "-" + day;
+    let blockEnd = year + "/" + month + "/" + day;
 
     $(".time-end").val(blockEnd);
-    console.log("選取的結束日期是" + year + "-" + month + "-" + day);
+    console.log("選取的結束日期是" + year + "/" + month + "/" + day);
     $(this).addClass('toDay').siblings().removeClass('toDay');
     $(".calendarView").hide();
     checkTime();
@@ -174,10 +174,10 @@ function rentTime(timeStart,timeEnd){
                 totlePrice = totlePrice-staging;
             }
             else{
-                dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+                dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"/"+timeM+"/"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
                 $('.rentData').html(dataTitle);
             }
-            dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"-"+timeM+"-"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
+            dataTitle+="<tr><th>"+(i+1)+"</th><td>"+timeY+"/"+timeM+"/"+timeD+"</td><td>"+staging+"</td><td>"+totlePrice+"</td></tr>";
             $('.rentData').html(dataTitle);
 
         }
