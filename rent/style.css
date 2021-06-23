@@ -207,7 +207,8 @@ ol,ul{
     margin-top:30px;
 }
 .hint-price{
-    display: none;;
+    display: none;
+    height:35px;
 }
 .block-start{
     margin-top:30px;
