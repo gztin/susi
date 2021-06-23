@@ -134,8 +134,11 @@ $(document).on("click", ".pick-end > .block > #d-list > li", function () {
 function rentTime(timeStart,timeEnd){
     var startDt = $(".time-start").val();
     var endDt = $(".time-end").val();
-    var diff = new Date(Date.parse(endDt) - Date.parse(startDt));
+    // var diff = new Date(Date.parse(endDt) - Date.parse(startDt));
+    var diff = Date.parse(endDt) - Date.parse(startDt);
     var monthTime = (((diff / 1000 / 60 / 60 / 24) + 1)/30);
+    
+    console.log("diff試試看："+diff);
     let dataTitle = '';
     let price = $('.price').val();
     let staging = Math.round(price*1.033/24);
