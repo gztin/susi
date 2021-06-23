@@ -10,17 +10,34 @@ $( "#datepicker2" ).datepicker({
 });
 printDay();
 
-$( "#datepicker1" ).click(function(){
+
+$(".count").click(function(){
+    // 確認走期
     let time1 = $(".time-start").val();
     let time2 = $(".time-end").val();
-    checkTime(time1,time2);
-});
-$( "#datepicker2" ).click(function(){
-    let time1 = $(".time-start").val();
-    let time2 = $(".time-end").val();
-    checkTime(time1,time2);
+    
+    var begintime_ms = Date.parse(new Date(time1.replace(/-/g, "/"))); //begintime 為開始時間
+    var endtime_ms = Date.parse(new Date(time2.replace(/-/g, "/")));   // endtime 為結束時間
+    
+    let duringTime = endtime_ms - begintime_ms;
+    let postTime = (((duringTime / 1000 / 60 / 60 / 24) + 1)/30);
+    let total = parseInt(Math.round(postTime));
+    $(".rentTime").html("走期一共"+total+"個月");
+
+    // 計算租金
+    countPrice(total);
 });
 
+function countPrice(){
+
+    // 規則:
+    // 分期固定兩年
+    // 合約走期看 total
+    let price = $('.price').val();
+    let staging = Math.round(price*1.033/24);
+
+    
+}
 
 function printDay(){
     let day = new Date();
@@ -32,13 +49,4 @@ function printDay(){
     let end = timeY+'/'+nextM+'/'+timeD;
     $(".time-start").val(start);
     $(".time-end").val(end);
-}
-function checkTime(time1,time2){
-   
-    var begintime_ms = Date.parse(new Date(time1.replace(/-/g, "/"))); //begintime 為開始時間
-    var endtime_ms = Date.parse(new Date(time2.replace(/-/g, "/")));   // endtime 為結束時間
-
-    let duringTime = endtime_ms - begintime_ms;
-    let postTime = (((duringTime / 1000 / 60 / 60 / 24) + 1)/30);
-    $(".rentTime").html("計算後走期一共"+postTime+"個月");
 }
