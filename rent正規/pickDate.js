@@ -27,8 +27,6 @@ $(".count").click(function(){
     // 但是計算上會被視同為12個月，因為是在該月的同一天。
     let total = Math.ceil(postTime);
     $(".rentTime").html("走期共"+total+"個月");
-    $(".rentTime").show();
-    
     // 計算租金
     countPrice(total);
     $('.table').show();
@@ -47,22 +45,10 @@ let countPrice = function (total){
     
     let price =parseInt($('.price').val()); // 月租金
     let tempBill = 0;
-    let tempDeal = 0;
-    let compound = 24;
+    let billNumber = 24;
     let staging = Math.round(price*1.033/24); // 每個月分期款
     let priceTotal = price * total; // 總費用,未加上利率
-    let dealTotal = 0; // 總費用,未加上利率
-    let totalTime = 0;
-    if(total >= compound){
-        totalTime = compound + 11;
-        console.log("合約大於等於兩年總共有："+totalTime);
-    }else{
-        totalTime = compound + total-1;
-        console.log("合約小於兩年，總共有："+totalTime);
-    }
-    
-    $(".hint-price").show();
-    $(".price-data1").html(priceTotal);
+    let totalTime = billNumber + total-1;
     
     // 費用總筆數
     let billData = new Array(totalTime);
@@ -76,34 +62,43 @@ let countPrice = function (total){
     // 第3筆是第1個billDetail的第3筆資料、第2個billDetail的第2筆資料、第3個billDetail的第1筆資料
 
     for(let count=0;count< totalTime;count++){
-        // 假設兩年約，total=24
-        if( (count < 12)){
-            tempBill = staging + staging*count;
-            billData[count] = tempBill;
-        }else if((count >= 12) && (count<=23)){        
-            // 第12月的時候，剛好滿一年
-            // 不需要繳交月費利息
-            billData[count] = tempBill+3000;
-
-        }else if((count >23) && ((tempBill - staging)>0)){
-            
-            // 第24個月的時候，第一個月的費用剛好繳完
-            //後面月份需要繳交的費用每次繳交都會少分期的月租費
-            tempBill = tempBill - staging;
-            billData[count] = tempBill;
-            
+        if(total < 13){
+            // 非兩年約
+            if( (count < total)){
+                tempBill = staging + staging*count;
+                billData[count] = tempBill;
+            }
+            else if((count>=total) && (count < 24)){
+                billData[count] = tempBill;
+            }else if(count > 23){
+                tempBill = tempBill - staging;
+                billData[count] = tempBill;
+            }else{
+                billData[count] = tempBill;
+            }
+            console.log("billData"+count+"陣列資料如下："+tempBill);
         }else{
-            billData[count] = tempBill;
+            // 兩年約
+            // 需注意第二年沒有計算複利
+            if( (count < 12)){
+                tempBill = staging + staging*count;
+                billData[count] = tempBill;
+            }
+            else if((count>=12) && (count < 24)){
+                billData[count] = parseInt(tempBill+3000);
+            }else if((count >= 24)&&(count < 35)){
+                tempBill = tempBill - staging;
+                billData[count] = tempBill;
+            }else{
+                billData[count] = tempBill;
+            }
+            console.log("billData"+count+"陣列資料如下："+tempBill);
         }
-        console.log("第 "+(count+1)+" 月付款資料如下："+tempBill);
     }
-    for(let n=0;n<totalTime;n++){
-        tempDeal = tempDeal + parseInt(billData[n]);
-    }
-    dealTotal = tempDeal;
-    $(".price-data2").html(dealTotal);
     // console.log("billData陣列資料如下："+billData);
-    // console.log("共有："+totalTime+"筆資料");
+    console.log("共有："+totalTime+"筆資料");
+
+
 
     // 列印html
     let dataTitle = '';
@@ -125,7 +120,13 @@ let countPrice = function (total){
             dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'/'+timeM+'/'+timeD+'</td><td class="data-money">'+billData[i]+'</td></tr>';
             $('.rentData').html(dataTitle);
         }
+
+        
     }
+
+    // console.log("總金額是："+ priceTotal);
+    
+    // console.log("月租是：" + staging);
 }
 
 function printDay(){

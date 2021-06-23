@@ -168,11 +168,6 @@
 
 .rentTime,.staging{
     padding-bottom: 10px;
-    display: none;
-}
-.hint{
-    padding-bottom: 20px;
-    display: none;
 }
 .table{
     margin-top:15px;
@@ -209,7 +204,6 @@ ol,ul{
 .block-start{
     margin-top:30px;
 }
-
 @media screen and (max-width: 768px) {
     
 }
