@@ -164,32 +164,32 @@ function rentTime(){
             let timeY = nextTime.getFullYear();
             let timeM = nextTime.getMonth();
             console.log("timeM目前的值是"+timeM);
-            // let timeD = nextTime.getDate();
-            // if((timeM==0) && ((i ==6)||(i ==18)||(i ==30))){
-            //     timeM=12;
-            //     // console.log("目前的日期是"+nextTime);
-            // }
-            // if(i<12){
-            //     totlePrice = staging+staging*i;
-            // }
-            // else if((11<i) && (i<22)){
-            //     totlePrice = totlePrice;
-            // }else if((23<i) && (i<35)){
-            //     // console.log("staging目前的值是："+staging+"而i目前的值是："+i);
-            //     // console.log("totlePrice目前的值是："+totlePrice);
-            //     totlePrice = totlePrice-staging;
-            // }
-            // else{
-            //     dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td class="data-money">'+staging+'</td></tr>';
-            //     $('.rentData').html(dataTitle);
-            //     let ccc = $('.time').html();
-            //     ccc = 
-            //     console.log(ccc);
-            // }
-            // dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td class="data-money">'+staging+'</td></tr>';
-            // $('.rentData').html(dataTitle);
-            // let ccc = $('.time').html();
-            // console.log(ccc);
+            let timeD = nextTime.getDate();
+            if((timeM==0) && ((i ==6)||(i ==18)||(i ==30))){
+                timeM=12;
+                // console.log("目前的日期是"+nextTime);
+            }
+            if(i<12){
+                totlePrice = staging+staging*i;
+            }
+            else if((11<i) && (i<22)){
+                totlePrice = totlePrice;
+            }else if((23<i) && (i<35)){
+                // console.log("staging目前的值是："+staging+"而i目前的值是："+i);
+                // console.log("totlePrice目前的值是："+totlePrice);
+                totlePrice = totlePrice-staging;
+            }
+            else{
+                dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td class="data-money">'+staging+'</td></tr>';
+                $('.rentData').html(dataTitle);
+                let ccc = $('.time').html();
+                ccc = 
+                console.log(ccc);
+            }
+            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td class="data-money">'+staging+'</td></tr>';
+            $('.rentData').html(dataTitle);
+            let ccc = $('.time').html();
+            console.log(ccc);
         }
     }
 }
