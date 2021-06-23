@@ -10,28 +10,47 @@ $( "#datepicker2" ).datepicker({
 });
 printDay();
 
+// 檢查欄位是否為數字
+function checkInput() { 
+    var a=document.getElementById('zhi').value;
+	if(isNaN(a)==true)
+	{
+		alert('不是數字哦');
+		document.getElementById('zhi').value='';
+	}
+}
 
 $(".count").click(function(){
     // 確認走期
     let time1 = $(".time-start").val();
     let time2 = $(".time-end").val();
+    let detectPrice = $(".price").val();
     
     var begintime_ms = Date.parse(new Date(time1.replace(/-/g, "/"))); //begintime 為開始時間
     var endtime_ms = Date.parse(new Date(time2.replace(/-/g, "/")));   // endtime 為結束時間
     
     let duringTime = endtime_ms - begintime_ms;
-    let postTime = (((duringTime / 1000 / 60 / 60 / 24))/30);
+    if(endtime_ms < begintime_ms){
+        alert("提醒，日期設定錯誤");
+        $(".time-start").val(time2);
+    }else if((detectPrice=='') || (detectPrice <=0)){
+        alert("提醒，租金設定不符合格式");
+    }else{
+        let postTime = (((duringTime / 1000 / 60 / 60 / 24))/30);
+        // 這邊直接取最大整數
+        // 以範例的2021/06/15 - 2022/05/15，相差了11.3333個月
+        // 但是計算上會被視同為12個月，因為是在該月的同一天。
+        let total = Math.ceil(postTime);
+        $(".rentTime").html("走期共"+total+"個月");
+        $(".rentTime").show();
+        
+        // 計算租金
+        countPrice(total);
+        $('.table').show();
+    }
+
     
-    // 這邊直接取最大整數
-    // 以範例的2021/06/15 - 2022/05/15，相差了11.3333個月
-    // 但是計算上會被視同為12個月，因為是在該月的同一天。
-    let total = Math.ceil(postTime);
-    $(".rentTime").html("走期共"+total+"個月");
-    $(".rentTime").show();
     
-    // 計算租金
-    countPrice(total);
-    $('.table').show();
 });
 
 let countPrice = function (total){
