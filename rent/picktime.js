@@ -46,35 +46,35 @@ function checkDays(year, month) {
         return (monthNormal[month - 1]);
     }
 }
-function printDays() {
-    var dayInf = '';
-    var dayclass;
-    var daysTotal = checkDays(theYear, theMonth);
-    var firstday = findFirstDay(theYear, theMonth);
-    var emptyDay = document.getElementById('d-list');
-    for (var empty1 = 1; empty1 <= firstday; empty1++) {
-        dayInf += "<li></li>";
-        emptyDay.innerHTML = dayInf;
-    }
-    for (var days = 1; days <= daysTotal; days++) {
-        // 過去時間
-        if ((theYear == data1.getFullYear() && theMonth < data1.getMonth() + 1) || (days < theDay && theYear == data1.getFullYear() && theMonth == data1.getMonth() + 1) || (theYear < data1.getFullYear())) {
-            dayClass = 'class="passDay"'
-        } else if (days == theDay && theYear == data1.getFullYear() && theMonth == data1.getMonth() + 1) {
-            dayClass = 'class="toDay"'
-        } else {
-            dayClass = 'class="future"'
-        }
-        dayInf += "<li" + ' ' + dayClass + ">" + "<a>" + days + "</a>" + "</li>";
-        emptyDay.innerHTML = dayInf;
-    }
-    var empty2 = 42 - firstday - daysTotal;
-    for (var last = 1; last <= empty2; last++) {
-        dayInf += "<li></li>";
-        emptyDay.innerHTML = dayInf;
-    }
-}
-printDays();
+// function printDays() {
+//     var dayInf = '';
+//     var dayclass;
+//     var daysTotal = checkDays(theYear, theMonth);
+//     var firstday = findFirstDay(theYear, theMonth);
+//     var emptyDay = document.getElementById('d-list');
+//     for (var empty1 = 1; empty1 <= firstday; empty1++) {
+//         dayInf += "<li></li>";
+//         emptyDay.innerHTML = dayInf;
+//     }
+//     for (var days = 1; days <= daysTotal; days++) {
+//         // 過去時間
+//         if ((theYear == data1.getFullYear() && theMonth < data1.getMonth() + 1) || (days < theDay && theYear == data1.getFullYear() && theMonth == data1.getMonth() + 1) || (theYear < data1.getFullYear())) {
+//             dayClass = 'class="passDay"'
+//         } else if (days == theDay && theYear == data1.getFullYear() && theMonth == data1.getMonth() + 1) {
+//             dayClass = 'class="toDay"'
+//         } else {
+//             dayClass = 'class="future"'
+//         }
+//         dayInf += "<li" + ' ' + dayClass + ">" + "<a>" + days + "</a>" + "</li>";
+//         emptyDay.innerHTML = dayInf;
+//     }
+//     var empty2 = 42 - firstday - daysTotal;
+//     for (var last = 1; last <= empty2; last++) {
+//         dayInf += "<li></li>";
+//         emptyDay.innerHTML = dayInf;
+//     }
+// }
+// printDays();
 
 $('#prev').click(function () {
     theMonth = theMonth - 1;
@@ -117,6 +117,7 @@ $(document).on("click", ".pick-start > .block > #d-list > li", function () {
     $(this).addClass('toDay').siblings().removeClass('toDay');
     $(".calendarView").hide();
     // checkTime();
+    rentTime();
 });
 
 // 選取結束日期
@@ -130,11 +131,12 @@ $(document).on("click", ".pick-end > .block > #d-list > li", function () {
     console.log("選取的結束日期是" + year + "/" + month + "/" + day);
     $(this).addClass('toDay').siblings().removeClass('toDay');
     $(".calendarView").hide();
+    rentTime();
     // checkTime();
 });
 
 // 算走期以及租金
-function rentTime(timeStart,timeEnd){
+function rentTime(){
     var startDt = $(".time-start").val();
     var endDt = $(".time-end").val();
     // var diff = new Date(Date.parse(endDt) - Date.parse(startDt));
@@ -162,32 +164,32 @@ function rentTime(timeStart,timeEnd){
             let timeY = nextTime.getFullYear();
             let timeM = nextTime.getMonth();
             console.log("timeM目前的值是"+timeM);
-            let timeD = nextTime.getDate();
-            if((timeM==0) && ((i ==6)||(i ==18)||(i ==30))){
-                timeM=12;
-                // console.log("目前的日期是"+nextTime);
-            }
-            if(i<12){
-                totlePrice = staging+staging*i;
-            }
-            else if((11<i) && (i<22)){
-                totlePrice = totlePrice;
-            }else if((23<i) && (i<35)){
-                // console.log("staging目前的值是："+staging+"而i目前的值是："+i);
-                // console.log("totlePrice目前的值是："+totlePrice);
-                totlePrice = totlePrice-staging;
-            }
-            else{
-                dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td class="data-money">'+staging+'</td><td>'+totlePrice+'</td></tr>';
-                $('.rentData').html(dataTitle);
-                let ccc = $('.time').html();
-                ccc = 
-                console.log(ccc);
-            }
-            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td class="data-money">'+staging+'</td><td>'+totlePrice+'</td></tr>';
-            $('.rentData').html(dataTitle);
-            let ccc = $('.time').html();
-            console.log(ccc);
+            // let timeD = nextTime.getDate();
+            // if((timeM==0) && ((i ==6)||(i ==18)||(i ==30))){
+            //     timeM=12;
+            //     // console.log("目前的日期是"+nextTime);
+            // }
+            // if(i<12){
+            //     totlePrice = staging+staging*i;
+            // }
+            // else if((11<i) && (i<22)){
+            //     totlePrice = totlePrice;
+            // }else if((23<i) && (i<35)){
+            //     // console.log("staging目前的值是："+staging+"而i目前的值是："+i);
+            //     // console.log("totlePrice目前的值是："+totlePrice);
+            //     totlePrice = totlePrice-staging;
+            // }
+            // else{
+            //     dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td class="data-money">'+staging+'</td></tr>';
+            //     $('.rentData').html(dataTitle);
+            //     let ccc = $('.time').html();
+            //     ccc = 
+            //     console.log(ccc);
+            // }
+            // dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td class="data-money">'+staging+'</td></tr>';
+            // $('.rentData').html(dataTitle);
+            // let ccc = $('.time').html();
+            // console.log(ccc);
         }
     }
 }

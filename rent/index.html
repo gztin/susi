@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="style.css?v=2">
     <title>租金試算</title>
 </head>
@@ -17,16 +18,16 @@
                     <h2>租金試算</h2>
                 </div>
                 <div class="mb-3 block-rentPrice">
-                    <label for="exampleFormControlInput1" class="form-label">租金</label>
+                    <label for="exampleFormControlInput1" class="form-label">月租金</label>
                     <input type="text" class="form-control price"  placeholder="請填寫租金">
                 </div>
                 <div class="mb-3 block-start">
                     <label for="exampleFormControlInput1" class="form-label">合約日期</label>
-                    <input type="text" class="form-control time-start" readonly="readonly">
+                    <input id="datepicker1" type="text" class="form-control time-start" readonly="readonly">
                 </div>
                 <div class="mb-3 block-end">
                     <label for="exampleFormControlInput1" class="form-label">到</label>
-                    <input type="text" class="form-control time-end" readonly="readonly">
+                    <input id="datepicker2" type="text" class="form-control time-end" readonly="readonly">
                 </div>
                 <span class="rentTime"></span>
                 <span class="staging"></span>
@@ -39,7 +40,6 @@
                             <tr>
                                 <th scope="col">期數</th>
                                 <th scope="col">月份</th>
-                                <th scope="col">月租金</th>
                                 <th scope="col">總額</th>
                             </tr>
                         </thead>
@@ -50,7 +50,8 @@
             </div>
         </div>
     </section>
-    <div class="calendarView">
+    <!-- <div class="calendarView">
+        <div id="calendar" class="block-date"></div>
         <div id="calender01">
             <div id="timeBlock" class="block">
                 <div id="prev" class="headInf">
@@ -80,7 +81,7 @@
                 <ul id="d-list"></ul>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- <div id="calender02">
         <div id="timeBlock2" class="block">
@@ -113,9 +114,9 @@
     </div> -->
     
 </body>
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-    <script src="picktime.js?v=7"></script>
-    <script src="opendate.js?v=2"></script>
+    <script src="pickDate.js?v=7"></script>
 </html>
