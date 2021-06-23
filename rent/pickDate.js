@@ -80,6 +80,7 @@ let countPrice = function (total){
         console.log("合約小於兩年，總共有："+totalTime);
     }
     
+    $('.hint').show();
     $(".hint-price").show();
     $(".price-data1").html(priceTotal);
     

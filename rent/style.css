@@ -206,6 +206,9 @@ ol,ul{
 .block-rentPrice{
     margin-top:30px;
 }
+.hint-price{
+    display: none;;
+}
 .block-start{
     margin-top:30px;
 }
