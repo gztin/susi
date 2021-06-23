@@ -113,7 +113,7 @@ $(document).on("click", ".pick-start > .block > #d-list > li", function () {
     console.log("選取的起始日期是" + year + "-" + month + "-" + day);
     $(this).addClass('toDay').siblings().removeClass('toDay');
     $(".calendarView").hide();
-    checkTime();
+    // checkTime();
     rentTime();
 });
 
@@ -128,7 +128,7 @@ $(document).on("click", ".pick-end > .block > #d-list > li", function () {
     console.log("選取的結束日期是" + year + "/" + month + "/" + day);
     $(this).addClass('toDay').siblings().removeClass('toDay');
     $(".calendarView").hide();
-    checkTime();
+    // checkTime();
     rentTime();
 });
 
@@ -174,13 +174,13 @@ function rentTime(timeStart,timeEnd){
                 totlePrice = totlePrice-staging;
             }
             else{
-                dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td>'+staging+'</td><td>'+totlePrice+'</td></tr>';
+                dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td class="data-money">'+staging+'</td><td>'+totlePrice+'</td></tr>';
                 $('.rentData').html(dataTitle);
                 let ccc = $('.time').html();
                 ccc = 
                 console.log(ccc);
             }
-            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td>'+staging+'</td><td>'+totlePrice+'</td></tr>';
+            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeY+'-'+timeM+'-'+timeD+'</td><td class="data-money">'+staging+'</td><td>'+totlePrice+'</td></tr>';
             $('.rentData').html(dataTitle);
             let ccc = $('.time').html();
             console.log(ccc);
@@ -196,6 +196,7 @@ function checkTime(){
     let time2 = new Date(endDtTemp[0],endDtTemp[1],endDtTemp[2]);
    
     if(time2.getTime() < time1.getTime()){
+        console.log("檢查看看"+time2.getTime());
         alert("起始日期不能晚於結束日期，須重新選擇");
         let tempData = new Date(time2.replace(/-/g,"/"));
         let tempY = tempData.getFullYear();

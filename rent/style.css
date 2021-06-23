@@ -185,6 +185,9 @@ thead{
     position: fixed;
     bottom: 10%;
 }
+.data-money{
+    text-align: center;
+}
 .rentData > tr:nth-child(even) {
     background: #f3f3f3;
 }
