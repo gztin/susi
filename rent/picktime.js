@@ -17,6 +17,9 @@ var monthNunian = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 // 預設選取今天
 let timeStart = theYear + "-" + theMonth + "-" + theDay;
 let timeEnd = theYear + "-" + nextMonth + "-" + theDay;
+timeStart.replace(/-/g,"/");
+timeEnd.replace(/-/g,"/");
+
 
 $(".time-start").val(timeStart);
 $(".time-end").val(timeEnd);
@@ -108,7 +111,7 @@ $(document).on("click", ".pick-start > .block > #d-list > li", function () {
     let month = $("#title-month").text();
     let day = $(this).text();
     let blockStart = year + "-" + month + "-" + day;
-
+    blockStart.replace(/-/g,"/");
     $(".time-start").val(blockStart);
     console.log("選取的起始日期是" + year + "-" + month + "-" + day);
     $(this).addClass('toDay').siblings().removeClass('toDay');
@@ -122,7 +125,7 @@ $(document).on("click", ".pick-end > .block > #d-list > li", function () {
     let month = $("#title-month").text();
     let day = $(this).text();
     let blockEnd = year + "/" + month + "/" + day;
-
+    blockEnd.replace(/-/g,"/");
     $(".time-end").val(blockEnd);
     console.log("選取的結束日期是" + year + "/" + month + "/" + day);
     $(this).addClass('toDay').siblings().removeClass('toDay');

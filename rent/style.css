@@ -198,6 +198,12 @@ ol,ul{
     padding-top: 50px;
     text-align: center;
 }
+.block-rentPrice{
+    margin-top:30px;
+}
+.block-start{
+    margin-top:30px;
+}
 @media screen and (max-width: 768px) {
     
 }
