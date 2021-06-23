@@ -114,7 +114,6 @@ $(document).on("click", ".pick-start > .block > #d-list > li", function () {
     $(this).addClass('toDay').siblings().removeClass('toDay');
     $(".calendarView").hide();
     // checkTime();
-    rentTime();
 });
 
 // 選取結束日期
@@ -129,7 +128,6 @@ $(document).on("click", ".pick-end > .block > #d-list > li", function () {
     $(this).addClass('toDay').siblings().removeClass('toDay');
     $(".calendarView").hide();
     // checkTime();
-    rentTime();
 });
 
 // 算走期以及租金
