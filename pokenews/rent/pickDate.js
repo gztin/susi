@@ -172,6 +172,9 @@ function printDay(){
     let end = '';
     let start = '';
 
+    timeY = parseInt(timeY);
+    timeM = parseInt(timeM);
+    
     // 小於零補0
     if(timeM < 10){
         start = timeY+'/'+'0'+timeM;
