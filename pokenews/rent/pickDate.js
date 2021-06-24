@@ -66,7 +66,7 @@ let countPrice = function (periodTime){
     let dataTitle = '';
     let price =parseInt($('.price').val()); // 月租金
     let tempBill = 0;
-    let countData = 0;
+    let countData = 1;
     let tempDeal = 0;
     let compound = 24; // 目前固定分期24
     let staging = Math.round(price*1.033/24); // 每個月分期款
@@ -74,7 +74,12 @@ let countPrice = function (periodTime){
     let dealTotal = 0; // 總費用,未加上利率
     let totalTime = 0;
 
-    totalTime = compound + periodTime-1;
+    if(periodTime>12){
+        totalTime = 35;
+    }else{
+        totalTime = compound + periodTime-1;
+    }
+
     console.log("總共有："+totalTime+"筆資料");
     
     $('.hint').show();
@@ -101,14 +106,26 @@ let countPrice = function (periodTime){
         let timeY = nextTime.getFullYear();
         let timeM = nextTime.getMonth();
 
-        if(countData < periodTime){
-            tempBill = staging + staging*countData;
+        if((countData < 13)&&(countData < periodTime)){
+
+            tempBill = staging*countData;
+            billData[n] = tempBill;
             countData++;
+        }else if((n>11) && ( n < periodTime)){
+            
+            // 大於一年的時候，就不用算複利了
+            // 僅需支付月租
+            tempBill = tempBill + price;
+            billData[n] = tempBill;
+            tempBill = tempBill - price;
+            
         }else if((n>=24)){
             tempBill = tempBill - staging;
             console.log("第 "+(n+1)+" 月付款資料如下："+tempBill);
+            billData[n] = tempBill;
+        }else{
+            billData[n] = tempBill;
         }
-        billData[n] = tempBill;
         if(timeM==0){
             timeM=12;
             dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+timeM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
