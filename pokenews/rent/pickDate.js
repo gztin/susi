@@ -100,12 +100,20 @@ let countPrice = function (periodTime){
     for(let n=0;n<totalTime;n++){
         // 設定表單起始時間
         let dayStart = $('.time-start').val();
-        let parstime = new Date(Date.parse(dayStart));
-        let nextTime =new Date(parstime.setMonth(parstime.getMonth()+(n+1)));
+        // let parstime = new Date(Date.parse(dayStart));
+        // let nextTime =new Date(parstime.setMonth(parstime.getMonth()+(n+1)));
         
-        let timeY = parseInt(nextTime.getFullYear());
-        let timeM = parseInt(nextTime.getMonth());
 
+
+        // let timeY = nextTime.getFullYear();
+        // let timeM = nextTime.getMonth();
+
+        let testData = dayStart.split("/");
+        
+        let infY = parseInt(testData[0]);
+        let infM = parseInt(testData[1])+(n+1);
+        
+        
         if((countData < 12)&&(countData < periodTime)){
 
             tempBill = staging + staging*countData;
@@ -138,10 +146,10 @@ let countPrice = function (periodTime){
         }
         if(timeM==0){
             timeM=12;
-            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+timeM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
+            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+infY+'/'+infM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
             $('.rentData').html(dataTitle);
         }else{
-            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+timeM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
+            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+infY+'/'+infM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
             $('.rentData').html(dataTitle);
         }
     }
