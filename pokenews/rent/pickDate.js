@@ -76,6 +76,8 @@ let countPrice = function (periodTime){
 
     if(periodTime>12){
         totalTime = 35;
+    }else if(periodTime>35){
+        totalTime = compound + periodTime-1;
     }else{
         totalTime = compound + periodTime-1;
     }
@@ -142,8 +144,12 @@ let countPrice = function (periodTime){
     for(let d=0;d<totalTime;d++){
         tempDeal = tempDeal + billData[d];
     }
-    tempDeal = tempDeal - 129;
-    $(".price-data2").html(tempDeal);
+    if(periodTime <=12){
+        tempDeal = tempDeal - 129;
+        $(".price-data2").html(tempDeal);
+    }else{
+        $(".price-data2").html(tempDeal);
+    }
 }
 
 function printDay(){
