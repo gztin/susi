@@ -67,7 +67,7 @@ let countPrice = function (periodTime){
     let dataTitle = '';
     let price =parseInt($('.price').val()); // 月租金
     let tempBill = 0;
-    let countData = 1;
+    let countData = 0;
     let tempDeal = 0;
     let compound = 24; // 目前固定分期24
     let staging = Math.round(price*1.033/24); // 每個月分期款
@@ -75,7 +75,9 @@ let countPrice = function (periodTime){
     let dealTotal = 0; // 總費用,未加上利率
     let totalTime = 0;
 
-    if(periodTime>12){
+    if(periodTime>35){
+        totalTime = periodTime;
+    }else if(periodTime>12){
         totalTime = 35;
     }else if((periodTime>12)&&(periodTime < 35)){
         totalTime = 35;
@@ -103,27 +105,31 @@ let countPrice = function (periodTime){
         let timeY = nextTime.getFullYear();
         let timeM = nextTime.getMonth();
 
-        if((countData < 13)&&(countData <= periodTime)){
+        if((countData < 12)&&(countData < periodTime)){
 
-            tempBill = staging*countData;
+            tempBill = staging + staging*countData;
             billData[n] = tempBill;
             countData++;
 
-        }else if( (n>12)&&(n<=periodTime) ){
-            if(n==24){
-                tempBill = tempBill - staging;
-                tempBill = tempBill + price;
-                billData[n] = tempBill;
-                tempBill = tempBill - price;
+        }else if( (n>=36) && ( periodTime >= 35 ) && (n < periodTime) ){
+            
+            tempBill = tempBill+price;
+            billData[n] = tempBill;
+            tempBill = tempBill-price;
 
-            }else{
-                // 滿一年之後，就不用再繳利息
-                tempBill = tempBill + price;
-                billData[n] = tempBill;
-                tempBill = tempBill - price;
-            }
+        }else if( (n>=24) && ( periodTime >= 25 ) && (n < periodTime) ){
+            
+            tempBill = tempBill - staging;
+            tempBill = tempBill+price;
+            billData[n] = tempBill;
+            tempBill = tempBill-price;
 
-        }else if(((n>=24)&&(n<=35))){
+        }else if((n<= (periodTime-1) && (n>11))){
+            tempBill = tempBill+price;
+            billData[n] = tempBill;
+            tempBill = tempBill-price;
+            
+        }else if(((n>23)&&(n<35))){
             tempBill = tempBill - staging;
             billData[n] = tempBill;
         }else{
@@ -137,7 +143,6 @@ let countPrice = function (periodTime){
             dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+timeM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
             $('.rentData').html(dataTitle);
         }
-       
     }
     // 計算優惠
     for(let d=0;d<totalTime;d++){
