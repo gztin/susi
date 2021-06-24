@@ -103,8 +103,8 @@ let countPrice = function (periodTime){
         let parstime = new Date(Date.parse(dayStart));
         let nextTime =new Date(parstime.setMonth(parstime.getMonth()+(n+1)));
         
-        let timeY = nextTime.getFullYear();
-        let timeM = nextTime.getMonth();
+        let timeY = parseInt(nextTime.getFullYear());
+        let timeM = parseInt(nextTime.getMonth());
 
         if((countData < 12)&&(countData < periodTime)){
 
