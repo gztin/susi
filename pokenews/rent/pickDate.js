@@ -147,13 +147,13 @@ let countPrice = function (periodTime){
         }
         if(timeM==0){
             timeM=12;
-            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+aaa+'</td><td class="data-money">'+billData[n]+'</td></tr>';
+            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+timeM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
             $('.rentData').html(dataTitle);
         }else if(timeM<10){
-            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+'0'+aaa+'</td><td class="data-money">'+billData[n]+'</td></tr>';
+            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+'0'+timeM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
             $('.rentData').html(dataTitle);
         }else{
-            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+aaa+'</td><td class="data-money">'+billData[n]+'</td></tr>';
+            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+timeM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
             $('.rentData').html(dataTitle);
         }
     }
