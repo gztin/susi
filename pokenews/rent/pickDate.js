@@ -125,6 +125,7 @@ let countPrice = function (periodTime){
             console.log("第 "+(n+1)+" 月付款資料如下："+tempBill);
             billData[n] = tempBill;
         }else{
+           
             billData[n] = tempBill;
         }
         if(timeM==0){
@@ -141,6 +142,7 @@ let countPrice = function (periodTime){
     for(let d=0;d<totalTime;d++){
         tempDeal = tempDeal + billData[d];
     }
+    tempDeal = tempDeal - 129;
     $(".price-data2").html(tempDeal);
 }
 
