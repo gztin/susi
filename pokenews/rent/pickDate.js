@@ -106,11 +106,12 @@ let countPrice = function (periodTime){
         let timeY = nextTime.getFullYear();
         let timeM = nextTime.getMonth();
 
-        if((countData < 13)&&(countData < periodTime)){
+        if((countData < 13)&&(countData <= periodTime)){
 
             tempBill = staging*countData;
             billData[n] = tempBill;
             countData++;
+
         }else if((n>11) && ( n < periodTime)){
             
             // 大於一年的時候，就不用算複利了
