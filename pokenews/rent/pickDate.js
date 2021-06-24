@@ -62,6 +62,7 @@ let countPrice = function (periodTime){
     // 這樣總共要還 24 + 6 - 1 個月 ( totaltime = 29 ) 
     
     // 列印html
+    // 清空
     $('.rentData').html('');
     let dataTitle = '';
     let price =parseInt($('.price').val()); // 月租金
@@ -76,8 +77,8 @@ let countPrice = function (periodTime){
 
     if(periodTime>12){
         totalTime = 35;
-    }else if(periodTime>35){
-        totalTime = compound + periodTime-1;
+    }else if((periodTime>12)&&(periodTime < 35)){
+        totalTime = 35;
     }else{
         totalTime = compound + periodTime-1;
     }
@@ -92,12 +93,6 @@ let countPrice = function (periodTime){
     let billData = new Array(totalTime);
     
     // console.log(billGroup);
-
-    // 將收集到的費用資料，依序存入陣列中
-    // 需要注意的是規則:
-    // 第1筆是第1個billDetail的第1筆資料
-    // 第2筆是第1個billDetail的第2筆資料、第2個billDetail的第1筆資料
-    // 第3筆是第1個billDetail的第3筆資料、第2個billDetail的第2筆資料、第3個billDetail的第1筆資料
 
     for(let n=0;n<totalTime;n++){
         // 設定表單起始時間
@@ -114,20 +109,24 @@ let countPrice = function (periodTime){
             billData[n] = tempBill;
             countData++;
 
-        }else if((n>11) && ( n < periodTime)){
-            
-            // 大於一年的時候，就不用算複利了
-            // 僅需支付月租
-            tempBill = tempBill + price;
-            billData[n] = tempBill;
-            tempBill = tempBill - price;
-            
-        }else if((n>=24)){
+        }else if( (n>12)&&(n<=periodTime) ){
+            if(n==24){
+                tempBill = tempBill - staging;
+                tempBill = tempBill + price;
+                billData[n] = tempBill;
+                tempBill = tempBill - price;
+
+            }else{
+                // 滿一年之後，就不用再繳利息
+                tempBill = tempBill + price;
+                billData[n] = tempBill;
+                tempBill = tempBill - price;
+            }
+
+        }else if(((n>=24)&&(n<=35))){
             tempBill = tempBill - staging;
-            console.log("第 "+(n+1)+" 月付款資料如下："+tempBill);
             billData[n] = tempBill;
         }else{
-           
             billData[n] = tempBill;
         }
         if(timeM==0){
@@ -144,12 +143,7 @@ let countPrice = function (periodTime){
     for(let d=0;d<totalTime;d++){
         tempDeal = tempDeal + billData[d];
     }
-    if(periodTime <=12){
-        tempDeal = tempDeal - 129;
-        $(".price-data2").html(tempDeal);
-    }else{
-        $(".price-data2").html(tempDeal);
-    }
+    $(".price-data2").html(tempDeal);
 }
 
 function printDay(){
