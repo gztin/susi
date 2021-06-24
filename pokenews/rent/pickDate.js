@@ -17,6 +17,7 @@ $( "#datepicker2" ).datepicker({
 printDay();
 
 // 檢查欄位是否為數字
+// onkeyup='checkInput()'
 function checkInput() { 
     var a=document.getElementById('zhi').value;
 	if(isNaN(a)==true)
