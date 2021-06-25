@@ -109,16 +109,14 @@ $(".count").click(function(){
             let priceRecord = countPrice(rent,time1,time2,printMonth);
             dealBill[i] = priceRecord;
 
-            let word = '您好嗎？';
-            let dayNow = new Date(dayStart);
-            console.log("有點不信邪："+dayNow);
+           
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${word}/${tempTime}${dayStart}</td><td class="data-money">${priceRecord}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempTime}</td><td class="data-money">${priceRecord}</td></tr>`;
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
              let newNexTime = getNextTime(tempNextTime);
-             tempTime =  new Date(newNexTime);
+             tempNextTime = convertDateForIos(newNexTime);
         }
         dataSize = dealBill.length;
         for(let coupon=0;coupon<dataSize;coupon++){
@@ -134,6 +132,14 @@ $(".count").click(function(){
         $('.table').show();
     }
 });
+
+function convertDateForIos(newNexTime) {
+    var arr = newNexTime.split(/[- :]/);
+    newNexTime = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
+    return newNexTime;
+}
+
+
 
 let countPrice = function (rent, time1, time2, printMonth) {
     var FinalPrice = 0;
