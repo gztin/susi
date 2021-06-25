@@ -108,7 +108,6 @@ $(".count").click(function(){
             dealBill[i] = priceRecord;
 
             // 列印資料
-            let bbb = "<div>'"+num1+"'</div>"
             dataTitle+="<tr><th>'"+(i+1)+"'</th><td class='time'></td><td class='data-money'>'"+priceRecord+"'</td></tr>";
             $(".time"),val(recordY);
             $('.rentData').html(dataTitle);
