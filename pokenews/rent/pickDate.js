@@ -2,14 +2,15 @@ $( "#datepicker1" ).datepicker({
     dateFormat: "yy/mm", 
     changeYear: true,
     changeMonth: true, // 月下拉選單
-    yearRange: "1990:2200",
+    yearRange: "2020:2200",
 });
 
 $( "#datepicker2" ).datepicker({
     dateFormat: "yy/mm", //修改顯示順序
     changeYear: true,
     changeMonth: true, // 月下拉選單
-    yearRange: "1990:2200",
+    yearRange: "2020:2200",
+    monthRange:""
 });
 
 
@@ -97,22 +98,34 @@ let countPrice = function (periodTime){
     
     // console.log(billGroup);
 
-    for(let n=0;n<totalTime;n++){
-        // 設定表單起始時間
-        let dayStart = $('.time-start').val();
-        
-        let parstime = new Date(Date.parse(dayStart));
-        let nextTime =new Date(parstime.setMonth(parstime.getMonth()+(n+1)));
-        let timeY = nextTime.getFullYear();
-        let timeM = nextTime.getMonth();
+    // 設定表單起始時間
+    // step.1 取得目前時間
+    let dayStart = $('.time-start').val();
+    // 將目前時間暫存到時間變數
+    let tempNextTime = dayStart;
 
-        timeY = parseInt(timeY);
-        timeM = parseInt(timeM);
+    for(let n=0;n<totalTime;n++){
+         
+        // 取得未來時間
+        let newNexTime = getNextTime(tempNextTime);
+        tempNextTime = newNexTime;
+
+        let record = tempNextTime.split("/");
+        let recordY = record[0];
+        let recordM = record[1]; 
+        // let parstime = new Date(Date.parse(dayStart));
+        // let nextTime =new Date(parstime.setMonth(parstime.getMonth()+(n+1)));
+        // let timeY = nextTime.getFullYear();
+        // let timeM = nextTime.getMonth();
+        console.log("下個月的時間是："+newNexTime);
+        console.log("下個月的時間是："+recordY+"/"+recordM);
+        // let fixY = parseInt(timeY);
+        // let fixM = parseInt(timeM);
+
+        // var timeBlock = [100];
+
         // console.log("timeM:"+timeM);
         // 待刪除
-        // let testData = dayStart.split("/");
-        // let infY = parseInt(testData[0]);
-        // let infM = parseInt(testData[1])+(n+1);
         
         
         if((countData < 12)&&(countData < periodTime)){
@@ -145,17 +158,19 @@ let countPrice = function (periodTime){
         }else{
             billData[n] = tempBill;
         }
-        if(timeM==0){
-            timeM=12;
-            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+timeM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
-            $('.rentData').html(dataTitle);
-        }else if(timeM<10){
-            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+'0'+timeM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
-            $('.rentData').html(dataTitle);
-        }else{
-            dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+timeY+'/'+timeM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
-            $('.rentData').html(dataTitle);
-        }
+        dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+recordY+'/'+recordM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
+        $('.rentData').html(dataTitle);
+        // if(recordM==0){
+        //     recordM=12;
+        //     dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+recordY+'/'+recordM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
+        //     $('.rentData').html(dataTitle);
+        // }else if(recordM<10){
+        //     dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+recordY+'/'+'0'+recordM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
+        //     $('.rentData').html(dataTitle);
+        // }else{
+        //     dataTitle+='<tr><th>'+(n+1)+'</th><td class="time">'+recordY+'/'+recordM+'</td><td class="data-money">'+billData[n]+'</td></tr>';
+        //     $('.rentData').html(dataTitle);
+        // }
     }
     // 計算優惠
     for(let d=0;d<totalTime;d++){
@@ -174,7 +189,8 @@ function printDay(){
 
     timeY = parseInt(timeY);
     timeM = parseInt(timeM);
-    
+
+
     // 小於零補0
     if(timeM < 10){
         start = timeY+'/'+'0'+timeM;
@@ -192,4 +208,50 @@ function printDay(){
     }
     $(".time-start").val(start);
     $(".time-end").val(end);
+}
+
+let getNextTime = function (dayStart){
+    let inDate = new Date(dayStart);
+    //                     1   2   3   4   5   6   7   8   9  10  11  12月
+    let daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    let strYear = inDate.getFullYear();
+    let strMonth = inDate.getMonth() + 1;
+    let strDay = inDate.getDate();
+    //一、解決閏年平年的二月份天數 //平年28天、閏年29天//能被4整除且不能被100整除的為閏年,或能被100整除且能被400整除
+    if (((strYear % 4) === 0) && ((strYear % 100) !== 0) || ((strYear % 400) === 0)) {
+        daysInMonth[2] = 29;
+    }
+    //二、解決跨年問題
+    if (strMonth + 1 === 13)
+    {
+        strYear += 1;
+        strMonth = 1;
+    }
+    else {
+        strMonth += 1;
+    }
+    //三、解決當月最後一日，例如2.28的下一個月日期是3.31；6.30下一個月日期是7.31；3.31下一個月是4.30
+    if (strMonth == 2 || strMonth == 4 || strMonth == 6 || strMonth == 9 || strMonth == 11) {
+        strDay = Math.min(strDay, daysInMonth[strMonth]);
+    }
+    else {
+        if (strDay >= 28) {
+            strDay = Math.max(strDay, daysInMonth[strMonth]);
+        }
+        else {
+            strDay = Math.min(strDay, daysInMonth[strMonth]);
+        }
+        
+    }
+
+    //四、給個位數的月、日補零
+    if (strMonth < 10)
+    {
+        strMonth = "0" + strMonth;
+    }
+    if (strDay < 10) {
+        strDay = "0" + strDay;
+    }
+    let datastr = strYear + "/" + strMonth;
+    return datastr;
 }
