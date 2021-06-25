@@ -109,10 +109,11 @@ $(".count").click(function(){
             dealBill[i] = priceRecord;
 
             let word = '您好嗎？';
+            let dddyyy = dayStart;
             let dayNow = new Date(dayStart);
             console.log("有點不信邪："+dayNow);
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${word}/${dayNow}</td><td class="data-money">${priceRecord}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${word}/${dayNow}${dayStart}</td><td class="data-money">${priceRecord}</td></tr>`;
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
