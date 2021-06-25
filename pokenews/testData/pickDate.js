@@ -80,6 +80,7 @@ $(".count").click(function(){
         $('.rentData').html('');
         let dataTitle = '';
         let dealBill =[];
+        let record =[];
 
         // 優惠資料的宣告
         let dataSize = 0;
@@ -90,7 +91,7 @@ $(".count").click(function(){
             
             // 設定目前要處理的月份
             printMonth = tempNextTime.replace("/","");
-            let record = tempNextTime.split("/");
+            record = tempNextTime.split("/");
             let recordY = record[0];
             let recordM = record[1]; 
             // console.log("下個月的時間是："+newNexTime);
