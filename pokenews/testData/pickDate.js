@@ -102,7 +102,7 @@ $(".count").click(function(){
             dealBill[i] = priceRecord;
 
             // 列印資料
-            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeStart+'/'+timeStart+'</td><td class="data-money">'+priceRecord+'</td></tr>';
+            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+recordY+'/'+recordM+'</td><td class="data-money">'+priceRecord+'</td></tr>';
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
@@ -116,7 +116,7 @@ $(".count").click(function(){
         }
         console.log("優惠價格為："+tempDeal);
         // 列印優惠費用計算結果
-        $(".price-data2").html(recordY);
+        $(".price-data2").html(tempDeal);
         $('.hint').show();
         $(".hint-price").show();
         $(".price-data1").html(priceTotal);
