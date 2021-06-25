@@ -95,8 +95,11 @@ $(".count").click(function(){
             // 設定目前要處理的月份
             printMonth = tempNextTime.replace("/","");
             record = tempNextTime.split("/");
+            record.map(String);
             let recordY = record[0];
             let recordM = record[1]; 
+
+
 
             recordY = parseInt(recordY);
             recordM = parseInt(recordM);
@@ -128,7 +131,6 @@ $(".count").click(function(){
         $(".price-data1").html(priceTotal);
         $('.table').show();
     }
-
 });
 
 let countPrice = function (rent, time1, time2, printMonth) {
