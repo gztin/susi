@@ -99,8 +99,6 @@ $(".count").click(function(){
             let recordY = record[0];
             let recordM = record[1]; 
 
-
-
             recordY = parseInt(recordY);
             recordM = parseInt(recordM);
             // console.log("下個月的時間是："+newNexTime);
@@ -111,7 +109,7 @@ $(".count").click(function(){
             dealBill[i] = priceRecord;
 
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${record[0]}${record[1]}</td><td></td><td class="data-money">${priceRecord}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${record[0]}${record[1]}</td><td class="data-money">${priceRecord}</td></tr>`;
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
