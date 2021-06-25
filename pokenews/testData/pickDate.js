@@ -35,6 +35,7 @@ $(".count").click(function(){
     
     // step.1 取得目前時間
     let dayStart = $('.time-start').val();
+    let tempTime = $('.tempTime').val();
     // 將目前時間暫存到時間變數
     let tempNextTime = dayStart;
 
@@ -113,12 +114,12 @@ $(".count").click(function(){
             let dayNow = new Date(dayStart);
             console.log("有點不信邪："+dayNow);
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${word}/${dayNow}${dayStart}</td><td class="data-money">${priceRecord}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${word}/${tempTime}${dayStart}</td><td class="data-money">${priceRecord}</td></tr>`;
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
              let newNexTime = getNextTime(tempNextTime);
-             tempNextTime = newNexTime;
+             tempTime =  new Date(newNexTime);
         }
         dataSize = dealBill.length;
         for(let coupon=0;coupon<dataSize;coupon++){

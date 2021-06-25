@@ -215,6 +215,9 @@ ol,ul{
   padding-bottom: 20px;
   display: none;
 }
+.tempTime{
+  /* display: none; */
+}
 @media screen and (max-width: 768px) {
     
 }
