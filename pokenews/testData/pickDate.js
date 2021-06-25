@@ -110,7 +110,6 @@ $(".count").click(function(){
             dealBill[i] = priceRecord;
 
             let word = '您好嗎？';
-            let dddyyy = dayStart;
             let dayNow = new Date(dayStart);
             console.log("有點不信邪："+dayNow);
             // 列印資料
@@ -244,5 +243,6 @@ function printDay(){
         end = printY+'/'+printM2;
     }
     $(".time-start").val(start);
+    $(".tempTime").val(start);
     $(".time-end").val(end);
 }
