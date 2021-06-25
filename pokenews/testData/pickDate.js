@@ -116,7 +116,7 @@ $(".count").click(function(){
         }
         console.log("優惠價格為："+tempDeal);
         // 列印優惠費用計算結果
-        $(".price-data2").html(tempDeal);
+        $(".price-data2").html(recordY);
         $('.hint').show();
         $(".hint-price").show();
         $(".price-data1").html(priceTotal);
