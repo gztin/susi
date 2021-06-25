@@ -91,7 +91,7 @@ $(".count").click(function(){
             
             // 清空時間陣列
             record =[];
-            
+
             // 設定目前要處理的月份
             printMonth = tempNextTime.replace("/","");
             record = tempNextTime.split("/");
@@ -108,7 +108,8 @@ $(".count").click(function(){
             dealBill[i] = priceRecord;
 
             // 列印資料
-            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+recordY+'年'+recordM+'月'+'</td><td class="data-money">'+priceRecord+'</td></tr>';
+            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time"></td><td class="data-money">'+priceRecord+'</td></tr>';
+            $(".time"),val(recordY);
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
