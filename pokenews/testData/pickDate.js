@@ -102,7 +102,7 @@ $(".count").click(function(){
             dealBill[i] = priceRecord;
 
             // 列印資料
-            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+recordY+'/'+recordM+'</td><td class="data-money">'+priceRecord+'</td></tr>';
+            dataTitle+='<tr><th>'+(i+1)+'</th><td class="time">'+timeStart+'/'+timeStart+'</td><td class="data-money">'+priceRecord+'</td></tr>';
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
@@ -170,7 +170,7 @@ let countPrice = function (rent, time1, time2, printMonth) {
 
 
 let getNextTime = function (dayStart){
-    let inDate = new Date(dayStart);
+    let inDate = new Date(dayStart.replace(/\-/g, "/"));
     //                     1   2   3   4   5   6   7   8   9  10  11  12月
     let daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     let strYear = inDate.getFullYear();
