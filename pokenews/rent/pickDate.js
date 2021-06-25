@@ -37,6 +37,9 @@ $(".count").click(function(){
     let a1 = time1.replace("/","");
     let a2 = time2.replace("/","");
     periodTime = (a2 - a1) % 88 + 1;
+    console.log("a1= "+a1);
+    console.log("a2= "+a2);
+
 
     if(a2 < a1){
         alert("提醒，日期設定錯誤");
