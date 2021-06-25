@@ -89,6 +89,9 @@ $(".count").click(function(){
         // 計算租金
         for(let i=0;i<dataLength;i++){
             
+            // 清空時間陣列
+            record =[];
+            
             // 設定目前要處理的月份
             printMonth = tempNextTime.replace("/","");
             record = tempNextTime.split("/");
