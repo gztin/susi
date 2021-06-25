@@ -108,8 +108,11 @@ $(".count").click(function(){
             let priceRecord = countPrice(rent,time1,time2,printMonth);
             dealBill[i] = priceRecord;
 
+            let word = '您好嗎？';
+            let dayNow = new Date(dayStart);
+            console.log("有點不信邪："+dayNow);
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${record[0]}${record[1]}</td><td class="data-money">${priceRecord}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${word}/${dayNow}</td><td class="data-money">${priceRecord}</td></tr>`;
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
