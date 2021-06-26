@@ -42,6 +42,7 @@ $(".count").click(function(){
     let timeTemp = $(".time-temp").val();
     let printMonth = ''; // 要列印的月份時間資料
     let rentCost = parseInt($('.price').val()); // 月租金
+
     let time1 = timeStart.replace("/","");
     let time2 = timeEnd.replace("/","");
     time1 = parseInt(time1);
@@ -49,18 +50,14 @@ $(".count").click(function(){
     periodTime = (time2 - time1) % 88 + 1;
     periodTime = parseInt(periodTime);
     let priceTotal = rentCost * periodTime; // 總費用,未加上利率
-    console.log("方案的價格是："+priceTotal);
+    // console.log("方案的價格是："+priceTotal);
     // console.log("time1的值是："+time1);
     // console.log("走期的值是："+periodTime);
-    console.log("time1:"+time1);
+    // console.log("time1:"+time1);
 
 
     // 測試宣告
-    let dayA = new Date();
-    let printB = dayA.setMonth(dayA.getMonth() + 1);
-    printB = new Date(printB);
-    printB = printB.toISOString().slice(0,7);
-    console.log("todo的值是:"+printB);
+    
     
     // 測試區 end 
     
@@ -98,7 +95,7 @@ $(".count").click(function(){
         $('.rentData').html('');
         let dataTitle = '';
         let dealBill =[];
-        let record =[];
+        // let record =[];
 
         // 優惠資料的宣告
         let dataSize = 0;
@@ -116,24 +113,30 @@ $(".count").click(function(){
 
         // 費用滿期
         let countPeriod = 12;
-        let fullPreiod ='';
+        let fullPeriod ='';
     
         // 計算租金
         for(let i=0;i<dataLength;i++){
             
             // 清空時間陣列
-            record =[];
+            // record =[];
 
             // 設定目前要處理的月份
+            tempNextTime = tempNextTime.toString();
             printMonth = tempNextTime.replace("/","");
-            fullPreiod = (printMonth - time1) % 88 ;
-            record = tempNextTime.split("/");
-            record.map(String);
-            let recordY = record[0];
-            let recordM = record[1]; 
 
-            recordY = parseInt(recordY);
-            recordM = parseInt(recordM);
+            // 繳月租費（不分期）
+            fullPeriod = (printMonth - time1) % 88 ;
+            console.log("printMonth目前是:"+printMonth);
+
+            // record = ;
+            // console.log("record目前是:"+record);
+
+            // let recordY = record[0];
+            // let recordM = record[1]; 
+
+            // recordY = parseInt(recordY);
+            // recordM = parseInt(recordM);
             // console.log("下個月的時間是："+newNexTime);
             // console.log("下個月的時間是："+recordY+"/"+recordM);
     
@@ -154,7 +157,7 @@ $(".count").click(function(){
             
             }else if((time2 > 202205)){
 
-                if((i > 11) && ( printMonth <= time2 ) && (i == fullPreiod) ){
+                if((i > 11) && ( printMonth <= time2 ) && (i == fullPeriod) ){
                     // 如果時間是該月份以及剛好滿一年，費用直接+3000
                     // 後面接續紀錄下一個繳交完整月份的資料，所以periodTime+1
 
@@ -193,15 +196,25 @@ $(".count").click(function(){
             dealBill[i] = FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${printB}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${FinalPrice}</td></tr>`;
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
-            printB = dayA.setMonth(dayA.getMonth() +i);
-            printB = new Date(printB);
-            printB = printB.toISOString().slice(0,7);
-            console.log("下個月的時間是："+printB+"i ="+i);
-            // startA = printA +'/'+ printB;
+            var nextTimeData = new Date(); 
+            tempNextTime = nextTimeData.setMonth(nextTimeData.getMonth() + i);
+            let bbb = new Date(tempNextTime);
+            let Y = bbb.getFullYear();
+            let M = bbb.getMonth()+1;
+            if(M<10){
+                tempNextTime = Y+"/0"+M;
+                tempNextTime = tempNextTime.toString();
+            }else{
+                tempNextTime = Y+"/"+M;
+                tempNextTime = tempNextTime.toString();
+            }
+            console.log("tempNextTime:"+tempNextTime);
+            // let d = new Date();
+            // tempNextTime = d.setMonth(d.getMonth() + i);
             
             // 測試
 
@@ -225,52 +238,17 @@ $(".count").click(function(){
 
 
 
-// let getNextTime = function (dayStart){
+let getOneMonthAgoDate = function (){
+    let d = new Date();
+    d.setMonth(d.getMonth() - 1);
+    let month = d.getMonth()+1;
+    let day = d.getDate();
 
-//     let timeStamp = new Date(dayStart);
-    
-//     //                     1   2   3   4   5   6   7   8   9  10  11  12月
-//     let daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-//     let strYear = timeStamp.getFullYear();
-//     let strMonth = timeStamp.getMonth() + 1;
-//     let strDay = timeStamp.getDate();
-//     //一、解決閏年平年的二月份天數 //平年28天、閏年29天//能被4整除且不能被100整除的為閏年,或能被100整除且能被400整除
-//     if (((strYear % 4) === 0) && ((strYear % 100) !== 0) || ((strYear % 400) === 0)) {
-//         daysInMonth[2] = 29;
-//     }
-//     //二、解決跨年問題
-//     if (strMonth + 1 === 13)
-//     {
-//         strYear += 1;
-//         strMonth = 1;
-//     }
-//     else {
-//         strMonth += 1;
-//     }
-//     //三、解決當月最後一日，例如2.28的下一個月日期是3.31；6.30下一個月日期是7.31；3.31下一個月是4.30
-//     if (strMonth == 2 || strMonth == 4 || strMonth == 6 || strMonth == 9 || strMonth == 11) {
-//         strDay = Math.min(strDay, daysInMonth[strMonth]);
-//     }
-//     else {
-//         if (strDay >= 28) {
-//             strDay = Math.max(strDay, daysInMonth[strMonth]);
-//         }
-//         else {
-//             strDay = Math.min(strDay, daysInMonth[strMonth]);
-//         }
-//     }
-
-//     //四、給個位數的月、日補零
-//     if (strMonth < 10)
-//     {
-//         strMonth = "0" + strMonth;
-//     }
-//     if (strDay < 10) {
-//         strDay = "0" + strDay;
-//     }
-//     let datastr = strYear + "/" + strMonth;
-//     return datastr;
-// }
+    let output = d.getFullYear() + '-' +
+    (month<10 ? '0' : '') + month + '-' +
+    (day<10 ? '0' : '') + day;
+    return output;
+}
 
 // 檢查是否輸入中文
 let CheckMyForm = function() 
