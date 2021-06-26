@@ -56,9 +56,11 @@ $(".count").click(function(){
 
 
     // 測試宣告
-    const dateTime = +new Date(timeStart);
+    const dateTime = new Date();
     const timestamp = Math.floor(dateTime / 1000);
-    let timeA = new Date(timestamp);
+    let d = new Date(timestamp);
+    let timeA = d.toISOString().slice(0,7);
+    console.log("todo的值是:"+todo);
     
     // 測試區 end 
     
@@ -224,52 +226,52 @@ $(".count").click(function(){
 
 
 
-let getNextTime = function (dayStart){
+// let getNextTime = function (dayStart){
 
-    let timeStamp = new Date(dayStart);
+//     let timeStamp = new Date(dayStart);
     
-    //                     1   2   3   4   5   6   7   8   9  10  11  12月
-    let daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    let strYear = timeStamp.getFullYear();
-    let strMonth = timeStamp.getMonth() + 1;
-    let strDay = timeStamp.getDate();
-    //一、解決閏年平年的二月份天數 //平年28天、閏年29天//能被4整除且不能被100整除的為閏年,或能被100整除且能被400整除
-    if (((strYear % 4) === 0) && ((strYear % 100) !== 0) || ((strYear % 400) === 0)) {
-        daysInMonth[2] = 29;
-    }
-    //二、解決跨年問題
-    if (strMonth + 1 === 13)
-    {
-        strYear += 1;
-        strMonth = 1;
-    }
-    else {
-        strMonth += 1;
-    }
-    //三、解決當月最後一日，例如2.28的下一個月日期是3.31；6.30下一個月日期是7.31；3.31下一個月是4.30
-    if (strMonth == 2 || strMonth == 4 || strMonth == 6 || strMonth == 9 || strMonth == 11) {
-        strDay = Math.min(strDay, daysInMonth[strMonth]);
-    }
-    else {
-        if (strDay >= 28) {
-            strDay = Math.max(strDay, daysInMonth[strMonth]);
-        }
-        else {
-            strDay = Math.min(strDay, daysInMonth[strMonth]);
-        }
-    }
+//     //                     1   2   3   4   5   6   7   8   9  10  11  12月
+//     let daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+//     let strYear = timeStamp.getFullYear();
+//     let strMonth = timeStamp.getMonth() + 1;
+//     let strDay = timeStamp.getDate();
+//     //一、解決閏年平年的二月份天數 //平年28天、閏年29天//能被4整除且不能被100整除的為閏年,或能被100整除且能被400整除
+//     if (((strYear % 4) === 0) && ((strYear % 100) !== 0) || ((strYear % 400) === 0)) {
+//         daysInMonth[2] = 29;
+//     }
+//     //二、解決跨年問題
+//     if (strMonth + 1 === 13)
+//     {
+//         strYear += 1;
+//         strMonth = 1;
+//     }
+//     else {
+//         strMonth += 1;
+//     }
+//     //三、解決當月最後一日，例如2.28的下一個月日期是3.31；6.30下一個月日期是7.31；3.31下一個月是4.30
+//     if (strMonth == 2 || strMonth == 4 || strMonth == 6 || strMonth == 9 || strMonth == 11) {
+//         strDay = Math.min(strDay, daysInMonth[strMonth]);
+//     }
+//     else {
+//         if (strDay >= 28) {
+//             strDay = Math.max(strDay, daysInMonth[strMonth]);
+//         }
+//         else {
+//             strDay = Math.min(strDay, daysInMonth[strMonth]);
+//         }
+//     }
 
-    //四、給個位數的月、日補零
-    if (strMonth < 10)
-    {
-        strMonth = "0" + strMonth;
-    }
-    if (strDay < 10) {
-        strDay = "0" + strDay;
-    }
-    let datastr = strYear + "/" + strMonth;
-    return datastr;
-}
+//     //四、給個位數的月、日補零
+//     if (strMonth < 10)
+//     {
+//         strMonth = "0" + strMonth;
+//     }
+//     if (strDay < 10) {
+//         strDay = "0" + strDay;
+//     }
+//     let datastr = strYear + "/" + strMonth;
+//     return datastr;
+// }
 
 // 檢查是否輸入中文
 let CheckMyForm = function() 
