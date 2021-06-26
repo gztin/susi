@@ -55,8 +55,8 @@ $(".count").click(function(){
     console.log("time1:"+time1);
 
 
-    let timeTestall = $(".time-start").val();
-    let timeTestallB = new Date(timeTestall.replace(/\-/g, "/"));
+    // 測試宣告
+    // 測試區 end 
     
     // 檢查是否輸入中文，如果輸入，顯示提示
     let checkCT = CheckMyForm();
@@ -96,7 +96,6 @@ $(".count").click(function(){
 
         // 優惠資料的宣告
         let dataSize = 0;
-        let couponTotal =0;
 
         // step.1 取得目前時間
         let dayStart = $('.time-start').val();
@@ -108,8 +107,6 @@ $(".count").click(function(){
         // 該月總費用
         let tempPrice = 0;
         let FinalPrice = 0;
-        // 該月有幾筆要付款
-        let periodCount = 0; 
 
         // 費用滿期
         let countPeriod = 12;
@@ -190,7 +187,7 @@ $(".count").click(function(){
             dealBill[i] = FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${timeTestallB}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${FinalPrice}</td></tr>`;
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
@@ -198,8 +195,6 @@ $(".count").click(function(){
             //  tempNextTime = newNexTime;
             tempNextTime  = newNexTime.toString();
 
-            let nextAAA = getNextTime(timeTestallB);
-            let nextBBB = nextAAA;
         }
         dataSize = dealBill.length;
 
@@ -221,12 +216,14 @@ $(".count").click(function(){
 
 
 let getNextTime = function (dayStart){
-    let inDate = new Date(dayStart.replace(/\-/g, "/"));
+
+    let timeStamp = new Date(dayStart);
+    
     //                     1   2   3   4   5   6   7   8   9  10  11  12月
     let daysInMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    let strYear = inDate.getFullYear();
-    let strMonth = inDate.getMonth() + 1;
-    let strDay = inDate.getDate();
+    let strYear = timeStamp.getFullYear();
+    let strMonth = timeStamp.getMonth() + 1;
+    let strDay = timeStamp.getDate();
     //一、解決閏年平年的二月份天數 //平年28天、閏年29天//能被4整除且不能被100整除的為閏年,或能被100整除且能被400整除
     if (((strYear % 4) === 0) && ((strYear % 100) !== 0) || ((strYear % 400) === 0)) {
         daysInMonth[2] = 29;
