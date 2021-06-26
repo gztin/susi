@@ -46,7 +46,9 @@ $(".count").click(function(){
     time1 = parseInt(time1);
     time2 = parseInt(time2);
     periodTime = (time2 - time1) % 88 + 1;
+    periodTime = parseInt(periodTime);
     let priceTotal = rentCost * periodTime; // 總費用,未加上利率
+    console.log("方案的價格是："+priceTotal);
     // console.log("time1的值是："+time1);
     // console.log("走期的值是："+periodTime);
     console.log("time1:"+time1);
@@ -180,7 +182,7 @@ $(".count").click(function(){
                 // 超過35個月
                 FinalPrice = 3000;
             }
-
+            FinalPrice = BigInt(FinalPrice)
             dealBill[i] = FinalPrice;
            
             // 列印資料
@@ -193,10 +195,12 @@ $(".count").click(function(){
             tempNextTime  = newNexTime.toString();
         }
         dataSize = dealBill.length;
+
         for(let coupon=0;coupon<dataSize;coupon++){
             tempDeal = tempDeal + dealBill[coupon];
-            // console.log("dealBill存入的值為："+dealBill[coupon]);
+            console.log("dealBill存入的值為："+dealBill[coupon]);
         }
+        tempDeal = BigInt(tempDeal);
         // console.log("優惠價格為："+(tempDeal));
         // 列印優惠費用計算結果
         $(".price-data2").html(tempDeal);
