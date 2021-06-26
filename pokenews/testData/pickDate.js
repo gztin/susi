@@ -56,6 +56,10 @@ $(".count").click(function(){
 
 
     // 測試宣告
+    const dateTime = +new Date(timeStart);
+    const timestamp = Math.floor(dateTime / 1000);
+    let timeA = new Date(timestamp);
+    
     // 測試區 end 
     
     // 檢查是否輸入中文，如果輸入，顯示提示
@@ -187,13 +191,18 @@ $(".count").click(function(){
             dealBill[i] = FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${timeA}</td><td class="data-money">${FinalPrice}</td></tr>`;
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
              let newNexTime = getNextTime(tempNextTime);
             //  tempNextTime = newNexTime;
             tempNextTime  = newNexTime.toString();
+
+            // 測試 area
+            let newNexTimeZZZ = getNextTime(timeA);
+            timeA = newNexTimeZZZ;
+            // 測試
 
         }
         dataSize = dealBill.length;
