@@ -30,16 +30,8 @@ printDay();
 
 $(".count").click(function(){
     
-    // 確認租金
-    let rent =parseInt($('.price').val()); // 月租金
-    
-    // step.1 取得目前時間
-    let dayStart = $('.time-start').val();
-    // 將目前時間暫存到時間變數
-    let tempNextTime = dayStart;
-
     let compound = 24;  // 分期方案，目前24個月
-    let periodTime =''; // 走期
+    let periodTime = 0; // 走期
     let dataLength = 0;
     let tempDeal = 0;
 
@@ -48,19 +40,33 @@ $(".count").click(function(){
     let timeStart = $(".time-start").val();
     let timeEnd = $(".time-end").val();
     let printMonth = ''; // 要列印的月份時間資料
-    
+    let rentCost = parseInt($('.price').val()); // 月租金
     let time1 = timeStart.replace("/","");
     let time2 = timeEnd.replace("/","");
+    time1 = parseInt(time1);
+    time2 = parseInt(time2);
     periodTime = (time2 - time1) % 88 + 1;
-    let priceTotal = rent * periodTime; // 總費用,未加上利率
+    let priceTotal = rentCost * periodTime; // 總費用,未加上利率
     // console.log("time1的值是："+time1);
     // console.log("走期的值是："+periodTime);
+    console.log("time1:"+time1);
 
+    
+    // 檢查是否輸入中文，如果輸入，顯示提示
+    let checkCT = CheckMyForm();
+
+    // 檢查是否符合格式
     if(time2 < time1){
-        alert("提醒，日期設定錯誤");
+        alert("提醒：日期設定錯誤，起始日期不能晚於結束日期");
         $(".time-start").val(timeEnd);
-    }else if((rent=='') || (rent <0)){
-        alert("提醒，租金設定不符合格式");
+    }else if( checkCT === false){
+        alert("提醒，租金格式錯誤，請輸入正確的價格。");
+        $('.price').val(''); 
+    }else if(($('.price').val()=='')){
+        alert("提醒：租金是必填欄位。");
+    }else if(($('.price').val() <= 0)){
+        alert("提醒：租金不得小於0或等於0。");
+        $('.price').val('');
     }else{
         $(".rentTime").html("走期共"+periodTime+"個月");
         $(".rentTime").show();
@@ -85,6 +91,23 @@ $(".count").click(function(){
         // 優惠資料的宣告
         let dataSize = 0;
         let couponTotal =0;
+
+        // step.1 取得目前時間
+        let dayStart = $('.time-start').val();
+        // 將目前時間暫存到時間變數
+        let tempNextTime = dayStart;
+        
+        // 租金、分期換算費用
+        let monthPrice = Math.round(rentCost * 1.033 / 24);
+        // 該月總費用
+        let tempPrice = 0;
+        let FinalPrice = 0;
+        // 該月有幾筆要付款
+        let periodCount = 0; 
+
+        // 費用滿期
+        let countPeriod = 12;
+        let fullPreiod ='';
     
         // 計算租金
         for(let i=0;i<dataLength;i++){
@@ -94,6 +117,7 @@ $(".count").click(function(){
 
             // 設定目前要處理的月份
             printMonth = tempNextTime.replace("/","");
+            fullPreiod = (printMonth - time1) % 88 ;
             record = tempNextTime.split("/");
             record.map(String);
             let recordY = record[0];
@@ -105,12 +129,62 @@ $(".count").click(function(){
             // console.log("下個月的時間是："+recordY+"/"+recordM);
     
             // 計算費用
-            let priceRecord = countPrice(rent,time1,time2,printMonth);
-            dealBill[i] = priceRecord;
+            if ( time2 <= 202205 ){
 
+                if( (i <= compound) && ( printMonth <= time2 )  ){
+                    // 如果付款的時間還沒超過time2，走期遞增
+                    periodTime = ( printMonth  - time1 ) % 88 + 1;
+                }else if ( (printMonth > time2) && ( i < compound) ){
+                    // 如果付款時間超過time2，且還沒付完分期，走期固定為time2-time1
+                    periodTime = (time2 - time1) % 88 + 1;
+                }else if( (printMonth > time2) && ( i >= compound) ){
+                    // 第一期後費用會開始遞減
+                    periodTime =( ( time2 - time1 ) % 88 + 1 ) +( compound - (i+1) );
+                } 
+                FinalPrice = periodTime * monthPrice;
+            
+            }else if((time2 > 202205)){
+
+                if((i > 11) && ( printMonth <= time2 ) && (i == fullPreiod) ){
+                    // 如果時間是該月份以及剛好滿一年，費用直接+3000
+                    // 後面接續紀錄下一個繳交完整月份的資料，所以periodTime+1
+
+                    countPeriod = 12;                    
+                    if((i>35)){
+                        // 如果費用超過 202204，費用固定 3000
+                        tempPrice = 3000;
+                    }else if((i>23) && (i<=35)){
+                        countPeriod = countPeriod + (compound - (i+1));
+                        tempPrice = countPeriod * monthPrice+3000;
+                    }else {
+                        tempPrice = countPeriod * monthPrice+3000;
+                    }
+                    FinalPrice = tempPrice;
+                    tempPrice = 0;
+
+                }else if((i <= compound) && ( printMonth < time2 ) ){
+                    // 如果付款的時間還沒到，費用計算照舊
+                    periodTime = ( printMonth - time1 ) % 88 + 1 ;
+                    FinalPrice = periodTime * monthPrice;
+                }else if((i < compound) && ( printMonth > time2 ) ){
+                    // 如果付款的時間還沒到，費用計算照舊
+                    countPeriod = 12;
+                    FinalPrice = countPeriod * monthPrice;
+                }else if(( i >= compound) && (printMonth > time2)){
+                    // 第一期繳費結束後，費用開始遞減，走期遞增
+                    countPeriod = 12;
+                    countPeriod = countPeriod + (compound - (i+1));
+                    FinalPrice = countPeriod * monthPrice;
+                }
+            }else{
+                // 超過35個月
+                FinalPrice = 3000;
+            }
+
+            dealBill[i] = FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${priceRecord}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${FinalPrice}</td></tr>`;
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
@@ -121,9 +195,9 @@ $(".count").click(function(){
         dataSize = dealBill.length;
         for(let coupon=0;coupon<dataSize;coupon++){
             tempDeal = tempDeal + dealBill[coupon];
-            console.log("dealBill存入的值為："+dealBill[coupon]);
+            // console.log("dealBill存入的值為："+dealBill[coupon]);
         }
-        console.log("優惠價格為："+tempDeal);
+        // console.log("優惠價格為："+(tempDeal));
         // 列印優惠費用計算結果
         $(".price-data2").html(tempDeal);
         $('.hint').show();
@@ -133,48 +207,6 @@ $(".count").click(function(){
     }
 });
 
-
-let countPrice = function (rent, time1, time2, printMonth) {
-    var FinalPrice = 0;
-    var MonthPrice = Math.round(rent * 1.033 / 24);
-    var PeriodCount = 0;
-    if (time2 <= 202205) {
-        if (printMonth >= parseInt(time1) + 200) {
-            PeriodCount = (time2 - (parseInt(printMonth) - 200) - 1) % 88 + 1;
-            console.log("PeriodCount是："+PeriodCount);
-        } else if (printMonth > time2){
-            PeriodCount = (time2 - time1) % 88 + 1;
-            console.log("PeriodCount是："+PeriodCount);
-        } else {
-            PeriodCount = (printMonth - time1) % 88 + 1;
-            console.log("PeriodCount是："+PeriodCount);
-        }
-    } else if (printMonth <= 202205) {
-            PeriodCount = (printMonth - time1) % 88 + 1;
-            console.log("PeriodCount是："+PeriodCount);
-    } else if (printMonth > 202205) {
-        if (printMonth >= parseInt(time1) + 200) {
-            PeriodCount = (202205 - (parseInt(printMonth) - 200) - 1) % 88 + 1;
-            console.log("PeriodCount是："+PeriodCount);
-        }
-        else{
-            PeriodCount = (202205 - time1) % 88 + 1;
-            console.log("PeriodCount是："+PeriodCount);
-        }
-    }
-
-    if (PeriodCount < 0) {
-        PeriodCount = 0;
-    }
-
-    FinalPrice = PeriodCount * MonthPrice;
-    console.log("費用資訊是："+FinalPrice);
-
-    if (printMonth > 202205 && printMonth <= time2) {
-        FinalPrice += parseInt(rent);
-    }
-    return FinalPrice;            
-};
 
 
 let getNextTime = function (dayStart){
@@ -221,6 +253,34 @@ let getNextTime = function (dayStart){
     let datastr = strYear + "/" + strMonth;
     return datastr;
 }
+
+// 檢查是否輸入中文
+let CheckMyForm = function() 
+{ 
+    var txt = $('.price').val(); 
+    if(checknumber(txt)) 
+    { 
+        return false; 
+    } 
+    return true; 
+} 
+function checknumber() 
+{ 
+    let string = $('.price').val();
+    let Letters = "1234567890"; 
+    let i; 
+    let c; 
+    for( i = 0; i < string.length; i ++ ) 
+    { 
+        c = string.charAt( i ); 
+        if (Letters.indexOf( c ) ==-1) 
+        { 
+            return true; 
+        } 
+    } 
+    return false; 
+} 
+
 
 function printDay(){
     let day = new Date();
