@@ -39,6 +39,7 @@ $(".count").click(function(){
     // 確認走期
     let timeStart = $(".time-start").val();
     let timeEnd = $(".time-end").val();
+    let timeTemp = $(".time-temp").val();
     let printMonth = ''; // 要列印的月份時間資料
     let rentCost = parseInt($('.price').val()); // 月租金
     let time1 = timeStart.replace("/","");
@@ -53,6 +54,9 @@ $(".count").click(function(){
     // console.log("走期的值是："+periodTime);
     console.log("time1:"+time1);
 
+
+    let timeTestall = $(".time-start").val();
+    let timeTestallB = new Date(timeTestall.replace(/\-/g, "/"));
     
     // 檢查是否輸入中文，如果輸入，顯示提示
     let checkCT = CheckMyForm();
@@ -186,13 +190,16 @@ $(".count").click(function(){
             dealBill[i] = FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${timeTestallB}</td><td class="data-money">${FinalPrice}</td></tr>`;
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
              let newNexTime = getNextTime(tempNextTime);
             //  tempNextTime = newNexTime;
             tempNextTime  = newNexTime.toString();
+
+            let nextAAA = getNextTime(timeTestallB);
+            let nextBBB = nextAAA;
         }
         dataSize = dealBill.length;
 
