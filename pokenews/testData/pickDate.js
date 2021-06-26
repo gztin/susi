@@ -182,7 +182,7 @@ $(".count").click(function(){
                 // 超過35個月
                 FinalPrice = 3000;
             }
-            FinalPrice = BigInt(FinalPrice)
+            FinalPrice = parseInt(FinalPrice)
             dealBill[i] = FinalPrice;
            
             // 列印資料
