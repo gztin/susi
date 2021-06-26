@@ -56,11 +56,11 @@ $(".count").click(function(){
 
 
     // 測試宣告
-    const dateTime = new Date();
-    const timestamp = Math.floor(dateTime / 1000);
-    let d = new Date(timestamp);
-    let timeA = d.toISOString().slice(0,7);
-    console.log("todo的值是:"+todo);
+    let dayA = new Date();
+    let printB = dayA.setMonth(dayA.getMonth() + 1);
+    printB = new Date(printB);
+    printB = printB.toISOString().slice(0,7);
+    console.log("todo的值是:"+printB);
     
     // 測試區 end 
     
@@ -193,17 +193,16 @@ $(".count").click(function(){
             dealBill[i] = FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${timeA}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${printB}</td><td class="data-money">${FinalPrice}</td></tr>`;
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
-             let newNexTime = getNextTime(tempNextTime);
-            //  tempNextTime = newNexTime;
-            tempNextTime  = newNexTime.toString();
-
-            // 測試 area
-            let newNexTimeZZZ = getNextTime(timeA);
-            timeA = newNexTimeZZZ;
+            printB = dayA.setMonth(dayA.getMonth() +i);
+            printB = new Date(printB);
+            printB = printB.toISOString().slice(0,7);
+            console.log("下個月的時間是："+printB+"i ="+i);
+            // startA = printA +'/'+ printB;
+            
             // 測試
 
         }
