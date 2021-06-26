@@ -39,7 +39,6 @@ $(".count").click(function(){
     // 確認走期
     let timeStart = $(".time-start").val();
     let timeEnd = $(".time-end").val();
-    let timeTemp = $(".time-temp").val();
     let printMonth = ''; // 要列印的月份時間資料
     let rentCost = parseInt($('.price').val()); // 月租金
 
@@ -51,14 +50,8 @@ $(".count").click(function(){
     periodTime = parseInt(periodTime);
     let priceTotal = rentCost * periodTime; // 總費用,未加上利率
     // console.log("方案的價格是："+priceTotal);
-    // console.log("time1的值是："+time1);
-    // console.log("走期的值是："+periodTime);
-    // console.log("time1:"+time1);
-
 
     // 測試宣告
-    
-    
     // 測試區 end 
     
     // 檢查是否輸入中文，如果輸入，顯示提示
@@ -118,27 +111,13 @@ $(".count").click(function(){
         // 計算租金
         for(let i=0;i<dataLength;i++){
             
-            // 清空時間陣列
-            // record =[];
-
             // 設定目前要處理的月份
             tempNextTime = tempNextTime.toString();
             printMonth = tempNextTime.replace("/","");
 
             // 繳月租費（不分期）
             fullPeriod = (printMonth - time1) % 88 ;
-            console.log("printMonth目前是:"+printMonth);
-
-            // record = ;
-            // console.log("record目前是:"+record);
-
-            // let recordY = record[0];
-            // let recordM = record[1]; 
-
-            // recordY = parseInt(recordY);
-            // recordM = parseInt(recordM);
-            // console.log("下個月的時間是："+newNexTime);
-            // console.log("下個月的時間是："+recordY+"/"+recordM);
+            // console.log("printMonth目前是:"+printMonth);
     
             // 計算費用
             if ( time2 <= 202205 ){
@@ -159,8 +138,7 @@ $(".count").click(function(){
 
                 if((i > 11) && ( printMonth <= time2 ) && (i == fullPeriod) ){
                     // 如果時間是該月份以及剛好滿一年，費用直接+3000
-                    // 後面接續紀錄下一個繳交完整月份的資料，所以periodTime+1
-
+                    
                     countPeriod = 12;                    
                     if((i>35)){
                         // 如果費用超過 202204，費用固定 3000
@@ -200,11 +178,13 @@ $(".count").click(function(){
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
-            var nextTimeData = new Date(); 
-            tempNextTime = nextTimeData.setMonth(nextTimeData.getMonth() + i);
-            let bbb = new Date(tempNextTime);
-            let Y = bbb.getFullYear();
-            let M = bbb.getMonth()+1;
+            var tempM = new Date(); 
+            tempNextTime = tempM.setMonth(tempM.getMonth() + 1 + i);
+
+            // 轉換時間格式
+            let tempData = new Date(tempNextTime);
+            let Y = tempData.getFullYear();
+            let M = tempData.getMonth()+1;
             if(M<10){
                 tempNextTime = Y+"/0"+M;
                 tempNextTime = tempNextTime.toString();
@@ -212,22 +192,22 @@ $(".count").click(function(){
                 tempNextTime = Y+"/"+M;
                 tempNextTime = tempNextTime.toString();
             }
-            console.log("tempNextTime:"+tempNextTime);
-            // let d = new Date();
-            // tempNextTime = d.setMonth(d.getMonth() + i);
-            
-            // 測試
+            // console.log("tempNextTime:"+tempNextTime);
 
         }
+
+        // 取得陣列長度
         dataSize = dealBill.length;
 
+        // 將資料存入變數
         for(let coupon=0;coupon<dataSize;coupon++){
             tempDeal = tempDeal + dealBill[coupon];
-            console.log("dealBill存入的值為："+dealBill[coupon]);
+            // console.log("dealBill存入的值為："+dealBill[coupon]);
         }
         tempDeal = BigInt(tempDeal);
         // console.log("優惠價格為："+(tempDeal));
         // 列印優惠費用計算結果
+
         $(".price-data2").html(tempDeal);
         $('.hint').show();
         $(".hint-price").show();
@@ -236,23 +216,8 @@ $(".count").click(function(){
     }
 });
 
-
-
-let getOneMonthAgoDate = function (){
-    let d = new Date();
-    d.setMonth(d.getMonth() - 1);
-    let month = d.getMonth()+1;
-    let day = d.getDate();
-
-    let output = d.getFullYear() + '-' +
-    (month<10 ? '0' : '') + month + '-' +
-    (day<10 ? '0' : '') + day;
-    return output;
-}
-
 // 檢查是否輸入中文
-let CheckMyForm = function() 
-{ 
+let CheckMyForm = function() { 
     var txt = $('.price').val(); 
     if(checknumber(txt)) 
     { 
@@ -260,8 +225,7 @@ let CheckMyForm = function()
     } 
     return true; 
 } 
-function checknumber() 
-{ 
+function checknumber() { 
     let string = $('.price').val();
     let Letters = "1234567890"; 
     let i; 

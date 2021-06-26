@@ -203,10 +203,16 @@ ol,ul{
   height:35px;
 }
 .block-rentPrice{
-    margin-top:30px;
+    margin-top:15px;
 }
 .block-start{
-    margin-top:30px;
+    margin-top:15px;
+}
+.block-start label{
+  margin-bottom: 15px;
+}
+.block-end label{
+  margin-bottom: 15px;
 }
 .ui-datepicker-calendar {
     display: none;
