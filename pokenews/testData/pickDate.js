@@ -67,7 +67,7 @@ $(".count").click(function(){
         $('.table').show();
 
         if(periodTime>35){
-            dataLength = printMonth;
+            dataLength = periodTime;
         }else if(periodTime>12){
             dataLength = 35;
         }else if((periodTime>12)&&(periodTime < 35)){
@@ -138,7 +138,6 @@ let countPrice = function (rent, time1, time2, printMonth) {
     var FinalPrice = 0;
     var MonthPrice = Math.round(rent * 1.033 / 24);
     var PeriodCount = 0;
-
     if (time2 <= 202205) {
         if (printMonth >= parseInt(time1) + 200) {
             PeriodCount = (time2 - (parseInt(printMonth) - 200) - 1) % 88 + 1;
