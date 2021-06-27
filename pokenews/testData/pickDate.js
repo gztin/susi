@@ -42,7 +42,7 @@ $(".count").click(function(){
 
     // step.1 取得目前時間
     let dayStart = $('.time-start').val();
-    console.log("dayStart:"+dayStart);
+    // console.log("dayStart:"+dayStart);
     // 將目前時間暫存到時間變數
     let tempNextTime = dayStart;
     
@@ -74,8 +74,8 @@ $(".count").click(function(){
     newM = netTemmp.getMonth()+1;
     newY.toString();
     newM.toString();
-    console.log("newY:"+newY);
-    console.log("newM:"+newM);
+    // console.log("newY:"+newY);
+    // console.log("newM:"+newM);
 
     let time1 = timeStart.replace("/","");
     let time2 = timeEnd.replace("/","");
@@ -135,14 +135,15 @@ $(".count").click(function(){
             // 設定目前要處理的月份
             tempNextTime = tempNextTime.toString();
             printMonth = tempNextTime.replace("/","");
+            printMonth = parseInt(printMonth);
 
             // 繳月租費（不分期）
             fullPeriod = (printMonth - time1) % 88 ;
             // console.log("printMonth目前是:"+printMonth);
     
-            // 計算費用
+            
             if ( time2 <= 202205 ){
-
+                // 如果合約小於一年
                 if( (i <= compound) && ( printMonth <= time2 )  ){
                     // 如果付款的時間還沒超過time2，走期遞增
                     periodTime = ( printMonth  - time1 ) % 88 + 1;
@@ -192,23 +193,23 @@ $(".count").click(function(){
                 FinalPrice = 3000;
             }
             
-            
             FinalPrice = parseInt(FinalPrice);
             totalPrice = totalPrice + FinalPrice;
            
             // 列印資料
             dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${FinalPrice}</td></tr>`;
-            
             $('.rentData').html(dataTitle);
             
             // 轉換時間格式
+             // 取得未來時間
             date = tempNextTime.split("/");
             sY = date[0];
             sM = date[1];
 
-            console.log(" date 是：" + date);
-            console.log(" sY 是：" + sY);
-            
+            // console.log(" date 是：" + date);
+            // console.log(" sY 是：" + sY);
+            sM = parseInt(sM);
+            sY = parseInt(sY);
             if(sM==12){
                 sY=sY+1;
                 sM=1;
@@ -218,20 +219,12 @@ $(".count").click(function(){
             if(sM<10){
                 tempNextTime = sY+"/0"+sM;
                 tempNextTime = tempNextTime.toString();
+                console.log("tempNextTime 進位處理完後的結果是:"+tempNextTime);
             }else{
                 tempNextTime = sY+"/"+sM;
                 tempNextTime = tempNextTime.toString();
+                console.log("tempNextTime 處理完後的結果是:"+tempNextTime);
             }
-            
-            // 取得未來時間
-            // var tempM = new Date();
-            // var bbb = new Date(tempNextTime);
-            // tempNextTime = bbb.setMonth(bbb.getMonth() + 1);
-            // console.log("tempM是："+tempM);
-            // console.log("tempNextTime是："+tempNextTime);
-            // console.log("bbb是："+bbb);
-            // console.log("tempNextTime:"+tempNextTime);
-
         }
 
         totalPrice = toCurrency(totalPrice);
