@@ -87,7 +87,9 @@ body {
         
     }
 }
-
+.ui-datepicker-calendar {
+    display: none;
+}
 ol,ul{
     padding-left:0px;
 }
