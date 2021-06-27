@@ -40,6 +40,33 @@ $(".count").click(function(){
     let printMonth = ''; // 要列印的月份時間資料
     let rentCost = parseInt($('.price').val()); // 月租金
 
+    // step.1 取得目前時間
+    let dayStart = $('.time-start').val();
+    console.log("dayStart:"+dayStart);
+    // 將目前時間暫存到時間變數
+    let tempNextTime = dayStart;
+    
+    // 租金、分期換算費用
+    let monthPrice = Math.round(rentCost * 1.033 / 24);
+    // 該月總費用
+    let tempPrice = 0;
+    let FinalPrice = 0;
+    let totalPrice = 0;
+
+    // 費用滿期
+    let countPeriod = 12;
+    let fullPeriod ='';
+
+    // 下一個時間資料的相關變數宣告
+    let newY = 0;
+    let newM = 0;
+
+    let netTemmp = new Date(dayStart);
+    newY = netTemmp.getFullYear();
+    newM = netTemmp.getMonth()+1;
+    console.log("newY:"+newY);
+    console.log("newM:"+newM);
+
     let time1 = timeStart.replace("/","");
     let time2 = timeEnd.replace("/","");
     time1 = parseInt(time1);
@@ -47,8 +74,6 @@ $(".count").click(function(){
     periodTime = (time2 - time1) % 88 + 1;
     periodTime = parseInt(periodTime);
     let priceTotal = rentCost * periodTime; // 總費用,未加上利率
-
-    // console.log("方案的價格是："+priceTotal);
 
     // 測試宣告
     // 測試區 end 
@@ -92,24 +117,7 @@ $(".count").click(function(){
         $('.table').hide();
         // let record =[];
 
-        // 優惠資料的宣告
-        let dataSize = 0;
-
-        // step.1 取得目前時間
-        let dayStart = $('.time-start').val();
-        // 將目前時間暫存到時間變數
-        let tempNextTime = dayStart;
         
-        // 租金、分期換算費用
-        let monthPrice = Math.round(rentCost * 1.033 / 24);
-        // 該月總費用
-        let tempPrice = 0;
-        let FinalPrice = 0;
-        let totalPrice = 0;
-
-        // 費用滿期
-        let countPeriod = 12;
-        let fullPeriod ='';
     
         // 計算租金
         for(let i=0;i<dataLength;i++){
@@ -179,26 +187,26 @@ $(".count").click(function(){
             totalPrice = totalPrice + FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${newY}${newM}</td><td class="data-money">${FinalPrice}</td></tr>`;
             $('.rentData').html(dataTitle);
             
             // 轉換時間格式
             let tempData = new Date(tempNextTime);
-            let Y = tempData.getFullYear() ;
-            let M = tempData.getMonth() + 1;
-            Y=parseInt(Y);
-            M=parseInt(M);
-            if(M==12){
-                Y=Y+1;
-                M=1;
+            newY = tempData.getFullYear() ;
+            newM = tempData.getMonth() + 1;
+            // Y=parseInt(Y);
+            // M=parseInt(M);
+            if(newM==12){
+                newY=newY+1;
+                newM=1;
             }else{
-                M++;
+                newM++;
             }
-            if(M<10){
-                tempNextTime = Y+"/0"+M;
+            if(newM<10){
+                tempNextTime = newY+"/0"+newM;
                 tempNextTime = tempNextTime.toString();
             }else{
-                tempNextTime = Y+"/"+M;
+                tempNextTime = newY+"/"+newM;
                 tempNextTime = tempNextTime.toString();
             }
             
