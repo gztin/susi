@@ -25,13 +25,10 @@ $('.date-picker2').datepicker( {
     }
 });
 
+// 列印日期資料，預設是今天
 printDay();
 
-
 $(".count").click(function(){
-    
-    let compound = 24;  // 分期方案，目前24個月
-    let periodTime = 0; // 走期
 
     // 計算兩個時間相差幾個月
     // 確認走期
@@ -58,24 +55,13 @@ $(".count").click(function(){
     let fullPeriod ='';
 
     // 下一個時間資料的相關變數宣告
+    let compound = 24;  // 分期方案，目前24個月
+    let periodTime = 0; // 走期
     let newY = 0;
     let newM = 0;
     let sY = '';
     let sM='';
-    // let dudate ='';
-    // let tempData ='';
-    // let newtimeData='';
-    let d='';
     let date =[];
-
-
-    let netTemmp = new Date(dayStart);
-    newY = netTemmp.getFullYear();
-    newM = netTemmp.getMonth()+1;
-    newY.toString();
-    newM.toString();
-    // console.log("newY:"+newY);
-    // console.log("newM:"+newM);
 
     let time1 = timeStart.replace("/","");
     let time2 = timeEnd.replace("/","");
@@ -84,14 +70,11 @@ $(".count").click(function(){
     periodTime = (time2 - time1) % 88 + 1;
     periodTime = parseInt(periodTime);
     let priceTotal = rentCost * periodTime; // 總費用,未加上利率
-
-    // 測試宣告
-    // 測試區 end 
     
     // 檢查是否輸入中文，如果輸入，顯示提示
     let checkCT = CheckMyForm();
 
-    // 檢查是否符合格式
+    // 檢查是否符合格式，並給予提示訊息
     if(time2 < time1){
         alert("提醒：日期設定錯誤，起始日期不能晚於結束日期");
         $(".time-start").val(timeEnd);
@@ -126,8 +109,6 @@ $(".count").click(function(){
         $(".hint-price").hide().removeClass("ff");
         $('.table').hide();
         // let record =[];
-
-        
     
         // 計算租金
         for(let i=0;i<dataLength;i++){

@@ -4,6 +4,7 @@
     list-style: none;
 }
 body {
+    background: #CCC5B9;
     font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;
 }
 .rentBlock{
@@ -11,20 +12,33 @@ body {
     .form-title{
         padding-top: 50px;
         text-align: center;
+        color: #403D39;
     }
     
     .block-rentPrice{
         margin-top:15px;
+        label{
+            color: #403D39;
+        }
     }
     .block-start {
         margin-top:15px;
         label{
+            color: #403D39;
             margin-bottom: 15px;
+        }
+        .time-start{
+            background: #403D39;
+            color: #fff;
         }
     }
     .block-end{
         label{
             margin-bottom: 15px;
+        }
+        .time-end{
+            background: #403D39;
+            color: #fff;
         }
     }
     .hint-price{
@@ -33,22 +47,24 @@ body {
         max-height:400px;
         margin-top:10px;
         border-radius: 4px;
-        border:1px solid #d4d4d4;
+        border: 1px solid #FFFCF2;
+        background: #252422;
+        color: #FFFCF2;
         .rentInf{
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #d4d4d4;
+            border-bottom: 1px solid #6b6b6b;
             p{
                 padding:10px;
                 margin-bottom: 0px;
             }
 
             .price-data1{
-                color: #31cc8c;
+                color: #FFFCF2;
             }
             .price-data2{
-                color: #0ca4ff;
+                color: #ff8759;
             }
         }
         .rentTime{
@@ -58,13 +74,16 @@ body {
             display: none;
             padding: 10px;
             font-size: 13px;
-            background: rgb(255, 246, 179);
-            border-top: 1px solid #d4d4d4;
+            background: #403D39;
+            border-top: 1px solid #6b6b6b;
         }
     }
     .hint{
         padding-bottom: 20px;
         display: none;
+        color: #CCC5B9;
+        background: #403D39;
+        border-top: 1px solid #6b6b6b;
     }
     .ff{
         display: flex!important;
@@ -78,13 +97,28 @@ body {
     display: none;
     thead{
         background:#252422;
-        color:#fff;
+        color:#FFFCF2;
     }
     .rentData {
+         // 奇數列
+         tr:nth-child(odd){
+            background:#FFFCF2;
+            color:#403D39;
+        }
+        // 偶數列
         tr:nth-child(even){
-            background: #f3f3f3;
+            background:#403D39;
+            color:#FFFCF2;
         }
     }
+    tbody{
+        tr{
+            border: none;
+        }
+    }
+}
+tbody, td, tfoot, th, thead, tr {
+    border: none;
 }
 ol,ul{
     padding-left:0px;
@@ -92,7 +126,16 @@ ol,ul{
 .ui-datepicker-calendar {
     display: none;
 }
-
+.count{
+    color: #fff;
+    background-color: #EB5E28;
+    border-color: #fbc692;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #EB5E28;
+    border-color: #fbc692;
+}
 @media screen and (max-width: 768px) {
     
 }

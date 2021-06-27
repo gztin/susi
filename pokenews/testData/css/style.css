@@ -5,6 +5,7 @@
 }
 
 body {
+  background: #CCC5B9;
   font-family: Microsoft JhengHei, Noto Sans TC, sans-serif;
 }
 
@@ -14,18 +15,31 @@ body {
 .rentBlock .form-title {
   padding-top: 50px;
   text-align: center;
+  color: #403D39;
 }
 .rentBlock .block-rentPrice {
   margin-top: 15px;
+}
+.rentBlock .block-rentPrice label {
+  color: #403D39;
 }
 .rentBlock .block-start {
   margin-top: 15px;
 }
 .rentBlock .block-start label {
+  color: #403D39;
   margin-bottom: 15px;
+}
+.rentBlock .block-start .time-start {
+  background: #403D39;
+  color: #fff;
 }
 .rentBlock .block-end label {
   margin-bottom: 15px;
+}
+.rentBlock .block-end .time-end {
+  background: #403D39;
+  color: #fff;
 }
 .rentBlock .hint-price {
   display: none;
@@ -33,23 +47,25 @@ body {
   max-height: 400px;
   margin-top: 10px;
   border-radius: 4px;
-  border: 1px solid #d4d4d4;
+  border: 1px solid #FFFCF2;
+  background: #252422;
+  color: #FFFCF2;
 }
 .rentBlock .hint-price .rentInf {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #d4d4d4;
+  border-bottom: 1px solid #6b6b6b;
 }
 .rentBlock .hint-price .rentInf p {
   padding: 10px;
   margin-bottom: 0px;
 }
 .rentBlock .hint-price .rentInf .price-data1 {
-  color: #31cc8c;
+  color: #FFFCF2;
 }
 .rentBlock .hint-price .rentInf .price-data2 {
-  color: #0ca4ff;
+  color: #ff8759;
 }
 .rentBlock .hint-price .rentTime {
   padding: 10px;
@@ -58,12 +74,15 @@ body {
   display: none;
   padding: 10px;
   font-size: 13px;
-  background: #fff6b3;
-  border-top: 1px solid #d4d4d4;
+  background: #403D39;
+  border-top: 1px solid #6b6b6b;
 }
 .rentBlock .hint {
   padding-bottom: 20px;
   display: none;
+  color: #CCC5B9;
+  background: #403D39;
+  border-top: 1px solid #6b6b6b;
 }
 .rentBlock .ff {
   display: flex !important;
@@ -78,10 +97,22 @@ body {
 }
 .table thead {
   background: #252422;
-  color: #fff;
+  color: #FFFCF2;
+}
+.table .rentData tr:nth-child(odd) {
+  background: #FFFCF2;
+  color: #403D39;
 }
 .table .rentData tr:nth-child(even) {
-  background: #f3f3f3;
+  background: #403D39;
+  color: #FFFCF2;
+}
+.table tbody tr {
+  border: none;
+}
+
+tbody, td, tfoot, th, thead, tr {
+  border: none;
 }
 
 ol, ul {
@@ -90,6 +121,18 @@ ol, ul {
 
 .ui-datepicker-calendar {
   display: none;
+}
+
+.count {
+  color: #fff;
+  background-color: #EB5E28;
+  border-color: #fbc692;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #EB5E28;
+  border-color: #fbc692;
 }
 
 @media screen and (max-width: 576px) {
