@@ -60,6 +60,8 @@ $(".count").click(function(){
     // 下一個時間資料的相關變數宣告
     let newY = 0;
     let newM = 0;
+    let sY = '';
+    let sM='';
 
     let netTemmp = new Date(dayStart);
     newY = netTemmp.getFullYear();
@@ -189,7 +191,7 @@ $(".count").click(function(){
             totalPrice = totalPrice + FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${sY}/${sM}</td><td class="data-money">${FinalPrice}</td></tr>`;
             
             $('.rentData').html(dataTitle);
             
@@ -197,6 +199,8 @@ $(".count").click(function(){
             let tempData = new Date(tempNextTime);
             newY = tempData.getFullYear() ;
             newM = tempData.getMonth() + 1;
+            sY = newY.toString();
+            sM = newM.toString();
             // Y=parseInt(Y);
             // M=parseInt(M);
             if(newM==12){
