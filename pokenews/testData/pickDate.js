@@ -69,7 +69,7 @@ $(".count").click(function(){
         alert("提醒：租金不得小於0或等於0。");
         $('.price').val('');
     }else{
-        $(".rentTime").html("走期共"+" "+periodTime+" "+"個月");
+        $(".rentTime").html("走期共"+" "+periodTime+""+"個月");
         $(".rentTime").show();
         $('.table').show();
 
@@ -86,6 +86,7 @@ $(".count").click(function(){
         // 前置作業，清空資料
         $('.rentData').html('');
         let dataTitle = '';
+        
         $(".hint").hide().removeClass("ff");
         $(".hint-price").hide().removeClass("ff");
         $('.table').hide();
@@ -182,8 +183,12 @@ $(".count").click(function(){
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
-            var tempM = new Date(); 
-            tempNextTime = tempM.setMonth(tempM.getMonth() + 1 + i);
+            // var tempM = new Date();
+            var bbb = new Date(tempNextTime);
+            tempNextTime = bbb.setMonth(bbb.getMonth() + 1);
+            // console.log("tempM是："+tempM);
+            console.log("tempNextTime是："+tempNextTime);
+            console.log("bbb是："+bbb);
 
             // 轉換時間格式
             let tempData = new Date(tempNextTime);
