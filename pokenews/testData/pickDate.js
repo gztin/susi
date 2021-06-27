@@ -189,7 +189,8 @@ $(".count").click(function(){
             totalPrice = totalPrice + FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${newY}${newM}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            
             $('.rentData').html(dataTitle);
             
             // 轉換時間格式
