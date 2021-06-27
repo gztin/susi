@@ -66,7 +66,7 @@ $(".count").click(function(){
     // let tempData ='';
     // let newtimeData='';
     let d='';
-    var date ='';
+    let date ='';
 
 
     let netTemmp = new Date(dayStart);
@@ -197,7 +197,7 @@ $(".count").click(function(){
             totalPrice = totalPrice + FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${sY}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${date}</td><td class="data-money">${FinalPrice}</td></tr>`;
             
             $('.rentData').html(dataTitle);
            
@@ -205,13 +205,13 @@ $(".count").click(function(){
             d = new Date(tempNextTime);
             date = d.getTime();
             date.toString();
-            sY = date.getFullYear();
-            sM = date.getMonth() + 1;
+            // sY = date.getFullYear();
+            // sM = date.getMonth() + 1;
             // d.toLocalDateString("en-US");
             // d.toISOString().slice(0,7);
             // dudate = newtimeData[0];
             // tempData.toString();
-            console.log("sY 是：" + sY);
+            // console.log("sY 是：" + sY);
             console.log("date 是：" + date);
             // newY = tempData.getFullYear() ;
             // newM = tempData.getMonth() + 1;
