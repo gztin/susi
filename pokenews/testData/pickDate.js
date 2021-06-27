@@ -32,8 +32,6 @@ $(".count").click(function(){
     
     let compound = 24;  // 分期方案，目前24個月
     let periodTime = 0; // 走期
-    let dataLength = 0;
-    let tempDeal = 0;
 
     // 計算兩個時間相差幾個月
     // 確認走期
@@ -49,6 +47,7 @@ $(".count").click(function(){
     periodTime = (time2 - time1) % 88 + 1;
     periodTime = parseInt(periodTime);
     let priceTotal = rentCost * periodTime; // 總費用,未加上利率
+
     // console.log("方案的價格是："+priceTotal);
 
     // 測試宣告
@@ -70,7 +69,7 @@ $(".count").click(function(){
         alert("提醒：租金不得小於0或等於0。");
         $('.price').val('');
     }else{
-        $(".rentTime").html("走期共"+periodTime+"個月");
+        $(".rentTime").html("走期共"+" "+periodTime+" "+"個月");
         $(".rentTime").show();
         $('.table').show();
 
@@ -88,6 +87,9 @@ $(".count").click(function(){
         $('.rentData').html('');
         let dataTitle = '';
         let dealBill =[];
+        $(".hint").hide().removeClass("ff");
+        $(".hint-price").hide().removeClass("ff");
+        $('.table').hide();
         // let record =[];
 
         // 優惠資料的宣告
@@ -103,6 +105,7 @@ $(".count").click(function(){
         // 該月總費用
         let tempPrice = 0;
         let FinalPrice = 0;
+        let totalPrice = 0;
 
         // 費用滿期
         let countPeriod = 12;
@@ -170,8 +173,10 @@ $(".count").click(function(){
                 // 超過35個月
                 FinalPrice = 3000;
             }
-            FinalPrice = parseInt(FinalPrice)
-            dealBill[i] = FinalPrice;
+            
+            
+            FinalPrice = parseInt(FinalPrice);
+            totalPrice = totalPrice + FinalPrice;
            
             // 列印資料
             dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${FinalPrice}</td></tr>`;
@@ -196,22 +201,12 @@ $(".count").click(function(){
 
         }
 
-        // 取得陣列長度
-        dataSize = dealBill.length;
-
-        // 將資料存入變數
-        for(let coupon=0;coupon<dataSize;coupon++){
-            tempDeal = tempDeal + dealBill[coupon];
-            // console.log("dealBill存入的值為："+dealBill[coupon]);
-        }
-        tempDeal = BigInt(tempDeal);
-        // console.log("優惠價格為："+(tempDeal));
-        // 列印優惠費用計算結果
-
-        $(".price-data2").html(tempDeal);
-        $('.hint').show();
-        $(".hint-price").show();
-        $(".price-data1").html(priceTotal);
+        totalPrice = toCurrency(totalPrice);
+        priceTotal = toCurrency(priceTotal);
+        $(".price-data2").html(totalPrice+"元");
+        $('.hint').show().addClass("ff");
+        $(".hint-price").show().addClass("ff");
+        $(".price-data1").html(priceTotal+"元");
         $('.table').show();
     }
 });
@@ -241,7 +236,15 @@ function checknumber() {
     return false; 
 } 
 
+// 轉換千分位
 
+let toCurrency = function (FinalPrice){
+    var parts = FinalPrice.toString().split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
+}
+
+// 列印日期
 function printDay(){
     let day = new Date();
     let printY = day.getFullYear();

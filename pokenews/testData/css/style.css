@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  font-family: Microsoft JhengHei, Noto Sans TC, sans-serif;
+}
+
+.rentBlock {
+  --bs-gutter-x: 0rem!important;
+}
+.rentBlock .form-title {
+  padding-top: 50px;
+  text-align: center;
+}
+.rentBlock .block-rentPrice {
+  margin-top: 15px;
+}
+.rentBlock .block-start {
+  margin-top: 15px;
+}
+.rentBlock .block-start label {
+  margin-bottom: 15px;
+}
+.rentBlock .block-end label {
+  margin-bottom: 15px;
+}
+.rentBlock .hint-price {
+  display: none;
+  font-size: 1.1em;
+  max-height: 400px;
+  margin-top: 10px;
+  border-radius: 4px;
+  border: 1px solid #d4d4d4;
+}
+.rentBlock .hint-price .rentInf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #d4d4d4;
+}
+.rentBlock .hint-price .rentInf p {
+  padding: 10px;
+  margin-bottom: 0px;
+}
+.rentBlock .hint-price .rentInf .price-data1 {
+  color: #31cc8c;
+}
+.rentBlock .hint-price .rentInf .price-data2 {
+  color: #0ca4ff;
+}
+.rentBlock .hint-price .rentTime {
+  padding: 10px;
+}
+.rentBlock .hint-price .hint {
+  display: none;
+  padding: 10px;
+  font-size: 13px;
+  background: #fff6b3;
+  border-top: 1px solid #d4d4d4;
+}
+.rentBlock .hint {
+  padding-bottom: 20px;
+  display: none;
+}
+.rentBlock .ff {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.table {
+  margin-top: 15px;
+  border: 1px solid #d4d4d4;
+  display: none;
+}
+.table thead {
+  background: #252422;
+  color: #fff;
+}
+.table .rentData tr:nth-child(even) {
+  background: #f3f3f3;
+}
+
+ol, ul {
+  padding-left: 0px;
+}
+
+@media screen and (max-width: 576px) {
+  .count {
+    height: 50px;
+  }
+}

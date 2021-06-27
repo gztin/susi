@@ -6,15 +6,15 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="style.css?v=4">
-    <title>租金試算v1.62</title>
+    <link rel="stylesheet" href="css/style.css?v=1">
+    <title>租金試算v2</title>
 </head>
 <body>
     <section>
         <div class="container-fluid">
             <div class="row rentBlock">
                 <div class="mb-3 form-title">
-                    <h2>租金試算v1.62</h2>
+                    <h2>租金試算v2</h2>
                 </div>
                 <div class="mb-3 block-rentPrice">
                     <label for="exampleFormControlInput1" class="form-label">月租金</label>
@@ -29,14 +29,19 @@
                     <label for="startDate">到</label>
                     <input name="startDate" class="form-control date-picker2 time-end" readonly="readonly"/>
                 </div>
-                <div class="hint-price">
-                    <p>
-                        原租金為<span class="price-data1"></span>元，配合專案可得<span class="price-data2"></span>元
-                    </p>
+                <div class="mb-3 hint-price">
+                    <div class="rentInf">
+                        <p class="price-title">原租金為</p>
+                        <p class="price-data1"></p>
+                    </div>
+                    <div class="rentInf">
+                        <p class="price-title">配合專案可得</p>
+                        <p class="price-data2"></p>
+                    </div>
+                    <span class="rentTime"></span>
+                    <span class="hint">當月若有裝修暫拆機等異動以實際付款金額為準</span>
                 </div>
-                
-                <span class="rentTime"></span>
-                <span class="hint">當月若有裝修暫拆機等異動以實際付款金額為準</span>
+
                 <div class="d-grid gap-2">
                     <button class="btn btn-primary count" type="button">計算租金</button>
                 </div>
