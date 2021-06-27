@@ -60,12 +60,13 @@ $(".count").click(function(){
     // 下一個時間資料的相關變數宣告
     let newY = 0;
     let newM = 0;
-    // let sY = '';
-    // let sM='';
+    let sY = '';
+    let sM='';
     // let dudate ='';
     // let tempData ='';
     // let newtimeData='';
     let d='';
+    var date ='';
 
 
     let netTemmp = new Date(dayStart);
@@ -196,16 +197,22 @@ $(".count").click(function(){
             totalPrice = totalPrice + FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${d}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${sY}</td><td class="data-money">${FinalPrice}</td></tr>`;
             
             $('.rentData').html(dataTitle);
            
             // 轉換時間格式
-            d = new Date(tempNextTime);
+            d = new Date(tempNextTime).getTime();
+            date = new Date(d);
+            date.toString();
+            sY = date.getFullYear();
+            sM = date.getMonth() + 1;
+            // d.toLocalDateString("en-US");
             // d.toISOString().slice(0,7);
             // dudate = newtimeData[0];
             // tempData.toString();
-            console.log("d 是："+d);
+            console.log("sY 是：" + sY);
+            console.log("sM 是：" + sM);
             // newY = tempData.getFullYear() ;
             // newM = tempData.getMonth() + 1;
             // sY = newY.toString();
