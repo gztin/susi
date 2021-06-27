@@ -197,7 +197,7 @@ $(".count").click(function(){
             totalPrice = totalPrice + FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${sY}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${FinalPrice}</td></tr>`;
             
             $('.rentData').html(dataTitle);
             
@@ -208,25 +208,20 @@ $(".count").click(function(){
 
             console.log(" date 是：" + date);
             console.log(" sY 是：" + sY);
-            // newY = tempData.getFullYear() ;
-            // newM = tempData.getMonth() + 1;
-            // sY = newY.toString();
-            // sM = newM.toString();
-            // Y=parseInt(Y);
-            // M=parseInt(M);
-            // if(newM==12){
-            //     newY=newY+1;
-            //     newM=1;
-            // }else{
-            //     newM++;
-            // }
-            // if(newM<10){
-            //     tempNextTime = newY+"/0"+newM;
-            //     tempNextTime = tempNextTime.toString();
-            // }else{
-            //     tempNextTime = newY+"/"+newM;
-            //     tempNextTime = tempNextTime.toString();
-            // }
+            
+            if(sM==12){
+                sY=sY+1;
+                sM=1;
+            }else{
+                sM++;
+            }
+            if(sM<10){
+                tempNextTime = sY+"/0"+sM;
+                tempNextTime = tempNextTime.toString();
+            }else{
+                tempNextTime = sY+"/"+sM;
+                tempNextTime = tempNextTime.toString();
+            }
             
             // 取得未來時間
             // var tempM = new Date();
