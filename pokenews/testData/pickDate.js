@@ -114,7 +114,8 @@ $(".count").click(function(){
             tempNextTime = tempNextTime.toString();
             printMonth = tempNextTime.replace("/","");
             let fff = tempNextTime;
-            // console.log("fff="+tempNextTime);
+            fff.toString();
+            console.log("fff="+tempNextTime);
 
             // 繳月租費（不分期）
             fullPeriod = (printMonth - time1) % 88 ;
@@ -182,8 +183,8 @@ $(".count").click(function(){
     
             // 取得未來時間
             var tempM = new Date(fff);
-            console.log("tempM="+tempM);
-            tempNextTime = tempM.setMonth(tempM.getMonth() + 1);
+             
+            tempNextTime = tempM.setMonth(tempM.getMonth() + 1 + i);
 
             // 轉換時間格式
             let tempData = new Date(tempNextTime);
