@@ -202,8 +202,8 @@ $(".count").click(function(){
             $('.rentData').html(dataTitle);
            
             // 轉換時間格式
-            d = new Date(tempNextTime).getTime();
-            date = new Date(d);
+            d = new Date(tempNextTime);
+            date = d.getTime();
             date.toString();
             sY = date.getFullYear();
             sM = date.getMonth() + 1;
@@ -212,7 +212,7 @@ $(".count").click(function(){
             // dudate = newtimeData[0];
             // tempData.toString();
             console.log("sY 是：" + sY);
-            console.log("sM 是：" + sM);
+            console.log("date 是：" + date);
             // newY = tempData.getFullYear() ;
             // newM = tempData.getMonth() + 1;
             // sY = newY.toString();
