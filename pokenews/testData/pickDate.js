@@ -60,8 +60,13 @@ $(".count").click(function(){
     // 下一個時間資料的相關變數宣告
     let newY = 0;
     let newM = 0;
-    let sY = '';
-    let sM='';
+    // let sY = '';
+    // let sM='';
+    // let dudate ='';
+    // let tempData ='';
+    // let newtimeData='';
+    let d='';
+
 
     let netTemmp = new Date(dayStart);
     newY = netTemmp.getFullYear();
@@ -191,31 +196,35 @@ $(".count").click(function(){
             totalPrice = totalPrice + FinalPrice;
            
             // 列印資料
-            dataTitle+=`<tr><th>${i+1}</th><td class="time">${sY}/${sM}</td><td class="data-money">${FinalPrice}</td></tr>`;
+            dataTitle+=`<tr><th>${i+1}</th><td class="time">${d}</td><td class="data-money">${FinalPrice}</td></tr>`;
             
             $('.rentData').html(dataTitle);
-            
+           
             // 轉換時間格式
-            let tempData = new Date(tempNextTime);
-            newY = tempData.getFullYear() ;
-            newM = tempData.getMonth() + 1;
-            sY = newY.toString();
-            sM = newM.toString();
+            d = new Date(tempNextTime);
+            // d.toISOString().slice(0,7);
+            // dudate = newtimeData[0];
+            // tempData.toString();
+            console.log("d 是："+d);
+            // newY = tempData.getFullYear() ;
+            // newM = tempData.getMonth() + 1;
+            // sY = newY.toString();
+            // sM = newM.toString();
             // Y=parseInt(Y);
             // M=parseInt(M);
-            if(newM==12){
-                newY=newY+1;
-                newM=1;
-            }else{
-                newM++;
-            }
-            if(newM<10){
-                tempNextTime = newY+"/0"+newM;
-                tempNextTime = tempNextTime.toString();
-            }else{
-                tempNextTime = newY+"/"+newM;
-                tempNextTime = tempNextTime.toString();
-            }
+            // if(newM==12){
+            //     newY=newY+1;
+            //     newM=1;
+            // }else{
+            //     newM++;
+            // }
+            // if(newM<10){
+            //     tempNextTime = newY+"/0"+newM;
+            //     tempNextTime = tempNextTime.toString();
+            // }else{
+            //     tempNextTime = newY+"/"+newM;
+            //     tempNextTime = tempNextTime.toString();
+            // }
             
             // 取得未來時間
             // var tempM = new Date();
