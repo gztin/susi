@@ -183,7 +183,7 @@ $(".count").click(function(){
     
             // 取得未來時間
             var tempM = new Date(); 
-            tempNextTime = tempNextTime.setMonth(tempNextTime.getMonth() + 1 + i);
+            tempNextTime = tempM.setMonth(tempM.getMonth() + 1 + i);
 
             // 轉換時間格式
             let tempData = new Date(tempNextTime);
