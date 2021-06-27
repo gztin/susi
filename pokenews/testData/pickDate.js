@@ -87,7 +87,7 @@ $(".count").click(function(){
         alert("提醒：租金不得小於0或等於0。");
         $('.price').val('');
     }else{
-        $(".rentTime").html("走期共"+" "+periodTime+""+"個月");
+        $(".rentTime").html("走期共"+" "+periodTime+" "+"個月");
         $(".rentTime").show();
         $('.table').show();
 
