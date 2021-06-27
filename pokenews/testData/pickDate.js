@@ -64,6 +64,8 @@ $(".count").click(function(){
     let netTemmp = new Date(dayStart);
     newY = netTemmp.getFullYear();
     newM = netTemmp.getMonth()+1;
+    newY.toString();
+    newM.toString();
     console.log("newY:"+newY);
     console.log("newM:"+newM);
 
