@@ -181,19 +181,19 @@ $(".count").click(function(){
             // 列印資料
             dataTitle+=`<tr><th>${i+1}</th><td class="time">${tempNextTime}</td><td class="data-money">${FinalPrice}</td></tr>`;
             $('.rentData').html(dataTitle);
-    
-            // 取得未來時間
-            // var tempM = new Date();
-            var bbb = new Date(tempNextTime);
-            tempNextTime = bbb.setMonth(bbb.getMonth() + 1);
-            // console.log("tempM是："+tempM);
-            console.log("tempNextTime是："+tempNextTime);
-            console.log("bbb是："+bbb);
-
+            
             // 轉換時間格式
             let tempData = new Date(tempNextTime);
-            let Y = tempData.getFullYear();
-            let M = tempData.getMonth()+1;
+            let Y = tempData.getFullYear() ;
+            let M = tempData.getMonth() + 1;
+            Y=parseInt(Y);
+            M=parseInt(M);
+            if(M==12){
+                Y=Y+1;
+                M=1;
+            }else{
+                M++;
+            }
             if(M<10){
                 tempNextTime = Y+"/0"+M;
                 tempNextTime = tempNextTime.toString();
@@ -201,6 +201,14 @@ $(".count").click(function(){
                 tempNextTime = Y+"/"+M;
                 tempNextTime = tempNextTime.toString();
             }
+            
+            // 取得未來時間
+            // var tempM = new Date();
+            // var bbb = new Date(tempNextTime);
+            // tempNextTime = bbb.setMonth(bbb.getMonth() + 1);
+            // console.log("tempM是："+tempM);
+            // console.log("tempNextTime是："+tempNextTime);
+            // console.log("bbb是："+bbb);
             // console.log("tempNextTime:"+tempNextTime);
 
         }

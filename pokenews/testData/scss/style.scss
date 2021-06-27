@@ -87,10 +87,13 @@ body {
         
     }
 }
-
 ol,ul{
     padding-left:0px;
 }
+.ui-datepicker-calendar {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
     
 }
