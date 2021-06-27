@@ -86,14 +86,10 @@ $(".count").click(function(){
         // 前置作業，清空資料
         $('.rentData').html('');
         let dataTitle = '';
-        let dealBill =[];
         $(".hint").hide().removeClass("ff");
         $(".hint-price").hide().removeClass("ff");
         $('.table').hide();
         // let record =[];
-
-        // 優惠資料的宣告
-        let dataSize = 0;
 
         // step.1 取得目前時間
         let dayStart = $('.time-start').val();
@@ -117,6 +113,8 @@ $(".count").click(function(){
             // 設定目前要處理的月份
             tempNextTime = tempNextTime.toString();
             printMonth = tempNextTime.replace("/","");
+            let fff = tempNextTime;
+            // console.log("fff="+tempNextTime);
 
             // 繳月租費（不分期）
             fullPeriod = (printMonth - time1) % 88 ;
@@ -183,8 +181,9 @@ $(".count").click(function(){
             $('.rentData').html(dataTitle);
     
             // 取得未來時間
-            var tempM = new Date(); 
-            tempNextTime = tempM.setMonth(tempM.getMonth() + 1 + i);
+            var tempM = new Date(fff);
+            console.log("tempM="+tempM);
+            tempNextTime = tempM.setMonth(tempM.getMonth() + 1);
 
             // 轉換時間格式
             let tempData = new Date(tempNextTime);
