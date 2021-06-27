@@ -35,24 +35,24 @@ ol,ul{
     text-align: center;
 }
 .ff{
-  display: flex!important;
-  flex-direction: column;
+	display: flex!important;
+	flex-direction: column;
 }
 .rentBlock{
   --bs-gutter-x: 0rem!important;
 }
 .hint-price{
-  display: none;
-  height:150px;
-  margin-top:10px;
-  border-radius: 4px;
-  border:1px solid #d4d4d4;
+    display: none;
+    height:150px;
+	margin-top:10px;
+	border-radius: 4px;
+	border:1px solid #d4d4d4;
 }
 .hint-price p{
-  margin-bottom: 0px;
+  	margin-bottom: 0px;
 }
 .original{
-  border-bottom: 1px solid #d4d4d4;
+  	border-bottom: 1px solid #d4d4d4;
 }
 .block-rentPrice{
     margin-top:15px;
@@ -61,17 +61,15 @@ ol,ul{
     margin-top:15px;
 }
 .block-start label{
-  margin-bottom: 15px;
+  	margin-bottom: 15px;
 }
 .block-end label{
-  margin-bottom: 15px;
+  	margin-bottom: 15px;
 }
-.ui-datepicker-calendar {
-    display: none;
-}
+
 .hint{
-  padding-bottom: 20px;
-  display: none;
+	padding-bottom: 20px;
+	display: none;
 }
 
 @media screen and (max-width: 768px) {
