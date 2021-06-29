@@ -25,7 +25,7 @@
                     }
                 }
                 h2 {
-                    color: rgb(61 255 220 / 90%);
+                    color: rgba(61, 255, 220, 0.9);
                     margin: 10px 0 0 0;
                     font-size: 28px;
                 }
@@ -933,7 +933,7 @@
 // footlogo
 #footer {
     .footer-info{
-        .logo {
+        .logo{
             img { 
                 width:120px;
                 padding-bottom: 20px;
@@ -1099,11 +1099,27 @@
         }
     }
 }
-.relation{
+#relation{
     .relation-list{
         text-align: center;
         span{
-            font-size: 2em;
+            font-size:2em;
+        }
+        .association{
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            .brand{
+                width: 20%;
+                margin-bottom: 5px;
+                margin-top: 25px;
+                margin-left: 5px;
+                margin-right: 5px;
+                border: 1px solid #efefef;
+                img{
+                    width:100%;
+                }
+            }
         }
     }
 }
@@ -1201,6 +1217,27 @@
             }
         }
     }
+    #relation{
+        .relation-list{
+            text-align: center;
+            span{
+                font-size:2em;
+                
+            }
+            .association{
+                .brand{
+                    width: 20%;
+                    margin-bottom: 5px;
+                    margin-top: 15px;
+                    margin-left: 5px;
+                    margin-right: 5px;
+                    img{
+                        width:100%;
+                    }
+                }
+            }
+        }
+    }
     #contact {
         .contactInf {
             .info {
@@ -1244,6 +1281,7 @@
             }
         }
     }
+   
     .serviceInfMall {
         .block-inf {
             .leftBlock {
@@ -1479,7 +1517,7 @@
                         font-family: "Poppins", sans-serif;
                     }
                     h2 {
-                        color: rgb(61 255 220 / 90%);
+                        color: rgba(61, 255, 220, 0.9);
                         margin: 0px 0 0 0;
                         font-size: 20px;
                     }
@@ -1487,7 +1525,23 @@
             }
         }
     }
-   
+    #relation{
+        .relation-list{
+            text-align: center;
+            span{
+                font-size:2em;
+                
+            }
+            .association{
+                .brand{
+                    width: 46%;
+                    img{
+                        width:100%;
+                    }
+                }
+            }
+        }
+    }
     #data-statistics {
         img {
             width:100%;
@@ -1904,13 +1958,6 @@
             } 
         }
     }
-    
-    .relation {
-        .row {
-            margin-left:5px;
-            margin-right:6px;    
-        }
-    }
     .adservice-community {
         height: 1950px;
     }
@@ -1935,7 +1982,7 @@
                         font-family: "Poppins", sans-serif;
                     }
                     h2 {
-                        color: rgb(61 255 220 / 90%);
+                        color: rgba(61, 255, 220, 0.9);
                         margin: 0px 0 0 0;
                         font-size: 20px;
                     }
