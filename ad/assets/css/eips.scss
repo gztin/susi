@@ -1010,6 +1010,7 @@
         text-align:justify;
     } 
 }
+
 .relation {
     padding: 60px 0 0;
     .title {
@@ -1224,6 +1225,15 @@
             }
         }
     }
+    .features{
+        padding-top:10px;
+        .row{
+            .image{
+                width: 90%;
+                margin: 0 auto;
+            }
+        }
+    }
     #relation{
         .relation-list{
             text-align: center;
@@ -1367,6 +1377,10 @@
         }
     }
     .counts {
+        .image{
+            width: 90%;
+            margin: -20px auto;
+        }
         .content {
             h3.title-setPoint {
                 text-align: center;

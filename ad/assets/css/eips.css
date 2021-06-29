@@ -1216,6 +1216,13 @@
   #services .block-inf .leftBlock .description, #services .block-inf .rightBlock .description {
     font-size: 1.3em;
   }
+  .features {
+    padding-top: 10px;
+  }
+  .features .row .image {
+    width: 90%;
+    margin: 0 auto;
+  }
   #relation .relation-list {
     text-align: center;
   }
@@ -1319,6 +1326,10 @@
   }
   .stepBlock .block-step .step .subStep .thumbnail img {
     width: 200px;
+  }
+  .counts .image {
+    width: 90%;
+    margin: -20px auto;
   }
   .counts .content h3.title-setPoint {
     text-align: center;
