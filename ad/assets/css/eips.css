@@ -56,6 +56,18 @@
   right: 0;
 }
 
+.counts .content {
+  padding: 30px 35px 0px;
+}
+
+.counts .content h3.title-setPoint {
+  text-align: center;
+}
+
+.counts .content span {
+  text-align: center;
+}
+
 .counts .content .count-box span {
   margin-left: 0px !important;
 }
@@ -1308,8 +1320,16 @@
   .stepBlock .block-step .step .subStep .thumbnail img {
     width: 200px;
   }
-  .count .content h3.title-setPoint {
+  .counts .content h3.title-setPoint {
     text-align: center;
+  }
+  .counts .content .buildCount {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .counts .content .buildCount .Inf {
+    width: 40%;
   }
   .block-community .buildPic {
     margin-top: 10px;

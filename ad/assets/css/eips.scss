@@ -57,6 +57,13 @@
 }
 .counts {
     .content {
+        padding:30px 35px 0px;
+        h3.title-setPoint {
+            text-align: center;
+        }
+        span{
+            text-align: center;
+        }
         .count-box {
             span{
                 margin-left:0px!important;
@@ -1359,10 +1366,18 @@
             }
         }
     }
-    .count {
+    .counts {
         .content {
             h3.title-setPoint {
                 text-align: center;
+            }
+            .buildCount{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                .Inf{
+                    width:40%;
+                }
             }
         }
     }
