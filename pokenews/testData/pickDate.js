@@ -34,7 +34,8 @@ $(".count").click(function(){
     // 確認走期
     let timeStart = $(".time-start").val();
     let timeEnd = $(".time-end").val();
-    let printMonth = ''; // 要列印的月份時間資料
+    let printMonth = ''; // 要列印的月份資料
+    let nowPrint = ''; // 要用來計算的正在列印的月份資料
     let rentCost = parseInt($('.price').val()); // 月租金
 
     // step.1 取得目前時間
@@ -62,13 +63,15 @@ $(".count").click(function(){
     let sY = '';
     let sM='';
     let date =[];
-
+    
     let time1 = timeStart.replace("/","");
     let time2 = timeEnd.replace("/","");
+    
     time1 = parseInt(time1);
     time2 = parseInt(time2);
     
-    periodTime = (time2 - time1) % 88 + 1;
+    // periodTime = (time2 - time1) % 88 + 1;
+    periodTime = datemonth(timeStart,timeEnd) + 1;
     periodTime = parseInt(periodTime);
     let priceTotal = rentCost * periodTime; // 總費用,未加上利率
     
@@ -116,31 +119,35 @@ $(".count").click(function(){
             
             // 設定目前要處理的月份
             tempNextTime = tempNextTime.toString();
-            printMonth = tempNextTime.replace("/","");
-            printMonth = parseInt(printMonth);
+            nowPrint = tempNextTime.replace("/","");
+            printMonth = tempNextTime;
+            nowPrint = parseInt(nowPrint);
 
             // 繳月租費（不分期）
-            fullPeriod = (printMonth - time1) % 88 ;
+            // fullPeriod = (printMonth - time1) % 88 ;
+            fullPeriod = datemonth(timeStart,printMonth);
             // console.log("printMonth目前是:"+printMonth);
     
             
             if ( time2 <= 202205 ){
                 // 如果合約小於一年
-                if( (i <= compound) && ( printMonth <= time2 )  ){
+                if( (i <= compound) && ( nowPrint <= time2 )  ){
                     // 如果付款的時間還沒超過time2，走期遞增
-                    periodTime = ( printMonth  - time1 ) % 88 + 1;
-                }else if ( (printMonth > time2) && ( i < compound) ){
+                    periodTime = datemonth(timeStart,printMonth) + 1;
+                    // periodTime = ( printMonth  - time1 ) % 88 + 1;
+                }else if ( (nowPrint > time2) && ( i < compound) ){
                     // 如果付款時間超過time2，且還沒付完分期，走期固定為time2-time1
-                    periodTime = (time2 - time1) % 88 + 1;
-                }else if( (printMonth > time2) && ( i >= compound) ){
+                    periodTime = datemonth(timeStart,timeEnd) + 1;
+                    // periodTime = (time2 - time1) % 88 + 1;
+                }else if( (nowPrint > time2) && ( i >= compound) ){
                     // 第一期後費用會開始遞減
-                    periodTime =( ( time2 - time1 ) % 88 + 1 ) +( compound - (i+1) );
+                    periodTime =( datemonth(timeStart,timeEnd) + 1 ) +( compound - (i+1) );
                 } 
                 FinalPrice = periodTime * monthPrice;
             
             }else if((time2 > 202205)){
 
-                if((i > 11) && ( printMonth <= time2 ) && (i == fullPeriod) ){
+                if((i > 11) && ( nowPrint <= time2 ) && (i == fullPeriod) ){
                     // 如果時間是該月份以及剛好滿一年，費用直接+3000
                     
                     countPeriod = 12;                    
@@ -156,15 +163,16 @@ $(".count").click(function(){
                     FinalPrice = tempPrice;
                     tempPrice = 0;
 
-                }else if((i <= compound) && ( printMonth < time2 ) ){
+                }else if((i <= compound) && ( nowPrint < time2 ) ){
                     // 如果付款的時間還沒到，費用計算照舊
-                    periodTime = ( printMonth - time1 ) % 88 + 1 ;
+                    periodTime = datemonth(timeStart,printMonth) + 1;
+                    // periodTime = ( printMonth - time1 ) % 88 + 1 ;
                     FinalPrice = periodTime * monthPrice;
-                }else if((i < compound) && ( printMonth > time2 ) ){
+                }else if((i < compound) && ( nowPrint > time2 ) ){
                     // 如果付款的時間還沒到，費用計算照舊
                     countPeriod = 12;
                     FinalPrice = countPeriod * monthPrice;
-                }else if(( i >= compound) && (printMonth > time2)){
+                }else if(( i >= compound) && (nowPrint > time2)){
                     // 第一期繳費結束後，費用開始遞減，走期遞增
                     countPeriod = 12;
                     countPeriod = countPeriod + (compound - (i+1));
@@ -250,6 +258,20 @@ let toCurrency = function (FinalPrice){
     var parts = FinalPrice.toString().split('.');
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return parts.join('.');
+}
+
+// 計算兩個日期的時間差
+let datemonth = function (date1,date2){
+    // 拆分年月日
+    date1 = date1.split('/');
+    // 得到月数
+    date1 = parseInt(date1[0]) * 12 + parseInt(date1[1]);
+    // 拆分年月日
+    date2 = date2.split('/');
+    // 得到月数
+    date2 = parseInt(date2[0]) * 12 + parseInt(date2[1]);
+    var m = Math.abs(date1 - date2);
+    return m;
 }
 
 // 列印日期
