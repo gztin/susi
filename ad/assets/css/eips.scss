@@ -170,13 +170,13 @@
                 span{
                     font-weight: bold;
                 }
-                .rule{}
             }
         }
     }
     .rightBlock{
         img{
             max-width:300px;
+            height:intrinsic;
         }
     }
 }
@@ -209,6 +209,7 @@
         .leftBlock{
             img{
                 width:100%;
+                height:intrinsic;
             }
         }
         .rightBlock{
@@ -225,6 +226,7 @@
                 }
                 .hint{
                     padding-top:20px;
+                    height:intrinsic;
                 }
             }
         }
@@ -263,7 +265,7 @@
             align-items: center!important;
             img{
                 width: 100%;
-                height: max-content;
+                height: auto;
             }
         }
         .rightBlock {

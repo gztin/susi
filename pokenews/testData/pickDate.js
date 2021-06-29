@@ -67,6 +67,7 @@ $(".count").click(function(){
     let time2 = timeEnd.replace("/","");
     time1 = parseInt(time1);
     time2 = parseInt(time2);
+    
     periodTime = (time2 - time1) % 88 + 1;
     periodTime = parseInt(periodTime);
     let priceTotal = rentCost * periodTime; // 總費用,未加上利率
@@ -145,12 +146,12 @@ $(".count").click(function(){
                     countPeriod = 12;                    
                     if((i>35)){
                         // 如果費用超過 202204，費用固定 3000
-                        tempPrice = 3000;
+                        tempPrice = rentCost;
                     }else if((i>23) && (i<=35)){
                         countPeriod = countPeriod + (compound - (i+1));
-                        tempPrice = countPeriod * monthPrice+3000;
+                        tempPrice = countPeriod * monthPrice+rentCost;
                     }else {
-                        tempPrice = countPeriod * monthPrice+3000;
+                        tempPrice = countPeriod * monthPrice+rentCost;
                     }
                     FinalPrice = tempPrice;
                     tempPrice = 0;
@@ -171,7 +172,7 @@ $(".count").click(function(){
                 }
             }else{
                 // 超過35個月
-                FinalPrice = 3000;
+                FinalPrice = rentCost;
             }
             
             FinalPrice = parseInt(FinalPrice);
