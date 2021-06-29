@@ -129,7 +129,7 @@ $(".count").click(function(){
             // console.log("printMonth目前是:"+printMonth);
     
             
-            if ( time2 <= 202205 ){
+            if ( (time2 - time1) <= 12 ){
                 // 如果合約小於一年
                 if( (i <= compound) && ( nowPrint <= time2 )  ){
                     // 如果付款的時間還沒超過time2，走期遞增
@@ -145,8 +145,8 @@ $(".count").click(function(){
                 } 
                 FinalPrice = periodTime * monthPrice;
             
-            }else if((time2 > 202205)){
-
+            }else if((time2 - time1) > 12){
+                // 如果合約大於一年
                 if((i > 11) && ( nowPrint <= time2 ) && (i == fullPeriod) ){
                     // 如果時間是該月份以及剛好滿一年，費用直接+3000
                     
