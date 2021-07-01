@@ -1,0 +1,1806 @@
+@charset "UTF-8";
+#hero01 {
+  width: 100%;
+  height: 100vh;
+  background: url(../img/city.jpg) top center;
+  background-size: cover;
+  position: relative;
+}
+
+#hero01 .container {
+  position: relative;
+  padding-top: 74px;
+  text-align: center;
+}
+
+#hero01 .container .row .slogan-eips h1 {
+  margin: 0;
+  font-size: 3em;
+  font-weight: 700;
+  line-height: 64px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+#hero01 .container .row .slogan-eips h1 span {
+  color: #ffc451;
+}
+
+#hero01 .container .row .slogan-eips h2 {
+  color: rgba(61, 255, 220, 0.9);
+  margin: 10px 0 0 0;
+  font-size: 28px;
+}
+
+#hero01:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.counts .content .count-box span {
+  margin-left: 0px !important;
+}
+
+.counts .content .count-box p {
+  margin-left: 0px !important;
+}
+
+.counts .content .count-community p, .counts .content .count-community span {
+  color: #48a3f2;
+}
+
+.counts .content .count-mall p, .counts .content .count-mall span {
+  color: #ff923f;
+}
+
+.counts .setPoint {
+  justify-content: center;
+}
+
+#contact .contactInf .info {
+  width: 100%;
+  background: transparent !important;
+}
+
+.sendmail {
+  background: #ffc451;
+  border: 0;
+  padding: 10px 24px;
+  color: #151515;
+  transition: 0.4s;
+  border-radius: 4px;
+}
+
+.about .container .need {
+  display: flex;
+  justify-content: center;
+}
+
+.about .container .need img {
+  max-width: 400px;
+}
+
+.about .container .reason {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about .container .reason .title {
+  font-size: 2.2em;
+}
+
+.about .container .reason .description {
+  text-align: justify;
+  padding-top: 40px;
+  font-size: 1.5em;
+}
+
+#ad-specification .leftBlock {
+  align-items: center !important;
+}
+
+#ad-specification .leftBlock .title {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+#ad-specification .leftBlock .hint {
+  width: 80%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  background: #b3b3b3;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+#ad-specification .leftBlock .description {
+  display: flex;
+  font-size: 1.4em;
+}
+
+#ad-specification .leftBlock .description p span {
+  font-weight: bold;
+}
+
+#ad-specification .rightBlock img {
+  max-width: 300px;
+}
+
+.services {
+  padding: 30px 0 !important;
+}
+
+.services .advance .subAdvance .icon-box {
+  border: none;
+  padding: 30px 20px !important;
+  background: none !important;
+}
+
+.services .advance .subAdvance .icon-box .title {
+  color: #ffc451;
+}
+
+.services .advance .subAdvance .description {
+  text-align: justify;
+}
+
+.serviceInf .block-inf {
+  display: flex;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  justify-content: center;
+}
+
+.serviceInf .block-inf .leftBlock img {
+  width: 100%;
+}
+
+.serviceInf .block-inf .rightBlock .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.serviceInf .block-inf .rightBlock .content .title {
+  font-size: 2.2em;
+}
+
+.serviceInf .block-inf .rightBlock .content .description {
+  font-size: 1.4em;
+  margin-bottom: 2px;
+}
+
+.serviceInf .block-inf .rightBlock .content .hint {
+  padding-top: 20px;
+}
+
+.serviceInf .block-inf .title {
+  font-size: 2.2em;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.serviceInf .block-inf .title .count {
+  color: #ffb200;
+}
+
+.serviceInf .block-inf .pic-tw {
+  display: flex;
+  justify-content: center;
+}
+
+.serviceInf .block-inf .pic-tw img {
+  width: 70%;
+}
+
+.serviceInf .b-reverse {
+  flex-direction: row-reverse;
+}
+
+.serviceInfMall .block-inf {
+  display: flex;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  justify-content: center;
+}
+
+.serviceInfMall .block-inf h4 {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ffdc84;
+}
+
+.serviceInfMall .block-inf .leftBlock {
+  align-items: center !important;
+}
+
+.serviceInfMall .block-inf .leftBlock img {
+  width: 100%;
+  height: max-content;
+}
+
+.serviceInfMall .block-inf .rightBlock {
+  padding-right: 50px;
+  align-items: center !important;
+}
+
+.serviceInfMall .block-inf .rightBlock .title {
+  font-size: 2em;
+}
+
+.serviceInfMall .block-inf .rightBlock .description {
+  font-size: 1.7em;
+  text-align: justify;
+}
+
+.serviceInfMall .b-reverse {
+  flex-direction: row-reverse;
+}
+
+.eipsNews .icon-box {
+  padding: 20px 20px;
+  margin-top: 20px;
+}
+
+.eipsNews .icon-box h5 {
+  font-size: 1.2em;
+}
+
+#hero00 {
+  width: 100%;
+  height: 100vh;
+  background: url(../img/hero-bg02.jpg) top center;
+  background-size: cover;
+  position: relative;
+}
+
+#hero00 .container {
+  position: relative;
+  padding-top: 74px;
+  text-align: center;
+}
+
+#hero00 .container h1 {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 64px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+#hero00 .container h1 span {
+  color: #ffc451;
+}
+
+#hero00 .container h2 {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 10px 0 0 0;
+  font-size: 24px;
+}
+
+#hero00 .container .adformLink {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px auto;
+  background: #f2c976;
+  color: #000 !important;
+  border-radius: 4px;
+}
+
+#hero00:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.stepBlock .block-step .block-title-step {
+  text-align: center;
+  padding-bottom: 40px;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.stepBlock .block-step .step {
+  display: flex;
+}
+
+.stepBlock .block-step .step .subStep {
+  padding: 0px 20px 0px 20px;
+}
+
+.stepBlock .block-step .step .subStep .thumbnail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stepBlock .block-step .step .subStep .thumbnail .stepTitle {
+  width: 85%;
+  height: 40px;
+  background: #277bca;
+  color: #fff;
+  border-radius: 20px;
+  padding: 5px;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: end;
+}
+
+.stepBlock .block-step .step .subStep .thumbnail .stepTitle .number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  color: #175f8a;
+  display: flex;
+  font-size: 1.4em;
+  align-items: center;
+  justify-content: center;
+  margin-right: 25%;
+}
+
+.stepBlock .block-step .step .subStep .thumbnail h5 {
+  font-size: 1.2em;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.stepBlock .block-step .step .subStep .thumbnail p {
+  font-size: 1.1em;
+  text-align: center;
+  text-align: justify;
+  height: 70px;
+}
+
+.stepBlock .block-step .step .subStep .thumbnail img {
+  width: 200px;
+}
+
+.theNews {
+  padding: 60px 0px 0px;
+}
+
+.theNews .news-content img {
+  width: 100%;
+}
+
+.eipsMall-header {
+  background: #000;
+}
+
+#hero02 {
+  width: 100%;
+  height: 100vh;
+  background: url(../img/hero-bg03.jpg) top center;
+  background-size: cover;
+  position: relative;
+}
+
+.mallEips .container .landingPageTitle .titleContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.mallEips .container .landingPageTitle .titleContent h1 {
+  color: #fff;
+  text-shadow: 1px 1px 3px #171717;
+}
+
+.mallEips .container .landingPageTitle .titleContent .adformLink {
+  width: 150px;
+  height: 50px;
+  margin: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  background: #f2c976;
+  color: #000 !important;
+  border-radius: 4px;
+}
+
+#cityInf {
+  padding-bottom: 0px;
+}
+
+#cityInf .container .block-bottom .inf-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+  justify-content: center;
+}
+
+#cityInf .container .block-bottom .inf-bottom h5 {
+  font-size: 2em;
+}
+
+#cityInf .container .block-bottom .inf-bottom p {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.picCity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url(../img/city.jpg);
+  background-size: cover;
+  width: 100%;
+  height: 212px;
+  background-repeat: no-repeat;
+}
+
+.picCity .linkTitle {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 40px;
+  padding-bottom: 40px;
+}
+
+.picCity .link {
+  display: flex;
+  width: 380px;
+}
+
+.picCity .link .bookingLink {
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  display: block;
+  padding: 10px;
+  background: #ffe2a7;
+  margin: 0px auto;
+  color: #000 !important;
+  border-radius: 4px;
+}
+
+.mallEipsInf {
+  padding-top: 40px;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  background-color: #f1f1f1;
+}
+
+.mallEipsInf .eipitemPic img {
+  width: 120px;
+  margin-left: 35%;
+}
+
+.eipsAdvance {
+  margin-top: 50px;
+}
+
+#services .block-inf {
+  display: flex !important;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  justify-content: center;
+}
+
+#services .block-center {
+  background: #fff;
+}
+
+.ad-service {
+  padding: 60px 0px 0px 0px;
+}
+
+.ad-service .icon-box .title {
+  font-size: 1.8em;
+}
+
+.ad-service .icon-box p {
+  font-size: 1.4em;
+}
+
+.picCityBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url(../img/city.jpg);
+  background-size: contain;
+  width: 100%;
+  height: 205px;
+  background-repeat: no-repeat;
+}
+
+.picCityBottom .linkBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.picCityBottom .linkBlock .linkTitle {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 40px;
+  padding-bottom: 15px;
+}
+
+.picCityBottom .linkBlock .link {
+  display: flex;
+  width: 380px;
+}
+
+.picCityBottom .linkBlock .link .bookingLink {
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  background: #ffe2a7;
+  margin: 0px auto;
+  color: #000 !important;
+  border-radius: 4px;
+}
+
+.eipsCommunity-header {
+  background: #000;
+}
+
+#hero03 {
+  width: 100%;
+  height: 100vh;
+  background: url(../img/hero-bg04.jpg) top center;
+  background-size: cover;
+  position: relative;
+}
+
+.aboutCEIP p {
+  font-size: 1.3em;
+  text-align: justify;
+}
+
+.aboutCEIP .aboutCEIP-pic01 {
+  width: 100%;
+}
+
+.aboutCEIP .aboutCEIP-pic02 {
+  width: 100%;
+}
+
+.aboutCEIP .title a {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.advanceEIP {
+  padding: 30px 0;
+  flex-direction: column;
+  background: #f1f1f1;
+}
+
+.advanceEIP .block-inf .block01 {
+  display: flex;
+  align-items: center;
+  height: 280px;
+}
+
+.advanceEIP .block-inf .block01 img {
+  width: 100%;
+  height: fit-content;
+}
+
+.advanceEIP .block-inf .block02 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 280px;
+}
+
+.advanceEIP .block-inf .block02 img {
+  width: 100%;
+}
+
+#data-statistics img {
+  width: 100%;
+}
+
+.block-accCommunity {
+  padding: 0 30px 50px;
+}
+
+.block-accCommunity .title {
+  display: flex;
+  justify-content: center;
+  padding: 0 30px 0;
+}
+
+.block-accCommunity .title span {
+  font-size: 1.4em;
+  padding: 0 40px 15px 40px;
+  border-bottom: 3px solid #ffc107;
+}
+
+.block-accCommunity .buildPic img {
+  width: 100%;
+}
+
+#hero05 {
+  width: 100%;
+  height: 100vh;
+  background: url(../img/hero-bg05.jpg) top center;
+  background-size: cover;
+  position: relative;
+}
+
+#hero05 .container .row .landingPageTitle .titleContent h1 {
+  color: #fff;
+}
+
+#hero05 .container .row .landingPageTitle .titleContent .adformLink {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+  background: #f2c976;
+  color: #000 !important;
+  border-radius: 4px;
+}
+
+.aboutmallEIPS {
+  background: #f1f1f1;
+  padding: 60px 0px;
+}
+
+.aboutmallEIPS .eipContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.aboutmallEIPS .eipContent .block-title {
+  font-size: 2.2em;
+}
+
+.aboutmallEIPS .eipContent .block-content {
+  padding-top: 40px;
+  font-size: 1.9em;
+}
+
+.aboutmallEIPS .eipitemPic {
+  justify-content: flex-end;
+}
+
+.aboutmallEIPS .eipitemPic img {
+  width: 300px;
+  height: auto;
+}
+
+.advancePic {
+  width: 100%;
+  height: 250px;
+  background: url(../img/mall.jpg) top center;
+  background-size: cover;
+}
+
+.advanceList .eipsAdvance .subAdvance {
+  justify-content: center;
+}
+
+.advanceList .eipsAdvance .subAdvance .icon-box {
+  text-align: center;
+}
+
+.advanceList .eipsAdvance .subAdvance .icon-box .title {
+  font-size: 2.2em;
+  font-weight: bold;
+}
+
+.advanceList .eipsAdvance .subAdvance .icon-box .description {
+  font-size: 1.6em;
+}
+
+#block-plan .title {
+  display: flex;
+  justify-content: center;
+  padding: 0 30px 0;
+}
+
+#block-plan .title span {
+  font-size: 2em;
+  font-weight: bold;
+  padding: 0 40px 15px 40px;
+}
+
+#block-plan .row .machinePic {
+  flex-direction: column;
+  justify-content: center;
+}
+
+#block-plan .row .machinePic span {
+  text-align: center;
+  padding: 10px;
+  font-size: 1.4em;
+}
+
+#block-plan .row .machinePic img {
+  width: 100%;
+}
+
+#block-eipsAdvance .title {
+  display: flex;
+  justify-content: center;
+  padding: 0 30px 0;
+}
+
+#block-eipsAdvance .title span {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+#block-eipsAdvance .row .eipsAdvance img {
+  width: 100%;
+}
+
+.block-community {
+  padding: 0 30px 50px;
+}
+
+.block-community .title {
+  display: flex;
+  justify-content: center;
+  padding: 0 30px 0;
+}
+
+.block-community .title span {
+  font-size: 1.4em;
+  padding: 0 40px 15px 40px;
+  border-bottom: 3px solid #ffc107;
+}
+
+.block-community .buildPic {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.block-community .buildPic img {
+  width: 99%;
+}
+
+.about-header {
+  background: #000;
+}
+
+.bossView {
+  padding-top: 120px;
+  background: #e6e6e6;
+}
+
+.bossView .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.bossView .title p {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.bossView img {
+  width: 100%;
+}
+
+.goodPoint .title {
+  font-size: 2.5em;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.goodPoint .point {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30px;
+}
+
+.goodPoint .point .point-pic {
+  width: 25%;
+}
+
+.goodPoint .point .point-pic img {
+  width: 100%;
+}
+
+.goodPoint .point .point-content {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+}
+
+.goodPoint .point .point-content span {
+  font-size: 1.8em;
+  padding-bottom: 10px;
+  color: #ffbe00;
+  border-bottom: 0.5px solid #d4d4d4;
+}
+
+.goodPoint .point .point-content p {
+  font-size: 1.2em;
+  padding-top: 10px;
+}
+
+.about-content .title {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #ffc173;
+}
+
+.about-content .content {
+  font-size: 1.2em;
+  text-align: justify;
+  line-height: 45px;
+}
+
+.about-history {
+  padding: 60px 0 0;
+}
+
+.about-history .title {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #ffc173;
+}
+
+.about-history .content li {
+  list-style-type: disc;
+  font-size: 1.2em;
+  text-align: justify;
+  line-height: 45px;
+}
+
+#footer .footer-info .logo img {
+  width: 120px;
+  padding-bottom: 20px;
+}
+
+.aboutET {
+  padding-top: 200px;
+  width: 100%;
+  height: auto;
+  background: #d7d7d7;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.aboutET img {
+  width: 100%;
+}
+
+.etView {
+  padding-top: 260px;
+  width: 100%;
+  height: 100vh;
+  background: url(../img/sales.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.etView .container h1 {
+  font-size: 3em;
+  color: #fff;
+  text-shadow: 1px 1px 3px #171717;
+}
+
+.etView .container .adformLink {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+  background: #f2c976;
+  color: #000 !important;
+  border-radius: 4px;
+}
+
+.ceo-content {
+  padding: 60px 0 0;
+}
+
+.ceo-content .title {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #ffc173;
+}
+
+.ceo-content .content {
+  list-style-type: disc;
+  font-size: 1.2em;
+  text-align: justify;
+}
+
+.relation {
+  padding: 60px 0 0;
+}
+
+.relation .title {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #ffc173;
+}
+
+.relation ul li {
+  font-size: 1.2em;
+}
+
+.bottom-logo .row {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.bottom-logo .row img {
+  width: 200px;
+}
+
+.block-salesJob .b-reverse {
+  flex-direction: row-reverse;
+}
+
+.block-salesJob .row .salesPic img {
+  width: 100%;
+  height: auto;
+}
+
+.block-salesJob .row .text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.block-salesJob .row .text-content .title {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #ffc173;
+}
+
+.block-salesJob .row .text-content span {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.block-salesJob .row .text-content .content {
+  font-size: 1.5em;
+  text-align: justify;
+}
+
+.block-salesJob .row .text-content .action {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.4em;
+}
+
+.adservice-community {
+  height: 1950px;
+}
+
+.adservice-mall {
+  height: 1845px;
+}
+
+.eips-community {
+  height: 2200px;
+}
+
+.eips-mall {
+  height: 2200px;
+}
+
+.faq-sales {
+  height: 1350px;
+}
+
+.FAQ {
+  margin: 0 auto;
+  overflow: scroll;
+  overflow-y: hidden;
+}
+
+.EiPsNews .icon-box {
+  margin-top: 20px;
+  padding: 20px 20px;
+}
+
+.EiPsNews .icon-box iframe {
+  height: 240px;
+}
+
+#relation .relation-list {
+  text-align: center;
+}
+
+#relation .relation-list span {
+  font-size: 2em;
+}
+
+#relation .relation-list .association {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+#relation .relation-list .association .brand {
+  width: 20%;
+  margin-bottom: 5px;
+  margin-top: 25px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: 1px solid #efefef;
+}
+
+#relation .relation-list .association .brand img {
+  width: 100%;
+}
+
+/*如果螢幕寬度為 768px（含） 以下，就套用 css 設定*/
+@media screen and (max-width: 768px) {
+  #hero00, #hero01, #hero02, #hero03, #hero05 {
+    height: 50vh;
+  }
+  #hero00 .container h1 {
+    font-size: 2.5em;
+  }
+  .about .container .need {
+    display: flex;
+    justify-content: center;
+  }
+  .about .container .need img {
+    max-width: 100%;
+    height: inherit;
+  }
+  .about .container .reason {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .about .container .reason .title {
+    font-size: 2.2em;
+  }
+  .about .container .reason .description {
+    text-align: justify;
+    padding-top: 40px;
+    font-size: 1.5em;
+  }
+  .etView {
+    padding-top: 300px;
+    width: 100%;
+    height: 70vh;
+    background: url(../img/sales.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .etView .container h1 {
+    font-size: 3em;
+    color: #fff;
+    text-shadow: 1px 1px 3px #171717;
+  }
+  .etView .container .adformLink {
+    width: 150px;
+    height: 50px;
+    display: flex;
+    margin-top: 40px;
+    align-items: center;
+    justify-content: center;
+    background: #f2c976;
+    color: #000 !important;
+    border-radius: 4px;
+  }
+  .eipsNews .icon-box h5 {
+    font-size: 1.5em;
+  }
+  .advanceList {
+    padding: 0px 0px;
+  }
+  #services .block-inf {
+    padding-top: 10px;
+    padding-bottom: 0px;
+  }
+  #services .block-inf .leftBlock, #services .block-inf .rightBlock {
+    padding-right: 0px;
+    justify-content: center;
+  }
+  #services .block-inf .leftBlock img, #services .block-inf .rightBlock img {
+    width: 90%;
+  }
+  #services .block-inf .leftBlock .title, #services .block-inf .rightBlock .title {
+    font-size: 1.8em;
+  }
+  #services .block-inf .leftBlock .description, #services .block-inf .rightBlock .description {
+    font-size: 1.3em;
+  }
+  #relation .relation-list {
+    text-align: center;
+  }
+  #relation .relation-list span {
+    font-size: 2em;
+  }
+  #relation .relation-list .association .brand {
+    width: 20%;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  #relation .relation-list .association .brand img {
+    width: 100%;
+  }
+  #contact .contactInf .info {
+    padding-top: 60px;
+  }
+  .serviceInf {
+    padding: 20px 0px;
+  }
+  .serviceInf .block-inf {
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .serviceInf .block-inf .leftBlock img {
+    width: 100%;
+  }
+  .serviceInf .block-inf .rightBlock .content .title {
+    font-size: 1.3em;
+  }
+  .serviceInf .block-inf .rightBlock .content .description {
+    font-size: 1em;
+    margin-bottom: 2px;
+  }
+  .serviceInf .block-inf .rightBlock .content .hint {
+    padding-top: 20px;
+  }
+  .serviceInf .block-inf .title {
+    font-size: 1.8em;
+    padding-bottom: 10px;
+  }
+  .serviceInf .block-inf .pic-tw img {
+    width: 80%;
+  }
+  .serviceInfMall .block-inf .leftBlock .title {
+    font-size: 2em;
+  }
+  .serviceInfMall .block-inf .leftBlock .description {
+    font-size: 1.7em;
+  }
+  .serviceInfMall .block-center .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .serviceInfMall .block-center .content .hint {
+    background-color: #fff;
+    text-align: right;
+  }
+  .goodPoint {
+    padding: 20px 0px;
+  }
+  .goodPoint .title {
+    font-size: 2.5em;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+  }
+  .goodPoint .point {
+    display: flex;
+  }
+  .goodPoint .point .point-pic img {
+    width: 100%;
+  }
+  .goodPoint .point .point-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .stepBlock .block-step .block-title-step {
+    text-align: center;
+    padding-bottom: 40px;
+    font-size: 3em;
+    font-weight: bold;
+  }
+  .stepBlock .block-step .step .subStep {
+    padding: 0px 10px 60px 10px;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail .stepTitle {
+    width: 100%;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail h5 {
+    font-size: 1.2em;
+    padding-top: 20px;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail p {
+    font-size: 1.1em;
+    height: 70px;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail img {
+    width: 200px;
+  }
+  .count .content h3.title-setPoint {
+    text-align: center;
+  }
+  .block-community .buildPic {
+    margin-top: 10px;
+  }
+  .block-community .buildPic img {
+    width: 230px;
+  }
+  .advanceEIP .block-inf .title {
+    font-size: 2em;
+  }
+  .advanceEIP .block-inf .description {
+    font-size: 1.7em;
+  }
+  .aboutmallEIPS {
+    padding: 60px 0px;
+  }
+  .aboutmallEIPS .eipContent .block-title {
+    font-size: 2em;
+  }
+  .aboutmallEIPS .eipContent .block-content {
+    padding-top: 40px;
+    font-size: 1.5em;
+  }
+  .aboutmallEIPS .eipitemPic img {
+    width: 200px;
+  }
+  .block-salesJob .b-reverse {
+    flex-direction: row-reverse;
+  }
+  .block-salesJob .b-reverse .content {
+    padding-top: 30px;
+  }
+  .block-salesJob .row .salesPic {
+    display: flex;
+    align-items: center;
+  }
+  .block-salesJob .row .salesPic img {
+    width: 100%;
+    height: auto;
+  }
+  .block-salesJob .row .text-content .title {
+    font-size: 2em;
+  }
+  .block-salesJob .row .text-content span {
+    font-size: 1.5em;
+  }
+  .block-salesJob .row .text-content .content {
+    font-size: 1.3em;
+  }
+  .block-salesJob .row .text-content .action {
+    font-size: 1em;
+  }
+  #ad-specification .leftBlock {
+    align-items: center !important;
+  }
+  #ad-specification .leftBlock .title {
+    font-size: 2.2em;
+    font-weight: bold;
+  }
+  #ad-specification .leftBlock .hint {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6em;
+    background: #b3b3b3;
+    color: #fff;
+    margin-bottom: 30px;
+  }
+  #ad-specification .leftBlock .description {
+    font-size: 1em;
+    display: flex;
+  }
+  #ad-specification .leftBlock .description .type {
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  #ad-specification .leftBlock .description .detail {
+    color: #464646;
+    font-size: 1.2em;
+  }
+  #ad-specification .rightBlock img {
+    width: 100%;
+    height: fit-content;
+  }
+  .aboutET {
+    padding-top: 120px;
+  }
+  .adservice-community {
+    height: 1950px;
+  }
+  .adservice-mall {
+    height: 1900px;
+  }
+  .eips-mall {
+    height: 2200px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #hero00 .container h1 {
+    font-size: 2em;
+    line-height: 40px;
+  }
+  #hero01 .container {
+    padding-top: 15px;
+  }
+  #hero01 .container .row .slogan-eips h1 {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: 700;
+    line-height: 64px;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+  }
+  #hero01 .container .row .slogan-eips h2 {
+    margin: 0px 0 0 0;
+    font-size: 20px;
+  }
+  #data-statistics img {
+    width: 100%;
+    max-height: 220px;
+  }
+  #block-eipsAdvance .row .eipsAdvance img {
+    width: 100%;
+    height: inherit;
+  }
+  .theNews {
+    padding: 60px 0px 0px;
+  }
+  .theNews .news-content img {
+    width: 100%;
+    max-height: 219px;
+  }
+  .etView {
+    padding-top: 160px;
+    width: 100%;
+    height: 50vh;
+    background: url(../img/sales.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .etView .container {
+    text-align: center;
+  }
+  .etView .container h1 {
+    font-size: 2.2em;
+    color: #fff;
+    text-shadow: 1px 1px 3px #171717;
+  }
+  .etView .container .adformLink {
+    width: 150px;
+    height: 50px;
+    display: flex;
+    margin: 40px auto;
+    align-items: center;
+    justify-content: center;
+    background: #f2c976;
+    color: #000 !important;
+    border-radius: 4px;
+  }
+  .about .container .need img {
+    max-width: 100%;
+    max-height: 520px;
+  }
+  .about .container .reason .description {
+    font-size: 1.3em;
+  }
+  .goodPoint .title {
+    font-size: 2.5em;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+  }
+  .goodPoint .point {
+    display: flex;
+  }
+  .goodPoint .point .point-pic img {
+    width: 100%;
+    max-height: 91px;
+  }
+  .goodPoint .point .point-content {
+    display: flex;
+    flex-direction: column;
+  }
+  #relation .relation-list {
+    text-align: center;
+  }
+  #relation .relation-list span {
+    font-size: 2em;
+  }
+  #relation .relation-list .association .brand {
+    width: 46%;
+  }
+  #relation .relation-list .association .brand img {
+    width: 100%;
+  }
+  #ad-specification .leftBlock {
+    align-items: center !important;
+  }
+  #ad-specification .leftBlock .title {
+    font-size: 2.2em;
+    font-weight: bold;
+  }
+  #ad-specification .leftBlock .hint {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6em;
+    background: #b3b3b3;
+    color: #fff;
+    margin-bottom: 30px;
+  }
+  #ad-specification .leftBlock .description {
+    font-size: 1em;
+    display: flex;
+  }
+  #ad-specification .leftBlock .description .type {
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2em;
+    width: 25%;
+  }
+  #ad-specification .leftBlock .description .detail {
+    color: #464646;
+    font-size: 1.2em;
+    width: 75%;
+  }
+  #ad-specification .rightBlock {
+    justify-content: center;
+  }
+  #ad-specification .rightBlock img {
+    width: 100%;
+    max-height: 532px;
+  }
+  .block-accCommunity .buildPic img {
+    width: 100%;
+    max-height: 229px;
+  }
+  .mallEips .titleContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #services .block-inf {
+    padding-top: 10px;
+    padding-bottom: 0px;
+  }
+  #services .block-inf .rightBlock {
+    padding-right: 10px;
+  }
+  #services .block-inf .rightBlock .title {
+    text-align: center;
+  }
+  #services .block-inf .rightBlock .description {
+    text-align: center;
+  }
+  #services .block-inf .leftBlock {
+    justify-content: center;
+  }
+  #services .block-inf .leftBlock img {
+    width: 90%;
+    max-height: 264px;
+  }
+  .aboutmallEIPS .eipContent .block-title {
+    text-align: center;
+  }
+  .aboutmallEIPS .eipContent .block-content {
+    text-align: center;
+  }
+  .aboutmallEIPS .eipitemPic {
+    justify-content: center;
+    padding-bottom: 60px;
+  }
+  .aboutmallEIPS .eipitemPic img {
+    width: 200px;
+    margin-left: 0px;
+  }
+  .advanceEIP .block-inf .block01 img {
+    width: 100%;
+    max-height: 280px;
+  }
+  .advanceEIP .block-inf .block02 img {
+    width: 100%;
+    height: auto;
+  }
+  .aboutCEIP .aboutCEIP-pic01 {
+    width: 100%;
+    height: 692px;
+  }
+  .aboutCEIP .aboutCEIP-pic02 {
+    width: 100%;
+    max-height: 159px;
+  }
+  .aboutCEIP .title a {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  .services .subAdvance .icon-box .description {
+    font-size: 1.3em;
+    text-align: center;
+  }
+  .serviceInf .block-inf {
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .serviceInf .block-inf .leftBlock img {
+    width: 100%;
+    max-height: 323px;
+  }
+  .serviceInf .block-inf .rightBlock .content .title {
+    font-size: 2.2em;
+  }
+  .serviceInf .block-inf .rightBlock .content .description {
+    font-size: 1.4em;
+    margin-bottom: 2px;
+  }
+  .serviceInf .block-inf .rightBlock .content .hint {
+    padding-top: 20px;
+  }
+  .serviceInf .block-inf .title {
+    font-size: 1.5em;
+  }
+  .serviceInf .block-inf .pic-tw img {
+    width: 100%;
+    max-height: 390px;
+  }
+  .stepBlock .block-step .block-title-step {
+    font-size: 2.5em;
+  }
+  .stepBlock .block-step .step {
+    flex-direction: column;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail .stepTitle {
+    width: 85%;
+    height: 50px;
+    border-radius: 25px;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail .stepTitle .number {
+    width: 40px;
+    height: 40px;
+    margin-right: 50px;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail .stepTitle .step-title {
+    font-size: 1.5em;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail h5 {
+    font-size: 1.4em;
+  }
+  .advancePic {
+    background-repeat: no-repeat;
+  }
+  .aboutCEIP .title {
+    text-align: center;
+  }
+  .advanceEIP .block-inf .title {
+    text-align: center;
+  }
+  .advanceEIP .block-inf .description {
+    font-size: 1.5em;
+    text-align: center;
+  }
+  #block-plan .title span {
+    font-size: 2.2em;
+    text-align: center;
+    padding: 0 0px 15px 0px;
+  }
+  #block-plan .row .machinePic img {
+    width: 100%;
+    height: auto;
+  }
+  #block-plan .row .machinePic span {
+    padding: 20px 0px 0px 0px;
+    font-size: 1.9em;
+  }
+  .block-community .title span {
+    font-size: 2.1em;
+  }
+  .block-community .buildPic img {
+    width: 350px;
+    max-height: 263px;
+  }
+  .block-salesJob .b-reverse {
+    flex-direction: inherit;
+  }
+  .block-salesJob .b-reverse .text-content .title, .block-salesJob .b-reverse .text-content span, .block-salesJob .b-reverse .text-content .content {
+    text-align: center;
+  }
+  .block-salesJob .b-reverse .content {
+    padding-top: 30px;
+  }
+  .block-salesJob .row .text-content .title {
+    text-align: center;
+  }
+  .block-salesJob .row .text-content span {
+    text-align: center;
+  }
+  .block-salesJob .row .text-content .content {
+    padding-top: 30px;
+    text-align: center;
+  }
+  .aboutET {
+    padding-top: 120px;
+  }
+  .bottom-logo .row img {
+    width: 200px;
+    max-height: 91px;
+  }
+  .about-content {
+    padding: 20px 0 0;
+  }
+  .about-content .content {
+    line-height: 30px;
+  }
+  .about-history {
+    padding: 20px 0 0;
+  }
+  .about-history .row {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .about-history .row .title {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ffc173;
+  }
+  .about-history .row .content li {
+    line-height: 30px;
+  }
+  .relation .row {
+    margin-left: 5px;
+    margin-right: 6px;
+  }
+  .adservice-community {
+    height: 1950px;
+  }
+  .adservice-mall {
+    height: 1800px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  #hero01 {
+    padding-top: 0px;
+    height: 80vh;
+  }
+  #hero01 .container {
+    padding-top: 0px;
+  }
+  #hero01 .container .row .slogan-eips h1 {
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: 700;
+    line-height: 64px;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+  }
+  #hero01 .container .row .slogan-eips h2 {
+    margin: 0px 0 0 0;
+    font-size: 20px;
+  }
+  .about .container .reason .title {
+    text-align: center;
+  }
+  .about .container .reason .description {
+    font-size: 1.4em;
+    text-align: center;
+  }
+  #hero00 {
+    padding-top: 100px;
+    height: 100vh;
+  }
+  #hero02 {
+    padding-top: 100px;
+    height: 80vh;
+  }
+  #hero03 {
+    padding-top: 150px;
+    height: 80vh;
+  }
+  #hero05 {
+    padding-top: 100px;
+    height: 80vh;
+  }
+  .advanceEIP .block-inf .block01 img {
+    width: 100%;
+    height: inherit;
+  }
+  .advanceEIP .block-inf .block02 img {
+    width: 100%;
+    height: auto;
+  }
+  .etView {
+    padding-top: 160px;
+    height: 80vh;
+  }
+  .counts {
+    padding: 0px 0px;
+  }
+  .counts .image {
+    background-size: contain;
+  }
+  .contact .section-title p {
+    font-size: 2em;
+  }
+  .aboutET {
+    padding-top: 120px;
+  }
+  .stepBlock .block-step .block-title-step {
+    font-size: 2em;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail .stepTitle .number {
+    margin-right: 20px;
+  }
+  .stepBlock .block-step .step .subStep .thumbnail .stepTitle .step-title {
+    font-size: 1.3em;
+  }
+  .aboutmallEIPS .eipContent .block-title {
+    font-size: 1.6em;
+  }
+  .aboutmallEIPS .eipContent .blcok-content {
+    font-size: 1.3em;
+  }
+  #services .block-inf .rightBlock .title {
+    font-size: 1.6em;
+  }
+  #block-plan .title span {
+    font-size: 1.5em;
+  }
+  .block-community .title span {
+    font-size: 1.4em;
+  }
+  .block-community .buildPic img {
+    width: -webkit-fill-available;
+  }
+  .bottom-logo .row img {
+    width: 200px;
+    max-height: 91px;
+  }
+  .adservice-community {
+    height: 2150px;
+  }
+  .adservice-mall {
+    height: 1800px;
+  }
+  .eips-mall {
+    height: 2300px;
+  }
+  .eips-community {
+    height: 2300px;
+  }
+  .faq-sales {
+    height: 1400px;
+  }
+}
