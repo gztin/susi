@@ -158,7 +158,6 @@ $(".count").click(function(){
             fullPeriod = datemonth(timeStart,printMonth);
             // console.log("printMonth目前是:"+printMonth);
     
-            
             if ( time2 <= 202205 ){
                 // 在202205以前的費用，採分期複利的方式付款
                 if((i <= compound-1) && ( nowPrint <= time2 )){
@@ -200,86 +199,15 @@ $(".count").click(function(){
                     // 計算起始時間到202205之間總共需繳交幾個月的分期費用
                     periodTime = datemonth(timeStart,printMonth) + 1;
                     tempPrice = periodTime * monthPrice;
-                }
-                // else if(( i > compound-1) &&(nowPrint == time2)){
-                //     // 第一期的費用繳清之後，每個月需支付的分期費用會開始遞減
-                //     // 在time2之前，且時間是202205以後，繳固定月費
-                //      periodTime =( datemonth(timeStart,timeEnd) ) +( compound - (i+1) );
-                //      tempPrice = periodTime * monthPrice + rentCost;
-                // }else if( (i <= compound-1) && (nowPrint > time2) && (nowPrint > 202205)){
-                //     // 如果列印的資料超過走期，且第一期費用還沒繳完
-                //     // 該月不需繳time2的分期，所以少了一筆分期的費用
-                //     periodTime = datemonth(timeStart,timeEnd);
-                //     tempPrice = periodTime * monthPrice;
-                // }else if(( i > compound-1) && (nowPrint > time2)){
-                //     // 第一期的費用繳清之後，每個月需支付的分期費用會開始遞減
-                //      periodTime =( datemonth(timeStart,timeEnd) ) +( compound - (i+1) );
-                //      tempPrice = periodTime * monthPrice;
-                // }
+                }   
                 FinalPrice = tempPrice;
                 tempPrice = 0;
-            }
-            // else if( time2 > 202205 ){
-                // if (nowPrint <= 202205){
-                //     // 計算起始時間到202205之間總共需繳交幾個月的分期費用
-                //     periodTime = datemonth(timeStart,printMonth) + 1;
-                //     tempPrice = periodTime * monthPrice;
-                // }else if( (i <= compound-1) && (nowPrint <= time2) && (nowPrint > 202205)){
-                //     // 在time2之前，且時間是202205以後，繳固定月費
-                //     periodTime = 202205 - time1;
-                //     tempPrice = periodTime * monthPrice + rentCost;
-                // }else if(( i > compound-1) &&(nowPrint == time2)){
-                //     // 第一期的費用繳清之後，每個月需支付的分期費用會開始遞減
-                //     // 在time2之前，且時間是202205以後，繳固定月費
-                //      periodTime =( datemonth(timeStart,timeEnd) ) +( compound - (i+1) );
-                //      tempPrice = periodTime * monthPrice + rentCost;
-                // }else if( (i <= compound-1) && (nowPrint > time2) && (nowPrint > 202205)){
-                //     // 如果列印的資料超過走期，且第一期費用還沒繳完
-                //     // 該月不需繳time2的分期，所以少了一筆分期的費用
-                //     periodTime = datemonth(timeStart,timeEnd);
-                //     tempPrice = periodTime * monthPrice;
-                // }else if(( i > compound-1) && (nowPrint > time2)){
-                //     // 第一期的費用繳清之後，每個月需支付的分期費用會開始遞減
-                //      periodTime =( datemonth(timeStart,timeEnd) ) +( compound - (i+1) );
-                //      tempPrice = periodTime * monthPrice;
-                // }
-                // FinalPrice = tempPrice;
-                // tempPrice = 0;
-                // else if((nowPrint > 202205)){
-                //     // 如果合約在202206以後，那該月的費用不分期，且要加上前面未繳交的分期費用
-                //     // countPeriod = 12;
-                //     periodTime = datemonth(timeStart,printMonth) + 1;
-                //     tempPrice = periodTime * monthPrice + rentCost;
-                //     FinalPrice = tempPrice;
-                //     tempPrice = 0;                   
-                //     // if((i>35)){
-                //     //     // 如果費用超過 202205，費用固定 3000
-                //     //     tempPrice = rentCost;
-                //     // }else if((i>23) && (i<=35)){
-                //     //     countPeriod = countPeriod + (compound - (i+1));
-                //     //     tempPrice = countPeriod * monthPrice+rentCost;
-                //     // }else {
-                //     //     tempPrice = countPeriod * monthPrice+rentCost;
-                //     // }
-                //     // FinalPrice = tempPrice;
-                //     // tempPrice = 0;
-
-                // }else if( nowPrint <= 202205 ){
-                    // 如果目前列印的資料是在202205以內的
-                    // periodTime = datemonth(timeStart,printMonth) + 1;
-                    // FinalPrice = periodTime * monthPrice;
-                // }
-                // else if((i < compound) && ( nowPrint > time2 ) ){
-                //     // 如果付款的時間還沒到，費用計算照舊
-                //     countPeriod = 12;
-                //     FinalPrice = countPeriod * monthPrice;
-                // }
-            // }
-            else{
+            }else{
                 // 超過35個月
                 FinalPrice = rentCost;
             }
             
+    
             FinalPrice = parseInt(FinalPrice);
             totalPrice = totalPrice + FinalPrice;
            
