@@ -7,6 +7,26 @@ body {
     background: #CCC5B9;
     font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;
 }
+
+// daypick設定
+#ui-datepicker-div button.ui-datepicker-current {display: none;}
+.ui-datepicker .ui-datepicker-buttonpane button{
+    width:100%;
+    margin: .5em 0em .4em;
+    padding: .5em .6em .3em .6em;
+}
+.hintInf{
+    display: none;
+    font-size: 1.2em;
+    text-align: center;
+    transition: all 1.5s ease;
+  -webkit-transition: all 1.5s ease;
+    p{
+        padding:10px;
+        margin-bottom: 0rem;
+    }
+}
+
 .rentBlock{
     --bs-gutter-x: 0rem!important;
     .form-title{
@@ -83,11 +103,17 @@ body {
         flex-direction: column;
         justify-content: space-around;
     }
+    .rowClass{
+        display: flex!important;
+        justify-content: center;
+    }
 }
 .table{
     margin-top:15px;
     border: 1px solid #d4d4d4;
     display: none;
+    transition: all 1.5s ease;
+  -webkit-transition: all 1.5s ease;
     thead{
         background:#252422;
         color:#FFFCF2;
