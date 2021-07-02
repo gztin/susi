@@ -174,6 +174,8 @@ $(".count").click(function(){
             }else if( time1 > 202205 ){
                 // 在202205以後的費用，費用固定
                 tempPrice = rentCost;
+                FinalPrice = tempPrice;
+                tempPrice = 0;
             }else if( ( time1 <= 202205 ) && ( time2 > 202205 )){
                 // 如果走期有跨過202205
                 if( nowPrint > 202404 ){
