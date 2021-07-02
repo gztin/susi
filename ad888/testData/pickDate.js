@@ -278,14 +278,14 @@ function editvfput() {
     let count = 5;
     let down = setInterval(CountDown, 1000);//每秒執行一次，賦值
     $('.timeHint').css('display','block');
-    $('.hintInf').css('display','flex');
+    $('.hintInf').addClass("rowClass");
     function CountDown() {
         $('.timeHint').text( count);//寫入
         console.log("count=" + count);
         if (count == 0) {
             // $('.timeHint').hide();//修改狀態
             $('.timeHint').css('display','none');
-            $('.hintInf').css('display','none');
+            $('.hintInf').removeClass("rowClass");
             $('.table').css('margin-top','15px');
             clearInterval(down);//銷燬計時器
             return;
