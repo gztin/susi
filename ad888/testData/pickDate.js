@@ -79,6 +79,7 @@ $(".count").click(function(){
     
     let time1 = timeStart.replace("/","");
     let time2 = timeEnd.replace("/","");
+    let deadLine = "2022/05";
     
     time1 = parseInt(time1);
     time2 = parseInt(time2);
@@ -112,7 +113,7 @@ $(".count").click(function(){
             dataLength = periodTime;
         }else if( ( time1 <= 202205 ) && ( time2 > 202205 ) && ( time2 <= 202404 ) ){
             // 合約跨過202205
-            dataLength = compound + ( (202205 - time1));
+            dataLength = compound + (datemonth(timeStart,deadLine));
         }else if ( ( time1 <= 202205 ) && ( time2 > 202205 ) && ( time2 > 202404 ) ){
             dataLength = periodTime;
         }else{
@@ -168,20 +169,20 @@ $(".count").click(function(){
                     tempPrice = rentCost;
                 }else if( (nowPrint > 202205) && (i <= compound-1) && (nowPrint <= time2) ){
                     // 在time2之前，且時間是202205以後，繳固定月費
-                    periodTime = (202205 - time1)+1;
+                    periodTime = datemonth(timeStart,deadLine) + 1;
                     tempPrice = periodTime * monthPrice + rentCost;
                 }else if( (nowPrint > 202205) && (i <= compound-1) && (nowPrint > time2) ){
                     // 如果第一期費用還沒繳完
                     // 該月不需繳time2的分期，所以少了一筆分期的費用
-                    periodTime = ( 202205 - time1 ) + 1;
+                    periodTime = datemonth(timeStart,deadLine) + 1;
                     tempPrice = periodTime * monthPrice;
                 }else if( (nowPrint > 202205) && (i > compound-1) && (nowPrint <= time2) ){
                     // 第一期的費用繳清之後，每個月需支付的分期費用會開始遞減
-                    periodTime = ( 202205 - time1 + 1 ) + ( compound - ( i + 1 ) );
+                    periodTime = ( datemonth(timeStart,deadLine) + 1 ) + ( compound - ( i + 1 ) );
                     tempPrice = periodTime * monthPrice + rentCost;
                 }else if( (nowPrint > 202205) && (i > compound-1) && (nowPrint > time2) ){
                     // 第一期的費用繳清之後，每個月需支付的分期費用會開始遞減
-                    periodTime = ( 202205 - time1 + 1 ) + ( compound - ( i + 1 ) );
+                    periodTime = ( datemonth(timeStart,deadLine) + 1 ) + ( compound - ( i + 1 ) );
                     tempPrice = periodTime * monthPrice;
                 }else if ( nowPrint <= 202205 ){
                     // 計算起始時間到202205之間總共需繳交幾個月的分期費用
@@ -230,11 +231,9 @@ $(".count").click(function(){
         totalPrice = toCurrency(totalPrice);
         priceTotal = toCurrency(priceTotal);
         $(".price-data2").html(totalPrice+"元");
-        // $('.hint').show();
         $(".hint-price").show().addClass("ff");
         $(".price-data1").html(priceTotal+"元");
         $('.table').show();
-        // $('.hintInf').show().addClass("rowClass");
         editvfput();
     }
 });
