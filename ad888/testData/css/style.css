@@ -145,8 +145,8 @@ body {
 }
 
 .table .rentData tr:nth-child(even) {
-  background: #403D39;
-  color: #FFFCF2;
+  background: #ffefdb;
+  color: #403D39;
 }
 
 .table tbody tr {
