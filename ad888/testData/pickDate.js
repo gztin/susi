@@ -290,6 +290,7 @@ function editvfput() {
             $('.hintInf').css('display','none');
             $('.table').css('margin-top','15px');
             clearInterval(down);//銷燬計時器
+            $('.timeHint').html('');
             return;
         }
     count--;
