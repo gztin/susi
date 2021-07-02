@@ -278,7 +278,8 @@ function editvfput() {
     let count = 5;
     let down = setInterval(CountDown, 1000);//每秒執行一次，賦值
     $('.timeHint').css('display','block');
-    $('.hintInf').addClass("rowClass");
+    $('.hintInf').css('display','flex');
+    $('.hintInf').css('justify-content','center');
     $('.table').css('margin-top','0px');
     function CountDown() {
         $('.timeHint').text( count);//寫入
@@ -286,7 +287,7 @@ function editvfput() {
         if (count == 0) {
             // $('.timeHint').hide();//修改狀態
             $('.timeHint').css('display','none');
-            $('.hintInf').removeClass("rowClass");
+            $('.hintInf').css('display','none');
             $('.table').css('margin-top','15px');
             clearInterval(down);//銷燬計時器
             return;
