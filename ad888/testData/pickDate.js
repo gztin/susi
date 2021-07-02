@@ -118,20 +118,6 @@ $(".count").click(function(){
         }else{
             dataLength = compound + periodTime-1;
         }
-        // else if( ( time1 <= 202205 ) && ( time2 <= 202404 ) ){
-        // 如果合約是超過202205，但是不超過202404
-        // dataLength = compound + periodTime - 1;
-        // }
-         // if(periodTime>35){
-        //     dataLength = periodTime;
-        // }else if(periodTime>12){
-        //     dataLength = 35;
-        // }else if((periodTime>12)&&(periodTime < 35)){
-        //     dataLength = 35;
-        // }else{
-        //     dataLength = compound + periodTime-1;
-        // }
-        
     
         // 前置作業，清空資料
         $('.rentData').html('');
@@ -140,7 +126,7 @@ $(".count").click(function(){
         
         $(".hint").hide().removeClass("ff");
         $(".hint-price").hide().removeClass("ff");
-        $('.hintInf').hide().removeClass("rowClass");
+        // $('.hintInf').hide().removeClass("rowClass");
         $('.table').hide();
         // let record =[];
     
@@ -209,7 +195,6 @@ $(".count").click(function(){
                 FinalPrice = rentCost;
             }
             
-    
             FinalPrice = parseInt(FinalPrice);
             totalPrice = totalPrice + FinalPrice;
            
@@ -241,16 +226,16 @@ $(".count").click(function(){
                 console.log("tempNextTime 處理完後的結果是:"+tempNextTime);
             }
         }
-
         $('.rentData').html(dataTitle);
         totalPrice = toCurrency(totalPrice);
         priceTotal = toCurrency(priceTotal);
         $(".price-data2").html(totalPrice+"元");
-        $('.hint').show().addClass("ff");
+        // $('.hint').show();
         $(".hint-price").show().addClass("ff");
         $(".price-data1").html(priceTotal+"元");
         $('.table').show();
-        $('.hintInf').show().addClass("rowClass");
+        // $('.hintInf').show().addClass("rowClass");
+        editvfput();
     }
 });
 
@@ -281,15 +266,32 @@ function checknumber() {
 // 倒數顯示後消失
 
 
-    
-
-
 
 // 轉換千分位
 let toCurrency = function (FinalPrice){
     var parts = FinalPrice.toString().split('.');
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return parts.join('.');
+}
+
+function editvfput() {
+    let count = 5;
+    let down = setInterval(CountDown, 1000);//每秒執行一次，賦值
+    $('.timeHint').css('display','block');
+    $('.hintInf').css('display','flex');
+    function CountDown() {
+        $('.timeHint').text( count);//寫入
+        console.log("count=" + count);
+        if (count == 0) {
+            // $('.timeHint').hide();//修改狀態
+            $('.timeHint').css('display','none');
+            $('.hintInf').css('display','none');
+            $('.table').css('margin-top','15px');
+            clearInterval(down);//銷燬計時器
+            return;
+        }
+    count--;
+    }
 }
 
 // 計算兩個日期的時間差
