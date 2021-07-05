@@ -3,8 +3,8 @@ $( ".date-picker1" ).datepicker({
     changeYear: true,
     showButtonPanel: true,
     dateFormat:"yy/mm",
-    yearRange:"2021:2200",
-    minDate: new Date(),
+    yearRange:"2020:2200",
+    minDate: new Date("2021/06"),
     onClose: function(dateText, inst) { 
         var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
         var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
@@ -17,7 +17,7 @@ $('.date-picker2').datepicker( {
     showButtonPanel: true,
     dateFormat:"yy/mm",
     yearRange: "2020:2200",
-    minDate: new Date(),
+    minDate: new Date("2021/06"),
     onClose: function(dateText, inst) { 
         var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
         var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
