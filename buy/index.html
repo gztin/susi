@@ -7,7 +7,7 @@
         <title>LINE Login Demo</title>
     </head>
     <body>
-        <button id="lineLoginBtn">LINE 登入</button>
+        <!-- <button id="lineLoginBtn">LINE 登入</button>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js'></script>
         <script>
             $('#lineLoginBtn').on('click', function(e) {
@@ -21,6 +21,18 @@
                 link += '&scope=openid%20profile';
                 window.location.href = link;
             });
-        </script>
+        </script> -->
+        <script>
+            function Auth() {
+            var URL = 'https://notify-bot.line.me/oauth/authorize?';
+            URL += 'response_type=code';
+            URL += '&client_id=9J0iTSSmnF6eGTuAlUIrwv';
+            URL += '&redirect_uri=http://gztin.github.io/susi/buy/aaa.html';
+            URL += '&scope=notify';
+            URL += '&state=abcde';
+            window.location.href = URL;
+            }
+            </script>
+        <button onclick="Auth();">點選這裡連結到LineNotify</button>
     </body>
     </html>
