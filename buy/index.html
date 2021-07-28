@@ -32,7 +32,19 @@
             URL += '&state=abcde';
             window.location.href = URL;
             }
+            function doPost() {
+                UrlFetchApp.fetch('https://notify-api.line.me/api/notify', {
+                    'headers': {
+                    'Authorization': 'Bearer ' + 'oClDubQf1hLNDseo9Xuo4ZnyRBJfqfykk0H0s8u44DG',
+                    },
+                    'method': 'post',
+                    'payload': {
+                        'message':'測試一下！'
+                    }
+                });
+            }
             Auth();
+            doPost();
             </script>
         
         <!-- <button onclick="Auth();">點選這裡連結到LineNotify</button> -->
