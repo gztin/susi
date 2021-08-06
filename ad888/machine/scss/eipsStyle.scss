@@ -1,0 +1,269 @@
+// 通用屬性
+%bs4-input-style{
+    width:100%;
+    height:calc(1.5em + 0.75rem + 2px);
+    border:1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+%dayBlock-border{
+    border: 1px solid #d4d4d4;
+}
+
+::placeholder {
+    color: rgb(201, 201, 201)!important;
+}
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+
+.hint-danger{
+    padding:10px;
+    margin:10px;
+}
+
+.buttonBlock{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.header-link{
+    li{
+        a{color:#fff;}
+    }
+}
+.col-block{
+    flex-direction: column;
+}
+
+
+
+
+.navbar{
+    display: flex;
+    justify-content: center;
+}
+.leftBlock{
+    .timeBlock{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background: #fff;
+        border:1px solid #d4d4d4;
+        width: 250px;
+        height:300px;
+        margin: 10px;
+        margin-top: 70px;
+        .block-header{
+            background: #3F4349;
+            width:100%;
+            height:45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span{
+                color:#fff;
+            }
+        }
+        .block-content{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width:220px;
+            height:200px;
+            .time-start{
+                margin-top:20px;
+            }
+        }
+    }
+}
+
+// 刊登紀錄
+.hintView{
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin: auto;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    background-color: rgba(0,0,0,.7);
+    .hintBlock-printSuccess{
+        width:400px;
+        height:200px;
+        background: #fff;
+        display: none;
+        text-align: center;
+        flex-direction: column;
+        justify-content: space-around;
+        .hint-content{
+            margin:5%;
+            .hint-inf{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                p{
+                    font-size: 1.4em;
+                    margin-bottom: 5px;
+                }
+                .closeHint{
+                    margin:10px;
+                    width:80%;
+                }
+            }
+        }
+    }
+    .hintBlock-viewReport{
+        .hint-content{
+            width:600px;
+            padding: 20px;
+            background: #fff;
+            img{
+                width:100%;
+            }
+            .control{
+                padding:10px;
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    }
+}
+.itemList{
+    width: 1200px;
+    .pageTitle{
+        margin-top:10px;
+        margin-left:10px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .listBlock{
+        // border:1px solid#bdbdbd;
+        margin-bottom: 5%;
+        background: #fff;
+        .blockHead{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top:20px;
+        }
+        .chartBlock{
+            max-width: 1040px;
+            padding: 20px;
+        }
+        table{
+            tbody{
+                background: #fff;
+                tr{
+                    td.arrangeNumber{
+                        width:0.25em;
+                    }
+                    td.action{
+                        display:flex;
+                        a{
+                            margin:3px;
+                        }
+                    }
+                }
+            }
+        }
+        .table th{
+            background: #313131;
+            color:#fff;
+            font-weight: 100;
+            padding-top: 0.8rem!important;
+            padding-bottom: 0.8rem!important;
+        }
+        .table th, .table td {
+            vertical-align: inherit!important;
+            padding: 0.75rem;
+        }
+        nav{
+            padding-bottom: 2px;
+            .pagination{
+                justify-content: flex-end;
+            }
+        }
+        
+    }
+}
+
+.sb-nav-fixed {
+    #layoutSidenav {
+        background: #E9EEF3 !important;
+        padding-bottom: 20px !important;
+        #layoutSidenav_content{
+            padding-left: 0px !important;
+        }
+    }
+}
+#ui-datepicker-div{
+    z-index: 9999!important;
+}
+// 區域資訊
+.placeBlock{
+    display:flex;
+    padding-left: 0px !important;
+    .cityInfBlock{
+        max-width: 18%!important;
+        padding-left: 0px !important;
+        .spanCity,.spanCountry{
+            width: 120px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 1em;
+            font-weight: inherit;
+        }
+        .spanCity{
+            background: #687689!important;
+        }
+        .spanCountry{
+            background: #8A9DB8!important;
+        }
+    }
+}
+
+.dataControl{
+    display:flex;
+    justify-content: flex-end;
+    padding-right: 0px !important;
+    a{
+        margin-left: 5px;
+    }
+}
+.footerBlock{
+    color:#Fff;
+    background: #3F4349;
+}
+footer{
+    z-index: 9;
+}
+
+
+// 通用屬性
+
+.block-active{
+    display: flex!important;
+}
+.hide{
+    display: none!important;
+}
+
+body {
+    font-family: Microsoft JhengHei,Noto Sans TC,sans-serif;
+}
+  
+
+  
+   
+

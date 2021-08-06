@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>數據流量監測平台</title>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link href="css/style.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/eipsStyle.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <div class="hintView hide">
+        <!-- 報表匯出成功 -->
+        <div class="hintBlock-printSuccess block-active">
+            <div class="hint-content">
+                <h2>通知</h2>
+                <hr>
+                <div class="hint-inf">
+                    <p>錯誤訊息01</p>
+                    <a class="btn btn-primary closeHint" href="#" role="button">關閉視窗</a>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">數據流量監測平台</a>
+            <!-- <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button> -->
+            <!-- Navbar Search-->
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav leftBlock" class="leftBlock">
+                <div class="timeBlock">
+                    <div class="block-header">
+                        <span class="header-title-name">選擇查詢時間</span>
+                    </div>    
+                    <div class="block-content">
+                        <input class="date-picker1 time-start" type="text" readonly="readonly">
+                        <span>到</span>
+                        <input class="date-picker2 time-end" type="text" readonly="readonly">
+                        <button class="btn btn-primary count" type="button">查詢</button>
+                    </div>
+                </div>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="itemList">
+                                <div class="form-group pageTitle">
+                                    <h3>超標設備列表</h3>
+                                </div>
+                                <div class="col-sm-12 listBlock">
+                                    <div class="blockHead">
+                                        <div class="form-group col-sm-8 placeBlock">
+                                            <div class="col-sm-3 cityInfBlock">
+                                                <span class="badge bg-secondary spanCity">台北市</span>
+                                            </div>
+                                            <div class="col-sm-3 cityInfBlock">
+                                                <span class="badge bg-secondary spanCountry">松山區</span>
+                                            </div>
+                                            <div class="col-sm-3 cityInfBlock">
+                                                <span class="badge bg-secondary spanCountry">南港區</span>
+                                            </div>
+                                            <div class="col-sm-3 cityInfBlock">
+                                                <span class="badge bg-secondary spanCountry">萬華區</span>
+                                            </div>
+                                            <div class="col-sm-3 cityInfBlock">
+                                                <span class="badge bg-secondary spanCountry">中山區</span>
+                                            </div>
+                                            <div class="col-sm-3 cityInfBlock">
+                                                <span class="badge bg-secondary spanCountry">大安區</span>
+                                            </div> 
+                                        </div>
+                                        <!-- <div class="form-group col-sm-4 dataControl">
+                                            <a class="btn btn-outline-dark addtoList" href="#" role="button">加入投放清單</a>
+                                            <a class="btn btn-outline-dark viewReport" href="adRecord.html" role="button">返回刊登紀錄</a>
+                                            <a class="btn btn-primary viewReport" href="#" role="button">匯出報表</a>
+                                        </div> -->
+                                    </div>
+                                    <table class="table table-bordered table-hover">
+                                        <tr>
+                                            <th class="arrangeNumber">NO</th>
+                                            <th class="">時間</th>
+                                            <th class="">縣市</th>
+                                            <th class="">鄉鎮區</th>
+                                            <th class="">場域名稱</th>
+                                            <th class="">mac</th>
+                                            <th class="">流量(GB)</th>
+                                            <th class="">動作</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="arrangeNumber">1</td>
+                                            <td class="">2021/08/03</td>
+                                            <td class="">台北市</td>
+                                            <td class="">信義區</td>
+                                            <td class="">信義香榭</td>
+                                            <td class="">z00001</td>
+                                            <td class="">4.2</td>
+                                            <td class="action">
+                                                <a class="btn btn-primary  viewReport" href="device-detail.html" role="button">查看</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="arrangeNumber">2</td>
+                                            <td class="">2021/08/03</td>
+                                            <td class="">台北市</td>
+                                            <td class="">信義區</td>
+                                            <td class="">信義香榭</td>
+                                            <td class="">z00001</td>
+                                            <td class="">4.2</td>
+                                            <td class="action">
+                                                <a class="btn btn-primary  viewReport" href="device-detail.html" role="button">查看</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="arrangeNumber">3</td>
+                                            <td class="">2021/08/03</td>
+                                            <td class="">台北市</td>
+                                            <td class="">信義區</td>
+                                            <td class="">信義香榭</td>
+                                            <td class="">z00001</td>
+                                            <td class="">4.2</td>
+                                            <td class="action">
+                                                <a class="btn btn-primary  viewReport" href="device-detail.html" role="button">查看</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="arrangeNumber">4</td>
+                                            <td class="">2021/08/03</td>
+                                            <td class="">台北市</td>
+                                            <td class="">信義區</td>
+                                            <td class="">信義香榭</td>
+                                            <td class="">z00001</td>
+                                            <td class="">4.2</td>
+                                            <td class="action">
+                                                <a class="btn btn-primary  viewReport" href="device-detail.html" role="button">查看</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="arrangeNumber">5</td>
+                                            <td class="">2021/08/03</td>
+                                            <td class="">台北市</td>
+                                            <td class="">信義區</td>
+                                            <td class="">信義香榭</td>
+                                            <td class="">z00001</td>
+                                            <td class="">4.2</td>
+                                            <td class="action">
+                                                <a class="btn btn-primary  viewReport" href="device-detail.html" role="button">查看</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="arrangeNumber">6</td>
+                                            <td class="">2021/08/03</td>
+                                            <td class="">台北市</td>
+                                            <td class="">信義區</td>
+                                            <td class="">信義香榭</td>
+                                            <td class="">z00001</td>
+                                            <td class="">4.2</td>
+                                            <td class="action">
+                                                <a class="btn btn-primary  viewReport" href="device-detail.html" role="button">查看</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="arrangeNumber">7</td>
+                                            <td class="">2021/08/03</td>
+                                            <td class="">台北市</td>
+                                            <td class="">信義區</td>
+                                            <td class="">信義香榭</td>
+                                            <td class="">z00001</td>
+                                            <td class="">4.2</td>
+                                            <td class="action">
+                                                <a class="btn btn-primary  viewReport" href="device-detail.html" role="button">查看</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="arrangeNumber">8</td>
+                                            <td class="">2021/08/03</td>
+                                            <td class="">台北市</td>
+                                            <td class="">信義區</td>
+                                            <td class="">信義香榭</td>
+                                            <td class="">z00001</td>
+                                            <td class="">4.2</td>
+                                            <td class="action">
+                                                <a class="btn btn-primary  viewReport" href="device-detail.html" role="button">查看</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="arrangeNumber">9</td>
+                                            <td class="">2021/08/03</td>
+                                            <td class="">台北市</td>
+                                            <td class="">信義區</td>
+                                            <td class="">信義香榭</td>
+                                            <td class="">z00001</td>
+                                            <td class="">4.2</td>
+                                            <td class="action">
+                                                <a class="btn btn-primary  viewReport" href="device-detail.html" role="button">查看</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="arrangeNumber">10</td>
+                                            <td class="">2021/08/03</td>
+                                            <td class="">台北市</td>
+                                            <td class="">信義區</td>
+                                            <td class="">信義香榭</td>
+                                            <td class="">z00001</td>
+                                            <td class="">4.2</td>
+                                            <td class="action">
+                                                <a class="btn btn-primary  viewReport" href="device-detail.html" role="button">查看</a>
+                                            </td>
+                                        </tr>
+                                        
+                                    </table>
+                                    <nav aria-label="Page navigation example pagenationBlock">
+                                        <ul class="pagination">
+                                          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                          <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        </ul>
+                                      </nav>
+                                </div>                
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <footer class="py-4 mt-auto footerBlock">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="">Copyright &copy; 研發中心 多媒體數位開發處</div>
+                </div>
+            </div>
+        </footer>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="js/pickDate.js"></script>
+    </body>
+</html>
