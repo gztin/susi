@@ -32,6 +32,19 @@
   font-size: 28px;
 }
 
+#hero01 .container .row .slogan-eips .bookingNow {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  margin: 40px auto;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  border: 1px solid #fff;
+  color: #fff !important;
+  border-radius: 4px;
+}
+
 #hero01:before {
   content: "";
   background: rgba(0, 0, 0, 0.3);
@@ -290,16 +303,59 @@
   font-size: 24px;
 }
 
-#hero00 .container .adformLink {
+#hero00 .container .landingLink {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  margin: 40px auto;
+  align-items: center;
+  justify-content: center;
+  background: #f2c976;
+  color: #000 !important;
+  border-radius: 4px;
+}
+
+#hero00 .container .landingLink {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  margin: 40px auto;
+  align-items: center;
+  justify-content: center;
+  background: #f2c976;
+  color: #000 !important;
+  border-radius: 4px;
+}
+
+#hero00 .container .link {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+#hero00 .container .link .adformLink {
   width: 150px;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 40px auto;
   background: #f2c976;
   color: #000 !important;
   border-radius: 4px;
+}
+
+#hero00 .container .link .gotoeips {
+  border: 1px solid #fff;
+  padding: 10px;
+  width: 150px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  color: #fff !important;
+  border-radius: 4px;
+  margin-left: 20px;
 }
 
 #hero00:before {
@@ -406,14 +462,44 @@
   text-shadow: 1px 1px 3px #171717;
 }
 
-.mallEips .container .landingPageTitle .titleContent .adformLink {
+.mallEips .container .landingPageTitle .titleContent .landingLink {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+  background: #f2c976;
+  color: #000 !important;
+  border-radius: 4px;
+}
+
+.mallEips .container .landingPageTitle .titleContent .link {
+  display: flex;
+  justify-content: center;
+}
+
+.mallEips .container .landingPageTitle .titleContent .link .gotoeips {
+  border: 1px solid #fff;
+  padding: 10px;
+  width: 150px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  color: #fff !important;
+  border-radius: 4px;
+  margin-left: 20px;
+}
+
+.mallEips .container .landingPageTitle .titleContent .link .adformLink {
   width: 150px;
   height: 50px;
   margin: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
   background: #f2c976;
   color: #000 !important;
   border-radius: 4px;
@@ -653,7 +739,38 @@
   color: #fff;
 }
 
-#hero05 .container .row .landingPageTitle .titleContent .adformLink {
+#hero05 .container .row .landingPageTitle .titleContent .landingLink {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+  background: #f2c976;
+  color: #000 !important;
+  border-radius: 4px;
+}
+
+#hero05 .container .row .landingPageTitle .titleContent .link {
+  display: flex;
+  justify-content: center;
+}
+
+#hero05 .container .row .landingPageTitle .titleContent .link .gotoeips {
+  border: 1px solid #fff;
+  padding: 10px;
+  width: 150px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  color: #fff !important;
+  border-radius: 4px;
+  margin-left: 20px;
+}
+
+#hero05 .container .row .landingPageTitle .titleContent .link .adformLink {
   width: 150px;
   height: 50px;
   display: flex;
@@ -913,7 +1030,7 @@
   text-shadow: 1px 1px 3px #171717;
 }
 
-.etView .container .adformLink {
+.etView .container .landingLink {
   width: 150px;
   height: 50px;
   display: flex;
@@ -923,6 +1040,37 @@
   background: #f2c976;
   color: #000 !important;
   border-radius: 4px;
+}
+
+.etView .container .link {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.etView .container .link .adformLink {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2c976;
+  color: #000 !important;
+  border-radius: 4px;
+}
+
+.etView .container .link .gotoeips {
+  border: 1px solid #fff;
+  padding: 10px;
+  width: 150px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  color: #fff !important;
+  border-radius: 4px;
+  margin-left: 20px;
 }
 
 .ceo-content {
@@ -1110,7 +1258,7 @@
     color: #fff;
     text-shadow: 1px 1px 3px #171717;
   }
-  .etView .container .adformLink {
+  .etView .container .landingLink {
     width: 150px;
     height: 50px;
     display: flex;
@@ -1120,6 +1268,35 @@
     background: #f2c976;
     color: #000 !important;
     border-radius: 4px;
+  }
+  .etView .container .link {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+  }
+  .etView .container .link .adformLink {
+    width: 150px;
+    height: 50px;
+    display: flex;
+    margin-top: 40px;
+    align-items: center;
+    justify-content: center;
+    background: #f2c976;
+    color: #000 !important;
+    border-radius: 4px;
+  }
+  .etView .container .link .gotoeips {
+    border: 1px solid #fff;
+    padding: 10px;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+    color: #fff !important;
+    border-radius: 4px;
+    margin-left: 20px;
   }
   .eipsNews .icon-box h5 {
     font-size: 1.5em;
@@ -1389,6 +1566,18 @@
     margin: 0px 0 0 0;
     font-size: 20px;
   }
+  #hero01 .container .row .slogan-eips .bookingNow {
+    width: 150px;
+    height: 50px;
+    display: flex;
+    margin: 40px auto;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+    border: 1px solid #fff;
+    color: #fff !important;
+    border-radius: 4px;
+  }
   #data-statistics img {
     width: 100%;
     max-height: 220px;
@@ -1420,11 +1609,39 @@
     color: #fff;
     text-shadow: 1px 1px 3px #171717;
   }
-  .etView .container .adformLink {
+  .etView .container .landingLink {
     width: 150px;
     height: 50px;
     display: flex;
-    margin: 40px auto;
+    margin-top: 40px;
+    align-items: center;
+    justify-content: center;
+    background: #f2c976;
+    color: #000 !important;
+    border-radius: 4px;
+  }
+  .etView .container .link {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+  }
+  .etView .container .link .gotoeips {
+    border: 1px solid #fff;
+    padding: 10px;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+    color: #fff !important;
+    border-radius: 4px;
+    margin-left: 20px;
+  }
+  .etView .container .link .adformLink {
+    width: 150px;
+    height: 50px;
+    display: flex;
     align-items: center;
     justify-content: center;
     background: #f2c976;
@@ -1735,6 +1952,18 @@
   #hero01 .container .row .slogan-eips h2 {
     margin: 0px 0 0 0;
     font-size: 20px;
+  }
+  #hero01 .container .row .slogan-eips .bookingNow {
+    width: 150px;
+    height: 50px;
+    display: flex;
+    margin: 40px auto;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+    border: 1px soild #fff;
+    color: #fff !important;
+    border-radius: 4px;
   }
   .about .container .reason .title {
     text-align: center;
