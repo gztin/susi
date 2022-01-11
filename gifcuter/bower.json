@@ -1,0 +1,28 @@
+{
+  "name": "cropperjs-gif",
+  "authors": [
+    "wmlgl <qq4014@126.com>"
+  ],
+  "description": "support cropperjs to crop gif, easy to use gif.js and gifuct-js",
+  "main": "src/index.js",
+  "keywords": [
+    "cropper",
+    "cropperjs",
+    "gif",
+    "encode",
+    "decode"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/wmlgl/cropperjs-gif",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gifuct-js": "^1.0.0",
+    "gif.js": "^0.2.0"
+  }
+}
