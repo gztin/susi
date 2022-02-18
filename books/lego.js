@@ -20,6 +20,7 @@ $(function() {
                     '<tr>' +
                     '<td>'+ '<img class="bookPic" src='+ result[count].data_pic +'>' + '</td>'+
                     '<td>'+ result[count].data_setName + '</td>'+
+                    '<td>'+ result[count].data_price + '</td>'+
                     '</tr>'
                 );
             }
