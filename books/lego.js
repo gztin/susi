@@ -1,6 +1,6 @@
 // // JSON
 $(function() {
-    const uri = "https://opensheet.vercel.app/1hp4ysRpU2wBq3hRTOlWH_9CSkn4Jw_gd7YjAGFItca0/A1:C81";
+    const uri = "https://opensheet.vercel.app/1hp4ysRpU2wBq3hRTOlWH_9CSkn4Jw_gd7YjAGFItca0/A1:D81";
         
     fetch(uri, {
         method: 'GET'
@@ -21,6 +21,7 @@ $(function() {
                     '<td>'+ '<img class="bookPic" src='+ result[count].data_pic +'>' + '</td>'+
                     '<td>'+ result[count].data_setName + '</td>'+
                     '<td>'+ result[count].data_pirce + '</td>'+
+                    '<td>'+ result[count].data_status + '</td>'+
                     '</tr>'
                 );
             }
