@@ -1,6 +1,6 @@
 // // JSON
 $(function() {
-    const uri = "https://opensheet.vercel.app/1-iH-YGEgyEkjrV2bM_sWR2MytqcfJf0ySiCugaiAgJw/A1:Z5427";
+    const uri = "https://opensheet.vercel.app/1-iH-YGEgyEkjrV2bM_sWR2MytqcfJf0ySiCugaiAgJw/A1:Z5532";
         
     fetch(uri, {
         method: 'GET'
@@ -18,7 +18,7 @@ $(function() {
                 var car = result[count];
                 $('tbody').append(
                     '<tr>' +
-                    '<td>'+ '<img class="bookPic" src='+ result[count].bookLink +'>' + '</td>'+
+                    '<td>'+ result[count].bookID + '</td>'+
                     '<td>'+ result[count].bookName + '</td>'+
                     '</tr>'
                 );
