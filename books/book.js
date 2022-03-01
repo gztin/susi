@@ -18,7 +18,7 @@ $(function() {
                 var car = result[count];
                 $('tbody').append(
                     '<tr>' +
-                    '<td>'+ '<img class="bookPic" src='+ result[count].bookLink +'>' + '</td>'+
+                    '<td>'+ result[count].bookLink + '</td>'+
                     '<td>'+ result[count].bookName + '</td>'+
                     '</tr>'
                 );
