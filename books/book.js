@@ -20,6 +20,7 @@ $(function() {
                     '<tr>' +
                     '<td><img src="'+result[count].bookLink + '"></td>'+
                     '<td>'+ result[count].bookName + '</td>'+
+                    '<td>'+ result[count].bookISBN+ '</td>'+
                     '</tr>'
                 );
             }
