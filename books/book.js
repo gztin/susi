@@ -18,9 +18,15 @@ $(function() {
                 var car = result[count];
                 $('tbody').append(
                     '<tr>' +
-                    '<td><img src="'+result[count].bookLink + '"></td>'+
-                    '<td>'+ result[count].bookName + '</td>'+
-                    '<td>'+ result[count].bookISBN+ '</td>'+
+                    '<td class="bookPic"><img src="'+result[count].bookLink + '"></td>'+
+                    '<td class="blockInf">'+ 
+                    '<div>'+ 
+                    '<p class="bookName">'+ result[count].bookName +'</p>'+ 
+                    '<p class="bookISBN">ISBN:'+ result[count].bookISBN +'</p>'+
+                    '</div>'+
+                    '</td>'+ 
+                    // '<td>'+ result[count].bookName + '</td>'+
+                    // '<td>'+ result[count].bookISBN+ '</td>'+
                     '</tr>'
                 );
             }
