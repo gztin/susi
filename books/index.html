@@ -154,7 +154,11 @@
 		padding-top:15px;
 		color:#3bb11f;
 	}
-	@media (max-width: 450px) {
+	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+			color: rgb(40, 40, 40);
+			opacity: 1; /* Firefox */
+	}
+	/* @media (max-width: 450px) {
 		table{
 			margin-top:0px;
 		}
@@ -163,11 +167,7 @@
 			bottom: 5%;
 			width: 92%;
 		}
-		::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-			color: rgb(40, 40, 40);
-			opacity: 1; /* Firefox */
-		}
-	}
+	} */
   </style>
 </head>
 
