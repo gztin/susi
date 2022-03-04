@@ -9588,6 +9588,16 @@ h5,
   width: 2px;
   background: rgba(255, 255, 255, 0.05);
 }
+.block-footer {
+  text-align: center;
+  background: #000;
+  color: #fff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.block-item {
+  padding-bottom: 0px !important;
+}
 @media (max-width: 991.98px) {
   .ftco-navbar-light .navbar-nav > .nav-item.ftco-seperator:before {
     display: none;
@@ -9717,6 +9727,10 @@ h5,
   height: 100%;
   position: inherit;
   z-index: 0;
+}
+.border-r {
+  border: 1px solid #fff;
+  border-radius: 10px;
 }
 .hero-wrap .overlay {
   position: absolute;
@@ -10882,7 +10896,7 @@ textarea.form-control {
 }
 
 .ftco-counter {
-  background: #29bae4;
+  background: #2a2a2a;
   padding: 10em 0;
 }
 .ftco-counter .text strong.number {
@@ -11117,8 +11131,11 @@ textarea.form-control {
 
 .block-18 .text span {
   display: block;
+  padding: 20px;
 }
-
+.linkBtn {
+  color: #fff !important;
+}
 .block-27 ul {
   padding: 0;
   margin: 0;
