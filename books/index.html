@@ -13,6 +13,56 @@
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 
   <style>
+	/* reset CSS */
+		/* http://meyerweb.com/eric/tools/css/reset/ 
+	v2.0 | 20110126
+	License: none (public domain)
+	*/
+
+	html, body, div, span, applet, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, abbr, acronym, address, big, cite, code,
+	del, dfn, em, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var,
+	b, u, i, center,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td,
+	article, aside, canvas, details, embed, 
+	figure, figcaption, footer, header, hgroup, 
+	menu, nav, output, ruby, section, summary,
+	time, mark, audio, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+	}
+	/* HTML5 display-role reset for older browsers */
+	article, aside, details, figcaption, figure, 
+	footer, header, hgroup, menu, nav, section {
+		display: block;
+	}
+	body {
+		line-height: 1;
+	}
+	ol, ul {
+		list-style: none;
+	}
+	blockquote, q {
+		quotes: none;
+	}
+	blockquote:before, blockquote:after,
+	q:before, q:after {
+		content: '';
+		content: none;
+	}
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+	/* reset CSS end */
     body {
       	padding: 1em;
 		font-family: 'Noto Sans TC', sans-serif;
@@ -43,11 +93,14 @@
 	.table-striped tbody tr:nth-of-type(odd){
 		background:transparent;
 	}
+	table{
+		margin-top:10px;
+	}
 	table td{
 		padding-right: 0!important;
 	}
 	td img{
-		width:180px;
+		width:160px;
 	}
 	tbody:nth-child(odd){
 		background:#f1f1f1;
@@ -90,20 +143,45 @@
 		width: 100%;
 		height: auto;
 	}
+	.bookPic,.bookInf{
+		padding-left:0px !important;
+	}
+	.bookInf > div{
+		display: flex;
+    	flex-direction: column;
+	}
+	.bookISBN{
+		padding-top:15px;
+		color:#3bb11f;
+	}
+	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+			color: rgb(40, 40, 40);
+			opacity: 1; /* Firefox */
+	}
+	/* @media (max-width: 450px) {
+		table{
+			margin-top:0px;
+		}
+		.block_search{
+			position: fixed;
+			bottom: 5%;
+			width: 92%;
+		}
+	} */
   </style>
 </head>
 
 <body>
   <div id="app">
-    <p>
-	  <input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入書名">
+    <p class="block_search">
+	  <input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入書名/ISBN">
     </p>
 	
     <table class="order-table table table-striped">
       <thead>
         <tr>
           	<th class="itemBar">書封</th>
-          	<th>書名</th>
+          	<th>書本資訊</th>
         </tr>
       </thead>
       <tbody>
