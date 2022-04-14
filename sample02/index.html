@@ -1,144 +1,237 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="description" content="HTTrack is an easy-to-use website mirror utility. It allows you to download a World Wide website from the Internet to a local directory,building recursively all structures, getting html, images, and other files from the server to your computer. Links are rebuiltrelatively so that you can freely browse to the local site (works with any browser). You can mirror several sites together so that you can jump from one toanother. You can, also, update an existing mirror site, or resume an interrupted download. The robot is fully configurable, with an integrated help" />
-	<meta name="keywords" content="httrack, HTTRACK, HTTrack, winhttrack, WINHTTRACK, WinHTTrack, offline browser, web mirror utility, aspirateur web, surf offline, web capture, www mirror utility, browse offline, local  site builder, website mirroring, aspirateur www, internet grabber, capture de site web, internet tool, hors connexion, unix, dos, windows 95, windows 98, solaris, ibm580, AIX 4.0, HTS, HTGet, web aspirator, web aspirateur, libre, GPL, GNU, free software" />
-	<title>Local index - HTTrack Website Copier</title>
-  <!-- Mirror and index made by HTTrack Website Copier/3.49-2 [XR&CO'2014] -->
-	<style type="text/css">
-	<!--
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>書本查詢</title>
 
-body {
-	margin: 0;  padding: 0;  margin-bottom: 15px;  margin-top: 8px;
-	background: #77b;
-}
-body, td {
-	font: 14px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+
+  <style>
+	/* reset CSS */
+		/* http://meyerweb.com/eric/tools/css/reset/ 
+	v2.0 | 20110126
+	License: none (public domain)
+	*/
+
+	html, body, div, span, applet, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, abbr, acronym, address, big, cite, code,
+	del, dfn, em, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var,
+	b, u, i, center,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td,
+	article, aside, canvas, details, embed, 
+	figure, figcaption, footer, header, hgroup, 
+	menu, nav, output, ruby, section, summary,
+	time, mark, audio, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
 	}
-
-#subTitle {
-	background: #000;  color: #fff;  padding: 4px;  font-weight: bold; 
+	/* HTML5 display-role reset for older browsers */
+	article, aside, details, figcaption, figure, 
+	footer, header, hgroup, menu, nav, section {
+		display: block;
 	}
-
-#siteNavigation a, #siteNavigation .current {
-	font-weight: bold;  color: #448;
+	body {
+		line-height: 1;
 	}
-#siteNavigation a:link    { text-decoration: none; }
-#siteNavigation a:visited { text-decoration: none; }
-
-#siteNavigation .current { background-color: #ccd; }
-
-#siteNavigation a:hover   { text-decoration: none;  background-color: #fff;  color: #000; }
-#siteNavigation a:active  { text-decoration: none;  background-color: #ccc; }
-
-
-a:link    { text-decoration: underline;  color: #00f; }
-a:visited { text-decoration: underline;  color: #000; }
-a:hover   { text-decoration: underline;  color: #c00; }
-a:active  { text-decoration: underline; }
-
-#pageContent {
-	clear: both;
-	border-bottom: 6px solid #000;
-	padding: 10px;  padding-top: 20px;
-	line-height: 1.65em;
-	background-image: url(backblue.gif);
-	background-repeat: no-repeat;
-	background-position: top right;
+	ol, ul {
+		list-style: none;
 	}
-
-#pageContent, #siteNavigation {
-	background-color: #ccd;
+	blockquote, q {
+		quotes: none;
 	}
+	blockquote:before, blockquote:after,
+	q:before, q:after {
+		content: '';
+		content: none;
+	}
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+	/* reset CSS end */
+    body {
+      	padding: 1em;
+		font-family: 'Noto Sans TC', sans-serif;
+    }
+	.hidden{
+		display:none;
+	}
+	i.fa{
+		cursor:pointer;
+		height:8px;
+	}
+	i.fa-sort-desc{
+		height:16px;
+	}
+	.snoID,.bikeFree,.bikeBlock{
+		padding-right:10px;
+	}
+	.itemBar{
+		display: flex;
+    	align-items: center;
+	}
+	.warring{color:#e85617;}
+	.enough{
+		color:#4db36d;
+	}
+	thead{background: #f17439;color: #fff;}
+	.table thead th{border-bottom:0px!important;font-weight: inherit;border-top:0px !important;;}
+	.table-striped tbody tr:nth-of-type(odd){
+		background:transparent;
+	}
+	table{
+		margin-top:10px;
+	}
+	table td{
+		padding-right: 0!important;
+	}
+	td img{
+		width:160px;
+	}
+	tbody:nth-child(odd){
+		background:#f1f1f1;
+	}
+	.light-table-filter{
+		border: 1px solid #d4d4d4;
+		border-radius: 5px;
+		height: 40px;
+		text-indent: 10px;
+		width:100%;
+	}
+	/* 分頁 */
+	.pageList{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.pager {
+	  display:flex;
+	  align-items:center;
+	  justify-content:center;
+      width: 30px;
+      height: 30px;
+      margin-right: 5px;
+      padding: 5px;
+	  border: 1px solid #aaa;
+	  cursor: pointer;
+    }
 
-
-.imgLeft  { float: left;   margin-right: 10px;  margin-bottom: 10px; }
-.imgRight { float: right;  margin-left: 10px;   margin-bottom: 10px; }
-
-hr { height: 1px;  color: #000;  background-color: #000;  margin-bottom: 15px; }
-
-h1 { margin: 0;  font-weight: bold;  font-size: 2em; }
-h2 { margin: 0;  font-weight: bold;  font-size: 1.6em; }
-h3 { margin: 0;  font-weight: bold;  font-size: 1.3em; }
-h4 { margin: 0;  font-weight: bold;  font-size: 1.18em; }
-
-.blak { background-color: #000; }
-.hide { display: none; }
-.tableWidth { min-width: 400px; }
-
-.tblRegular       { border-collapse: collapse; }
-.tblRegular td    { padding: 6px;  background-image: url(fade.gif);  border: 2px solid #99c; }
-.tblHeaderColor, .tblHeaderColor td { background: #99c; }
-.tblNoBorder td   { border: 0; }
-
-
-// -->
-</style>
-
+    .pager a {
+	  text-decoration: none;
+	  color:#000;
+	}
+	.on{background:#000;color:#fff;}
+	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+		color: rgb(235, 235, 235);
+		opacity: 1; /* Firefox */
+	}
+	.responsive {
+		width: 100%;
+		height: auto;
+	}
+	.bookPic,.bookInf{
+		padding-left:0px !important;
+	}
+	.bookInf > div{
+		display: flex;
+    	flex-direction: column;
+	}
+	.bookISBN{
+		padding-top:15px;
+		color:#3bb11f;
+	}
+	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+			color: rgb(40, 40, 40);
+			opacity: 1; /* Firefox */
+	}
+	/* @media (max-width: 450px) {
+		table{
+			margin-top:0px;
+		}
+		.block_search{
+			position: fixed;
+			bottom: 5%;
+			width: 92%;
+		}
+	} */
+  </style>
 </head>
 
-<table width="76%" border="0" align="center" cellspacing="0" cellpadding="3" class="tableWidth">
-	<tr>
-	<td id="subTitle">HTTrack Website Copier - Open Source offline browser</td>
-	</tr>
-</table>
-<table width="76%" border="0" align="center" cellspacing="0" cellpadding="0" class="tableWidth">
-<tr class="blak">
-<td>
-	<table width="100%" border="0" align="center" cellspacing="1" cellpadding="0">
-	<tr>
-	<td colspan="6"> 
-		<table width="100%" border="0" align="center" cellspacing="0" cellpadding="10">
-		<tr> 
-		<td id="pageContent"> 
-<!-- ==================== End prologue ==================== -->
-
-	<meta name="generator" content="HTTrack Website Copier/3.x">
-	<TITLE>Local index - HTTrack</TITLE>
-</HEAD>
-<BODY>
-<H1 ALIGN=Center>Index of locally available sites:</H1>
-	<TABLE BORDER="0" WIDTH="100%" CELLSPACING="1" CELLPADDING="0">
-		<TR>
-			<TD BACKGROUND="fade.gif">
-				&middot;
-					<A HREF="themesboss.com/pioted/solid_9.html">
-						Pioted | Responsive Bootstrap 4 Landing Template
-					</A>		
-			</TD>
-		</TR>
-	</TABLE>
-	<BR>
-	<BR>
-	<BR>
-  	<H6 ALIGN="RIGHT">
-	<I>Mirror and index made by HTTrack Website Copier [XR&amp;CO'2008]</I>
-	</H6>
-	<!-- Mirror and index made by HTTrack Website Copier/3.49-2 [XR&CO'2014] -->
-	<!-- Thanks for using HTTrack Website Copier! -->
-	<meta HTTP-EQUIV="Refresh" CONTENT="0; URL=themesboss.com/pioted/solid_9.html">
-
-
-<!-- ==================== Start epilogue ==================== -->
-		</td>
-		</tr>
-		</table>
-	</td>
-	</tr>
+<body>
+  <div id="app">
+    <p class="block_search">
+	  <input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入書名/ISBN">
+    </p>
+	
+    <table class="order-table table table-striped">
+      <thead>
+        <tr>
+          	<th class="itemBar">書封</th>
+          	<th>書本資訊</th>
+        </tr>
+      </thead>
+      <tbody>
+		<!-- 請補完 -->
+		
+      </tbody>
 	</table>
-</td>
-</tr>
-</table>
-
-<table width="76%" border="0" align="center" valign="bottom" cellspacing="0" cellpadding="0">
-	<tr>
-	<td id="footer"><small>&copy; 2008 Xavier Roche & other contributors - Web Design: Leto Kauler.</small></td>
-	</tr>
-</table>
-
+  </div>
 </body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="book.js?v=1"></script>
+	<script>
+		(function(document) {
+	'use strict';
 
+	var LightTableFilter = (function(Arr) {
+
+		var _input;
+
+		function _onInputEvent(e) {
+			_input = e.target;
+			var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+			Arr.forEach.call(tables, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, _filter);
+				});
+			});
+		}
+
+		function _filter(row) {
+			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+		}
+
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('light-table-filter');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = _onInputEvent;
+				});
+			}
+		};
+	})(Array.prototype);
+
+	document.addEventListener('readystatechange', function() {
+		if (document.readyState === 'complete') {
+			LightTableFilter.init();
+		}
+	});
+
+})(document);
+	</script>
 </html>
-
-
