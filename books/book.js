@@ -1,7 +1,6 @@
 // // JSON
 $(function() {
-    const uri = "https://opensheet.vercel.app/1-iH-YGEgyEkjrV2bM_sWR2MytqcfJf0ySiCugaiAgJw/A1:Z1000";
-        
+    const uri = "https://opensheet.vercel.app/1-iH-YGEgyEkjrV2bM_sWR2MytqcfJf0ySiCugaiAgJw/A1:Z10000";     
     fetch(uri, {
         method: 'GET'
     })
