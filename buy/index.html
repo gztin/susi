@@ -4,49 +4,81 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>LINE Login Demo</title>
+        <title>Day1</title>
     </head>
+    <style>
+        [v-cloak]{
+            display:none;
+        }
+    </style>
     <body>
-        <!-- <button id="lineLoginBtn">LINE 登入</button>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js'></script>
-        <script>
-            $('#lineLoginBtn').on('click', function(e) {
-                let client_id = '1656196060';
-                let redirect_uri = 'https://notify-bot.line.me/oauth/authorize?response_type=code&scope=notify&response_mode=form_post&client_id=URUW3cHl8RPLZRgsN85QBV&redirect_uri=https://line.husan.cc/register&state=U9f4a4a872b118cd08887e88a2b80a30a';
-                let link = 'https://access.line.me/oauth2/v2.1/authorize?';
-                link += 'response_type=code';
-                link += '&client_id=' + client_id;
-                link += '&redirect_uri=' + redirect_uri;
-                link += '&state=login';
-                link += '&scope=openid%20profile';
-                window.location.href = link;
-            });
-        </script> -->
-        <script>
-            function Auth() {
-            var URL = 'https://notify-bot.line.me/oauth/authorize?';
-            URL += 'response_type=code';
-            URL += '&client_id=9J0iTSSmnF6eGTuAlUIrwv';
-            URL += '&redirect_uri=http://gztin.github.io/susi/buy/aaa.html';
-            URL += '&scope=notify';
-            URL += '&state=abcde';
-            window.location.href = URL;
-            }
-            function doPost() {
-                UrlFetchApp.fetch('https://notify-api.line.me/api/notify', {
-                    'headers': {
-                    'Authorization': 'Bearer ' + 'oClDubQf1hLNDseo9Xuo4ZnyRBJfqfykk0H0s8u44DG',
-                    },
-                    'method': 'post',
-                    'payload': {
-                        'message':'測試一下！'
-                    }
-                });
-            }
-            Auth();
-            doPost();
-            </script>
-        
-        <!-- <button onclick="Auth();">點選這裡連結到LineNotify</button> -->
+        <div id="app">
+            <div id="section1">
+                <span>data1</span>
+                <span>data2</span>
+                <span>data3</span>
+                <span>data4</span>
+                <span>data5</span>
+                <span>data6</span>
+                <span>data7</span>
+                <span>data8</span>
+                <span>data9</span>
+                <span>data10</span>
+            </div>
+            <div id="section2">
+                <span>data1</span>
+                <span>data2</span>
+                <span>data3</span>
+                <span>data4</span>
+                <span>data5</span>
+                <span>data6</span>
+                <span>data7</span>
+                <span>data8</span>
+                <span>data9</span>
+                <span>data10</span>
+            </div>
+            <div id="section3">
+                <span>data1</span>
+                <span>data2</span>
+                <span>data3</span>
+                <span>data4</span>
+                <span>data5</span>
+                <span>data6</span>
+                <span>data7</span>
+                <span>data8</span>
+                <span>data9</span>
+                <span>data10</span>
+            </div>
+            <div id="section4">
+                <span>data1</span>
+                <span>data2</span>
+                <span>data3</span>
+                <span>data4</span>
+                <span>data5</span>
+                <span>data6</span>
+                <span>data7</span>
+                <span>data8</span>
+                <span>data9</span>
+                <span>data10</span>
+            </div>
+            <div id="section5">
+                <p>版權所有，仿冒必究</p>
+                <p v-cloak>{{company}}{{copyright}}{{year}}</p>
+            </div>
+        </div>
     </body>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js' integrity='sha512-PyKhbAWS+VlTWXjk/36s5hJmUJBxcGY/1hlxg6woHD/EONP2fawZRKmvHdTGOWPKTqk3CPSUPh7+2boIBklbvw==' crossorigin='anonymous'></script>
+    <script>
+        
+        //section5
+        new Vue({
+            el:'#section5',
+            data:{
+                copyright:'版權所有',
+                company:'一零四資訊科技股份有限公司 ',
+                year:'©'+ new Date().getFullYear(),
+            }
+        })
+    
+    </script>
     </html>
