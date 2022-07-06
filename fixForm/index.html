@@ -63,20 +63,29 @@
 	}
 	/* reset CSS end */
     body {
-      	padding: 1em;
 		font-family: 'Noto Sans TC', sans-serif;
     }
+	form{
+		padding: 1em;
+	}
 	#formInf{
 		display: flex;
     	flex-direction: column;
 	}
 	.form-title{
-		padding-top:10px;
+		padding-top:20px;
 		padding-bottom: 20px;
 		text-align: center;
+		background-color: #ffe25a;
+		display: flex;
+		align-items: center;
+    	justify-content: space-around;
 	}
 	.form-title p{
 		font-size: 23px;
+	}
+	.logo{
+		width: 100px;
 	}
 	.block{
 		padding-bottom: 5%;
@@ -101,7 +110,7 @@
 		color:#32a4ff;
 	}
 	.hidden{
-		display:none;
+		visibility:hidden;
 	}
 	thead{background: #f17439;color: #fff;}
 	.table thead th{border-bottom:0px!important;font-weight: inherit;border-top:0px !important;;}
@@ -159,8 +168,12 @@
 </head>
 
 <body>
+	<header class="form-title">
+		<img class="logo" src="logo-small.jpg" alt="">
+		<p >設備報修單</p>
+		<p class="hidden">設備報修單</p>
+	</header>
 	<form action="">
-		<div class="form-title"><p>設備報修單</p></div>
 		<div id="formInf">
 			<div class="block">
 				<span class="title">報修人</span>
