@@ -107,6 +107,19 @@
 	.option-fix input{
 		margin-right:10px;
 	}
+	.option{
+		display: flex;
+    	align-items: center;
+		padding-bottom: 15px;
+	}
+	.block-issue input{
+		margin-top:10px;
+		margin-right:10px;
+	}
+	.issuePic > img{
+		width:100%;
+	}
+	
 	.title{
 		color:#32a4ff;
 	}
@@ -164,6 +177,15 @@
 		color: #fff;
 		background: #313131;
 	}
+	.block-issue{
+		width: 100%;
+	}
+	section.issueContent{
+		height:50px;
+	}
+	.block-issue:nth-child(2){
+		margin-left:10px;
+	}
 	
   </style>
 </head>
@@ -194,20 +216,59 @@
 			</div>
 			<div class="block">
 				<span class="title">報修類別</span>
-				<div class="option-fix">
-					<input  type="radio" name="fix" value="" checked>黑屏/白屏/粉紅屏、等屏幕顏色出現問題
+				<div class="option">
+					<div class="block-issue">
+						<section class="issuePic">
+							<img src="s1.jpg" alt="">
+						</section>
+						<section class="issueContent">
+							<input  type="radio" name="fix" value="" checked>黑屏/白屏/粉紅屏，停格東森自然美廣告。
+						</section>
+					</div>
+					<div class="block-issue">
+						<section class="issuePic">
+							<img src="s2.jpg" alt="">
+						</section>
+						<section class="issueContent">
+							<input  type="radio" name="fix" value="" >當前無播放計畫(商辦的機器會出現的狀況)
+						</section>
+					</div>
 				</div>
-				<div class="option-fix">
-					<input  type="radio" name="fix" value="" >停格東森自然美廣告。
+				<div class="option">
+					<div class="block-issue">
+						<section class="issuePic">
+							<img src="s3.jpg" alt="">
+						</section>
+						<section class="issueContent">
+							<input  type="radio" name="fix" value="" checked>後台網址無法登入。
+						</section>
+					</div>
+					<div class="block-issue">
+						<section class="issuePic">
+							<img src="s4.jpg" alt="">
+						</section>
+						<section class="issueContent">
+							<input  type="radio" name="fix" value="" >公告已上傳，機台無顯示。
+						</section>
+					</div>
 				</div>
-				<div class="option-fix">
-					<input  type="radio" name="fix" value="" >當前無播放計畫(商辦的機器會出現的狀況)
-				</div>
-				<div class="option-fix">
-					<input  type="radio" name="fix" value="" >電腦後台網址無法登入。
-				</div>
-				<div class="option-fix">
-					<input  type="radio" name="fix" value="" >公告已上傳，機台無顯示。
+				<div class="option">
+					<div class="block-issue">
+						<section class="issuePic">
+							<img src="s5.jpg" alt="">
+						</section>
+						<section class="issueContent">
+							<input  type="radio" name="fix" value="" checked>發票/收據開立完成。
+						</section>
+					</div>
+					<div class="block-issue">
+						<section class="issuePic">
+							<img src="s6.jpg" alt="">
+						</section>
+						<section class="issueContent">
+							<input  type="radio" name="fix" value="" >其他問題
+						</section>
+					</div>
 				</div>
 			</p>
 			<div class="block">
