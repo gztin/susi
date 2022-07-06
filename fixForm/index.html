@@ -70,12 +70,35 @@
 		display: flex;
     	flex-direction: column;
 	}
+	.form-title{
+		padding-top:10px;
+		padding-bottom: 20px;
+		text-align: center;
+	}
+	.form-title p{
+		font-size: 23px;
+	}
 	.block{
 		padding-bottom: 5%;
 	}
 	.block span{
 		display: flex;
 		margin-bottom: 3%;
+	}
+	textarea{
+		width:100%;
+	}
+	.option-fix{
+		display:flex;
+		font-size: 17px;
+    	padding-bottom: 15px;
+		justify-content: start;
+	}
+	.option-fix input{
+		margin-right:10px;
+	}
+	.title{
+		color:#32a4ff;
 	}
 	.hidden{
 		display:none;
@@ -104,7 +127,6 @@
 		text-indent: 10px;
 		width:100%;
 	}
-	
 	
 	.on{background:#000;color:#fff;}
 	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -137,72 +159,92 @@
 </head>
 
 <body>
-  <div id="formInf">
-    <p class="block">
-		<span>報修人</span>
-	  	<input type="text" class="light-table-filter" data-table="order-table" placeholder="填寫報修人">
-    </p>
-	<p class="block">
-		<span>聯絡電話</span>
-	  	<input type="phone" class="light-table-filter" data-table="order-table" placeholder="填寫報修人">
-    </p>
-	<p class="block">
-		<span>社區名稱</span>
-		<input type="text" class="light-table-filter" data-table="order-table" placeholder="填寫社區名稱">
-	</p>
-	<p class="block">
-		<span>社區地址</span>
-		<input type="text" class="light-table-filter" data-table="order-table" placeholder="填寫社區地址">
-	</p>
-    <table class="table table-bordered table-hover">
-		<tr>
-			<th class="active">
-				<input type="checkbox" class="select-all checkbox" name="select-all" />
-			</th>
-			<th class="tb-cell itemType">設備機型</th>
-			<th class="tb-cell itemName">設備名稱</th>
+	<form action="">
+		<div class="form-title"><p>設備報修單</p></div>
+		<div id="formInf">
+			<div class="block">
+				<span class="title">報修人</span>
+				<input type="text" class="light-table-filter" data-table="order-table" placeholder="填寫報修人">
+			</div>
+			<div class="block">
+				<span class="title">聯絡電話</span>
+				<input type="phone" class="light-table-filter" data-table="order-table" placeholder="填寫報修人">
+			</div>
+			<div class="block">
+				<span class="title">社區名稱</span>
+				<input type="text" class="light-table-filter" data-table="order-table" placeholder="填寫社區名稱">
+			</div>
+			<div class="block">
+				<span class="title">社區地址</span>
+				<input type="text" class="light-table-filter" data-table="order-table" placeholder="填寫社區地址">
+			</div>
+			<div class="block">
+				<span class="title">報修類別</span>
+				<div class="option-fix">
+					<input  type="radio" name="fix" value="" checked>黑屏/白屏/粉紅屏、等屏幕顏色出現問題
+				</div>
+				<div class="option-fix">
+					<input  type="radio" name="fix" value="" >停格東森自然美廣告。
+				</div>
+				<div class="option-fix">
+					<input  type="radio" name="fix" value="" >當前無播放計畫(商辦的機器會出現的狀況)
+				</div>
+				<div class="option-fix">
+					<input  type="radio" name="fix" value="" >電腦後台網址無法登入。
+				</div>
+				<div class="option-fix">
+					<input  type="radio" name="fix" value="" >公告已上傳，機台無顯示。
+				</div>
+			</p>
+			<div class="block">
+				<span class="title">報修原因</span>
+				<textarea type="textarea" rows="4" cols="50" class="" data-table="order-table" placeholder=""></textarea>
+			</div>
+			<table class="table table-bordered table-hover">
+				<tr>
+					<th class="active">
+						<input type="checkbox" class="select-all checkbox" name="select-all" />
+					</th>
+					<th class="tb-cell itemType">設備機型</th>
+					<th class="tb-cell itemName">設備名稱</th>
+					
+				</tr>
+				<tr>
+					<td class="active">
+						<input type="checkbox" class="select-item checkbox" name="select-item" value="1000" />
+					</td>
+					<td class="tb-cell itemType">中強2.0</td>
+					<td class="tb-cell itemName">百樂大廈a棟-1</td>
+				</tr>
+				<tr>
+					<td class="active">
+						<input type="checkbox" class="select-item checkbox" name="select-item" value="1000" />
+					</td>
+					<td class="tb-cell itemType">中強2.0</td>
+					<td class="tb-cell itemName">百樂大廈a棟-2</td>
+				</tr>
+				<tr>
+					<td class="active">
+						<input type="checkbox" class="select-item checkbox" name="select-item" value="1000" />
+					</td>
+					<td class="tb-cell itemType">中強2.0</td>
+					<td class="tb-cell itemName">百樂大廈a棟-3</td>
+				</tr>
+				<tr>
+					<td class="active">
+						<input type="checkbox" class="select-item checkbox" name="select-item" value="1000" />
+					</td>
+					<td class="tb-cell itemType">中強2.0</td>
+					<td class="tb-cell itemName">百樂大廈a棟-4</td>
+				</tr>
 			
-		</tr>
-		<tr>
-			<td class="active">
-				<input type="checkbox" class="select-item checkbox" name="select-item" value="1000" />
-			</td>
-			<td class="tb-cell itemType">中強2.0</td>
-			<td class="tb-cell itemName">百樂大廈a棟-1</td>
-		</tr>
-		<tr>
-			<td class="active">
-				<input type="checkbox" class="select-item checkbox" name="select-item" value="1000" />
-			</td>
-			<td class="tb-cell itemType">中強2.0</td>
-			<td class="tb-cell itemName">百樂大廈a棟-2</td>
-		</tr>
-		<tr>
-			<td class="active">
-				<input type="checkbox" class="select-item checkbox" name="select-item" value="1000" />
-			</td>
-			<td class="tb-cell itemType">中強2.0</td>
-			<td class="tb-cell itemName">百樂大廈a棟-3</td>
-		</tr>
-		<tr>
-			<td class="active">
-				<input type="checkbox" class="select-item checkbox" name="select-item" value="1000" />
-			</td>
-			<td class="tb-cell itemType">中強2.0</td>
-			<td class="tb-cell itemName">百樂大廈a棟-4</td>
-		</tr>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	</table>
-  </div>
+			</table>
+			<div class="sendInf">
+				<a class="btn btn-primary btn-block" href="#" role="button">申請報修</a>
+			</div>
+		</div>
+	</form>
+	
 </body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
