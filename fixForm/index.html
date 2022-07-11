@@ -186,6 +186,10 @@
 	.block-issue:nth-child(2){
 		margin-left:10px;
 	}
+	.select-item,.select-all{
+		width:20px;
+		height:20px;
+	}
 	
   </style>
 </head>
@@ -206,14 +210,7 @@
 				<span class="title">聯絡電話（必填）</span>
 				<input type="tel" class="light-table-filter userPhone" data-table="order-table" placeholder="EX:033456789" required="required" >
 			</div>
-			<div class="block">
-				<span class="title">社區名稱（必填）</span>
-				<input type="text" class="light-table-filter userCounty" data-table="order-table" placeholder="請填寫社區名稱" required="required" >
-			</div>
-			<div class="block">
-				<span class="title">社區地址（必填）</span>
-				<input type="text" class="light-table-filter userAddress" data-table="order-table" placeholder="請填寫社區地址" required="required" >
-			</div>
+			
 			<div class="block">
 				<span class="title">報修類別（必填）</span>
 				<div class="option">
@@ -222,7 +219,7 @@
 							<img src="s1.jpg" alt="">
 						</section>
 						<section class="issueContent">
-							<input  type="radio" name="fix" value="">黑屏/白屏/粉紅屏，停格東森自然美廣告。
+							<input  type="radio" name="fix" value="">黑屏/白屏/粉紅屏，停格東森自然美廣告，如重啟機器後仍無法排除，請選取此項目。
 						</section>
 					</div>
 					<div class="block-issue">
@@ -248,7 +245,7 @@
 							<img src="s4.jpg" alt="">
 						</section>
 						<section class="issueContent">
-							<input  type="radio" name="fix" value="">公告已上傳，機台無顯示。
+							<input  type="radio" name="fix" value="">公告已上傳，機台無顯示，如重啟機器後仍無法排除，請選取此項目。
 						</section>
 					</div>
 				</div>
@@ -328,7 +325,7 @@
 					</tr>
 				</table>
 			</div>
-			<input class="btn btn-primary btn-block" type="submit" onclick="location.href='success.html'">
+			<input class="btn btn-primary btn-block sendInf" type="submit" value="確 定" onsubmit="return check();">
 		</form>
 	</section>
 </body>
@@ -338,9 +335,26 @@
 	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 	<script src="js/pickAll.js"></script>
-	<!-- <script>
+	<script>
 		$(function(){
-			$("div.sendInf > a.sendFixInf").click(function(){
+			function check(){
+				if($(".userName").val() == ""){
+					alert("請填寫報修人姓名");
+					return false;
+				}else if($(".userPhone").val() == ""){
+					alert("請填寫聯絡電話");
+					return false;
+				}else if($(".userCounty").val() == ""){
+					alert("請填寫社區名稱");
+					return false;
+				}else if($(".userAddress").val() == ""){
+					alert("請填寫社區地址");
+					return false;
+				}
+				self.location='success.htm';
+				return true;
+			}
+			$(".sendInf").click(function(){
 				if($(".userName").val() == ""){
 					alert("請填寫報修人姓名");
 				}else if($(".userPhone").val() == ""){
@@ -350,9 +364,9 @@
 				}else if($(".userAddress").val() == ""){
 					alert("請填寫社區地址");
 				}else{
-				
+					return false;
 				}	
 			});
 		});
-	</script> -->
+	</script>
 </html>
