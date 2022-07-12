@@ -1,0 +1,179 @@
+/* reset CSS */
+		/* http://meyerweb.com/eric/tools/css/reset/ 
+	v2.0 | 20110126
+	License: none (public domain)
+	*/
+
+	html, body, div, span, applet, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, abbr, acronym, address, big, cite, code,
+	del, dfn, em, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var,
+	b, u, i, center,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td,
+	article, aside, canvas, details, embed, 
+	figure, figcaption, footer, header, hgroup, 
+	menu, nav, output, ruby, section, summary,
+	time, mark, audio, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+	}
+	/* HTML5 display-role reset for older browsers */
+	article, aside, details, figcaption, figure, 
+	footer, header, hgroup, menu, nav, section {
+		display: block;
+	}
+	body {
+		line-height: 1;
+	}
+	ol, ul {
+		list-style: none;
+	}
+	blockquote, q {
+		quotes: none;
+	}
+	blockquote:before, blockquote:after,
+	q:before, q:after {
+		content: '';
+		content: none;
+	}
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+	/* reset CSS end */
+    body {
+		font-family: 'Noto Sans TC', sans-serif;
+    }
+	form{
+		padding: 1em;
+	}
+	#formInf{
+		display: flex;
+    	flex-direction: column;
+	}
+	.form-title{
+		padding-top:20px;
+		padding-bottom: 20px;
+		text-align: center;
+		background:url(bg-all.jpeg);
+		background-size: cover;
+		display: flex;
+		align-items: center;
+    	justify-content: space-around;
+	}
+	.form-title p{
+		font-size: 23px;
+	}
+	.logo{
+		width: 100px;
+	}
+	.block{
+		padding-bottom: 5%;
+	}
+	.block span{
+		display: flex;
+		margin-bottom: 3%;
+	}
+	textarea{
+		width:100%;
+	}
+	.option-fix{
+		display:flex;
+		font-size: 17px;
+    	padding-bottom: 15px;
+		justify-content: start;
+	}
+	.option-fix input{
+		margin-right:10px;
+	}
+	.option{
+		display: flex;
+    	align-items: center;
+		padding-bottom: 15px;
+	}
+	.block-issue input{
+		margin-top:10px;
+		margin-right:10px;
+	}
+	.issuePic > img{
+		width:100%;
+	}
+	
+	.title{
+		color:#32a4ff;
+	}
+	.hidden{
+		visibility:hidden;
+	}
+	thead{background: #f17439;color: #fff;}
+	.table thead th{border-bottom:0px!important;font-weight: inherit;border-top:0px !important;;}
+	.table-striped tbody tr:nth-of-type(odd){
+		background:transparent;
+	}
+	table{
+		margin-top:10px;
+	}
+	table td{
+		padding-right: 0!important;
+	}
+	td img{
+		width:160px;
+	}
+	tbody:nth-child(odd){
+		background:#f1f1f1;
+	}
+	.light-table-filter{
+		border: 1px solid #d4d4d4;
+		border-radius: 5px;
+		height: 40px;
+		text-indent: 10px;
+		width:100%;
+	}
+	
+	.on{background:#000;color:#fff;}
+	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+		color: rgb(235, 235, 235);
+		opacity: 1; /* Firefox */
+	}
+	.responsive {
+		width: 100%;
+		height: auto;
+	}
+	
+	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+			color: rgb(176, 176, 176);
+			opacity: 1; /* Firefox */
+	}
+	/* 奇數 */
+	.table tr:nth-child(odd){
+		background:#e3e3e3;
+	}
+	/* 偶數 */
+	.table tr:nth-child(even){
+		background:#fff;
+	}
+	.table th{
+		color: #fff;
+		background: #313131;
+	}
+    
+	.block-issue{
+		width: 100%;
+	}
+	section.issueContent{
+		height:110px;
+	}
+	.block-issue:nth-child(2){
+		margin-left:10px;
+	}
+	.select-item,.select-all{
+		width:20px;
+		height:20px;
+	}
