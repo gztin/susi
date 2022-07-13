@@ -436,6 +436,9 @@
             text-indent: 10px;
             width:100%;
         }
+        .block-device{
+            margin-top:30px;
+        }
         .block-issue{
             border:1px solid #d4d4d4;
             width: 100%;
