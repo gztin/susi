@@ -12,7 +12,7 @@
     integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css?v=1">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
 		<p class="hidden">設備報修單</p>
 	</header>
 	<section>
-		<section class="hint"><p>❗️不是您的社區嗎？請關掉此表單，回到Line並重新輸入電話，或通知小幫手，我們會盡快協助您。</p></section>
+		<section class="hint"><p>❗️不是您的社區嗎？請關掉此表單，回到Line並重新輸入電話<br>或通知小幫手，我們會盡快協助您。</p></section>
 		<form action="">
 			<div class="block">
 				<span class="title">社區名稱</span>
@@ -49,25 +49,8 @@
 							<img src="s1.jpg" alt="">
 						</section>
 						<section class="issueContent">
-							<input  type="radio" name="fix" value="">黑屏/白屏/粉紅屏，停格東森自然美廣告，如重啟機器後仍無法排除，請選取此項目。
-						</section>
-					</div>
-					<div class="block-issue">
-						<section class="issuePic">
-							<img src="s2.jpg" alt="">
-						</section>
-						<section class="issueContent">
-							<input  type="radio" name="fix" value="">當前無播放計畫(商辦的機器會出現的狀況)
-						</section>
-					</div>
-				</div>
-				<div class="option">
-					<div class="block-issue">
-						<section class="issuePic">
-							<img src="s3.jpg" alt="">
-						</section>
-						<section class="issueContent">
-							<input  type="radio" name="fix" value="">系統登入相關問題。
+							<input class="issueOption" type="radio" name="fix" value="">
+							<p>黑屏/白屏/粉紅屏，停格東森自然美廣告，如重啟機器後仍無法排除，請選取此項目。</p>
 						</section>
 					</div>
 					<div class="block-issue">
@@ -75,7 +58,29 @@
 							<img src="s4.jpg" alt="">
 						</section>
 						<section class="issueContent">
-							<input  type="radio" name="fix" value="">公告已上傳，機台無顯示，如重啟機器後仍無法排除，請選取此項目。
+							<input class="issueOption" type="radio" name="fix" value="">
+							<p>公告已上傳，機台無顯示，如重啟機器後仍無法排除，請選取此項目。</p>
+						</section>
+					</div>
+					
+				</div>
+				<div class="option">
+					<div class="block-issue">
+						<section class="issuePic">
+							<img src="s3.jpg" alt="">
+						</section>
+						<section class="issueContent fixsize">
+							<input class="issueOption" type="radio" name="fix" value="">
+							<p>系統登入相關問題。</p>
+						</section>
+					</div>
+					<div class="block-issue">
+						<section class="issuePic">
+							<img src="s2.jpg" alt="">
+						</section>
+						<section class="issueContent fixsize">
+							<input class="issueOption" type="radio" name="fix" value="">
+							<p>當前無播放計畫(商辦的機器會出現的狀況)</p>
 						</section>
 					</div>
 				</div>
@@ -84,16 +89,18 @@
 						<section class="issuePic">
 							<img src="s5.jpg" alt="">
 						</section>
-						<section class="issueContent">
-							<input  type="radio" name="fix" value="">發票/收據開立完成。
+						<section class="issueContent fixsize">
+							<input class="issueOption" type="radio" name="fix" value="">
+							<p>發票/收據開立完成。</p>
 						</section>
 					</div>
 					<div class="block-issue">
 						<section class="issuePic">
 							<img src="s6.jpg" alt="">
 						</section>
-						<section class="issueContent">
-							<input  type="radio" name="fix" value="" >其他問題
+						<section class="issueContent fixsize">
+							<input class="issueOption" type="radio" name="fix" value="" >
+							<p>其他問題</p>
 						</section>
 					</div>
 				</div>

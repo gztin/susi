@@ -110,6 +110,10 @@
     .hint > i{
         font-size: 20px;
     }
+    .hint > p{
+        text-align: center;
+        line-height: 17px;
+    }
 	
     
     @media (min-width: 769px){
@@ -400,18 +404,12 @@
         .option-fix input{
             margin-right:10px;
         }
-        .option{
-            display: flex;
-            align-items: center;
-            padding-bottom: 15px;
-        }
+        
         .block-issue input{
             margin-top:10px;
             margin-right:10px;
         }
-        .issuePic > img{
-            width:100%;
-        }
+        
         table{
             margin-top:10px;
         }
@@ -432,13 +430,38 @@
             width:100%;
         }
         .block-issue{
+            border:1px solid #d4d4d4;
             width: 100%;
         }
-        section.issueContent{
-            height:110px;
+        .issueOption{
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            margin-top: -85px!important;
+            margin-left: 10px;
         }
-        .block-issue:nth-child(2){
-            margin-left:10px;
+        .issuePic{
+            margin:5%;
+        }
+        .issuePic > img{
+            width:100%;
+        }
+        section.issueContent{
+            margin:5%;
+            height:90px;
+        }
+        .issueContent > p{
+            text-align: justify;
+            font-size: 90%;
+            line-height: 20px;
+        }
+        .option{
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .fixsize{
+            height: 35px!important;
         }
         .select-item,.select-all{
             width:20px;
