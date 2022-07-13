@@ -11,323 +11,7 @@
     integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-  <style>
-	/* reset CSS */
-		/* http://meyerweb.com/eric/tools/css/reset/ 
-	v2.0 | 20110126
-	License: none (public domain)
-	*/
-
-	html, body, div, span, applet, object, iframe,
-	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-	a, abbr, acronym, address, big, cite, code,
-	del, dfn, em, img, ins, kbd, q, s, samp,
-	small, strike, strong, sub, sup, tt, var,
-	b, u, i, center,
-	dl, dt, dd, ol, ul, li,
-	fieldset, form, label, legend,
-	table, caption, tbody, tfoot, thead, tr, th, td,
-	article, aside, canvas, details, embed, 
-	figure, figcaption, footer, header, hgroup, 
-	menu, nav, output, ruby, section, summary,
-	time, mark, audio, video {
-		margin: 0;
-		padding: 0;
-		border: 0;
-		font-size: 100%;
-		font: inherit;
-		vertical-align: baseline;
-	}
-	/* HTML5 display-role reset for older browsers */
-	article, aside, details, figcaption, figure, 
-	footer, header, hgroup, menu, nav, section {
-		display: block;
-	}
-	body {
-		line-height: 1;
-	}
-	ol, ul {
-		list-style: none;
-	}
-	blockquote, q {
-		quotes: none;
-	}
-	blockquote:before, blockquote:after,
-	q:before, q:after {
-		content: '';
-		content: none;
-	}
-	table {
-		border-collapse: collapse;
-		border-spacing: 0;
-	}
-	/* reset CSS end */
-    body {
-		font-family: 'Noto Sans TC', sans-serif;
-    }
-	form{
-		padding: 1em;
-	}
-	#formInf{
-		display: flex;
-    	flex-direction: column;
-	}
-	
-	@media screen and (min-width: 769px) {
-		.form-title{
-			padding-top:20px;
-			padding-bottom: 20px;
-			text-align: center;
-			background:url(bg-all.jpeg);
-			background-size: cover;
-			display: flex;
-			align-items: center;
-			justify-content: space-around;
-		}
-		.form-title p{
-			font-size: 23px;
-		}
-		.logo{
-			width: 100px;
-		}
-		.block{
-			padding-bottom: 4%;
-		}
-		.block span{
-			display: flex;
-			margin-bottom: 2%;
-    		font-size: 20px;
-		}
-		textarea{
-			width:100%;
-		}
-		.option-fix{
-			display:flex;
-			font-size: 17px;
-			padding-bottom: 15px;
-			justify-content: start;
-		}
-		.option-fix input{
-			margin-right:10px;
-		}
-		.option{
-			display: flex;
-			align-items: center;
-			padding-bottom: 15px;
-		}
-		.block-issue input{
-			margin-top:10px;
-			margin-right:10px;
-		}
-		.issuePic > img{
-			width:100%;
-		}
-		.select-all{
-			width:20px;
-			height:20px;
-		}
-		.select-item{
-			width:20px;
-			height:20px;
-		}
-		.title{
-			color:#32a4ff;
-		}
-		.hidden{
-			visibility:hidden;
-		}
-		thead{background: #f17439;color: #fff;}
-		.table thead th{border-bottom:0px!important;font-weight: inherit;border-top:0px !important;;}
-		.table-striped tbody tr:nth-of-type(odd){
-			background:transparent;
-		}
-		table{
-			margin-top:10px;
-		}
-		table td{
-			padding-right: 0!important;
-		}
-		td img{
-			width:160px;
-		}
-		tbody:nth-child(odd){
-			background:#f1f1f1;
-		}
-		.light-table-filter{
-			border: 1px solid #d4d4d4;
-			border-radius: 5px;
-			height: 40px;
-			text-indent: 10px;
-			width:100%;
-		}
-		
-		.on{background:#000;color:#fff;}
-		::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-			color: rgb(235, 235, 235);
-			opacity: 1; /* Firefox */
-		}
-		.responsive {
-			width: 100%;
-			height: auto;
-		}
-		
-		::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-				color: rgb(176, 176, 176);
-				opacity: 1; /* Firefox */
-		}
-		/* 奇數 */
-		.table tr:nth-child(odd){
-			background:#e3e3e3;
-		}
-		/* 偶數 */
-		.table tr:nth-child(even){
-			background:#fff;
-		}
-		.table th{
-			color: #fff;
-			background: #313131;
-		}
-		.block-issue{
-			width: 100%;
-		}
-		section.issueContent{
-			height:50px;
-			font-size: 17px;
-    		line-height: 25px;
-		}
-		.block-issue:nth-child(2){
-			margin-left:10px;
-		}
-	}
-	@media screen and (max-width: 768px) {
-		.form-title{
-			padding-top:20px;
-			padding-bottom: 20px;
-			text-align: center;
-			background:url(bg-all.jpeg);
-			background-size: cover;
-			display: flex;
-			align-items: center;
-			justify-content: space-around;
-		}
-		.form-title p{
-			font-size: 23px;
-		}
-		.logo{
-			width: 100px;
-		}
-		.block{
-			padding-bottom: 5%;
-		}
-		.block span{
-			display: flex;
-			margin-bottom: 3%;
-		}
-		textarea{
-			width:100%;
-		}
-		.option-fix{
-			display:flex;
-			font-size: 17px;
-			padding-bottom: 15px;
-			justify-content: start;
-		}
-		.option-fix input{
-			margin-right:10px;
-		}
-		.option{
-			display: flex;
-			align-items: center;
-		}
-		.block-issue input{
-			margin-top:10px;
-			margin-right:10px;
-		}
-		.issuePic > img{
-			width:100%;
-		}
-		
-		.title{
-			color:#32a4ff;
-		}
-		.hidden{
-			visibility:hidden;
-		}
-		thead{background: #f17439;color: #fff;}
-		.table thead th{border-bottom:0px!important;font-weight: inherit;border-top:0px !important;;}
-		.table-striped tbody tr:nth-of-type(odd){
-			background:transparent;
-		}
-		table{
-			margin-top:10px;
-		}
-		table td{
-			padding-right: 0!important;
-		}
-		td img{
-			width:160px;
-		}
-		tbody:nth-child(odd){
-			background:#f1f1f1;
-		}
-		.light-table-filter{
-			border: 1px solid #d4d4d4;
-			border-radius: 5px;
-			height: 40px;
-			text-indent: 10px;
-			width:100%;
-		}
-		
-		.on{background:#000;color:#fff;}
-		::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-			color: rgb(235, 235, 235);
-			opacity: 1; /* Firefox */
-		}
-		.responsive {
-			width: 100%;
-			height: auto;
-		}
-		
-		::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-				color: rgb(176, 176, 176);
-				opacity: 1; /* Firefox */
-		}
-		/* 奇數 */
-		.table tr:nth-child(odd){
-			background:#e3e3e3;
-		}
-		/* 偶數 */
-		.table tr:nth-child(even){
-			background:#fff;
-		}
-		.table th{
-			color: #fff;
-			background: #313131;
-		}
-		.select-all{
-			width:20px;
-			height:20px;
-		}
-		.select-item{
-			width:20px;
-			height:20px;
-		}
-		.block-issue{
-			width: 100%;
-		}
-		section.issueContent{
-			height:95px;
-			line-height: 20px;
-		}
-		.aaa{
-			height:40px!important;
-		}
-		.block-issue:nth-child(2){
-			margin-left:10px;
-		}
-	}
-	@media screen and (max-width: 568px) {}
-  </style>
+	<link rel="stylesheet" href="style.css?v=1">
 </head>
 
 <body>
@@ -339,12 +23,12 @@
 	<section>
 		<form action="">
 			<div class="block">
-				<span class="title">社區/大樓名稱</span>
-				<input type="text" class="light-table-filter userCounty" data-table="order-table" placeholder="請填寫社區名稱" readonly="readonly" >
+				<span class="title">社區名稱</span>
+				<input type="text" class="light-table-filter userName" data-table="order-table" placeholder="填寫報修人" readonly="readonly" >
 			</div>
 			<div class="block">
 				<span class="title">社區地址</span>
-				<input type="text" class="light-table-filter userAddress" data-table="order-table" placeholder="請填寫社區地址" readonly="readonly" >
+				<input type="tel" class="light-table-filter userPhone" data-table="order-table" placeholder="EX:033456789" readonly="readonly" >
 			</div>
 			<div class="block">
 				<span class="title">報修人（必填）</span>
@@ -381,7 +65,7 @@
 							<img src="s3.jpg" alt="">
 						</section>
 						<section class="issueContent">
-							<input  type="radio" name="fix" value="">後台系統登入相關問題。
+							<input  type="radio" name="fix" value="">系統登入相關問題。
 						</section>
 					</div>
 					<div class="block-issue">
@@ -398,7 +82,7 @@
 						<section class="issuePic">
 							<img src="s5.jpg" alt="">
 						</section>
-						<section class="issueContent aaa">
+						<section class="issueContent">
 							<input  type="radio" name="fix" value="">發票/收據開立完成。
 						</section>
 					</div>
@@ -406,7 +90,7 @@
 						<section class="issuePic">
 							<img src="s6.jpg" alt="">
 						</section>
-						<section class="issueContent aaa">
+						<section class="issueContent">
 							<input  type="radio" name="fix" value="" >其他問題
 						</section>
 					</div>
