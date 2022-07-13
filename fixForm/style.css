@@ -58,53 +58,7 @@
 		display: flex;
     	flex-direction: column;
 	}
-	.form-title{
-		padding-top:20px;
-		padding-bottom: 20px;
-		text-align: center;
-		background:url(bg-all.jpeg);
-		background-size: cover;
-		display: flex;
-		align-items: center;
-    	justify-content: space-around;
-	}
-	.form-title p{
-		font-size: 23px;
-	}
-	.logo{
-		width: 100px;
-	}
-	.block{
-		padding-bottom: 5%;
-	}
-	.block span{
-		display: flex;
-		margin-bottom: 3%;
-	}
-	textarea{
-		width:100%;
-	}
-	.option-fix{
-		display:flex;
-		font-size: 17px;
-    	padding-bottom: 15px;
-		justify-content: start;
-	}
-	.option-fix input{
-		margin-right:10px;
-	}
-	.option{
-		display: flex;
-    	align-items: center;
-		padding-bottom: 15px;
-	}
-	.block-issue input{
-		margin-top:10px;
-		margin-right:10px;
-	}
-	.issuePic > img{
-		width:100%;
-	}
+	
 	
 	.title{
 		color:#32a4ff;
@@ -117,25 +71,8 @@
 	.table-striped tbody tr:nth-of-type(odd){
 		background:transparent;
 	}
-	table{
-		margin-top:10px;
-	}
-	table td{
-		padding-right: 0!important;
-	}
-	td img{
-		width:160px;
-	}
-	tbody:nth-child(odd){
-		background:#f1f1f1;
-	}
-	.light-table-filter{
-		border: 1px solid #d4d4d4;
-		border-radius: 5px;
-		height: 40px;
-		text-indent: 10px;
-		width:100%;
-	}
+	
+	
 	
 	.on{background:#000;color:#fff;}
 	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -163,17 +100,348 @@
 		color: #fff;
 		background: #313131;
 	}
+    .hint{
+        display:flex;
+        align-items: center;
+        font-size: 12px;
+        justify-content: center;
+        padding:10px;
+    }
+    .hint > i{
+        font-size: 20px;
+    }
+	
     
-	.block-issue{
-		width: 100%;
-	}
-	section.issueContent{
-		height:110px;
-	}
-	.block-issue:nth-child(2){
-		margin-left:10px;
-	}
-	.select-item,.select-all{
-		width:20px;
-		height:20px;
-	}
+    @media (min-width: 769px){
+        .form-title{
+            padding-top:20px;
+            padding-bottom: 20px;
+            text-align: center;
+            background:url(bg-all.jpeg);
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .form-title p{
+            font-size: 23px;
+        }
+        .logo{
+            width: 100px;
+        }
+        .block{
+            padding-bottom: 3%;
+        }
+        .block span{
+            display: flex;
+            margin-bottom: 1%;
+        }
+        textarea{
+            width:100%;
+        }
+        .option-fix{
+            display:flex;
+            font-size: 17px;
+            padding-bottom: 15px;
+            justify-content: start;
+        }
+        .option-fix input{
+            margin-right:10px;
+        }
+        .option{
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .block-issue input{
+            margin-top:10px;
+            margin-right:10px;
+            width: 15px;
+            height: 15px;
+        }
+        
+        table{
+            margin-top:10px;
+        }
+        table td{
+            padding-right: 0!important;
+        }
+        td img{
+            width:160px;
+        }
+        tbody:nth-child(odd){
+            background:#f1f1f1;
+        }
+        .light-table-filter{
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            height: 40px;
+            text-indent: 10px;
+            width:100%;
+        }
+        .block-issue{
+            width: 100%;
+            border:1px solid #d4d4d4;
+        }
+        .issuePic{
+            margin:5%;
+        }
+        .issuePic > img{
+            width:100%;
+        }
+        section.issueContent{
+            margin:5%;
+            height:50px;
+            line-height: 25px;
+        }
+        .block-issue:nth-child(2){
+            margin-left:10px;
+        }
+        .select-item,.select-all{
+            width:20px;
+            height:20px;
+        }
+    }
+    @media (max-width: 768px){
+        .form-title{
+            padding-top:20px;
+            padding-bottom: 20px;
+            text-align: center;
+            background:url(bg-all.jpeg);
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .form-title p{
+            font-size: 23px;
+        }
+        .logo{
+            width: 100px;
+        }
+        .block{
+            padding-bottom: 3%;
+        }
+        .block span{
+            display: flex;
+            margin-bottom: 1%;
+        }
+        textarea{
+            width:100%;
+        }
+        .option-fix{
+            display:flex;
+            font-size: 17px;
+            padding-bottom: 15px;
+            justify-content: start;
+        }
+        .option-fix input{
+            margin-right:10px;
+        }
+        .option{
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .block-issue input{
+            margin-top:10px;
+            margin-right:10px;
+        }
+        .issuePic > img{
+            width:100%;
+        }
+        table{
+            margin-top:10px;
+        }
+        table td{
+            padding-right: 0!important;
+        }
+        td img{
+            width:160px;
+        }
+        tbody:nth-child(odd){
+            background:#f1f1f1;
+        }
+        .light-table-filter{
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            height: 40px;
+            text-indent: 10px;
+            width:100%;
+        }
+        .block-issue{
+            width: 100%;
+        }
+        section.issueContent{
+            height:110px;
+        }
+        .block-issue:nth-child(2){
+            margin-left:10px;
+        }
+        .select-item,.select-all{
+            width:20px;
+            height:20px;
+        }
+    }
+    @media (max-width: 568px){
+        .form-title{
+            padding-top:20px;
+            padding-bottom: 20px;
+            text-align: center;
+            background:url(bg-all.jpeg);
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .form-title p{
+            font-size: 23px;
+        }
+        .logo{
+            width: 100px;
+        }
+        .block{
+            padding-bottom: 5%;
+        }
+        .block span{
+            display: flex;
+            margin-bottom: 3%;
+        }
+        textarea{
+            width:100%;
+        }
+        .option-fix{
+            display:flex;
+            font-size: 17px;
+            padding-bottom: 15px;
+            justify-content: start;
+        }
+        .option-fix input{
+            margin-right:10px;
+        }
+        .option{
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .block-issue input{
+            margin-top:10px;
+            margin-right:10px;
+        }
+        .issuePic > img{
+            width:100%;
+        }
+        table{
+            margin-top:10px;
+        }
+        table td{
+            padding-right: 0!important;
+        }
+        td img{
+            width:160px;
+        }
+        tbody:nth-child(odd){
+            background:#f1f1f1;
+        }
+        .light-table-filter{
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            height: 40px;
+            text-indent: 10px;
+            width:100%;
+        }
+        .block-issue{
+            width: 100%;
+        }
+        section.issueContent{
+            height:110px;
+        }
+        .block-issue:nth-child(2){
+            margin-left:10px;
+        }
+        .select-item,.select-all{
+            width:20px;
+            height:20px;
+        }
+    }
+    @media (max-width: 414px){
+        .form-title{
+            padding-top:20px;
+            padding-bottom: 20px;
+            text-align: center;
+            background:url(bg-all.jpeg);
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .form-title p{
+            font-size: 23px;
+        }
+        .logo{
+            width: 100px;
+        }
+        .block{
+            padding-bottom: 5%;
+        }
+        .block span{
+            display: flex;
+            margin-bottom: 3%;
+        }
+        textarea{
+            width:100%;
+        }
+        .option-fix{
+            display:flex;
+            font-size: 17px;
+            padding-bottom: 15px;
+            justify-content: start;
+        }
+        .option-fix input{
+            margin-right:10px;
+        }
+        .option{
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .block-issue input{
+            margin-top:10px;
+            margin-right:10px;
+        }
+        .issuePic > img{
+            width:100%;
+        }
+        table{
+            margin-top:10px;
+        }
+        table td{
+            padding-right: 0!important;
+        }
+        td img{
+            width:160px;
+        }
+        tbody:nth-child(odd){
+            background:#f1f1f1;
+        }
+        .light-table-filter{
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            height: 40px;
+            text-indent: 10px;
+            width:100%;
+        }
+        .block-issue{
+            width: 100%;
+        }
+        section.issueContent{
+            height:110px;
+        }
+        .block-issue:nth-child(2){
+            margin-left:10px;
+        }
+        .select-item,.select-all{
+            width:20px;
+            height:20px;
+        }
+    }
