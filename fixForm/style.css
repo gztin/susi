@@ -139,6 +139,7 @@
         .block span{
             display: flex;
             margin-bottom: 1%;
+            font-size: 20px;
         }
         textarea{
             width:100%;
@@ -160,10 +161,14 @@
         .block-issue input{
             margin-top:10px;
             margin-right:10px;
-            width: 15px;
-            height: 15px;
         }
-        
+        .issueOption{
+            width: 35px!important;
+            height: 35px!important;
+            position: absolute;
+            margin-top: -195px!important;
+            margin-left: 5px;
+        }
         table{
             margin-top:10px;
         }
@@ -195,8 +200,12 @@
         }
         section.issueContent{
             margin:5%;
-            height:50px;
+            height:80px;
+        }
+        .issueContent > p{
+            text-align: justify;
             line-height: 25px;
+            font-size: 20px;
         }
         .block-issue:nth-child(2){
             margin-left:10px;
@@ -330,7 +339,6 @@
         }
         .block-issue input{
             margin-top:10px;
-            margin-right:10px;
         }
         .issuePic > img{
             width:100%;
@@ -407,7 +415,6 @@
         
         .block-issue input{
             margin-top:10px;
-            margin-right:10px;
         }
         
         table{
@@ -438,7 +445,6 @@
             height: 25px;
             position: absolute;
             margin-top: -85px!important;
-            margin-left: 10px;
         }
         .issuePic{
             margin:5%;
