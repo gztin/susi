@@ -166,8 +166,8 @@
             width: 35px!important;
             height: 35px!important;
             position: absolute;
-            margin-top: -195px!important;
-            margin-left: 5px;
+            margin-top: -210px!important;
+            margin-left: 320px;
         }
         table{
             margin-top:10px;
@@ -444,7 +444,8 @@
             width: 25px;
             height: 25px;
             position: absolute;
-            margin-top: -85px!important;
+            margin-top: -98px!important;
+            margin-left: 140px;
         }
         .issuePic{
             margin:5%;
