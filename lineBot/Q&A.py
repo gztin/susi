@@ -46,69 +46,93 @@ def handle_message(event):
     
     global status
     
-   
-    # 如果狀態是空的，開始問答
-    if mtext == '報修':
-        sendCarousel(event)
+    # 狀態是空的，開始一般問答
+    if status.get(userId) == None or status.get(userId) == '':
     
-    elif mtext == '後台網址' or mtext == '公告上傳教學':
-        message = [
-            TextSendMessage(  # 傳送文字
-                text="您好，請使用新版公告，並請參閱公告教學影片，感謝您"+'\n\n'+'帳號：社區電話'+'\n'+'密碼：27566084'+'\n\n'+'https://www.eiptv-eips.com/Committee/Login'
-            ),
-            VideoSendMessage(
-                original_content_url="https://www.eiptv-eips.com/%E7%B3%BB%E7%B5%B1%E6%93%8D%E4%BD%9C%E8%AA%AA%E6%98%8E.mp4",
-                preview_image_url="https://www.eiptv-eips.com/%E7%B3%BB%E7%B5%B1%E6%93%8D%E4%BD%9C%E8%AA%AA%E6%98%8E.mp4"
-            )
-        ]
-        line_bot_api.reply_message(event.reply_token, message)
+        if mtext == '報修':
+            sendCarousel(event)
         
-    elif mtext == '查詢租金':
-        message = [
-            TextSendMessage(  # 傳送文字
-                text='請提供【查詢月份】，待查詢後立即回覆您，謝謝。'
-            )
-        ]
-        line_bot_api.reply_message(event.reply_token, message)
+        elif mtext == '後台網址' or mtext == '公告上傳教學':
+            message = [
+                TextSendMessage(  # 傳送文字
+                    text="您好，請使用新版公告，並請參閱公告教學影片，感謝您"+'\n\n'+'帳號：社區電話'+'\n'+'密碼：27566084'+'\n\n'+'https://www.eiptv-eips.com/Committee/Login'
+                ),
+                VideoSendMessage(
+                    original_content_url="https://www.eiptv-eips.com/%E7%B3%BB%E7%B5%B1%E6%93%8D%E4%BD%9C%E8%AA%AA%E6%98%8E.mp4",
+                    preview_image_url="https://www.eiptv-eips.com/%E7%B3%BB%E7%B5%B1%E6%93%8D%E4%BD%9C%E8%AA%AA%E6%98%8E.mp4"
+                )
+            ]
+            line_bot_api.reply_message(event.reply_token, message)
         
-        # 狀態改變
-        # status[userId] = 's2' 
-    
-    elif mtext == '簡易處理':
-        message = [
-            TextSendMessage(  # 傳送文字
-                text='您好，請協助將機台重啟看看是否正常運作，機台上方有一黑線，拔起重插即可，謝謝您。'
-            ),
-            ImageSendMessage(
-                original_content_url="https://i.imgur.com/MW9Kgo4.png",
-                preview_image_url="https://i.imgur.com/MW9Kgo4.png"
-            )
-        ]
-        line_bot_api.reply_message(event.reply_token, message)
-    
-    elif status.get(userId) == None or status.get(userId) == '':
-        if mtext == '我要報修':
-            message = TextSendMessage(text="(!!!)請輸入報修大樓/社區的電話號碼(!!!)")
+        elif mtext == '我要報修':
+            message = TextSendMessage(text="❗️請輸入大樓/社區的聯絡電話❗️")
             line_bot_api.reply_message(event.reply_token, message)   
-            status[userId] = 's1'    
-    
-    # 處理完對應的程序後清空狀態        
-    elif status.get(userId) == 's1':  
-        phone = mtext
-        url = f'http://test.eiptv.net:99/api/LineRepair/{(userId)},{(userName)},{(phone)}'
-        print("送給馬丁的網址 是:", url )
-        r = requests.get(url)
-        soup = str(BeautifulSoup(r.text,"html.parser"))
-        lineData = soup
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=lineData))
+            status[userId] = 's1'
+            
+        elif mtext == '簡易處理':
+            message = [
+                TextSendMessage(  # 傳送文字
+                    text='您好，請協助將機台重啟看看是否正常運作，機台上方有一黑線，拔起重插即可，謝謝您。'
+                ),
+                ImageSendMessage(
+                    original_content_url="https://i.imgur.com/MW9Kgo4.png",
+                    preview_image_url="https://i.imgur.com/MW9Kgo4.png"
+                )
+            ]
+            line_bot_api.reply_message(event.reply_token, message)
+            
+        elif mtext == '查詢租金':
+            message = [
+                TextSendMessage(  # 傳送文字
+                    text='請提供【查詢月份】，待查詢後立即回覆您，謝謝。'
+                )
+            ]
+            line_bot_api.reply_message(event.reply_token, message)
+            
         
-        # 狀態重置
-        status[userId]=''       
+            
+    elif status.get(userId) !='':
+                
+        if mtext == '是，我要報修' and status.get(userId) =='s1':
+            message = [
+                TextSendMessage(  # 傳送文字
+                    text='請輸入大樓/社區聯絡電話'
+                )
+            ]
+            line_bot_api.reply_message(event.reply_token, message)
+            
+        elif mtext == '否，結束報修流程' and status.get(userId) =='s1':
+            # 狀態重置
+            status[userId]=''
+            print("目前狀態是:", status[userId],"已重置狀態" )
+            message = [
+                TextSendMessage(  # 傳送文字
+                    text='流程已經結束，請選擇您需要的服務項目'
+                )
+            ]
+            line_bot_api.reply_message(event.reply_token, message)
+       
+        elif status.get(userId) == 's1':  
+            phone = mtext
+            url = f'http://test.eiptv.net:99/api/LineRepair/{(userId)},{(userName)},{(phone)}'
+            print("送給馬丁的網址 是:", url )
+            r = requests.get(url)
+            soup = str(BeautifulSoup(r.text,"html.parser"))
+            lineData = soup
+            if lineData == '無符合社區資料':
+                print("目前狀態是:", status[userId],"進入報修狀態" )
+                retryConfirm(event)
+            else:
+                line_bot_api.reply_message(event.reply_token, TextSendMessage(text="請點選下方的專屬連結進行報修"+"\n\n"+lineData))
+                # 狀態重置
+                status[userId]=''
+    
+    # 處理完對應的程序後清空狀態            
 
 def sendCarousel(event):  # 轉盤樣板
     try:
         message = TemplateSendMessage(
-            alt_text='轉盤樣板',
+            alt_text='很抱歉，電腦版的Line 無法顯示此類型選單',
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
@@ -152,6 +176,28 @@ def sendCarousel(event):  # 轉盤樣板
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text='發生錯誤！'))
 
-        
+def retryConfirm(event):
+    try:
+        message = TemplateSendMessage(
+            alt_text = '很抱歉，電腦版的Line 無法顯示此類型選單',
+            template = ConfirmTemplate(
+                text = '社區聯絡電話資料輸入錯誤，無符合社區資料，要繼續報修嗎？',
+                actions = [
+                    MessageTemplateAction(
+                        label = '是',
+                        text = '是，我要報修'
+                    ),
+                    MessageTemplateAction(
+                        label = '否',
+                        text = '否，結束報修流程'
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, message)
+    except:
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text='發生錯誤！'))
+      
 if __name__ == '__main__':
     app.run(port=2000)
