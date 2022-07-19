@@ -1,0 +1,928 @@
+/* reset CSS */
+		/* http://meyerweb.com/eric/tools/css/reset/ 
+	v2.0 | 20110126
+	License: none (public domain)
+	*/
+
+	html, body, div, span, applet, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, abbr, acronym, address, big, cite, code,
+	del, dfn, em, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var,
+	b, u, i, center,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td,
+	article, aside, canvas, details, embed, 
+	figure, figcaption, footer, header, hgroup, 
+	menu, nav, output, ruby, section, summary,
+	time, mark, audio, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+	}
+	/* HTML5 display-role reset for older browsers */
+	article, aside, details, figcaption, figure, 
+	footer, header, hgroup, menu, nav, section {
+		display: block;
+	}
+	body {
+		line-height: 1;
+	}
+	ol, ul {
+		list-style: none;
+	}
+	blockquote, q {
+		quotes: none;
+	}
+	blockquote:before, blockquote:after,
+	q:before, q:after {
+		content: '';
+		content: none;
+	}
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+	/* reset CSS end */
+    body {
+		font-family: 'Noto Sans TC', sans-serif;
+    }
+	form{
+		padding: 1em;
+        
+	}
+    
+	#formInf{
+		display: flex;
+    	flex-direction: column;
+	}
+	
+    .banner{
+        background-image: url("img/banner.jpg");
+        background-size: cover;
+        background-position: center;
+        height:400px;
+    }
+    .ad{
+        background-image: url("img/car.png");
+        background-size: cover;
+        background-position: center;
+        margin-top: 3%;
+        height:400px;
+    }
+
+    .slogan{
+        padding-top: 15%;
+        padding-left: 5%;
+        color:#fff;
+        text-shadow: 1px 3px 10px #000;
+    }
+    
+	.brand-title{
+		color:#000;
+	}
+	.hidden{
+		visibility:hidden;
+	}
+	thead{background: #f17439;color: #fff;}
+	.table thead th{border-bottom:0px!important;font-weight: inherit;border-top:0px !important;;}
+	.table-striped tbody tr:nth-of-type(odd){
+		background:transparent;
+	}
+	
+	.on{background:#000;color:#fff;}
+	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+		color: rgb(235, 235, 235);
+		opacity: 1; /* Firefox */
+	}
+	.responsive {
+		width: 100%;
+		height: auto;
+	}
+	
+	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+			color: rgb(176, 176, 176);
+			opacity: 1; /* Firefox */
+	}
+	/* 奇數 */
+	/* .table tr:nth-child(odd){
+		background:#f6f6f6;
+	} */
+	/* 偶數 */
+	/* .table tr:nth-child(even){
+		background:#fff;
+	} */
+    .table tr > td:nth-child(1){
+        background:#fff;
+    }
+	.table th{
+		color: #000;
+		/* background: #e9ecef; */
+        text-align: center;
+	}
+    .price{
+        display:flex;
+        align-items:center;
+        padding-top: 5%;
+        padding-left:2%;
+    }
+    .block{
+        display: flex;
+        flex-direction: column;
+    }
+    .block > span.title{
+        padding-bottom: 2%;
+    }
+    .others{
+        margin-top:2%;
+        display:none;
+    }
+    .newPrice{
+        color:rgb(19, 109, 219);
+    }
+    .deadline{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .hint-time{
+        background: #000;
+        color: #fff;
+        
+    }
+    .title-size{
+        font-weight: bold;
+        display: flex;
+    }
+    .note{
+        color:#b74d2a;
+    }
+    @media (min-width: 1224px){
+        .banner{
+            background-position: -2%;
+        }
+        .brand-title{
+            font-size:35px;
+            padding: 2%;
+            font-weight: bold;
+        }
+        .price > span{
+           font-size:30px;
+        }
+        .hint{
+            padding-left: 2.3%;
+            padding-top: 2%;
+            font-size: 20px;
+            color: #fe8b5a;
+        }
+        .hint-time{
+            font-size:25px;
+            text-align:center;
+        }
+        .hint-time > form > input{
+            width:50px;
+            text-align:center;
+        }
+        .slogan > p:nth-child(1){
+            font-size:35px;
+            padding-bottom: 2%;
+        }
+        .slogan > p:nth-child(2){
+            font-size:20.5px;
+        }
+        .title-size{
+            padding:3%;
+            font-size: 30px;
+            padding-left: 10%;
+        }
+        .title-size > p{
+            padding-left:3%;
+        }
+        .title-size img{
+            width:200px;
+        }
+        .form-title{
+            padding-top:20px;
+            padding-bottom: 20px;
+            text-align: center;
+            background:url(bg-all.jpeg);
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .form-title p{
+            font-size: 23px;
+        }
+        .logo{
+            width: 100px;
+        }
+        .block{
+            padding-bottom: 3%;
+        }
+        textarea{
+            width:100%;
+        }
+        .option-fix{
+            display:flex;
+            font-size: 17px;
+            padding-bottom: 15px;
+            justify-content: start;
+        }
+        .option-fix input{
+            margin-right:10px;
+        }
+        .option{
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .block-issue input{
+            margin-top:10px;
+            margin-right:10px;
+        }
+        .issueOption{
+            width: 35px!important;
+            height: 35px!important;
+            position: absolute;
+            margin-top: -210px!important;
+            margin-left: 320px;
+        }
+        table{
+            margin-top:10px;
+        }
+        .table > tbody > tr > th{
+            width:65px;
+            padding-top:20%;
+        }
+        .engine > tbody > tr:nth-child(2){
+            height:40px;
+        }
+        tr.e1 {
+            line-height: 3px;
+        }
+        table td{
+            padding-right: 0!important;
+        }
+        .engine{
+            font-size:15px;
+            line-height: 20px;
+        }
+        .carSize > tbody > tr{
+            line-height: 19.5px;
+        }
+        .carSize > tbody > tr >th{
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+            padding-left: 3.5%;
+            padding-top: 0%;
+        }
+        .hybird > tbody > tr{
+            line-height: 19.5px;
+        }
+        .hybird > tbody > tr >th{
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+            padding-left: 3.5%;
+            padding-top: 0%;
+        }
+        .oil >  tbody > tr > th{
+            padding-top:3%;
+            writing-mode: vertical-lr;
+            padding-left: 20px;
+        }
+        td.tb-cell.item {
+            width: 36%;
+        }
+        td img{
+            width:160px;
+        }
+        tbody:nth-child(odd){
+            background:#fafafa;
+        }
+        .light-table-filter{
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            height: 40px;
+            text-indent: 10px;
+            width:100%;
+        }
+        .block-issue{
+            width: 100%;
+            border:1px solid #d4d4d4;
+        }
+        .issuePic{
+            margin:5%;
+        }
+        .issuePic > img{
+            width:100%;
+        }
+        section.issueContent{
+            margin:5%;
+            height:80px;
+        }
+        .issueContent > p{
+            text-align: justify;
+            line-height: 25px;
+            font-size: 20px;
+        }
+        .block-issue:nth-child(2){
+            margin-left:10px;
+        }
+        .select-item,.select-all{
+            width:20px;
+            height:20px;
+        }
+        .note{
+            text-align: right;
+            font-size: 50%;
+            padding-right: 10%;
+            padding-bottom: 3%;
+
+        }
+        footer{
+            background: #000;
+            color: #fff;
+            height: 35px;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    
+    @media (max-width: 1223px){
+        .banner{
+            background-position: -1%;
+        }
+        .brand-title{
+            font-size:35px;
+            padding: 2%;
+            font-weight: bold;
+        }
+        .price > span{
+           font-size:30px;
+        }
+        .hint{
+            padding-left: 2.3%;
+            padding-top: 2%;
+            font-size: 20px;
+            color: #fe8b5a;
+        }
+        .hint-time{
+            font-size:25px;
+            text-align:center;
+        }
+        .hint-time > form > input{
+            width:50px;
+            text-align:center;
+        }
+        .slogan > p:nth-child(1){
+            font-size:35px;
+            padding-bottom: 2%;
+        }
+        .slogan > p:nth-child(2){
+            font-size:20.5px;
+        }
+        .title-size{
+            padding:3%;
+            font-size: 30px;
+            padding-left: 8%;
+        }
+        .title-size > p{
+            padding-left:3%;
+        }
+        .title-size img{
+            width:200px;
+        }
+        .form-title{
+            padding-top:20px;
+            padding-bottom: 20px;
+            text-align: center;
+            background:url(bg-all.jpeg);
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .form-title p{
+            font-size: 23px;
+        }
+        .logo{
+            width: 100px;
+        }
+        .block{
+            padding-bottom: 3%;
+        }
+        textarea{
+            width:100%;
+        }
+        .option-fix{
+            display:flex;
+            font-size: 17px;
+            padding-bottom: 15px;
+            justify-content: start;
+        }
+        .option-fix input{
+            margin-right:10px;
+        }
+        .option{
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .block-issue input{
+            margin-top:10px;
+            margin-right:10px;
+        }
+        .issueOption{
+            width: 35px!important;
+            height: 35px!important;
+            position: absolute;
+            margin-top: -210px!important;
+            margin-left: 320px;
+        }
+        table{
+            margin-top:10px;
+        }
+        .table > tbody > tr > th{
+            width:65px;
+            padding-top:20%;
+        }
+        .engine > tbody > tr:nth-child(2){
+            height:40px;
+        }
+        tr.e1 {
+            line-height: 3px;
+        }
+        table td{
+            padding-right: 0!important;
+        }
+        td.tb-cell.item {
+            width: 36%;
+        }
+        .engine{
+            font-size:15px;
+            line-height: 20px;
+        }
+        .hybird > tbody > tr{
+            line-height: 19.5px;
+        }
+        .hybird > tbody > tr >th{
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+            padding-left: 3.5%;
+            padding-top: 0%;
+        }
+        td img{
+            width:160px;
+        }
+        tbody:nth-child(odd){
+            background:#fafafa;
+        }
+        .light-table-filter{
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            height: 40px;
+            text-indent: 10px;
+            width:100%;
+        }
+        .block-issue{
+            width: 100%;
+            border:1px solid #d4d4d4;
+        }
+        .issuePic{
+            margin:5%;
+        }
+        .issuePic > img{
+            width:100%;
+        }
+        .oil >  tbody > tr > th{
+            padding-top:3%;
+            writing-mode: vertical-lr;
+            padding-left: 20px;
+        }
+        section.issueContent{
+            margin:5%;
+            height:80px;
+        }
+        .issueContent > p{
+            text-align: justify;
+            line-height: 25px;
+            font-size: 20px;
+        }
+        .block-issue:nth-child(2){
+            margin-left:10px;
+        }
+        .select-item,.select-all{
+            width:20px;
+            height:20px;
+        }
+        .note{
+            text-align: right;
+            font-size: 50%;
+            padding-right: 5%;
+            padding-bottom: 3%;
+        }
+        footer{
+            background: #000;
+            color: #fff;
+            height: 35px;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    @media (max-width: 768px){
+        .banner {
+            background-position:37%;
+        }
+        .form-title{
+            padding-top:20px;
+            padding-bottom: 20px;
+            text-align: center;
+            background:url(bg-all.jpeg);
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .form-title p{
+            font-size: 23px;
+        }
+        .logo{
+            width: 100px;
+        }
+        .block{
+            padding-bottom: 3%;
+        }
+        .block span{
+            display: flex;
+            margin-bottom: 1%;
+        }
+        textarea{
+            width:100%;
+        }
+        .option-fix{
+            display:flex;
+            font-size: 17px;
+            padding-bottom: 15px;
+            justify-content: start;
+        }
+        .option-fix input{
+            margin-right:10px;
+        }
+        .option{
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .block-issue input{
+            margin-top:10px;
+            margin-right:10px;
+        }
+        .issuePic > img{
+            width:100%;
+        }
+        td.tb-cell.item {
+            width: 36%;
+        }
+        table{
+            margin-top:10px;
+        }
+        table td{
+            padding-right: 0!important;
+        }
+        td img{
+            width:160px;
+        }
+        tbody:nth-child(odd){
+            background:#f1f1f1;
+        }
+        .light-table-filter{
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            height: 40px;
+            text-indent: 10px;
+            width:100%;
+        }
+        .block-issue{
+            width: 100%;
+        }
+        section.issueContent{
+            height:110px;
+        }
+        .block-issue:nth-child(2){
+            margin-left:10px;
+        }
+        .select-item,.select-all{
+            width:20px;
+            height:20px;
+        }
+        .note{
+            text-align: right;
+            font-size: 50%;
+            padding-right: 5%;
+            padding-bottom: 3%;
+        }
+        footer{
+            background: #000;
+            color: #fff;
+            height: 35px;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    @media (max-width: 568px){
+        .form-title{
+            padding-top:20px;
+            padding-bottom: 20px;
+            text-align: center;
+            background:url(bg-all.jpeg);
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .form-title p{
+            font-size: 23px;
+        }
+        .logo{
+            width: 100px;
+        }
+        .block{
+            padding-bottom: 5%;
+        }
+        .block span{
+            display: flex;
+            margin-bottom: 3%;
+        }
+        textarea{
+            width:100%;
+        }
+        .option-fix{
+            display:flex;
+            font-size: 17px;
+            padding-bottom: 15px;
+            justify-content: start;
+        }
+        .option-fix input{
+            margin-right:10px;
+        }
+        .option{
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .block-issue input{
+            margin-top:10px;
+        }
+        .issuePic > img{
+            width:100%;
+        }
+        table{
+            margin-top:10px;
+        }
+        table td{
+            padding-right: 0!important;
+        }
+        td img{
+            width:160px;
+        }
+        tbody:nth-child(odd){
+            background:#f1f1f1;
+        }
+        .light-table-filter{
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            height: 40px;
+            text-indent: 10px;
+            width:100%;
+        }
+        .block-issue{
+            width: 100%;
+        }
+        section.issueContent{
+            height:110px;
+        }
+        .block-issue:nth-child(2){
+            margin-left:10px;
+        }
+        .select-item,.select-all{
+            width:20px;
+            height:20px;
+        }
+        .note{
+            text-align: right;
+            font-size: 50%;
+            padding-right: 5%;
+            padding-bottom: 3%;
+        }
+        footer{
+            background: #000;
+            color: #fff;
+            height: 35px;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    @media (max-width: 414px){
+        .banner{
+            height:200px;
+            background-position: 0%;
+        }        
+        .ad{
+            background-position: -66px;
+            margin-top: 3%;
+            height:200px;
+        }
+        .title-size img {
+            width: 100px;
+            height: 30px;
+        }
+        .title-size > p {
+            padding-left: 3%;
+            font-size: 20px;
+        }
+        .slogan{
+            padding-top: 15%;
+            padding-left: 5%;
+        }
+        .slogan > p:nth-child(1) {
+            font-size: 27px;
+            padding-bottom: 2%;
+        }
+        .slogan > p:nth-child(2) {
+            font-size: 15.5px;
+        }
+        .brand-title {
+            font-size: 23px;
+            padding: 2%;
+            font-weight: bold;
+        }
+        .price > span {
+            font-size: 20px;
+        }
+        .form-title{
+            padding-top:20px;
+            padding-bottom: 20px;
+            text-align: center;
+            background:url(bg-all.jpeg);
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .form-title p{
+            font-size: 23px;
+        }
+        .hint-time {
+            font-size: 11px;
+            text-align: center;
+        }
+        .hint {
+            font-size: 15px;
+        }
+        .hint-time > form > input {
+            width: 30px;
+        }
+        .logo{
+            width: 100px;
+        }
+        .block{
+            padding-bottom: 5%;
+        }
+        .block span{
+            display: flex;
+            margin-bottom: 3%;
+        }
+        textarea{
+            width:100%;
+        }
+        .option-fix{
+            display:flex;
+            font-size: 17px;
+            padding-bottom: 15px;
+            justify-content: start;
+        }
+        .option-fix input{
+            margin-right:10px;
+        }
+        
+        .block-issue input{
+            margin-top:10px;
+        }
+        
+        table{
+            margin-top:10px;
+        }
+        table th{
+            font-size: 50%!important;
+        }
+        table td{
+            padding-right: 0!important;
+            font-size: 50%!important;
+            line-height: 20px;
+        }
+        .table > tbody > tr > th {
+            width: 55px;
+        }
+        .carSize >  tbody > tr > th{
+            padding-top:30%;
+        }
+        .engine > tbody > tr > th {
+            padding-top:50%;
+        }
+        .system >  tbody > tr > th{
+            padding-top:42%;
+        }
+        .oil >  tbody > tr > th{
+            padding-top:5%;
+            writing-mode: vertical-lr;
+            padding-left: 20px;
+        }
+        td img{
+            width:160px;
+        }
+        tbody:nth-child(odd){
+            background:#f1f1f1;
+        }
+        td.tb-cell.item {
+            width: 40%;
+        }
+        .light-table-filter{
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            height: 40px;
+            text-indent: 10px;
+            width:100%;
+        }
+        .hybird > tbody > tr >th {
+            padding-left: 5.5%;
+        }
+        .block-device{
+            margin-top:30px;
+        }
+        .block-issue{
+            border:1px solid #d4d4d4;
+            width: 100%;
+        }
+        .issueOption{
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            margin-top: -98px!important;
+            margin-left: 140px;
+        }
+        .issuePic{
+            margin:5%;
+        }
+        .issuePic > img{
+            width:100%;
+        }
+        section.issueContent{
+            margin:5%;
+            height:90px;
+        }
+        .issueContent > p{
+            text-align: justify;
+            font-size: 90%;
+            line-height: 20px;
+        }
+        .option{
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .fixsize{
+            height: 35px!important;
+        }
+        .select-item,.select-all{
+            width:20px;
+            height:20px;
+        }
+        .note{
+            text-align: right;
+            font-size: 50%;
+            padding-right: 5%;
+            padding-bottom: 3%;
+        }
+        footer{
+            background: #000;
+            color: #fff;
+            height: 35px;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+    }
