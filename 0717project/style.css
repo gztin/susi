@@ -322,7 +322,6 @@
         }
         .oil >  tbody > tr > th{
             padding-top:3%;
-            writing-mode: vertical-lr;
             padding-left: 20px;
         }
         td.tb-cell.item {
@@ -787,7 +786,6 @@
         }
         .oil >  tbody > tr > th{
             padding-top:3%;
-            writing-mode: vertical-lr;
             padding-left: 20px;
         }
         td.tb-cell.item {
