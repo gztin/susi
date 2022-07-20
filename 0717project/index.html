@@ -321,8 +321,10 @@
 				}).then(result => {
 					console.log("打過去的網址是："+renewPriceUrl);
 					console.log("最新的價格是："+result);
+					alert("出價完成！")
 					 let newPrice = parseInt(result);
-					 $(".newPrice").html(newPrice); 
+					 $(".newPrice").html(newPrice);
+					 $(".userPrice").val(""); 
 				});
 			} 
 		});
