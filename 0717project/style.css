@@ -308,8 +308,6 @@
             line-height: 19.5px;
         }
         .carSize > tbody > tr >th{
-            writing-mode: vertical-lr;
-            text-orientation: upright;
             padding-left: 3.5%;
             padding-top: 0%;
         }
@@ -773,8 +771,6 @@
             line-height: 19.5px;
         }
         .carSize > tbody > tr >th{
-            writing-mode: vertical-lr;
-            text-orientation: upright;
             padding-left: 3.5%;
             padding-top: 0%;
         }
