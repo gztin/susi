@@ -926,7 +926,7 @@
             line-height: 20px;
         }
         .table > tbody > tr > th {
-            width: 55px;
+            width: 50px;
         }
         .carSize >  tbody > tr > th{
             padding-top:30%;
@@ -938,7 +938,7 @@
             padding-top:42%;
         }
         .oil >  tbody > tr > th{
-            padding-top:5%;
+            padding-top:15%;
             padding-left: 20px;
         }
         td img{
