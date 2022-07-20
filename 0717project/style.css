@@ -78,7 +78,7 @@
     }
 
     .slogan{
-        padding-top: 15%;
+        padding-top: 8%;
         padding-left: 5%;
         color:#fff;
         text-shadow: 1px 3px 10px #000;
@@ -183,8 +183,11 @@
     .brand-title{
         text-align: center;
     }
-    .memberInf > form > p.hint{
+    /* .memberInf > form > p.hint{
         padding-bottom: 2%;
+    } */
+    .btn-votePrice{
+        padding-top: 2%;
     }
     .brand-hint{
         color: #f10120;
@@ -220,11 +223,11 @@
             text-align:center;
         }
         .slogan > p:nth-child(1){
-            font-size:35px;
+            font-size:60px;
             padding-bottom: 2%;
         }
         .slogan > p:nth-child(2){
-            font-size:20.5px;
+            font-size:34.5px;
         }
         .title-size{
             padding:3%;
@@ -387,6 +390,21 @@
     }
     
     @media (max-width: 1223px){
+        
+        .slogan{
+            padding-top: 10%;
+            padding-left: 3%;
+            color:#fff;
+            text-shadow: 1px 3px 10px #000;
+        }
+        .slogan > p:nth-child(1){
+            font-size:55px;
+            padding-bottom: 2%;
+        }
+        .slogan > p:nth-child(2){
+            font-size:32.5px;
+        }
+
         .banner{
             background-position: -1%;
         }
@@ -415,13 +433,7 @@
             width:50px;
             text-align:center;
         }
-        .slogan > p:nth-child(1){
-            font-size:35px;
-            padding-bottom: 2%;
-        }
-        .slogan > p:nth-child(2){
-            font-size:20.5px;
-        }
+        
         .title-size{
             padding:3%;
             font-size: 30px;
@@ -572,6 +584,19 @@
         }
     }
     @media (max-width: 768px){
+        .slogan{
+            padding-top: 15%;
+            padding-left: 3%;
+            color:#fff;
+            text-shadow: 1px 3px 10px #000;
+        }
+        .slogan > p:nth-child(1){
+            font-size:39px;
+            padding-bottom: 2%;
+        }
+        .slogan > p:nth-child(2){
+            font-size:22.5px;
+        }
         .banner {
             background-position:37%;
         }
