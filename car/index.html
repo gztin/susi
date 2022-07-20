@@ -1,204 +1,328 @@
 <!DOCTYPE html>
-<html>
-	
-<!-- Mirrored from themesboss.com/pioted/solid_9.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 22 Jun 2021 09:28:31 GMT -->
+<html lang="en">
+
 <head>
-		<meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <title>東森員購競標網</title>
-	    <meta name="description" content="" />
-	    <meta name="keywords" content="" />
-	    <meta name="author" content="ThemesBoss" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta property="og:image" content="https://gztin.github.io/susi/fixForm/logo-small.jpg">
+  <title>東森員購競標網</title>
 
-	    <link rel="shortcut icon" href="images/favicon.ico">
+  <link rel="shortcut icon" href="./img/favicon.ico">	
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<!-- onload="clock();return true" -->
+<body>
+	<section class="banner">
+		<div class="slogan">
+			<p class="slogan-content">東森員購競標網</p>
+			<p class="slogan-content">僅限集團員工，可重複投標</p>
+		</div>
+	</section>
+	<div class="hint-time">
+		<form name="formnow" class="deadline">
+			倒數計時<input type="text" name="dd" class="dd" size=4> 天 <input 
+			type="text" class="hh" name="hh" size=2> 小時 <input type="text" 
+			name="mm" class="mm" size=2> 分 <input class="ss" type="text" name="ss" 
+			size=2> 秒，活動結束!<br>
+		</form>
+	</div>
+	<section class="carInf">
+		<div class="container">
+			<div class="row">
+				<div class="block col-lg-6 order-lg-2">
+					<p class="brand-title">Rav4 王者休旅旗艦版(尊爵黑)</p>
+					<p class="brand-hint">原價120萬，限量1台</p>
+					<p class="price">
+						<span class="newPrice"></span>
+						<span>目前得標價：(萬元)</span>
+					</p>
+				</div>
+				<div class="memberInf col-lg-6 order-lg-1">
+					<form action="">
+						<div class="block">
+							<span class="title">所屬單位(必選）</span>
+							<select name="" id="pickCompany" class="light-table-filter">
+								<option value="東森國際(含東投、東租)">東森國際(含東投、東租)</option>
+								<option value="東森得易購(含東森新零售百貨、自然美直營店)">東森得易購(含東森新零售百貨、自然美直營店)</option>
+								<option value="東森新媒體">東森新媒體</option>
+								<option value="東森寵物雲">東森寵物雲</option>
+								<option value="奧斯卡寵物水族連鎖（含寵物王國、金王子）">奧斯卡寵物水族連鎖（含寵物王國、金王子）</option>
+								<option value="東森自然美（含瑞昇醫美）">東森自然美（含瑞昇醫美）</option>
+								<option value="東森房屋">東森房屋</option>
+								<option value="東森保代">東森保代</option>
+								<option value="東森直消電商">東森直消電商</option>
+								<option value="東森分眾">東森分眾</option>
+								<option value="熊媽媽">熊媽媽</option>
+								<option value="遠富國際">遠富國際</option>
+								<option value="東森海洋">東森海洋</option>
+								<option value="歡樂旅行社">歡樂旅行社</option>
+							</select>
+						</div>
+						<div class="block">
+							<span class="title">姓名(必填）</span>
+							<input type="text" class="light-table-filter userName" data-table="order-table" placeholder="填寫姓名" required="required">
+						</div>
+						<div class="block">
+							<span class="title">手機(必填）</span>
+							<input type="text" class="light-table-filter userPhone" data-table="order-table" placeholder="填寫手機號碼" required="required">
+						</div>
+						<div class="block">
+							<span class="title"><p>搶標金額(必填，不得低於目前得標價）</p></span>
+							<input type="text" class="light-table-filter userPrice" data-table="order-table" placeholder="每次競標最低增額:1萬" required="required">
+						</div>
+						<p class="hint">*棄標者，第二順位得標</p>
+						<input class="btn btn-votePrice btn-block sendInf" value="立即搶標">
+					</form>
+				</div>
+				
+			</div>
+		</div>
+		<hr>
+	</section>
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="ad"></div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<span class="title-size"><img src="./img/rav4-logo.png" alt=""><p>旗艦版 ( 尊爵黑 ) 規格表</p></span>
+		<div class="container">
+			<div class="row">
+				<!-- 尺寸 -->
+				<div class="col-lg-6">
+					<table class="table table-bordered table-hover carSize">
+						<tbody>
+							<th rowspan="7">尺寸</th>
+							<tr>
+								<td class="tb-cell item">全長(mm)</td>
+								<td class="tb-cell itemContent">4,060</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">全寬(mm)</td>
+								<td class="tb-cell itemContent">1,855</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">全高(mm)</td>
+								<td class="tb-cell itemContent">1,685</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">軸距(mm)</td>
+								<td class="tb-cell itemContent">2,690</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">車重(Kg)</td>
+								<td class="tb-cell itemContent">1,700</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">最小迴轉半徑(m)</td>
+								<td class="tb-cell itemContent">5.5</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
-	    <!--Bootstrap Css-->
-	    <link rel="stylesheet" href="css/bootstrap.min.css" />
+				<!-- 引擎 -->
+				<div class="col-lg-6">
+					<table class="table table-bordered table-hover engine">
+						<tbody>
+							<th rowspan="7">引擎</th>
+							<tr>
+								<td class="tb-cell item">形式</td>
+								<td class="tb-cell itemContent engine" style="text-align:center;">A-25A-FXS直列四汽缸<br>進氣:VVT-iE電子控制連續可變汽門正時系統<br>排氣VVT-i連續可變汽門正時控制系統<br>附ERG廢棄再循環系統</td>
+							</tr>
+							<tr class="e1">
+								<td class="tb-cell item">排氣量</td>
+								<td class="tb-cell itemContent">2,487(c.c)</td>
+							</tr>
+							<tr class="e1">
+								<td class="tb-cell item">壓縮比</td>
+								<td class="tb-cell itemContent">14.0:1</td>
+							</tr>
+							<tr class="e1">
+								<td class="tb-cell item">油箱容量</td>
+								<td class="tb-cell itemContent">55(L)</td>
+							</tr>
+							<tr class="e1">
+								<td class="tb-cell item">最大馬力</td>
+								<td class="tb-cell itemContent">178/5,700(ps/rpm)</td>
+							</tr>
+							<tr class="e1">
+								<td class="tb-cell item">最大扭力</td>
+								<td class="tb-cell itemContent">22.5/3,600~5,200(kg-m/rpm)</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
-	    <!-- Materialdesign icons Css -->
-	    <link rel="stylesheet" href="css/materialdesignicons.min.css">
+				<!-- 項目 -->
+				<div class="col-lg-6">
+					<table class="table table-bordered table-hover hybird">
+						<tbody>
+							<th rowspan="7" >H<br>Y<br>B<br>R<br>I<br>D<br>系<br>統</th>
+							<tr>
+								<td class="tb-cell item">馬達形式-永磁電動馬達MG1</td>
+								<td class="tb-cell itemContent">啟動馬達</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">馬達形式-永磁電動馬達MG1</td>
+								<td class="tb-cell itemContent">650V，驅動前輪;120gs/20.6kg-m</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">電池形式</td>
+								<td class="tb-cell itemContent">鎳氫電池(Ni-MH)</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">電池電壓</td>
+								<td class="tb-cell itemContent">244.8V</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">最大綜效馬力(ps)</td>
+								<td class="tb-cell itemContent">218</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
-	    <!-- Mobirise icons Css -->
-	    <link rel="stylesheet" href="css/mobiriseicons.css">
+				<!-- 系統結構 -->
+				<div class="col-lg-6">
+					<table class="table table-bordered table-hover system">
+						<tbody>
+							<th rowspan="7">系統結構</th>
+							<tr>
+								<td class="tb-cell item">轉向系統</td>
+								<td class="tb-cell itemContent">EPS電動輔助方向盤</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">傳動系統</td>
+								<td class="tb-cell itemContent">FF前輪傳動</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">變速箱系統</td>
+								<td class="tb-cell itemContent">E-CVT無段變速系統</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">懸吊系統</td>
+								<td class="tb-cell itemContent">(前)獨立麥花臣式，附防傾平衡桿</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">煞車系統</td>
+								<td class="tb-cell itemContent">(後)獨立雙A臂式，附防傾平衡桿</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">輪胎規格</td>
+								<td class="tb-cell itemContent">四輪碟煞，附智能輔助剎車系統<br>(ABS+BAS+EBD+BOS)</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- 系統結構 -->
+			<div class="row">
+				<div class="col-lg-12">
+					<table class="table table-bordered table-hover oil">
+						<tbody>
+							<th rowspan="4">油<br>耗<br>值</th>
+							<tr>
+								<td class="tb-cell item">平均油耗(km/L)</td>
+								<td class="tb-cell itemContent">21.3</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">年油耗量</td>
+								<td class="tb-cell itemContent">704</td>
+							</tr>
+							<tr>
+								<td class="tb-cell item">能源效率等級</td>
+								<td class="tb-cell itemContent">1</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="note"><p>*詳細規格請上官網查詢</p></div>
+	<footer>
+		<p> www.toyota.com.tw</p>
+	</footer>
+</body>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/85155ffcd6.js"></script>
+	<script src="js/time.js"></script>
+	<script>
+		let priceNew = setInterval(function(){
+			let timeDay = $(".dd").val();
+			let timeHour = $(".hh").val();
+			let timeMin = $(".mm").val();
+			let timeSec = $(".ss").val();
+			let winner = $(".newPrice").html();
+			//console.log("目前的得標價是:"+winner);
+			console.log("timeHour的值是:"+timeHour);
+			console.log("timeMin的值是:"+timeMin);
+			console.log("timeSec的值是:"+timeSec);
+			console.log("目前的得標價是:"+winner);
+			
+			if ((timeDay=='0')&&(timeHour=='0')&&(timeMin=='0')&&(timeSec=='0')){
+				clearInterval(priceNew);
+			}
+			else{
+				url = 'http://test.eiptv.net:99/api/BidPrice/toyota1';
+				fetch(url, {method:'GET'}).then(res => {
+					return res.text();
+				}).then(result => {
+					let newPrice = parseInt(result);
+					alert("最新的得標價是:"+newPrice);
+					 $(".newPrice").html(newPrice); 
+				});
+			}
+		},1000);
 
-        <!-- Magnific-popup -->
-        <link rel="stylesheet" href="css/magnific-popup.css">
-        <!-- Animate Css -->
-        <link rel="stylesheet" href="css/animate.min.css">
-        <!-- OWL SLIDER -->
-        <link rel="stylesheet" href="css/owl.carousel.css" />
-        <link rel="stylesheet" href="css/owl.theme.css" />
-        <link rel="stylesheet" href="css/owl.transitions.css" />
+		function getComp(){
+			otherGroup = document.getElementById("pickCompany").value;
+			if(otherGroup == 15){
+				$(".others").toggle();
+			}
+			else{
+				$(".others").toggle();
+			}
+		}
+		$(".btn-votePrice").click(function(){
+			let priceNoew = parseInt($(".newPrice").text());
+			let priceInf = $(".userPrice").val();
+			
+			if(priceInf < priceNoew){
+				alert("您的出價低於目前得標價，請重新下標");
+			}
+			else{
+				var e = document.getElementById("pickCompany");
+				let item = "toyota1"
+				let userComp = e.value;
+				let userName = $(".userName").val();
+				let userPhone = $(".userPhone").val();
+				let userPrice = $(".userPrice").val(); 
 
-	    <!-- Custom style Css -->
-	    <link rel="stylesheet" href="css/style.css?v=1">
-	</head>
-	<body>
-
-        <!-- START HOME -->
-        <section class="section home-bg-color h-100vh" id="home">
-            <p class="slogan-title">東森員購競標網</p>
-            <p class="slogan-content">（ 僅限集團員工，可重複投標 ）</p>
-        </section>
-        <!-- END HOME -->
-
-        <!-- 競標資訊 -->
-        <section class="section" id="price-inf">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">  
-                        <p class="title">RAV4王者休旅旗艦版（尊爵黑）</p>
-                        <p class="title-content">原價120萬，限量1台</p>
-                        <p class="block_price">
-                            <span class="priceText">目前標價：</span>
-                            <span class="priceNew">96萬</span>
-                        </p>
-                        <p class="hint">最低增額：1萬</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- END 競標資訊 -->
-
-        <!-- 時間資訊 -->
-        <section class="section" id="time-inf">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">  
-                        <p class="block_time">
-                            <span class="priceText">10天5小時30分20秒</span>
-                            <span class="priceNew">結束</span>
-                        </p>
-                    </div>
-                    div
-                </div>
-            </div>
-        </section>
-        <!-- END 時間資訊 -->
-
-        <!-- 汽車資訊 -->
-        <section class="section" id="car-inf">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">  
-                        <p class="block_time">
-                            <span class="priceText">10天5小時30分20秒</span>
-                            <span class="priceNew">結束</span>
-                        </p>
-                    </div>
-                    div
-                </div>
-            </div>
-        </section>
-        <!-- END 汽車資訊 -->
-
-         <!-- 員工資料 -->
-         <section class="section" id="time-inf">
-            <div class="container">
-                <div class="row">
-                    <form action="">
-                        <div class="block">
-                            <span>您所屬的單位：</span>
-                            <select name="company" id="brand">
-                                <option>請選擇單位名稱</option>
-                                <option value="東森國際(含東投、東租)">東森國際(含東投、東租)</option>
-                                <option value="東森得易購(含東森新零售百貨、自然美直營店)"></option>
-                                <option value="東森新媒體">東森新媒體</option>
-                                <option value="東森寵物雲">東森寵物雲</option>
-                                <option value="奧斯卡寵物水族連鎖（含寵物王國、金王子）">奧斯卡寵物水族連鎖（含寵物王國、金王子）</option>
-                                <option value="東森自然美（含瑞昇醫美）">東森自然美（含瑞昇醫美）</option>
-                                <option value="東森房屋">東森房屋</option>
-                                <option value="東森保貸">東森保貸</option>
-                                <option value="東森直消電商">東森直消電商</option>
-                                <option value="東森分眾">東森分眾</option>
-                                <option value="東森禾力科技">東森禾力科技</option>
-                                <option value="熊媽媽">熊媽媽</option>
-                                <option value="遠富國際">遠富國際</option>
-                                <option value="東森海洋">東森海洋</option>
-                                <option value="歡樂旅行社">歡樂旅行社</option>
-                                <option value="其他（請註明）">其他（請註明）</option>
-                            </select>
-                        </div>
-                        <div class="block personName">
-                            <span class="name">姓名：</span>
-                            <input type="text">
-                        </div>
-                        <div class="block personPhone">
-                            <span class="name">手機：</span>
-                            <input type="text">
-                        </div>
-                        <div class="block vote">
-                            <span class="name">搶標金額（萬）</span>
-                            <input type="text">
-                        </div>
-                        <input class="btn btn-primary btn-block sendInf" type="submit" value="立即搶標">
-                    </form>
-                </div>
-            </div>
-        </section>
-        <!-- END 員工資料 -->
-
-        <!--START FOOTER-->  
-        <footer class="pt-5 footer">
-            <div class="container">
-                <div class="row pb-4">
-                    <div class="col-lg-3">
-                        <h6 class="footer-title text-uppercase">About Pioted</h6>
-                        <p class="mt-3 about_footer_color desc-line-height">Lorem ipsum dolor sit amet, consectetur adipiscing elit.sapien et lacus tempus varius.</p>                        
-                    </div>
-                    <div class="col-lg-3">
-                        <h6 class="footer-title text-uppercase">Important Link</h6>
-                        <ul class="list-unstyled footer_menu_list margin-t-30">
-                            <li><a href="#">Terms & Condition</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Return Policy</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Sitemap</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3">
-                        <h6 class="footer-title text-uppercase">Our Pages</h6>
-                        <ul class="list-unstyled footer_menu_list margin-t-30">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Features</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Client</a></li>
-                            <li><a href="#">Pricing</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3">
-                        <h6 class="footer-title text-uppercase">Contact Us</h6>
-                        <p class="mb-1 about_footer_color mt-3"><i class="mdi mdi-email-outline"></i> : <span>support@website.com</span></p>
-                        <p class="mb-1 about_footer_color"><i class="mdi mdi-cellphone"></i> : <span>+1 234 569 798</span></p>
-                        <p class="mb-1 about_footer_color"><i class="mdi mdi-earth"></i> : <span>www.website.com</span></p>
-                        <p class="mb-1 about_footer_color"><i class="mdi mdi-hospital-building"></i> : <span>9:00 AM - 6:00 PM</span></p>
-                        <p class="mb-1 about_footer_color"><i class="mdi mdi-map-marker"></i> : <span>97 Ilchester Road, Muirhead, KY15 2GP</span></p>
-                    </div>
-                </div>
-                <div class="footer-border"></div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="footer-alt text-center">
-                            <p class="copy-rights">2018 &copy; Pioted. Design by ThemesBoss.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!--END FOOTER-->  
-
-        <!-- BACK TO TOP -->    
-        <a href="#" class="back_top"> <i class="mbri-arrow-up"> </i> </a>
-
-        <!-- JAVASCRIPTS -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <!--EASING JS-->
-        <script src="js/jquery.easing.min.js"></script>
-	</body>
-
-<!-- Mirrored from themesboss.com/pioted/solid_9.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 22 Jun 2021 09:29:14 GMT -->
+				renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+userComp+","+userName+","+userPhone+","+userPrice;
+				fetch(renewPriceUrl, {method:'GET'}).then(res => {
+					return res.text();
+				}).then(result => {
+					console.log("打過去的網址是："+renewPriceUrl);
+					console.log("最新的價格是："+result);
+					alert("出價完成！")
+					 let newPrice = parseInt(result);
+					 $(".newPrice").html(newPrice);
+					 $(".userPrice").val(""); 
+				});
+			} 
+		});
+	</script>
 </html>
-
-
-
