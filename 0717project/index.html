@@ -285,8 +285,11 @@
 				fetch(url, {method:'GET'}).then(res => {
 					return res.text();
 				}).then(result => {
-					let newPrice = parseInt(result);
-					 $(".newPrice").html(newPrice); 
+					let oriPrice = parseInt(result);
+					
+					 $(".newPrice").html(oriPrice);
+					 let aaa =  $(".newPrice").val(); 
+					 alert("目前的得標價是:"+aaa);
 				});
 			}
 		},1000);
