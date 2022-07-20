@@ -286,7 +286,6 @@
 					return res.text();
 				}).then(result => {
 					let newPrice = parseInt(result);
-					newPrice = newPrice/10000;
 					 $(".newPrice").html(newPrice); 
 				});
 			}
@@ -323,7 +322,6 @@
 					console.log("打過去的網址是："+renewPriceUrl);
 					console.log("最新的價格是："+result);
 					 let newPrice = parseInt(result);
-					 newPrice = newPrice/10000;
 					 $(".newPrice").html(newPrice); 
 				});
 			} 
