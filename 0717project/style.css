@@ -65,6 +65,7 @@
         background-image: url("img/banner.jpg");
         background-size: cover;
         background-position: center;
+        width:100%;
         height:400px;
     }
     .ad{
@@ -792,12 +793,14 @@
     }
     @media (max-width: 414px){
         .banner{
+            width:100%;
             height:200px;
             background-position: 0%;
         }        
         .ad{
             background-position: -66px;
             margin-top: 3%;
+            width:100%;
             height:200px;
         }
         .title-size img {
