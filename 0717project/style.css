@@ -756,6 +756,9 @@
         tbody:nth-child(odd){
             background:#f1f1f1;
         }
+        span.newPrice{
+            font-size: 70px!important;
+        }
         .light-table-filter{
             border: 1px solid #d4d4d4;
             border-radius: 5px;
@@ -861,6 +864,9 @@
         }
         .price > span {
             font-size: 20px;
+        }
+        span.newPrice{
+            font-size: 70px!important;
         }
         .form-title{
             padding-top:20px;
