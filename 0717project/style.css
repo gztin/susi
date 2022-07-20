@@ -155,6 +155,7 @@
         font-size:180px !important;;
         padding-bottom: 5%;
         font-weight: bold;
+        cursor: pointer;
     }
     .deadline{
         display: flex;
