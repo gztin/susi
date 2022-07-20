@@ -28,66 +28,75 @@
 			<p class="slogan-content">僅限集團員工，可重複投標</p>
 		</div>
 	</section>
+	<div class="hint-time">
+		<form name="formnow" class="deadline">
+			倒數計時<input type="text" name="dd" size=4> 天 <input 
+			type="text" name="hh" size=2> 小時 <input type="text" 
+			name="mm" size=2> 分 <input type="text" name="ss" 
+			size=2> 秒，活動結束!<br>
+		</form>
+	</div>
 	<section class="carInf">
-		<div class="block">
-			<p class="brand-title">Rav4旗艦版(尊爵黑)</p>
-			<p class="price">
-				<span>目前得標價:</span>
-				<span class="newPrice">96</span>
-				<span> 萬元</span>
-			</p>
-			<p class="hint">每次出價增額:1萬</p>
-		</div>
-		<div class="hint-time">
-			<form name="formnow" class="deadline">
-				再過<input type="text" name="dd" size=4> 天 <input 
-				type="text" name="hh" size=2> 小時 <input type="text" 
-				name="mm" size=2> 分 <input type="text" name="ss" 
-				size=2> 秒，活動就結束了!<br>
-			</form>
+		<div class="container">
+			<div class="row">
+				<div class="block col-lg-6 order-lg-2">
+					<p class="brand-title">Rav4 王者休旅旗艦版(尊爵黑)</p>
+					<p class="brand-hint">原價120萬，限量1台</p>
+					<p class="price">
+						<span class="newPrice">96</span>
+						<span>目前得標價：(萬元)</span>
+					</p>
+				</div>
+				<div class="memberInf col-lg-6 order-lg-1">
+					<form action="">
+						<div class="block">
+							<span class="title">所屬單位(必選）</span>
+							<select name="" id="pickCompany" class="light-table-filter" onchange="getComp()">
+								<option value="東森國際(含東投、東租)">東森國際(含東投、東租)</option>
+								<option value="東森得易購(含東森新零售百貨、自然美直營店)">東森得易購(含東森新零售百貨、自然美直營店)</option>
+								<option value="東森新媒體">東森新媒體</option>
+								<option value="東森寵物雲">東森寵物雲</option>
+								<option value="奧斯卡寵物水族連鎖（含寵物王國、金王子）">奧斯卡寵物水族連鎖（含寵物王國、金王子）</option>
+								<option value="東森自然美（含瑞昇醫美）">東森自然美（含瑞昇醫美）</option>
+								<option value="東森房屋">東森房屋</option>
+								<option value="東森保代">東森保代</option>
+								<option value="東森直消電商">東森直消電商</option>
+								<option value="東森分眾">東森分眾</option>
+								<option value="熊媽媽">熊媽媽</option>
+								<option value="遠富國際">遠富國際</option>
+								<option value="東森海洋">東森海洋</option>
+								<option value="歡樂旅行社">歡樂旅行社</option>
+							</select>
+						</div>
+						<div class="block">
+							<span class="title">姓名(必填）</span>
+							<input type="text" class="light-table-filter userName" data-table="order-table" placeholder="填寫姓名" readonly="readonly" >
+						</div>
+						<div class="block">
+							<span class="title">手機(必填）</span>
+							<input type="text" class="light-table-filter userPhone" data-table="order-table" placeholder="填寫手機號碼" readonly="readonly" >
+						</div>
+						<div class="block">
+							<span class="title"><p>搶標金額</p><p class="hint">*每次競標最低增額:1萬</p></span>
+							
+							<input type="text" class="light-table-filter userPrice" data-table="order-table" placeholder="0" readonly="readonly" >
+						</div>
+						<input class="btn btn-votePrice btn-block sendInf" type="submit" value="立即搶標">
+					</form>
+				</div>
+				
+			</div>
 		</div>
 		<hr>
-		<div class="memberInf">
-			<form action="">
-				<div class="block">
-					<span class="title">所屬單位</span>
-					<select name="" id="pickCompany" class="light-table-filter" onchange="getComp()">
-						<option value="東森國際(含東投、東租)">東森國際(含東投、東租)</option>
-						<option value="東森得易購(含東森新零售百貨、自然美直營店)">東森得易購(含東森新零售百貨、自然美直營店)</option>
-						<option value="東森新媒體">東森新媒體</option>
-						<option value="東森寵物雲">東森寵物雲</option>
-						<option value="奧斯卡寵物水族連鎖（含寵物王國、金王子）">奧斯卡寵物水族連鎖（含寵物王國、金王子）</option>
-						<option value="東森自然美（含瑞昇醫美）">東森自然美（含瑞昇醫美）</option>
-						<option value="東森房屋">東森房屋</option>
-						<option value="東森保代">東森保代</option>
-						<option value="東森直消電商">東森直消電商</option>
-						<option value="東森分眾">東森分眾</option>
-						<option value="熊媽媽">熊媽媽</option>
-						<option value="遠富國際">遠富國際</option>
-						<option value="東森海洋">東森海洋</option>
-						<option value="歡樂旅行社">歡樂旅行社</option>
-						<option value="15">其他 (請註明)</option>
-					</select>
-					<input class="light-table-filter others" type="text" placeholder="請填寫公司名稱">
-				</div>
-				<div class="block">
-					<span class="title">姓名</span>
-					<input type="text" class="light-table-filter userName" data-table="order-table" placeholder="填寫姓名" readonly="readonly" >
-				</div>
-				<div class="block">
-					<span class="title">手機</span>
-					<input type="text" class="light-table-filter userPhone" data-table="order-table" placeholder="填寫手機號碼" readonly="readonly" >
-				</div>
-				<div class="block">
-					<span class="title">搶標金額</span>
-					<input type="text" class="light-table-filter userPrice" data-table="order-table" placeholder="0" readonly="readonly" >
-				</div>
-				<input class="btn btn-primary btn-block sendInf" type="submit" value="立即搶標">
-			</form>
+	</section>
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="ad"></div>
+			</div>
 		</div>
 	</section>
-	<hr>
-	<section class="ad"></section>
 	<section>
 		<span class="title-size"><img src="./img/rav4-logo.png" alt=""><p>旗艦版 ( 尊爵黑 ) 規格表</p></span>
 		<div class="container">

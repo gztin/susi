@@ -72,6 +72,7 @@
         background-size: cover;
         background-position: center;
         margin-top: 3%;
+        width: 100%;
         height:400px;
     }
 
@@ -127,22 +128,31 @@
     .price{
         display:flex;
         align-items:center;
-        padding-top: 5%;
+        padding-top: 2%;
         padding-left:2%;
+        flex-direction: column;
     }
     .block{
         display: flex;
         flex-direction: column;
     }
     .block > span.title{
+        display: flex;
+        align-items: center;
         padding-bottom: 2%;
     }
     .others{
         margin-top:2%;
         display:none;
     }
+    .price > span{
+        font-size:20px;
+     }
     .newPrice{
         color:rgb(19, 109, 219);
+        font-size:150px !important;;
+        padding-bottom: 5%;
+        padding-top: 5%;
     }
     .deadline{
         display: flex;
@@ -161,6 +171,18 @@
     .note{
         color:#b74d2a;
     }
+    .btn-votePrice{
+        color:#fff;
+        background-color: #f10120;
+        border-color: #f10120;
+    }
+    .brand-title{
+        text-align: center;
+    }
+    .brand-hint{
+        color: #fe8b5a;
+        text-align: center;
+    }
     @media (min-width: 1224px){
         .banner{
             background-position: -2% -2%;
@@ -170,13 +192,14 @@
             padding: 2%;
             font-weight: bold;
         }
-        .price > span{
-           font-size:30px;
+        .brand-hint{
+            font-size:15px;
+            padding: 2%;
         }
+        
         .hint{
             padding-left: 2.3%;
-            padding-top: 2%;
-            font-size: 20px;
+            font-size: 15px;
             color: #fe8b5a;
         }
         .hint-time{
@@ -197,7 +220,7 @@
         .title-size{
             padding:3%;
             font-size: 30px;
-            padding-left: 10%;
+            padding-left: 6%;
         }
         .title-size > p{
             padding-left:3%;
@@ -222,7 +245,7 @@
             width: 100px;
         }
         .block{
-            padding-bottom: 3%;
+            padding-bottom: 2%;
         }
         textarea{
             width:100%;
@@ -364,13 +387,15 @@
             padding: 2%;
             font-weight: bold;
         }
+        .brand-hint{
+            font-size:15px;
+        }
         .price > span{
            font-size:30px;
         }
         .hint{
             padding-left: 2.3%;
-            padding-top: 2%;
-            font-size: 20px;
+            font-size: 12px;
             color: #fe8b5a;
         }
         .hint-time{
@@ -416,7 +441,7 @@
             width: 100px;
         }
         .block{
-            padding-bottom: 3%;
+            padding-bottom: 1.5%;
         }
         textarea{
             width:100%;
@@ -705,6 +730,36 @@
             height: 40px;
             text-indent: 10px;
             width:100%;
+        }
+        .engine{
+            font-size:15px;
+            line-height: 20px;
+        }
+        .carSize > tbody > tr{
+            line-height: 19.5px;
+        }
+        .carSize > tbody > tr >th{
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+            padding-left: 3.5%;
+            padding-top: 0%;
+        }
+        .hybird > tbody > tr{
+            line-height: 19.5px;
+        }
+        .hybird > tbody > tr >th{
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+            padding-left: 3.5%;
+            padding-top: 0%;
+        }
+        .oil >  tbody > tr > th{
+            padding-top:3%;
+            writing-mode: vertical-lr;
+            padding-left: 20px;
+        }
+        td.tb-cell.item {
+            width: 36%;
         }
         .block-issue{
             width: 100%;
