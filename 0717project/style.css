@@ -183,6 +183,9 @@
     .brand-title{
         text-align: center;
     }
+    .memberInf > form > p.hint{
+        padding-bottom: 2%;
+    }
     .brand-hint{
         color: #f10120;
         text-align: center;
