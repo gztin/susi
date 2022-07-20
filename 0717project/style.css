@@ -315,8 +315,8 @@
             line-height: 19.5px;
         }
         .hybird > tbody > tr >th{
-            writing-mode: vertical-lr;
-            text-orientation: upright;
+            /* writing-mode: vertical-lr;
+            text-orientation: upright; */
             padding-left: 3.5%;
             padding-top: 0%;
         }
@@ -510,14 +510,17 @@
             font-size:15px;
             line-height: 20px;
         }
+        .carSize > tbody > tr {
+            line-height: 22.5px;
+        }
         .hybird > tbody > tr{
-            line-height: 19.5px;
+            line-height: 26.5px;
         }
         .hybird > tbody > tr >th{
-            writing-mode: vertical-lr;
-            text-orientation: upright;
+            /* writing-mode: vertical-lr;
+            text-orientation: upright; */
             padding-left: 3.5%;
-            padding-top: 0%;
+            padding-top: 9%;
         }
         td img{
             width:160px;
@@ -544,7 +547,6 @@
         }
         .oil >  tbody > tr > th{
             padding-top:3%;
-            writing-mode: vertical-lr;
             padding-left: 20px;
         }
         section.issueContent{
@@ -778,8 +780,8 @@
             line-height: 19.5px;
         }
         .hybird > tbody > tr >th{
-            writing-mode: vertical-lr;
-            text-orientation: upright;
+            /* writing-mode: vertical-lr;
+            text-orientation: upright; */
             padding-left: 3.5%;
             padding-top: 0%;
         }
@@ -938,7 +940,6 @@
         }
         .oil >  tbody > tr > th{
             padding-top:5%;
-            writing-mode: vertical-lr;
             padding-left: 20px;
         }
         td img{
@@ -959,6 +960,7 @@
         }
         .hybird > tbody > tr >th {
             padding-left: 5.5%;
+            padding-top: 12%;
         }
         .block-device{
             margin-top:30px;
