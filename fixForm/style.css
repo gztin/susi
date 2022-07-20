@@ -126,7 +126,7 @@
         margin:0 auto;
     }
 
-    @media (min-width: 769px){
+    @media (min-width: 1024px){
         .form-title{
             padding-top:20px;
             padding-bottom: 20px;
@@ -176,8 +176,108 @@
             width: 35px!important;
             height: 35px!important;
             position: absolute;
-            margin-top: -210px!important;
-            margin-left: 320px;
+            margin-top: -25%!important;
+            margin-left: 39%;
+        }
+        table{
+            margin-top:10px;
+        }
+        table td{
+            padding-right: 0!important;
+        }
+        td img{
+            width:160px;
+        }
+        tbody:nth-child(odd){
+            background:#f1f1f1;
+        }
+        .light-table-filter{
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            height: 40px;
+            text-indent: 10px;
+            width:100%;
+        }
+        .block-issue{
+            width: 100%;
+            border:1px solid #d4d4d4;
+        }
+        .issuePic{
+            margin:5%;
+        }
+        .issuePic > img{
+            width:100%;
+        }
+        section.issueContent{
+            margin:5%;
+            height:80px;
+        }
+        .issueContent > p{
+            text-align: justify;
+            line-height: 25px;
+            font-size: 25px;
+        }
+        .block-issue:nth-child(2){
+            margin-left:10px;
+        }
+        .select-item,.select-all{
+            width:20px;
+            height:20px;
+        }
+    }
+
+    @media (max-width: 1023px){
+        .form-title{
+            padding-top:20px;
+            padding-bottom: 20px;
+            text-align: center;
+            background:url(bg-all.jpeg);
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .form-title p{
+            font-size: 23px;
+        }
+        .logo{
+            width: 100px;
+        }
+        .block{
+            padding-bottom: 3%;
+        }
+        .block span{
+            display: flex;
+            margin-bottom: 1%;
+            font-size: 20px;
+        }
+        textarea{
+            width:100%;
+        }
+        .option-fix{
+            display:flex;
+            font-size: 17px;
+            padding-bottom: 15px;
+            justify-content: start;
+        }
+        .option-fix input{
+            margin-right:10px;
+        }
+        .option{
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .block-issue input{
+            margin-top:10px;
+            margin-right:10px;
+        }
+        .issueOption{
+            width: 35px!important;
+            height: 35px!important;
+            position: absolute;
+            margin-top: -25%!important;
+            margin-left: 39%;
         }
         table{
             margin-top:10px;
@@ -292,11 +392,24 @@
             text-indent: 10px;
             width:100%;
         }
+
         .block-issue{
             width: 100%;
         }
+        .issueOption{
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            margin-top: -25%!important;
+            margin-left: 36%;
+        }
         section.issueContent{
-            height:110px;
+            height:80px;
+        }
+        section.issueContent > p{
+            text-align: justify;
+            line-height: 25px;
+            font-size: 20px;
         }
         .block-issue:nth-child(2){
             margin-left:10px;
@@ -378,6 +491,18 @@
         section.issueContent{
             height:110px;
         }
+        section.issueContent > p{
+            text-align: justify;
+            line-height: 20px;
+            font-size: 15px;
+        }
+        .issueOption{
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            margin-top: -25%!important;
+            margin-left: 36%;
+        }
         .block-issue:nth-child(2){
             margin-left:10px;
         }
@@ -454,12 +579,13 @@
             width: 100%;
         }
         .issueOption{
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             position: absolute;
-            margin-top: -98px!important;
-            margin-left: 140px;
+            margin-top: -24%!important;
+            margin-left: 32%;
         }
+        
         .issuePic{
             margin:5%;
         }
@@ -468,7 +594,7 @@
         }
         section.issueContent{
             margin:5%;
-            height:90px;
+            height:60px;
         }
         .issueContent > p{
             text-align: justify;
