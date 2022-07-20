@@ -265,22 +265,23 @@
 	<script src="https://kit.fontawesome.com/85155ffcd6.js"></script>
 	<script src="js/time.js"></script>
 	<script>
-
 		let priceNew = setInterval(function(){
 			let timeDay = $(".dd").val();
 			let timeHour = $(".hh").val();
 			let timeMin = $(".mm").val();
 			let timeSec = $(".ss").val();
 			let winner = $(".newPrice").html();
+			//console.log("目前的得標價是:"+winner);
+			console.log("timeHour的值是:"+timeHour);
+			console.log("timeMin的值是:"+timeMin);
+			console.log("timeSec的值是:"+timeSec);
 			console.log("目前的得標價是:"+winner);
-			//console.log("timeHour的值是:"+timeHour);
-			//console.log("timeMin的值是:"+timeMin);
-			//console.log("timeSec的值是:"+timeSec);
-			if ((timeDay==0)&&(timeHour==0)&&(timeMin==0)&&(timeSec==0)){
+			
+			if ((timeDay=='0')&&(timeHour=='0')&&(timeMin=='0')&&(timeSec=='0')){
 				clearInterval(priceNew);
 			}
 			else{
-				url = 'http://test.eiptv.net:99/api/BidPrice/toyota';
+				url = 'http://test.eiptv.net:99/api/BidPrice/toyota1';
 				fetch(url, {method:'GET'}).then(res => {
 					return res.text();
 				}).then(result => {
@@ -309,7 +310,7 @@
 			}
 			else{
 				var e = document.getElementById("pickCompany");
-				let item = "toyota"
+				let item = "toyota1"
 				let userComp = e.value;
 				let userName = $(".userName").val();
 				let userPhone = $(".userPhone").val();
