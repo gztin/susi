@@ -152,9 +152,10 @@
      }
     .newPrice{
         color:#f10120;
-        font-size:150px !important;;
+        font-size:180px !important;;
         padding-bottom: 5%;
         padding-top: 5%;
+        font-weight: bold;
     }
     .deadline{
         display: flex;
@@ -183,7 +184,7 @@
         text-align: center;
     }
     .brand-hint{
-        color: #fe8b5a;
+        color: #f10120;
         text-align: center;
     }
     @media (min-width: 1224px){
@@ -204,9 +205,10 @@
         .hint{
             padding-left: 2.3%;
             font-size: 15px;
-            color: #fe8b5a;
+            color: #f10120;
         }
         .hint-time{
+            height: 75px;
             font-size:25px;
             text-align:center;
         }
