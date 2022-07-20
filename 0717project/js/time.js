@@ -2,7 +2,7 @@
   var DifferenceHour = -1
   var DifferenceMinute = -1
   var DifferenceSecond = -1
-  var Tday = new Date("July 20, 2022 23:59:59") 
+  var Tday = new Date("July 31, 2022 23:59:59") 
   var daysms = 24 * 60 * 60 * 1000
   var hoursms = 60 * 60 * 1000
   var Secondms = 60 * 1000
