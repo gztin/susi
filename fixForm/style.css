@@ -115,7 +115,17 @@
         line-height: 17px;
     }
 	
-    
+    .finish-hint >div.container > div.row > h1{
+        text-align: center;
+        line-height: 25px;
+        padding:100px;
+        width: 100%;
+    }
+    .finish-hint >div.container > div.row > button{
+        width:80%;
+        margin:0 auto;
+    }
+
     @media (min-width: 769px){
         .form-title{
             padding-top:20px;
