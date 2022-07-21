@@ -13,7 +13,7 @@ function clock()
   var timer=null;
   var show=document.getElementById("show");
   function show_date_time(){   
-    var target=new Date("2022/7/21");  
+    var target=new Date("2022/7/31");  
     var today=new Date(); 
     var timeold=(target.getTime()-today.getTime());   
     var sectimeold=timeold/1000   
@@ -27,7 +27,14 @@ function clock()
     var minsold=Math.floor((e_hrsold-hrsold)*60);   
     var seconds=Math.floor((e_minsold-minsold)*60);
     if(daysold<0){   
-      document.getElementById("time").innerHTML="逾期,倒數計時已經失效";  
+      // document.getElementById("time").innerHTML="逾期,倒數計時已經失效";  
+      $(".dd").val("0");
+			$(".hh").val("0");
+			$(".mm").val("0");
+			$(".ss").val("0");
+      $(".btn-votePrice").val("");
+      $(".btn-votePrice").val("活動結束，已停止出價");
+      document.getElementById("sendInf").disabled = true;
       clearInterval(timer);
     }   
     else{   

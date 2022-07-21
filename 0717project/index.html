@@ -13,10 +13,10 @@
     integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <!-- onload="clock();return true" -->
-<body>
+<body onload="clock();return true">
 	<!-- <header class="form-title">
 		<img class="logo" src="logo-small.jpg" alt="">
 		<p >設備報修單</p>
@@ -81,7 +81,7 @@
 							<input type="text" class="light-table-filter userPrice" data-table="order-table" placeholder="每次競標最低增額:1萬" required="required">
 						</div>
 						<p class="hint">*棄標者，第二順位得標</p>
-						<input class="btn btn-votePrice btn-block sendInf" value="立即搶標">
+						<input id="sendInf" class="btn btn-votePrice btn-block sendInf" value="立即搶標">
 					</form>
 				</div>
 				
@@ -265,6 +265,68 @@
 	<script src="https://kit.fontawesome.com/85155ffcd6.js"></script>
 	<script src="js/time.js"></script>
 	<script>
-		$("newPrice").html("aaaa");
+		let priceNew = setInterval(function(){
+			let timeDay = $(".dd").val();
+			let timeHour = $(".hh").val();
+			let timeMin = $(".mm").val();
+			let timeSec = $(".ss").val();
+			let winner = $(".newPrice").html();
+			//console.log("目前的得標價是:"+winner);
+			console.log("timeHour的值是:"+timeHour);
+			console.log("timeMin的值是:"+timeMin);
+			console.log("timeSec的值是:"+timeSec);
+			console.log("目前的得標價是:"+winner);
+			
+			if ((timeDay=='0')&&(timeHour=='0')&&(timeMin=='0')&&(timeSec=='0')){
+				clearInterval(priceNew);
+			}
+			else{
+				url = 'http://test.eiptv.net:99/api/BidPrice/toyota1';
+				fetch(url, {method:'GET'}).then(res => {
+					return res.text();
+				}).then(result => {
+					let oriPrice = parseInt(result);
+					$(".newPrice").html(oriPrice);
+				});
+			}
+		},1000);
+
+		function getComp(){
+			otherGroup = document.getElementById("pickCompany").value;
+			if(otherGroup == 15){
+				$(".others").toggle();
+			}
+			else{
+				$(".others").toggle();
+			}
+		}
+		$(".btn-votePrice").click(function(){
+			let priceNoew = parseInt($(".newPrice").text());
+			let priceInf = $(".userPrice").val();
+			
+			if(priceInf < priceNoew){
+				alert("您的出價低於目前得標價，請重新下標");
+			}
+			else{
+				var e = document.getElementById("pickCompany");
+				let item = "toyota1"
+				let userComp = e.value;
+				let userName = $(".userName").val();
+				let userPhone = $(".userPhone").val();
+				let userPrice = $(".userPrice").val(); 
+
+				renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+userComp+","+userName+","+userPhone+","+userPrice;
+				fetch(renewPriceUrl, {method:'GET'}).then(res => {
+					return res.text();
+				}).then(result => {
+					console.log("打過去的網址是："+renewPriceUrl);
+					console.log("最新的價格是："+result);
+					alert("出價完成！")
+					 let newPrice = parseInt(result);
+					 $(".newPrice").html(newPrice);
+					 $(".userPrice").val(""); 
+				});
+			} 
+		});
 	</script>
 </html>

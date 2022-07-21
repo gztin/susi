@@ -78,7 +78,7 @@
     }
 
     .slogan{
-        padding-top: 8%;
+        padding-top: 10%;
         padding-left: 5%;
         color:#fff;
         text-shadow: 1px 3px 10px #000;
@@ -179,6 +179,7 @@
         color:#fff;
         background-color: #f10120;
         border-color: #f10120;
+        cursor: pointer;
         margin-top: 2%;
     }
     .brand-title{
@@ -190,6 +191,11 @@
     .brand-hint{
         color: #f10120;
         text-align: center;
+    }
+    form.deadline > input {
+        color: #00e1ff;
+        background: transparent;
+        border-width: 0px;
     }
     @media (min-width: 1224px){
         .banner{
