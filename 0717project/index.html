@@ -280,7 +280,7 @@
 			}
 			else{
 				url = 'http://test.eiptv.net:99/api/BidPrice/ggt';
-				await fetch(url, {
+				fetch(url, {
 					method:'GET',
 					headers: {
 						accept: 'application/json',
@@ -319,7 +319,7 @@
 				let userPrice = $(".userPrice").val(); 
 
 				renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+userComp+","+userName+","+userPhone+","+userPrice;
-				await fetch(renewPriceUrl, {
+				fetch(renewPriceUrl, {
 					method:'GET',
 					headers: {
 						accept: 'application/json',
