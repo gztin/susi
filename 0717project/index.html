@@ -265,44 +265,6 @@
 	<script src="https://kit.fontawesome.com/85155ffcd6.js"></script>
 	<script src="js/time.js"></script>
 	<script>
-		$(".newPrice").html("AAAA");
-
-		function getComp(){
-			otherGroup = document.getElementById("pickCompany").value;
-			if(otherGroup == 15){
-				$(".others").toggle();
-			}
-			else{
-				$(".others").toggle();
-			}
-		}
-		$(".btn-votePrice").click(function(){
-			let priceNoew = parseInt($(".newPrice").text());
-			let priceInf = $(".userPrice").val();
-			
-			if(priceInf < priceNoew){
-				alert("您的出價低於目前得標價，請重新下標");
-			}
-			else{
-				var e = document.getElementById("pickCompany");
-				let item = "toyota1"
-				let userComp = e.value;
-				let userName = $(".userName").val();
-				let userPhone = $(".userPhone").val();
-				let userPrice = $(".userPrice").val(); 
-
-				renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+userComp+","+userName+","+userPhone+","+userPrice;
-				fetch(renewPriceUrl, {method:'GET'}).then(res => {
-					return res.text();
-				}).then(result => {
-					console.log("打過去的網址是："+renewPriceUrl);
-					console.log("最新的價格是："+result);
-					alert("出價完成！")
-					 let newPrice = parseInt(result);
-					 $(".newPrice").html(newPrice);
-					 $(".userPrice").val(""); 
-				});
-			} 
-		});
+		$("newPrice").html("aaaa");
 	</script>
 </html>
