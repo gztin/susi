@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta property="og:image" content="https://gztin.github.io/susi/fixForm/logo-small.jpg">
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
   <title>東森員購競標網</title>
 
   <link rel="shortcut icon" href="./img/favicon.ico">	
@@ -265,13 +264,66 @@
 	<script src="https://kit.fontawesome.com/85155ffcd6.js"></script>
 	<script src="js/time.js"></script>
 	<script>
-		url = 'http://test.eiptv.net:99/api/BidPrice/toyota';
-		fetch(url, {method:'GET'}).then(res => {
-			return res.text();
-		}).then(result => {
-			let oriPrice = parseInt(result);
-			$(".newPrice").html(oriPrice);
+		let priceNew = setInterval(function(){
+			let timeDay = $(".dd").val();
+			let timeHour = $(".hh").val();
+			let timeMin = $(".mm").val();
+			let timeSec = $(".ss").val();
+			let winner = $(".newPrice").html();
+			//console.log("目前的得標價是:"+winner);
+			//console.log("timeHour的值是:"+timeHour);
+			//console.log("timeSec的值是:"+timeSec);
+			//console.log("目前的得標價是:"+winner);
+			
+			if ((timeDay=='0')&&(timeHour=='0')&&(timeMin=='0')&&(timeSec=='0')){
+				clearInterval(priceNew);
+			}
+			else{
+				url = 'http://test.eiptv.net:99/api/BidPrice/toyota';
+				fetch(url, {method:'GET'}).then(res => {
+					return res.text();
+				}).then(result => {
+					console.log("印出來的資料是："+result);
+				});
+			}
+		},1000);
+
+		function getComp(){
+			otherGroup = document.getElementById("pickCompany").value;
+			if(otherGroup == 15){
+				$(".others").toggle();
+			}
+			else{
+				$(".others").toggle();
+			}
+		}
+		$(".btn-votePrice").click(function(){
+			let priceNoew = parseInt($(".newPrice").text());
+			let priceInf = $(".userPrice").val();
+			
+			if(priceInf < priceNoew){
+				alert("您的出價低於目前得標價，請重新下標");
+			}
+			else{
+				var e = document.getElementById("pickCompany");
+				let item = "toyota"
+				let userComp = e.value;
+				let userName = $(".userName").val();
+				let userPhone = $(".userPhone").val();
+				let userPrice = $(".userPrice").val(); 
+
+				renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+userComp+","+userName+","+userPhone+","+userPrice;
+				fetch(renewPriceUrl, {method:'GET'}).then(res => {
+					return res.text();
+				}).then(result => {
+					console.log("打過去的網址是："+renewPriceUrl);
+					console.log("最新的價格是："+result);
+					alert("出價完成！")
+					 let newPrice = parseInt(result);
+					 $(".newPrice").html(newPrice);
+					 $(".userPrice").val(""); 
+				});
+			} 
 		});
-		
 	</script>
 </html>
