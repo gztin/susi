@@ -281,7 +281,7 @@
 				clearInterval(priceNew);
 			}
 			else{
-				url = 'http://test.eiptv.net:99/api/BidPrice/toyota1';
+				url = 'http://test.eiptv.net:99/api/BidPrice/ggt';
 				fetch(url, {method:'GET'}).then(res => {
 					return res.text();
 				}).then(result => {
@@ -309,7 +309,7 @@
 			}
 			else{
 				var e = document.getElementById("pickCompany");
-				let item = "toyota1"
+				let item = "ggt"
 				let userComp = e.value;
 				let userName = $(".userName").val();
 				let userPhone = $(".userPhone").val();
