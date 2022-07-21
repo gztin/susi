@@ -45,6 +45,9 @@
 						<span class="newPrice"></span>
 						<span>目前得標價：(萬元)</span>
 					</p>
+					<p class="notice">
+						備註：二手車（已掛牌，0里程），目前為旭邦名下，需現金支付，公司不提供貸款，成交後公司會開立發票，規費需自行負擔，東森分眾聯絡人：蔡婉儀 02-25791991#252
+					</p>
 				</div>
 				<div class="memberInf col-lg-6 order-lg-1">
 					<form action="">
@@ -275,14 +278,14 @@
 			//console.log("timeSec的值是:"+timeSec);
 			//console.log("目前的得標價是:"+winner);
 		
-			var dataUrl= "http://test.eiptv.net:99/api/BidPrice/toyota1"
+			var dataUrl= "https://api.sampleapis.com/coffee/hot"
 			var xhr = new XMLHttpRequest()
 			xhr.open('GET',dataUrl, true)
 			xhr.send()
 			xhr.onload = function(){
 				var data = JSON.parse(this.responseText);
 				console.log(data);
-				$(".newPrice").html(data);
+				$(".newPrice").html(data[0].title);
 			}
 			
 		

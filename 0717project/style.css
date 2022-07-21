@@ -197,6 +197,11 @@
         background: transparent;
         border-width: 0px;
     }
+    p.notice {
+        border: 1px solid #ff6d00;
+        padding: 3%;
+        line-height: 20px;
+    }
     @media (min-width: 1224px){
         .banner{
             background-position: -2% -2%;
