@@ -280,7 +280,12 @@
 			}
 			else{
 				url = 'http://test.eiptv.net:99/api/BidPrice/ggt';
-				fetch(url, {method:'GET'}).then(res => {
+				await fetch(url, {
+					method:'GET',
+					headers: {
+						accept: 'application/json',
+					},
+				}).then(res => {
 					return res.text();
 				}).then(result => {
 					let oriPrice = parseInt(result);
@@ -314,7 +319,12 @@
 				let userPrice = $(".userPrice").val(); 
 
 				renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+userComp+","+userName+","+userPhone+","+userPrice;
-				fetch(renewPriceUrl, {method:'GET'}).then(res => {
+				await fetch(renewPriceUrl, {
+					method:'GET',
+					headers: {
+						accept: 'application/json',
+					},
+				}).then(res => {
 					return res.text();
 				}).then(result => {
 					console.log("打過去的網址是："+renewPriceUrl);
