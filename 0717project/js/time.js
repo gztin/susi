@@ -13,7 +13,7 @@ function clock()
   var timer=null;
   var show=document.getElementById("show");
   function show_date_time(){   
-    var target=new Date("2022/7/31");  
+    var target=new Date("2022/7/30");  
     var today=new Date(); 
     var timeold=(target.getTime()-today.getTime());   
     var sectimeold=timeold/1000   

@@ -43,17 +43,16 @@
 					<p class="brand-hint">原價120萬，限量1台</p>
 					<p class="price">
 						<span class="newPrice"></span>
-						<span>目前得標價：(萬元)</span>
-					</p>
-					<p class="notice">
-						備註：二手車（已掛牌，0里程），目前為旭邦名下，需現金支付，公司不提供貸款，成交後公司會開立發票，規費需自行負擔，東森分眾聯絡人：蔡婉儀 02-25791991#252
+						<span class="record">目前競標價：(萬元)</span>
+						<label id="winnerInf" class="winnerInf">目前出價最高者：<i class="winnerComp"></i>的<i class="winner"></i></label>
 					</p>
 				</div>
 				<div class="memberInf col-lg-6 order-lg-1">
 					<form action="">
 						<div class="block">
 							<span class="title">所屬單位(必選）</span>
-							<select name="" id="pickCompany" class="light-table-filter">
+							<select name="" id="pickCompany" class="pickCompany light-table-filter">
+								<option value="option01">請選擇公司單位</option>
 								<option value="東森國際(含東投、東租)">東森國際(含東投、東租)</option>
 								<option value="東森得易購(含東森新零售百貨、自然美直營店)">東森得易購(含東森新零售百貨、自然美直營店)</option>
 								<option value="東森新媒體">東森新媒體</option>
@@ -69,10 +68,11 @@
 								<option value="東森海洋">東森海洋</option>
 								<option value="歡樂旅行社">歡樂旅行社</option>
 							</select>
+							<input class="light-table-filter others" type="text" placeholder="如不在上述選項，請填寫公司名稱">
 						</div>
 						<div class="block">
 							<span class="title">姓名(必填）</span>
-							<input type="text" class="light-table-filter userName" data-table="order-table" placeholder="填寫姓名" required="required">
+							<input type="text" class="light-table-filter userName" data-table="order-table" placeholder="請輸入中文姓名" required="required">
 						</div>
 						<div class="block">
 							<span class="title">手機(必填）</span>
@@ -84,6 +84,9 @@
 						</div>
 						<p class="hint">*棄標者，第二順位得標</p>
 						<input id="sendInf" class="btn btn-votePrice btn-block sendInf" value="立即搶標">
+						<p class="notice">
+							備註：二手車（已掛牌，0里程），目前為旭邦名下，需現金支付，公司不提供貸款，成交後公司會開立發票，規費需自行負擔。<br><br>東森分眾聯絡人：蔡婉儀 <br>聯絡電話：02-25791991#252
+						</p>
 					</form>
 				</div>
 				
@@ -261,7 +264,7 @@
 		<p> www.toyota.com.tw</p>
 	</footer>
 </body>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous" ></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 	<script src="https://kit.fontawesome.com/85155ffcd6.js"></script>
@@ -277,28 +280,36 @@
 			//console.log("timeHour的值是:"+timeHour);
 			//console.log("timeSec的值是:"+timeSec);
 			//console.log("目前的得標價是:"+winner);
-		
-			$.getJSON("http://test.eiptv.net:99/api/BidPrice/toyota").done(function (data) {
-				console.log(data);
-			});
-			//var dataUrl= "https://api.sampleapis.com/coffee/hot"
-			//var xhr = new XMLHttpRequest()
-			//xhr.open('GET',dataUrl, true)
-			//xhr.send()
-			//xhr.onload = function(){
-			//	var data = JSON.parse(this.responseText);
-			//	console.log(data);
-			//	$(".newPrice").html(data[0].title);
-			//}
 			
-		
-				//url = 'http://test.eiptv.net:99/api/BidPrice/toyota';
-				//fetch(url, {method:'GET'}).then(res => {
-				//	return res.text();
-				//}).then(result => {
-				//	console.log("印出來的資料是："+result);
-				//});
+			if ((timeDay=='0')&&(timeHour=='0')&&(timeMin=='0')&&(timeSec=='0')){
+				clearInterval(priceNew);
+			}
+			else{
+				url = 'http://test.eiptv.net:99/api/BidPrice/toyota3';
+				fetch(url, {method:'GET'}).then(res => {
+					return res.json();
+				}).then(result => {
+					//console.log("目前出價最高的人："+result[0].Name);
+					//console.log("所屬的公司："+result[0].Company);
+					//console.log("目前出價："+result[0].Price);
+					let winner = result[0].Name;
+					let winnerComp = result[0].Company
+					let resultPrice = result[0].Price;
+					newName = winner.replace(winner[1],"O");
+					//console.log("新名字newName是："+newName);
+					if(winner != ''){
+						$(".winnerInf").css("display","flex");
+						$(".winnerComp").html(winnerComp);
+						$(".winner").html(newName);
+						$(".newPrice").html(resultPrice);
+					}
+					else{
+						$(".newPrice").html(resultPrice);
+					}
+				});
+			}
 		},1000);
+
 
 		function getComp(){
 			otherGroup = document.getElementById("pickCompany").value;
@@ -316,15 +327,27 @@
 			if(priceInf < priceNoew){
 				alert("您的出價低於目前得標價，請重新下標");
 			}
+			if(priceInf%1 != 0){
+				alert("競標價格必須是以萬元為單位");
+			}
+			if(priceInf > 200){
+				alert("已超過競標上限，請重新出價");
+			}
 			else{
 				var e = document.getElementById("pickCompany");
-				let item = "toyota"
+				let item = "toyota3"
 				let userComp = e.value;
 				let userName = $(".userName").val();
 				let userPhone = $(".userPhone").val();
 				let userPrice = $(".userPrice").val(); 
-
-				renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+userComp+","+userName+","+userPhone+","+userPrice;
+				let otherGroup = document.getElementById("pickCompany").value;
+				let other = $(".others").val();
+				if( otherGroup != 'option01'){
+					renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+userComp+","+userName+","+userPhone+","+userPrice;
+				}
+				else{
+					renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+other+","+userName+","+userPhone+","+userPrice;
+				}
 				fetch(renewPriceUrl, {method:'GET'}).then(res => {
 					return res.text();
 				}).then(result => {
