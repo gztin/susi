@@ -60,7 +60,9 @@
 		display: flex;
     	flex-direction: column;
 	}
-	
+	sup{
+        font-size:50%;
+    }
     .banner{
         background-image: url("img/banner.jpg");
         background-size: cover;
@@ -129,10 +131,11 @@
     .price{
         display:flex;
         align-items:center;
-        padding-top: 15%;
-        padding-left:2%;
-        padding-bottom: 5%;
+        margin-top: 12%;
+        margin-left:2%;
+        margin-bottom: 5%;
         flex-direction: column;
+        border: 1px solid #d4d4d4;
     }
     .block{
         display: flex;
@@ -141,21 +144,41 @@
     .block > span.title{
         display: flex;
         align-items: center;
-        padding-bottom: 2%;
+        padding-bottom: 3%;
+        margin-top: 2%;
     }
     .others{
         margin-top:2%;
-        /* display:none; */
+        display:none;
     }
     .price > span{
-        font-size:20px;
+        width:100%;
+        border-bottom: 1px solid #d4d4d4;
+     }
+     .record{
+        color:#fff;
+        display: flex;
+        font-size:30px;
+        padding: 3%;
+        justify-content: center;
+        background: #c30;
      }
     .newPrice{
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
+    span.newPrice > label:nth-child(2){
+        font-size: 30px;
+        margin-bottom: 30px;
+        margin-left: 10px;
+    }
+    .priceInf{
         color:#f10120;
-        font-size:180px !important;;
+        font-size:180px;
         padding-bottom: 5%;
         font-weight: bold;
-        cursor: pointer;
+        margin-left:15%;
     }
     .deadline{
         display: flex;
@@ -185,9 +208,7 @@
     .brand-title{
         text-align: center;
     }
-    /* .memberInf > form > p.hint{
-        padding-bottom: 2%;
-    } */
+    
     .brand-hint{
         color: #f10120;
         text-align: center;
@@ -201,14 +222,32 @@
         border: 1px solid #ff6d00;
         padding: 3%;
         line-height: 20px;
-        margin-top: 20px;
+        margin-top: 10px;
     }
+    
     .winnerInf {
-        border: 1px solid #0096ff;
-        padding: 3%;
-        margin-top: 20px;
-        font-size: 14px;
+        font-size: 20px;
         display: none;
+        flex-direction: column;
+    }
+    .winnerTitle{
+        width:100%;
+        color: #e9e9e9;
+        padding-top: 3%;
+        background: #0f0f0f;
+        padding-bottom: 3%;
+        text-align: center;
+        border-bottom: 1px solid #181818;
+    }
+    .winnerContent{
+        color:#fff;
+        text-align: center;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        background: #373737;
+    }
+    .winnerInf > p{
+        display: flex;
     }
     @media (min-width: 1224px){
         .banner{
@@ -218,13 +257,13 @@
             font-size:35px;
             padding: 2%;
             font-weight: bold;
-            padding-top: 5%;
+            padding-top: 10%;
         }
         .brand-hint{
             font-size:15px;
             padding: 2%;
         }
-        
+       
         .hint{
             padding-left: 2.3%;
             font-size: 15px;
@@ -427,14 +466,14 @@
             font-size:32px;
             padding: 2%;
             font-weight: bold;
-            padding-top: 5%;
+            padding-top: 16%;
         }
         .brand-hint{
             font-size:15px;
         }
-        .price > span{
+        /* .price > span{
            font-size:30px;
-        }
+        } */
         .hint{
             padding-left: 2.3%;
             font-size: 12px;
@@ -448,7 +487,9 @@
             width:50px;
             text-align:center;
         }
-        
+        .memberInf{
+            margin-top:3%;
+        }
         .title-size{
             padding:3%;
             font-size: 30px;
@@ -547,6 +588,217 @@
         tbody:nth-child(odd){
             background:#fafafa;
         }
+        .winnerInf{
+            font-size:18px;
+        }
+        .record{
+            font-size:25px;
+        }
+        .light-table-filter{
+            border: 1px solid #d4d4d4;
+            border-radius: 5px;
+            height: 40px;
+            text-indent: 10px;
+            width:100%;
+        }
+        .block-issue{
+            width: 100%;
+            border:1px solid #d4d4d4;
+        }
+        .issuePic{
+            margin:5%;
+        }
+        .issuePic > img{
+            width:100%;
+        }
+        .oil >  tbody > tr > th{
+            padding-top:3%;
+            padding-left: 20px;
+        }
+        section.issueContent{
+            margin:5%;
+            height:80px;
+        }
+        .issueContent > p{
+            text-align: justify;
+            line-height: 25px;
+            font-size: 20px;
+        }
+        .block-issue:nth-child(2){
+            margin-left:10px;
+        }
+        .select-item,.select-all{
+            width:20px;
+            height:20px;
+        }
+        .note{
+            text-align: right;
+            font-size: 50%;
+            padding-right: 5%;
+            padding-bottom: 3%;
+        }
+        footer{
+            background: #000;
+            color: #fff;
+            height: 35px;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    @media (max-width: 1023px){
+        
+        .slogan{
+            padding-top: 10%;
+            padding-left: 3%;
+            color:#fff;
+            text-shadow: 1px 3px 10px #000;
+        }
+        .slogan > p:nth-child(1){
+            font-size:55px;
+            padding-bottom: 2%;
+        }
+        .slogan > p:nth-child(2){
+            font-size:32.5px;
+        }
+
+        .banner{
+            background-position: -1%;
+        }
+        .brand-title{
+            font-size:32px;
+            padding: 2%;
+            font-weight: bold;
+            padding-top: 5%;
+        }
+        .brand-hint{
+            font-size:15px;
+        }
+        .price{
+            margin-top: 5%;
+            margin-bottom: 0%;
+        }
+        .hint{
+            padding-left: 2.3%;
+            font-size: 12px;
+            color: #f10120;
+        }
+        .hint-time{
+            font-size:25px;
+            text-align:center;
+        }
+        .hint-time > form > input{
+            width:50px;
+            text-align:center;
+        }
+        .memberInf{
+            margin-top:3%;
+        }
+        .title-size{
+            padding:3%;
+            font-size: 30px;
+        }
+        .title-size > p{
+            padding-left:3%;
+        }
+        .title-size img{
+            width:200px;
+        }
+        .form-title{
+            padding-top:20px;
+            padding-bottom: 20px;
+            text-align: center;
+            background:url(bg-all.jpeg);
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .form-title p{
+            font-size: 23px;
+        }
+        .logo{
+            width: 100px;
+        }
+        .block{
+            padding-bottom: 1.5%;
+        }
+        textarea{
+            width:100%;
+        }
+        .option-fix{
+            display:flex;
+            font-size: 17px;
+            padding-bottom: 15px;
+            justify-content: start;
+        }
+        .option-fix input{
+            margin-right:10px;
+        }
+        .option{
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+        }
+        .block-issue input{
+            margin-top:10px;
+            margin-right:10px;
+        }
+        .issueOption{
+            width: 35px!important;
+            height: 35px!important;
+            position: absolute;
+            margin-top: -210px!important;
+            margin-left: 320px;
+        }
+        table{
+            margin-top:10px;
+        }
+        .table > tbody > tr > th{
+            width:65px;
+            padding-top:20%;
+        }
+        .engine > tbody > tr:nth-child(2){
+            height:40px;
+        }
+        tr.e1 {
+            line-height: 3px;
+        }
+        table td{
+            padding-right: 0!important;
+        }
+        td.tb-cell.item {
+            width: 36%;
+        }
+        .engine{
+            font-size:15px;
+            line-height: 20px;
+        }
+        .carSize > tbody > tr {
+            line-height: 22.5px;
+        }
+        .hybird > tbody > tr{
+            line-height: 26.5px;
+        }
+        .hybird > tbody > tr >th{
+            /* writing-mode: vertical-lr;
+            text-orientation: upright; */
+            padding-left: 3.5%;
+            padding-top: 9%;
+        }
+        td img{
+            width:160px;
+        }
+        tbody:nth-child(odd){
+            background:#fafafa;
+        }
+        .winnerInf{
+            font-size:18px;
+        }
+        .record{
+            font-size:25px;
+        }
         .light-table-filter{
             border: 1px solid #d4d4d4;
             border-radius: 5px;
@@ -638,7 +890,6 @@
         }
         .block span{
             display: flex;
-            margin-bottom: 1%;
         }
         textarea{
             width:100%;
@@ -678,6 +929,9 @@
         }
         tbody:nth-child(odd){
             background:#f1f1f1;
+        }
+        .memberInf{
+            margin-top:3%;
         }
         .light-table-filter{
             border: 1px solid #d4d4d4;
@@ -737,7 +991,6 @@
         }
         .block span{
             display: flex;
-            margin-bottom: 3%;
         }
         textarea{
             width:100%;
@@ -761,6 +1014,9 @@
         }
         .issuePic > img{
             width:100%;
+        }
+        .memberInf{
+            margin-top:3%;
         }
         table{
             margin-top:10px;
@@ -875,7 +1131,7 @@
             font-size: 23px;
             padding: 2%;
             font-weight: bold;
-            padding-top: 5%;
+            padding-top: 12%;
         }
         .price > span {
             font-size: 20px;
@@ -914,7 +1170,6 @@
         }
         .block span{
             display: flex;
-            margin-bottom: 3%;
         }
         .winnerInf {
             font-size:14px;
@@ -948,7 +1203,7 @@
             line-height: 20px;
         }
         .table > tbody > tr > th {
-            width: 50px;
+            width: 48px;
         }
         .carSize >  tbody > tr > th{
             padding-top:30%;
@@ -1016,6 +1271,18 @@
             display: flex;
             align-items: center;
             padding-bottom: 15px;
+        }
+        span.newPrice > label:nth-child(2){
+            font-size:16px;
+        }
+        .priceInf{
+            font-size:150px;
+        }
+        .winnerTitle{
+            font-size:16px;
+        }
+        .winnerContent{
+            font-size: 14px;
         }
         .fixsize{
             height: 35px!important;
