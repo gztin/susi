@@ -180,11 +180,17 @@
         font-weight: bold;
         margin-left:15%;
     }
-    .deadline{
+    .deadline,.deadlineInf{
         display: flex;
         justify-content: space-around;
         align-items: center;
     }
+    .activity-start{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
     .hint-time{
         background: #000;
         color: #fff;
@@ -218,6 +224,22 @@
         background: transparent;
         border-width: 0px;
     }
+    form.activity-start > input {
+        color: #fbb400;
+        background: transparent;
+        border-width: 0px;
+    }
+    .deadlineInf{
+        display: none;
+        padding: 0.7em;
+    }
+    .deadlineInf > input {
+        color: #00e1ff;
+        background: transparent;
+        border-width: 0px;
+        width: 50px;
+        text-align: center;
+    }
     p.notice {
         border: 1px solid #ff6d00;
         padding: 3%;
@@ -246,6 +268,21 @@
         padding-bottom: 3%;
         background: #373737;
     }
+    .vote{
+        display:flex;
+        align-items: center;
+    }
+    .unit{
+        margin-left:2%;
+        width: 45px;
+        font-size: 20px;
+    }
+    p.brand-sub {
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 2%;
+    }
     .winnerInf > p{
         display: flex;
     }
@@ -258,6 +295,14 @@
             padding: 2%;
             font-weight: bold;
             padding-top: 10%;
+        }
+        .brand-title-activity{
+            font-size:35px;
+            padding: 2%;
+            font-weight: bold;
+            padding-top: 10%;
+            padding-bottom: 10%;
+            text-align: center;
         }
         .brand-hint{
             font-size:15px;
@@ -426,10 +471,10 @@
             height:20px;
         }
         .note{
-            text-align: right;
+            width: 100%;
             font-size: 50%;
-            padding-right: 10%;
             padding-bottom: 3%;
+            text-align: center;
 
         }
         footer{
@@ -467,6 +512,14 @@
             padding: 2%;
             font-weight: bold;
             padding-top: 16%;
+        }
+        .brand-title-activity{
+            font-size:35px;
+            padding: 2%;
+            font-weight: bold;
+            padding-top: 16%;
+            padding-bottom: 16%;
+            text-align: center;
         }
         .brand-hint{
             font-size:15px;
@@ -632,10 +685,10 @@
             height:20px;
         }
         .note{
-            text-align: right;
+            width: 100%;
             font-size: 50%;
-            padding-right: 5%;
             padding-bottom: 3%;
+            text-align: center;
         }
         footer{
             background: #000;
@@ -664,13 +717,21 @@
         }
 
         .banner{
-            background-position: -1%;
+            background-position: 0%;
         }
         .brand-title{
             font-size:32px;
             padding: 2%;
             font-weight: bold;
             padding-top: 5%;
+        }
+        .brand-title-activity{
+            font-size:35px;
+            padding: 2%;
+            font-weight: bold;
+            padding-top: 5%;
+            padding-bottom: 5%;
+            text-align: center;
         }
         .brand-hint{
             font-size:15px;
@@ -837,10 +898,10 @@
             height:20px;
         }
         .note{
-            text-align: right;
+            width:100%;
             font-size: 50%;
-            padding-right: 5%;
             padding-bottom: 3%;
+            text-align: center;
         }
         footer{
             background: #000;
@@ -954,10 +1015,10 @@
             height:20px;
         }
         .note{
-            text-align: right;
+            width: 100%;
             font-size: 50%;
-            padding-right: 5%;
             padding-bottom: 3%;
+            text-align: center;
         }
         footer{
             background: #000;
@@ -1081,10 +1142,10 @@
             height:20px;
         }
         .note{
-            text-align: right;
+            width: 100%;
             font-size: 50%;
-            padding-right: 5%;
             padding-bottom: 3%;
+            text-align: center;
         }
         footer{
             background: #000;
@@ -1132,6 +1193,14 @@
             padding: 2%;
             font-weight: bold;
             padding-top: 12%;
+        }
+        .brand-title-activity{
+            font-size:35px;
+            padding: 2%;
+            font-weight: bold;
+            padding-top: 12%;
+            padding-bottom: 12%;
+            text-align: center;
         }
         .price > span {
             font-size: 20px;
@@ -1292,10 +1361,10 @@
             height:20px;
         }
         .note{
-            text-align: right;
+            width: 100%;
             font-size: 50%;
-            padding-right: 5%;
             padding-bottom: 3%;
+            text-align: center;
         }
         footer{
             background: #000;

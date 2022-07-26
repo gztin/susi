@@ -8,12 +8,11 @@
   // var Secondms = 60 * 1000
   // var microsecond = 1000
 
-function clock()
-{
+function clock(){
   var timer=null;
   var show=document.getElementById("show");
   function show_date_time(){   
-    var target=new Date("2022/7/30");  
+    var target=new Date("2022/7/27");  
     var today=new Date(); 
     var timeold=(target.getTime()-today.getTime());   
     var sectimeold=timeold/1000   
