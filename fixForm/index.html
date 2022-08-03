@@ -26,11 +26,11 @@
 		<form action="">
 			<div class="block">
 				<span class="title">社區 / 商辦 大樓名稱</span>
-				<input type="text" class="light-table-filter userName" data-table="order-table" placeholder="填寫名稱" readonly="readonly" >
+				<input type="text" class="light-table-filter Community" data-table="order-table" placeholder="填寫名稱" readonly="readonly" >
 			</div>
 			<div class="block">
 				<span class="title">社區 / 商辦 大樓地址</span>
-				<input type="tel" class="light-table-filter userPhone" data-table="order-table" placeholder="填寫地址" readonly="readonly" >
+				<input type="tel" class="light-table-filter userAddress" data-table="order-table" placeholder="填寫地址" readonly="readonly" >
 			</div>
 			<div class="block">
 				<span class="title">報修人（必填）</span>
@@ -162,7 +162,7 @@
 					</tr>
 				</table>
 			</div>
-			<input class="btn btn-primary btn-block sendInf" type="submit" value="確 定" onsubmit="return check();">
+			<input class="btn btn-primary btn-block sendInf" type="submit" value="送出報修單" onsubmit="return check();">
 		</form>
 	</section>
 </body>
@@ -172,8 +172,60 @@
 	<script src="https://kit.fontawesome.com/85155ffcd6.js"></script>
 	<script src="js/pickAll.js"></script>
 	<script>
+		let userName = $(".userName").val();
+		let userPhone = $(".userPhone").
+		let regu = "^[ ]+$";
+		let empty = new RegExp(regu);
+		let regex = /^[0-9\s]*$/;
+	
+
 		$(".block-issue").click(function(){
 			$(this).find("input").prop("checked", true);
 		});
+
+		//聯絡人資料空白檢查
+		if(userName==""){
+			console.log("目前輸入的姓名是："+userName);
+			alert("報修人資料需填寫，請重新輸入");
+			$(".userName").val("");
+		}
+		else if(empty.test(userName)){
+			console.log("目前報修人姓名是："+userName);
+			alert("報修人資料不能是空白，請重新輸入");
+			$(".userName").val("");
+		}
+		// 聯絡電話空格檢查
+		else if(empty.test(userPhone)){
+			console.log("目前輸入的手機號碼是："+userPhone);
+			alert("聯絡電話資料不能是空白，請重新輸入");
+			$(".userPhone").val("");
+		}
+		// 聯絡電話空白檢查
+		else if(userPhone ==''){
+			console.log("目前輸入的手機號碼是："+userPhone);
+			alert("聯絡電話資料需填寫，請重新輸入");
+		}
+		// 聯絡電話全形檢查
+		else if(!regex.test(userPhone)){
+			console.log("目前輸入的手機號碼是："+userPhone);
+			alert("手機格式錯誤(請切換到半形、全數字不輸入任何符號)，請重新填寫");
+			$(".userPhone").val("");
+		}
+		
+
+
+		//全形轉半形
+		function toASCII(chars) {
+			var ascii = '';
+			for(var i=0, l=chars.length; i<l; i++) {
+				var c = chars[i].charCodeAt(0);
+				//只針對半形去轉換
+				if (c >= 0xFF00 && c <= 0xFFEF) {
+					c = 0xFF & (c + 0x20);
+				}
+				ascii += String.fromCharCode(c);
+			}
+			return ascii;
+		}
 	</script>
 </html>
