@@ -162,7 +162,8 @@
 					</tr>
 				</table>
 			</div>
-			<input class="btn btn-primary btn-block sendInf" type="submit" value="送出報修單" onsubmit="return check();">
+			<button id="sendInf" class="btn btn-votePrice btn-block sendInf" type="button">送出報修單</button>
+			<!-- <input class="btn btn-primary btn-block sendInf" type="submit" value="送出報修單" onsubmit="return check();"> -->
 		</form>
 	</section>
 </body>
@@ -172,45 +173,47 @@
 	<script src="https://kit.fontawesome.com/85155ffcd6.js"></script>
 	<script src="js/pickAll.js"></script>
 	<script>
-		let userName = $(".userName").val();
-		let userPhone = $(".userPhone").
-		let regu = "^[ ]+$";
-		let empty = new RegExp(regu);
-		let regex = /^[0-9\s]*$/;
-	
-
+		
 		$(".block-issue").click(function(){
 			$(this).find("input").prop("checked", true);
 		});
 
-		//聯絡人資料空白檢查
-		if(userName==""){
-			console.log("目前輸入的姓名是："+userName);
-			alert("報修人資料需填寫，請重新輸入");
-			$(".userName").val("");
-		}
-		else if(empty.test(userName)){
-			console.log("目前報修人姓名是："+userName);
-			alert("報修人資料不能是空白，請重新輸入");
-			$(".userName").val("");
-		}
-		// 聯絡電話空格檢查
-		else if(empty.test(userPhone)){
-			console.log("目前輸入的手機號碼是："+userPhone);
-			alert("聯絡電話資料不能是空白，請重新輸入");
-			$(".userPhone").val("");
-		}
-		// 聯絡電話空白檢查
-		else if(userPhone ==''){
-			console.log("目前輸入的手機號碼是："+userPhone);
-			alert("聯絡電話資料需填寫，請重新輸入");
-		}
-		// 聯絡電話全形檢查
-		else if(!regex.test(userPhone)){
-			console.log("目前輸入的手機號碼是："+userPhone);
-			alert("手機格式錯誤(請切換到半形、全數字不輸入任何符號)，請重新填寫");
-			$(".userPhone").val("");
-		}
+		$(".sendInf").click(function(){
+			let userName = $(".userName").val();
+			let userPhone = $(".userPhone").val();
+			let regu = "^[ ]+$";
+			let empty = new RegExp(regu);
+			let regex = /^[0-9\s]*$/;
+			//聯絡人資料空白檢查
+			if(userName==""){
+				console.log("目前輸入的姓名是："+userName);
+				alert("報修人資料需填寫，請重新輸入");
+				$(".userName").val("");
+			}
+			else if(empty.test(userName)){
+				console.log("目前報修人姓名是："+userName);
+				alert("報修人資料不能是空白，請重新輸入");
+				$(".userName").val("");
+			}
+			// 聯絡電話空格檢查
+			else if(empty.test(userPhone)){
+				console.log("目前輸入的手機號碼是："+userPhone);
+				alert("聯絡電話資料不能是空白，請重新輸入");
+				$(".userPhone").val("");
+			}
+			// 聯絡電話空白檢查
+			else if(userPhone ==''){
+				console.log("目前輸入的手機號碼是："+userPhone);
+				alert("聯絡電話資料需填寫，請重新輸入");
+			}
+			// 聯絡電話全形檢查
+			else if(!regex.test(userPhone)){
+				console.log("目前輸入的手機號碼是："+userPhone);
+				alert("手機格式錯誤(請切換到半形、全數字不輸入任何符號)，請重新填寫");
+				$(".userPhone").val("");
+			}
+		});
+		
 		
 
 
