@@ -58,11 +58,12 @@
 		display: flex;
     	flex-direction: column;
 	}
-	
-	
 	.title{
 		color:#32a4ff;
 	}
+    .title-fanProblem{
+        color:#000;
+    }
 	.hidden{
 		visibility:hidden;
 	}
@@ -71,6 +72,23 @@
 	.table-striped tbody tr:nth-of-type(odd){
 		background:transparent;
 	}
+    .sendInf{
+        color: #fff!important;
+        background-color: #007bff!important;
+        width: 100%!important;
+        display: block !important;
+        font-weight: 400!important;
+        text-align: center!important;
+        white-space: nowrap!important;
+        vertical-align: middle!important;
+        user-select: none!important;
+        border: 1px solid transparent!important;
+        padding: 0.5rem 0.75rem!important;
+        font-size: 1rem!important;
+        line-height: 1.25!important;
+        border-radius: 0.25rem!important;
+        transition: all .15s ease-in-out!important;
+    }
 	
 	
 	
@@ -214,7 +232,7 @@
         }
         .issueContent > p{
             text-align: justify;
-            line-height: 25px;
+            line-height: 30px;
             font-size: 25px;
         }
         .block-issue:nth-child(2){

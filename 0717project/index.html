@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="style.css?v=5">
 </head>
 <!-- onload="clock();return true" -->
-<body onload="clock();return true">
+<body>
 	<!-- <header class="form-title">
 		<img class="logo" src="logo-small.jpg" alt="">
 		<p >設備報修單</p>
@@ -28,6 +28,10 @@
 		</div>
 	</section>
 	<div class="hint-time">
+		<!-- <div class="deadlineInf">
+			倒數計時<input type="text" value="0"> 天 <input 
+			type="text" value="0"> 小時 <input type="text" value="0"> 分 <input type="text" value="0"> 秒，活動結束!<br>
+		</div> -->
 		<form name="formnow" class="deadline">
 			倒數計時<input type="text" name="dd" class="dd" size=4> 天 <input 
 			type="text" class="hh" name="hh" size=2> 小時 <input type="text" 
@@ -40,7 +44,8 @@
 			<div class="row">
 				<div class="block col-lg-6 order-lg-2">
 					<p class="brand-title">Rav4 王者休旅旗艦版(尊爵黑)</p>
-					<p class="brand-hint">原價120萬，限量1台</p>
+					<p class="brand-sub">即日起15日內</p>
+					<p class="brand-hint">原價120萬，起標價96萬元，限量1台</p>
 					<p class="price">
 						<span class="record">目前競標價</span>
 						
@@ -59,7 +64,7 @@
 						<div class="block">
 							<span class="title">所屬單位(必選）</span>
 							<select name="" id="pickCompany" class="pickCompany light-table-filter">
-								<option value="option01">請選擇公司單位</option>
+								<option value="01">請選擇公司單位</option>
 								<option value="東森國際(含東投、東租)">東森國際(含東投、東租)</option>
 								<option value="東森得易購(含東森新零售百貨、自然美直營店)">東森得易購(含東森新零售百貨、自然美直營店)</option>
 								<option value="東森新媒體">東森新媒體</option>
@@ -84,20 +89,22 @@
 						</div>
 						<div class="block">
 							<span class="title">手機(必填）</span>
-							<input type="text" class="light-table-filter userPhone" data-table="order-table" placeholder="填寫手機號碼" required="required">
+							<input type="tel" class="light-table-filter userPhone" data-table="order-table" placeholder="填寫手機號碼" required="required">
 						</div>
 						<div class="block">
-							<span class="title"><p>搶標金額(必填，不得低於目前得標價）</p></span>
-							<input type="text" class="light-table-filter userPrice" data-table="order-table" placeholder="需輸入整數" required="required">
+							<span class="title"><p>搶標金額(單位：萬元）必填，不得低於目前競標價</p></span>
+							<span class="vote">
+								<input type="text" class="light-table-filter userPrice" data-table="order-table" placeholder="每一次競標增額最低1萬元" required="required">
+								<label class="unit">萬元</label>
+							</span>
 						</div>
 						<p class="hint">*棄標者，第二順位得標</p>
-						<input id="sendInf" class="btn btn-votePrice btn-block sendInf" value="立即搶標">
+						<button id="sendInf" class="btn btn-votePrice btn-block sendInf" type="button">立即搶標</button>
 						<p class="notice">
-							備註：二手車（已掛牌，0里程），目前為旭邦名下，需現金支付，公司不提供貸款，成交後公司會開立發票，規費需自行負擔。<br><br>東森分眾聯絡人：蔡婉儀 <br>聯絡電話：02-25791991#252
+							備註：0里程，已掛牌，目前為旭邦名下，需現金支付，公司不提供貸款，成交後公司會開立發票，規費需自行負擔。<br><br>東森分眾聯絡人：蔡婉儀 <br>聯絡電話：02-25791991#252
 						</p>
 					</form>
-				</div>
-				
+				</div>	
 			</div>
 		</div>
 		<hr>
@@ -267,7 +274,13 @@
 			</div>
 		</div>
 	</section>
-	<div class="note"><p>*詳細規格請上官網查詢</p></div>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="note"><p>*建議使用電腦開啟頁面，詳細規格請上官網查詢，主辦單位保有隨時修改及終止本活動之權利。</p></div>
+			</div>
+		</div>
+	</section>
 	<footer>
 		<p> www.toyota.com.tw</p>
 	</footer>
@@ -276,42 +289,41 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 	<script src="https://kit.fontawesome.com/85155ffcd6.js"></script>
-	<script src="js/time.js"></script>
+	<!-- <script src="js/time.js"></script> -->
 	<script>
+		let timer = setInterval(clock, 1000);
+		var reset = 1;
 		let priceNew = setInterval(function(){
 			let timeDay = $(".dd").val();
 			let timeHour = $(".hh").val();
 			let timeMin = $(".mm").val();
 			let timeSec = $(".ss").val();
 			let winner = $(".newPrice").html();
-			//console.log("目前的得標價是:"+winner);
-			//console.log("timeHour的值是:"+timeHour);
-			//console.log("timeSec的值是:"+timeSec);
-			//console.log("目前的得標價是:"+winner);
 			
 			if ((timeDay=='0')&&(timeHour=='0')&&(timeMin=='0')&&(timeSec=='0')){
 				clearInterval(priceNew);
 			}
 			else{
-				url = 'http://test.eiptv.net:99/api/BidPrice/toyota3';
+				url = 'http://test.eiptv.net:99/api/BidPrice/toyotaAA';
 				fetch(url, {method:'GET'}).then(res => {
 					return res.json();
 				}).then(result => {
-					//console.log("目前出價最高的人："+result[0].Name);
-					//console.log("所屬的公司："+result[0].Company);
-					//console.log("目前出價："+result[0].Price);
+
 					let winner = result[0].Name;
 					let winnerComp = result[0].Company
 					let resultPrice = result[0].Price;
-					newName = winner.replace(winner[1],"O");
 					//console.log("新名字newName是："+newName);
-					if(winner != ''){
+					if(winner=='預設起價'){
+						$(".priceInf").html(resultPrice);
+					}
+					else if((winner != '')&&(winner!='預設起價')){
+						newName = winner.replace(winner[1],"O");
 						$(".winnerInf").css("display","flex");
 						$(".winnerContent").html(winnerComp+'-'+newName);
 						$(".priceInf").html(resultPrice);
 					}
 					else{
-						$(".newPrice").html(resultPrice);
+						$(".priceInf").html(resultPrice);
 					}
 				});
 			}
@@ -326,48 +338,253 @@
 				$(".others").css("display","none");
 			}
 		});
-		function getComp(){
-			
-		}
 		$(".btn-votePrice").click(function(){
 			let priceNoew = parseInt($(".newPrice").text());
+			let otherGroup = document.getElementById("pickCompany").value;
+			let userName = $(".userName").val();
+			let phoneInf = $(".userPhone").val();
 			let priceInf = $(".userPrice").val();
+			let others = $(".others").val();
+			var regu = "^[ ]+$";
+			var empty = new RegExp(regu);
+			var regex = /^[0-9\s]*$/;
+			let abc = toASCII(priceInf);
+			console.log("userName的值是："+userName);
+			priceInf = abc;
+			$(".userPrice").val(priceInf);
 			
-			if(priceInf < priceNoew){
-				alert("您的出價低於目前得標價，請重新下標");
+			if(otherGroup=='01'){
+				alert("請選擇所屬公司");
 			}
-			if(priceInf%1 != 0){
-				alert("競標價格必須是以萬元為單位");
+			else if((otherGroup==15) && (others==='')){
+				alert("此欄位不能是空白，請輸入所屬公司資料");
 			}
-			if(priceInf > 120){
-				alert("已超過競標上限，請重新出價");
+			else if((otherGroup==15) && (empty.test(others))){
+				alert("此欄位不能是空白，請輸入所屬公司資料");
 			}
-			else{
-				var e = document.getElementById("pickCompany");
-				let item = "toyota3"
-				let userComp = e.value;
-				let userName = $(".userName").val();
-				let userPhone = $(".userPhone").val();
-				let userPrice = $(".userPrice").val(); 
-				let otherGroup = document.getElementById("pickCompany").value;
-				let other = $(".others").val();
-				if( otherGroup != 'option01'){
-					renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+userComp+","+userName+","+userPhone+","+userPrice;
+			else if(userName ===''){
+				alert("需填寫姓名");
+			}
+			// 姓名空白檢查
+			else if(empty.test(userName)){
+				console.log("目前輸入的姓名是："+userName);
+				alert("姓名資料不能是空白，請重新輸入");
+				$(".userPhone").val("");
+			}
+			// 聯絡電話空白檢查
+			else if(empty.test(phoneInf)){
+				console.log("目前輸入的手機號碼是："+phoneInf);
+				alert("聯絡電話資料不能是空白，請重新輸入");
+				$(".userPhone").val("");
+			}
+			else if(phoneInf ==''){
+				console.log("目前輸入的手機號碼是："+phoneInf);
+				alert("聯絡電話資料不能是空白，請輸入電話號碼");
+			}
+			else if(!regex.test(phoneInf)){
+				console.log("目前輸入的手機號碼是："+phoneInf);
+				alert("手機格式錯誤(請切換到半形、全數字不輸入任何符號)，請重新填寫");
+				$(".userPhone").val("");
+			}
+			else if(phoneInf.length < 10){
+				console.log(phoneInf);
+				alert("手機號碼長度錯誤，請重新填寫");
+				$(".userPhone").val("");
+				
+			}
+			// 競標金額空白檢查
+			else if(empty.test(priceInf)){
+				console.log("目前輸入的價格是："+priceInf);
+				alert("競標價格資料不能是空白，請重新出價");
+				$(".userPhone").val("");
+			}
+			else if( priceInf != ''){
+				if(priceInf < 125){
+					if(priceInf < priceNoew){
+						alert("您的出價低於目前競標價，請重新出價");
+						$(".userPrice").val("");
+					}
+					
+					else if(priceInf == priceNoew){
+						console.log(phoneInf);
+						alert("您目前的出價等於競標價，請重新出價");
+						$(".userPrice").val("");
+					}
+					else if(priceInf%1 != 0){
+						alert("競標價格必須是以萬元為單位");
+						$(".userPrice").val("");
+					}
+					else{
+						console.log(phoneInf);
+						sendInf();
+						alert("出價完成！");
+					}
+				}
+				else if(priceInf == 125){
+					if(priceInf < priceNoew){
+						alert("您的出價低於目前競標價，請重新出價");
+						$(".userPrice").val("");
+					}
+					else if(priceInf == priceNoew){
+						alert("很遺憾，已有人得標!"+"\n"+"想搶標？請聯絡 東森分眾聯絡人：蔡婉儀"+"\n"+"聯絡電話：02-25791991#252");
+						$(".userPrice").val("");
+					}
+					else if(priceInf%1 != 0){
+						alert("競標價格必須是以萬元為單位");
+						$(".userPrice").val("");
+					}
+					else{
+						alert("恭喜得標！");
+						sendInf();
+						reset = 0;
+						clock(reset);
+					}
+				}
+				else if(priceInf > 125){
+					alert("您的出價已超過競標上限！"+"\n\n"+"想搶標？請聯絡 東森分眾聯絡人：蔡婉儀"+"\n"+"聯絡電話：02-25791991#252");
+					$(".userPrice").val("");
 				}
 				else{
-					renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+other+","+userName+","+userPhone+","+userPrice;
+					alert("格式不正確，請輸入數字資料");
+					$(".userPrice").val("");
 				}
-				fetch(renewPriceUrl, {method:'GET'}).then(res => {
-					return res.text();
-				}).then(result => {
-					console.log("打過去的網址是："+renewPriceUrl);
-					console.log("最新的價格是："+result);
-					alert("出價完成！")
-					 let newPrice = parseInt(result);
-					 $(".newPrice").html(newPrice);
-					 $(".userPrice").val(""); 
-				});
-			} 
+			}
+			else{
+				alert("需填寫競標金額，才能下標，請出價");
+			}
+			
+
+			
 		});
+
+
+
+		//全形轉半形
+		function toASCII(chars) {
+			var ascii = '';
+			for(var i=0, l=chars.length; i<l; i++) {
+				var c = chars[i].charCodeAt(0);
+				//只針對半形去轉換
+				if (c >= 0xFF00 && c <= 0xFFEF) {
+					c = 0xFF & (c + 0x20);
+				}
+				ascii += String.fromCharCode(c);
+			}
+			return ascii;
+		}
+		
+
+		//出價
+		function sendInf(){
+			var e = document.getElementById("pickCompany");
+			let item = "toyotaAA"
+			let userComp = e.value;
+			let userName = $(".userName").val();
+			let userPhone = $(".userPhone").val();
+			let userPrice = $(".userPrice").val(); 
+			let otherGroup = document.getElementById("pickCompany").value;
+			let other = $(".others").val();
+			if( otherGroup == '15'){
+				renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+other+","+userName+","+userPhone+","+userPrice;
+				fetch(renewPriceUrl, {method:'GET'}).then(res => {
+					return res.json();
+				}).then(result => {
+					let resultPrice = result[0].Price;
+					$(".priceInf").html(resultPrice);
+					$(".userPrice").val("");
+					alert("出價完成！");
+
+					console.log("最新的價格是："+resultPrice);
+					console.log("打過去的網址是："+renewPriceUrl);
+				});
+			}
+			else{
+				renewPriceUrl = 'http://test.eiptv.net:99/api/BidRecord/'+item+","+userComp+","+userName+","+userPhone+","+userPrice;
+				fetch(renewPriceUrl, {method:'GET'}).then(res => {
+					return res.json();
+				}).then(result => {
+					//console.log("打過去的網址是："+renewPriceUrl);
+					//console.log("最新的價格是："+result);
+					//let newPrice = parseInt(result);
+					let resultPrice = result[0].Price;
+					$(".priceInf").html(resultPrice);
+					$(".userPrice").val("");
+					alert("出價完成！");
+					console.log("最新的價格是："+resultPrice);
+					console.log("打過去的網址是："+renewPriceUrl);
+				});
+			}
+		}
+
+		//倒數計時
+		function clock(reset){
+			var timer=null;
+			var show=document.getElementById("show");
+			function show_date_time(){   
+			  	var target=new Date("2022/8/11");  
+			  	var today=new Date(); 
+				var timeold=(target.getTime()-today.getTime());   
+				var sectimeold=timeold/1000   
+				var secondsold=Math.floor(sectimeold);   
+				var msPerDay=24*60*60*1000   
+				var e_daysold=timeold/msPerDay   
+				var daysold=Math.floor(e_daysold);   
+				var e_hrsold=(e_daysold-daysold)*24;   
+				var hrsold=Math.floor(e_hrsold);   
+				var e_minsold=(e_hrsold-hrsold)*60;   
+				var minsold=Math.floor((e_hrsold-hrsold)*60);   
+				var seconds=Math.floor((e_minsold-minsold)*60);
+				
+				//if(reset ==0){
+				//	$(".dd").val("0");
+				//	$(".hh").val("0");
+				//	$(".mm").val("0");
+				//	$(".ss").val("0");
+				//	console.log("時間已成功停止")
+				//	$(".btn-votePrice").val("");
+				//	$(".btn-votePrice").val("活動結束，已停止出價");
+				//	$(".btn-votePrice").css("cursor","not-allowed");
+				//	document.getElementById("sendInf").disabled = true;
+					
+					//備註提示
+					//$(".want").css("display","flex");
+
+					//時間歸零
+					//$(".deadline").css("display","none");
+					//$(".deadlineInf").css("display","flex");
+				//}
+				
+				if(daysold<0){   
+					// document.getElementById("time").innerHTML="逾期,倒數計時已經失效";  
+					$(".dd").val("0");
+					$(".hh").val("0");
+					$(".mm").val("0");
+					$(".ss").val("0");
+					$(".btn-votePrice").val("");
+					$(".btn-votePrice").val("活動結束，已停止出價");
+					$(".btn-votePrice").css("cursor","not-allowed");
+					document.getElementById("sendInf").disabled = true;
+					clearInterval(timer);
+					
+					//時間歸零失敗的備案
+					//$(".deadline").css("display","none");
+					//$(".deadlineInf").css("display","flex");
+				}   
+				else{   
+					if (daysold<10) {daysold="0"+daysold}   
+					if (hrsold<10) {hrsold="0"+hrsold}   
+					if (minsold<10) {minsold="0"+minsold}   
+					if (seconds<10) {seconds="0"+seconds}
+					
+					$(".dd").val(daysold);
+						$(".hh").val(hrsold);
+						$(".mm").val(minsold);
+						$(".ss").val(seconds);
+			
+					// show.innerHTML="距離結束時間還有:"+daysold+"天"+hrsold+"小時"+minsold+"分"+seconds+"秒";     
+				}   
+			}   
+			timer=setInterval(show_date_time,1000);
+		} 
 	</script>
 </html>
