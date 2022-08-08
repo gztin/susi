@@ -65,9 +65,14 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token, message)
         
         elif mtext == '我要報修':
-            message = TextSendMessage(text="❗️請輸入大樓/社區的聯絡電話❗️")
+            message = TextSendMessage(text="❗️請輸入大樓/社區的聯絡電話")
             line_bot_api.reply_message(event.reply_token, message)   
             status[userId] = 's1'
+            
+        elif mtext == '查詢租金':
+            message = TextSendMessage(text="❗️要查詢租金，請先輸入大樓/社區的帳號")
+            line_bot_api.reply_message(event.reply_token, message)   
+            status[userId] = 's2'
             
         elif mtext == '簡易處理':
             message = [
@@ -81,22 +86,22 @@ def handle_message(event):
             ]
             line_bot_api.reply_message(event.reply_token, message)
             
-        elif mtext == '查詢租金':
-            message = [
-                TextSendMessage(  # 傳送文字
-                    text='請提供【查詢月份】，待查詢後立即回覆您，謝謝。'
-                )
-            ]
-            line_bot_api.reply_message(event.reply_token, message)
+        # elif mtext == '查詢租金':
+        #     message = [
+        #         TextSendMessage(  # 傳送文字
+        #             text='請提供【查詢月份】，待查詢後立即回覆您，謝謝。'
+        #         )
+        #     ]
+        #     line_bot_api.reply_message(event.reply_token, message)
             
         
             
-    elif status.get(userId) !='':
+    elif status.get(userId) =='s1':
                 
         if mtext == '是，我要報修' and status.get(userId) =='s1':
             message = [
                 TextSendMessage(  # 傳送文字
-                    text='請輸入大樓/社區聯絡電話'
+                    text='請輸入大樓/社區的聯絡電話'
                 )
             ]
             line_bot_api.reply_message(event.reply_token, message)
@@ -112,20 +117,57 @@ def handle_message(event):
             ]
             line_bot_api.reply_message(event.reply_token, message)
        
-        elif status.get(userId) == 's1':  
+        # 
+        else:
             phone = mtext
             url = f'http://test.eiptv.net:99/api/LineRepair/{(userId)},{(userName)},{(phone)}'
-            print("送給馬丁的網址 是:", url )
+            print("用戶要報修，送給馬丁的網址 是:", url )
             r = requests.get(url)
             soup = str(BeautifulSoup(r.text,"html.parser"))
             lineData = soup
-            if lineData == '無符合社區資料':
-                print("目前狀態是:", status[userId],"進入報修狀態" )
-                retryConfirm(event)
-            else:
+            if 'http' in lineData:
                 line_bot_api.reply_message(event.reply_token, TextSendMessage(text="請點選下方的專屬連結進行報修"+"\n\n"+lineData))
                 # 狀態重置
                 status[userId]=''
+            else:
+                print("目前狀態是:", status[userId],"進入報修狀態" )
+                retryConfirm(event)
+                
+    elif status.get(userId) == 's2':
+         
+        if mtext == '是，我要查詢租金':
+            message = [
+                TextSendMessage(  # 傳送文字
+                    text='請輸入大樓/社區的聯絡電話'
+                )
+            ]
+            line_bot_api.reply_message(event.reply_token, message)
+            
+        elif mtext == '否，結束查詢租金流程':
+            # 狀態重置
+            status[userId]=''
+            print("目前狀態是:", status[userId],"已重置狀態" )
+            message = [
+                TextSendMessage(  # 傳送文字
+                    text='流程已經結束，請選擇您需要的服務項目'
+                )
+            ]
+            line_bot_api.reply_message(event.reply_token, message) 
+        
+        else:
+            phone = mtext
+            url = f'http://test.eiptv.net:99/api/LineRepair/{(userId)},{(userName)},{(phone)}'
+            print("用戶要查詢租金，送給馬丁的網址 是:", url )
+            r = requests.get(url)
+            soup = str(BeautifulSoup(r.text,"html.parser"))
+            lineData = soup
+            if 'http' in lineData:
+                line_bot_api.reply_message(event.reply_token, TextSendMessage(text="請點選下方的專屬連結"+"\n\n"+lineData))
+                # 狀態重置
+                status[userId]=''
+            else:
+                print("目前狀態是:", status[userId],"進入查詢租金狀態" )
+                retryConfirmRent(event)
     
     # 處理完對應的程序後清空狀態            
 
@@ -176,12 +218,13 @@ def sendCarousel(event):  # 轉盤樣板
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text='發生錯誤！'))
 
+# 確認是否要繼續報修
 def retryConfirm(event):
     try:
         message = TemplateSendMessage(
             alt_text = '很抱歉，電腦版的Line 無法顯示此類型選單',
             template = ConfirmTemplate(
-                text = '社區聯絡電話資料輸入錯誤，無符合社區資料，要繼續報修嗎？',
+                text = '無符合貴社區的相關資料，要繼續報修嗎？請點"否"，並聯絡客服電話： 02-2579-1991，由客服總機為您協助報修',
                 actions = [
                     MessageTemplateAction(
                         label = '是',
@@ -190,6 +233,30 @@ def retryConfirm(event):
                     MessageTemplateAction(
                         label = '否',
                         text = '否，結束報修流程'
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, message)
+    except:
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text='發生錯誤！'))
+
+# 確認是否要繼續查詢租金        
+def retryConfirmRent(event):
+    try:
+        message = TemplateSendMessage(
+            alt_text = '很抱歉，電腦版的Line 無法顯示此類型選單',
+            template = ConfirmTemplate(
+                text = '無符合貴社區的相關租金資料，要繼續查詢嗎？請點"否"，並聯絡客服電話： 02-2579-1991，由客服總機為您協助報修',
+                actions = [
+                    MessageTemplateAction(
+                        label = '是',
+                        text = '是，我要查詢租金'
+                    ),
+                    MessageTemplateAction(
+                        label = '否',
+                        text = '否，結束查詢租金流程'
                     )
                 ]
             )
