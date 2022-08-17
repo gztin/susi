@@ -168,15 +168,17 @@
         object-fit:cover;
     }
     .notice{
-        border: 1px solid #aeaeae;
         margin-bottom: 20px;
         border-radius: 5px;
+        background: #000;
     }
     .deviceHint{
-        border:1px solid #ff3939;
+        /* border:1px solid #ff3939; */
         padding: 20px;
+        padding-bottom: 0px;
         margin: 10px;
         line-height: 23px;
+        color:#fff;
     }
 
     @media (min-width: 1024px){
