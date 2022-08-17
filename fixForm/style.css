@@ -12,7 +12,7 @@
 	b, u, i, center,
 	dl, dt, dd, ol, ul, li,
 	fieldset, form, label, legend,
-	table, caption, tbody, tfoot, thead, tr, th, td,
+	table, caption, tbody, tfoot, thead, tr,
 	article, aside, canvas, details, embed, 
 	figure, figcaption, footer, header, hgroup, 
 	menu, nav, output, ruby, section, summary,
@@ -29,6 +29,9 @@
 	footer, header, hgroup, menu, nav, section {
 		display: block;
 	}
+    
+
+
 	body {
 		line-height: 1;
 	}
@@ -47,6 +50,19 @@
 		border-collapse: collapse;
 		border-spacing: 0;
 	}
+    table th{
+        color: #fff;
+		background: #313131;
+        padding: 0.75rem;
+        vertical-align: revert!important;
+        padding-left: 12px!important;
+        padding-right: 0px!important;
+        text-align: left;
+    }
+    table td{
+        border: 1px solid #e9ecef!important;
+        padding: 0.75rem;
+    }
 	/* reset CSS end */
     body {
 		font-family: 'Noto Sans TC', sans-serif;
@@ -89,9 +105,6 @@
         border-radius: 0.25rem!important;
         transition: all .15s ease-in-out!important;
     }
-	
-	
-	
 	.on{background:#000;color:#fff;}
 	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 		color: rgb(235, 235, 235);
@@ -114,10 +127,6 @@
 	.table tr:nth-child(even){
 		background:#fff;
 	}
-	.table th{
-		color: #fff;
-		background: #313131;
-	}
     .hint{
         display:flex;
         align-items: center;
@@ -133,7 +142,7 @@
         line-height: 17px;
     }
 	
-    section.finish-hint > div > div > h1 {
+    section.finish-hint > div > div > h1{
         text-align: center!important;
     }
     .finish-hint >div.container > div.row > h1{
@@ -145,6 +154,29 @@
     .finish-hint >div.container > div.row > button{
         width:80%;
         margin:0 auto;
+    }
+    .block-sample{
+        display: flex;
+    }
+    .block-sample > span{
+        margin:20px;
+        margin-top: 10px!important;
+        margin-bottom: 20px!important;
+    }
+    .block-sample > span > img{
+        width:100%;
+        object-fit:cover;
+    }
+    .notice{
+        border: 1px solid #aeaeae;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+    .deviceHint{
+        border:1px solid #ff3939;
+        padding: 20px;
+        margin: 10px;
+        line-height: 23px;
     }
 
     @media (min-width: 1024px){
@@ -209,7 +241,6 @@
             vertical-align: top!important;
         }
         table td{
-            border: 1px solid #e9ecef!important;
             padding-right: 0!important;
         }
         td img{
@@ -299,6 +330,7 @@
             margin-top:10px;
             margin-right:10px;
         }
+        
         .issueOption{
             width: 35px!important;
             height: 35px!important;
@@ -581,9 +613,6 @@
         
         table{
             margin-top:10px;
-        }
-        table td{
-            padding-right: 0!important;
         }
         td img{
             width:160px;

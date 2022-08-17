@@ -26,7 +26,7 @@
 		<form action="">
 			<div class="block">
 				<span class="title">社區 / 商辦 大樓名稱</span>
-				<input type="text" class="light-table-filter Community" data-table="order-table" placeholder="填寫名稱" readonly="readonly" >
+				<input type="text" class="light-table-filter Community" data-table="order-table" placeholder="填寫名稱" readonly="readonly"  >
 			</div>
 			<div class="block">
 				<span class="title">社區 / 商辦 大樓地址</span>
@@ -38,7 +38,7 @@
 			</div>
 			<div class="block">
 				<span class="title">聯絡電話（必填）</span>
-				<input type="tel" class="light-table-filter userPhone" data-table="order-table" placeholder="填寫電話或手機號碼，EX:0912345678" required="required" >
+				<input type="tel" class="light-table-filter userPhone" data-table="order-table" placeholder="請填寫聯絡電話，包含區碼（e.g.0225791991)" required="required" >
 			</div>
 			
 			<div class="block">
@@ -121,7 +121,16 @@
 				<span class="title">報修圖片3</span>
 				<input class="uploadFile" type="file">
 			</div>
+			
 			<div class="block block-device">
+				<div class="notice">
+					<p class="deviceHint">請參考電子佈告欄左(或右)上角銀/白色貼紙,第一欄印有社區名稱及編號。
+						若貼紙遺失或模糊,請於上述第7項備註該設備電梯棟別編號或門牌號，以利維修人員優先前往處理。</p>
+					<div class="block-sample">
+						<span><img src="fix01.jpg" alt=""></span>
+						<span><img src="fix02.jpg" alt=""></span>
+					</div>
+				</div>
 				<span class="title">勾選需報修的設備（必填）</span>
 				<table class="table table-bordered table-hover">
 					<tr>
@@ -181,6 +190,7 @@
 		$(".sendInf").click(function(){
 			let userName = $(".userName").val();
 			let userPhone = $(".userPhone").val();
+			let userPhoneSize = userPhone.length;
 			let regu = "^[ ]+$";
 			let empty = new RegExp(regu);
 			let regex = /^[0-9\s]*$/;
@@ -201,11 +211,21 @@
 				alert("聯絡電話資料不能是空白，請重新輸入");
 				$(".userPhone").val("");
 			}
+			// 聯絡電話長度檢查
+			else if(userPhoneSize > 10){
+				console.log("目前輸入的手機號碼長度是："+userPhoneSize);
+				alert("電話格式不符，請重新輸入");
+			}
 			// 聯絡電話空白檢查
 			else if(userPhone ==''){
 				console.log("目前輸入的手機號碼是："+userPhone);
 				alert("聯絡電話資料需填寫，請重新輸入");
 			}
+			// 聯絡電話特殊符號檢查
+			//else if(specialSignal.test(userPhone)){
+			//	console.log("目前輸入的手機號碼是："+userPhone);
+			//	alert("電話資料不能含有特殊符號，請重新輸入");
+			//}
 			// 聯絡電話全形檢查
 			else if(!regex.test(userPhone)){
 				console.log("目前輸入的手機號碼是："+userPhone);
@@ -214,9 +234,6 @@
 			}
 		});
 		
-		
-
-
 		//全形轉半形
 		function toASCII(chars) {
 			var ascii = '';
