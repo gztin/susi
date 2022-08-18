@@ -555,7 +555,7 @@
         section.issueContent > p{
             text-align: justify;
             line-height: 20px;
-            font-size: 15px;
+            font-size: 13px;
         }
         .issueOption{
             width: 35px;
