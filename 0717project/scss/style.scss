@@ -107,9 +107,32 @@ form{
     }
 }
 @media (max-width: 568px){
-    
+    .banner{
+        background-position: -2%;
+        .slogan{
+            p{
+                font-size:35px;
+                padding-bottom: 2%;
+            }
+            p{
+                font-size:20.5px;
+            }
+        }
+    }
 }
 @media (max-width: 414px){
+    .banner{
+        background-position: -2%;
+        .slogan{
+            p{
+                font-size:35px;
+                padding-bottom: 2%;
+            }
+            p{
+                font-size:20.5px;
+            }
+        }
+    }
     .slogan{
         padding-top: 15%;
         padding-left: 5%;
