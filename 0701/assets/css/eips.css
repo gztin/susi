@@ -461,6 +461,11 @@
   color: #fff;
   text-shadow: 1px 1px 3px #171717;
 }
+.mallEips .container .landingPageTitle .titleContent h5 {
+  color: #fff;
+  line-height: 30px;
+  text-shadow: 1px 1px 3px #171717;
+}
 
 .mallEips .container .landingPageTitle .titleContent .landingLink {
   width: 150px;
