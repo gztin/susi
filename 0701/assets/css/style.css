@@ -12,7 +12,9 @@ body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
 }
-
+.landingLink > svg{
+  margin-right: 10px;
+}
 a {
   color: #ffc451;
   text-decoration: none;
