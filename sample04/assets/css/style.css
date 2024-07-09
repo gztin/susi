@@ -1,0 +1,168 @@
+/* update */
+.banner{
+    width:100%;
+    height:100vh;
+    background-image:url(../images/banner/KV\ Background_1440.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+}
+.aaa{
+    height:300px;
+    /* background-color: #C30; */
+}
+.bbb{
+    height:300px;
+    background-color: #007fe0;
+}
+.block_guset{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.guest{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20vh;
+}
+.guestPic{
+    width: 320px;
+    height:265px;
+    background-image:url(../images/common/guestPic.png);
+    background-size: contain;
+    background-repeat: no-repeat ;
+}
+.guestButton{
+    width:200px;
+    height:100px;
+    background-image:url(../images/common/button_guest.png);
+    background-size: contain;
+    background-repeat: no-repeat ;
+}
+.bossRighthand{
+    width:115px;
+    height:90px;
+    background-image:url(../images/common/boss_rightHand.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-bottom: 10vh;
+}
+.bossLefthand{
+    width:115px;
+    height:90px;
+    background-image:url(../images/common/boss_leftHand.png);
+    background-size: contain;
+    background-repeat: no-repeat ;
+    margin-top: 10vh;
+    margin-right: 2vw;
+}
+.boss{
+    background-image:url(../images/common/bossYuan.png);
+    background-size: contain;
+    background-repeat: no-repeat ;
+    width: 510px;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* margin-top:10vh; */
+}
+.serviceA{
+    background-color: #EBF9FF;
+    width: 100%;
+    height:500px;
+    z-index: 1;
+}
+.sectionA_MenuA{
+    background-image:url(../images/common/sectionA_1024up.png);
+    background-size: cover;
+    background-repeat: no-repeat ;
+    width: 100%;
+    height: 380px;
+    margin-top:10vh;
+    position: relative;
+}
+.serviceA_MenuButton{
+    width:100%;
+    display: flex;
+    gap:5px;
+    justify-content: center;
+    position: absolute;
+    bottom: 40px;
+}
+.serviceA_MenuButton > a{
+    width: 173px;
+    height:60px;
+    color:#fff;
+}
+.serviceA_MenuButton > a:nth-child(1){
+    background-image: url(../images/button/sectionA_1_default.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.serviceA_MenuButton > a:nth-child(1):hover{
+    background-image: url(../images/button/sectionA_1_hover.png);
+}
+.serviceA_MenuButton > a:nth-child(2){
+    background-image: url(../images/button/sectionA_2_default.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.serviceA_MenuButton > a:nth-child(2):hover{
+    background-image: url(../images/button/sectionA_2_hover.png);
+}
+.serviceA_MenuButton > a:nth-child(3){
+    background-image: url(../images/button/sectionA_3_default.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.serviceA_MenuButton > a:nth-child(3):hover{
+    background-image: url(../images/button/sectionA_3_hover.png);
+}
+.serviceA_MenuButton > a:nth-child(4){
+    background-image: url(../images/button/sectionA_4_default.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.serviceA_MenuButton > a:nth-child(4):hover{
+    background-image: url(../images/button/sectionA_4_hover.png);
+}
+.serviceA_MenuButton > a:nth-child(5){
+    background-image: url(../images/button/sectionA_5_default.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.serviceA_MenuButton > a:nth-child(5):hover{
+    background-image: url(../images/button/sectionA_5_hover.png);
+}
+.sectionB{
+    background-image: url(../images/background/body_bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height:100vh;
+}
+/* update end */
+@media screen and (min-width: 1024px) {
+   
+}
+@media screen and (max-width: 1023px) and (min-width:768px) {
+    .banner{
+        background-image: url(../images/banner/KV\ Background_768.png);
+    }
+}
+@media screen and (max-width: 767px){
+    .banner{
+        background-image: url(../images/banner/KV\ Background_767.png);
+    }
+}
+@media screen and (max-width: 345px){
+    .banner{
+        background-image: url(../images/banner/KV\ Background_767.png);
+    }
+}
