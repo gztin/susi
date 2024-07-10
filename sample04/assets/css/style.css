@@ -1,4 +1,5 @@
 /* update */
+
 .banner{
     width:100%;
     height:100vh;
@@ -16,31 +17,36 @@
     height:300px;
     background-color: #007fe0;
 }
-.block_guset{
+.block_agent{
     display: flex;
     justify-content: center;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
-.guest{
+.block_boss{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.agent{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     margin-bottom: 20vh;
 }
-.guestPic{
+.agentPic{
     width: 320px;
     height:265px;
-    background-image:url(../images/common/guestPic.png);
+    background-image:url(../images/common/agentPic.png);
     background-size: contain;
     background-repeat: no-repeat ;
 }
-.guestButton{
+.agentButton{
     width:200px;
     height:100px;
-    background-image:url(../images/common/button_guest.png);
+    background-image:url(../images/common/button_agent.png);
     background-size: contain;
     background-repeat: no-repeat ;
 }
@@ -65,14 +71,20 @@
     background-image:url(../images/common/bossYuan.png);
     background-size: contain;
     background-repeat: no-repeat ;
-    width: 510px;
-    height: 700px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    /* margin-top:10vh; */
+    background-position: center;
+    width: 600px;
+    height: 800px;
 }
-.serviceA{
+.boss > .bossBackground{
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    height: 500px;
+}
+.block_boss > .agentButton{
+    display: none;
+}
+.Block_service{
     background-color: #EBF9FF;
     width: 100%;
     height:500px;
@@ -80,15 +92,18 @@
 }
 .sectionA_MenuA{
     background-image:url(../images/common/sectionA_1024up.png);
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat ;
+    background-position: center;
     width: 100%;
     height: 380px;
     margin-top:10vh;
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 .serviceA_MenuButton{
-    width:100%;
+    width:90%;
     display: flex;
     gap:5px;
     justify-content: center;
@@ -96,7 +111,7 @@
     bottom: 40px;
 }
 .serviceA_MenuButton > a{
-    width: 173px;
+    width: 100%;
     height:60px;
     color:#fff;
 }
@@ -140,29 +155,337 @@
 .serviceA_MenuButton > a:nth-child(5):hover{
     background-image: url(../images/button/sectionA_5_hover.png);
 }
-.sectionB{
+.Block_information{
     background-image: url(../images/background/body_bg.png);
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
-    height:100vh;
+    height:auto;
 }
+.ccc{
+    background-image: url(../images/background/body_bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    width: 100%;
+    height:78px;
+}
+.Block_footerInf{
+    background-image: url(../images/background/footer_bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    width: 100%;
+    height:auto;
+    margin-bottom: 40px;
+}
+.block{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.footerInf_1024{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 900px;
+}
+.footerInfA{
+    background-image: url(../images/background/footInfA_1024.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 400px;
+    height:125px;
+}
+.footerInfB{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height:750px;
+    margin-top:-20px;
+}
+.sub{
+    display: flex;
+}
+.sub_InfB{
+    background-image: url(../images/background/InfB_1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width:100%;
+    height:370px;
+}
+.sub_InfB:nth-child(2){
+    background-image: url(../images/background/InfB_2.png);
+}
+.footerInfC{
+    background-image: url(../images/background/InfC.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width:100%;
+    height:370px;
+    margin-top:-10px;
+}
+
+.creditCard{
+    height:800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.creditCard_title{
+    background-image: url(../images/common/service_credit_title.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 400px;
+    height:125px;
+}
+
+.serviceBlock{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 900px;
+}
+/* Slider */
+.onlineService{
+    height:500px;
+}
+/* end slider */
+
+/* tapView */
+.content {
+    display: none;
+    margin-top: 20px;
+    width:100%;
+}
+.content.active {
+    display: block;
+}
+.buttons {
+    margin-top: 20px;
+    display:flex;
+    width:65%;
+    height:60px;
+}
+
+/* 信用卡顯示資訊 */
+.serviceImg{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height:400px;
+}
+#content1 > .serviceImg{
+    background-image: url(../images/background/card_1.png);
+}
+#content2 > .serviceImg{
+    background-image: url(../images/background/card_2.png);
+}
+#content3 > .serviceImg{
+    background-image: url(../images/background/card_3.png);
+}
+#content4 > .serviceImg{
+    background-image: url(../images/background/card_4.png);
+}
+
+/* 按鈕背景圖片 */
+.card_Service {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height:60px;
+}
+.card_Service[data-bg="service1"] {
+    background-image: url('../images/button/creditCard_service_1.png');
+}
+
+.card_Service[data-bg="service2"] {
+    background-image: url('../images/button/creditCard_service_2.png');
+}
+
+.card_Service[data-bg="service3"] {
+    background-image: url('../images/button/creditCard_service_3.png');
+}
+
+.card_Service[data-bg="service4"] {
+    background-image: url('../images/button/creditCard_service_4.png');
+}
+
+.card_Service.active[data-bg="service1"] {
+    background-image: url('../images/button/creditCard_service_1_active.png');
+}
+
+.card_Service.active[data-bg="service2"] {
+    background-image: url('../images/button/creditCard_service_2_active.png');
+}
+
+.card_Service.active[data-bg="service3"] {
+    background-image: url('../images/button/creditCard_service_3_active.png');
+}
+
+.card_Service.active[data-bg="service4"] {
+    background-image: url('../images/button/creditCard_service_4_active.png');
+}
+
+/* 隱藏未選擇的內容 */
+.content {
+    display: none;
+}
+
+.content.active {
+    display: block;
+}
+/* end Tap view */
+
 /* update end */
 @media screen and (min-width: 1024px) {
    
 }
 @media screen and (max-width: 1023px) and (min-width:768px) {
+    .block_agent{
+        flex-direction: column;
+    }
+    .agent {
+        margin-top: 13vh;
+        margin-bottom: 0vh;
+    }
+    .agent > .agentButton{
+        display: none;
+    }
+    .agent > .agentPic{
+        width: 320px;
+        height: 265px;
+    }
+    .block_boss{
+        margin-top:-10vh;
+    }
+    .block_boss > .agentButton{
+        display: block;
+        margin-top:-5vh;
+    }
+    .boss {
+        margin-top: -12vh;
+    }
+    .agentButton {
+        width: 250px;
+        height: 65px;
+    }
+    .buttons {
+        width: 100%;
+        flex-wrap: wrap; /* 允許換行 */
+    }
+    .buttons a {
+        flex: 0 0 calc(50% - 10px); /* 每個按鈕佔50%的寬度，減去間距 */
+        margin-bottom: 10px; /* 下方間距 */
+    }
     .banner{
         background-image: url(../images/banner/KV\ Background_768.png);
+        background-position: bottom;
+        height: 130vh;
+    }
+    .content {
+        margin-top:100px;
+    }
+    .card_Service {
+        background-size: cover;
+        height: 90px;
+    }
+    .sectionA_MenuA{
+        background-image:url(../images/common/sectionA_768.png);
     }
 }
 @media screen and (max-width: 767px){
+    .block_agent{
+        flex-direction: column;
+    }
+    .agent {
+        margin-top: 13vh;
+        margin-bottom: 0vh;
+    }
+    .agent > .agentButton{
+        display: none;
+    }
+    .block_boss{
+        margin-top:-10vh;
+    }
+    .block_boss > .agentButton{
+        display: block;
+        margin-top:-5vh;
+    }
+    .boss {
+        margin-top: -12vh;
+    }
+    .buttons {
+        width: 100%;
+        flex-wrap: wrap; /* 允許換行 */
+    }
+    .buttons a {
+        flex: 0 0 calc(50% - 10px); /* 每個按鈕佔50%的寬度，減去間距 */
+        margin-bottom: 10px; /* 下方間距 */
+    }
     .banner{
         background-image: url(../images/banner/KV\ Background_767.png);
+        background-position: bottom;
+    }
+    .content {
+        margin-top:100px;
+    }
+    .card_Service {
+        background-size: cover;
+        height: 90px;
+    }
+    .sectionA_MenuA{
+        background-image:url(../images/common/sectionA_768.png);
     }
 }
 @media screen and (max-width: 345px){
+    .block_agent{
+        flex-direction: column;
+    }
+    .agent {
+        margin-top: 13vh;
+        margin-bottom: 0vh;
+    }
+    .agent > .agentButton{
+        display: none;
+    }
+    .block_boss{
+        margin-top:-10vh;
+    }
+    .block_boss > .agentButton{
+        display: block;
+        margin-top:-5vh;
+    }
+    .boss {
+        margin-top: -12vh;
+    }
+    .buttons {
+        width:100%;
+        flex-wrap: wrap; /* 允許換行 */
+    }
+    .buttons a {
+        flex: 0 0 calc(50% - 10px); /* 每個按鈕佔50%的寬度，減去間距 */
+        margin-bottom: 10px; /* 下方間距 */
+    }
     .banner{
         background-image: url(../images/banner/KV\ Background_767.png);
+    }
+    .content {
+        margin-top:100px;
+    }
+    .card_Service {
+        background-size: cover;
+        height: 90px;
+    }
+    .sectionA_MenuA{
+        background-image:url(../images/common/sectionA_768.png);
     }
 }
