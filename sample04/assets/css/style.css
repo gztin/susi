@@ -2,13 +2,14 @@
 
 .banner{
     width:100%;
-    height:100vh;
-    background-image:url(../images/banner/KV\ Background_1440.png);
-    background-size: cover;
+    height:60vw;
+    background-image:url(../images/banner/KV\ Background_1440b.png);
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
 }
+
 .aaa{
     height:300px;
     /* background-color: #C30; */
@@ -18,7 +19,7 @@
     background-color: #007fe0;
 }
 .block_agent{
-    display: flex;
+    display: none;
     justify-content: center;
     position: absolute;
     left: 50%;
@@ -71,8 +72,8 @@
     background-size: contain;
     background-repeat: no-repeat ;
     background-position: center;
-    width: 600px;
-    height: 700px;
+    width: 700px;
+    height: 800px;
 }
 .boss > .bossBackground{
     display: flex;
@@ -112,7 +113,6 @@
 .serviceA_MenuButton > a{
     width: 100%;
     height:60px;
-    color:#fff;
 }
 .serviceA_MenuButton > a:nth-child(1){
     background-image: url(../images/button/sectionA_1_default.png);
@@ -346,10 +346,33 @@
 
 /* update end */
 @media screen and (min-width: 1024px) {
-   
+   .agentButton{
+        display: block;
+        margin-top: 450px;
+        margin-left: 20vw;
+        width: 20vw;
+        height: 10vw;
+   }
+   .animation{
+        display: flex;
+        margin-top:450px;
+        margin-left:3vw;
+   }
+   .bossRighthand{
+        width:8vw;
+        height:6vw;
+   }
+   .bossLefthand{
+        width:8vw;
+        height:6vw;
+   }
 }
 @media screen and (max-width: 1023px) and (min-width:768px) {
+    
+    /* Block_banner */
+
     .block_agent{
+        display: flex;
         flex-direction: column;
     }
     .agent {
@@ -360,8 +383,8 @@
         display: none;
     }
     .agent > .agentPic{
-        width: 520px;
-        height: 400px;
+        width: 460px;
+        height: 370px;
     }
     .block_boss{
         margin-top:-10vh;
@@ -384,6 +407,9 @@
         width: 250px;
         height: 65px;
     }
+    .Block_service{
+        background-color: #F4FFFF;
+    }
     .buttons {
         width: 100%;
         flex-wrap: wrap; /* 允許換行 */
@@ -397,6 +423,49 @@
         background-position: bottom;
         height: 160vh;
     }
+
+    /* end Block_banner */
+
+    /* Block_service */
+    .Block_service{
+        height:950px;
+    }
+    .Block_service > .container{
+        width:100%;
+    }
+    .sectionA_MenuA{
+        background-size: contain;
+        height:800px;
+    }
+    .serviceA_MenuButton{
+        flex-direction: column;
+        gap: 0;
+        bottom: 70px;
+    }
+    .serviceA_MenuButton > a {
+        height:90px;
+    }
+    .serviceA_MenuButton > a:nth-child(1){
+        background-image: url(../images/button/sectionA_1_default_long.png);
+        background-position: center;
+    }
+    .serviceA_MenuButton > a:nth-child(2){
+        background-image: url(../images/button/sectionA_2_default_long.png);
+        background-position: center;
+    }
+    .serviceA_MenuButton > a:nth-child(3){
+        background-image: url(../images/button/sectionA_3_default_long.png);
+        background-position: center;
+    }
+    .serviceA_MenuButton > a:nth-child(4){
+        background-image: url(../images/button/sectionA_4_default_long.png);
+        background-position: center;
+    }
+    .serviceA_MenuButton > a:nth-child(5){
+        background-image: url(../images/button/sectionA_5_default_long.png);
+        background-position: center;
+    }
+    /* end Block_service */
     .content {
         margin-top:100px;
     }
@@ -409,6 +478,7 @@
     }
 }
 @media screen and (max-width: 767px){
+    /* Block_banner */
     .block_agent{
         flex-direction: column;
     }
@@ -429,6 +499,9 @@
     .boss {
         margin-top: -12vh;
     }
+    .Block_service{
+        background-color: #F4FFFF;
+    }
     .buttons {
         width: 100%;
         flex-wrap: wrap; /* 允許換行 */
@@ -438,9 +511,52 @@
         margin-bottom: 10px; /* 下方間距 */
     }
     .banner{
-        background-image: url(../images/banner/KV\ Background_767.png);
+        background-image: url(../images/banner/KV\ Background_768.png);
         background-position: bottom;
     }
+    /* end Block_banner */
+
+    /* Block_service */
+    .Block_service{
+        height:950px;
+    }
+    .Block_service > .container{
+        width:100%;
+    }
+    .sectionA_MenuA{
+        background-size: contain;
+        height:800px;
+    }
+    .serviceA_MenuButton{
+        flex-direction: column;
+        gap: 0;
+        bottom: 125px;
+    }
+    .serviceA_MenuButton > a {
+        height:75px;
+    }
+    .serviceA_MenuButton > a:nth-child(1){
+        background-image: url(../images/button/sectionA_1_default_long.png);
+        background-position: center;
+    }
+    .serviceA_MenuButton > a:nth-child(2){
+        background-image: url(../images/button/sectionA_2_default_long.png);
+        background-position: center;
+    }
+    .serviceA_MenuButton > a:nth-child(3){
+        background-image: url(../images/button/sectionA_3_default_long.png);
+        background-position: center;
+    }
+    .serviceA_MenuButton > a:nth-child(4){
+        background-image: url(../images/button/sectionA_4_default_long.png);
+        background-position: center;
+    }
+    .serviceA_MenuButton > a:nth-child(5){
+        background-image: url(../images/button/sectionA_5_default_long.png);
+        background-position: center;
+    }
+    /* end Block_service */
+
     .content {
         margin-top:100px;
     }
@@ -453,6 +569,7 @@
     }
 }
 @media screen and (max-width: 345px){
+    /* Block_banner */
     .block_agent{
         flex-direction: column;
     }
@@ -477,6 +594,9 @@
         width:100%;
         flex-wrap: wrap; /* 允許換行 */
     }
+    .Block_service{
+        background-color: #F4FFFF;
+    }
     .buttons a {
         flex: 0 0 calc(50% - 10px); /* 每個按鈕佔50%的寬度，減去間距 */
         margin-bottom: 10px; /* 下方間距 */
@@ -484,6 +604,24 @@
     .banner{
         background-image: url(../images/banner/KV\ Background_767.png);
     }
+    /* end Block_banner */
+
+    /* Block_service */
+    .Block_service > .container{
+        width:100%;
+    }
+    .sectionA_MenuA{
+        background-size: contain;
+        height:800px;
+    }
+    .serviceA_MenuButton{
+        flex-direction: column;
+    }
+    .serviceA_MenuButton > a {
+        height:90px;
+    }
+    /* end Block_service */
+
     .content {
         margin-top:100px;
     }
