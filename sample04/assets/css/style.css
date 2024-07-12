@@ -306,6 +306,7 @@
     width:75%;
     height:60px;
     gap:1.5vw;
+    justify-content: center;
 }
 .creditCard_menu a:hover > span.bt_l {
     background-image: url(../images/button/bt_l_hover.png);
@@ -1257,6 +1258,11 @@
     .creditCard_menu a {
         flex: 0 0 calc(50% - 10px); /* 每個按鈕佔50%的寬度，減去間距 */
         margin-bottom: 10px; /* 下方間距 */
+        height: 11vw;
+        font-size: 4vw;
+    }
+    .creditCard_menu > a:nth-child(2),.creditCard_menu > a:nth-child(4){
+        column-gap: 0;
     }
     .banner{
         background-image: url(../images/banner/KVBackground_360.png);
@@ -1292,8 +1298,18 @@
     }
     .serviceA_MenuButton{
         flex-direction: column;
-        gap: 4vw;
-        margin-top:14vh;
+        gap: 2vw;
+        margin-top:33vh;
+    }
+    .Block_information > .container{
+        width:95%;
+    }
+    .service_creditCard{
+        padding-left:0px;
+        padding-right:0px;
+    }
+    .serviceImg{
+        height:100vw;
     }
 }
 @media screen and (max-width: 360px){
