@@ -418,6 +418,27 @@
 .test{
     width:19%;
 }
+.a01{
+    background-image:url(../images/background/InfB_1.png);
+}
+.a02{
+    background-image:url(../images/background/InfB_2.png);
+}
+.a03{
+    background-image:url(../images/background/InfB_3.png);
+}
+.agentFooterPic {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.agentInfA, .agentInfB, .agentInfC {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
 
 /* update end */
 @media screen and (min-width: 1024px) {
@@ -1177,6 +1198,19 @@
     }
     .card_Service{
         height:9vh;
+    }
+    .service_creditCard {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .col-lg-6 {
+        width: 100%;
+    }
+
+    .agentFooterPic, .agentInfA, .agentInfB, .agentInfC {
+        width: 90vw;
+        margin-bottom: 10vw;
     }
 }
 @media screen and (max-width: 680px){
