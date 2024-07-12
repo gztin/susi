@@ -90,7 +90,7 @@
 			<!-- <div style="height: 1800px; padding: 200px 0; text-align: center; color: #888888;">空白區域<br>空白區域<br>空白區域</div> -->
 			<section class="section mainSection">
                 <div class="banner">
-                    <div class="agentButton_1024"></div>
+                    <a href="https://ytbk.tw/3Ujeua" class="agentButton_1024"></a>
                     <div class="animation_1024">
                         <img class="bossRighthand" src="img/common/boss_rightHand.png" alt="">
                         <img class="bossLefthand" src="img/common/boss_leftHand.png" alt="">
@@ -109,7 +109,7 @@
                                 </div>
                                 <!-- <div class="bossRighthand"></div> -->
                             </div>
-                            <div class="agentButton"></div>
+                            <a hreh="https://ytbk.tw/3Ujeua" class="agentButton"></a>
                         </div>  
                     </div>  
                 </div>
@@ -144,29 +144,55 @@
                         <div class="col-lg-12 service_creditCard">
                             <div class="creditCard">
                                 <div class="creditCard_title"></div>
-                                <div class="buttons">
-                                    <a href="#" onclick="showContent(event, 1, this)" class="card_Service active" data-bg="service1"></a>
-                                    <a href="#" onclick="showContent(event, 2, this)" class="card_Service" data-bg="service2"></a>
-                                    <a href="#" onclick="showContent(event, 3, this)" class="card_Service" data-bg="service3"></a>
-                                    <a href="#" onclick="showContent(event, 4, this)" class="card_Service" data-bg="service4"></a>
+                                <div class="creditCard_menu">
+                                    <a href="#" onclick="showContent(event, 1, this)" class="card_Service active" data-bg="service1">
+                                        <span class="bt_l"></span>線上申辦<span class="bt_r"></span>
+                                    </a>
+                                    <a href="#" onclick="showContent(event, 2, this)" class="card_Service" data-bg="service2">
+                                        <span class="bt_l"></span>線上申辦<span class="bt_r"></span>
+                                    </a>
+                                    <a href="#" onclick="showContent(event, 3, this)" class="card_Service" data-bg="service3">
+                                        <span class="bt_l"></span>線上申辦<span class="bt_r"></span>
+                                    </a>
+                                    <a href="#" onclick="showContent(event, 4, this)" class="card_Service" data-bg="service4">
+                                        <span class="bt_l"></span>線上申辦<span class="bt_r"></span>
+                                    </a>
                                 </div>
                                 <div id="content1" class="content active">
                                     <div class="serviceImg">
                                         <div class="space"></div>
                                         <div class="hint">
-                                            <img src="img/background/hint_1.png" alt="">
-                                            <div class="creditCard_button"></div>
+                                            <div class="space"></div>
+                                            <a href="#" class="creditCard_button"></a>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="content2" class="content">
-                                    <div class="serviceImg"></div>
+                                    <div class="serviceImg">
+                                        <div class="space"></div>
+                                        <div class="hint">
+                                            <div class="space"></div>
+                                            <a href="#" class="creditCard_button"></a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="content3" class="content">
-                                    <div class="serviceImg"></div>
+                                    <div class="serviceImg">
+                                        <div class="space"></div>
+                                        <div class="hint">
+                                            <div class="space"></div>
+                                            <a href="#" class="creditCard_button"></a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="content4" class="content">
-                                    <div class="serviceImg"></div>
+                                    <div class="serviceImg">
+                                        <div class="space"></div>
+                                        <div class="hint">
+                                            <div class="space"></div>
+                                            <a href="#" class="creditCard_button"></a>
+                                        </div>
+                                    </div>
                                 </div>
                                 
                             </div>
@@ -295,7 +321,7 @@
                 selectedContent.classList.add('active');
 
                 // 移除所有鏈接的 active 類並恢復原始背景圖片
-                const links = document.querySelectorAll('.buttons a');
+                const links = document.querySelectorAll('.creditCard_menu a');
                 links.forEach(link => link.classList.remove('active'));
 
                 // 為被點擊的鏈接添加 active 類
