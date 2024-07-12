@@ -1118,7 +1118,7 @@
 @media screen and (max-width: 360px){
     .banner{
         background-image: url(../images/banner/KVBackground_360.png);
-        height:510px;
+        height:610px;
     }
     .agent {
         margin-top: 9vh;
