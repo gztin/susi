@@ -1260,7 +1260,7 @@
     }
     .banner{
         background-image: url(../images/banner/KVBackground_360.png);
-        height:730px;
+        height:930px;
     }
     /* end Block_banner */
 
@@ -1268,16 +1268,12 @@
     .Block_service > .container{
         width:100%;
     }
-    .sectionA_MenuA{
-        background-size: 100%;
-        width:90vw;
-        height:790px;
-    }
     .serviceA_MenuButton{
         flex-direction: column;
     }
     .serviceA_MenuButton > a {
         height:13vw;
+        font-size: 4vw;;
     }
     /* end Block_service */
 
@@ -1290,11 +1286,14 @@
     }
     .sectionA_MenuA{
         background-image:url(../images/common/sectionA_480.png);
+        background-size: 100% 100%;
+        width:90vw;
+        height:790px;
     }
     .serviceA_MenuButton{
         flex-direction: column;
         gap: 4vw;
-        bottom: 9vw;
+        margin-top:14vh;
     }
 }
 @media screen and (max-width: 360px){
