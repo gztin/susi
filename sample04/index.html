@@ -90,20 +90,28 @@
 			<!-- <div style="height: 1800px; padding: 200px 0; text-align: center; color: #888888;">空白區域<br>空白區域<br>空白區域</div> -->
 			<section class="section mainSection">
                 <div class="banner">
-                        <div class="block_agent">
-                            <div class="agent">
-                                <div class="agentPic"></div>
-                                 <div class="agentButton"></div>
-                            </div>
-                            <div class="block_boss">
-                                <div class="boss">
-                                    <img class="bossRighthand" src="images/common/boss_rightHand.png" alt="">
-                                    <!-- <div class="bossRighthand"></div> -->
-                                    <div class="bossLefthand"></div>
-                                </div>
+                    <div class="agentButton_1024"></div>
+                    <div class="animation_1024">
+                        <img class="bossRighthand" src="img/common/boss_rightHand.png" alt="">
+                        <img class="bossLefthand" src="img/common/boss_leftHand.png" alt="">
+                    </div>
+                    
+                    <div class="block_agent">
+                        <div class="agent">
+                            <div class="agentPic"></div>
                                 <div class="agentButton"></div>
-                            </div>  
+                        </div>
+                        <div class="block_boss">
+                            <div class="boss">
+                                <div class="animation_768">
+                                    <img class="bossRighthand" src="img/common/boss_rightHand.png" alt="">
+                                    <img class="bossLefthand" src="img/common/boss_leftHand.png" alt="">
+                                </div>
+                                <!-- <div class="bossRighthand"></div> -->
+                            </div>
+                            <div class="agentButton"></div>
                         </div>  
+                    </div>  
                 </div>
             </section>
             <section class="section Block_service">
@@ -120,15 +128,33 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-12 col-sm-12 col-xs-12" style="text-align: center;">
+                            <img src="img/common/sectionA_1024.png" alt="" id="test0">
+                            <a href="" class="test">
+                                <img src="img/button/sectionA_1_default.png" alt="" id="testA">
+                            </a>
+                            <a href="" class="test">
+                                <img src="img/button/sectionA_1_default.png" alt="" id="testB">
+                            </a>
+                            <a href="" class="test">
+                                <img src="img/button/sectionA_1_default.png" alt="" id="testC">
+                            </a>
+                            <a href="" class="test">
+                                <img src="img/button/sectionA_1_default.png" alt="" id="testD">
+                            </a>
+                            <a href="" class="test">
+                                <img src="img/button/sectionA_1_default.png" alt="" id="testE">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
             <section class="section Block_information">
-                <div class="container">
+                <div class="container" style="margin:-1px auto">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="onlineService">
-                                
+                               
                             </div>
                         </div>
                     </div>
@@ -143,7 +169,13 @@
                                     <a href="#" onclick="showContent(event, 4, this)" class="card_Service" data-bg="service4"></a>
                                 </div>
                                 <div id="content1" class="content active">
-                                    <div class="serviceImg"></div>
+                                    <div class="serviceImg">
+                                        <div class="space"></div>
+                                        <div class="hint">
+                                            <img src="img/background/hint_1.png" alt="">
+                                            <div class="creditCard_button"></div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="content2" class="content">
                                     <div class="serviceImg"></div>
@@ -154,22 +186,24 @@
                                 <div id="content4" class="content">
                                     <div class="serviceImg"></div>
                                 </div>
+                                
                             </div>
+                            
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 aaa">
-                            aaa
+                            bbb
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <img src="img/background/invest_1024.png" alt="" id="invest">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12 aaa">
-                            aaa
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12 aaa">
-                            aaa
+                            ddd
                         </div>
                     </div>
                 </div>
@@ -180,23 +214,28 @@
             <section class="section Block_footerInf">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12-lg block">
-                            <div class="footerInf_1024">
-                                <div class="footerInfA"></div>
-                                <div class="footerInfB">
-                                    <div class="sub">
-                                        <div class="sub_InfB"></div>
-                                        <div class="sub_InfB"></div>
-                                    </div>
-                                    <div class="footerInfC"></div>
-                                </div>
-                                
-                            </div>
+                        <div class="col-lg-12">
+                            <img class="agentFooterPic" src="img/background/agent.png" alt="">
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="#">
+                                <img class="agentInfA" src="img/background/InfB_1.png" alt="" id="agentInfA">
+                            </a>
+                         </div>
+                         <div class="col-lg-6">
+                             <a href="#">
+                                <img class="agentInfB" src="img/background/InfB_2.png" alt="" id="agentInfB">
+                            </a>
+                         </div>
+                        <div class="col-lg-12">
+                            <a href="#" >
+                                <img class="agentInfC" src="img/background/InfB_3.png" alt="" id="agentInfC">
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- 內容區結束 -->
+     <!-- 內容區結束 -->
             <!-- 元先生智能助理 -->
             <div class="yuantaman">
                 <a href="https://ytbk.tw/3Ujeua" target="_blank">
@@ -280,6 +319,63 @@
                 // 為被點擊的鏈接添加 active 類
                 element.classList.add('active');
             }
+        </script>
+
+        <!-- 縮放視窗換圖 -->
+        <script>
+            function updateImageAgentINfC() {
+                var agentInfC = document.getElementById('agentInfC');
+                if (window.innerWidth < 769) {
+                    agentInfC.src = 'img/background/InfB_3b.png';
+                } else {
+                    agentInfC.src = 'img/background/InfB_3.png';
+                }
+            }
+
+            function updateImageInvest() {
+                var invest = document.getElementById('invest');
+                if (window.innerWidth < 361) {
+                    invest.src = 'img/background/invest_360.png';
+                }else if (window.innerWidth < 769) {
+                    invest.src = 'img/background/invest_768.png';
+                }else {
+                    invest.src = 'img/background/invest_1024.png';
+                }
+            }
+
+            function updateImageTest() {
+                var test0 = document.getElementById('test0');
+                var testA = document.getElementById('testA');
+                var testB = document.getElementById('testB');
+                var testC = document.getElementById('testC');
+                var testD = document.getElementById('testD');
+                var testE = document.getElementById('testE');
+                if (window.innerWidth < 1024) {
+                    test0.src = "img/common/sectionA_768.png";
+                    testA.src = 'img/button/sectionA_1_default_long.png';
+                    testB.src = 'img/button/sectionA_2_default_long.png';
+                    testC.src = 'img/button/sectionA_3_default_long.png';
+                    testD.src = 'img/button/sectionA_4_default_long.png';
+                    testE.src = 'img/button/sectionA_5_default_long.png';
+                }else {
+                    test0.src = "img/common/sectionA_1024.png";
+                    testA.src = 'img/button/sectionA_1_default.png';
+                    testB.src = 'img/button/sectionA_2_default.png';
+                    testC.src = 'img/button/sectionA_3_default.png';
+                    testD.src = 'img/button/sectionA_4_default.png';
+                    testE.src = 'img/button/sectionA_5_default.png';
+                }
+            }
+
+            // 初始檢查
+            updateImageAgentINfC();
+            updateImageInvest();
+            updateImageTest()
+
+            // 當視窗大小改變時，更新圖片
+            window.addEventListener('resize', updateImageAgentINfC);
+            window.addEventListener('resize', updateImageInvest);
+            window.addEventListener('resize', updateImageTest);
         </script>
     </body>
 </html>
