@@ -303,8 +303,9 @@
 .creditCard_menu {
     margin-top: 20px;
     display:flex;
-    width:65%;
+    width:75%;
     height:60px;
+    gap:1.5vw;
 }
 .creditCard_menu a:hover > span.bt_l {
     background-image: url(../images/button/bt_l_hover.png);
@@ -344,7 +345,9 @@
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
-    height:60px;
+    height:4vw;
+    font-size: 1.5vw;
+    font-weight: 400;
 }
 .card_Service[data-bg="service1"],
 .card_Service[data-bg="service2"],
@@ -376,11 +379,14 @@
 .card_Service.active[data-bg="service4"]{
     background-color: #94fffa;
     color:#013397;
-    border:#013397 solid 1px;
+    border:#013397 solid 2px;
     box-shadow: 1px 2px 3px #94fffa ;
 }
-.card_Service.active[data-bg="service1"] > .bt_l{
-
+.card_Service.active[data-bg="service1"] > span.bt_l{
+    background-image: url(../images/button/bt_l_hover.png);
+}
+.card_Service.active[data-bg="service1"] > span.bt_r{
+    background-image: url(../images/button/bt_r_hover.png);
 }
 /* .card_Service.active[data-bg="service1"] {
     background-image: url('../images/button/creditCard_service_1_active.png');
@@ -455,12 +461,12 @@
         justify-content: center;
         align-items: center;
    }
-   .space{
+   .serviceImg > .space{
         width:20vw;
         height:5vw;
    }
    .creditCard_button {
-        margin-top: 2vw;
+        margin-top: 9vw;
         margin-left: 2vw;
     }
    .agentFooterPic{
@@ -502,9 +508,7 @@
         width: 55vw;
         height: 43vw;
     }
-    .block_boss{
-        
-    }
+    
     .block_boss > .agentButton{
         display: block;
         margin-top:-6vh;
@@ -538,10 +542,14 @@
     .creditCard_menu {
         width: 100%;
         flex-wrap: wrap; /* 允許換行 */
+        row-gap: 1vw;
+        column-gap: 1vw;
+        height: 14vw;
     }
     .creditCard_menu a {
         flex: 0 0 calc(50% - 10px); /* 每個按鈕佔50%的寬度，減去間距 */
         margin-bottom: 10px; /* 下方間距 */
+        font-size: 3vw;
     }
     .banner{
         height: 1200px;
@@ -622,6 +630,42 @@
         margin-top: 5vw;
         margin-bottom: -2vw;
    }
+   
+    #content1 > .serviceImg{
+        background-image: url(../images/background/card_1b.png);
+    }
+    #content2 > .serviceImg{
+        background-image: url(../images/background/card_2b.png);
+    }
+    #content3 > .serviceImg{
+        background-image: url(../images/background/card_3b.png);
+    }
+    #content4 > .serviceImg{
+        background-image: url(../images/background/card_4b.png);
+    }
+    .serviceImg{
+        display: flex;
+        justify-content: end;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 90vw;
+    }
+    .serviceImg > .hint{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: 18vw;
+    }
+
+    .serviceImg > .space,.serviceImg > .hint > .space{
+        width:24vw;
+        height:5vw;
+    }
+    .creditCard_button{
+        width:25vw;
+        height:7vw;
+    }
 }
 @media screen and (max-width: 980px){
     .test{
@@ -688,10 +732,15 @@
     .creditCard_menu {
         width: 100%;
         flex-wrap: wrap; /* 允許換行 */
+        row-gap: 1vw;
+        column-gap: 2vw;
+        height: 14vw;
     }
     .creditCard_menu a {
         flex: 0 0 calc(50% - 10px); /* 每個按鈕佔50%的寬度，減去間距 */
         margin-bottom: 10px; /* 下方間距 */
+        font-size: 3vw;
+        font-weight: 700;
     }
     .banner{
         background-image: url(../images/banner/KVBackground_768.png);
@@ -756,6 +805,41 @@
         background-position: center;
     } */
     /* end Block_service */
+    #content1 > .serviceImg{
+        background-image: url(../images/background/card_1b.png);
+    }
+    #content2 > .serviceImg{
+        background-image: url(../images/background/card_2b.png);
+    }
+    #content3 > .serviceImg{
+        background-image: url(../images/background/card_3b.png);
+    }
+    #content4 > .serviceImg{
+        background-image: url(../images/background/card_4b.png);
+    }
+    .serviceImg{
+        display: flex;
+        justify-content: end;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 90vw;
+    }
+    .serviceImg > .hint{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: 18vw;
+    }
+
+    .serviceImg > .space,.serviceImg > .hint > .space{
+        width:24vw;
+        height:5vw;
+    }
+    .creditCard_button{
+        width:25vw;
+        height:7vw;
+    }
     .content {
         margin-top:100px;
     }
@@ -772,6 +856,9 @@
         margin-top: 10vw;
         margin-bottom: -5vw;
    }
+   .card_Service{
+        height:10vh;
+    }
 }
 @media screen and (max-width: 820px){
     .test{
@@ -916,6 +1003,44 @@
     .sectionA_MenuA{
         background-image:url(../images/common/sectionA_768.png);
     }
+    #content1 > .serviceImg{
+        background-image: url(../images/background/card_1b.png);
+    }
+    #content2 > .serviceImg{
+        background-image: url(../images/background/card_2b.png);
+    }
+    #content3 > .serviceImg{
+        background-image: url(../images/background/card_3b.png);
+    }
+    #content4 > .serviceImg{
+        background-image: url(../images/background/card_4b.png);
+    }
+    .serviceImg{
+        display: flex;
+        justify-content: end;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 90vw;
+    }
+    .serviceImg > .hint{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: 18vw;
+    }
+
+    .serviceImg > .space,.serviceImg > .hint > .space{
+        width:24vw;
+        height:5vw;
+    }
+    .creditCard_button{
+        width:25vw;
+        height:7vw;
+    }
+    .card_Service{
+        height:10vh;
+    }
 }
 @media screen and (max-width: 768px){
     .test{
@@ -1048,6 +1173,9 @@
     }
     .sectionA_MenuA{
         background-image:url(../images/common/sectionA_768.png);
+    }
+    .card_Service{
+        height:9vh;
     }
 }
 @media screen and (max-width: 680px){
