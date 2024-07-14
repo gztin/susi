@@ -8,14 +8,51 @@
     background-position: center;
     display: flex;
 }
-
+.button-reset {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    outline: none;
+}
+.custom-button {
+    width: 12.5vw;
+    height:3.5vw;
+    background-color: #013397;
+    color: #fff;
+    text-decoration: none;
+    border: #94fffa solid 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.custom-button:hover{
+    background-color: #94fffa;
+    color:#013397;
+    border:#013397 solid 1px;
+    box-shadow: 1px 2px 3px #94fffa ;
+}
 .aaa{
-    height:300px;
-    /* background-color: #C30; */
+    width:100%;
+    height:30vw;
+    background-color: #C30;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:2vw;
+    margin-bottom: 2vw;
 }
 .bbb{
     height:300px;
     background-color: #007fe0;
+}
+.eee{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:1vw;
 }
 .block_agent{
     display: none;
@@ -112,25 +149,9 @@
     justify-content: center;
     align-items: center;
 }
-.serviceA_MenuButton > a{
+.serviceA_MenuButton > button{
     width: 12.5vw;
     height:3.5vw;
-}
-
-.serviceA_MenuButton > a{
-    background-color: #013397;
-    color:#fff;
-    text-decoration: none;
-    border:#94fffa solid 1px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.serviceA_MenuButton > a:hover{
-    background-color: #94fffa;
-    color:#013397;
-    border:#013397 solid 1px;
-    box-shadow: 1px 2px 3px #94fffa ;
 }
 
 .bt_l,.bt_r{
@@ -149,50 +170,50 @@
     margin-right: 0.25vw;
     margin-top: 2.5vw;
 }
-.serviceA_MenuButton a:hover > span.bt_l {
+.serviceA_MenuButton button:hover > span.bt_l {
     background-image: url(../images/button/bt_l_hover.png);
 }
-.serviceA_MenuButton a:hover > span.bt_r {
+.serviceA_MenuButton button:hover > span.bt_r {
     background-image: url(../images/button/bt_r_hover.png);
 }
-/* .serviceA_MenuButton > a:nth-child(1){
+/* .serviceA_MenuButton > button:nth-child(1){
     background-image: url(../images/button/sectionA_1_default.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
-.serviceA_MenuButton > a:nth-child(1):hover{
+.serviceA_MenuButton > button:nth-child(1):hover{
     background-image: url(../images/button/sectionA_1_hover.png);
 } */
-/* .serviceA_MenuButton > a:nth-child(2){
+/* .serviceA_MenuButton > button:nth-child(2){
     background-image: url(../images/button/sectionA_2_default.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
-.serviceA_MenuButton > a:nth-child(2):hover{
+.serviceA_MenuButton > button:nth-child(2):hover{
     background-image: url(../images/button/sectionA_2_hover.png);
 }
-.serviceA_MenuButton > a:nth-child(3){
+.serviceA_MenuButton > button:nth-child(3){
     background-image: url(../images/button/sectionA_3_default.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
-.serviceA_MenuButton > a:nth-child(3):hover{
+.serviceA_MenuButton > button:nth-child(3):hover{
     background-image: url(../images/button/sectionA_3_hover.png);
 }
-.serviceA_MenuButton > a:nth-child(4){
+.serviceA_MenuButton > button:nth-child(4){
     background-image: url(../images/button/sectionA_4_default.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
-.serviceA_MenuButton > a:nth-child(4):hover{
+.serviceA_MenuButton > button:nth-child(4):hover{
     background-image: url(../images/button/sectionA_4_hover.png);
 }
-.serviceA_MenuButton > a:nth-child(5){
+.serviceA_MenuButton > button:nth-child(5){
     background-image: url(../images/button/sectionA_5_default.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
-.serviceA_MenuButton > a:nth-child(5):hover{
+.serviceA_MenuButton > button:nth-child(5):hover{
     background-image: url(../images/button/sectionA_5_hover.png);
 } */
 .Block_information{
@@ -214,8 +235,8 @@
     background-image:url(../images/button/creditService_hover.png);
 }
 
-.ccc{
-    background-image: url(../images/background/body_bg.png);
+.background_Connect{
+    background-image: url(../images/background/body_bg_buttomA.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -225,12 +246,13 @@
 }
 .Block_footerInf{
     background-image: url(../images/background/footer_bg.png);
-    background-size: cover;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: bottom;
     width: 100%;
     height:auto;
     margin-bottom: 40px;
+    position: relative;
 }
 .block{
     width: 100%;
@@ -427,21 +449,33 @@
 .a03{
     background-image:url(../images/background/InfB_3.png);
 }
-.agentFooterPic {
-    width: 100%;
+.Block_footerInf .container {
+    width: 70%;
+    max-width: 100%;
+    padding: 0;
+}
+.agentInfA, .agentInfB, .agentInfC {
+    /* width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    height:auto; */
+}
+.full-width-img {
+    width: 100%;
+    height: auto;
 }
 
-.agentInfA, .agentInfB, .agentInfC {
-    width: 100%;
-    max-width: 600px;
+.full-width-container {
+    width: 70%;
+    padding: 0;
     margin: 0 auto;
+    display: flex;
+    position: relative;
 }
 
 
 /* update end */
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1200px) {
     .banner{
         background-image:url(../images/banner/KVBackground_1440b.png);
     }
@@ -492,13 +526,13 @@
         margin-left: 2vw;
     }
    .agentFooterPic{
-        width: 40vw;
-        margin-left: 10vw;
-        margin-top: 5vw;
+        width: 50vw;
+        padding-top: 5vw;
         margin-bottom: -2vw;
+        height: 20vw;
    }
 }
-@media screen and (max-width: 1023px) and (min-width:981px) {
+@media screen and (max-width: 1199px) {
     .test{
         width:80%;
     }
@@ -596,7 +630,7 @@
         gap: 1vw;
         bottom: 70px;
     }
-    .serviceA_MenuButton > a {
+    .serviceA_MenuButton > button {
         height: 8vw;
         width: 90%;
         font-size: 3vw;
@@ -615,23 +649,23 @@
         margin-top: 3vw;
     }
 
-    /* .serviceA_MenuButton > a:nth-child(1){
+    /* .serviceA_MenuButton > button:nth-child(1){
         background-image: url(../images/button/sectionA_1_default_long.png);
         background-position: center;
     } */
-    /* .serviceA_MenuButton > a:nth-child(2){
+    /* .serviceA_MenuButton > button:nth-child(2){
         background-image: url(../images/button/sectionA_2_default_long.png);
         background-position: center;
     }
-    .serviceA_MenuButton > a:nth-child(3){
+    .serviceA_MenuButton > button:nth-child(3){
         background-image: url(../images/button/sectionA_3_default_long.png);
         background-position: center;
     }
-    .serviceA_MenuButton > a:nth-child(4){
+    .serviceA_MenuButton > button:nth-child(4){
         background-image: url(../images/button/sectionA_4_default_long.png);
         background-position: center;
     }
-    .serviceA_MenuButton > a:nth-child(5){
+    .serviceA_MenuButton > button:nth-child(5){
         background-image: url(../images/button/sectionA_5_default_long.png);
         background-position: center;
     } */
@@ -647,10 +681,10 @@
         background-image:url(../images/common/sectionA_768.png);
     }
     .agentFooterPic{
-        width: 40vw;
-        margin-left: 10vw;
-        margin-top: 5vw;
-        margin-bottom: -2vw;
+        padding-top: 10vw;
+        padding-left: 14vw;
+        padding-right: 7vw;
+        margin-bottom: -5vw;
    }
    
     #content1 > .serviceImg{
@@ -687,6 +721,45 @@
     .creditCard_button{
         width:25vw;
         height:7vw;
+    }
+    .right-align {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+    
+    }
+    .full-width-container {
+        width: 100%;
+    }
+    .full-width-container {
+        width: 100%;
+        display: block;
+    }
+
+    .full-width-container img {
+        display: block;
+        width: 100%;
+    }
+
+    .col-lg-12 img.agentInfA {
+        display: block;
+        margin-left: 5%;
+        margin-right: 0;
+    }
+
+    .col-lg-12 img.agentInfB {
+        display: block;
+        margin-left: -5%;
+        margin-right: auto;
+    }
+    .col-lg-12 img.agentInfC {
+        display: block;
+        margin-left: 0%;
+        margin-right: 0;
+    }
+    .col-lg-12.service_creditCard {
+        height: 1100px;
     }
 }
 @media screen and (max-width: 980px){
@@ -788,7 +861,7 @@
         gap: 1vw;
         bottom: 13vw;
     }
-    .serviceA_MenuButton > a {
+    .serviceA_MenuButton > button {
         height: 8vw;
         width: 95%;
         font-size: 3vw;
@@ -806,23 +879,23 @@
         margin-right: 0.25vw;
         margin-top: 2.5vw;
     }
-    /* .serviceA_MenuButton > a:nth-child(1){
+    /* .serviceA_MenuButton > button:nth-child(1){
         background-image: url(../images/button/sectionA_1_default_long.png);
         background-position: center;
     } */
-    /* .serviceA_MenuButton > a:nth-child(2){
+    /* .serviceA_MenuButton > button:nth-child(2){
         background-image: url(../images/button/sectionA_2_default_long.png);
         background-position: center;
     }
-    .serviceA_MenuButton > a:nth-child(3){
+    .serviceA_MenuButton > button:nth-child(3){
         background-image: url(../images/button/sectionA_3_default_long.png);
         background-position: center;
     }
-    .serviceA_MenuButton > a:nth-child(4){
+    .serviceA_MenuButton > button:nth-child(4){
         background-image: url(../images/button/sectionA_4_default_long.png);
         background-position: center;
     }
-    .serviceA_MenuButton > a:nth-child(5){
+    .serviceA_MenuButton > button:nth-child(5){
         background-image: url(../images/button/sectionA_5_default_long.png);
         background-position: center;
     } */
@@ -867,19 +940,10 @@
     }
     .card_Service {
         background-size: cover;
-        height: 90px;
+        height:10vh;
     }
     .sectionA_MenuA{
         background-image:url(../images/common/sectionA_768.png);
-    }
-    .agentFooterPic{
-        width: 55vw;
-        margin-left: 10vw;
-        margin-top: 10vw;
-        margin-bottom: -5vw;
-   }
-   .card_Service{
-        height:10vh;
     }
 }
 @media screen and (max-width: 820px){
@@ -976,7 +1040,7 @@
         gap: 1vw;
         bottom: 13vw;
     }
-    .serviceA_MenuButton > a {
+    .serviceA_MenuButton > button {
         height: 8vw;
         width: 95%;
         font-size: 3vw;
@@ -994,23 +1058,23 @@
         margin-right: 0.25vw;
         margin-top: 2.5vw;
     }
-    /* .serviceA_MenuButton > a:nth-child(1){
+    /* .serviceA_MenuButton > button:nth-child(1){
         background-image: url(../images/button/sectionA_1_default_long.png);
         background-position: center;
     } */
-    /* .serviceA_MenuButton > a:nth-child(2){
+    /* .serviceA_MenuButton > button:nth-child(2){
         background-image: url(../images/button/sectionA_2_default_long.png);
         background-position: center;
     }
-    .serviceA_MenuButton > a:nth-child(3){
+    .serviceA_MenuButton > button:nth-child(3){
         background-image: url(../images/button/sectionA_3_default_long.png);
         background-position: center;
     }
-    .serviceA_MenuButton > a:nth-child(4){
+    .serviceA_MenuButton > button:nth-child(4){
         background-image: url(../images/button/sectionA_4_default_long.png);
         background-position: center;
     }
-    .serviceA_MenuButton > a:nth-child(5){
+    .serviceA_MenuButton > button:nth-child(5){
         background-image: url(../images/button/sectionA_5_default_long.png);
         background-position: center;
     } */
@@ -1061,7 +1125,7 @@
         height:7vw;
     }
     .card_Service{
-        height:10vh;
+        height:7vh;
     }
 }
 @media screen and (max-width: 768px){
@@ -1145,7 +1209,7 @@
         gap: 1vw;
         bottom: 13vw;
     }
-    .serviceA_MenuButton > a {
+    .serviceA_MenuButton > button {
         height: 8vw;
         width: 95%;
         font-size: 3vw;
@@ -1163,24 +1227,24 @@
         margin-right: 0.25vw;
         margin-top: 2.5vw;
     }
-    /* .serviceA_MenuButton > a:nth-child(1){
+    /* .serviceA_MenuButton > button:nth-child(1){
         background-color: #007fe0;
         color:#fff;
         border:#94fffa solid 2px;
     }
-    .serviceA_MenuButton > a:nth-child(2){
+    .serviceA_MenuButton > button:nth-child(2){
         background-image: url(../images/button/sectionA_2_default_long.png);
         background-position: center;
     }
-    .serviceA_MenuButton > a:nth-child(3){
+    .serviceA_MenuButton > button:nth-child(3){
         background-image: url(../images/button/sectionA_3_default_long.png);
         background-position: center;
     }
-    .serviceA_MenuButton > a:nth-child(4){
+    .serviceA_MenuButton > button:nth-child(4){
         background-image: url(../images/button/sectionA_4_default_long.png);
         background-position: center;
     }
-    .serviceA_MenuButton > a:nth-child(5){
+    .serviceA_MenuButton > button:nth-child(5){
         background-image: url(../images/button/sectionA_5_default_long.png);
         background-position: center;
     } */
@@ -1191,17 +1255,15 @@
     }
     .card_Service {
         background-size: cover;
-        height: 90px;
+        height: 10vw;
     }
     .sectionA_MenuA{
         background-image:url(../images/common/sectionA_768.png);
     }
-    .card_Service{
-        height:9vh;
-    }
     .service_creditCard {
         padding-left: 0;
         padding-right: 0;
+        height:900px;
     }
 
     .col-lg-6 {
@@ -1210,7 +1272,6 @@
 
     .agentFooterPic, .agentInfA, .agentInfB, .agentInfC {
         width: 90vw;
-        margin-bottom: 10vw;
     }
 }
 @media screen and (max-width: 680px){
@@ -1228,7 +1289,7 @@
         background-size: contain;
         height:550px;
     }
-    .serviceA_MenuButton > a {
+    .serviceA_MenuButton > button {
         height:8vw;
     }
     .serviceA_MenuButton{
@@ -1311,7 +1372,7 @@
     .serviceA_MenuButton{
         flex-direction: column;
     }
-    .serviceA_MenuButton > a {
+    .serviceA_MenuButton > button {
         height:13vw;
         font-size: 4vw;;
     }

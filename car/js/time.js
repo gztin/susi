@@ -13,7 +13,7 @@ function clock()
   var timer=null;
   var show=document.getElementById("show");
   function show_date_time(){   
-    var target=new Date("2022/7/21");  
+    var target=new Date("2022/7/3");  
     var today=new Date(); 
     var timeold=(target.getTime()-today.getTime());   
     var sectimeold=timeold/1000   
@@ -41,7 +41,7 @@ function clock()
 			$(".mm").val(minsold);
 			$(".ss").val(seconds);
 
-      // show.innerHTML="距離結束時間還有:"+daysold+"天"+hrsold+"小時"+minsold+"分"+seconds+"秒";     
+      show.innerHTML="距離結束時間還有:"+daysold+"天"+hrsold+"小時"+minsold+"分"+seconds+"秒";     
     }   
   }   
   timer=setInterval(show_date_time,1000);
