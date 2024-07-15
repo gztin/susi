@@ -52,6 +52,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap:1vw;
 }
 .block_agent{
@@ -60,6 +61,10 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+}
+.block_invest{
+    margin-top:10vw;
+    margin-bottom: 10vw;
 }
 .block_boss{
     display: flex;
@@ -222,6 +227,7 @@
     background-repeat: no-repeat;
     width: 100%;
     height:auto;
+    padding-top: 10vw;
 }
 
 .creditCard_button{
@@ -473,6 +479,145 @@
     position: relative;
 }
 
+/* slider */
+.creditInf,.service_Digital {
+    margin: 20px auto;
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.creditInf{
+    background-image: url(../images/background/bg_onlineService_A.png);
+    width: 100%;
+    height: 46vw;
+}
+.service_Digital{
+    background-image: url(../images/background/bg_digitalService_A.png);
+    width: 100%;
+    height: 46vw;
+}
+.title{
+  color:#fff;
+  margin-left:1vw;
+  margin-right:1vw;
+  text-align: center;
+  font-size: 32px;
+}
+.block_title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.block_title > span{
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin: 0 5px; /* 调整间距 */
+}
+.title_span1{
+  background-color:#15FFD5;
+  opacity: 0.3;
+}
+.title_span2{
+  background-color:#15FFD5;
+}
+.slider {
+  width: 83%;
+  height: 32vw;
+  margin: 20px auto;
+  position: relative;
+}
+.slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    transition: transform 0.5s;
+}
+.slide > img{
+  width:100%;
+  height: auto; /* 確保圖片按比例縮放 */
+  margin:0 auto;
+}
+.sliderButton{
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    margin: 0 auto;
+    width: 100%;
+    gap: 40vw;
+}
+.slick-prev, .slick-next {
+    background-color:#15FFD5;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: unset;
+}
+.slick-prev:before, .slick-next:before {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color:#033689;
+    background-color:#15FFD5;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slick-next {
+    right: 10vw !important;
+}
+.slick-prev {
+    left: 10vw !important;
+}
+.slick-dots li.slick-active button:before {
+    color: red; 
+}
+.slick-dots {
+    text-align: center;
+    margin-top:-20px;
+    bottom: 20px;
+}
+.slick-dots li {
+    display: inline-block;
+    margin: 0 10px; /* Increase margin for more spacing */
+}
+.slick-dots li button {
+    background: #66ACFF;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 12px;
+    display: block;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.slick-dots li.slick-active button {
+    background: #94fffa; /* Custom color for active dot */
+}
+.slick-dots li button:before {
+    opacity: 0;
+}
+.slick-dots li button:before {
+    content: none;
+}
+.slick-center .slide {
+    transform: scale(1.5); /* Scale center slide */
+}
+.slide:not(.slick-center) {
+    transform: scale(0.8); /* Default scale for non-center slides */
+    margin-top:3vw;
+    opacity: 0.5;
+}
+.slick-list {
+  scale: 0.85;
+}
+/* slider end */
 
 /* update end */
 @media screen and (min-width: 1200px) {
@@ -686,6 +831,16 @@
         padding-right: 7vw;
         margin-bottom: -5vw;
    }
+   .creditInf{
+        background-image: url(../images/background/bg_onlineService_B.png);
+        width: 100%;
+        height: 46vw;
+    }
+    .service_Digital{
+        background-image: url(../images/background/bg_digitalService_B.png);
+        width: 100%;
+        height: 46vw;
+    }
    
     #content1 > .serviceImg{
         background-image: url(../images/background/card_1b.png);
