@@ -44,7 +44,7 @@
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/common.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="assets/css/aos.css">
-        <link href="assets/css/style.css?v=4" rel="stylesheet" type="text/css" />
+        <link href="assets/css/style.css?v=1" rel="stylesheet" type="text/css" />
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
@@ -150,8 +150,9 @@
                     
                     <!-- 線上申辦 -->
                     <div id="service01" class="row">
-                        <div class="aaa">
-                            <img class="full-width-img" src="img/common/title_onlineService.png" alt="">
+                        <div class="block_title_Pic">
+                            <h2 class="strokeText" data-storke="線上申辦" id="title">線上申辦</h2>
+                            <p class="subTitle">無需排隊，線上申辦超便利，元先生助您一臂之力！</p>
                         </div>
                         <div class="creditInf">
                             <div class="block_title">
@@ -187,8 +188,9 @@
 
                     <!-- 信用卡熱門 -->
                     <div id="service02" class="eee">
-                        <div class="aaa">
-                            <img class="full-width-img" src="img/common/title_creditCard.png" alt="">
+                        <div class="block_title_Pic">
+                            <h2 class="strokeText" data-storke="信用卡熱門" id="title">信用卡熱門</h2>
+                            <p class="subTitle">信用卡問題，元先生通通為您解答！</p>
                         </div>
                         <div class="creditCard_menu">
                             <a href="#" onclick="showContent(event, 1, this)" class="card_Service active" data-bg="service1">
@@ -251,6 +253,10 @@
 
                     <!-- 數位服務 -->
                     <div id="service04" class="row">
+                        <div class="block_title_Pic">
+                            <h2 class="strokeText" data-storke="數位服務" id="title">數位服務</h2>
+                            <p class="subTitle">元先生，數位服務的領航員，帶您輕鬆掌握數位金融。</p>
+                        </div>
                         <div class="service_Digital">
                             <div class="block_title">
                                 <span class="title_span1"></span>
@@ -285,42 +291,44 @@
 
                     <!-- 貸款業務 -->
                     <div id="service05" class="row">
-                        <div class="service_Digital">
-                            <div class="block_title">
+                        <div class="service_Loan">
+                            <div class="block_sliderLoan">
+                              <div class="block_title">
                                 <span class="title_span1"></span>
                                 <span class="title_span2"></span>
                                 <span class="title_span1"></span>
-                                <div class="title">個人網銀</div>
+                                <div class="title">貸款申請</div>
                                 <span class="title_span1"></span>
                                 <span class="title_span2"></span>
                                 <span class="title_span1"></span>
                             </div>
-                            <div class="slide_digital">
-                                <div class="slide slide1">
-                                <img src="img/digital_1.png" alt="">
+                            <div class="slide_loan">
+                                <div class="slide slide_Pic slide1">
+                                    <img src="img/loan_1.png" alt="">
                                 </div>
-                                <div class="slide slide2">
-                                <img src="img/digital_2.png" alt="">
+                                <div class="slide slide_Pic slide2">
+                                    <img src="img/loan_2.png" alt="">
                                 </div>
-                                <div class="slide slide3">
-                                <img src="img/digital_3.png" alt="">
+                                <div class="slide slide_Pic slide3">
+                                    <img src="img/loan_3.png" alt="">
                                 </div>
-                                <div class="slide slide4">
-                                <img src="img/digital_4.png" alt="">
+                                <div class="slide slide_Pic slide4">
+                                    <img src="img/loan_4.png" alt="">
                                 </div>
                             </div>
-                            <div class="sliderButton">
+                            <div class="sliderButton_loan">
                                 <button type="button" class="slick-prev"><i class="fa-solid fa-arrow-right"></i></button>
                                 <button type="button" class="slick-next"><i class="fa-solid fa-arrow-right"></i></button>
                             </div>
                             <a href="#" class="button_slideService"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
             <!-- <section class="section background_Connect"></section> -->
             <!-- 找找元先生 -->
-            <section class="Block_footerInf">
+            <!-- <section class="Block_footerInf">
                 <div class="agentFooterPic full-width-container">
                     <img class="full-width-img" src="img/agent.png" alt="">
                 </div>
@@ -336,7 +344,7 @@
                     <img class="agentInfC full-width-img" id="responsiveImage" src="img/InfB_3.png" alt="">
                 </div>
                
-            </section>
+            </section> -->
      <!-- 內容區結束 -->
             <!-- 元先生智能助理 -->
             <div class="yuantaman">
@@ -546,6 +554,32 @@
         ]
                 }).on('afterChange', function(event, slick, currentSlide){
                     let titles = ['個人網銀', 'Line個人化', '行動支付', '匯率查詢'];
+                    $('#service04 .title').text(titles[currentSlide % titles.length]);
+                });
+
+                // 貸款服務
+                $('#service05 .slide_loan').slick({
+                    infinite: true,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: true,
+                    centerMode: true,
+                    centerPadding: '30px',
+                    prevArrow: '#service05 .slick-prev',
+                    nextArrow: '#service05 .slick-next',
+                    customPaging: function(slider, i) {
+                        return '<button>' + (i + 1) + '</button>';
+                    },
+                    responsive: [
+                        {
+                            breakpoint: 1200,
+                            settings: {
+                                slidesToShow: 1
+                            }
+                        }
+                    ]
+                }).on('afterChange', function(event, slick, currentSlide){
+                    let titles = ['貸款申請', '繳款方式', '帳務查詢', '進度查詢'];
                     $('#service04 .title').text(titles[currentSlide % titles.length]);
                 });
             });

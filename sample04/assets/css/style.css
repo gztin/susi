@@ -1,4 +1,5 @@
 /* update */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
 .banner{
     width:100%;
@@ -34,16 +35,58 @@
     border:#013397 solid 1px;
     box-shadow: 1px 2px 3px #94fffa ;
 }
-.aaa{
-    width:100%;
-    height:30vw;
-    background-color: #C30;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    margin-top:2vw;
-    margin-bottom: 2vw;
+
+/* 文字CSS */
+.strokeText{
+    color:#013397;
+    font-size:4vw;
+    font-weight: 900;
+    -webkit-text-stroke: 0.5px #fff;
+    text-stroke: 0.5px #fff;
+    
 }
+.strokeText::before {
+    content: attr(data-storke);
+}
+.strokeText::before {
+    position: absolute;
+    z-index: -1;
+    -webkit-text-stroke: 10px #fff;
+    text-stroke: 10px #fff;
+    text-shadow: 1px 1px 15px #94fffa,
+                 1px 1px 15px #94fffa,
+                 1px 1px 15px #94fffa,
+                 1px 1px 15px #94fffa;
+}
+.subTitle{
+    color:#fff;
+    font-weight: bold;
+    font-size: 2vw;
+}
+.block_title_Pic{
+    width:75%;
+    height:8vw;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin:0 auto;
+    margin-top:10vw;
+    background-size:100% 100%;
+}
+/* .title_onlineService{
+    background-image:url(../images/common/title_onlineService_A.png);
+}
+.title_creditCardSercvice{
+    background-image:url(../images/common/title_creditCard_A.png);
+    height:13vw;
+}
+.title_digitalService{
+    background-image:url(../images/common/title_digitalService_A.png);
+}
+.title_loanService{
+    background-image:url(../images/common/title_loanService_B.png);
+} */
 .bbb{
     height:300px;
     background-color: #007fe0;
@@ -237,6 +280,14 @@
     background-size: contain;
     background-repeat: no-repeat ;
     margin:0 auto;
+}
+.block_sliderLoan{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    margin-left:8vw;
 }
 .button_slideService{
     width:20.5vw;
@@ -502,6 +553,18 @@
     width: 100%;
     height: 53vw;
 }
+.service_Loan {
+    width: 100%;
+    height: 48vw;
+    margin: 0 auto;
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.service_Loan {
+    background-image: url(../images/background/bg_loanService.png);
+}
 .title{
   color:#fff;
   margin-left:1vw;
@@ -537,6 +600,17 @@
   margin: 20px auto;
   position: relative;
 }
+.slide_loan {
+    width: 100%;
+    height: 37vw;
+    margin: 0px auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    transition: transform 0.5s;
+}
 .slide {
     display: flex;
     justify-content: center;
@@ -551,6 +625,11 @@
     height: auto; /* 確保圖片按比例縮放 */
     margin: 0 auto;
 }
+.slide_Pic > img{
+    max-width: 450px;
+    width: 25vw;
+    height: 37vw;
+}
 .sliderButton{
     display: flex;
     justify-content: space-around;
@@ -558,6 +637,13 @@
     margin: 0 auto;
     width: 100%;
     gap: 40vw;
+}
+.sliderButton_loan {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    margin: 0 auto;
+    width: 68%;
 }
 .slick-prev, .slick-next {
     background-color:#15FFD5;
@@ -854,18 +940,40 @@
         width: 100%;
         height: 100vw;
     }
-   
+    .service_Loan {
+        background-image: url(../images/background/bg_loanService_B.png);
+        height: 100vw;
+    }
+    .block_sliderLoan{
+        width:100%;
+        margin-left: 0vw;
+    }
+    .slide_loan{
+        height: 74vw;
+    }
     .slide > img {
         max-width: 50vw;
     }
+    .slide_Pic > img {
+        width:100%;
+        height:auto;
+    }
+    .sliderButton_loan{
+        width: 100%;
+        gap: 40vw;
+    }
+    .button_slideService {
+        width: 32.5vw;
+        height: 9vw;
+    }
     .slick-prev, .slick-next {
-        width: 7vw; /* Increased size */
-        height: 7vw; /* Increased size */
+        width: 4.5vw; /* Increased size */
+        height: 4.5vw; /* Increased size */
     }
     .slick-prev:before, .slick-next:before {
-        width: 7vw; /* Increased size */
-        height: 7vw; /* Increased size */
-        font-size: 4vw;
+        width: 4.5vw; /* Increased size */
+        height: 4.5vw; /* Increased size */
+        font-size: 3vw;
     }
     #content1 > .serviceImg{
         background-image: url(../images/background/card_1b.png);
@@ -1480,12 +1588,15 @@
     .creditInf{
         background-image: url(../images/background/bg_onlineService_C.png);
         width: 100%;
-        height: 46vw;
+        height: 120vw;
     }
     .service_Digital{
         background-image: url(../images/background/bg_digitalService_C.png);
         width: 100%;
         height: 46vw;
+    }
+    .service_Loan {
+        background-image: url(../images/background/bg_loanService_C.png);
     }
 }
 @media screen and (max-width: 490px){
