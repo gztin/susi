@@ -822,6 +822,14 @@
    }
 }
 @media screen and (max-width: 1199px) {
+    .strokeText::before {
+        position: absolute;
+        z-index: -1;
+        -webkit-text-stroke: 10px #fff;
+        text-stroke: 5px #fff;
+        text-shadow: 1px 1px 10px #94fffa,
+                     1px 1px 10px #94fffa,
+    }
     .container{
         width:100%;
     }
@@ -1732,6 +1740,14 @@
     
 }
 @media screen and (max-width: 490px){
+    .strokeText::before {
+        position: absolute;
+        z-index: -1;
+        -webkit-text-stroke: 10px #fff;
+        text-stroke: 5px #fff;
+        text-shadow: 1px 1px 5px #94fffa,
+                     1px 1px 5px #94fffa,
+    }
     .Block_information {
         background-image: url('../images/background/body_bg_360.png');
     }
