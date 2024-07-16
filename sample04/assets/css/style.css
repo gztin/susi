@@ -1,6 +1,31 @@
 /* update */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
+/* CSS動畫 */
+@keyframes upAndDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+.bossRighthand {
+    animation: upAndDown 2s infinite;
+}
+
+@keyframes upAndDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+.bossLefthand {
+    animation: upAndDown 2s infinite;
+}
+
 .banner{
     width:100%;
     height:60vw;
@@ -401,7 +426,7 @@
 }
 /* 信用卡顯示資訊 */
 .serviceImg{
-    background-size: contain;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
@@ -556,7 +581,7 @@
 }
 .service_Loan {
     width: 100%;
-    height: 48vw;
+    height: 56vw;
     margin: 0 auto;
     background-size: 100% 100%;
     display: flex;
@@ -567,6 +592,22 @@
 }
 .service_Loan {
     background-image: url(../images/background/bg_loanService.png);
+}
+.block_invest{
+    background-image: url(../images/background/invest_1024.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 59vw;
+}
+.block_invest > .linkBlock > .creditCard_button{
+    margin-top: 7vw;
+    margin-left: 8vw;
+    width: 20vw;
+    height: 5.5vw;
 }
 .title{
   color:#fff;
@@ -781,6 +822,9 @@
    }
 }
 @media screen and (max-width: 1199px) {
+    .container{
+        width:100%;
+    }
     .block_title_Pic{
         height:15vw;
     }
@@ -788,6 +832,7 @@
         font-size: 3.5vw;
         line-height: 5vw;
         margin-top: 5vw;
+        width:80%;
     }
     .strokeText{
         font-size:6vw;
@@ -950,16 +995,42 @@
    .creditInf{
         background-image: url(../images/background/bg_onlineService_B.png);
         height: 100vw;
+        margin-bottom: 20vw;
     }
     .service_Digital{
         background-image: url(../images/background/bg_digitalService_B.png);
         width: 100%;
         height: 100vw;
+        margin-bottom: 20vw;
     }
     .service_Loan {
         background-image: url(../images/background/bg_loanService_B.png);
         height: 100vw;
+        margin-bottom: 20vw;
     }
+    .block_invest{
+        background-image: url(../images/background/invest_768.png);
+        justify-content: unset;
+        width: 73vw;
+        height: 100vw;
+        scale: 1.05;
+        margin:0 auto;
+        margin-bottom: 20vw;
+    }
+    .block_invest > .linkBlock{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 56vw;
+    }
+    .block_invest > .linkBlock > .creditCard_button{
+        margin-top: 0vw;
+        margin-left: 0vw;
+        width: 40vw;
+        height: 11vw;
+        margin:0 auto;
+    }
+
     .block_sliderLoan{
         width:100%;
         margin-left: 0vw;
@@ -979,8 +1050,8 @@
         gap: 40vw;
     }
     .button_slideService {
-        width: 32.5vw;
-        height: 9vw;
+        width: 40vw;
+        height: 11vw;
     }
     .slick-prev, .slick-next {
         width: 4.5vw; /* Increased size */
@@ -992,16 +1063,16 @@
         font-size: 3vw;
     }
     #content1 > .serviceImg{
-        background-image: url(../images/background/card_1b.png);
+        background-image: url(../images/background/card_1_768.png);
     }
     #content2 > .serviceImg{
-        background-image: url(../images/background/card_2b.png);
+        background-image: url(../images/background/card_2_768.png);
     }
     #content3 > .serviceImg{
-        background-image: url(../images/background/card_3b.png);
+        background-image: url(../images/background/card_3_768.png);
     }
     #content4 > .serviceImg{
-        background-image: url(../images/background/card_4b.png);
+        background-image: url(../images/background/card_4_768.png);
     }
     .serviceImg{
         display: flex;
@@ -1020,11 +1091,11 @@
 
     .serviceImg > .space,.serviceImg > .hint > .space{
         width:24vw;
-        height:5vw;
+        height:0vw;
     }
-    .creditCard_button{
-        width:25vw;
-        height:7vw;
+    .serviceImg > .space,.serviceImg > .hint > .creditCard_button{
+        width:40vw;
+        height:11vw;
     }
     .right-align {
         position: absolute;
@@ -1205,24 +1276,25 @@
     } */
     /* end Block_service */
     #content1 > .serviceImg{
-        background-image: url(../images/background/card_1b.png);
+        background-image: url(../images/background/card_1_768.png);
     }
     #content2 > .serviceImg{
-        background-image: url(../images/background/card_2b.png);
+        background-image: url(../images/background/card_2_768.png);
     }
     #content3 > .serviceImg{
-        background-image: url(../images/background/card_3b.png);
+        background-image: url(../images/background/card_3_768.png);
     }
     #content4 > .serviceImg{
-        background-image: url(../images/background/card_4b.png);
+        background-image: url(../images/background/card_4_768.png);
     }
     .serviceImg{
         display: flex;
         justify-content: end;
         flex-direction: column;
         align-items: center;
-        width: 100%;
-        height: 90vw;
+        width: 95%;
+        height: 100vw;
+        margin: 0 auto;
     }
     .serviceImg > .hint{
         display: flex;
@@ -1233,7 +1305,7 @@
 
     .serviceImg > .space,.serviceImg > .hint > .space{
         width:24vw;
-        height:5vw;
+        height:0vw;
     }
     .creditCard_button{
         width:25vw;
@@ -1281,9 +1353,6 @@
     .agent > .agentPic{
         width: 60vw;
         height: 49vw;
-    }
-    .block_boss{
-        
     }
     .block_boss > .agentButton{
         display: block;
@@ -1394,24 +1463,26 @@
         background-image:url(../images/common/sectionA_768.png);
     }
     #content1 > .serviceImg{
-        background-image: url(../images/background/card_1b.png);
+        background-image: url(../images/background/card_1_768.png);
     }
     #content2 > .serviceImg{
-        background-image: url(../images/background/card_2b.png);
+        background-image: url(../images/background/card_2_768.png);
     }
     #content3 > .serviceImg{
-        background-image: url(../images/background/card_3b.png);
+        background-image: url(../images/background/card_3_768.png);
     }
     #content4 > .serviceImg{
-        background-image: url(../images/background/card_4b.png);
+        background-image: url(../images/background/card_4_768.png);
     }
     .serviceImg{
         display: flex;
         justify-content: end;
         flex-direction: column;
         align-items: center;
-        width: 100%;
-        height: 90vw;
+        width: 95%;
+        height: 100vw;
+        margin:0 auto;
+        margin-bottom: 20vw;
     }
     .serviceImg > .hint{
         display: flex;
@@ -1422,7 +1493,7 @@
 
     .serviceImg > .space,.serviceImg > .hint > .space{
         width:24vw;
-        height:5vw;
+        height:0vw;
     }
     .creditCard_button{
         width:25vw;
@@ -1433,6 +1504,7 @@
     }
 }
 @media screen and (max-width: 768px){
+    
     .test{
         width:80%;
     }
@@ -1579,6 +1651,18 @@
     }
 }
 @media screen and (max-width: 680px){
+    /* 標題文字 */
+    .strokeText {
+        font-size: 9vw;
+    }
+    .subTitle {
+        font-size: 4.5vw;
+        line-height: 7vw;
+        margin-top: 10vw;
+        width: 80%;
+    }
+
+    /* 輪播 */
     .banner {
         height:1100px;
     }
@@ -1586,6 +1670,7 @@
         width: 60vw;
         height: 16vw;
     }
+
     .test{
         width:80%;
     }
@@ -1602,23 +1687,54 @@
         bottom: 8vw;
     }
     .creditInf{
-        background-image: url(../images/background/bg_onlineService_C.png);
+        background-image: url(../images/background/bg_onlineService_B.png);
         width: 100%;
         height: 120vw;
+        margin-bottom: 20vw;
+        margin-top: 10vw;
     }
     .service_Digital{
-        background-image: url(../images/background/bg_digitalService_C.png);
+        background-image: url(../images/background/bg_digitalService_B.png);
         width: 100%;
-        height: 46vw;
+        height: 800px;
+        margin-top:10vw;
+        margin-bottom: 20vw;
     }
     .service_Loan {
-        background-image: url(../images/background/bg_loanService_C.png);
+        background-image: url(../images/background/bg_loanService_B.png);
+        height:800px;
+        margin-bottom: 20vw;
     }
     .Block_information{
-        background-image: url('../images/background/body_bg_360.png');
+        background-image: url('../images/background/body_bg_768.png');
     }
+    /* 信用卡熱門 */
+    .serviceImg {
+        margin-bottom: 20vw;
+    }
+    .block_title_Pic {
+        width:100%;
+    }
+    .creditCard_menu {
+        margin-top:10vw;
+    }
+    .creditCard_button,.button_slideService{
+        width:40vw;
+        height:11vw;
+    }
+    .block_invest > .linkBlock > .creditCard_button {
+        width:40vw;
+        height:11vw;
+    }
+    .block_invest {
+        margin-bottom: 20vw;
+    }
+    
 }
 @media screen and (max-width: 490px){
+    .Block_information {
+        background-image: url('../images/background/body_bg_360.png');
+    }
     .test{
         width:80%;
     }
@@ -1666,6 +1782,9 @@
     .creditCard_menu {
         width:100%;
         flex-wrap: wrap; /* 允許換行 */
+    }
+    .creditInf {
+        height:800px;
     }
     .Block_service{
         background-color: #F4FFFF;
@@ -1716,21 +1835,87 @@
         gap: 2vw;
         margin-top:33vh;
     }
-    .Block_information > .container{
-        width:95%;
-    }
     .service_creditCard{
         padding-left:0px;
         padding-right:0px;
     }
     .serviceImg{
-        height:100vw;
+        width: 100%;
+        height: 700px;
+        margin-bottom: 20vw;
     }
+    #content1 > .serviceImg{
+        background-image: url(../images/background/card_1_360.png);
+    }
+    #content2 > .serviceImg{
+        background-image: url(../images/background/card_2_360.png);
+    }
+    #content3 > .serviceImg{
+        background-image: url(../images/background/card_3_360.png);
+    }
+    #content4 > .serviceImg{
+        background-image: url(../images/background/card_4_360.png);
+    }
+
+    .creditCard_button {
+        width: 44vw;
+        height: 13vw;
+        margin-top:-6vw;
+    }
+    .block_invest {
+        background-image: url(../images/background/invest_360.png);
+        width: 100%;
+        height: 900px;
+    }
+    .block_invest > .linkBlock > .creditCard_button {
+        margin-top: 60vw;
+        width: 44vw;
+        height: 13vw;
+    }
+    .creditInf {
+        margin-bottom: 20vw;
+        margin-top: 13vw;
+    }
+    .strokeText {
+        font-size: 10vw;
+    }
+    .subTitle {
+        font-size: 5vw;
+        line-height: 7vw;
+        margin-top: 8vw;
+    }
+    .slide > img {
+        max-width: 80vw;
+    }
+    .slick-prev, .slick-next {
+        width: 8vw; /* Increased size */
+        height: 8vw; /* Increased size */
+    }
+    .slick-prev:before, .slick-next:before {
+        width: 8vw; /* Increased size */
+        height: 8vw; /* Increased size */
+        font-size: 4vw;
+    }
+    .slick-dotted.slick-slider {
+        margin-bottom: 0px !important;
+        height: 550px;
+    }
+    .creditCard_button,.serviceImg > .hint > .creditCard_button, .button_slideService,.block_invest > .linkBlock > .creditCard_button {
+        width: 60vw;
+        height: 17vw;
+    }
+    
 }
-@media screen and (max-width: 360px){
+@media screen and (max-width: 400px){
     .banner{
         background-image: url(../images/banner/KVBackground_360.png);
         height:560px;
+    }
+    .Block_service {
+        height: 850px;
+    }
+    .creditInf {
+        height:800px;
     }
     .agent {
         margin-top: 9vh;
@@ -1742,4 +1927,12 @@
     .sectionA_MenuA {
         height: 670px;
     }
+    .block_invest > .linkBlock > .creditCard_button{
+        margin-top:85vw;
+    }
+    .creditCard_button,.serviceImg > .hint > .creditCard_button, .button_slideService,.block_invest > .linkBlock > .creditCard_button {
+        width: 60vw;
+        height: 17vw;
+    }
+    
 }
