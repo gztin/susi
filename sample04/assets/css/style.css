@@ -80,8 +80,6 @@
     text-stroke: 10px #fff;
     text-shadow: 1px 1px 15px #94fffa,
                  1px 1px 15px #94fffa,
-                 1px 1px 15px #94fffa,
-                 1px 1px 15px #94fffa;
 }
 .subTitle{
     color:#fff;
@@ -828,7 +826,6 @@
         -webkit-text-stroke: 10px #fff;
         text-stroke: 5px #fff;
         text-shadow: 1px 1px 10px #94fffa,
-                     1px 1px 10px #94fffa,
     }
     .container{
         width:100%;
@@ -1746,7 +1743,6 @@
         -webkit-text-stroke: 10px #fff;
         text-stroke: 5px #fff;
         text-shadow: 1px 1px 5px #94fffa,
-                     1px 1px 5px #94fffa,
     }
     .Block_information {
         background-image: url('../images/background/body_bg_360.png');
