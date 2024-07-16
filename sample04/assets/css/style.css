@@ -230,14 +230,19 @@
     padding-top: 10vw;
 }
 
-.creditCard_button{
+.creditCard_button,.button_slideService{
     width:200px;
     height:60px;
     background-image:url(../images/button/creditService_default.png);
     background-size: contain;
     background-repeat: no-repeat ;
+    margin:0 auto;
 }
-.creditCard_button:hover{
+.button_slideService{
+    width:20.5vw;
+    height:6vw;
+}
+.creditCard_button:hover,.button_slideService:hover{
     background-image:url(../images/button/creditService_hover.png);
 }
 
@@ -490,12 +495,12 @@
 .creditInf{
     background-image: url(../images/background/bg_onlineService_A.png);
     width: 100%;
-    height: 46vw;
+    height: 53vw;
 }
 .service_Digital{
     background-image: url(../images/background/bg_digitalService_A.png);
     width: 100%;
-    height: 46vw;
+    height: 53vw;
 }
 .title{
   color:#fff;
@@ -508,6 +513,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top:2vw;
 }
 .block_title > span{
   display: inline-block;
@@ -522,6 +528,9 @@
 .title_span2{
   background-color:#15FFD5;
 }
+.slick-dotted.slick-slider {
+    margin-bottom: 0px!important;
+}
 .slider {
   width: 83%;
   height: 32vw;
@@ -533,12 +542,14 @@
     justify-content: center;
     align-items: center;
     font-size: 24px;
+    margin: 0 10px;
     transition: transform 0.5s;
 }
 .slide > img{
-  width:100%;
-  height: auto; /* 確保圖片按比例縮放 */
-  margin:0 auto;
+    width: 100%;
+    max-width: 400px; /* Add max-width to control the size */
+    height: auto; /* 確保圖片按比例縮放 */
+    margin: 0 auto;
 }
 .sliderButton{
     display: flex;
@@ -575,9 +586,12 @@
 .slick-prev {
     left: 10vw !important;
 }
-.slick-dots li.slick-active button:before {
-    color: red; 
+.slick-dots li.slick-active button {
+    transform: scale(1.5); /* 放大 active 的 dot */
 }
+/* .slick-dots li.slick-active button:before {
+    color: red; 
+} */
 .slick-dots {
     text-align: center;
     margin-top:-20px;
@@ -833,15 +847,26 @@
    }
    .creditInf{
         background-image: url(../images/background/bg_onlineService_B.png);
-        width: 100%;
-        height: 46vw;
+        height: 100vw;
     }
     .service_Digital{
         background-image: url(../images/background/bg_digitalService_B.png);
         width: 100%;
-        height: 46vw;
+        height: 100vw;
     }
    
+    .slide > img {
+        max-width: 50vw;
+    }
+    .slick-prev, .slick-next {
+        width: 7vw; /* Increased size */
+        height: 7vw; /* Increased size */
+    }
+    .slick-prev:before, .slick-next:before {
+        width: 7vw; /* Increased size */
+        height: 7vw; /* Increased size */
+        font-size: 4vw;
+    }
     #content1 > .serviceImg{
         background-image: url(../images/background/card_1b.png);
     }
@@ -1451,6 +1476,16 @@
         flex-direction: column;
         gap: 1vw;
         bottom: 8vw;
+    }
+    .creditInf{
+        background-image: url(../images/background/bg_onlineService_C.png);
+        width: 100%;
+        height: 46vw;
+    }
+    .service_Digital{
+        background-image: url(../images/background/bg_digitalService_C.png);
+        width: 100%;
+        height: 46vw;
     }
 }
 @media screen and (max-width: 490px){
