@@ -127,7 +127,7 @@
     background-image:url(../images/common/title_digitalService_A.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    margin-top:20vw;
+    margin-top:10vw;
 }
 .title_loanService{
     background-image:url(../images/common/title_loanService_B.png);
@@ -334,7 +334,7 @@
 } */
 .Block_information{
     background-image: url(../images/background/body_bga.png);
-    background-size: cover;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     width: 100%;
     height:auto;
@@ -375,7 +375,7 @@
 
 .background_Connect{
     background-image: url(../images/background/body_bg_buttomA.png);
-    background-size: cover;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: bottom;
     width: 100%;
@@ -626,8 +626,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 10vw;
+    margin-bottom: 30vw;
     margin-top: 20vw;
+
 }
 .service_Loan {
     background-image: url(../images/background/bg_loanService.png);
@@ -1053,7 +1054,7 @@
         height: 43vw;
     }
     .Block_information{
-        background-image: url('../images/background/body_bg_768.png');
+        background-image: url('../images/background/body_bga.png');
     }
     .block_boss > .agentButton{
         display: block;
@@ -1916,7 +1917,7 @@
         position: relative;
     }
     .Block_information{
-        background-image: url('../images/background/body_bg_768.png');
+        background-image: url('../images/background/body_bga.png');
     }
     /* 信用卡熱門 */
     .serviceImg {
@@ -1952,7 +1953,7 @@
                      1px 1px 15px #94fffa,
     }
     .Block_information {
-        background-image: url('../images/background/body_bg_360.png');
+        background-image: url('../images/background/body_bga.png');
     }
     .test{
         width:80%;
