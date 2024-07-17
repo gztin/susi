@@ -44,7 +44,7 @@
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/common.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="assets/css/aos.css">
-        <link href="assets/css/style.css?v=3" rel="stylesheet" type="text/css" />
+        <link href="assets/css/style.css?v=2" rel="stylesheet" type="text/css" />
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
@@ -328,25 +328,26 @@
                     </div>
                 </div>
             </section>
+            
             <!-- <section class="section background_Connect"></section> -->
             <!-- 找找元先生 -->
-            <!-- <section class="Block_footerInf">
-                <div class="agentFooterPic full-width-container">
-                    <img class="full-width-img" src="img/agent.png" alt="">
-                </div>
-                <div class="row full-width-container">
-                    <div class="col-xl-6 col-lg-12 full-width-container" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="250">
-                        <img class="agentInfA full-width-img" src="img/InfB_1.png" alt="">
+            <div class="Block_footerInf">
+                <div class="agentFooterPic full-width-container" data-aos-duration="1500" data-aos-delay="250"></div>
+                <div class="block_place_inf">
+                    <div class="block_sub">
+                        <div class="placeA" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="250">
+                          <a href="#" class="button_slideService"></a>
+                        </div>
+                        <div class="placeB" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="250">
+                          <a href="#" class="button_slideService"></a>
+                        </div>  
                     </div>
-                    <div class="col-xl-6 col-lg-12 full-width-container" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="250">
-                        <img class="agentInfB full-width-img" src="img/InfB_2.png" alt="">
+                    <div class="placeC" data-aos="flip-left">
+                      <a href="#" class="button_slideService"></a>
                     </div>
-                </div>
-                <div class="col-lg-12 full-width-container" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="250">
-                    <img class="agentInfC full-width-img" id="responsiveImage" src="img/InfB_3.png" alt="">
-                </div>
-               
-            </section> -->
+                </div> 
+            </div>
+            
      <!-- 內容區結束 -->
             <!-- 元先生智能助理 -->
             <div class="yuantaman">
@@ -456,31 +457,19 @@
                 }
             }
     
-            function updateImageInvest() {
-                var invest = document.getElementById('invest');
-                if (window.innerWidth < 361) {
-                    invest.src = 'img/background/invest_360.png';
-                }else if (window.innerWidth < 1200) {
-                    invest.src = 'img/background/invest_768.png';
-                }else {
-                    invest.src = 'img/background/invest_1024.png';
-                }
-            }
-
-            function updateImageSrc() {
-                const img = document.getElementById('responsiveImage');
-                if (window.innerWidth < 769) {
-                    img.src = 'img/InfB_3c.png';
-                } else if (window.innerWidth < 1200) {
-                    img.src = 'img/InfB_3b.png';
-                } else {
-                    img.src = 'img/InfB_3.png';
-                }
-            }
+            // function updateImageInvest() {
+            //     var invest = document.getElementById('invest');
+            //     if (window.innerWidth < 361) {
+            //         invest.src = 'img/background/invest_360.png';
+            //     }else if (window.innerWidth < 1200) {
+            //         invest.src = 'img/background/invest_768.png';
+            //     }else {
+            //         invest.src = 'img/background/invest_1024.png';
+            //     }
+            // }
 
             function updateAll() {
-                updateImageSrc();
-                updateImageInvest();
+                // updateImageInvest();
                 updateFlexWrap();
                 updateAOSAttributes();
             }

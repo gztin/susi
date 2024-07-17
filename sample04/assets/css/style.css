@@ -80,6 +80,7 @@
     text-stroke: 10px #fff;
     text-shadow: 1px 1px 15px #94fffa,
                  1px 1px 15px #94fffa,
+                 1px 1px 15px #94fffa,
 }
 .subTitle{
     color:#fff;
@@ -122,6 +123,27 @@
     align-items: center;
     gap:1vw;
 }
+.block_place_inf{
+    display: flex;
+    flex-direction: column;
+}
+.block_sub{
+    display: flex;
+}
+.placeA,.placeB,.placeC{
+    width:100%;
+    height:20vw;
+}
+/* .placeA{
+    background: #c30;
+}
+.placeB{
+    background: green;
+}
+.placeC{
+    background: blue;
+} */
+
 .block_agent{
     display: none;
     justify-content: center;
@@ -339,6 +361,8 @@
     height:auto;
     margin-bottom: 40px;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .block{
     width: 100%;
@@ -428,7 +452,7 @@
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
-    height:400px;
+    height:47vw;
 }
 #content1 > .serviceImg{
     background-image: url(../images/background/card_1a.png);
@@ -535,28 +559,18 @@
 .a03{
     background-image:url(../images/background/InfB_3.png);
 }
-.Block_footerInf .container {
-    width: 70%;
-    max-width: 100%;
-    padding: 0;
-}
-.agentInfA, .agentInfB, .agentInfC {
-    /* width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    height:auto; */
-}
+
+
 .full-width-img {
     width: 100%;
     height: auto;
 }
 
 .full-width-container {
-    width: 70%;
+    width: 50%;
     padding: 0;
     margin: 0 auto;
-    display: flex;
-    position: relative;
+    padding-top:10vw;
 }
 
 /* slider */
@@ -759,6 +773,88 @@
 .slick-list {
   scale: 0.85;
 }
+
+/* footerInf */
+.block_place_inf{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    margin-top: -3vw;
+}
+.block_sub{
+    display: flex;
+    width: 100%;
+    position: relative;
+    height: 56vw;
+}
+.placeA, .placeB{
+    width:50%;
+    height:60vw;
+    display: block;
+    position: absolute; /* 相對定位 */
+    background-size: 100% 100%;
+}
+.placeC {
+    width:96%;
+    height:60vw;
+    display: block;
+    position: relative; /* 相對定位 */
+    background-size: 100% 100%;
+    margin: 0 auto;
+}
+.placeA{
+    background-image: url(../images/background/InfB_1.png);
+    padding-left: 3vw;
+    left: 2%;
+}
+.placeB{
+    background-image: url(../images/background/InfB_2.png);
+    left: 48%;
+}
+.placeC{
+  background-image: url(../images/background/infB_3.png);
+}
+.Block_footerInf{
+    background-image: url(../images/background/footer_bg.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    width: 100%;
+    height:auto;
+    margin-bottom: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5vw;
+}
+.full-width-container {
+    width: 50%;
+    padding: 0;
+    margin: 0 auto;
+    padding-top:10vw;
+    height:15vw;
+}
+.button_slideService{
+    width:20vw;
+    height:6vw;
+    background-image:url(../images/button/creditService_default.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat ;
+    margin:0 auto;
+    display: block;
+    position: absolute;
+    left: 50%; /* 水平居中 */
+    transform: translateX(-50%); /* 使元素完全居中 */
+    bottom:4vw;
+}
+.button_slideService:hover{
+    background-image:url(../images/button/creditService_hover.png);
+}
+.agentFooterPic{
+  background-image:url(../images/common/agent.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 /* slider end */
 
 /* update end */
@@ -812,12 +908,12 @@
         margin-top: 9vw;
         margin-left: 2vw;
     }
-   .agentFooterPic{
+   /* .block_Place{
         width: 50vw;
         padding-top: 5vw;
         margin-bottom: -2vw;
         height: 20vw;
-   }
+   } */
 }
 @media screen and (max-width: 1199px) {
     .strokeText::before {
@@ -826,6 +922,7 @@
         -webkit-text-stroke: 10px #fff;
         text-stroke: 5px #fff;
         text-shadow: 1px 1px 10px #94fffa,
+                     1px 1px 15px #94fffa,
     }
     .container{
         width:100%;
@@ -991,12 +1088,12 @@
     .sectionA_MenuA{
         background-image:url(../images/common/sectionA_768.png);
     }
-    .agentFooterPic{
+    /* .block_Place{
         padding-top: 10vw;
         padding-left: 14vw;
         padding-right: 7vw;
         margin-bottom: -5vw;
-   }
+   } */
    .creditInf{
         background-image: url(../images/background/bg_onlineService_B.png);
         height: 100vw;
@@ -1116,31 +1213,46 @@
         width: 100%;
         display: block;
     }
-
     .full-width-container img {
         display: block;
         width: 100%;
     }
 
-    .col-lg-12 img.agentInfA {
-        display: block;
-        margin-left: 5%;
-        margin-right: 0;
-    }
-
-    .col-lg-12 img.agentInfB {
-        display: block;
-        margin-left: -5%;
-        margin-right: auto;
-    }
-    .col-lg-12 img.agentInfC {
-        display: block;
-        margin-left: 0%;
-        margin-right: 0;
-    }
-    .col-lg-12.service_creditCard {
-        height: 1100px;
-    }
+    /* footerinf */
+    .block_sub{
+        flex-wrap: wrap;
+        justify-content: space-around;
+        overflow: hidden;
+        height: auto;
+      }
+      .placeA, .placeB {
+        width: 90%;
+        height: 100vw;
+      }
+      .placeA {
+        background-image: url(../images/background/InfB_1b.png);
+        position: relative;
+        left: 0%;
+        margin-left: 10%;
+      }
+      .placeB {
+        background-image: url(../images/background/InfB_2b.png);
+        position: relative;
+        left: -9%;
+      }
+      .placeC{
+        background-image: url(../images/background/infB_3b.png);
+        width:100%;
+        height: 100vw;
+      }
+      .placeA > .button_slideService,
+      .placeB > .button_slideService,
+      .placeC > .button_slideService {
+        width: 37vw;
+        height: 10vw;
+        left: 52%;
+        bottom: 7vw;
+      }
 }
 @media screen and (max-width: 980px){
     .test{
@@ -1325,6 +1437,17 @@
     }
     .sectionA_MenuA{
         background-image:url(../images/common/sectionA_768.png);
+    }
+    .Block_footerInf{
+        padding-top: 10vw;
+    }
+    .full-width-container {
+        width:75%;
+        height:25vw;
+        margin-top: -5vw;
+    }
+    .block_place_inf {
+        margin-top: -5vw;
     }
 }
 @media screen and (max-width: 820px){
@@ -1651,9 +1774,7 @@
         width: 100%;
     }
 
-    .agentFooterPic, .agentInfA, .agentInfB, .agentInfC {
-        width: 90vw;
-    }
+    
 }
 @media screen and (max-width: 680px){
     /* 標題文字 */
@@ -1743,6 +1864,8 @@
         -webkit-text-stroke: 10px #fff;
         text-stroke: 5px #fff;
         text-shadow: 1px 1px 5px #94fffa,
+                     1px 1px 15px #94fffa,
+                     1px 1px 15px #94fffa,
     }
     .Block_information {
         background-image: url('../images/background/body_bg_360.png');
@@ -1916,7 +2039,27 @@
         width: 60vw;
         height: 17vw;
     }
-    
+    /* footerInf */
+    .placeA {
+        background-image: url(../images/background/InfB_1c.png);
+        left:12%;
+      }
+      .placeB {
+        background-image: url(../images/background/InfB_2c.png);
+        left:-12%;
+      }
+      .placeC{
+        background-image: url(../images/background/infB_3c.png);
+      }
+      .placeA, .placeB {
+        width: 360px;
+        height: 558px;
+      }
+      .placeA > .button_slideService,.placeB > .button_slideService{
+        bottom:4vw;
+        width: 48vw;
+        height: 13vw;
+      }
 }
 @media screen and (max-width: 400px){
     .banner{
