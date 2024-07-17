@@ -1966,8 +1966,8 @@
     .sectionA_MenuA{
         background-image:url(../images/common/sectionA_480.png);
         background-size: 100% 100%;
-        width:90vw;
-        height:900px;
+        width:100%;
+        height:861px;
         margin-top:20vw;
         position: relative;
     }
@@ -1977,6 +1977,10 @@
         margin-top: 0vw;
         position: absolute;
         bottom: 16vw;
+    }
+    .custom-button:hover{
+        background-color: inherit; /* 繼承父元素的背景顏色 */
+        color: inherit; /* 繼承父元素的文字顏色 */
     }
     .service_creditCard{
         padding-left:0px;
