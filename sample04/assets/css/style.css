@@ -1926,6 +1926,7 @@
     }
     .Block_service{
         background-color: #F4FFFF;
+        margin-bottom: 20vw;
     }
     .creditCard_menu a {
         flex: 0 0 calc(50% - 10px); /* 每個按鈕佔50%的寬度，減去間距 */
@@ -1966,13 +1967,16 @@
         background-image:url(../images/common/sectionA_480.png);
         background-size: 100% 100%;
         width:90vw;
-        height:790px;
+        height:900px;
         margin-top:20vw;
+        position: relative;
     }
-    .serviceA_MenuButton{
+    .serviceA_MenuButton {
         flex-direction: column;
-        gap: 2vw;
-        margin-top:33vh;
+        gap: 4vw;
+        margin-top: 0vw;
+        position: absolute;
+        bottom: 16vw;
     }
     .service_creditCard{
         padding-left:0px;
