@@ -106,9 +106,9 @@
         width: 100%;
         gap: 10vw;
       }
-      .slick-dots li.slick-active button {
+      /* .slick-dots li.slick-active button {
         transform: scale(1.5);
-      }
+      } */
       .slick-dots {
         text-align: center;
         margin-top: -20px;
@@ -118,18 +118,19 @@
         display: inline-block;
         margin: 0 10px;
       }
+      
       .slick-dots li button {
-        background: #66ACFF;
+        background: url('../sample04/assets/images/common/dot_normal.png') no-repeat center center;
+        background-size: contain;
         border: none;
-        border-radius: 50%;
-        width: 25px;
-        height: 12px;
+        width: 30px;  /* 根據圖片大小調整 */
+        height: 15px; /* 根據圖片大小調整 */
         display: block;
-        border-radius: 5px;
         cursor: pointer;
       }
       .slick-dots li.slick-active button {
-        background: #94fffa;
+        background: url('../sample04/assets/images/common/dot_active.png') no-repeat center center;
+        background-size: contain;
       }
       .slick-dots li button:before {
         opacity: 0;

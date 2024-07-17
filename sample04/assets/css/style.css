@@ -25,7 +25,24 @@
 .bossLefthand {
     animation: upAndDown 2s infinite;
 }
-
+.agentLink{
+    width:500px;
+    height:550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    top:9vw;
+    left:16vw;
+}
+.brand{
+    width:500px;
+    height:390px;
+    background-image:url(../images/common/agentPic.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
 .banner{
     width:100%;
     height:60vw;
@@ -33,6 +50,7 @@
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
+    position: relative;
 }
 .button-reset {
     background: none;
@@ -89,29 +107,33 @@
     text-align: center;
 }
 .block_title_Pic{
-    width:75%;
-    height:8vw;
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
+    width:50vw;
+    height:10vw;
     margin:0 auto;
-    margin-top:10vw;
-    background-size:100% 100%;
 }
-/* .title_onlineService{
+.title_onlineService{
     background-image:url(../images/common/title_onlineService_A.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 .title_creditCardSercvice{
     background-image:url(../images/common/title_creditCard_A.png);
-    height:13vw;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width:36vw;
+    margin-top:20vw;
 }
 .title_digitalService{
     background-image:url(../images/common/title_digitalService_A.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin-top:20vw;
 }
 .title_loanService{
     background-image:url(../images/common/title_loanService_B.png);
-} */
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
 .bbb{
     height:300px;
     background-color: #007fe0;
@@ -320,8 +342,8 @@
 }
 
 .creditCard_button,.button_slideService{
-    width:200px;
-    height:60px;
+    width:20vw;
+    height:6vw;
     background-image:url(../images/button/creditService_default.png);
     background-size: contain;
     background-repeat: no-repeat ;
@@ -333,7 +355,15 @@
     justify-content: center;
     align-items: center;
     width: 40%;
-    margin-left:8vw;
+    margin-left:9.5vw;
+    position: relative;
+    margin-top: 3vw;
+}
+.block_sliderLoan > .sliderButton{
+    width:65vw;
+}
+.block_sliderLoan > .block_title{
+    gap:2vw;
 }
 .button_slideService{
     width:20.5vw;
@@ -391,8 +421,6 @@
     height:750px;
     margin-top:-20px;
 }
-
-
 .creditCard{
     height:800px;
     display: flex;
@@ -408,7 +436,6 @@
     width: 400px;
     height:125px;
 }
-
 .serviceBlock{
     display: flex;
     flex-direction: column;
@@ -452,7 +479,7 @@
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
-    height:47vw;
+    height:40vw;
 }
 #content1 > .serviceImg{
     background-image: url(../images/background/card_1a.png);
@@ -589,21 +616,24 @@
 .service_Digital{
     background-image: url(../images/background/bg_digitalService_A.png);
     width: 100%;
-    height: 53vw;
+    height: 48vw;
 }
 .service_Loan {
     width: 100%;
-    height: 56vw;
+    height: 50vw;
     margin: 0 auto;
     background-size: 100% 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 5vw;
     margin-bottom: 10vw;
+    margin-top: 20vw;
 }
 .service_Loan {
     background-image: url(../images/background/bg_loanService.png);
+}
+.slide_loan > ul.slick-dots{
+    bottom:8vw;
 }
 .block_invest{
     background-image: url(../images/background/invest_1024.png);
@@ -621,20 +651,26 @@
     width: 20vw;
     height: 5.5vw;
 }
+.cube{
+    display: flex;
+    justify-content: space-around;
+}
 .title{
   color:#fff;
   margin-left:1vw;
   margin-right:1vw;
   text-align: center;
   font-size: 32px;
+  font-weight: bold;
 }
 .block_title{
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top:2vw;
+  gap:4vw;
 }
-.block_title > span{
+.block_title > .cube > span{
   display: inline-block;
   width: 15px;
   height: 15px;
@@ -658,7 +694,7 @@
 }
 .slide_loan {
     width: 100%;
-    height: 37vw;
+    height: 47vw;
     margin: 0px auto;
     position: relative;
     display: flex;
@@ -666,6 +702,7 @@
     align-items: center;
     font-size: 24px;
     transition: transform 0.5s;
+    padding-bottom: 5vw;
 }
 .slide {
     display: flex;
@@ -679,6 +716,12 @@
     width: 100%;
     max-width: 400px; /* Add max-width to control the size */
     height: auto; /* 確保圖片按比例縮放 */
+    margin: 0 auto;
+}
+.slide_loan > .slick-list > .slick-track > .slide > img {
+    max-width: 450px;
+    width: 25vw;
+    height: 37vw;
     margin: 0 auto;
 }
 .slide_Pic > img{
@@ -699,12 +742,12 @@
     justify-content: space-around;
     position: absolute;
     margin: 0 auto;
-    width: 68%;
+    width: 60vw;
 }
 .slick-prev, .slick-next {
     background-color:#15FFD5;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -728,9 +771,10 @@
 .slick-prev {
     left: 10vw !important;
 }
-.slick-dots li.slick-active button {
-    transform: scale(1.5); /* 放大 active 的 dot */
-}
+
+/* .slick-dots li.slick-active button {
+    transform: scale(1.5);
+} */
 /* .slick-dots li.slick-active button:before {
     color: red; 
 } */
@@ -744,6 +788,19 @@
     margin: 0 10px; /* Increase margin for more spacing */
 }
 .slick-dots li button {
+    background: url('../images/common/dot_normal.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    width: 30px;  /* 根據圖片大小調整 */
+    height: 15px; /* 根據圖片大小調整 */
+    display: block;
+    cursor: pointer;
+  }
+.slick-dots li.slick-active button {
+    background: url('../images/common/dot_active.png') no-repeat center center;
+    background-size: contain;
+}
+/* .slick-dots li button {
     background: #66ACFF;
     border: none;
     border-radius: 50%;
@@ -754,8 +811,8 @@
     cursor: pointer;
 }
 .slick-dots li.slick-active button {
-    background: #94fffa; /* Custom color for active dot */
-}
+    background: #94fffa;
+} */
 .slick-dots li button:before {
     opacity: 0;
 }
@@ -780,6 +837,7 @@
     flex-direction: column;
     width:100%;
     margin-top: -3vw;
+    margin-bottom:20vw;
 }
 .block_sub{
     display: flex;
@@ -806,6 +864,17 @@
     background-image: url(../images/background/InfB_1.png);
     padding-left: 3vw;
     left: 2%;
+}
+.placeA > .button_slideService,
+.placeB > .button_slideService,
+.placeC > .button_slideService{
+    bottom:4vw;
+}
+.placeA > .button_slideService{
+    margin-left:4vw;
+}
+.placeB > .button_slideService{
+    left:42%;
 }
 .placeB{
     background-image: url(../images/background/InfB_2.png);
@@ -845,7 +914,7 @@
     position: absolute;
     left: 50%; /* 水平居中 */
     transform: translateX(-50%); /* 使元素完全居中 */
-    bottom:4vw;
+    bottom:1vw;
 }
 .button_slideService:hover{
     background-image:url(../images/button/creditService_hover.png);
@@ -860,12 +929,10 @@
 /* update end */
 @media screen and (min-width: 1200px) {
     .banner{
-        background-image:url(../images/banner/KVBackground_1440b.png);
+        background-image:url(../images/banner/KVBackground_1440c.png);
     }
    .agentButton_1024{
         display: block;
-        margin-top: 30vw;
-        margin-left: 20vw;
         width: 20vw;
         height: 10vw;
    }
@@ -875,7 +942,7 @@
    .animation_1024{
         display: flex;
         margin-top:20vw;
-        margin-left:3vw;
+        margin-left:15vw;
    }
    .animation_768{
         display: flex;
@@ -906,7 +973,7 @@
    }
    .creditCard_button {
         margin-top: 9vw;
-        margin-left: 2vw;
+        margin-left: 7vw;
     }
    /* .block_Place{
         width: 50vw;
@@ -914,19 +981,28 @@
         margin-bottom: -2vw;
         height: 20vw;
    } */
+   #service01,
+   #service02,
+   #service03,
+   #service04,
+   #service05{
+        /* margin-bottom: 15vw; */
+    }
 }
 @media screen and (max-width: 1199px) {
     html, body {
         overflow-x: hidden;
     }
-    .strokeText::before {
+    /* .strokeText::before {
         position: absolute;
         z-index: -1;
         -webkit-text-stroke: 10px #fff;
-        text-stroke: 5px #fff;
-        text-shadow: 1px 1px 10px #94fffa,
+        text-stroke: 15px #fff;
+        text-shadow: 1px 1px 15px #94fffa,
                      1px 1px 15px #94fffa,
-    }
+                     1px 1px 15px #94fffa,
+                     1px 1px 15px #94fffa,
+    } */
     .container{
         width:100%;
     }

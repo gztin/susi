@@ -74,28 +74,38 @@
         justify-content: center;
         align-items: center;
       }
-      .slide > img {
+      .slide_loan > .slick-list > .slick-track > .slide > img {
+        max-width: 450px;
         width: 25vw;
         height: 37vw;
         margin: 0 auto;
       }
-      .slide_Pic > img{
-        max-width: 450px;
-      }
-      .slick-prev, .slick-next {
+      
+      .block_sliderLoan > .sliderButton > .slick-prev,
+      .block_sliderLoan > .sliderButton > .slick-next {
         background-color: #15FFD5;
-        width: 50px;
-        height: 50px;
+        width: 35px;
+        height: 35px;
         display: flex;
         justify-content: center;
         align-items: center;
         position: unset;
       }
-      .slick-prev:before, .slick-next:before {
+      .block_sliderLoan > .sliderButton > .slick-prev:before, 
+      .block_sliderLoan > .sliderButton > .slick-next:before {
         font-family: 'Font Awesome 5 Free';
+        background-color: #15FFD5;
+        width: 35px;
+        height: 35px;
         font-weight: 900;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: #033689;
-        font-size: 30px;
+        font-size: 25px;
+      }
+      .block_sliderLoan > .sliderButton{
+        width: 68vw;
       }
       .sliderButton {
         display: flex;
@@ -104,33 +114,26 @@
         margin: 0 auto;
         width: 68%;
       }
-      .slick-dots li.slick-active button {
+      /* .slick-dots li.slick-active button {
         transform: scale(1.5);
-      }
-      .slick-dots {
+      } */
+      .slide_loan > .slick-dots {
         text-align: center;
         margin-top: -20px;
         bottom: 20px;
       }
-      .slick-dots li {
-        display: inline-block;
-        margin: 0 10px;
-      }
       .slick-dots li button {
-        background: #66ACFF;
+        background: url('../sample04/assets/images/common/dot_normal.png') no-repeat center center;
+        background-size: contain;
         border: none;
-        border-radius: 50%;
-        width: 25px;
-        height: 12px;
+        width: 30px;  /* 根據圖片大小調整 */
+        height: 15px; /* 根據圖片大小調整 */
         display: block;
-        border-radius: 5px;
         cursor: pointer;
       }
       .slick-dots li.slick-active button {
-        background: #94fffa;
-      }
-      .slick-dots li button:before {
-        opacity: 0;
+        background: url('../sample04/assets/images/common/dot_active.png') no-repeat center center;
+        background-size: contain;
       }
       .slick-dots li button:before {
         content: none;
@@ -153,20 +156,35 @@
         align-items: center;
         width: 40%;
         margin-left:11vw;
+        position: relative;
+      }
+      .cube{
+          display: flex;
+          justify-content: space-around;
+      }
+      .block_title > .cube > span{
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin: 0 5px; /* 调整间距 */
       }
     </style>
 </head>
 <body>
-    <div class="loanInf">
+    <div class="loanInf" id="service05">
         <div class="block_sliderLoan">
           <div class="block_title">
-            <span class="title_span1"></span>
-            <span class="title_span2"></span>
-            <span class="title_span1"></span>
-            <div class="title">貸款申請</div>
-            <span class="title_span1"></span>
-            <span class="title_span2"></span>
-            <span class="title_span1"></span>
+            <div class="cube">
+              <span class="title_span1"></span>
+              <span class="title_span2"></span>
+              <span class="title_span1"></span>
+          </div>
+          <div class="title">貸款申請</div>
+          <div class="cube">
+              <span class="title_span1"></span>
+              <span class="title_span2"></span>
+              <span class="title_span1"></span>
+          </div>
         </div>
         <div class="slide_loan">
             <div class="slide slide1">
@@ -195,15 +213,15 @@
     <script>
       $(document).ready(function() {
     // 初始化 線上申辦 Slider
-    $('#service04 .slide_loan').slick({
+    $('#service05 .slide_loan').slick({
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         dots: true,
         centerMode: true,
         centerPadding: '30px',
-        prevArrow: '#service04 .slick-prev',
-        nextArrow: '#service04 .slick-next',
+        prevArrow: '#service05 .slick-prev',
+        nextArrow: '#service05 .slick-next',
         customPaging: function(slider, i) {
             return '<button>' + (i + 1) + '</button>';
         },
@@ -217,7 +235,7 @@
         ]
     }).on('afterChange', function(event, slick, currentSlide){
         let titles = ['貸款申請', '繳款方式', '帳務查詢', '進度查詢'];
-        $('#service04 .title').text(titles[currentSlide % titles.length]);
+        $('#service05 .title').text(titles[currentSlide % titles.length]);
     });
 });
     </script>
