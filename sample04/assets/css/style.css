@@ -1025,6 +1025,9 @@
     .animation_1024{
         display: none;
     }
+    .agentLink{
+        display: none;
+    }
     .agentButton_1024{
         display: none;
     }
