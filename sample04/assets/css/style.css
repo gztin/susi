@@ -34,7 +34,7 @@
     position: relative;
     align-items: center;
     top:9vw;
-    left:16vw;
+    left:10vw;
 }
 .brand{
     width:500px;
@@ -942,7 +942,7 @@
    .animation_1024{
         display: flex;
         margin-top:20vw;
-        margin-left:15vw;
+        margin-left:10vw;
    }
    .animation_768{
         display: flex;
