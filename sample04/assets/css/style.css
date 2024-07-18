@@ -2334,7 +2334,7 @@ html, body {
         flex-wrap: wrap; /* 允許換行 */
     }
     .creditInf {
-        height:800px;
+        height:600px;
         position: relative;
     }
     .Block_service{
@@ -2408,6 +2408,9 @@ html, body {
     .serviceImg > .hint {
         width:100%;
         height:23vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     #content1 > .serviceImg{
         background-image: url(../images/background/card_1_360.png);
@@ -2474,31 +2477,47 @@ html, body {
     }
     
     .creditInf > .button_slideService,.service_Digital > .button_slideService{
-        bottom:13vw;
+        bottom:0vw;
     } 
     .slick-dotted.slick-slider {
-        height:650px;
+        height:480px;
     }
     .slick-dots {
-        bottom:22vw;
+        bottom:12vw;
     }
-    /* .slide_digital > .slick-dots{
-        bottom:22vw;
-    } */
-
+    .service_Digital{
+        background-image: url(../images/background/bg_digitalService_C.png);
+        height:600px;
+    }
+    .slide > img{
+        max-width:65vw;
+    }
     .block_title{
         scale:0.85;
     }
+    .slick-prev{
+        left:12.2vw;
+    }
+    .slick-next{
+        right:12.2vw;
+    }
     .slider_loan > .block_title{
-        scale:0.65;
+        scale:1;
     }
     .block_title > .cube > span{
         width: 12px;
         height:12px;
     }
     .slider_loan > .block_title > .cube > span{
-        width: 12px;
-        height: 12px;
+        width: 6px;
+        height: 6px;
+        margin:0 3px;
+    }
+    .creditInf > .block_title > .title, .service_Digital > .block_title > .title{
+        font-size: 6.5vw;
+    }
+    .slider_loan > .block_title > .title{
+        font-size: 4.5vw;
     }
     /* .slider_loan > .slick-prev, .slider_loan > .slick-next{
         width:35px;
@@ -2519,11 +2538,11 @@ html, body {
     /* footerInf */
     .placeA {
         background-image: url(../images/background/InfB_1c.png);
-        left:12%;
+        left:2%;
       }
       .placeB {
         background-image: url(../images/background/InfB_2c.png);
-        left:-12%;
+        left:-7%;
       }
       .placeC{
         background-image: url(../images/background/infB_3c.png);
@@ -2538,41 +2557,94 @@ html, body {
         height: 13vw;
       }
       .loan{
+        width:100%;
         height:800px;
+      }
+      .slider_loan{
+        height:auto;
       }
       .slider_loan > .slick-slider{
         height: auto;
       }
+      .slider_loan > .slick-slider > .slick-list > .slick-track > .slick-slide img{
+        width:70%;
+    }
+    .slider_loan > .slick-prev,
+    .slider_loan > .slick-next{
+        width:5.5vw;
+        height:5.5vw;
+    }
+    .slider_loan > .slick-prev::before, 
+    .slider_loan > .slick-next::before{
+        width:5.5vw;
+        height:5.5vw;
+    }
+    .slider_loan > .button_slideService {
+        width: 36vw;
+        height: 10vw;
+    }
+    .placeC > .button_slideService{
+        width: 49vw;
+        height: 14vw;
+        bottom:12vw;
+    }
+      
 }
 @media screen and (max-width: 400px){
+    
     .banner{
         background-image: url(../images/banner/KVBackground_360.png);
-        height:560px;
+        height:760px;
     }
+    .serviceImg {
+        height:550px;
+    }
+    .block_invest{
+        height:750px;
+    }
+    
     .Block_service {
         height: 850px;
         padding-top:20vw;
     }
     .creditInf {
-        height:800px;
+        height:600px;
+    }
+    .slick-next {
+        right: 4.2vw;
+    }
+    .slick-prev {
+        left: 4.2vw;
     }
     .agent {
         margin-top: 9vh;
     }
     .agent > .agentPic {
+        width: 70vw;
+        height: 54vw;
+    }
+    /* .agent > .agentPic {
         width: 55vw;
         height: 44vw;
-    }
+    } */
     .sectionA_MenuA {
         height: 670px;
     }
     .block_invest > .linkBlock > .creditCard_button{
         margin-top:85vw;
     }
-    .creditCard_button,.serviceImg > .hint > .creditCard_button, .button_slideService,.block_invest > .linkBlock > .creditCard_button {
+    .creditCard_button,.serviceImg > .hint > .creditCard_button, 
+    .button_slideService,
+    .block_invest > .linkBlock > .creditCard_button {
         width: 60vw;
         height: 17vw;
-    }  
+    }
+    .block_invest > .linkBlock > .creditCard_button{
+        margin-top:57vw;
+    }
+    .slider_loan > .button_slideService{
+        bottom:-11vw;
+    }
 }
 @media screen and (min-width: 1920px) {
     .container{
