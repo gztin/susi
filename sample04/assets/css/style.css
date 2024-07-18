@@ -1458,6 +1458,9 @@ html, body {
     .serviceImg > .space,.serviceImg > .hint > .creditCard_button{
         width:40vw;
         height:11vw;
+        margin: 0 auto;
+        position: absolute;
+        bottom: 11vw;
     }
     .right-align {
         position: absolute;
@@ -1913,7 +1916,7 @@ html, body {
         justify-content: end;
         flex-direction: column;
         align-items: center;
-        width: 95%;
+        width: 84%;
         height: 100vw;
         margin:0 auto;
         margin-bottom: 20vw;
@@ -1940,25 +1943,31 @@ html, body {
     .creditInf > .sliderButton > button.slick-next, 
     .service_Digital > .sliderButton > button.slick-prev,
     .service_Digital > .sliderButton > button.slick-next {
-        width: 55px;
-        height: 55px;
+        width: 3.5vw;
+        height: 3.5vw;
         
     }
     .creditInf > .sliderButton > button.slick-prev:before, 
     .creditInf > .sliderButton > button.slick-next:before,
     .service_Digital > .sliderButton > button.slick-prev:before, 
     .service_Digital > .sliderButton > button.slick-next:before {
-        width: 55px;
-        height: 55px;
+        width: 3.5vw;
+        height: 3.5vw;
     }
     .agentFooterPic {
-        scale:1;
+        scale:0.9;
     }
     .title_loan_pic{
         height:13vw;
     }
     #service02{
         margin-bottom: 5vw;
+    }
+    .block_sub{{
+        margin-top:90px;
+    }
+    .agentFooterPic{
+        /* margin-top:2vw; */
     }
 }
 @media screen and (max-width: 768px){
