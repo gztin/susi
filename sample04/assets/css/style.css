@@ -176,13 +176,6 @@ html, body {
     height:300px;
     background-color: #007fe0;
 }
-.eee{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap:1vw;
-}
 .block_place_inf{
     display: flex;
     flex-direction: column;
@@ -384,7 +377,7 @@ html, body {
     padding-top: 10vw;
     padding-bottom: 5vw;
 }
-.ddd{
+.connect_buttom{
     background: linear-gradient(90deg, 
        #012B7C 0%, 
        #144391 45%,
@@ -392,7 +385,17 @@ html, body {
        #012A7B 100%);
     width: 100%;
     height:5vw;
-    border-bottom: 5px #00ffff solid;
+    border-bottom: 8px #00ffff solid;
+}
+.connect_top{
+    background: linear-gradient(90deg, 
+       #012B7C 0%, 
+       #144391 45%,
+       #074EAB 76%,
+       #012A7B 100%);
+    width: 100%;
+    height:5vw;
+    border-top: 5px #00ffff solid;
 }
 
 .creditCard_button,.button_slideService{
@@ -412,7 +415,17 @@ html, body {
     background-image:url(../images/button/creditService_hover.png);
 }
 
-.background_Connect{
+/* 背景連結 */
+.background_Connect_top{
+    background-image: url(../images/background/body_bg_buttomD.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    width: 30vw;
+    height:5vw;
+    margin: -5px auto;
+}
+.background_Connect_buttom{
     background-image: url(../images/background/body_bg_buttomC.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -505,6 +518,7 @@ html, body {
     height:60px;
     gap:1.5vw;
     justify-content: center;
+    margin:30px auto;
 }
 .creditCard_menu a:hover > span.bt_l {
     background-image: url(../images/button/bt_l_hover.png);
@@ -2537,20 +2551,71 @@ html, body {
         max-width: 100%;
     }
     .animation_1024 {
-        margin-left: 10vw;
+        margin-left: 17vw;
     }
     .sectionA_MenuA{
         background-size: 100% 100%;
         height:35vw;
     }
     .agentLink{
-        margin-left:10vw;
+        margin-left:3vw;
     }
+
+    /* 輪播設定 */
     .block_title{
         scale:2;
         gap:2vw;
     }
     .slick-dots {
         scale:2;
+    }
+    .slide > img {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        margin: 0 auto;
+    }
+    .creditInf > .sliderButton > button.slick-prev, 
+    .creditInf > .sliderButton > button.slick-next, 
+    .service_Digital > .sliderButton > button.slick-prev, 
+    .service_Digital > .sliderButton > button.slick-next {
+        background-color: #15FFD5;
+        width: 55px;
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .slick-prev{
+        left:6.2vw;
+    }
+    .slick-next{
+        right:6.2vw;
+    }
+    .button_slideService{
+        bottom:-1vw;
+    }
+
+    /* 錨點選單 */
+    .custom-button{
+        font-size:1.5vw;
+    }
+
+    /* 信用卡熱門 */
+    .serviceImg{
+        margin-top:5vw;
+        height:49vw;
+    }
+    /* 投資理財 */
+    .block_invest{
+        height:65vw;
+    }
+
+    /* 貸款申請 */
+    .loan {
+        height:56vw;
+    }
+    .slider_loan > .button_slideService{
+        bottom:-18vw;
     }
 }
