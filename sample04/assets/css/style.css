@@ -30,6 +30,9 @@ html, body {
     animation: upAndDown 2s infinite;
     animation-delay: 2s;
 }
+.subTitle .line-break {
+    display: inline;
+}
 .agentLink{
     width:24vw;
     height:24vw;
@@ -913,6 +916,7 @@ html, body {
     text-align: center;
     margin-top: 20px;
     bottom: 3.5vw;
+    scale: 0.8;
 }
 .slider_loan > .slick-dots li {
     display: inline-block;
@@ -2244,9 +2248,6 @@ html, body {
     }
     .full-width-container {
         width: 100%;
-    }
-    .full-width-container {
-        width: 100%;
         display: block;
     }
     .full-width-container img {
@@ -2335,8 +2336,10 @@ html, body {
         display: none;
       }
       .agentFooterPic {
-        height:30vw;
-        scale:0.75;
+        background-image: url(../images/background/agent_768.png);
+        height:33vw;
+        scale:0.95;
+        margin-left:5vw;
       }
 }
 @media screen and (max-width: 980px){
@@ -2969,30 +2972,41 @@ html, body {
     
 }
 @media screen and (max-width: 490px){
-    .strokeText::before {
-        position: absolute;
-        z-index: -1;
-        -webkit-text-stroke: 10px #fff;
-        text-stroke: 5px #fff;
-        text-shadow: 1px 1px 5px #94fffa,
-                     1px 1px 15px #94fffa,
-                     1px 1px 15px #94fffa,
+    #service01{
+        padding-top:0vw;
     }
+    .subTitle .line-break {
+        display: block;
+    }
+    .subTitle {
+        font-size: 4.5vw;
+        line-height: 7vw;
+        margin-top: 0vw;
+    }
+    #service01 > .block_title_Pic > .subTitle{
+        width:59%;
+    }
+    .title_onlineSerivce_pic {
+        height:14vw;
+    }
+    .title_creditCard_pic {
+        height: 14vw;
+    }
+    .title_digital_pic {
+        height: 14vw;
+    }
+    .creditCard_menu{
+        height:7vw;
+    }
+    
     .Block_information {
         /* background-image: url('../images/background/body_bg.png'); */
     }
     .loan{
         background-image:url(../images/background/bg_loanService_C.png);
+        margin-top: 10vw;
     }
-    .title_onlineSerivce_pic {
-        height:20vw;
-    }
-    .title_creditCard_pic {
-        height: 26vw;
-    }
-    .title_digital_pic {
-        height: 22vw;
-    }
+    
     .creditInf > .sliderButton > button.slick-prev,
     .creditInf > .sliderButton > button.slick-next, 
     .service_Digital > .sliderButton > button.slick-prev,
@@ -3124,7 +3138,7 @@ html, body {
     }
     .serviceImg{
         width: 100%;
-        height: 700px;
+        height: 630px;
         margin-bottom: 20vw;
         position: relative;
     }
@@ -3173,11 +3187,7 @@ html, body {
     .strokeText {
         font-size: 10vw;
     }
-    .subTitle {
-        font-size: 4.5vw;
-        line-height: 7vw;
-        margin-top: 8vw;
-    }
+    
     .slide > img {
         max-width: 80vw;
     }
@@ -3206,11 +3216,25 @@ html, body {
         height:480px;
     }
     .slick-dots {
-        bottom:12vw;
+        bottom:9vw;
     }
     .service_Digital{
         background-image: url(../images/background/bg_digitalService_C.png);
         height:600px;
+    }
+    .slider_loan > .slick-slider > ul.slick-dots{
+        scale: 0.7;
+    }
+    .agentFooterPic {
+        background-image: url(../images/background/agent_360.png);
+        background-position-y: 15px;
+    }
+    .placeC {
+        height:540px;
+    }
+    .full-width-container {
+        width:100%;
+        height:34vw;
     }
     .slide > img{
         max-width:65vw;
@@ -3242,15 +3266,7 @@ html, body {
     .slider_loan > .block_title > .title{
         font-size: 4.5vw;
     }
-    /* .slider_loan > .slick-prev, .slider_loan > .slick-next{
-        width:35px;
-        height:35px;
-    }
-    .slider_loan > .slick-prev:before, 
-    .slider_loan > .slick-next:before{
-        width:35px;
-        height:35px;
-    } */
+    
     .slider_loan > .slick-next{
         right:20vw;
     }
@@ -3261,18 +3277,20 @@ html, body {
     /* footerInf */
     .placeA {
         background-image: url(../images/background/InfB_1c.png);
-        left:2%;
+        left:4%;
+        
       }
       .placeB {
         background-image: url(../images/background/InfB_2c.png);
-        left:-7%;
+        left:-8%;
       }
       .placeC{
         background-image: url(../images/background/infB_3c.png);
       }
       .placeA, .placeB {
-        width: 360px;
-        height: 558px;
+        width: 100%;
+        height: 650px;
+        margin-left: 0px;
       }
       .placeA > .button_slideService,.placeB > .button_slideService{
         bottom:4vw;
