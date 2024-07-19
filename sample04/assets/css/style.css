@@ -1961,6 +1961,9 @@ html, body {
     .sectionA_MenuA{
         width:100%;
     }
+    .connect_buttom{
+        margin-top:-1px;
+    }
     .creditInf{
         margin-top:0px;
     }
@@ -3385,6 +3388,13 @@ html, body {
     }
     .slider_loan > .button_slideService{
         bottom:-11vw;
+    }
+    .agentFooterPic {
+        background-image: url(../images/background/agent_360.png);
+        background-position-y: 15px;
+    }
+    .placeA{
+        bottom:26px;
     }
 }
 @media screen and (min-width: 1201px) {
