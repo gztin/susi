@@ -2204,16 +2204,16 @@ html, body {
         right:17.2vw;
     }
     #content1 > .serviceImg{
-        background-image: url(../images/background/card_1_768.png);
+        background-image: url(../images/background/card_1b.png);
     }
     #content2 > .serviceImg{
-        background-image: url(../images/background/card_2_768.png);
+        background-image: url(../images/background/card_2b.png);
     }
     #content3 > .serviceImg{
-        background-image: url(../images/background/card_3_768.png);
+        background-image: url(../images/background/card_3b.png);
     }
     #content4 > .serviceImg{
-        background-image: url(../images/background/card_4_768.png);
+        background-image: url(../images/background/card_4b.png);
     }
     .serviceImg{
         display: flex;
@@ -2460,16 +2460,16 @@ html, body {
         margin-top: 2.5vw;
     }
     #content1 > .serviceImg{
-        background-image: url(../images/background/card_1_768.png);
+        background-image: url(../images/background/card_1b.png);
     }
     #content2 > .serviceImg{
-        background-image: url(../images/background/card_2_768.png);
+        background-image: url(../images/background/card_2b.png);
     }
     #content3 > .serviceImg{
-        background-image: url(../images/background/card_3_768.png);
+        background-image: url(../images/background/card_3b.png);
     }
     #content4 > .serviceImg{
-        background-image: url(../images/background/card_4_768.png);
+        background-image: url(../images/background/card_4b.png);
     }
     .serviceImg{
         display: flex;
