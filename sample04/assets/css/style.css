@@ -2515,6 +2515,21 @@ html, body {
     .test{
         width:80%;
     }
+    .subTitle {
+        font-size: 22px;
+    }
+    .block_invest {
+        height:1100px;
+    }
+    .block_invest > .linkBlock > .creditCard_button{
+        margin-top:19vw;
+    }
+    .connect_top{
+        margin-top:1px;
+    }
+    .connect_buttom{
+        margin-top:-1px;
+    }
     /* Block_banner */
     .animation_1024{
         display: none;
