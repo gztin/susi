@@ -84,74 +84,42 @@ html, body {
     box-shadow: 1px 2px 3px #94fffa ;
 }
 
-/* 文字CSS */
-.strokeText{
-    color:#013397;
-    font-size:4vw;
-    font-weight: bold;
-    -webkit-text-stroke: 0.5px #fff;
-    text-stroke: 0.5px #fff;
-    line-height: normal;
-    
-}
-.strokeText::before {
-    content: attr(data-storke);
-    font-weight: bold;
-}
-.strokeText::before {
-    position: absolute;
-    z-index: -1;
-    -webkit-text-stroke: 10px #fff;
-    text-stroke: 10px #fff;
-    text-shadow: 1px 1px 15px #94fffa,1px 1px 15px #94fffa,1px 1px 15px #94fffa,1px 1px 15px #94fffa;
-}
+
 .subTitle{
     color:#fff;
     font-weight: bold;
-    font-size: 2vw;
+    font-size: 25px;
     text-align: center;
     line-height: normal;
-    margin-top:1.5vw;
+    margin-top:10px;
 }
 .block_title_Pic{
-    width:50vw;
-    height:10vw;
+    width:100%;
+    height:90px;
     margin:0 auto;
+    margin-bottom: 50px;
+}
+.title_pic{
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width:100%;
+    height:76px;
 }
 .title_onlineSerivce_pic{
-    background-image:url(../images/common/title_onlineService_A.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height: 7vw;
-    width: 60%;
+    background-image:url(../images/background/title_service_A.png);
 }
 .title_digital_pic{
-    background-image:url(../images/common/title_digitalService_A.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height:10vw;
+    background-image:url(../images/background/title_service_C.png);
 }
 .title_creditCard_pic{
-    background-image:url(../images/common/title_creditCard_A.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height:10vw;
-    width:36vw;
+    background-image:url(../images/background/title_service_B.png);
 }
 .title_loan_pic{
-    background-image:url(../images/common/title_loanService_B.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height:10vw;
-    width:40vw;
-    display: none;
+    background-image:url(../images/background/title_service_D.png);
 }
-
-.titleGroup{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+#service05 > .block_title_Pic{
+    display: none;
 }
 
 #service01,
@@ -187,15 +155,6 @@ html, body {
     width:100%;
     height:20vw;
 }
-/* .placeA{
-    background: #c30;
-}
-.placeB{
-    background: green;
-}
-.placeC{
-    background: blue;
-} */
 
 .block_agent{
     display: none;
@@ -275,7 +234,7 @@ html, body {
     background-size: contain;
     background-repeat: no-repeat ;
     background-position: center;
-    width: 100%;
+    width: 1200px;
     height: 500px;
     margin: 0 auto;
     margin-top:10vh;
@@ -299,6 +258,7 @@ html, body {
 .serviceA_MenuButton > button{
     width: 12.5vw;
     height:3.5vw;
+    font-size: 22px;
 }
 
 .bt_l,.bt_r{
@@ -323,46 +283,6 @@ html, body {
 .serviceA_MenuButton button:hover > span.bt_r {
     background-image: url(../images/button/bt_r_hover.png);
 }
-/* .serviceA_MenuButton > button:nth-child(1){
-    background-image: url(../images/button/sectionA_1_default.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-.serviceA_MenuButton > button:nth-child(1):hover{
-    background-image: url(../images/button/sectionA_1_hover.png);
-} */
-/* .serviceA_MenuButton > button:nth-child(2){
-    background-image: url(../images/button/sectionA_2_default.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-.serviceA_MenuButton > button:nth-child(2):hover{
-    background-image: url(../images/button/sectionA_2_hover.png);
-}
-.serviceA_MenuButton > button:nth-child(3){
-    background-image: url(../images/button/sectionA_3_default.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-.serviceA_MenuButton > button:nth-child(3):hover{
-    background-image: url(../images/button/sectionA_3_hover.png);
-}
-.serviceA_MenuButton > button:nth-child(4){
-    background-image: url(../images/button/sectionA_4_default.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-.serviceA_MenuButton > button:nth-child(4):hover{
-    background-image: url(../images/button/sectionA_4_hover.png);
-}
-.serviceA_MenuButton > button:nth-child(5){
-    background-image: url(../images/button/sectionA_5_default.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-.serviceA_MenuButton > button:nth-child(5):hover{
-    background-image: url(../images/button/sectionA_5_hover.png);
-} */
 .Block_information{
     /* background-image: url(../images/background/body_bg.png); */
     background: linear-gradient(90deg, 
@@ -417,7 +337,7 @@ html, body {
 
 /* 背景連結 */
 .background_Connect_top{
-    background-image: url(../images/background/body_bg_buttomD.png);
+    background-image: url(../images/background/body_bg_topConnect.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -512,7 +432,7 @@ html, body {
     display: block;
 }
 .creditCard_menu {
-    margin-top: 20px;
+    margin-top: 45px;
     display:flex;
     width:75%;
     height:60px;
@@ -532,7 +452,7 @@ html, body {
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
-    height:38vw;
+    height:850px;
 }
 #content1 > .serviceImg{
     background-image: url(../images/background/card_1a.png);
@@ -574,18 +494,6 @@ html, body {
     justify-content: space-between;
     align-items: center;
 }
-
-/* .card_Service[data-bg="service2"] {
-    background-image: url('../images/button/creditCard_service_2.png');
-}
-
-.card_Service[data-bg="service3"] {
-    background-image: url('../images/button/creditCard_service_3.png');
-}
-
-.card_Service[data-bg="service4"] {
-    background-image: url('../images/button/creditCard_service_4.png');
-} */
 .card_Service.active[data-bg="service1"],
 .card_Service.active[data-bg="service2"],
 .card_Service.active[data-bg="service3"],
@@ -601,26 +509,9 @@ html, body {
 .card_Service.active[data-bg="service1"] > span.bt_r{
     background-image: url(../images/button/bt_r_hover.png);
 }
-/* .card_Service.active[data-bg="service1"] {
-    background-image: url('../images/button/creditCard_service_1_active.png');
-}
-
-.card_Service.active[data-bg="service2"] {
-    background-image: url('../images/button/creditCard_service_2_active.png');
-}
-
-.card_Service.active[data-bg="service3"] {
-    background-image: url('../images/button/creditCard_service_3_active.png');
-}
-
-.card_Service.active[data-bg="service4"] {
-    background-image: url('../images/button/creditCard_service_4_active.png');
-} */
 
 /* 隱藏未選擇的內容 */
-.container{
-    max-width: 1200px;
-}
+
 .content {
     display: none;
 }
@@ -667,14 +558,24 @@ html, body {
 .creditInf{
     background-image: url(../images/background/bg_onlineService_A.png);
     width: 100%;
-    height: 47vw;
+    height: 900px;
 }
 .service_Digital{
     background-image: url(../images/background/bg_digitalService_A.png);
     width: 100%;
-    height: 48vw;
+    height: 900px;
 }
-
+.loan{
+    background-image:url(../images/background/bg_loanService.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width:100%;
+    height:1000px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .block_invest{
     background-image: url(../images/background/invest_1024.png);
     background-size: 100% 100%;
@@ -683,11 +584,11 @@ html, body {
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    height: 50vw;
+    height: 1150px;
 }
 .block_invest > .linkBlock > .creditCard_button{
     margin-top: 7vw;
-    margin-left: 7vw;
+    margin-left: 11vw;
     width: 20vw;
     height: 5.5vw;
 }
@@ -785,24 +686,17 @@ html, body {
 }
 
 .slick-next {
-    right: 4.2vw;
+    right: 5.5vw;
     font-weight: bold;
 }
 .slick-prev {
-    left: 4.2vw;
+    left: 5.5vw;
     font-weight: bold;
 }
-
-/* .slick-dots li.slick-active button {
-    transform: scale(1.5);
-} */
-/* .slick-dots li.slick-active button:before {
-    color: red; 
-} */
 .slick-dots {
     text-align: center;
     margin-top:-20px;
-    bottom: 20px;
+    bottom: 60px;
 }
 .slick-dots li {
     display: inline-block;
@@ -821,19 +715,6 @@ html, body {
     background: url('../images/common/dot_active.png') no-repeat center center;
     background-size: contain;
 }
-/* .slick-dots li button {
-    background: #66ACFF;
-    border: none;
-    border-radius: 50%;
-    width: 25px;
-    height: 12px;
-    display: block;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.slick-dots li.slick-active button {
-    background: #94fffa;
-} */
 .slick-dots li button:before {
     opacity: 0;
 }
@@ -954,17 +835,6 @@ html, body {
     width: 100%;
     height: 70vw;
 }
-.loan{
-    background-image:url(../images/background/bg_loanService.png);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    width:100%;
-    height:42vw;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 .slider_loan {
     /* background-color: #333; */
     width: 50%;
@@ -1071,7 +941,7 @@ html, body {
     background-size: contain;
     background-repeat: no-repeat ;
     margin:0 auto;
-    bottom:-5vw;
+    bottom:-11vw;
 }
 .slider_loan > .slick-slider > .slick-list > .slick-track > .slick-slide img {
     max-width: 80%;
@@ -1091,6 +961,936 @@ html, body {
 /* update end */
 
 @media screen and (min-width: 1200px) {
+    .container{
+        max-width: 1500px;
+    }
+    .agentLink{
+        width:24vw;
+        height:24vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        align-items: center;
+        top:9vw;
+        left:18vw;
+    }
+    .brand{
+        width:100%;
+        height:40vw;
+        background-image:url(../images/common/agentPic.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+    .banner{
+        width:100%;
+        height:60vw;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        position: relative;
+    }
+    .button-reset {
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+        outline: none;
+    }
+    .custom-button {
+        width: 12.5vw;
+        height:3.5vw;
+        background-color: #013397;
+        color: #fff;
+        text-decoration: none;
+        border: #94fffa solid 1px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .custom-button:hover{
+        background-color: #94fffa;
+        color:#013397;
+        border:#013397 solid 1px;
+        box-shadow: 1px 2px 3px #94fffa ;
+    }
+    
+    
+    .subTitle{
+        color:#fff;
+        font-weight: bold;
+        font-size: 25px;
+        text-align: center;
+        line-height: normal;
+        margin-top:10px;
+    }
+    .block_title_Pic{
+        width:100%;
+        height:90px;
+        margin:0 auto;
+        margin-bottom: 50px;
+    }
+    .title_pic{
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        width:100%;
+        height:76px;
+    }
+    .title_onlineSerivce_pic{
+        background-image:url(../images/background/title_service_A.png);
+    }
+    .title_digital_pic{
+        background-image:url(../images/background/title_service_C.png);
+    }
+    .title_creditCard_pic{
+        background-image:url(../images/background/title_service_B.png);
+    }
+    .title_loan_pic{
+        background-image:url(../images/background/title_service_D.png);
+    }
+    #service05 > .block_title_Pic{
+        display: none;
+    }
+    
+    #service01,
+    #service02,
+    #service03,
+    #service04,
+    #service05{
+        margin-bottom:20vw;
+    }
+    #service01{
+        padding-top:10vw;
+    }
+    #service05{
+        /* margin-bottom: 0vw; */
+    }
+    .title_loanService{
+        background-image:url(../images/common/title_loanService_B.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+    .bbb{
+        height:300px;
+        background-color: #007fe0;
+    }
+    .block_place_inf{
+        display: flex;
+        flex-direction: column;
+    }
+    .block_sub{
+        display: flex;
+    }
+    .placeA,.placeB,.placeC{
+        width:100%;
+        height:20vw;
+    }
+    
+    .block_agent{
+        display: none;
+        justify-content: center;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .block_invest{
+        margin-top:10vw;
+        margin-bottom: 10vw;
+    }
+    .block_boss{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .agent{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 4vh;
+    }
+    .agentPic{
+        width: 320px;
+        height:265px;
+        background-image:url(../images/common/agentPic.png);
+        background-size: contain;
+        background-repeat: no-repeat ;
+    }
+    
+    .agentButton,.agentButton_1024{
+        width:200px;
+        height:100px;
+        background-image:url(../images/common/button_agent.png);
+        background-size: contain;
+        background-repeat: no-repeat ;
+    }
+    .bossRighthand{
+        width:115px;
+        height:90px;
+        margin-bottom: 14vh;
+    }
+    .bossLefthand{
+        width:115px;
+        height:90px;
+        margin-right: 5vw;
+    }
+    .boss{
+        background-image:url(../images/common/bossYuan.png);
+        background-size: contain;
+        background-repeat: no-repeat ;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:600px;
+        height:800px;
+    }
+    .boss > .bossBackground{
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        height: 465px;
+    }
+    .block_boss > .agentButton{
+        display: none;
+    }
+    .Block_service{
+        background-color: #EBF9FF;
+        width: 100%;
+        z-index: 1;
+    }
+    .sectionA_MenuA{
+        background-image:url(../images/common/sectionA_1024up.png);
+        background-size: contain;
+        background-repeat: no-repeat ;
+        background-position: center;
+        width: 1200px;
+        height: 500px;
+        margin: 0 auto;
+        margin-top:10vh;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .sectionA_MenuA > .space{
+        width:20vw;
+        height:16vw;
+    }
+    .serviceA_MenuButton{
+        width:90%;
+        display: flex;
+        gap:1vw;
+        justify-content: center;
+        align-items: center;
+    }
+    .serviceA_MenuButton > button{
+        width: 12.5vw;
+        height:3.5vw;
+        font-size: 22px;
+    }
+    
+    .bt_l,.bt_r{
+        background-repeat: no-repeat;
+        background-size: contain;
+        width:1vw;
+        height:1vw;
+    }
+    .bt_l{
+        background-image: url(../images/button/bt_l.png);
+        margin-left: 0.5vw;
+        margin-bottom: 2vw;
+    }
+    .bt_r{
+        background-image: url(../images/button/bt_r.png);
+        margin-right: 0.25vw;
+        margin-top: 2.5vw;
+    }
+    .serviceA_MenuButton button:hover > span.bt_l {
+        background-image: url(../images/button/bt_l_hover.png);
+    }
+    .serviceA_MenuButton button:hover > span.bt_r {
+        background-image: url(../images/button/bt_r_hover.png);
+    }
+    .Block_information{
+        /* background-image: url(../images/background/body_bg.png); */
+        background: linear-gradient(90deg, 
+           #012B7C 0%, 
+           #144391 45%,
+           #074EAB 76%,
+           #012A7B 100%);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        height:auto;
+        padding-top: 10vw;
+        padding-bottom: 5vw;
+    }
+    .connect_buttom{
+        background: linear-gradient(90deg, 
+           #012B7C 0%, 
+           #144391 45%,
+           #074EAB 76%,
+           #012A7B 100%);
+        width: 100%;
+        height:5vw;
+        border-bottom: 8px #00ffff solid;
+    }
+    .connect_top{
+        background: linear-gradient(90deg, 
+           #012B7C 0%, 
+           #144391 45%,
+           #074EAB 76%,
+           #012A7B 100%);
+        width: 100%;
+        height:5vw;
+        border-top: 5px #00ffff solid;
+    }
+    
+    .creditCard_button,.button_slideService{
+        width:20vw;
+        height:6vw;
+        background-image:url(../images/button/creditService_default.png);
+        background-size: contain;
+        background-repeat: no-repeat ;
+        margin:0 auto;
+    }
+    
+    .button_slideService{
+        width:20.5vw;
+        height:6vw;
+    }
+    .creditCard_button:hover,.button_slideService:hover{
+        background-image:url(../images/button/creditService_hover.png);
+    }
+    
+    /* 背景連結 */
+    .background_Connect_top{
+        background-image: url(../images/background/body_bg_topConnect.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: bottom;
+        width: 30vw;
+        height:5vw;
+        margin: -5px auto;
+    }
+    .background_Connect_buttom{
+        background-image: url(../images/background/body_bg_buttomC.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: bottom;
+        width: 30vw;
+        height:5vw;
+        margin: 0px auto;
+    }
+    .Block_footerInf{
+        background-image: url(../images/background/footer_bg.jpg);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: bottom;
+        width: 100%;
+        height:auto;
+        margin-bottom: 40px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+    .block{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .footerInf_1024{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 600px;
+        height: 900px;
+    }
+    .footerInfA{
+        background-image: url(../images/background/footInfA_1024.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 400px;
+        height:125px;
+    }
+    .footerInfB{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height:750px;
+        margin-top:-20px;
+    }
+    .creditCard{
+        height:800px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .creditCard_title{
+        background-image: url(../images/common/service_credit_title.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 400px;
+        height:125px;
+    }
+    .serviceBlock{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 600px;
+        height: 900px;
+    }
+    /* Slider */
+    .onlineService{
+        height:500px;
+    }
+    /* end slider */
+    
+    /* tapView */
+    .content {
+        display: none;
+        margin-top: 20px;
+        width:100%;
+    }
+    .content.active {
+        display: block;
+    }
+    .creditCard_menu {
+        margin-top: 45px;
+        display:flex;
+        width:75%;
+        height:60px;
+        gap:1.5vw;
+        justify-content: center;
+        margin:30px auto;
+    }
+    .creditCard_menu a:hover > span.bt_l {
+        background-image: url(../images/button/bt_l_hover.png);
+    }
+    .creditCard_menu a:hover > span.bt_r {
+        background-image: url(../images/button/bt_r_hover.png);
+    }
+    /* 信用卡顯示資訊 */
+    .serviceImg{
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 100%;
+        height:850px;
+    }
+    #content1 > .serviceImg{
+        background-image: url(../images/background/card_1a.png);
+    }
+    #content2 > .serviceImg{
+        background-image: url(../images/background/card_2a.png);
+    }
+    #content3 > .serviceImg{
+        background-image: url(../images/background/card_3a.png);
+    }
+    #content4 > .serviceImg{
+        background-image: url(../images/background/card_4a.png);
+    }
+    
+    .serviceImg > .hint{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* 按鈕背景圖片 */
+    .card_Service {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 100%;
+        height:4vw;
+        font-size: 1.5vw;
+        font-weight: 400;
+    }
+    .card_Service[data-bg="service1"],
+    .card_Service[data-bg="service2"],
+    .card_Service[data-bg="service3"],
+    .card_Service[data-bg="service4"] {
+        background-color: #013397;
+        color:#fff;
+        text-decoration: none;
+        border:#94fffa solid 1px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .card_Service.active[data-bg="service1"],
+    .card_Service.active[data-bg="service2"],
+    .card_Service.active[data-bg="service3"],
+    .card_Service.active[data-bg="service4"]{
+        background-color: #94fffa;
+        color:#013397;
+        border:#013397 solid 2px;
+        box-shadow: 1px 2px 3px #94fffa ;
+    }
+    .card_Service.active[data-bg="service1"] > span.bt_l{
+        background-image: url(../images/button/bt_l_hover.png);
+    }
+    .card_Service.active[data-bg="service1"] > span.bt_r{
+        background-image: url(../images/button/bt_r_hover.png);
+    }
+    
+    /* 隱藏未選擇的內容 */
+    
+    .content {
+        display: none;
+    }
+    
+    .content.active {
+        display: block;
+    }
+    /* end Tap view */
+    
+    .test{
+        width:19%;
+    }
+    .a01{
+        background-image:url(../images/background/InfB_1.png);
+    }
+    .a02{
+        background-image:url(../images/background/InfB_2.png);
+    }
+    .a03{
+        background-image:url(../images/background/InfB_3.png);
+    }
+    
+    
+    .full-width-img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .full-width-container {
+        width: 50%;
+        padding: 0;
+        margin: 0 auto;
+        padding-top:10vw;
+    }
+    
+    /* slider */
+    .creditInf,.service_Digital {
+        margin: 20px auto;
+        background-size: 100% 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .creditInf{
+        background-image: url(../images/background/bg_onlineService_A.png);
+        width: 100%;
+        height: 900px;
+    }
+    .service_Digital{
+        background-image: url(../images/background/bg_digitalService_A.png);
+        width: 100%;
+        height: 900px;
+    }
+    .loan{
+        background-image:url(../images/background/bg_loanService.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        width:100%;
+        height:1000px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .block_invest{
+        background-image: url(../images/background/invest_1024.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        height: 1150px;
+    }
+    .block_invest > .linkBlock > .creditCard_button{
+        margin-top: 7vw;
+        margin-left: 11vw;
+        width: 20vw;
+        height: 5.5vw;
+    }
+    .cube{
+        display: flex;
+        justify-content: space-around;
+    }
+    .title{
+      color:#fff;
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .block_title{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top:2vw;
+      gap:4vw;
+    }
+    .block_title > .cube > span{
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin: 0 5px; /* 调整间距 */
+    }
+    .title_span1{
+      background-color:#15FFD5;
+      opacity: 0.3;
+    }
+    .title_span2{
+      background-color:#15FFD5;
+    }
+    .slick-dotted .slick-slider {
+        margin-bottom: 0px;
+    }
+    .slider {
+      width: 83%;
+      height: 32vw;
+      margin: 20px auto;
+      position: relative;
+    }
+    
+    .slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        margin: 0 10px;
+        transition: transform 0.5s;
+    }
+    .slide > img{
+        width: 100%;
+        max-width: 400px; /* Add max-width to control the size */
+        height: auto; /* 確保圖片按比例縮放 */
+        margin: 0 auto;
+    }
+    
+    .slide_Pic > img{
+        max-width: 450px;
+        width: 25vw;
+        height: 37vw;
+    }
+    .sliderButton{
+        display: flex;
+        justify-content: space-around;
+        position: absolute;
+        margin: 0 auto;
+        width: 100%;
+    }
+    .creditInf > .sliderButton > button.slick-prev,
+    .creditInf > .sliderButton > button.slick-next, 
+    .service_Digital > .sliderButton > button.slick-prev,
+    .service_Digital > .sliderButton > button.slick-next {
+        background-color:#15FFD5;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .creditInf > .sliderButton > button.slick-prev:before, 
+    .creditInf > .sliderButton > button.slick-next:before,
+    .service_Digital > .sliderButton > button.slick-prev:before, 
+    .service_Digital > .sliderButton > button.slick-next:before {
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        color:#033689;
+        background-color:#15FFD5;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .slick-next {
+        right: 5.5vw;
+        font-weight: bold;
+    }
+    .slick-prev {
+        left: 5.5vw;
+        font-weight: bold;
+    }
+    .slick-dots {
+        text-align: center;
+        margin-top:-20px;
+        bottom: 60px;
+    }
+    .slick-dots li {
+        display: inline-block;
+        margin: 0 10px; /* Increase margin for more spacing */
+    }
+    .slick-dots li button {
+        background: url('../images/common/dot_normal.png') no-repeat center center;
+        background-size: contain;
+        border: none;
+        width: 30px;  /* 根據圖片大小調整 */
+        height: 15px; /* 根據圖片大小調整 */
+        display: block;
+        cursor: pointer;
+      }
+    .slick-dots li.slick-active button {
+        background: url('../images/common/dot_active.png') no-repeat center center;
+        background-size: contain;
+    }
+    .slick-dots li button:before {
+        opacity: 0;
+    }
+    .slick-dots li button:before {
+        content: none;
+    }
+    .slick-center .slide {
+        transform: scale(1.5); /* Scale center slide */
+    }
+    .slide:not(.slick-center) {
+        transform: scale(0.8); /* Default scale for non-center slides */
+        margin-top:3vw;
+        opacity: 0.5;
+    }
+    .slick-list {
+      scale: 0.85;
+    }
+    
+    /* footerInf */
+    .block_place_inf{
+        display: flex;
+        flex-direction: column;
+        width:100%;
+        margin-top: -3vw;
+        margin-bottom:20vw;
+    }
+    .block_sub{
+        display: flex;
+        width: 100%;
+        position: relative;
+        height: 56vw;
+    }
+    .placeA, .placeB{
+        width:50%;
+        height:60vw;
+        display: block;
+        position: absolute; /* 相對定位 */
+        background-size: 100% 100%;
+    }
+    .placeC {
+        width:96%;
+        height:60vw;
+        display: block;
+        position: relative; /* 相對定位 */
+        background-size: 100% 100%;
+        margin: 0 auto;
+    }
+    .placeA{
+        background-image: url(../images/background/InfB_1.png);
+        padding-left: 3vw;
+        left: 2%;
+    }
+    .placeA > .button_slideService,
+    .placeB > .button_slideService,
+    .placeC > .button_slideService{
+        bottom:4vw;
+    }
+    .placeA > .button_slideService{
+        margin-left:4vw;
+    }
+    .placeB > .button_slideService{
+        left:42%;
+    }
+    .placeB{
+        background-image: url(../images/background/InfB_2.png);
+        left: 48%;
+    }
+    .placeC{
+      background-image: url(../images/background/infB_3.png);
+    }
+    .Block_footerInf{
+        background-image: url(../images/background/footer_bg.jpg);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: bottom;
+        width: 100%;
+        height:auto;
+        margin-bottom: 40px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding-top: 5vw;
+        margin-top:-1px;
+    }
+    .full-width-container {
+        width: 50%;
+        padding: 0;
+        margin: 0 auto;
+        padding-top:10vw;
+        height:15vw;
+    }
+    .button_slideService{
+        width:20vw;
+        height:6vw;
+        background-image:url(../images/button/creditService_default.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat ;
+        margin:0 auto;
+        display: block;
+        position: absolute;
+        left: 50%; /* 水平居中 */
+        transform: translateX(-50%); /* 使元素完全居中 */
+        bottom:1vw;
+    }
+    .button_slideService:hover{
+        background-image:url(../images/button/creditService_hover.png);
+    }
+    .agentFooterPic{
+      background-image:url(../images/common/agent.png);
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+    /* slider end */
+    
+    /* 貸款業務Slider */
+    .container-loan {
+        display: flex;
+        width: 100%;
+        height: 70vw;
+    }
+    .slider_loan {
+        /* background-color: #333; */
+        width: 50%;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+    .slider_loan > .block_title{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2vw;
+        gap: 2vw;
+    }
+    .slider_loan > .block_title > .title {
+        color: #fff;
+        text-align: center;
+        font-size: 32px;
+        font-weight: bold;
+    }
+    .slider_loan > .block_title > .cube > span {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin: 0 5px;
+    }
+    
+    .right {
+        /* background-color: #fff; */
+        width: 37%;
+        height: 100%;
+    }
+    .slider_loan > .slick-slider {
+        width: 90%;
+        margin: auto;
+        margin-bottom: 2vw;
+    }
+    .slider_loan > .slick-prev, .slick-next {
+        background-color: #15FFD5;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+    .slider_loan > .slick-prev {
+        left: 4vw;
+    }
+    .slider_loan > .slick-next {
+        right: 4vw;
+    }
+    .slider_loan > .slick-prev:before, 
+    .slider_loan > .slick-next:before {
+        background-color: #15FFD5;
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        color: #033689;
+        font-size: 25px;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .slider_loan > .slick-initialized .slick-slide{
+        margin-bottom: 2vw;
+      }
+    .slider_loan > .slick-slider > ul.slick-dots {
+        text-align: center;
+        margin-top: 20px;
+        bottom: 3.5vw;
+    }
+    .slider_loan > .slick-dots li {
+        display: inline-block;
+        margin: 0 15px;
+    }
+    .slider_loan > .slick-dots li button {
+        background: url('../images/common/dot_normal.png') no-repeat center center;
+        background-size: contain;
+        border: none;
+        width: 30px;
+        height: 15px;
+        display: block;
+        cursor: pointer;
+    }
+    .slider_loan > .slick-dots li.slick-active button {
+        background: url('../images/common/dot_active.png') no-repeat center center;
+        background-size: contain;
+    }
+    .slider_loan > .slick-dots li button:before {
+        content: none;
+    }
+    .slider_loan > .button_slideService{
+        width:17vw;
+        height:5vw;
+        background-image:url('../images/common/button_agent.png');
+        background-size: contain;
+        background-repeat: no-repeat ;
+        margin:0 auto;
+        bottom:-11vw;
+    }
+    .slider_loan > .slick-slider > .slick-list > .slick-track > .slick-slide img {
+        max-width: 80%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        scale: 0.9;
+    }
+    .slider_loan > .title {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 2em;
+        color: white;
+    }
     .banner{
         background-image:url(../images/banner/KVBackground_1440c.png);
     }
@@ -1129,6 +1929,7 @@ html, body {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top:100px;
    }
    .serviceImg > .space{
         width:20vw;
@@ -1138,33 +1939,29 @@ html, body {
         margin-top: 9vw;
         margin-left: 7vw;
     }
-   /* .block_Place{
-        width: 50vw;
-        padding-top: 5vw;
-        margin-bottom: -2vw;
-        height: 20vw;
-   } */
    
 }
 @media screen and (max-width: 1199px) {
     html, body {
         overflow-x: hidden;
     }
-    /* .strokeText::before {
-        position: absolute;
-        z-index: -1;
-        -webkit-text-stroke: 10px #fff;
-        text-stroke: 15px #fff;
-        text-shadow: 1px 1px 15px #94fffa,
-                     1px 1px 15px #94fffa,
-                     1px 1px 15px #94fffa,
-                     1px 1px 15px #94fffa,
-    } */
     .container{
         width:100%;
     }
     .block_title_Pic {
-        height: 11vw;
+        height: 15vw;
+    }
+    .block_title_Pic {
+        margin-bottom: 0px;
+    }
+    .creditInf{
+        margin-top:0px;
+    }
+    .creditCard_menu{
+        margin-top:8vw;
+    }
+    .loan {
+        margin-top:2.5vw;
     }
     .title_onlineSerivce_pic{
         height:10vw;
@@ -1176,10 +1973,11 @@ html, body {
         height:14vw;
     }
     .subTitle{
-        font-size: 3.5vw;
+        font-size: 30px;
         line-height: 5vw;
         margin-top: 5vw;
         width:80%;
+        margin:0 auto;
     }
     .strokeText{
         font-size:6vw;
@@ -1267,7 +2065,9 @@ html, body {
         height: 1600px;
         background-image:url(../images/banner/KVBackground_768.png);
     }
-
+    #service05 > .block_title_Pic{
+        display: block;
+    }
     /* end Block_banner */
 
     /* Block_service */
@@ -1304,27 +2104,6 @@ html, body {
         margin-right: 0.25vw;
         margin-top: 3vw;
     }
-
-    /* .serviceA_MenuButton > button:nth-child(1){
-        background-image: url(../images/button/sectionA_1_default_long.png);
-        background-position: center;
-    } */
-    /* .serviceA_MenuButton > button:nth-child(2){
-        background-image: url(../images/button/sectionA_2_default_long.png);
-        background-position: center;
-    }
-    .serviceA_MenuButton > button:nth-child(3){
-        background-image: url(../images/button/sectionA_3_default_long.png);
-        background-position: center;
-    }
-    .serviceA_MenuButton > button:nth-child(4){
-        background-image: url(../images/button/sectionA_4_default_long.png);
-        background-position: center;
-    }
-    .serviceA_MenuButton > button:nth-child(5){
-        background-image: url(../images/button/sectionA_5_default_long.png);
-        background-position: center;
-    } */
     /* end Block_service */
     .content {
         margin-top:100px;
@@ -1336,12 +2115,6 @@ html, body {
     .sectionA_MenuA{
         background-image:url(../images/common/sectionA_768.png);
     }
-    /* .block_Place{
-        padding-top: 10vw;
-        padding-left: 14vw;
-        padding-right: 7vw;
-        margin-bottom: -5vw;
-   } */
    .creditInf{
         background-image: url(../images/background/bg_onlineService_B.png);
         height: 100vw;
@@ -1408,15 +2181,6 @@ html, body {
         width: 40vw;
         height: 11vw;
     }
-    /* .slick-prev, .slick-next {
-        width: 3vw; 
-        height: 3vw; 
-    }
-    .slick-prev:before, .slick-next:before {
-        width: 3vw; 
-        height: 3vw;
-        font-size: 3vw;
-    } */
     .slick-prev{
         left:17.2vw;
     }
@@ -1680,27 +2444,6 @@ html, body {
         margin-right: 0.25vw;
         margin-top: 2.5vw;
     }
-    /* .serviceA_MenuButton > button:nth-child(1){
-        background-image: url(../images/button/sectionA_1_default_long.png);
-        background-position: center;
-    } */
-    /* .serviceA_MenuButton > button:nth-child(2){
-        background-image: url(../images/button/sectionA_2_default_long.png);
-        background-position: center;
-    }
-    .serviceA_MenuButton > button:nth-child(3){
-        background-image: url(../images/button/sectionA_3_default_long.png);
-        background-position: center;
-    }
-    .serviceA_MenuButton > button:nth-child(4){
-        background-image: url(../images/button/sectionA_4_default_long.png);
-        background-position: center;
-    }
-    .serviceA_MenuButton > button:nth-child(5){
-        background-image: url(../images/button/sectionA_5_default_long.png);
-        background-position: center;
-    } */
-    /* end Block_service */
     #content1 > .serviceImg{
         background-image: url(../images/background/card_1_768.png);
     }
@@ -1868,27 +2611,6 @@ html, body {
         margin-right: 0.25vw;
         margin-top: 2.5vw;
     }
-    /* .serviceA_MenuButton > button:nth-child(1){
-        background-image: url(../images/button/sectionA_1_default_long.png);
-        background-position: center;
-    } */
-    /* .serviceA_MenuButton > button:nth-child(2){
-        background-image: url(../images/button/sectionA_2_default_long.png);
-        background-position: center;
-    }
-    .serviceA_MenuButton > button:nth-child(3){
-        background-image: url(../images/button/sectionA_3_default_long.png);
-        background-position: center;
-    }
-    .serviceA_MenuButton > button:nth-child(4){
-        background-image: url(../images/button/sectionA_4_default_long.png);
-        background-position: center;
-    }
-    .serviceA_MenuButton > button:nth-child(5){
-        background-image: url(../images/button/sectionA_5_default_long.png);
-        background-position: center;
-    } */
-    /* end Block_service */
     .content {
         margin-top:100px;
     }
@@ -2070,29 +2792,6 @@ html, body {
         margin-right: 0.25vw;
         margin-top: 2.5vw;
     }
-    /* .serviceA_MenuButton > button:nth-child(1){
-        background-color: #007fe0;
-        color:#fff;
-        border:#94fffa solid 2px;
-    }
-    .serviceA_MenuButton > button:nth-child(2){
-        background-image: url(../images/button/sectionA_2_default_long.png);
-        background-position: center;
-    }
-    .serviceA_MenuButton > button:nth-child(3){
-        background-image: url(../images/button/sectionA_3_default_long.png);
-        background-position: center;
-    }
-    .serviceA_MenuButton > button:nth-child(4){
-        background-image: url(../images/button/sectionA_4_default_long.png);
-        background-position: center;
-    }
-    .serviceA_MenuButton > button:nth-child(5){
-        background-image: url(../images/button/sectionA_5_default_long.png);
-        background-position: center;
-    } */
-    /* end Block_service */
-
     .content {
         margin-top:100px;
     }
@@ -2646,7 +3345,7 @@ html, body {
         bottom:-11vw;
     }
 }
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1201px) {
     .container{
         max-width: 100%;
     }
