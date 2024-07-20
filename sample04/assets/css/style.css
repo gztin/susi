@@ -2,7 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
 /* CSS動畫 */
-@keyframes upAndDown {
+@keyframes upAndDownA {
+    0%, 100% {
+        transform: translateY(-20px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+}
+@keyframes upAndDownB {
     0%, 100% {
         transform: translateY(0);
     }
@@ -11,24 +19,16 @@
     }
 }
 .bossRighthand {
-    animation: upAndDown 2s infinite;
-    animation-delay: 2s;
-}
-
-@keyframes upAndDown {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
+    animation: upAndDownA 2s infinite;
+    animation-delay: 3s;
 }
 html, body {
     overflow-x: hidden;
+    background-color: #F4FFFF;
 }
 .bossLefthand {
-    animation: upAndDown 2s infinite;
-    animation-delay: 2s;
+    animation: upAndDownB 2s infinite;
+    animation-delay: 3s;
 }
 .subTitle .line-break {
     display: inline;
@@ -75,16 +75,17 @@ html, body {
     background-color: #013397;
     color: #fff;
     text-decoration: none;
-    border: #94fffa solid 1px;
+    border: #94fffa solid 2px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 1px 2px 10px #94fffa ;
 }
 .custom-button:hover{
     background-color: #94fffa;
     color:#013397;
-    border:#013397 solid 1px;
-    box-shadow: 1px 2px 3px #94fffa ;
+    border:#013397 solid 2px;
+    box-shadow: 1px 2px 10px #94fffa ;
 }
 
 
@@ -166,6 +167,11 @@ html, body {
     left: 50%;
     transform: translateX(-50%);
 }
+.group{
+    position: absolute;
+    margin: 0 auto;
+    bottom: 1vw;
+}
 .block_invest{
     margin-top:10vw;
     margin-bottom: 10vw;
@@ -174,6 +180,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 .agent{
     display: flex;
@@ -194,7 +201,7 @@ html, body {
     width:200px;
     height:100px;
     background-image:url(../images/common/button_agent.png);
-    background-size: contain;
+    background-size: 100% 100%;
     background-repeat: no-repeat ;
 }
 .bossRighthand{
@@ -237,7 +244,7 @@ html, body {
     background-size: contain;
     background-repeat: no-repeat ;
     background-position: center;
-    width: 1200px;
+    max-width: 1200px;
     height: 500px;
     margin: 0 auto;
     margin-top:10vh;
@@ -262,6 +269,7 @@ html, body {
     width: 12.5vw;
     height:3.5vw;
     font-size: 22px;
+    font-weight: bold;
 }
 
 .bt_l,.bt_r{
@@ -1010,16 +1018,17 @@ html, body {
         background-color: #013397;
         color: #fff;
         text-decoration: none;
-        border: #94fffa solid 1px;
+        border: #94fffa solid 2px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        box-shadow: 1px 2px 10px #94fffa ;
     }
     .custom-button:hover{
         background-color: #94fffa;
         color:#013397;
         border:#013397 solid 1px;
-        box-shadow: 1px 2px 3px #94fffa ;
+        box-shadow: 1px 2px 10px #94fffa ;
     }
     
     
@@ -1172,10 +1181,10 @@ html, body {
         background-size: contain;
         background-repeat: no-repeat ;
         background-position: center;
-        width: 1200px;
-        height: 500px;
+        width: 100%;
+        max-width: 1200px;  
         margin: 0 auto;
-        margin-top:10vh;
+        height: 700px;
         position: relative;
         display: flex;
         justify-content: center;
@@ -1183,8 +1192,8 @@ html, body {
         align-items: center;
     }
     .sectionA_MenuA > .space{
-        width:20vw;
-        height:16vw;
+        width: 100%;
+        height: 300px;
     }
     .serviceA_MenuButton{
         width:90%;
@@ -1194,26 +1203,27 @@ html, body {
         align-items: center;
     }
     .serviceA_MenuButton > button{
-        width: 12.5vw;
-        height:3.5vw;
-        font-size: 22px;
+        width: 250px;
+        height: 70px;
+        font-size: 25px;
+        position: relative;
     }
     
     .bt_l,.bt_r{
         background-repeat: no-repeat;
         background-size: contain;
-        width:1vw;
-        height:1vw;
+        width: 24px;
+        height: 18px;
     }
     .bt_l{
         background-image: url(../images/button/bt_l.png);
-        margin-left: 0.5vw;
-        margin-bottom: 2vw;
+        margin-left: 8px;
+        margin-bottom: 35px;
     }
     .bt_r{
         background-image: url(../images/button/bt_r.png);
-        margin-right: 0.25vw;
-        margin-top: 2.5vw;
+        margin-right: 7px;
+        margin-top: 39px;
     }
     .serviceA_MenuButton button:hover > span.bt_l {
         background-image: url(../images/button/bt_l_hover.png);
@@ -1900,8 +1910,9 @@ html, body {
     }
    .agentButton_1024{
         display: block;
-        width: 20vw;
+        width: 18vw;
         height: 10vw;
+        margin-top:10px;
    }
    .agentButton_1024:hover{
         background-image: url('../images/common/button_agent_hover.png');
@@ -1923,10 +1934,6 @@ html, body {
         height:6vw;
         margin-left: 22vw;
         margin-top: 5vw;
-   }
-   .sectionA_MenuA{
-        margin-top:10vw;
-        margin-bottom: 10vw;
    }
    
    .serviceImg{
@@ -1960,6 +1967,7 @@ html, body {
     }
     .sectionA_MenuA{
         width:100%;
+        margin-top:0vw;
     }
     .connect_buttom{
         margin-top:-1px;
@@ -2014,6 +2022,14 @@ html, body {
     .block_agent{
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        /* background: #c30; */
+        height: 1300px;
+        position: relative;
+        width: 70%;
+        margin: 0 auto;
+        position: absolute;
+        /* opacity: 0.4; */
     }
     .agent {
         margin-top: 13vh;
@@ -2023,38 +2039,41 @@ html, body {
         display: none;
     }
     .agent > .agentPic{
-        width: 55vw;
-        height: 43vw;
+        width: 800px;
+        height: 600px;
     }
     .Block_information{
         /* background-image: url('../images/background/body_bg.png'); */
     }
     .block_boss > .agentButton{
         display: block;
-        margin-top:-6vh;
+        margin-top:-100px;
     }
     .block_boss > .agentButton:hover{
         background-image: url('../images/common/button_agent_hover.png');
     }
     .boss {
-        width: 60vw;
-        height: 80vw;
-        margin-top: -14vw;
+        width: 800px;
+        height: 900px;
+        margin-top: -170px;
     }
     .boss > .bossBackground {
         height:415px;
     }
     .bossRighthand{
-        margin-right: 30vw;
-        margin-bottom: 6vw;
+        margin-right: 400px;
+        margin-bottom: 40px;
     }
     .bossLefthand{
-        margin-right: 8vw;
-        margin-top: 13vw;
+        margin-right: 50px;
+        margin-top: 150px;
+    }
+    .bossRighthand,.bossLefthand{
+        scale:1.2;
     }
     .agentButton {
-        width: 33vw;
-        height: 9vw;
+        width: 450px;
+        height: 120px;
     }
     .Block_service{
         background-color: #F4FFFF;
@@ -2072,7 +2091,7 @@ html, body {
         font-size: 3vw;
     }
     .banner{
-        height: 1600px;
+        height: 1500px;
         background-image:url(../images/banner/KVBackground_768.png);
     }
     #service05 > .block_title_Pic{
@@ -2103,7 +2122,7 @@ html, body {
         height: 8vw;
         width: 90%;
         font-size: 3vw;
-        box-shadow: 2px 2px 3px #94fffa ;
+        box-shadow: 0px 0x 8px 0px #94fffa ;
     }
     .bt_l,.bt_r{
         width: 4vw;
@@ -2344,6 +2363,16 @@ html, body {
         scale:0.95;
         margin-left:5vw;
       }
+      .brand{
+        width:700px;
+        height:500px;
+      }
+      /* .agentLink{
+        width:800px;
+        height:800px;
+        background-color: #c60;
+        opacity: 0.5;
+      } */
 }
 @media screen and (max-width: 980px){
     .test{
@@ -2365,6 +2394,7 @@ html, body {
     .block_agent{
         display: flex;
         flex-direction: column;
+        height:1150px;
     }
     .agent {
         margin-top: 13vh;
@@ -2374,32 +2404,35 @@ html, body {
         display: none;
     }
     .agent > .agentPic{
-        width: 50vw;
-        height: 39vw;
+        width: 600px;
+        height: 500px;
     }
     .block_boss > .agentButton{
         display: block;
-        margin-top:-6vh;
+        margin-top:-100px;
     }
     .boss {
-        width: 60vw;
-        height: 80vw;
-        margin-top: -14vw;
+        width: 800px;
+        height: 900px;
+        margin-top: -200px;
     }
     .boss > .bossBackground {
         height:415px;
     }
     .bossRighthand{
-        margin-right: 30vw;
-        margin-bottom: 6vw;
+        margin-right: 420px;
+        margin-bottom: 40px;
     }
     .bossLefthand{
-        margin-right: 8vw;
-        margin-top: 13vw;
+        margin-right: 60px;
+        margin-top: 150px;
     }
     .agentButton {
-        width: 33vw;
-        height: 9vw;
+        width: 365px;
+        height: 100px;
+    }
+    .bossLefthand,.bossRighthand{
+        scale:1.2;
     }
     .Block_service{
         background-color: #F4FFFF;
@@ -2420,14 +2453,14 @@ html, body {
     .banner{
         background-image: url(../images/banner/KVBackground_768.png);
         background-position: 100% 100%;
-        height: 1000px;
+        height: 1300px;
     }
     
     /* end Block_banner */
 
     /* Block_service */
     .Block_service{
-        height:950px;
+        height:1050px;
     }
     .Block_service > .container{
         width:100%;
@@ -2435,6 +2468,8 @@ html, body {
     .sectionA_MenuA{
         background-size: contain;
         height:800px;
+        position: absolute;
+        margin-top: 10vw;
     }
     .serviceA_MenuButton{
         flex-direction: column;
@@ -2443,21 +2478,21 @@ html, body {
     }
     .serviceA_MenuButton > button {
         height: 8vw;
-        width: 95%;
+        width: 90%;
         font-size: 3vw;
-        box-shadow: 2px 2px 10px #94fffa ;
+        box-shadow: 0px 0x 8px 0px #94fffa ;
     }
     .bt_l,.bt_r{
         width: 4vw;
         height: 2vw;
     }
     .bt_l {
-        margin-left: 1.5vw;
-        margin-top: 1vw;
+        margin-left: 0.8vw;
+        margin-top: 0vw;
     }
     .bt_r {
         margin-right: 0.25vw;
-        margin-top: 2.5vw;
+        margin-top: 3.2vw;
     }
     #content1 > .serviceImg{
         background-image: url(../images/background/card_1b.png);
@@ -2561,28 +2596,28 @@ html, body {
         display: none;
     }
     .agent > .agentPic{
-        width: 60vw;
-        height: 49vw;
+        width: 550px;
+        height: 450px;
     }
     .block_boss > .agentButton{
         display: block;
         margin-top:-6vh;
     }
     .boss {
-        width: 60vw;
-        height: 80vw;
-        margin-top: -14vw;
+        width: 600px;
+        height: 800px;
+        margin-top: -170px;
     }
     .boss > .bossBackground {
         height:415px;
     }
     .bossRighthand{
-        margin-right: 30vw;
-        margin-bottom: 6vw;
+        margin-right: 350px;
+        margin-bottom: 50px;
     }
     .bossLefthand{
-        margin-right: 8vw;
-        margin-top: 13vw;
+        margin-right: 55px;
+        margin-top: 100px;
     }
     .block_boss > .agentButton {
         width: 50vw;
@@ -2602,7 +2637,7 @@ html, body {
     .banner{
         background-image: url(../images/banner/KVBackground_768.png);
         background-position: 100% 100%;
-        height: 1200px;
+        height: 1250px;
     }
 
     /* end Block_banner */
@@ -2739,18 +2774,19 @@ html, body {
     }
     .block_agent{
         flex-direction: column;
+        height: 1015px;
     }
     .agent {
         margin-top: 9vh;
         margin-bottom: 0vh;
     }
     .block_boss > .agentButton {
-        width: 50vw;
-        height: 13vw;
+        width: 365px;
+        height: 100px;
     }
     .agent > .agentPic{
-        width: 70vw;
-        height: 55vw;
+        width: 450px;
+        height: 360px;
     }
     .agentButton_1024{
         display: none;
@@ -2759,15 +2795,15 @@ html, body {
         display: none;
     }
     .block_boss{
-        margin-top:-10vh;
+        margin-top:-150px;
     }
     .block_boss > .agentButton{
         display: block;
-        margin-top:-5vh;
+        margin-top:-100px;
     }
     .boss {
-        height: 97vw;
-        width: 80vw;
+        width: 550px;
+        height: 700px;
         margin-top:0;
     }
     .Block_service{
@@ -2784,7 +2820,7 @@ html, body {
     .banner{
         background-image: url(../images/banner/KVBackground_768.png);
         background-position: bottom;
-        height: 1300px;
+        height: 1050px;
     }
     /* end Block_banner */
 
@@ -2910,13 +2946,26 @@ html, body {
 
     /* 輪播 */
     .banner {
-        height:1100px;
+        height:950px;
+    }
+    .agent {
+        margin-top: 14vh;
+    }
+    .agent > .agentPic {
+        width: 400px;
+        height: 314px;
+    }
+    .block_boss {
+        margin-top:-17vw;
     }
     .block_boss > .agentButton {
-        width: 60vw;
-        height: 16vw;
+        width: 365px;
+        height: 100px;
     }
-
+    .block_agent {
+        height:930px;
+    }
+    
     .test{
         width:80%;
     }
@@ -2972,7 +3021,378 @@ html, body {
     .block_invest {
         margin-bottom: 20vw;
     }
+    .boss {
+        width: 400px;
+        height: 680px;
+        margin-top: -10vw;
+    }
+    .bossLefthand, .bossRighthand {
+        scale: 1;
+    }
+    .bossRighthand {
+        margin-right: 250px;
+    }
+}
+@media screen and (max-width: 600px){
+    #service01{
+        padding-top:0vw;
+    }
+    .subTitle .line-break {
+        display: block;
+    }
+    .subTitle {
+        font-size: 4.5vw;
+        line-height: 7vw;
+        margin-top: 0vw;
+    }
+    #service01 > .block_title_Pic > .subTitle{
+        width:59%;
+    }
+    .title_onlineSerivce_pic {
+        height:14vw;
+    }
+    .title_creditCard_pic {
+        height: 14vw;
+    }
+    .title_digital_pic {
+        height: 14vw;
+    }
+    .creditCard_menu{
+        height:7vw;
+    }
     
+    .Block_information {
+        /* background-image: url('../images/background/body_bg.png'); */
+    }
+    .loan{
+        background-image:url(../images/background/bg_loanService_C.png);
+        margin-top: 10vw;
+    }
+    
+    .creditInf > .sliderButton > button.slick-prev,
+    .creditInf > .sliderButton > button.slick-next, 
+    .service_Digital > .sliderButton > button.slick-prev,
+    .service_Digital > .sliderButton > button.slick-next {
+        width: 35px;
+        height: 35px;
+        
+    }
+    .creditInf > .sliderButton > button.slick-prev:before, 
+    .creditInf > .sliderButton > button.slick-next:before,
+    .service_Digital > .sliderButton > button.slick-prev:before, 
+    .service_Digital > .sliderButton > button.slick-next:before {
+        width: 35px;
+        height: 35px;
+    }
+    .test{
+        width:80%;
+    }
+    /* Block_banner */
+    .block_agent{
+        flex-direction: column;
+        height:600px;
+    }
+    .agent {
+        margin-top: 13vh;
+        margin-bottom: 0vh;
+    }
+    .agent > .agentPic {
+        width: 68vw;
+        height: 54vw;
+    }
+    .agent > .agentButton{
+        display: none;
+    }
+    .agentButton_1024{
+        display: none;
+    }
+    .block_boss{
+        margin-top:-15vh;
+    }
+    .block_boss > .agentButton{
+        display: block;
+        margin-top:-16vh;
+        width: 73vw;
+        height: 19vw;
+    }
+    .boss {
+        margin-top: -4vh;
+        margin-left:4vw;
+        width: 72vw;
+        height: 119vw;
+    }
+    .bossRighthand,.bossLefthand {
+        width: 17vw;
+        height: 13vw;
+    }
+    .bossRighthand {
+        margin-right: 43vw;
+        margin-bottom: 6vw;
+    }
+    .creditCard_menu {
+        width:100%;
+        flex-wrap: wrap; /* 允許換行 */
+    }
+    .creditInf {
+        height:600px;
+        position: relative;
+    }
+    .Block_service{
+        background-color: #F4FFFF;
+        margin-bottom: 20vw;
+    }
+    .creditCard_menu a {
+        flex: 0 0 calc(50% - 10px); /* 每個按鈕佔50%的寬度，減去間距 */
+        margin-bottom: 10px; /* 下方間距 */
+        height: 11vw;
+        font-size: 4vw;
+    }
+    .creditCard_menu > a:nth-child(2),.creditCard_menu > a:nth-child(4){
+        column-gap: 0;
+    }
+    .banner{
+        background-image: url(../images/banner/KVBackground_360.png);
+        height:930px;
+    }
+    /* end Block_banner */
+
+    /* Block_service */
+    .Block_service > .container{
+        width:100%;
+    }
+    .serviceA_MenuButton{
+        flex-direction: column;
+    }
+    .serviceA_MenuButton > button {
+        height:13vw;
+        font-size: 4vw;;
+    }
+    /* end Block_service */
+
+    .content {
+        margin-top:100px;
+    }
+    .card_Service {
+        background-size: cover;
+        height: 90px;
+    }
+    .sectionA_MenuA{
+        background-image:url(../images/common/sectionA_480.png);
+        background-size: 100% 100%;
+        width:100%;
+        height:900px;
+        margin-top:20vw;
+        position: relative;
+    }
+    .serviceA_MenuButton {
+        flex-direction: column;
+        gap: 4vw;
+        margin-top: 0vw;
+        position: absolute;
+        bottom: 16vw;
+    }
+    .custom-button:hover{
+        background-color: inherit; /* 繼承父元素的背景顏色 */
+        color: inherit; /* 繼承父元素的文字顏色 */
+    }
+    .service_creditCard{
+        padding-left:0px;
+        padding-right:0px;
+    }
+    .serviceImg{
+        width: 100%;
+        height: 630px;
+        margin-bottom: 20vw;
+        position: relative;
+    }
+    .serviceImg > .hint {
+        width:100%;
+        height:23vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #content1 > .serviceImg{
+        background-image: url(../images/background/card_1_360.png);
+    }
+    #content2 > .serviceImg{
+        background-image: url(../images/background/card_2_360.png);
+    }
+    #content3 > .serviceImg{
+        background-image: url(../images/background/card_3_360.png);
+    }
+    #content4 > .serviceImg{
+        background-image: url(../images/background/card_4_360.png);
+    }
+    
+    .creditCard_button {
+        width: 44vw;
+        height: 13vw;
+        margin-top:-6vw;
+    }
+    .block_invest {
+        background-image: url(../images/background/invest_360.png);
+        width: 100%;
+        height: 900px;
+    }
+    .block_invest > .linkBlock {
+        height:70vw;
+    }
+    .block_invest > .linkBlock > .creditCard_button {
+        margin-top: 60vw;
+        width: 44vw;
+        height: 13vw;
+    }
+    .creditInf {
+        margin-bottom: 20vw;
+        margin-top: 13vw;
+    }
+    .strokeText {
+        font-size: 10vw;
+    }
+    
+    .slide > img {
+        max-width: 80vw;
+    }
+    .slick-prev, .slick-next {
+        width: 8vw; /* Increased size */
+        height: 8vw; /* Increased size */
+    }
+    .slick-prev:before, .slick-next:before {
+        width: 8vw; /* Increased size */
+        height: 8vw; /* Increased size */
+        font-size: 4vw;
+    }
+    .slick-dotted.slick-slider {
+        margin-bottom: 0px !important;
+        height: 570px;
+    }
+    .creditCard_button,.serviceImg > .hint > .creditCard_button, .button_slideService,.block_invest > .linkBlock > .creditCard_button {
+        width: 60vw;
+        height: 17vw;
+    }
+    
+    .creditInf > .button_slideService,.service_Digital > .button_slideService{
+        bottom:0vw;
+    } 
+    .slick-dotted.slick-slider {
+        height:480px;
+    }
+    .slick-dots {
+        bottom:9vw;
+    }
+    .service_Digital{
+        background-image: url(../images/background/bg_digitalService_C.png);
+        height:600px;
+    }
+    .slider_loan > .slick-slider > ul.slick-dots{
+        scale: 0.7;
+    }
+    .agentFooterPic {
+        background-image: url(../images/background/agent_360.png);
+        background-position-y: 15px;
+    }
+    .placeC {
+        height:540px;
+    }
+    .full-width-container {
+        width:100%;
+        height:34vw;
+    }
+    .slide > img{
+        max-width:65vw;
+    }
+    .block_title{
+        scale:0.85;
+    }
+    .slick-prev{
+        left:12.2vw;
+    }
+    .slick-next{
+        right:12.2vw;
+    }
+    .slider_loan > .block_title{
+        scale:1;
+    }
+    .block_title > .cube > span{
+        width: 12px;
+        height:12px;
+    }
+    .slider_loan > .block_title > .cube > span{
+        width: 6px;
+        height: 6px;
+        margin:0 3px;
+    }
+    .creditInf > .block_title > .title, .service_Digital > .block_title > .title{
+        font-size: 6.5vw;
+    }
+    .slider_loan > .block_title > .title{
+        font-size: 4.5vw;
+    }
+    
+    .slider_loan > .slick-next{
+        right:20vw;
+    }
+    .slider_loan > .slick-prev{
+        left:20vw;
+    }
+
+    /* footerInf */
+    .placeA {
+        background-image: url(../images/background/InfB_1c.png);
+        left:4%;
+        
+      }
+      .placeB {
+        background-image: url(../images/background/InfB_2c.png);
+        left:-8%;
+      }
+      .placeC{
+        background-image: url(../images/background/infB_3c.png);
+      }
+      .placeA, .placeB {
+        width: 100%;
+        height: 650px;
+        margin-left: 0px;
+      }
+      .placeA > .button_slideService,.placeB > .button_slideService{
+        bottom:4vw;
+        width: 48vw;
+        height: 13vw;
+      }
+      .loan{
+        width:100%;
+        height:800px;
+      }
+      .slider_loan{
+        height:auto;
+      }
+      .slider_loan > .slick-slider{
+        height: auto;
+      }
+      .slider_loan > .slick-slider > .slick-list > .slick-track > .slick-slide img{
+        width:70%;
+    }
+    .slider_loan > .slick-prev,
+    .slider_loan > .slick-next{
+        width:5.5vw;
+        height:5.5vw;
+    }
+    .slider_loan > .slick-prev::before, 
+    .slider_loan > .slick-next::before{
+        width:5.5vw;
+        height:5.5vw;
+    }
+    .slider_loan > .button_slideService {
+        width: 36vw;
+        height: 10vw;
+    }
+    .placeC > .button_slideService{
+        width: 49vw;
+        height: 14vw;
+        bottom:12vw;
+    }
+      
 }
 @media screen and (max-width: 490px){
     #service01{
@@ -3037,8 +3457,8 @@ html, body {
         margin-bottom: 0vh;
     }
     .agent > .agentPic {
-        width: 80vw;
-        height: 62vw;
+        width: 68vw;
+        height: 54vw;
     }
     .agent > .agentButton{
         display: none;
@@ -3047,7 +3467,7 @@ html, body {
         display: none;
     }
     .block_boss{
-        margin-top:-10vh;
+        margin-top:-15vh;
     }
     .block_boss > .agentButton{
         display: block;
@@ -3058,8 +3478,8 @@ html, body {
     .boss {
         margin-top: -4vh;
         margin-left:4vw;
-        width:90vw;
-        height:135vw;
+        width: 72vw;
+        height: 119vw;
     }
     .bossRighthand,.bossLefthand {
         width: 23vw;
