@@ -1082,7 +1082,7 @@ html, body {
     #service03,
     #service04,
     #service05{
-        margin-bottom:20vw;
+        margin-bottom:200px;
     }
     #service01{
         padding-top:100px;
@@ -1877,7 +1877,7 @@ html, body {
     .slider_loan > .slick-slider > ul.slick-dots {
         text-align: center;
         margin-top: 20px;
-        bottom: 3.5vw;
+        bottom: 80px;
     }
     .slider_loan > .slick-dots li {
         display: inline-block;
@@ -1906,7 +1906,7 @@ html, body {
         background-size: contain;
         background-repeat: no-repeat ;
         margin:0 auto;
-        bottom:-4.5vw;
+        bottom:-110px;
     }
     .slider_loan > .slick-slider > .slick-list > .slick-track > .slick-slide img {
         max-width: 450px;
