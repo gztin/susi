@@ -924,7 +924,7 @@ html, body {
     text-align: center;
     margin-top: 20px;
     bottom: 3.5vw;
-    scale: 1;
+    scale: 0.75;
 }
 .slider_loan > .slick-dots li {
     display: inline-block;
@@ -2292,7 +2292,7 @@ html, body {
       .placeA {
         background-image: url(../images/background/InfB_1b.png);
         position: relative;
-        left: 0%;
+        left: 4%;
         margin-left: 10%;
       }
       .placeB {
@@ -2359,9 +2359,10 @@ html, body {
       }
       .agentFooterPic {
         background-image: url(../images/background/agent_768.png);
-        height:33vw;
+        width:90%;
+        height:31vw;
         scale:0.95;
-        margin-left:5vw;
+        margin-left:9vw;
       }
       .brand{
         width:700px;
@@ -3140,7 +3141,7 @@ html, body {
     }
     .Block_service{
         background-color: #F4FFFF;
-        margin-bottom: 20vw;
+        margin-bottom: 30vw;
     }
     .creditCard_menu a {
         flex: 0 0 calc(50% - 10px); /* 每個按鈕佔50%的寬度，減去間距 */
@@ -3180,9 +3181,9 @@ html, body {
     .sectionA_MenuA{
         background-image:url(../images/common/sectionA_480.png);
         background-size: 100% 100%;
-        width:83%;
-        height:900px;
-        margin-top:20vw;
+        width:90%;
+        height:1000px;
+        margin-top:8vw;
         position: relative;
     }
     .serviceA_MenuButton {
@@ -3190,7 +3191,7 @@ html, body {
         gap: 4vw;
         margin-top: 0vw;
         position: absolute;
-        bottom: 16vw;
+        bottom: 10vw;
     }
     .custom-button:hover{
         background-color: inherit; /* 繼承父元素的背景顏色 */
@@ -3543,7 +3544,7 @@ html, body {
         background-size: 100% 100%;
         width:93%;
         height:900px;
-        margin-top:20vw;
+        margin-top:10vw;
         position: relative;
     }
     .serviceA_MenuButton {
