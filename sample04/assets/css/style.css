@@ -2946,10 +2946,10 @@ html, body {
 
     /* 輪播 */
     .banner {
-        height:950px;
+        height:1020px;
     }
     .agent {
-        margin-top: 14vh;
+        margin-top: 7vh;
     }
     .agent > .agentPic {
         width: 400px;
@@ -2961,6 +2961,7 @@ html, body {
     .block_boss > .agentButton {
         width: 365px;
         height: 100px;
+        margin-top:-125px;
     }
     .block_agent {
         height:930px;
@@ -3022,8 +3023,8 @@ html, body {
         margin-bottom: 20vw;
     }
     .boss {
-        width: 400px;
-        height: 680px;
+        width: 480px;
+        height: 725px;
         margin-top: -10vw;
     }
     .bossLefthand, .bossRighthand {
@@ -3090,15 +3091,15 @@ html, body {
     /* Block_banner */
     .block_agent{
         flex-direction: column;
-        height:600px;
+        height:835px;
     }
     .agent {
-        margin-top: 13vh;
+        margin-top: 9vh;
         margin-bottom: 0vh;
     }
     .agent > .agentPic {
-        width: 68vw;
-        height: 54vw;
+        width: 400px;
+        height: 325px;
     }
     .agent > .agentButton{
         display: none;
@@ -3111,15 +3112,15 @@ html, body {
     }
     .block_boss > .agentButton{
         display: block;
-        margin-top:-16vh;
-        width: 73vw;
-        height: 19vw;
+        margin-top:-22vw;
+        width: 325px;
+        height: 85px;
     }
     .boss {
-        margin-top: -4vh;
+        margin-top: -12vw;
         margin-left:4vw;
-        width: 72vw;
-        height: 119vw;
+        width: 450px;
+        height: 720px;
     }
     .bossRighthand,.bossLefthand {
         width: 17vw;
@@ -3179,7 +3180,7 @@ html, body {
     .sectionA_MenuA{
         background-image:url(../images/common/sectionA_480.png);
         background-size: 100% 100%;
-        width:100%;
+        width:83%;
         height:900px;
         margin-top:20vw;
         position: relative;
@@ -3451,14 +3452,15 @@ html, body {
     /* Block_banner */
     .block_agent{
         flex-direction: column;
+        height:735px;
     }
     .agent {
-        margin-top: 13vh;
+        margin-top: 8vh;
         margin-bottom: 0vh;
     }
     .agent > .agentPic {
-        width: 68vw;
-        height: 54vw;
+        width: 350px;
+        height: 280px;
     }
     .agent > .agentButton{
         display: none;
@@ -3471,19 +3473,19 @@ html, body {
     }
     .block_boss > .agentButton{
         display: block;
-        margin-top:-9vh;
-        width: 73vw;
-        height: 19vw;
+        margin-top:-12vh;
+        width: 250px;
+        height: 70px;
     }
     .boss {
         margin-top: -4vh;
         margin-left:4vw;
-        width: 72vw;
-        height: 119vw;
+        width: 350px;
+        height: 550px;
     }
     .bossRighthand,.bossLefthand {
-        width: 23vw;
-        height: 16vw;
+        width: 85px;
+        height: 65px;
     }
     .bossRighthand {
         margin-right: 43vw;
@@ -3512,7 +3514,7 @@ html, body {
     }
     .banner{
         background-image: url(../images/banner/KVBackground_360.png);
-        height:930px;
+        height:770px;
     }
     /* end Block_banner */
 
@@ -3539,7 +3541,7 @@ html, body {
     .sectionA_MenuA{
         background-image:url(../images/common/sectionA_480.png);
         background-size: 100% 100%;
-        width:100%;
+        width:93%;
         height:900px;
         margin-top:20vw;
         position: relative;
@@ -3758,7 +3760,7 @@ html, body {
     
     .banner{
         background-image: url(../images/banner/KVBackground_360.png);
-        height:760px;
+        height:670px;
     }
     .serviceImg {
         height:550px;
@@ -3769,7 +3771,7 @@ html, body {
     
     .Block_service {
         height: 850px;
-        padding-top:20vw;
+        padding-top:0vw;
     }
     .creditInf {
         height:600px;
@@ -3784,13 +3786,24 @@ html, body {
         margin-top: 9vh;
     }
     .agent > .agentPic {
-        width: 70vw;
-        height: 54vw;
+        width: 275px;
+        height: 220px;
     }
-    /* .agent > .agentPic {
-        width: 55vw;
-        height: 44vw;
-    } */
+    .block_agent{
+        height:655px;
+    }
+    .boss {
+        width:290px;
+        height:518px;
+    }
+    .bossRighthand, .bossLefthand {
+        width: 75px;
+        height: 55px;
+    }
+    .bossLefthand{
+        margin-right: 10px;
+    }
+    .block_boss > .agentButton {}
     .sectionA_MenuA {
         height: 670px;
     }
