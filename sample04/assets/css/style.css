@@ -1035,8 +1035,7 @@ html, body {
 }
 /* 貸款業務Slider  end*/
 /* update end */
-
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1025px) {
     .container{
         max-width: 1500px;
     }
@@ -1971,6 +1970,66 @@ html, body {
    .animation_768{
         display: flex;
    }
+}
+@media screen and (max-width: 1024px) {
+    .banner{
+        background-image:url(../images/banner/KVBackground_1440c.png);
+    }
+    .sectionA_MenuA{
+        height:374px;
+    }
+    .creditInf,.service_Digital{
+        height:40vw;
+    }
+    .slick-dots{
+        bottom:0.2vw;
+    }
+    .serviceImg{
+        height:40vw;
+    }
+    .block_invest{
+        height:55vw;
+    }
+    .loan{
+        height:49vw;
+    }
+    .slider_loan{
+        height:auto;
+    }
+    .slider_loan > .block_title > .cube > span{
+        width: 0.5vw;
+        height: 0.5vw;
+        margin: 0 0.2vw;
+    }
+    .slider_loan > .block_title > .title{
+        font-size: 1.5vw;
+    }
+    .slick-dots{
+        scale: 0.75;
+    }
+    .slider_loan > .slick-slider > ul.slick-dots{
+        scale: 0.75;
+        bottom:0.5vw;
+    }
+    .slider_loan > .slick-slider > .slick-list{
+        scale:0.9;
+        margin-top: 0vw;
+    }
+    .slider_loan > .button_slideService{
+        bottom:-2vw;
+    }
+    .slider_loan > .slick-prev{
+        left:1vw;
+    }
+    .slider_loan > .slick-next {
+        right: 1vw;
+    }
+    .background_Connect_buttom{
+        max-width: 50vw;
+    }
+    .background_Connect_top{
+        max-width: 50vw;
+    }
 }
 @media screen and (max-width: 1023px) {
     html, body {
