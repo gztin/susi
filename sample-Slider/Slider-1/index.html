@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Swiper Slider</title>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="asset/css/swiper-bundle.min.css">
+    <style>
+        /* Custom styles */
+        .slider_digital {
+            width: 1024px;
+            height: 793.99px;
+            background-image: url(asset/img/bg_digitalService_B.svg);
+            background-repeat: no-repeat;
+            background-size: contain;
+            position: relative;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        .block_title {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 40px;
+            text-align: center;
+        }
+
+        .title {
+            font-weight: 700;
+            font-size: 32px;
+            color: #fff;
+            line-height: 40px;
+        }
+
+        .swiper-container {
+            width: 912px;
+            height: 603px;
+            margin: 0px auto;
+            overflow: hidden;
+            position: relative;
+            margin-top:40px;
+        }
+        .swiper-wrapper{
+          bottom:80px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* 将内容对齐到底部 */
+            position: relative; /* 设置相对定位 */
+        }
+
+        .swiper-slide img {
+            width: 340px;
+            height: 526px;
+            object-fit: contain; /* 确保图片比例 */
+            position: absolute;
+            bottom: 0; /* 图片对齐到滑块底部 */
+            transition: transform 0.3s ease;
+            transform-origin: bottom center; /* 确保缩放时从底部中心开始 */
+        }
+
+        /* Custom button styles */
+        .swiper-button-next, .swiper-button-prev {
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 50px;
+            height: 50px;
+        }
+        .swiper-button-next:after, 
+        .swiper-button-prev:after{
+          opacity: 0;
+        }
+        .swiper-button-next{
+          background-image: url(asset/img/arrow-right_outline.png); /* 替换为你的分页器背景图 */
+        }
+        .swiper-button-prev{
+          background-image: url(asset/img/arrow-left_outline.png); /* 替换为你的分页器背景图 */
+        }
+        /* Custom pagination styles */
+        .swiper-pagination-bullet {
+            background: none;
+            background-image: url(asset/img/dot_normal.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            border-radius:0%;
+            width: 24px;
+            height: 6px;
+            opacity: 1;
+        }
+        .swiper-pagination-bullet-active{
+          background-image: url(asset/img/dot_active.png);
+        }
+
+        .swiper-slide-active img {
+            transform: scale(1);
+        }
+        .swiper-pagination{
+          bottom: 32px !important;;
+        }
+        .swiper-slide-next img, 
+        .swiper-slide-prev img {
+            transform: scale(0.8);
+            opacity: 0.5; /* 左右两侧图片半透明 */
+        }
+        .swiper-slide-next img{
+            mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+        }
+        .swiper-slide-prev img{
+            mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+        }
+        .button_slideService{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          text-decoration: none;
+          width:265px;
+          height:62px;
+          background: rgba(0, 51, 151, 1);
+          color:#fff;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 30px;
+          margin:0 auto;
+          border: 2px solid rgba(0, 255, 255, 1);
+          position: relative;
+          box-shadow: 0px 0px 8px 0px rgba(0, 255, 255, 0.8);
+        }
+        .triangle-left {
+            width: 0;
+            height: 0;
+            border-right: 30px solid transparent;
+            border-bottom: 30px solid rgba(0, 255, 255, 1); /* 设置三角形的颜色 */
+        }
+        .triangle-right {
+            width: 30px;
+            height: 30px;
+            top:-1px;
+            right: -1px;
+            background:  rgba(0, 255, 255, 1);
+            clip-path: polygon(0 100%, 100% 100%, 0 0);
+            transform: rotate(180deg); /* 水平旋转180度 */
+        }
+        .button_slideService span {
+            margin: 0 auto; /* 为文本添加一些左右边距 */
+        }
+        .triangle-left {
+            position: absolute;
+            bottom: -1px;
+            left:-1px;
+        }
+        .triangle-right {
+            position: absolute;
+            margin-left: 8px; /* 添加间距 */
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Swiper Container -->
+    <div class="slider_digital">
+        <div class="block_title">
+            <div class="title">個人網銀</div>
+        </div>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="img/credit_1.png" alt="Image 1"></div>
+                <div class="swiper-slide"><img src="img/credit_2.png" alt="Image 2"></div>
+                <div class="swiper-slide"><img src="img/credit_3.png" alt="Image 3"></div>
+                <div class="swiper-slide"><img src="img/credit_4.png" alt="Image 4"></div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+        <a id="serviceDigital" href="https://ytbk.tw/2IJ73a" target="_blank" class="button_slideService">
+            <span class="triangle-left"></span>
+            <span>元先生為您介紹</span>
+            <span class="triangle-right"></span>
+        </a>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="asset/js/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3, // 预设显示三张图片
+            spaceBetween: 40, // 图片之间的间距
+            loop: true, // 循环模式
+            centeredSlides: true, // 当前活跃的幻灯片居中
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            }
+        });
+
+    </script>
+</body>
+</html>
