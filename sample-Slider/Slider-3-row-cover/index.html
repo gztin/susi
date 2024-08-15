@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Swiper Slider</title>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="asset/css/swiper-bundle.min.css">
+    <style>
+        .block01{
+            width:960px;
+            height:450px;
+            background: blue;
+            margin:0 auto;
+            margin-top:50px;
+            position: relative;
+        }
+        /* Custom styles */
+        .swiper-container {
+            width: 800px;
+            height: 300px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: #C60;
+        }
+        .swiper-wrapper{
+            height:300px;
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .swiper-pagination{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            bottom: 0 !important;
+            background: rgb(104, 170, 250);
+        }
+        /* Custom button styles */
+        .swiper-button-next, .swiper-button-prev {
+            background-color: #fff;
+            border-radius: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Custom pagination styles */
+        .swiper-pagination-bullet {
+            width: 20px;
+            height: 20px;
+            opacity: 1;
+        }
+
+        .swiper-slide-active img {
+            transform: scale(1);
+        }
+
+        .swiper-slide-next img, .swiper-slide-prev img {
+            transform: scale(0.8);
+        }
+        .slider_title{
+            font-size: 24px;
+            line-height: 30px;
+            font-weight: 700;
+            width:300px;
+            height:40px;
+            padding-top:30px;
+            padding-bottom:30px;
+            color:#fff;
+            margin:0 auto;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 半透明效果 */
+        .swiper-slide-next img{
+            mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+        }
+        .swiper-slide-prev img{
+            mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Swiper Container -->
+    <section class="block01">
+        <div class="slider_title">AAA</div>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="https://via.placeholder.com/400x300?text=Image+1" alt="Image 1"></div>
+                <div class="swiper-slide"><img src="https://via.placeholder.com/400x300?text=Image+2" alt="Image 2"></div>
+                <div class="swiper-slide"><img src="https://via.placeholder.com/400x300?text=Image+3" alt="Image 3"></div>
+                <div class="swiper-slide"><img src="https://via.placeholder.com/400x300?text=Image+4" alt="Image 4"></div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- Swiper JS -->
+    <script src="asset/js/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var titles = ['AAA', 'BBB', 'CCC', 'DDD']; // 定義標題
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3, // 預設顯示的數量
+            spaceBetween: 0, // 物件間距
+            loop: true, // 是否無限重複
+            centeredSlides: true, // 物件置中
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            on: {
+                slideChangeTransitionEnd: function () {
+                    // 更新中间和两边图片的缩放
+                    document.querySelectorAll('.swiper-slide').forEach(function(slide) {
+                        slide.querySelector('img').style.transform = 'scale(0.8)';
+                    });
+                    document.querySelector('.swiper-slide-active img').style.transform = 'scale(1)';
+
+                    // 更新標題
+                    var activeIndex = swiper.realIndex;
+                    document.querySelector('.slider_title').textContent = titles[activeIndex];
+                }
+                
+            }
+        });
+
+        // 初始化时，设置中间图片为1倍缩放，两侧图片为0.8倍缩放
+        document.querySelector('.swiper-slide-active img').style.transform = 'scale(1)';
+        document.querySelector('.swiper-slide-next img').style.transform = 'scale(0.8)';
+        document.querySelector('.swiper-slide-prev img').style.transform = 'scale(0.8)';
+    </script>
+</body>
+</html>
