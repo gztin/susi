@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A Slide Toggle Example</title>
+    <style>
+        .qa-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .qa-item {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .qa-question {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .qa-answer {
+            display: none;
+            padding: 10px;
+            background-color: white;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="qa-container">
+        <div class="qa-item">
+            <div class="qa-question">什麼是Lorem Ipsum?</div>
+            <div class="qa-answer">
+                Lorem Ipsum是一種虛構的文字，用來模擬文本佈局，通常在設計和排版時使用。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-question">為什麼使用Lorem Ipsum?</div>
+            <div class="qa-answer">
+                Lorem Ipsum讓設計師可以在不受實際內容干擾的情況下設計和測試佈局。
+            </div>
+        </div>
+        <!-- 你可以根據需要繼續添加更多的Q&A項目 -->
+    </div>
+
+    <!-- 加入 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.qa-question').on('click', function() {
+                const answer = $(this).next('.qa-answer');
+                answer.slideToggle(300); // 使用slideToggle進行上下切換
+            });
+        });
+    </script>
+</body>
+</html>

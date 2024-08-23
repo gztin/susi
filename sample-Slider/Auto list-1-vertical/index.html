@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolling List Example</title>
+    <style>
+        .block01 {
+            width: 500px;
+            height: 500px;
+            background: blue;
+            margin: 0 auto;
+            margin-top: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .list {
+            width: 300px; /* 设置宽度 */
+            height: 250px; /* 5个列表项的高度 (5 * 50px) */
+            overflow: hidden; /* 隐藏溢出内容 */
+            position: relative;
+            margin: 0 auto;
+            margin-top:100px;
+            border: 1px solid #fff;
+        }
+
+        .list ul {
+            position: absolute;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            transition: transform 1s ease-in-out; /* 添加平滑过渡效果 */
+        }
+
+        .list li {
+            height: 50px; /* 每个列表项的高度 */
+            line-height: 50px;
+            text-align: center;
+            color:#fff;
+        }
+    </style>
+</head>
+<body>
+    <section class="block01">
+        <div class="list">
+            <ul id="scroll-list">
+                <li>第一名 AAA</li>
+                <li>第二名 BBB</li>
+                <li>第三名 CCC</li>
+                <li>第四名 DDD</li>
+                <li>第五名 EEE</li>
+                <li>第六名 FFF</li>
+                <li>第七名 GGG</li>
+                <li>第八名 HHH</li>
+            </ul>
+        </div>
+    </section>
+
+    <script>
+        const list = document.getElementById('scroll-list');
+        const items = document.querySelectorAll('.list li');
+        const visibleItems = 3; // 設定一次顯示的數量
+        const itemHeight = items[0].offsetHeight; // 列表資料高度
+        const totalItems = items.length;
+        let index = 0;
+
+        // 總高度＝資料高度x數量
+        document.querySelector('.list').style.height = `${visibleItems * itemHeight}px`;
+
+        // 複製列表到後面，以便實現無縫滾動
+        list.innerHTML += list.innerHTML;
+
+        function scrollList() {
+            index++;
+            list.style.transition = 'transform 1s ease-in-out';
+            list.style.transform = `translateY(-${index * itemHeight}px)`;
+
+            if (index >= totalItems) {
+                setTimeout(() => {
+                    list.style.transition = 'none';
+                    list.style.transform = 'translateY(0)';
+                    index = 0;
+                }, 1000); // 動畫結束後，重置位置
+            }
+        }
+
+        // 每2秒變換一次
+        setInterval(scrollList, 2000);
+    </script>
+</body>
+</html>

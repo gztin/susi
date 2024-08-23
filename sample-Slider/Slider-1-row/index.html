@@ -7,6 +7,13 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="asset/css/swiper-bundle.min.css">
     <style>
+        #section01{
+            width:100%;
+            height:1080px;
+            position: relative;
+            background: rgb(104, 170, 250);
+            display: inline-block;
+        }
         .block01{
             width:500px;
             height:500px;
@@ -104,20 +111,22 @@
 </head>
 <body>
     <!-- Swiper Container -->
-    <section class="block01">
-        <div class="slider_title">AAA</div>
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="https://via.placeholder.com/400x300?text=Image+1" alt="Image 1"></div>
-                <div class="swiper-slide"><img src="https://via.placeholder.com/400x300?text=Image+2" alt="Image 2"></div>
-                <div class="swiper-slide"><img src="https://via.placeholder.com/400x300?text=Image+3" alt="Image 3"></div>
-                <div class="swiper-slide"><img src="https://via.placeholder.com/400x300?text=Image+4" alt="Image 4"></div>
+    <section id="section01">
+        <div class="block01">
+            <div class="slider_title">AAA</div>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://via.placeholder.com/400x300?text=Image+1" alt="Image 1"></div>
+                    <div class="swiper-slide"><img src="https://via.placeholder.com/400x300?text=Image+2" alt="Image 2"></div>
+                    <div class="swiper-slide"><img src="https://via.placeholder.com/400x300?text=Image+3" alt="Image 3"></div>
+                    <div class="swiper-slide"><img src="https://via.placeholder.com/400x300?text=Image+4" alt="Image 4"></div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination"></div>
-            <!-- Add Navigation -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
         </div>
     </section>
 

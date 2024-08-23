@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Marquee Example</title>
+    <style>
+        .marquee-container {
+            width: 100%;
+            max-width: 600px;
+            height: 100px; /* 設定跑馬燈的高度 */
+            overflow: hidden; /* 隱藏溢出部分 */
+            border: 1px solid #ddd;
+            margin: 50px auto;
+            position: relative;
+            background-color: #f9f9f9;
+        }
+
+        .marquee-content {
+            position: absolute;
+            width: 100%;
+            bottom: -100%; /* 起始位置在容器的底部外 */
+        }
+
+        .marquee-text {
+            font-size: 16px;
+            line-height: 20px;
+            text-align: justify;
+            color: #007bff;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <div class="marquee-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero aut tempora facere, asperiores inventore expedita ab. Commodi tempore delectus doloremque!</div>
+            <!-- 你可以繼續添加更多文字段落 -->
+        </div>
+    </div>
+
+    <!-- 加入 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function startMarquee() {
+                $('.marquee-content').css('bottom', '-100%'); // 重置位置到容器底部外
+                $('.marquee-content').animate({
+                    bottom: '100%' // 文字從容器底部往上移動到頂部
+                }, 10000, 'linear', function() {
+                    // 當動畫結束後，立即重置位置，然後重新啟動動畫
+                    startMarquee();
+                });
+            }
+
+            // 開始跑馬燈效果
+            startMarquee();
+        });
+    </script>
+</body>
+</html>
