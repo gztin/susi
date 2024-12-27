@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>邀請好友表單</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .inviteForm{
+      width:700px;
+      height:510px;
+      position: relative;
+      margin:0 auto;
+      border: 10px solid rgba(255, 148, 36, 0.5);
+      border-radius: 25px;
+    }
+    .inviteForm > form{
+      width:90%;
+      margin:30px auto;
+    }
+    .mail {
+      display: flex;
+      justify-content: flex-start;
+      gap:10px;
+    }
+
+    .mail div {
+      margin-bottom: 8px;
+    }
+
+    .mail label {
+      display: inline-block;
+      width: 55px;
+    }
+
+    input[type="text"],input[type="email"] { 
+      padding: 10px;
+      margin-right: 10px;
+      border-radius: 4px; /* 圓角效果 */
+      border: 1px solid #ccc; /* 可調整的邊框 */
+    }
+    .mail input[type="text"]{
+      width: 100px;
+    }
+    .mail input[type="email"]{
+      width: 200px;
+    }
+    .userName,.userMail{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .inf{
+      display: flex;
+      align-items: center;
+    }
+    .friend-emails {
+      margin-top:25px;
+    }
+
+    .friend-emails input[type="email"] {
+      display: block;
+      width: 96%;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .captcha {
+      display: flex;
+      align-items: center;
+      margin-bottom: 35px;
+    }
+
+    .captcha label {
+      margin-right: 10px;
+    }
+
+    .captcha input[type="text"] {
+      width: 100px;
+      padding: 5px;
+      margin-right: 10px;
+    }
+
+    .checkCode{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .captcha{
+      margin-top:10px;
+    }
+    .codeInf {
+      width: 100px;
+      height: 30px;
+      background-color: #e0e0e0;
+      text-align: center;
+      line-height: 30px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+    }
+    hr {
+      border: 0.5px solid #e7e7e7; /* 設定 hr 的顏色為 f4f4f4 */
+    }
+    input::placeholder {
+      color: #bbbbbb; /* 你想要的顏色 */
+      opacity: 1; /* 確保顏色不會被透明度影響 */
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #283044;
+      border-radius: 6.75px;
+      color: white;
+      width: 150px;
+      border: none;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+      margin-left: 10px;
+      font-size: 12px;
+    }
+    @media screen and (max-width: 768px){
+      .inviteForm{
+        width:93%;
+        height:600px;
+      }
+      .mail {
+          flex-direction: column;
+          align-items: baseline;
+          gap:0px;
+      }
+      .friend-emails input[type="email"] {
+        width:93%;
+      }
+      .captcha{
+        align-items: baseline;
+        flex-direction: column;
+        gap:10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="inviteForm">
+      <form id="inviteForm">
+        <!-- 第1部分：表單 -->
+        <div class="mail">
+          <div class="userName">
+            <div class="inf">
+              <label for="name">姓名:</label>
+              <input type="text" id="name" placeholder="輸入姓名">
+            </div>
+          </div>
+          <div class="userMail">
+            <div class="inf">
+              <label for="email">信箱:</label>
+              <input type="email" id="email" placeholder="輸入Mail">
+            </div>
+          </div>
+          <span class="error" id="nameEmailError"></span> <!-- 錯誤訊息顯示區 -->
+        </div>
+        <hr>
+        <!-- 第2部分：好友信箱欄位 -->
+        <div class="friend-emails">
+          <input type="email" class="friend-email" placeholder="輸入好友信箱">
+          <input type="email" class="friend-email" placeholder="輸入好友信箱">
+          <input type="email" class="friend-email" placeholder="輸入好友信箱">
+          <input type="email" class="friend-email" placeholder="輸入好友信箱">
+          <input type="email" class="friend-email" placeholder="輸入好友信箱">
+        </div>
+        <span class="error" id="friendEmailError"></span> <!-- 錯誤訊息顯示區 -->
+        <!-- 第3部分：驗證碼 -->
+        <div class="captcha">
+          <label for="captcha">請輸入驗證碼:</label>
+          <div class="checkCode">
+            <input type="text" id="captcha" placeholder="驗證碼">
+            <div class="codeInf">1234</div> <!-- 假設這裡放的是驗證碼圖 -->
+          </div>
+          <span class="error" id="captchaError"></span> <!-- 錯誤訊息顯示區 -->
+        </div>
+    
+        <!-- 第4部分：按鈕 -->
+        <div style="display: flex; justify-content: center;">
+          <button type="button" id="submitBtn">轉寄邀請好友</button>
+        </div>
+      </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#submitBtn').on('click', function() {
+        // 清除之前的錯誤訊息
+        $('#nameEmailError').text('');
+        $('#friendEmailError').text('');
+        $('#captchaError').text('');
+
+        let hasErrors = false;
+        const name = $('#name').val().trim();
+        const email = $('#email').val().trim();
+        const captcha = $('#captcha').val().trim();
+        const friendEmails = $('.friend-email');
+
+        // 驗證姓名與Email是否已填寫
+        if (!name && !email) {
+          $('#nameEmailError').text('請填寫姓名和電子郵件');
+          hasErrors = true;
+        } else if (!name) {
+          $('#nameEmailError').text('請填寫姓名');
+          hasErrors = true;
+        } else if (!email) {
+          $('#nameEmailError').text('請填寫信箱帳號');
+          hasErrors = true;
+        } else if (!UserValidateEmail(email)) {  // 使用UserValidateEmail函數檢查
+          $('#nameEmailError').text('請填寫正確的Email格式');
+          $('#email').val('');  // 清空電子郵件輸入欄位
+          hasErrors = true;
+        }
+
+        // 檢查每個朋友的信箱格式
+        let invalidFriendEmails = false;
+        friendEmails.each(function() {
+          const friendEmail = $(this).val().trim();
+          if (friendEmail && !UserValidateEmail(friendEmail)) {
+            invalidFriendEmails = true;
+            $(this).val(''); // 清空錯誤的好友信箱欄位
+            $('#friendEmailError').text('請填寫正確的好友信箱格式');
+          }
+        });
+
+        if (!invalidFriendEmails) {
+          // 至少一個好友信箱需要填寫
+          let friendEmailFilled = false;
+          friendEmails.each(function() {
+            if ($(this).val().trim()) {
+              friendEmailFilled = true;
+            }
+          });
+          if (!friendEmailFilled) {
+            $('#friendEmailError').text('請至少填寫一個好友的信箱');
+            hasErrors = true;
+          }
+        }
+
+        // 驗證碼檢查
+        if (!captcha) {
+          $('#captchaError').text('請填寫驗證碼');
+          hasErrors = true;
+        }
+
+        // 如果沒有錯誤，顯示提交成功訊息
+        if (!hasErrors) {
+          alert('表單成功提交！');
+        }
+      });
+    });
+
+    // 驗證電子郵件格式
+    function UserValidateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      return re.test(email);
+    }
+  </script>
+
+</body>
+</html>

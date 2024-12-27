@@ -109,14 +109,17 @@
             <tr>
                 <th rowspan="2" class="header-blue">使用空間</th>
                 <th rowspan="2" class="header-blue">坪數</th>
-                <th rowspan="2" class="header-blue">使用行設計圖<br>最大容納人數</th>
-                <th colspan="1" class="header-orange">星期一至星期五<br>每時段租金 (平日)</th>
-                <th colspan="1" class="header-orange">星期六至星期日<br>每時段租金 (假日)</th>
-                <th colspan="1" class="header-blue">全日租金<br>上午加下午時段</th>
+                <th rowspan="2" class="header-blue">使用行設計圖最大容納人數</th>
+                <th colspan="2" class="header-orange">星期一至星期五<br>時段租金 (平日)</th>
+                <th colspan="2" class="header-orange">星期六至星期日<br>時段租金 (假日)</th>
+                <th colspan="2" class="header-blue">全日租金</th>
             </tr>
             <tr>
                 <th class="header-orange">上午/下午時段</th>
                 <th class="header-orange">上午/下午時段</th>
+                <th class="header-orange">上午/下午時段</th>
+                <th class="header-orange">上午/下午時段</th>
+                <th class="header-blue">上午/下午時段</th>
                 <th class="header-blue">上午/下午時段</th>
             </tr>
         </thead>
@@ -125,49 +128,67 @@
                 <td data-label="使用空間">A</td>
                 <td data-label="坪數">68.2</td>
                 <td data-label="最大容納人數">180</td>
-                <td data-label="平日租金 上午/下午">33,500</td>
-                <td data-label="假日租金 上午/下午">39,500</td>
-                <td data-label="全日租金 上午/下午">57,000</td>
+                <td data-label="平日租金">33,500</td>
+                <td data-label="平日租金">39,500</td>
+                <td data-label="假日租金">57,000</td>
+                <td data-label="假日租金">67,000</td>
+                <td data-label="全日租金">57,000</td>
+                <td data-label="全日租金">67,000</td>
             </tr>
             <tr>
                 <td data-label="使用空間">B</td>
                 <td data-label="坪數">33.3</td>
                 <td data-label="最大容納人數">100</td>
-                <td data-label="平日租金 上午/下午">16,000</td>
-                <td data-label="假日租金 上午/下午">19,500</td>
-                <td data-label="全日租金 上午/下午">27,500</td>
+                <td data-label="平日租金">16,000</td>
+                <td data-label="平日租金">19,500</td>
+                <td data-label="假日租金">27,500</td>
+                <td data-label="假日租金">33,000</td>
+                <td data-label="全日租金">27,500</td>
+                <td data-label="全日租金">33,000</td>
             </tr>
             <tr>
                 <td data-label="使用空間">C</td>
                 <td data-label="坪數">48</td>
                 <td data-label="最大容納人數">180</td>
-                <td data-label="平日租金 上午/下午">23,000</td>
-                <td data-label="假日租金 上午/下午">28,000</td>
-                <td data-label="全日租金 上午/下午">39,000</td>
+                <td data-label="平日租金">23,000</td>
+                <td data-label="平日租金">28,000</td>
+                <td data-label="假日租金">39,000</td>
+                <td data-label="假日租金">45,000</td>
+                <td data-label="全日租金">39,000</td>
+                <td data-label="全日租金">45,000</td>
             </tr>
             <tr>
                 <td data-label="使用空間">D</td>
                 <td data-label="坪數">38.7</td>
                 <td data-label="最大容納人數">65</td>
-                <td data-label="平日租金 上午/下午">19,000</td>
-                <td data-label="假日租金 上午/下午">23,000</td>
-                <td data-label="全日租金 上午/下午">32,500</td>
+                <td data-label="平日租金">19,000</td>
+                <td data-label="平日租金">23,000</td>
+                <td data-label="假日租金">32,500</td>
+                <td data-label="假日租金">37,500</td>
+                <td data-label="全日租金">32,500</td>
+                <td data-label="全日租金">37,500</td>
             </tr>
             <tr>
                 <td data-label="使用空間">A+B</td>
                 <td data-label="坪數">101.5</td>
                 <td data-label="最大容納人數">306</td>
-                <td data-label="平日租金 上午/下午">49,500</td>
-                <td data-label="假日租金 上午/下午">59,000</td>
-                <td data-label="全日租金 上午/下午">80,750</td>
+                <td data-label="平日租金">49,500</td>
+                <td data-label="平日租金">58,000</td>
+                <td data-label="假日租金">80,750</td>
+                <td data-label="假日租金">92,500</td>
+                <td data-label="全日租金">80,750</td>
+                <td data-label="全日租金">92,500</td>
             </tr>
             <tr>
                 <td data-label="使用空間">A+B+C</td>
-                <td data-label="坪數">149.5</td>
+                <td data-label="坪數">140.5</td>
                 <td data-label="最大容納人數">510</td>
-                <td data-label="平日租金 上午/下午">72,500</td>
-                <td data-label="假日租金 上午/下午">87,000</td>
-                <td data-label="全日租金 上午/下午">123,500</td>
+                <td data-label="平日租金">72,500</td>
+                <td data-label="平日租金">87,000</td>
+                <td data-label="假日租金">123,500</td>
+                <td data-label="假日租金">140,000</td>
+                <td data-label="全日租金">123,500</td>
+                <td data-label="全日租金">140,000</td>
             </tr>
         </tbody>
     </table>
