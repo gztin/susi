@@ -299,7 +299,7 @@ html, body {
     .slogan{
         width:640px;
         height:111.57px;
-        background-image:url(../images/banner/slogan_M.svg);
+        background-image:url(../images/banner/slogan_M.png);
     }
     #section01{
         width:100%;
@@ -369,7 +369,7 @@ html, body {
     .slogan{
         width:640px;
         height:111.57px;
-        background-image:url(../images/banner/slogan_M.svg);
+        background-image:url(../images/banner/slogan_M.png);
     }
     .textGroup {
         width:392px;
@@ -443,7 +443,7 @@ html, body {
     .slogan{
         width:688px;
         height:105.57px;
-        background-image:url(../images/banner/slogan_M.svg);
+        background-image:url(../images/banner/slogan_M.png);
     }
     .responsive-text {
         white-space: normal; /* 視窗小時允許換行 */
@@ -561,7 +561,7 @@ html, body {
     .slogan{
         width:328px;
         height:110px;
-        background-image:url(../images/banner/slogan_S.svg);
+        background-image:url(../images/banner/slogan_S.png);
     }
     .act_text_content{
         width:568px;
