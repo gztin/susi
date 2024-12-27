@@ -174,7 +174,7 @@ html, body {
 .bigTitle{
     width:670px;
     height:246px;
-    background-image: url(../images/banner/big_title_M.svg);
+    background-image: url(../images/banner/big_title_M.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -522,7 +522,7 @@ html, body {
     .bigTitle{
         width:326px;
         height:108.98px;
-        background-image: url(../images/banner/big_title_S.svg);
+        background-image: url(../images/banner/big_title_S.png);
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
