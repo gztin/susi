@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>守护毛孩子 - 动物救援紧急募款行动</title>
+    <style>
+        :root {
+            --primary-color: #ff8e5e;
+            --secondary-color: #3a3a3a;
+            --bg-light: #f9f6f2;
+            --text-color: #555;
+            --marquee-bg: #fffbf5; /* 稍微调亮一点背景，让两个区块更融合 */
+            /* 垂直轮播速度，根据内容多寡调整，内容越多通常需要越慢的时间 */
+            --marquee-speed-vertical: 40s; 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Hero Section (保持不变) --- */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1518671649977-dbbd66932989?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); 
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        header p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .btn-donate-hero {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-donate-hero:hover {
+            transform: scale(1.05);
+            background-color: #e67e50;
+        }
+
+        /* --- Sections 通用样式 --- */
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- Impact Section (关于计划 - 保持不变) --- */
+        .impact-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            text-align: center;
+        }
+
+        .impact-item {
+            flex: 1 1 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .impact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .impact-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* --- [修改核心] Donor Wall & Good Deeds Section --- */
+        #donor-wall {
+            background-color: var(--marquee-bg);
+            padding: 60px 20px;
+            /* 移除 text-align: center，改用内部布局控制 */
+        }
+
+        /* 新增：双栏布局容器 */
+        .wall-content-wrapper {
+            display: grid;
+            /* 定义两栏，比例为 1.2 : 1，左侧稍宽 */
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: start; /* 内容顶部对齐 */
+        }
+
+        .column-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            text-align: left;
+        }
+
+        /* --- 左侧：善事事迹记录样式 --- */
+        .deed-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .deed-date {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin-right: 15px;
+            white-space: nowrap;
+        }
+
+        .deed-content h4 {
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+        }
+        
+        .deed-content p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* --- 右侧：垂直捐款跑马灯样式 --- */
+        /* 1. 容器需要固定高度，形成视窗 */
+        .marquee-container-vertical {
+            width: 100%;
+            /* 设定一个固定高度，让内容在这个高度内滚动 */
+            height: 450px; 
+            overflow: hidden;
+            position: relative;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+            border: 1px solid #eee;
+        }
+
+        /* 2. 轨道改为垂直排列 */
+        .marquee-track-vertical {
+            display: flex;
+            flex-direction: column; /* 关键：垂直排列 */
+            /* 应用垂直滚动动画 */
+            animation: scrollMarqueeVertical var(--marquee-speed-vertical) linear infinite;
+            will-change: transform;
+        }
+
+        /* 3. 垂直滚动关键帧：从 Y=0 移动到 Y=-50% */
+        @keyframes scrollMarqueeVertical {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                /* 向上移动自身总高度的 50% */
+                transform: translateY(-50%);
+            }
+        }
+
+        /* 4. 捐款卡片样式调整为适合垂直堆叠 */
+        .donor-card-new {
+            display: flex;
+            align-items: center;
+            background: #ffffff; /* 使用純白背景，更乾淨 */
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06); /* 增加柔和的陰影 */
+            border: 1px solid #f0f0f0;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .donor-card-new:hover {
+            transform: translateX(5px); /* 滑鼠懸停時增加微小的互動效果 */
+        }
+
+        .donor-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: #e9e9e9; /* 頭像佔位符顏色 */
+            margin-right: 15px;
+            /* 使用 SVG 做為預設頭像圖示 */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23a0a0a0"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
+            background-size: 60%;
+            background-position: center;
+            background-repeat: no-repeat;
+            flex-shrink: 0; /* 避免頭像被壓縮 */
+        }
+
+        .donor-info {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .donor-name {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .donor-message {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .donor-amount {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        /* --- Donation Form Section (捐款区 - 保持不变) --- */
+        #donate-section {
+            text-align: center;
+        }
+        .donation-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .amount-btn {
+            padding: 15px 30px;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .amount-btn.active, .amount-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .custom-amount {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            width: 200px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            color: #bbb;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            header p { font-size: 1.2rem; }
+            section h2 { font-size: 2rem; }
+            
+            /* 手机版将双栏改为单栏堆叠 */
+            .wall-content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            /* 手机上可以稍微调整滚动高度和速度 */
+            .marquee-container-vertical {
+                height: 350px;
+            }
+            :root { --marquee-speed-vertical: 30s; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>守护被遗忘的生命</h1>
+        <p>您的每一次援手，都将成为它们重获新生的希望。我们致力于救援、医疗与安置流浪动物。</p>
+        <a href="#donate-section" class="btn-donate-hero">立即伸出援手</a>
+    </header>
+
+    <section id="impact">
+        <div class="section-header">
+            <h2>您的捐款将用于何处？</h2>
+        </div>
+        <div class="impact-grid">
+            <div class="impact-item">
+                <span class="impact-icon">🏥</span>
+                <h3>紧急医疗</h3>
+                <p>为受伤、生病的动物提供手术与药物治疗，让它们脱离痛苦。</p>
+            </div>
+            <div class="impact-item">
+                <span class="impact-icon">🏠</span>
+                <h3>中途安置</h3>
+                <p>提供干净、安全的庇护所与食物，直到它们找到温暖的家。</p>
+            </div>
+            <div class="impact-item">
+                <span class="impact-icon">🥣</span>
+                <h3>日常温饱</h3>
+                <p>支持一线救助人员的饲料费用，让街头的孩子不再挨饿。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="donor-wall">
+        <div class="section-header">
+            <h2>爱心见证与透明公开</h2>
+            <p>(感谢每一位支持者，我们承诺善用每一分善款)</p>
+        </div>
+        
+        <div class="wall-content-wrapper">
+            
+            <div class="good-deeds-column">
+                <h3 class="column-title">近期善事记录</h3>
+                
+                <div class="deed-item">
+                    <div class="deed-date">2023/10/25</div>
+                    <div class="deed-content">
+                        <h4>救援车祸橘猫“阿福”</h4>
+                        <p>于大同路救援后肢骨折的橘猫，已完成紧急手术，目前在医院休养中，情况稳定。</p>
+                    </div>
+                </div>
+                <div class="deed-item">
+                    <div class="deed-date">2023/10/20</div>
+                    <div class="deed-content">
+                        <h4>购入冬季保暖物资</h4>
+                        <p>使用善款购入 50 条保暖毛毯与 3 台电暖器，已分发至北部山区的中途之家，帮助毛孩过冬。</p>
+                    </div>
+                </div>
+                <div class="deed-item">
+                    <div class="deed-date">2023/10/15</div>
+                    <div class="deed-content">
+                        <h4>支持 TNR 绝育行动</h4>
+                        <p>本月资助社区爱妈完成 20 只街猫的绝育手术与疫苗施打，有效控制流浪数量。</p>
+                    </div>
+                </div>
+                 <div class="deed-item">
+                    <div class="deed-date">2023/10/10</div>
+                    <div class="deed-content">
+                        <h4>老狗“黑皮”成功送养</h4>
+                        <p>在收容所待了三年的黑皮终于找到了温暖的家！感谢新家人的接纳。</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="donor-marquee-column">
+                <h3 class="column-title">最新捐款支持 (实时)</h3>
+                
+                <div class="marquee-container-vertical">
+                    <div class="marquee-track-vertical" id="marqueeTrack">
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="donate-section" style="background-color: white;">
+        <div class="section-header">
+            <h2>选择您的爱心方案</h2>
+            <p>所有捐款均以人民币 (CNY) 计算</p>
+        </div>
+        
+        <div class="donation-options">
+            <button class="amount-btn">¥ 50</button>
+            <button class="amount-btn active">¥ 100</button>
+            <button class="amount-btn">¥ 200</button>
+            <button class="amount-btn">¥ 500</button>
+        </div>
+        
+        <div style="margin-top: 20px;">
+             <input type="number" placeholder="自定义金额 (¥)" class="custom-amount" min="1">
+        </div>
+
+        <button class="btn-donate-hero" style="margin-top: 20px; width: 100%; max-width: 400px;">确认捐款</button>
+        
+        <p style="margin-top: 30px; font-size: 0.9rem; color: #888;">
+            * 我们承诺公开透明，所有捐款流向将定期于官网公告。
+        </p>
+    </section>
+
+    <footer>
+        <h3>毛孩子救援协会</h3>
+        <p>联系我们：contact@animalrescue.example | 电话：400-123-4567</p>
+        <p>© 2023 Animal Rescue Initiative. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const donorData = [
+                { name: "张伟", amount: 100 },
+                { name: "王芳", amount: 50 },
+                { name: "李娜", amount: 200 },
+                { name: "刘强", amount: 500 },
+                { name: "陈静", amount: 100 },
+                { name: "杨洋", amount: 1000 },
+                { name: "赵敏", amount: 50 },
+                { name: "黄磊", amount: 300 },
+                { name: "周杰", amount: 100 },
+                { name: "吴刚", amount: 50 },
+                { name: "郑爽", amount: 200 },
+                { name: "匿名好心人", amount: 800 },
+                { name: "孙丽", amount: 150 },
+                { name: "朱一龙", amount: 500 }
+            ];
+
+            const track = document.getElementById('marqueeTrack');
+
+            // 创建单个【垂直】捐款卡片的函数
+            // 注意：HTML 结构和 class 名称稍微调整以适应垂直布局
+            function createDonorCardNew(donor) {
+                const card = document.createElement('div');
+                card.className = 'donor-card-new'; // 使用新的樣式 class
+                card.innerHTML = `
+                    <div class="donor-avatar"></div>
+                    <div class="donor-info">
+                        <span class="donor-name">${donor.name}</span>
+                        <span class="donor-message">捐赠了 <span class="donor-amount">¥ ${donor.amount}</span></span>
+                    </div>
+                `;
+                return card;
+            }
+
+            // 填充初始数据
+            donorData.forEach(donor => {
+                track.appendChild(createDonorCardNew(donor));
+            });
+
+            // 实现“无限”的关键：复制一份相同的数据加到后面
+            // 原理与水平轮播相同，只是 CSS 处理方向不同
+            donorData.forEach(donor => {
+                const clonedCard = createDonorCardNew(donor).cloneNode(true);
+                track.appendChild(clonedCard);
+            });
+
+            // 简单的捐款按钮切换效果
+            const amountBtns = document.querySelectorAll('.amount-btn');
+            amountBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
