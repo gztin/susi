@@ -242,7 +242,7 @@
     "stream-http": "^3.2.0",
     "swiper": "^6.2.0",
     "terser-webpack-plugin": "^5.1.1",
-    "ua-parser-js": "^0.7.23",
+    "ua-parser-js": "^0.7.33",
     "vconsole": "^3.3.4",
     "xss": "^1.0.8"
   },
