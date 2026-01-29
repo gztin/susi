@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>守護記憶 - 失智長者長照募款專案</title>
+    <style>
+        :root {
+            --primary-color: #6c91c2; /* 改為沉穩的藍色 */
+            --secondary-color: #3a3a3a;
+            --bg-light: #f9f6f2;
+            --text-color: #555;
+            --marquee-bg: #fffbf5; /* 稍微调亮一点背景，让两个区块更融合 */
+            /* 垂直轮播速度，根据内容多寡调整，内容越多通常需要越慢的时间 */
+            --marquee-speed-vertical: 40s; 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Hero Section (保持不变) --- */
+        header {
+            /* 建議替換為溫暖的長照主題圖片，例如：牽手、陪伴的畫面 */
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('img/banner02.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        header p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .btn-donate-hero {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-donate-hero:hover {
+            transform: scale(1.05);
+            background-color: #5a7aa1; /* 懸停顏色加深 */
+        }
+
+        /* --- Sections 通用样式 --- */
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- Impact Section (您的捐款將用於) - 改回網格卡片佈局 --- */
+        .impact-grid {
+            display: grid;
+            /* 響應式網格，每行最多3個，最小寬度150px */
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center; /* 卡片內容置中 */
+        }
+
+        .impact-item {
+            /* 移除 flex 相關設定 */
+            background: white;
+            padding: 25px 15px; /* 調整內距以適應較小的卡片 */
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            /* 移除 margin-bottom */
+        }
+
+        .impact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .impact-item h3 {
+            font-size: 1.1rem; /* 調整標題字體大小 */
+        }
+
+        .impact-item p {
+            font-size: 0.9rem; /* 調整內文字體大小 */
+        }
+
+        .impact-icon {
+            font-size: 2.5rem; /* 調整圖示大小 */
+            margin-bottom: 15px;
+            display: block;
+            /* 移除背景圓圈等複雜樣式 */
+        }
+
+        /* --- 全新：合併後的雙欄佈局 --- */
+        #witness-and-impact-section {
+            background-color: var(--marquee-bg);
+            padding: 60px 20px;
+        }
+
+        .two-column-layout {
+            display: grid;
+            /* 左欄寬度是右欄的 1.5 倍 */
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .column-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        /* 新增：右欄文字段落樣式 */
+        .column-text p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- 左欄：愛心見證 (服務日誌) --- */
+        .deed-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex;
+            align-items: flex-start;
+            transition: background-color 0.3s;
+        }
+
+        .deed-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .deed-date {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin-right: 15px;
+            white-space: nowrap;
+        }
+
+        .deed-content h4 {
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+        }
+        
+        .deed-content p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* --- 全新：獨立的捐款芳名錄區塊 --- */
+        #donor-marquee-section {
+            padding: 60px 20px;
+            background-color: #fff; /* 使用白色背景使其突出 */
+        }
+
+        /* 1. 容器需要固定高度，形成视窗 */
+        .marquee-container-vertical {
+            width: 100%;
+            /* 高度可根據內容調整 */
+            height: 400px; 
+            overflow: hidden;
+            position: relative;
+            /* 移除背景和邊框，使其更融入新區塊 */
+        }
+
+        /* 2. 轨道改为垂直排列 */
+        .marquee-track-vertical {
+            display: flex;
+            flex-direction: column; /* 关键：垂直排列 */
+            /* 应用垂直滚动动画 */
+            animation: scrollMarqueeVertical var(--marquee-speed-vertical) linear infinite;
+            will-change: transform;
+        }
+
+        /* 3. 垂直滚动关键帧：从 Y=0 移动到 Y=-50% */
+        @keyframes scrollMarqueeVertical {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                /* 向上移动自身总高度的 50% */
+                transform: translateY(-50%);
+            }
+        }
+
+        /* 4. 捐款卡片样式调整为适合垂直堆叠 */
+        .donor-card-new {
+            display: flex;
+            align-items: center;
+            background: #ffffff; /* 使用純白背景，更乾淨 */
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06); /* 增加柔和的陰影 */
+            border: 1px solid #f0f0f0;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .donor-card-new:hover {
+            transform: translateX(5px); /* 滑鼠懸停時增加微小的互動效果 */
+        }
+
+        .donor-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: #e9e9e9; /* 頭像佔位符顏色 */
+            margin-right: 15px;
+            /* 使用 SVG 做為預設頭像圖示 */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23a0a0a0"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
+            background-size: 60%;
+            background-position: center;
+            background-repeat: no-repeat;
+            flex-shrink: 0; /* 避免頭像被壓縮 */
+        }
+
+        .donor-info {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .donor-name {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .donor-message {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .donor-amount {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        /* --- Donation Form Section (捐款區) - 全新卡片式佈局 --- */
+        #donate-section {
+            text-align: center;
+        }
+
+        .donation-options {
+            display: flex;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 響應式網格佈局 */
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .donation-card {
+            background: #fdfdfd;
+            border: 2px solid #eee;
+            border-radius: 15px;
+            padding: 25px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .donation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .donation-card.active {
+            border-color: var(--primary-color);
+            background-color: #f0f5fb; /* 淺藍色背景表示選中 */
+            transform: translateY(-5px);
+        }
+
+        .card-amount {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            color: #777;
+            min-height: 40px; /* 確保卡片高度一致 */
+        }
+
+        .custom-amount {
+            /* 調整自訂輸入框樣式以融入卡片 */
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #ccc;
+            background: transparent;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            padding: 5px 0;
+        }
+
+        .custom-amount:focus {
+            outline: none;
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            color: #bbb;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            header p { font-size: 1.2rem; }
+            section h2 { font-size: 2rem; }
+            
+            /* 手机版将双栏改为单栏堆叠 */
+            .wall-content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            /* 手机上可以稍微调整滚动高度和速度 */
+            .marquee-container-vertical {
+                height: 350px;
+            }
+            :root { --marquee-speed-vertical: 30s; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>守護記憶，點亮晚年</h1>
+        <p>您的每一份支持，都是對失智長者及其家庭最溫暖的依靠。我們致力於提供專業照護、延緩退化及家庭支持服務。</p>
+        <a href="#donate-section" class="btn-donate-hero">支持長照計畫</a>
+    </header>
+
+    <section id="witness-and-impact-section">
+        <div class="section-header">
+            <h2>您的捐款將用於</h2>
+        </div>
+        <div class="impact-grid">
+            <div class="impact-item">
+                <span class="impact-icon">🧠</span>
+                <h3>專業醫療與照護</h3>
+                <p>提供藥物支持、物理治療與日常健康監測，維持長者生活品質。</p>
+            </div>
+            <div class="impact-item">
+                <span class="impact-icon">🤝</span>
+                <h3>社區支持與活動</h3>
+                <p>開辦認知活動、藝術治療與懷舊小組，延緩心智退化，豐富社交生活。</p>
+            </div>
+            <div class="impact-item">
+                <span class="impact-icon">👨‍👩‍👧‍👦</span>
+                <h3>家庭照顧者喘息</h3>
+                <p>為辛勞的家庭照顧者提供支持課程與臨時托顧服務，給予他們喘息的空間。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="witness-and-impact-section">
+        <div class="section-header">
+            <h2>愛心見證與透明公開</h2>
+            <p>(感謝每一位支持者，我們承諾善用每一分善款)</p>
+        </div>
+        
+        <!-- 全新：雙欄佈局容器 -->
+        <div class="two-column-layout">
+            <!-- 左欄：愛心見證 -->
+            <div class="witness-column">
+                <h3 class="column-title">愛心見證</h3>
+                <div class="deed-item">
+                    <div class="deed-date">2024/06/10</div>
+                    <div class="deed-content">
+                        <h4>端午節愛心粽活動</h4>
+                        <p>邀請長者與志工一同包粽子，感受節日氛圍，並將多餘的粽子分送給社區獨居長者。</p>
+                    </div>
+                </div>
+                <div class="deed-item">
+                    <div class="deed-date">2024/05/22</div>
+                    <div class="deed-content">
+                        <h4>體適能與健康講座</h4>
+                        <p>物理治療師帶領長者進行溫和的伸展運動，並分享預防跌倒的實用技巧。</p>
+                    </div>
+                </div>
+                <div class="deed-item">
+                    <div class="deed-date">2024/04/30</div>
+                    <div class="deed-content">
+                        <h4>小小園丁計畫</h4>
+                        <p>在機構的頂樓花園，長者們親手種植蔬菜與香草，享受園藝的樂趣與成就感。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右欄：捐款用途 -->
+            <div class="impact-column column-text">
+                <h3 class="column-title">機構介紹</h3>
+                <p>我們是一家非營利組織，自2010年成立以來，致力於為失智症長者提供一個如家一般溫暖、安全且富有尊嚴的照護環境。我們的團隊由專業的護理師、社工、物理治療師及活動帶領員組成。</p>
+                <h3 class="column-title" style="margin-top: 30px;">成立宗旨</h3>
+                <p>我們的宗旨是透過個人化的照護計畫與豐富的社區活動，延緩長者心智功能退化，維持其生活品質與社交連結，同時為家庭照顧者提供必要的支持與喘息服務，共同打造一個對失智症友善的社會。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 全新：獨立的捐款芳名錄區塊 -->
+    <section id="donor-marquee-section">
+        <div class="section-header">
+            <h2>最新捐款支持</h2>
+        </div>
+        <div class="marquee-container-vertical">
+            <div class="marquee-track-vertical" id="marqueeTrack">
+            </div>
+        </div>
+    </section>
+
+    <section id="donate-section" style="background-color: white;">
+        <div class="section-header">
+            <h2>選擇您的愛心方案</h2>
+            <p>您的每一份心意，都將轉化為長者臉上的笑容</p>
+        </div>
+        
+        <div class="donation-options">
+            <div class="donation-card" data-amount="50">
+                <div class="card-amount">¥ 50</div>
+                <div class="card-description">支持一位长者参与单次艺术治疗工作坊</div>
+            </div>
+            <div class="donation-card active" data-amount="100">
+                <div class="card-amount">¥ 100</div>
+                <div class="card-description">提供一周的专业认知训练教材</div>
+            </div>
+            <div class="donation-card" data-amount="200">
+                <div class="card-amount">¥ 200</div>
+                <div class="card-description">支持一场社区怀旧音乐会的举办</div>
+            </div>
+            <div class="donation-card" data-amount="custom">
+                <input type="number" placeholder="自订金额 (¥)" class="custom-amount" min="1">
+                <div class="card-description">您的任意心意，都是最温暖的支持</div>
+            </div>
+        </div>
+
+        <button class="btn-donate-hero" style="margin-top: 30px; width: 100%; max-width: 400px;">確認捐款</button>
+        
+        <p style="margin-top: 30px; font-size: 0.9rem; color: #888;">
+            * 我們承諾公開透明，所有捐款流向將定期於官網公告。
+        </p>
+    </section>
+
+    <footer>
+        <h3>失智症關懷協會</h3>
+        <p>聯絡我們：contact@dementia-care.example | 電話：(02) 1234-5678</p>
+        <p>© 2023 Dementia Care Initiative. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 移除頁籤切換的 JavaScript 邏輯
+        document.addEventListener('DOMContentLoaded', function() {
+            const donorData = [
+                { name: "张伟", amount: 100 },
+                { name: "王芳", amount: 50 },
+                { name: "李娜", amount: 200 },
+                { name: "刘强", amount: 500 },
+                { name: "陈静", amount: 100 },
+                { name: "杨洋", amount: 1000 },
+                { name: "赵敏", amount: 50 },
+                { name: "黄磊", amount: 300 },
+                { name: "周杰", amount: 100 },
+                { name: "吴刚", amount: 50 },
+                { name: "郑爽", amount: 200 },
+                { name: "匿名好心人", amount: 800 },
+                { name: "孙丽", amount: 150 },
+                { name: "朱一龙", amount: 500 }
+            ];
+
+            const track = document.getElementById('marqueeTrack');
+
+            // 创建单个【垂直】捐款卡片的函数
+            // 注意：HTML 结构和 class 名称稍微调整以适应垂直布局
+            function createDonorCardNew(donor) {
+                const card = document.createElement('div');
+                card.className = 'donor-card-new'; // 使用新的樣式 class
+                card.innerHTML = `
+                    <div class="donor-avatar"></div>
+                    <div class="donor-info">
+                        <span class="donor-name">${donor.name}</span>
+                        <span class="donor-message">捐赠了 <span class="donor-amount">¥ ${donor.amount}</span></span>
+                    </div>
+                `;
+                return card;
+            }
+
+            // 填充初始数据
+            donorData.forEach(donor => {
+                track.appendChild(createDonorCardNew(donor));
+            });
+
+            // 实现“无限”的关键：复制一份相同的数据加到后面
+            // 原理与水平轮播相同，只是 CSS 处理方向不同
+            donorData.forEach(donor => {
+                const clonedCard = createDonorCardNew(donor).cloneNode(true);
+                track.appendChild(clonedCard);
+            });
+        });
+
+        // 新增：捐款方案卡片點擊邏輯
+        document.addEventListener('DOMContentLoaded', function() {
+            const donationCards = document.querySelectorAll('.donation-card');
+            const customAmountInput = document.querySelector('.custom-amount');
+
+            donationCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    donationCards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    // 如果點擊的是自訂金額卡片，自動聚焦到輸入框
+                    if (this.dataset.amount === 'custom') {
+                        customAmountInput.focus();
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
