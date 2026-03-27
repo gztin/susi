@@ -1,54 +1,1087 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Swiper Slider</title>
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="asset/css/swiper-bundle.min.css">
-    <style>
-        .pagination {
-  display: flex;
-  list-style: none;
-  padding-left: 0;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>網頁編輯器</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+  <script>
+    CKEDITOR.config.versionCheck = false;
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: oklch(93% 0.02 80);
+      font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+      min-height: 100vh;
+      padding: clamp(16px, 3vw, 40px);
+    }
 
-.page-item {
-  margin-right: 5px;
-}
+    .editor-wrapper {
+      display: block;
+      max-width: 980px;
+      margin: 0 auto;
+    }
 
-.page-link {
-  display: block;
-  padding: 8px 12px;
-  text-decoration: none;
-  color: #007bff;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-}
+    /* 左側主編輯區 */
+    .editor-main {
+      flex: 1;
+      background: oklch(99% 0.005 80);
+      border: 1px solid oklch(85% 0.03 80);
+      padding: clamp(20px, 3vw, 36px);
+      display: flex;
+      flex-direction: column;
+      min-height: 700px;
+    }
 
-.page-link:hover {
-  background-color: #e9ecef;
-  border-color: #dee2e6;
-  color: #0056b3;
-}
+    /* 拖曳區域 */
+    .drop-zone {
+      flex: 1;
+      min-height: 400px;
+    }
 
-.page-item.active .page-link {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: white;
-  pointer-events: none; /* 防止被點擊 */
-}
-    </style>
+    /* 每個可拖曳的區塊 */
+    .block-item {
+      border: 1px dashed oklch(75% 0.04 80);
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      cursor: grab;
+      background: oklch(99% 0.005 80);
+      transition: border-color 0.2s ease-out, background 0.2s ease-out;
+      padding-bottom: 52px;
+    }
+    .block-item:active { cursor: grabbing; }
+    .block-item.dragging { opacity: 0.35; }
+    .block-item.drag-over {
+      border-color: oklch(60% 0.08 80);
+      background: oklch(97% 0.015 80);
+    }
+
+    .block-close {
+      position: absolute;
+      bottom: 14px;
+      left: 20px;
+      border: 1px solid oklch(40% 0.01 80);
+      background: oklch(25% 0.01 80);
+      cursor: pointer;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      padding: 4px 12px;
+      color: oklch(95% 0.005 80);
+      font-family: 'Noto Sans TC', sans-serif;
+      transition: background 0.15s ease-out;
+    }
+    .block-close:hover { background: oklch(45% 0.12 25); border-color: oklch(45% 0.12 25); }
+
+    .block-table .table-controls { margin-top: 16px; }
+
+    /* contenteditable */
+    .block-item [contenteditable] {
+      font-size: 14px;
+      font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+      outline: none;
+      line-height: 1.7;
+    }
+    .block-item [contenteditable][data-placeholder][data-empty="true"]::before {
+      content: attr(data-placeholder);
+      color: oklch(70% 0.02 80);
+      pointer-events: none;
+    }
+    .block-item [contenteditable][data-placeholder] { position: relative; }
+
+    /* 主標題 */
+    .block-heading h5.tit {
+      font-size: 20px;
+      margin: 0 0 4px;
+      color: #bb9157;
+      border-left: 4px solid #bb9157;
+      padding-left: 12px;
+      outline: none;
+      font-family: 'Noto Serif TC', serif;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .block-heading h5.tit::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: oklch(82% 0.04 80);
+    }
+
+    /* 副標題 */
+    .block-subheading .subT {
+      font-size: 15px;
+      outline: none;
+      font-weight: 500;
+      color: oklch(30% 0.02 80);
+      letter-spacing: 0.02em;
+    }
+
+    /* 圖片群組 */
+    .block-image-group .img-group-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .block-image-group .img-group-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .block-image-group .img-slot {
+      position: relative;
+    }
+    .block-image-group .img-slot .upload-area {
+      border: 1px dashed oklch(72% 0.04 80);
+      padding: 24px 12px;
+      text-align: center;
+      cursor: pointer;
+      color: oklch(65% 0.04 80);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      transition: border-color 0.2s, color 0.2s;
+      height: 100%;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .block-image-group .img-slot .upload-area:hover { border-color: #bb9157; color: #bb9157; }
+    .block-image-group .img-slot input[type=file] { display: none; }
+    .block-image-group .img-slot img { width: 100%; display: block; }
+    .block-image-group .img-slot .slot-remove {
+      position: absolute; top: 4px; right: 4px;
+      background: oklch(25% 0.01 80 / 0.7); color: #fff;
+      border: none; cursor: pointer; font-size: 11px;
+      padding: 2px 6px; display: none;
+    }
+    .block-image-group .img-slot:hover .slot-remove { display: block; }
+    .block-image-group .img-group-controls {
+      display: flex; gap: 8px; margin-top: 12px; align-items: center;
+    }
+    .block-image-group .img-group-controls button {
+      padding: 4px 14px; font-size: 11px; letter-spacing: 0.04em;
+      border: 1px solid oklch(78% 0.03 80);
+      background: transparent; cursor: pointer;
+      font-family: inherit; color: oklch(40% 0.02 80);
+      transition: background 0.15s;
+    }
+    .block-image-group .img-group-controls button:hover { background: oklch(94% 0.02 80); }
+    .block-image-group .cols-toggle {
+      font-size: 11px; color: oklch(50% 0.03 80); margin-left: auto;
+      display: flex; gap: 4px; align-items: center;
+    }
+    .block-image-group .cols-toggle button {
+      padding: 3px 8px; font-size: 11px;
+      border: 1px solid oklch(78% 0.03 80);
+      background: transparent; cursor: pointer; font-family: inherit;
+    }
+    .block-image-group .cols-toggle button.active {
+      background: oklch(25% 0.01 80); color: #fff; border-color: oklch(25% 0.01 80);
+    }
+    .block-text .cke { border: 1px solid oklch(82% 0.03 80) !important; }
+    .block-item.dragging .cke { pointer-events: none; }
+
+    /* 圖片 */
+    .block-image .upload-area {
+      border: 1px dashed oklch(72% 0.04 80);
+      padding: 32px;
+      text-align: center;
+      cursor: pointer;
+      color: oklch(65% 0.04 80);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      transition: border-color 0.2s ease-out, color 0.2s ease-out;
+    }
+    .block-image .upload-area:hover {
+      border-color: #bb9157;
+      color: #bb9157;
+    }
+    .block-image .upload-area.has-image { padding: 0; border: none; }
+    .block-image input[type=file] { display: none; }
+    .block-image .preview-img { width: 740px; max-width: 100%; display: block; }
+    .block-image .img-actions { margin-top: 8px; display: flex; gap: 8px; }
+    .block-image .img-actions button {
+      padding: 4px 12px; font-size: 11px;
+      border: 1px solid oklch(78% 0.03 80);
+      background: transparent; cursor: pointer;
+      font-family: inherit; letter-spacing: 0.03em;
+      color: oklch(40% 0.02 80);
+      transition: background 0.15s;
+    }
+    .block-image .img-actions button:hover { background: oklch(94% 0.02 80); }
+
+    /* 檔案下載 */
+    .block-file .file-table {
+      width: 100%; border-collapse: collapse; font-size: 14px;
+      border: 1px solid #e0d9ce;
+    }
+    .block-file .file-table th {
+      background: #f8f8f8;
+      border-bottom: 2px solid #c8a96e;
+      border-top: 1px solid #e0d9ce;
+      border-right: 1px solid #e0d9ce;
+      padding: 12px 16px; text-align: left;
+      font-weight: 500; color: #4c4c4c;
+      font-family: 'Noto Serif TC', serif;
+      letter-spacing: 0.03em; outline: none;
+    }
+    .block-file .file-table th:last-child { border-right: none; }
+    .block-file .file-table td {
+      border-bottom: 1px solid #e0d9ce;
+      border-right: 1px solid #e0d9ce;
+      padding: 12px 16px; vertical-align: middle;
+      color: #4c4c4c; outline: none;
+      transition: color 0.15s;
+    }
+    .block-file .file-table td:last-child { border-right: none; }
+    .block-file .file-table tr:hover td { color: #c8a96e; }
+    .block-file .file-table tr:last-child td { border-bottom: none; }
+    .block-file .file-table .td-download { width: 80px; text-align: center; }
+    .block-file .file-table input[type=file] { display: none; }
+    .block-file .file-table .upload-link-btn {
+      background: none; border: none; cursor: pointer;
+      padding: 0; display: inline-flex; align-items: center;
+      transition: opacity 0.15s, transform 0.15s ease-out;
+    }
+    .block-file .file-table .upload-link-btn img { width: 20px; height: 20px; }
+    .block-file .file-table .upload-link-btn:hover { transform: translateY(-1px); opacity: 0.7; }
+    .block-file .file-table .upload-link-btn.has-link img { filter: hue-rotate(180deg); }
+        /* URL Modal */
+    #urlModal {
+      display: none; position: fixed; inset: 0;
+      background: oklch(10% 0.01 80 / 0.5); z-index: 9999;
+      align-items: center; justify-content: center;
+    }
+    #urlModal .url-modal-box {
+      background: oklch(99% 0.005 80);
+      border: 1px solid oklch(85% 0.03 80);
+      padding: 28px; width: 420px; max-width: 90vw;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    #urlModal .url-modal-box label {
+      font-size: 13px; color: oklch(35% 0.02 80);
+      letter-spacing: 0.05em; font-weight: 500;
+    }
+    #urlModal .url-modal-box input {
+      border: 1px solid oklch(80% 0.03 80); padding: 9px 12px;
+      font-size: 14px; font-family: inherit; width: 100%;
+      background: oklch(98% 0.008 80); outline: none;
+      transition: border-color 0.15s;
+    }
+    #urlModal .url-modal-box input:focus { border-color: #bb9157; }
+    #urlModal .url-modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+    #urlModal .url-modal-actions button {
+      padding: 7px 20px; font-size: 12px; letter-spacing: 0.05em;
+      cursor: pointer; font-family: inherit;
+      border: 1px solid oklch(78% 0.03 80); background: transparent;
+      color: oklch(35% 0.02 80); transition: background 0.15s;
+    }
+    #urlModal .url-modal-actions button:hover { background: oklch(94% 0.02 80); }
+    #urlModal .url-modal-actions .btn-confirm {
+      background: oklch(25% 0.01 80); color: oklch(95% 0.005 80);
+      border-color: oklch(25% 0.01 80);
+    }
+    #urlModal .url-modal-actions .btn-confirm:hover { background: oklch(35% 0.01 80); }
+
+    .block-file .file-controls { display: flex; gap: 8px; margin-top: 12px; }
+    .block-file .file-controls button,
+    .block-table .table-controls button {
+      padding: 4px 14px; font-size: 11px; letter-spacing: 0.04em;
+      border: 1px solid oklch(78% 0.03 80);
+      background: transparent; cursor: pointer;
+      font-family: inherit; color: oklch(40% 0.02 80);
+      transition: background 0.15s;
+    }
+    .block-file .file-controls button:hover,
+    .block-table .table-controls button:hover { background: oklch(94% 0.02 80); }
+    .block-file .file-controls .btn-del-row,
+    .block-table .table-controls .btn-del-row {
+      color: oklch(45% 0.15 25); border-color: oklch(70% 0.1 25);
+    }
+    .block-file .file-controls .btn-del-row:hover,
+    .block-table .table-controls .btn-del-row:hover { background: oklch(96% 0.04 25); }
+
+    /* 表格 */
+    .block-table .table-editor,
+    .block-table .environmental {
+      width: 100%; border-collapse: collapse; font-size: 14px;
+      border: 1px solid #e0d9ce;
+    }
+    .block-table .environmental th,
+    .block-table .table-editor th {
+      background: #f8f8f8;
+      border-bottom: 2px solid #c8a96e;
+      border-top: 1px solid #e0d9ce;
+      border-right: 1px solid #e0d9ce;
+      padding: 12px 16px; text-align: left;
+      font-weight: 500; color: #4c4c4c;
+      font-family: 'Noto Serif TC', serif;
+      letter-spacing: 0.03em; outline: none;
+    }
+    .block-table .environmental td,
+    .block-table .table-editor td {
+      border-bottom: 1px solid #e0d9ce;
+      border-right: 1px solid #e0d9ce;
+      padding: 12px 16px; vertical-align: middle;
+      color: #4c4c4c; outline: none;
+      transition: color 0.15s;
+    }
+    .block-table .environmental th:last-child,
+    .block-table .table-editor th:last-child,
+    .block-table .environmental td:last-child,
+    .block-table .table-editor td:last-child { border-right: none; }
+    .block-table .environmental tr:hover td,
+    .block-table .table-editor tr:hover td { color: #c8a96e; }
+        .block-table .table-controls { display: flex; gap: 8px; margin-top: 16px; }
+
+    /* 底部按鈕 */
+    .editor-footer {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid oklch(88% 0.025 80);
+    }
+    .editor-footer button {
+      padding: 10px 28px;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', inherit;
+      border: 1px solid oklch(78% 0.03 80);
+      background: transparent;
+      color: oklch(35% 0.02 80);
+      transition: background 0.15s ease-out, color 0.15s ease-out;
+    }
+    .editor-footer button:hover { background: oklch(94% 0.02 80); }
+    .editor-footer .btn-preview {
+      background: oklch(25% 0.01 80);
+      color: oklch(95% 0.005 80);
+      border-color: oklch(25% 0.01 80);
+    }
+    .editor-footer .btn-preview:hover { background: oklch(35% 0.01 80); }
+    .editor-footer .btn-publish {
+      background: #bb9157;
+      color: oklch(99% 0.005 80);
+      border-color: #bb9157;
+    }
+    .editor-footer .btn-publish:hover { background: oklch(58% 0.1 65); border-color: oklch(58% 0.1 65); }
+
+    /* 右側元件面板 */
+    .component-panel {
+      position: fixed;
+      right: clamp(16px, 3vw, 40px);
+      top: clamp(16px, 3vw, 40px);
+      width: 110px;
+      background: oklch(99% 0.005 80);
+      border: 1px solid oklch(85% 0.03 80);
+      padding: 16px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+      z-index: 100;
+    }
+    .panel-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: oklch(60% 0.04 80);
+      text-transform: uppercase;
+      padding: 0 4px 8px;
+      border-bottom: 1px solid oklch(88% 0.025 80);
+      margin-bottom: 4px;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+    .comp-row-item { display: flex; }
+    .comp-btn {
+      flex: 1;
+      padding: 8px 6px;
+      border: 1px solid oklch(82% 0.03 80);
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      font-family: 'Noto Sans TC', inherit;
+      color: oklch(35% 0.02 80);
+      text-align: center;
+      transition: background 0.15s ease-out, border-color 0.15s, color 0.15s;
+    }
+    .comp-btn:hover {
+      background: oklch(25% 0.01 80);
+      color: oklch(95% 0.005 80);
+      border-color: oklch(25% 0.01 80);
+    }
+    .comp-btn:disabled { color: oklch(75% 0.02 80); cursor: not-allowed; }
+    .comp-btn:disabled:hover { background: transparent; color: oklch(75% 0.02 80); border-color: oklch(82% 0.03 80); }
+
+    /* 空白提示 */
+    .empty-hint {
+      text-align: center;
+      color: oklch(72% 0.03 80);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      padding: 60px 0;
+      pointer-events: none;
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">4</a></li>
-          <li class="page-item"><a class="page-link" href="#">5</a></li>
-        </ul>
-      </nav>
+
+<div class="editor-wrapper">
+  <!-- 左側編輯區 -->
+  <div class="editor-main">
+
+
+    <div class="drop-zone" id="dropZone">
+      <div class="empty-hint" id="emptyHint">點擊上方按鈕或右側「加入」來新增元件</div>
+    </div>
+
+    <div class="editor-footer">
+      <button onclick="resetEditor()">重置</button>
+      <button class="btn-preview" onclick="previewPage()">預覽頁面</button>
+      <button class="btn-publish" onclick="if(validateBlocks()) alert('發佈成功！')">發佈上架</button>
+    </div>
+  </div>
+
+  <!-- 右側元件面板 -->
+  <div class="component-panel">
+    <div class="panel-label">元件</div>
+    <div class="comp-row-item">
+      <button class="comp-btn" disabled>主標題</button>
+    </div>
+    <div class="comp-row-item">
+      <button class="comp-btn" onclick="addBlock('subheading')">副標題</button>
+    </div>
+    <div class="comp-row-item">
+      <button class="comp-btn" onclick="addBlock('text')">內文</button>
+    </div>
+    <div class="comp-row-item">
+      <button class="comp-btn" onclick="addBlock('image')">圖片</button>
+    </div>
+    <div class="comp-row-item">
+      <button class="comp-btn" onclick="addBlock('image-group')">圖片群組</button>
+    </div>
+    <div class="comp-row-item">
+      <button class="comp-btn" onclick="addBlock('file')">檔案下載</button>
+    </div>
+    <div class="comp-row-item">
+      <button class="comp-btn" onclick="addBlock('fold')">折文</button>
+    </div>
+    <div class="comp-row-item">
+      <button class="comp-btn" onclick="addBlock('table')">表格</button>
+    </div>
+  </div>
+</div>
+
+<!-- 程式碼預覽 Modal -->
+<div id="codeModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:#1e1e1e;color:#d4d4d4;border-radius:6px;width:600px;max-width:90vw;max-height:80vh;display:flex;flex-direction:column;">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #333;">
+      <span id="codeModalTitle" style="font-size:14px;font-family:monospace;color:#9cdcfe;"></span>
+      <button onclick="document.getElementById('codeModal').style.display='none'" style="background:none;border:none;color:#aaa;font-size:18px;cursor:pointer;">✕</button>
+    </div>
+    <pre id="codeModalContent" style="margin:0;padding:16px;overflow:auto;font-size:13px;font-family:monospace;line-height:1.6;white-space:pre-wrap;"></pre>
+  </div>
+</div>
+
+<!-- URL 設定 Modal -->
+<div id="urlModal">
+  <div class="url-modal-box">
+    <label>設定下載連結</label>
+    <input type="text" id="urlModalInput" placeholder="貼上檔案網址 https://...">
+    <div class="url-modal-actions">
+      <button onclick="closeUrlModal()">取消</button>
+      <button class="btn-confirm" onclick="confirmUrl()">確認</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let dragSrc = null;
+
+  function updateEmptyHint() {
+    const zone = document.getElementById('dropZone');
+    const hint = document.getElementById('emptyHint');
+    const blocks = zone.querySelectorAll('.block-item');
+    hint.style.display = blocks.length === 0 ? 'block' : 'none';
+  }
+
+  function addBlock(type) {
+    const zone = document.getElementById('dropZone');
+
+    // 主標題限制只能一個，且固定在最上方
+    if (type === 'heading') {
+      if (zone.querySelector('.block-heading')) return;
+    }
+
+    const block = document.createElement('div');
+    block.className = 'block-item block-' + type;
+    block.draggable = true;
+    block.innerHTML = buildBlockHTML(type) + '<button class="block-close" onclick="removeBlock(this)">移除區塊</button>';
+
+    if (type === 'heading') {
+      const hint = zone.querySelector('#emptyHint');
+      zone.insertBefore(block, hint ? hint.nextSibling : zone.firstChild);
+    } else {
+      zone.appendChild(block);
+    }
+
+    if (type === 'text') {
+      const ta = block.querySelector('textarea');
+      if (ta) initCKEditor(ta.id);
+    }
+    bindDrag(block);
+    // 綁定 placeholder 行為
+    block.querySelectorAll('[contenteditable][data-placeholder]').forEach(el => {
+      const update = () => el.setAttribute('data-empty', el.innerText.trim() === '' ? 'true' : 'false');
+      el.setAttribute('data-empty', 'true');
+      el.addEventListener('input', update);
+      el.addEventListener('blur', update);
+    });
+    updateEmptyHint();
+    updateHeadingBtn();
+  }
+
+  function updateHeadingBtn() {
+    const zone = document.getElementById('dropZone');
+    const btn = document.getElementById('btnHeading');
+    if (!btn) return;
+    btn.disabled = !!zone.querySelector('.block-heading');
+  }
+
+  function initCKEditor(id) {
+    CKEDITOR.replace(id, {
+      language: 'zh',
+      height: 200,
+      resize_enabled: false,
+      versionCheck: false,
+      editorplaceholder: '請輸入內文文字...',
+      format_tags: 'p;h1;h2;h3;h4;h5;h6',
+      toolbar: [
+        { name: 'clipboard', items: ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo'] },
+        { name: 'basicstyles', items: ['Bold','Italic','Underline','Strike','-','RemoveFormat'] },
+        { name: 'paragraph', items: ['NumberedList','BulletedList','-','Blockquote'] },
+        { name: 'links', items: ['Link','Unlink'] },
+        { name: 'insert', items: ['Image','Table'] },
+        '/',
+        { name: 'styles', items: ['Styles','Format'] },
+        { name: 'colors', items: ['TextColor','BGColor'] },
+        { name: 'tools', items: ['Source'] }
+      ]
+    });
+    CKEDITOR.instances[id].on('instanceReady', function() {
+      this.container.$.addEventListener('dragstart', e => e.stopPropagation());
+    });
+  }
+
+  function buildBlockHTML(type) {
+    switch (type) {
+      case 'heading':
+        return '<h5 class="tit" contenteditable="true" data-placeholder="請輸入標題文字" data-empty="true"><span></span></h5>';
+      case 'subheading':
+        return '<div class="subT" contenteditable="true" data-placeholder="請輸入副標題文字" data-empty="true"></div>';
+      case 'text': {
+        const uid = 'cke_ta_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+        return `<textarea id="${uid}" style="width:100%;min-height:120px;"></textarea>`;
+      }
+      case 'image':
+        return `<div class="upload-area" onclick="this.nextElementSibling.click()">
+                  ＋ 點擊上傳圖片
+                </div>
+                <input type="file" accept="image/*" onchange="previewImg(this)">`;
+      case 'image-group': {
+        const slot = `<div class="img-slot">
+          <div class="upload-area" onclick="this.nextElementSibling.click()">＋ 上傳圖片</div>
+          <input type="file" accept="image/*" onchange="previewSlotImg(this)">
+          <button class="slot-remove" onclick="clearSlotImg(this)">✕</button>
+        </div>`;
+        return `<div class="img-group-grid" data-cols="2">
+          ${slot}${slot}
+        </div>
+        <div class="img-group-controls">
+          <button onclick="addImgSlot(this)">＋ 新增圖片</button>
+          <button onclick="removeImgSlot(this)">－ 移除最後</button>
+          <div class="cols-toggle">
+            欄數：
+            <button class="active" onclick="setImgCols(this,2)">2</button>
+            <button onclick="setImgCols(this,3)">3</button>
+          </div>
+        </div>`;
+      }
+      case 'file':
+        return `<table class="file-table">
+          <tbody>
+            <tr>
+              <th contenteditable="true">檔案名稱</th>
+              <th class="td-download" style="width:80px;text-align:center;">下載</th>
+            </tr>
+            <tr>
+              <td contenteditable="true">請輸入檔案名稱</td>
+              <td class="td-download">${fileDownloadCell()}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="file-controls">
+          <button onclick="addFileRow(this)">＋ 新增列</button>
+          <button class="btn-del-row" onclick="delFileRow(this)">－ 刪除最後列</button>
+        </div>`;
+      case 'fold':
+        return `<details>
+                  <summary contenteditable="true" style="cursor:pointer;">折疊標題（點擊展開）</summary>
+                  <div contenteditable="true" style="padding:8px 0;">折疊內容文字...</div>
+                </details>`;
+      case 'table':
+        return `<table class="environmental">
+          <tbody>
+            <tr>
+              <th contenteditable="true" width="25%">項目</th>
+              <th contenteditable="true">說明</th>
+            </tr>
+            <tr>
+              <td contenteditable="true">請輸入項目</td>
+              <td contenteditable="true">請輸入說明內容</td>
+            </tr>
+            <tr>
+              <td contenteditable="true">請輸入項目</td>
+              <td contenteditable="true">請輸入說明內容</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-controls">
+          <button onclick="addTableRow(this)">＋ 新增列</button>
+          <button class="btn-del-row" onclick="delTableRow(this)">－ 刪除最後列</button>
+        </div>`;
+    }
+  }
+
+  function addTableRow(btn) {
+    const table = btn.closest('.block-table').querySelector('table');
+    const tbody = table.querySelector('tbody');
+    const colCount = tbody.querySelector('tr').children.length;
+    const tr = document.createElement('tr');
+    for (let i = 0; i < colCount; i++) {
+      const td = document.createElement('td');
+      td.contentEditable = 'true';
+      td.textContent = '請輸入內容';
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+  }
+
+  function delTableRow(btn) {
+    const tbody = btn.closest('.block-table').querySelector('tbody');
+    if (tbody.rows.length > 1) tbody.deleteRow(-1);
+  }
+
+  function makeImgSlot() {
+    return `<div class="img-slot">
+      <div class="upload-area" onclick="this.nextElementSibling.click()">＋ 上傳圖片</div>
+      <input type="file" accept="image/*" onchange="previewSlotImg(this)">
+      <button class="slot-remove" onclick="clearSlotImg(this)">✕</button>
+    </div>`;
+  }
+
+  function previewSlotImg(input) {
+    if (input.files && input.files[0]) {
+      const area = input.previousElementSibling;
+      const url = URL.createObjectURL(input.files[0]);
+      area.innerHTML = `<img src="${url}" alt="">`;
+      area.classList.add('has-image');
+      area.style.padding = '0';
+      area.onclick = null;
+    }
+  }
+
+  function clearSlotImg(btn) {
+    const slot = btn.closest('.img-slot');
+    const area = slot.querySelector('.upload-area');
+    area.innerHTML = '＋ 上傳圖片';
+    area.classList.remove('has-image');
+    area.style.padding = '';
+    area.onclick = function() { slot.querySelector('input[type=file]').click(); };
+    slot.querySelector('input[type=file]').value = '';
+  }
+
+  function addImgSlot(btn) {
+    const grid = btn.closest('.block-image-group').querySelector('.img-group-grid');
+    grid.insertAdjacentHTML('beforeend', `<div class="img-slot">
+      <div class="upload-area" onclick="this.nextElementSibling.click()">＋ 上傳圖片</div>
+      <input type="file" accept="image/*" onchange="previewSlotImg(this)">
+      <button class="slot-remove" onclick="clearSlotImg(this)">✕</button>
+    </div>`);
+  }
+
+  function removeImgSlot(btn) {
+    const grid = btn.closest('.block-image-group').querySelector('.img-group-grid');
+    if (grid.children.length > 1) grid.lastElementChild.remove();
+  }
+
+  function setImgCols(btn, cols) {
+    const group = btn.closest('.block-image-group');
+    const grid = group.querySelector('.img-group-grid');
+    grid.className = 'img-group-grid' + (cols === 3 ? ' cols-3' : '');
+    grid.dataset.cols = cols;
+    btn.closest('.cols-toggle').querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function previewImg(input) {
+    if (input.files && input.files[0]) {
+      const area = input.previousElementSibling;
+      const url = URL.createObjectURL(input.files[0]);
+      area.innerHTML = `<img class="preview-img" src="${url}" alt="預覽圖片">
+        <div class="img-actions">
+          <button onclick="this.closest('.block-image').querySelector('input[type=file]').click()">重新上傳</button>
+          <button onclick="clearImg(this)">移除圖片</button>
+        </div>`;
+      area.classList.add('has-image');
+    }
+  }
+
+  function clearImg(btn) {
+    const area = btn.closest('.upload-area');
+    area.classList.remove('has-image');
+    area.innerHTML = '＋ 點擊上傳圖片';
+    btn.closest('.block-image').querySelector('input[type=file]').value = '';
+  }
+
+  function fileDownloadCell() {
+    return `<button class="upload-link-btn" title="點擊設定連結" onclick="openUrlModal(this)"><img src="img/icon_downLoad.png" alt="下載" style="width:20px;height:20px;"></button>`;
+  }
+  let _urlTargetBtn = null;
+
+  function openUrlModal(btn) {
+    _urlTargetBtn = btn;
+    const input = document.getElementById('urlModalInput');
+    input.value = btn.dataset.href || '';
+    document.getElementById('urlModal').style.display = 'flex';
+    setTimeout(() => input.focus(), 50);
+  }
+
+  function closeUrlModal() {
+    document.getElementById('urlModal').style.display = 'none';
+    _urlTargetBtn = null;
+  }
+
+  function confirmUrl() {
+    const url = document.getElementById('urlModalInput').value.trim();
+    if (_urlTargetBtn) {
+      _urlTargetBtn.dataset.href = url;
+      _urlTargetBtn.classList.toggle('has-link', !!url);
+      _urlTargetBtn.title = url ? '已設定：' + url + '（點擊修改）' : '點擊設定連結';
+      // 若有 URL，點按鈕直接開連結（編輯模式下 ctrl+click 或右鍵）
+      _urlTargetBtn.onclick = url
+        ? function(e) { if (e.ctrlKey || e.metaKey) { window.open(url, '_blank'); } else { openUrlModal(this); } }
+        : function() { openUrlModal(this); };
+    }
+    closeUrlModal();
+  }
+
+  function attachFile(input) {
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const td = input.closest('tr').querySelector('td[contenteditable]');
+      if (td && td.textContent.trim() === '請輸入檔案名稱') td.textContent = file.name;
+      // 儲存檔案 URL 到 button 的 data 屬性供預覽用
+      const btn = input.previousElementSibling;
+      btn.dataset.fileUrl = URL.createObjectURL(file);
+      btn.dataset.fileName = file.name;
+      btn.style.color = '#4a7fc1';
+    }
+  }
+
+  function addFileRow(btn) {
+    const tbody = btn.closest('.block-file').querySelector('tbody');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td contenteditable="true">請輸入檔案名稱</td>
+      <td class="td-download">${fileDownloadCell()}</td>`;
+    tbody.appendChild(tr);
+  }
+
+  function delFileRow(btn) {
+    const tbody = btn.closest('.block-file').querySelector('tbody');
+    // 保留 th 列，至少保留一筆 td 列
+    const rows = tbody.querySelectorAll('tr');
+    if (rows.length > 2) tbody.deleteRow(-1);
+  }
+
+  function removeBlock(btn) {
+    const block = btn.closest('.block-item');
+    // 銷毀該區塊內的 CKEditor instance
+    const ta = block.querySelector('textarea');
+    if (ta && CKEDITOR.instances[ta.id]) {
+      CKEDITOR.instances[ta.id].destroy();
+    }
+    block.remove();
+    updateEmptyHint();
+    updateHeadingBtn();
+  }
+
+  function bindDrag(el) {
+    el.addEventListener('dragstart', e => {
+      // 標題區塊不可拖曳
+      if (el.classList.contains('block-heading')) { e.preventDefault(); return; }
+      // 若點擊來源在 CKEditor 內部則不啟動拖曳
+      if (e.target.closest && e.target.closest('.cke')) {
+        e.preventDefault();
+        return;
+      }
+      dragSrc = el;
+      el.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    el.addEventListener('dragend', () => {
+      el.classList.remove('dragging');
+      document.querySelectorAll('.block-item').forEach(b => b.classList.remove('drag-over'));
+    });
+    el.addEventListener('dragover', e => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      if (el !== dragSrc) el.classList.add('drag-over');
+    });
+    el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
+    el.addEventListener('drop', e => {
+      e.preventDefault();
+      el.classList.remove('drag-over');
+      if (dragSrc && dragSrc !== el) {
+        const zone = document.getElementById('dropZone');
+        const items = [...zone.querySelectorAll('.block-item')];
+        const srcIdx = items.indexOf(dragSrc);
+        const tgtIdx = items.indexOf(el);
+
+        // 不允許拖到標題區塊之前
+        if (el.classList.contains('block-heading')) return;
+
+        const ckData = saveCKEditors();
+
+        if (srcIdx < tgtIdx) {
+          zone.insertBefore(dragSrc, el.nextSibling);
+        } else {
+          zone.insertBefore(dragSrc, el);
+        }
+
+        // 移動後重建 CKEditor
+        restoreCKEditors(ckData);
+      }
+    });
+  }
+
+  function saveCKEditors() {
+    const data = {};
+    for (const name in CKEDITOR.instances) {
+      data[name] = CKEDITOR.instances[name].getData();
+      CKEDITOR.instances[name].destroy();
+    }
+    return data;
+  }
+
+  function restoreCKEditors(data) {
+    document.querySelectorAll('.block-text textarea').forEach(ta => {
+      const savedData = data[ta.id] || ta.value;
+      ta.value = savedData;
+      initCKEditor(ta.id);
+    });
+  }
+
+  function resetEditor() {
+    if (!confirm('確定要重置所有內容嗎？')) return;
+    const zone = document.getElementById('dropZone');
+    // 銷毀所有 CKEditor
+    zone.querySelectorAll('.block-text textarea').forEach(ta => {
+      if (CKEDITOR.instances[ta.id]) CKEDITOR.instances[ta.id].destroy();
+    });
+    zone.querySelectorAll('.block-item').forEach(b => b.remove());
+    updateEmptyHint();
+    updateHeadingBtn();
+    // 重置後主標題必須重新加入
+    addBlock('heading');
+  }
+
+  function validateBlocks() {
+    const zone = document.getElementById('dropZone');
+    const errors = [];
+
+    zone.querySelectorAll('.block-item').forEach((block, i) => {
+      const label = block.querySelector('h5.tit, .subT, [contenteditable]')?.tagName || '元件';
+      const idx = i + 1;
+
+      // contenteditable 空白檢查
+      block.querySelectorAll('[contenteditable]').forEach(el => {
+        if (el.innerText.trim() === '') {
+          const name = block.classList.contains('block-heading') ? '主標題'
+            : block.classList.contains('block-subheading') ? '副標題'
+            : block.classList.contains('block-file') ? '檔案下載'
+            : block.classList.contains('block-table') ? '表格'
+            : '元件';
+          errors.push(`第 ${idx} 個區塊（${name}）有欄位尚未填寫`);
+        }
+      });
+
+      // CKEditor 空白檢查
+      const ta = block.querySelector('textarea');
+      if (ta && CKEDITOR.instances[ta.id]) {
+        const text = CKEDITOR.instances[ta.id].getData().replace(/<[^>]*>/g, '').trim();
+        if (!text) errors.push(`第 ${idx} 個區塊（內文）尚未填寫`);
+      }
+
+      // 圖片未上傳
+      if (block.classList.contains('block-image')) {
+        const img = block.querySelector('img.preview-img');
+        if (!img) errors.push(`第 ${idx} 個區塊（圖片）尚未上傳圖片`);
+      }
+    });
+
+    // 去重
+    const unique = [...new Set(errors)];
+    if (unique.length > 0) {
+      alert('請完成以下欄位後再預覽：\n\n' + unique.join('\n'));
+      return false;
+    }
+    return true;
+  }
+
+  function previewPage() {
+    if (!validateBlocks()) return;
+    const zone = document.getElementById('dropZone');
+    const win = window.open('', '_blank');
+    win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>預覽</title>
+      <style>
+      *{box-sizing:border-box;margin:0;padding:0;}
+      body{font-family:'Microsoft JhengHei',sans-serif;background:#f0f0f0;padding:40px 20px;}
+      .inner_box{width:780px;margin:0 auto;background:#fff;border:1px solid #e0e0e0;padding:32px;}
+      .inner_box > *{margin-bottom:20px;}
+      ul,ol{padding-left:1.5em;margin:0.5em 0;}
+      li{line-height:1.8;}
+      h5.tit{font-size:20px;margin:0 0 20px;color:#bb9157;border-left:4px solid #bb9157;padding-left:10px;display:flex;align-items:center;gap:16px;}
+      h5.tit::after{content:'';flex:1;height:1px;background:#e8ddd0;}
+      .subT{font-size:14px;margin-bottom:12px;}
+      details summary{cursor:pointer;font-weight:bold;}
+      img{width:740px;max-width:100%;display:block;}
+      .img-group-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+      .img-group-grid.cols-3{grid-template-columns:repeat(3,1fr);}
+      .img-group-grid img{width:100%;display:block;}
+      table.environmental,table.file-table{width:100%;border-collapse:collapse;font-size:14px;border:1px solid #e0d9ce;margin-bottom:12px;}
+      table.environmental th,table.file-table th{background:#f8f8f8;border-bottom:2px solid #c8a96e;border-top:1px solid #e0d9ce;border-right:1px solid #e0d9ce;padding:12px 16px;text-align:left;font-weight:500;color:#4c4c4c;}
+      table.environmental td,table.file-table td{border-bottom:1px solid #e0d9ce;border-right:1px solid #e0d9ce;padding:12px 16px;vertical-align:middle;color:#4c4c4c;font-size:14px;transition:color 0.15s;}
+      table.environmental tr:hover td,table.file-table tr:hover td{color:#c8a96e;}
+      table.environmental th:last-child,table.file-table th:last-child,table.environmental td:last-child,table.file-table td:last-child{border-right:none;}
+      table.environmental tr:last-child td,table.file-table tr:last-child td{border-bottom:none;}
+      .td-download{width:80px;text-align:center;}
+      .td-download a{color:#c8a96e;font-size:20px;text-decoration:none;}
+      </style></head><body><div class="inner_box">`);
+
+    zone.querySelectorAll('.block-item').forEach(block => {
+      const clone = block.cloneNode(true);
+
+      // 移除編輯器 UI
+      clone.querySelector('.block-close')?.remove();
+      clone.querySelectorAll('.table-controls, .file-controls, .img-actions').forEach(el => el.remove());
+      clone.querySelectorAll('input[type=file]').forEach(el => el.remove());
+      clone.querySelectorAll('.cke').forEach(el => el.remove());
+
+      // 移除圖片上傳區域的點擊提示文字（只保留 img）
+      const uploadArea = clone.querySelector('.upload-area');
+      if (uploadArea) {
+        const img = uploadArea.querySelector('img.preview-img');
+        if (img) {
+          uploadArea.replaceWith(img);
+        } else {
+          uploadArea.remove();
+        }
+      }
+      // 圖片群組：清理每個 slot
+      clone.querySelectorAll('.img-slot').forEach(slot => {
+        const img = slot.querySelector('img');
+        slot.querySelector('.slot-remove')?.remove();
+        slot.querySelector('input[type=file]')?.remove();
+        const area = slot.querySelector('.upload-area');
+        if (img) {
+          area ? area.replaceWith(img) : null;
+        } else {
+          slot.remove();
+        }
+      });
+      clone.querySelector('.img-group-controls')?.remove();
+
+      // CKEditor 內容
+      const ta = clone.querySelector('textarea');
+      if (ta && CKEDITOR.instances[ta.id]) {
+        const div = document.createElement('div');
+        div.innerHTML = CKEDITOR.instances[ta.id].getData();
+        ta.replaceWith(div);
+      }
+
+      // 檔案下載按鈕轉 <a>
+      clone.querySelectorAll('.upload-link-btn').forEach(btn => {
+        const url = btn.dataset.href || '';
+        const td = btn.closest('.td-download');
+        const a = document.createElement('a');
+        a.href = url || '#';
+        if (url) a.target = '_blank';
+        a.textContent = '⬇';
+        td.innerHTML = '';
+        td.appendChild(a);
+      });
+
+      win.document.write(clone.innerHTML);
+    });
+
+    win.document.write('</div></body></html>');
+    win.document.close();
+  }
+
+  updateEmptyHint();
+  updateHeadingBtn();
+
+  // 預設加入主標題
+  addBlock('heading');
+
+  // 查看程式碼 modal
+  const componentCode = {
+    heading: {
+      html: `<h5 class="tit"><span>主標題文字</span></h5>`,
+      css: `.tit {\n  font-size: 14px;\n  font-weight: bold;\n  border-left: 4px solid #c8a96e;\n  padding-left: 10px;\n}`
+    },
+    subheading: {
+      html: `<div class="subT">副標題文字</div>`,
+      css: `.subT {\n  font-size: 14px;\n  color: #333;\n}`
+    },
+    text: {
+      html: `<p>請填入內文文字</p>`,
+      css: `p {\n  font-size: 14px;\n  line-height: 1.8;\n  color: #333;\n}`
+    },
+    image: {
+      html: `<!-- 圖片 -->\n<figure class="image-block">\n  <img src="image.jpg" alt="圖片說明">\n</figure>`,
+      css: `.image-block img {\n  max-width: 100%;\n  display: block;\n}`
+    },
+    file: {
+      html: `<!-- 檔案下載 -->\n<div class="file-block">\n  <a href="file.pdf" download>📎 檔案名稱.pdf</a>\n</div>`,
+      css: `.file-block a {\n  font-size: 14px;\n  color: #4a7fc1;\n  text-decoration: none;\n}`
+    },
+    fold: {
+      html: `<!-- 折文 -->\n<details class="fold-block">\n  <summary>折疊標題</summary>\n  <p>折疊內容文字</p>\n</details>`,
+      css: `.fold-block summary {\n  cursor: pointer;\n  font-weight: bold;\n  font-size: 14px;\n}\n.fold-block p {\n  padding: 8px 0;\n  font-size: 14px;\n}`
+    },
+    table: {
+      html: `<table class="environmental">\n  <tbody>\n    <tr>\n      <th width="25%">項目</th>\n      <th>說明</th>\n    </tr>\n    <tr>\n      <td>項目文字</td>\n      <td>說明內容</td>\n    </tr>\n  </tbody>\n</table>`,
+      css: `.environmental {\n  width: 100%;\n  border-collapse: collapse;\n  font-size: 14px;\n}\n.environmental th {\n  border-bottom: 2px solid #c8a96e;\n  padding: 10px 14px;\n  text-align: left;\n}\n.environmental td {\n  border-bottom: 1px solid #e8e8e8;\n  padding: 10px 14px;\n  vertical-align: top;\n}`
+    }
+  };
+
+  function showCode(type, mode) {
+    const data = componentCode[type];
+    if (!data) return;
+    const modal = document.getElementById('codeModal');
+    document.getElementById('codeModalTitle').textContent = type + ' — ' + mode.toUpperCase();
+    document.getElementById('codeModalContent').textContent = data[mode] || '（尚未提供）';
+    modal.style.display = 'flex';
+  }
+</script>
 </body>
 </html>
