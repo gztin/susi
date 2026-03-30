@@ -123,6 +123,78 @@
       letter-spacing: 0.02em;
     }
 
+    /* 折文 */
+    .block-fold .fold-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e0d9ce;
+    }
+    .block-fold .fold-title-input {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 500;
+      color: #4c4c4c;
+      outline: none;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+    .block-fold .fold-toggle-btn { display: none; }
+    .block-fold .fold-body {
+      padding-top: 12px;
+      display: block;
+    }
+    .fold-toolbar {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed oklch(82% 0.03 80);
+    }
+    .fold-toolbar-label {
+      font-size: 11px;
+      color: oklch(60% 0.04 80);
+      letter-spacing: 0.05em;
+    }
+    .fold-toolbar button {
+      padding: 3px 10px;
+      font-size: 11px;
+      border: 1px solid oklch(78% 0.03 80);
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
+      color: oklch(40% 0.02 80);
+      letter-spacing: 0.03em;
+      transition: background 0.15s;
+    }
+    .fold-toolbar button:hover { background: oklch(94% 0.02 80); }
+    .fold-drop-zone { min-height: 20px; }
+    /* 折文內的子區塊 */
+    .fold-child {
+      border: 1px dashed oklch(80% 0.03 80);
+      padding: 12px;
+      margin-bottom: 10px;
+      position: relative;
+      background: oklch(99.5% 0.003 80);
+      cursor: grab;
+    }
+    .fold-child:active { cursor: grabbing; }
+    .fold-child.dragging { opacity: 0.35; }
+    .fold-child.drag-over { border-color: #bb9157; background: oklch(97% 0.015 80); }
+    .fold-child .fold-child-remove {
+      position: absolute;
+      bottom: 8px; left: 12px;
+      background: oklch(25% 0.01 80);
+      color: #fff; border: none;
+      font-size: 10px; padding: 3px 10px;
+      cursor: pointer; font-family: inherit;
+      letter-spacing: 0.04em;
+    }
+    .fold-child .fold-child-remove:hover { background: oklch(45% 0.12 25); }
+    .fold-child { padding-bottom: 36px; }
+
     /* 圖片群組 */
     .block-image-group .img-group-grid {
       display: grid;
@@ -644,10 +716,19 @@
           <button class="btn-del-row" onclick="delFileRow(this)">－ 刪除最後列</button>
         </div>`;
       case 'fold':
-        return `<details>
-                  <summary contenteditable="true" style="cursor:pointer;">折疊標題（點擊展開）</summary>
-                  <div contenteditable="true" style="padding:8px 0;">折疊內容文字...</div>
-                </details>`;
+        return `<div class="fold-header">
+          <div class="fold-title-input" contenteditable="true" data-placeholder="請輸入折疊標題文字" data-empty="true"></div>
+        </div>
+        <div class="fold-body">
+          <div class="fold-toolbar">
+            <span class="fold-toolbar-label">加入：</span>
+            <button onclick="addFoldBlock(this,'subheading')">副標題</button>
+            <button onclick="addFoldBlock(this,'text')">內文</button>
+            <button onclick="addFoldBlock(this,'image')">圖片</button>
+            <button onclick="addFoldBlock(this,'table')">表格</button>
+          </div>
+          <div class="fold-drop-zone"></div>
+        </div>`;
       case 'table':
         return `<table class="environmental">
           <tbody>
@@ -669,6 +750,92 @@
           <button onclick="addTableRow(this)">＋ 新增列</button>
           <button class="btn-del-row" onclick="delTableRow(this)">－ 刪除最後列</button>
         </div>`;
+    }
+  }
+
+  function toggleFold(btn) {
+    // 編輯器內不做收折，按鈕僅為視覺裝飾
+  }
+
+  function addFoldBlock(btn, type) {
+    const zone = btn.closest('.fold-body').querySelector('.fold-drop-zone');
+    const child = document.createElement('div');
+    child.className = 'fold-child';
+
+    let inner = '';
+    if (type === 'subheading') {
+      inner = '<div class="subT" contenteditable="true" data-placeholder="請輸入副標題" data-empty="true"></div>';
+    } else if (type === 'text') {
+      const uid = 'cke_fold_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+      inner = `<textarea id="${uid}" style="width:100%;min-height:80px;"></textarea>`;
+    } else if (type === 'image') {
+      inner = `<div class="upload-area" style="border:1px dashed #ccc;padding:20px;text-align:center;cursor:pointer;font-size:12px;color:#aaa;" onclick="this.nextElementSibling.click()">＋ 上傳圖片</div>
+               <input type="file" accept="image/*" style="display:none;" onchange="previewFoldImg(this)">`;
+    } else if (type === 'table') {
+      inner = buildBlockHTML('table');
+    }
+
+    child.innerHTML = inner + '<button class="fold-child-remove" onclick="removeFoldChild(this)">移除</button>';
+    zone.appendChild(child);
+
+    if (type === 'text') {
+      const ta = child.querySelector('textarea');
+      if (ta) initCKEditor(ta.id);
+    }
+    child.querySelectorAll('[contenteditable][data-placeholder]').forEach(el => {
+      const update = () => el.setAttribute('data-empty', el.innerText.trim() === '' ? 'true' : 'false');
+      el.setAttribute('data-empty', 'true');
+      el.addEventListener('input', update);
+      el.addEventListener('blur', update);
+    });
+    bindFoldChildDrag(child, zone);
+  }
+
+  function bindFoldChildDrag(el, zone) {
+    let dragSrcChild = null;
+    el.addEventListener('dragstart', e => {
+      if (e.target.closest && e.target.closest('.cke')) { e.preventDefault(); return; }
+      dragSrcChild = el;
+      el.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.stopPropagation();
+    });
+    el.addEventListener('dragend', () => {
+      el.classList.remove('dragging');
+      zone.querySelectorAll('.fold-child').forEach(c => c.classList.remove('drag-over'));
+    });
+    el.addEventListener('dragover', e => {
+      e.preventDefault(); e.stopPropagation();
+      if (el !== dragSrcChild) el.classList.add('drag-over');
+    });
+    el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
+    el.addEventListener('drop', e => {
+      e.preventDefault(); e.stopPropagation();
+      el.classList.remove('drag-over');
+      if (dragSrcChild && dragSrcChild !== el) {
+        const children = [...zone.querySelectorAll('.fold-child')];
+        const si = children.indexOf(dragSrcChild), ti = children.indexOf(el);
+        zone.insertBefore(dragSrcChild, si < ti ? el.nextSibling : el);
+      }
+    });
+    el.draggable = true;
+  }
+
+  function removeFoldChild(btn) {
+    const child = btn.closest('.fold-child');
+    const ta = child.querySelector('textarea');
+    if (ta && CKEDITOR.instances[ta.id]) CKEDITOR.instances[ta.id].destroy();
+    child.remove();
+  }
+
+  function previewFoldImg(input) {
+    if (input.files && input.files[0]) {
+      const area = input.previousElementSibling;
+      const url = URL.createObjectURL(input.files[0]);
+      area.innerHTML = `<img src="${url}" style="max-width:100%;display:block;">`;
+      area.style.padding = '0';
+      area.style.border = 'none';
+      area.onclick = null;
     }
   }
 
@@ -919,21 +1086,33 @@
     const zone = document.getElementById('dropZone');
     const errors = [];
 
+    // 主標題優先檢查
+    const headingBlock = zone.querySelector('.block-heading');
+    if (headingBlock) {
+      const tit = headingBlock.querySelector('h5.tit');
+      if (!tit || tit.innerText.trim() === '') {
+        alert('請填寫主標題文字後再預覽。');
+        tit?.focus();
+        return false;
+      }
+    }
+
     zone.querySelectorAll('.block-item').forEach((block, i) => {
-      const label = block.querySelector('h5.tit, .subT, [contenteditable]')?.tagName || '元件';
       const idx = i + 1;
 
-      // contenteditable 空白檢查
-      block.querySelectorAll('[contenteditable]').forEach(el => {
-        if (el.innerText.trim() === '') {
-          const name = block.classList.contains('block-heading') ? '主標題'
-            : block.classList.contains('block-subheading') ? '副標題'
-            : block.classList.contains('block-file') ? '檔案下載'
-            : block.classList.contains('block-table') ? '表格'
-            : '元件';
-          errors.push(`第 ${idx} 個區塊（${name}）有欄位尚未填寫`);
-        }
-      });
+      // contenteditable 空白檢查（跳過主標題，已單獨處理）
+      if (!block.classList.contains('block-heading')) {
+        block.querySelectorAll('[contenteditable]').forEach(el => {
+          if (el.innerText.trim() === '') {
+            const name = block.classList.contains('block-subheading') ? '副標題'
+              : block.classList.contains('block-file') ? '檔案下載'
+              : block.classList.contains('block-table') ? '表格'
+              : block.classList.contains('block-fold') ? '折文標題'
+              : '元件';
+            errors.push(`第 ${idx} 個區塊（${name}）有欄位尚未填寫`);
+          }
+        });
+      }
 
       // CKEditor 空白檢查
       const ta = block.querySelector('textarea');
@@ -974,6 +1153,14 @@
       h5.tit::after{content:'';flex:1;height:1px;background:#e8ddd0;}
       .subT{font-size:14px;margin-bottom:12px;}
       details summary{cursor:pointer;font-weight:bold;}
+      .fold-section{border-bottom:1px solid #e0e0e0;margin-bottom:0;}
+      .fold-section-header{display:flex;align-items:center;justify-content:space-between;height:40px;padding:0;cursor:pointer;}
+      .fold-section-title{font-size:16px;font-weight:400;color:#4a7fc1;padding-left:0;}
+      .fold-section-icon{width:24px;height:24px;display:block;background:url(img/icon_open.png) center no-repeat;background-size:contain;flex-shrink:0;}
+      .fold-section.open .fold-section-icon{background-image:url(img/icon_close.png);}
+      .fold-section-body{display:none;padding:12px 0 16px;}
+      .fold-section.open .fold-section-body{display:block;}
+      .fold-content-item{margin-bottom:12px;}
       img{width:740px;max-width:100%;display:block;}
       .img-group-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
       .img-group-grid.cols-3{grid-template-columns:repeat(3,1fr);}
@@ -994,9 +1181,54 @@
 
       // 移除編輯器 UI
       clone.querySelector('.block-close')?.remove();
-      clone.querySelectorAll('.table-controls, .file-controls, .img-actions').forEach(el => el.remove());
+      clone.querySelectorAll('.table-controls, .file-controls, .img-actions, .fold-toolbar, .fold-child-remove, .fold-toggle-btn').forEach(el => el.remove());
       clone.querySelectorAll('input[type=file]').forEach(el => el.remove());
       clone.querySelectorAll('.cke').forEach(el => el.remove());
+
+      // 折文元件：轉換成官網樣式輸出
+      if (block.classList.contains('block-fold')) {
+        const titleEl = block.querySelector('.fold-title-input');
+        const title = (titleEl ? (titleEl.innerText || titleEl.textContent) : '折疊標題').trim();
+        const foldClone = block.cloneNode(true);
+        // CKEditor 內容
+        foldClone.querySelectorAll('.fold-child textarea').forEach(ta => {
+          if (CKEDITOR.instances[ta.id]) {
+            const div = document.createElement('div');
+            div.innerHTML = CKEDITOR.instances[ta.id].getData();
+            ta.replaceWith(div);
+          }
+        });
+        // 圖片
+        foldClone.querySelectorAll('.fold-child .upload-area').forEach(area => {
+          const img = area.querySelector('img');
+          img ? area.replaceWith(img) : area.remove();
+        });
+        foldClone.querySelectorAll('.fold-child input[type=file], .fold-child .fold-child-remove, .cke, .fold-toolbar').forEach(el => el.remove());
+
+        let childrenHTML = '';
+        foldClone.querySelectorAll('.fold-child').forEach(child => {
+          childrenHTML += `<div class="fold-content-item">${child.innerHTML}</div>`;
+        });
+
+        win.document.write(`
+          <div class="fold-section">
+            <div class="fold-section-header" onclick="this.parentElement.classList.toggle('open')">
+              <span class="fold-section-title">${title}</span>
+              <span class="fold-section-icon"></span>
+            </div>
+            <div class="fold-section-body">${childrenHTML}</div>
+          </div>`);
+        return;
+      }
+
+      // 折文子元件的 CKEditor 內容（非折文區塊）
+      clone.querySelectorAll('.fold-child textarea').forEach(ta => {
+        if (CKEDITOR.instances[ta.id]) {
+          const div = document.createElement('div');
+          div.innerHTML = CKEDITOR.instances[ta.id].getData();
+          ta.replaceWith(div);
+        }
+      });
 
       // 移除圖片上傳區域的點擊提示文字（只保留 img）
       const uploadArea = clone.querySelector('.upload-area');
@@ -1099,3 +1331,4 @@
 </script>
 </body>
 </html>
+
