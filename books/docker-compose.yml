@@ -1,0 +1,24 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "1234:80"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3000"
+    environment:
+      - POKEMONTCG_KEY=d9c6f551-ce91-4b21-a83d-15b099752a70
+      - POKETRACE_KEY=pc_31460cc6d7542f3eea7d401ff0e002faa189a6ec8a7bb209
+      - DB_PATH=/data/poker.db
+    volumes:
+      - db_data:/data
+    restart: unless-stopped
+
+volumes:
+  db_data:
