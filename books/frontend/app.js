@@ -184,7 +184,7 @@ let setsDataByEn = {}; // enName -> set object
 
 async function loadSetsData() {
   try {
-    const res = await fetch('/sets.json');
+    const res = await fetch('/data/setName.json');
     const arr = await res.json();
     arr.forEach(s => {
       setsData[s.id] = s;
