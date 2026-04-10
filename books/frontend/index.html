@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>寶可夢卡牌瀏覽器</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -345,7 +349,7 @@
 </header>
 
 <div class="controls">
-  <input type="text" id="searchInput" placeholder="搜尋卡片名稱（英文）..." />
+  <input type="text" id="searchInput" placeholder="搜尋卡片名稱..." />
   <select id="typeSelect">
     <option value="">所有屬性</option>
     <option value="Fire">🔥 火</option>
@@ -388,12 +392,17 @@
   <select id="setSelect">
     <option value="">所有系列</option>
   </select>
-  <button onclick="fetchCards(1)">搜尋</button>
+  <button onclick="fetchCardsForDisplay(1)">搜尋</button>
   <button class="secondary" onclick="resetSearch()">重置</button>
-  <button class="secondary" id="langBtn" onclick="cycleLang()">🌐 中文</button>
+  <select id="langSelect" onchange="changeLang(this.value)">
+    <option value="en">English</option>
+    <option value="ja">日本語</option>
+  </select>
 </div>
 
 <div id="breadcrumb" class="breadcrumb"></div>
+
+<div id="paginationTop" class="pagination"></div>
 
 <div id="status">載入中...</div>
 <div class="grid" id="grid"></div>

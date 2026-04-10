@@ -2,17 +2,19 @@ const express = require('express');
 const cors = require('cors');
 const cron = require('node-cron');
 const fetch = require('node-fetch');
+const puppeteer = require('puppeteer-core');
 const db = require('./db');
-const { getPriceFromDb, syncSetPrices } = require('./poketrace');
 const { fetchJpPrice } = require('./price_scraper');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PTCG_KEY = process.env.POKEMONTCG_KEY;
-const PTCG_BASE = 'https://api.pokemontcg.io/v2';
-const ptcgHeaders = { 'X-Api-Key': PTCG_KEY };
+const CHROME_PATH = process.env.CHROME_PATH ||
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+
+// 爬蟲配置 - 使用 pokemondb.net 作為資料來源
+const POKEMON_DB_BASE = 'https://pokemondb.net/card';
 
 const EXCHANGE_API = 'https://v6.exchangerate-api.com/v6/58ba6f659ed119cfab3d522b/latest/USD';
 
@@ -55,69 +57,86 @@ if (!getCachedRates()) {
   refreshRates();
 }
 
-// ---- 代理 pokemontcg.io（帶後端 key，前端不暴露）----
+// ---- 代理 TCGdx API（支援多語言）----
 app.get('/api/cards', async (req, res) => {
   try {
-    const params = new URLSearchParams(req.query);
-    const r = await fetch(`${PTCG_BASE}/cards?${params}`, { headers: ptcgHeaders });
-    res.json(await r.json());
-  } catch (e) { res.status(500).json({ error: e.message }); }
+    const lang = req.query.lang || 'en';
+    const params = new URLSearchParams();
+    
+    // 轉換查詢參數
+    if (req.query.name) params.set('name', req.query.name);
+    if (req.query.set) params.set('set.id', req.query.set); // TCGdx 使用 set.id
+    if (req.query.page) params.set('page', req.query.page);
+    if (req.query.pageSize) params.set('pageSize', req.query.pageSize);
+    
+    const url = `${TCGDX_BASE}/${lang}/cards${params.toString() ? '?' + params : ''}`;
+    console.log('Fetching from TCGdx:', url);
+    
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`TCGdx API error: ${r.status}`);
+    
+    const cards = await r.json();
+    
+    // 轉換為相容格式
+    const result = {
+      data: cards,
+      totalCount: cards.length, // TCGdx 不提供總數，使用當前頁面數量
+      page: parseInt(req.query.page) || 1,
+      pageSize: parseInt(req.query.pageSize) || 250
+    };
+    
+    res.json(result);
+  } catch (e) { 
+    console.error('Cards API error:', e.message);
+    res.status(500).json({ error: e.message }); 
+  }
 });
 
 app.get('/api/cards/:id', async (req, res) => {
   try {
-    const r = await fetch(`${PTCG_BASE}/cards/${req.params.id}`, { headers: ptcgHeaders });
-    res.json(await r.json());
-  } catch (e) { res.status(500).json({ error: e.message }); }
+    const lang = req.query.lang || 'en';
+    const r = await fetch(`${TCGDX_BASE}/${lang}/cards/${req.params.id}`);
+    if (!r.ok) throw new Error(`TCGdx API error: ${r.status}`);
+    
+    const card = await r.json();
+    res.json({ data: card });
+  } catch (e) { 
+    console.error('Card detail API error:', e.message);
+    res.status(500).json({ error: e.message }); 
+  }
 });
 
 app.get('/api/sets', async (req, res) => {
   try {
-    const params = new URLSearchParams(req.query);
-    const r = await fetch(`${PTCG_BASE}/sets?${params}`, { headers: ptcgHeaders });
-    res.json(await r.json());
-  } catch (e) { res.status(500).json({ error: e.message }); }
-});
-
-// ---- 從 DB 取價格（前端打這個，不打外部 API）----
-app.get('/api/price/:ptcgId', (req, res) => {
-  const prices = getPriceFromDb(req.params.ptcgId);
-  if (!prices) return res.status(404).json({ error: 'not found' });
-  res.json({ prices });
-});
-
-// ---- 手動觸發同步某系列 ----
-app.post('/api/admin/sync-set', async (req, res) => {
-  const { setId } = req.body;
-  if (!setId) return res.status(400).json({ error: 'setId required' });
-
-  try {
-    // 先從 pokemontcg 抓該系列所有卡片
-    let allCards = [], page = 1;
-    while (true) {
-      const r = await fetch(
-        `${PTCG_BASE}/cards?q=set.id:${setId}&pageSize=250&page=${page}`,
-        { headers: ptcgHeaders }
-      );
-      const body = await r.json();
-      allCards = allCards.concat(body.data || []);
-      if (allCards.length >= body.totalCount) break;
-      page++;
+    const lang = req.query.lang || 'en';
+    const params = new URLSearchParams();
+    
+    if (req.query.pageSize) params.set('pageSize', req.query.pageSize);
+    
+    const url = `${TCGDX_BASE}/${lang}/sets${params.toString() ? '?' + params : ''}`;
+    console.log('Fetching sets from TCGdx:', url);
+    
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`TCGdx API error: ${r.status}`);
+    
+    let sets = await r.json();
+    
+    // 如果有 orderBy 參數，進行排序
+    if (req.query.orderBy === '-releaseDate') {
+      // TCGdx 的系列通常已經按發布日期排序，但我們可以根據 ID 反向排序
+      sets = sets.reverse();
     }
-
-    const setInfo = allCards[0]?.set || { name: setId };
-    const count = await syncSetPrices(setId, setInfo.name, allCards);
-    res.json({ synced: count, total: allCards.length });
-  } catch (e) {
-    res.status(500).json({ error: e.message });
+    
+    const result = {
+      data: sets,
+      totalCount: sets.length
+    };
+    
+    res.json(result);
+  } catch (e) { 
+    console.error('Sets API error:', e.message);
+    res.status(500).json({ error: e.message }); 
   }
-});
-
-// ---- Sync 狀態 ----
-app.get('/api/admin/sync-status', (req, res) => {
-  const logs = db.prepare('SELECT * FROM sync_log ORDER BY synced_at DESC').all();
-  const total = db.prepare('SELECT COUNT(*) as c FROM price_cache WHERE prices_json IS NOT NULL').get();
-  res.json({ logs, totalWithPrices: total.c });
 });
 
 // ---- 點擊追蹤：紀錄卡片被點閱次數 ----
@@ -134,24 +153,49 @@ app.post('/api/cards/:id/click', (req, res) => {
 });
 
 // ---- 取得前 10 名熱門卡片 ----
-app.get('/api/popular-cards', (req, res) => {
+app.get('/api/popular-cards', async (req, res) => {
   try {
     const rows = db.prepare(`
-      SELECT s.ptcg_id as id, s.click_count, p.name, p.prices_json, p.set_id
-      FROM card_stats s
-      LEFT JOIN price_cache p ON s.ptcg_id = p.ptcg_id
-      ORDER BY s.click_count DESC
+      SELECT ptcg_id as id, click_count
+      FROM card_stats
+      ORDER BY click_count DESC
       LIMIT 10
     `).all();
 
-    const data = rows.map(r => ({
-      id: r.id,
-      name: r.name || '未知卡片',
-      set: { id: r.set_id },
-      clickCount: r.click_count
-    }));
+    // 從 TCGdx 取得卡片詳細資料
+    const lang = req.query.lang || 'en';
+    const data = [];
+    
+    for (const row of rows) {
+      try {
+        const cardRes = await fetch(`${TCGDX_BASE}/${lang}/cards/${row.id}`);
+        if (cardRes.ok) {
+          const card = await cardRes.json();
+          data.push({
+            id: row.id,
+            name: card.name || '未知卡片',
+            image: card.image || null,
+            set: { id: card.set?.id },
+            clickCount: row.click_count
+          });
+        }
+      } catch (e) {
+        console.warn(`無法取得卡片 ${row.id}:`, e.message);
+        data.push({
+          id: row.id,
+          name: '未知卡片',
+          image: null,
+          set: { id: null },
+          clickCount: row.click_count
+        });
+      }
+    }
+    
     res.json({ data });
-  } catch (e) { res.status(500).json({ error: e.message }); }
+  } catch (e) { 
+    console.error('Popular cards error:', e.message);
+    res.status(500).json({ error: e.message }); 
+  }
 });
 
 // ---- 抓取日版價格 (Scraper Proxy) ----
@@ -187,36 +231,6 @@ app.get('/api/rates', (req, res) => {
 cron.schedule('0 8 * * *', () => {
   console.log('[cron] 更新匯率...');
   refreshRates();
-});
-
-// ---- Cron：每天凌晨 2 點更新最近 5 個系列 ----
-cron.schedule('0 2 * * *', async () => {
-  console.log('[cron] 開始每日價格更新...');
-  try {
-    const r = await fetch(`${PTCG_BASE}/sets?orderBy=-releaseDate&pageSize=5`, { headers: ptcgHeaders });
-    const { data: sets } = await r.json();
-
-    for (const set of sets) {
-      // 抓該系列所有卡片
-      let allCards = [], page = 1;
-      while (true) {
-        const cr = await fetch(
-          `${PTCG_BASE}/cards?q=set.id:${set.id}&pageSize=250&page=${page}`,
-          { headers: ptcgHeaders }
-        );
-        const body = await cr.json();
-        allCards = allCards.concat(body.data || []);
-        if (allCards.length >= body.totalCount) break;
-        page++;
-      }
-      await syncSetPrices(set.id, set.name, allCards);
-
-      // 避免打太快
-      await new Promise(r => setTimeout(r, 2000));
-    }
-  } catch (e) {
-    console.error('[cron] 更新失敗:', e.message);
-  }
 });
 
 app.listen(3000, () => console.log('Backend running on :3000'));

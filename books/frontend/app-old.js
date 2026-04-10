@@ -1,8 +1,17 @@
+// API 配置
 const API_BASE = '/api';
 
-const BACKEND_BASE = '/api';
-const PAGE_SIZE = 15;
+// 語言設定
+let currentLang = 'zh-TW'; // 預設繁體中文
+const LANG_CYCLE = ['zh-TW', 'en', 'ja'];
+const LANG_LABEL = { 'zh-TW': '🌐 中文', 'en': '🌐 EN', 'ja': '🌐 日本語' };
 
+// 快取資料
+let pokemonCache = new Map();
+let setCache = new Map();
+
+
+const PAGE_SIZE = 15;
 let currentPage = 1;
 let totalCount = 0;
 let currentSetId = null;
@@ -178,104 +187,118 @@ function translateRarity(rarity) {
   return RARITY_MAP[rarity] || rarity;
 }
 
-// 靜態系列資料（從 sets.json 載入）
-let setsData = {};  // id -> set object
-let setsDataByEn = {}; // enName -> set object
-
-// 寶可夢名稱資料（從 pokemonName.json 載入）
-let pokemonByEn = {}; // enName (lowercase) -> { zhName, jpName, enName }
-
-async function loadSetsData() {
-  try {
-    const [setsRes, pkmnRes] = await Promise.all([
-      fetch('/data/setName.json'),
-      fetch('/data/pokemonName.json'),
-    ]);
-    const setsArr = await setsRes.json();
-    setsArr.forEach(s => {
-      setsData[s.id] = s;
-      setsDataByEn[s.enName] = s;
-    });
-    const pkmnArr = await pkmnRes.json();
-    pkmnArr.forEach(p => {
-      pokemonByEn[p.enName.toLowerCase()] = p;
-    });
-  } catch (e) {
-    console.warn('無法載入靜態資料', e);
-  }
+// API 呼叫函數
+async function fetchCards(query = '', pageSize = 20, page = 1) {
+    try {
+        const params = new URLSearchParams({
+            lang: currentLang,
+            page: page.toString(),
+            pageSize: pageSize.toString()
+        });
+        
+        if (query) params.set('name', query);
+        
+        const response = await fetch(`${API_BASE}/cards?${params}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
+        return await response.json();
+    } catch (error) {
+        console.error('抓取卡片資料失敗:', error);
+        return { data: [], totalCount: 0 };
+    }
 }
 
-// 根據英文名稱取得對應語言的寶可夢名稱
-function getPokemonName(enName) {
-  if (!enName) return enName;
-  // 嘗試完整名稱比對（如 "Mewtwo ex" → 先找 "mewtwo ex"，再找 "mewtwo"）
-  const key = enName.toLowerCase();
-  const direct = pokemonByEn[key];
-  if (direct) {
-    if (currentLang === 'zh') return direct.zhName;
-    if (currentLang === 'jp') return direct.jpName;
-    return direct.enName;
-  }
-  // 去掉後綴（ex, V, VMAX 等）再找
-  const base = key.replace(/\s+(ex|v|vmax|vstar|gx|tag team|e)$/i, '').trim();
-  const baseMatch = pokemonByEn[base];
-  if (baseMatch) {
-    const suffix = enName.slice(baseMatch.enName.length);
-    if (currentLang === 'zh') return baseMatch.zhName + suffix;
-    if (currentLang === 'jp') return baseMatch.jpName + suffix;
-    return enName;
-  }
-  return enName; // fallback 英文
+async function fetchSets(pageSize = 250) {
+    try {
+        const params = new URLSearchParams({
+            lang: currentLang,
+            orderBy: '-releaseDate',
+            pageSize: pageSize.toString()
+        });
+        
+        const response = await fetch(`${API_BASE}/sets?${params}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
+        const result = await response.json();
+        
+        // 快取系列資料
+        result.data.forEach(set => {
+            setCache.set(set.id, set);
+        });
+        
+        return result;
+    } catch (error) {
+        console.error('抓取系列資料失敗:', error);
+        return { data: [] };
+    }
 }
 
-// 語言切換：zh / en / jp，預設中文
-let currentLang = 'zh';
-const LANG_CYCLE = ['zh', 'en', 'jp'];
-const LANG_LABEL = { zh: '🌐 中文', en: '🌐 EN', jp: '🌐 日本語' };
+async function fetchCardById(cardId) {
+    try {
+        if (pokemonCache.has(cardId)) {
+            return pokemonCache.get(cardId);
+        }
+        
+        const response = await fetch(`${API_BASE}/cards/${cardId}?lang=${currentLang}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
+        const result = await response.json();
+        pokemonCache.set(cardId, result.data);
+        
+        return result.data;
+    } catch (error) {
+        console.error('抓取卡片詳細資料失敗:', error);
+        return null;
+    }
+}
 
-let lastCards = []; // 供語言切換時重新渲染
-let lastModalCard = null; // 供語言切換時更新 modal 標題
+// 根據卡片名稱取得顯示名稱（TCGdx 已經提供多語言）
+function getPokemonName(name) {
+  return name || '未知卡片';
+}
 
 function cycleLang() {
   const idx = LANG_CYCLE.indexOf(currentLang);
   currentLang = LANG_CYCLE[(idx + 1) % LANG_CYCLE.length];
   document.getElementById('langBtn').textContent = LANG_LABEL[currentLang];
+  
+  // 清除快取，重新載入資料
+  pokemonCache.clear();
+  setCache.clear();
+  
   // 重新渲染目前畫面
   if (!currentSetId) {
-    renderSets(currentPage);
-    document.getElementById('status').textContent = `共 ${allSets.length} 個系列，第 ${currentPage} 頁`;
+    loadSets().then(() => renderSets(currentPage));
   } else {
-    renderCards(lastCards);
+    fetchCards(1);
   }
-  // 若 modal 開著也更新標題
+  
+  // 若 modal 開著也更新
   const overlay = document.getElementById('modalOverlay');
   if (overlay.classList.contains('open') && lastModalCard) {
-    document.getElementById('modalTitle').textContent = getPokemonName(lastModalCard.name);
+    openModal(lastModalCard.id);
   }
 }
 
-function getSetName(setId, enName) {
-  const s = setsData[setId] || setsDataByEn[enName];
-  if (!s) return enName;
-  if (currentLang === 'zh') return s.zhName;
-  if (currentLang === 'jp') return s.jpName;
-  return s.enName;
+function getSetName(setId, fallbackName) {
+  const s = setCache.get(setId);
+  return s ? s.name : fallbackName || setId;
 }
 
 // ---- 初始化系列資料 ----
 async function loadSets() {
   try {
-    const res = await fetch(`${API_BASE}/sets?orderBy=-releaseDate&pageSize=250`, {
-    });
-    const data = await res.json();
+    const data = await fetchSets();
     allSets = data.data;
 
     // 填充下拉選單
     const sel = document.getElementById('setSelect');
+    sel.innerHTML = '<option value="">所有系列</option>'; // 清空現有選項
+    
     allSets.forEach(s => {
       const opt = document.createElement('option');
       opt.value = s.id;
-      opt.textContent = getSetName(s.id, s.name);
+      opt.textContent = s.name;
       sel.appendChild(opt);
     });
     sel.value = ''; // 確保不自動選中任何系列
@@ -328,8 +351,8 @@ function renderSets(page = 1) {
 
   grid.innerHTML = pagedSets.map(s => `
     <div class="card set-card" onclick="selectSet('${s.id}', '${s.name}')">
-      <img class="set-logo" src="${s.images.logo}" alt="${s.name}" loading="lazy" />
-      <div class="set-name-overlay">${getSetName(s.id, s.name)}</div>
+      <img class="set-logo" src="${s.logo}" alt="${s.name}" loading="lazy" />
+      <div class="set-name-overlay">${s.name}</div>
     </div>
   `).join('');
 
@@ -352,24 +375,17 @@ async function fetchSets(page = 1) {
 
 // ---- 搜尋 ----
 function buildQuery() {
-  const q = [];
-  const rawName = document.getElementById('searchInput').value.trim();
-  // 中文名稱自動轉換為英文（pokemontcg.io 只支援英文搜尋）
-  const name = ZH_TO_EN_NAME[rawName] || rawName;
+  const name = document.getElementById('searchInput').value.trim();
   const type = document.getElementById('typeSelect').value;
   const rarity = document.getElementById('raritySelect').value;
   const supertype = document.getElementById('supertypeSelect').value;
   const set = document.getElementById('setSelect').value;
 
-  if (name) q.push(`name:${name}*`);
-  if (type) q.push(`types:${type}`);
-  if (rarity) q.push(`rarity:"${rarity}"`);
-  if (supertype) q.push(`supertype:"${supertype}"`);
-  if (set) q.push(`set.id:${set}`);
-  return q.join(' ');
+  // TCGdx 使用不同的查詢方式，我們主要使用 name 參數
+  return name;
 }
 
-async function fetchCards(page = 1) {
+async function fetchCardsForDisplay(page = 1) {
   currentPage = page;
   const grid = document.getElementById('grid');
   const status = document.getElementById('status');
@@ -383,9 +399,9 @@ async function fetchCards(page = 1) {
   status.textContent = '載入中...';
 
   const params = new URLSearchParams({
-    pageSize: PAGE_SIZE,
+    lang: currentLang,
     page: currentPage,
-    orderBy: '-set.releaseDate',
+    pageSize: PAGE_SIZE,
   });
   
   // 如果下拉選單有選，則同步狀態
@@ -395,18 +411,14 @@ async function fetchCards(page = 1) {
     const sObj = allSets.find(s => s.id === setVal);
     currentSetName = sObj ? sObj.name : setVal;
     renderBreadcrumb();
+    params.set('set', setVal);
   }
 
-  const q = buildQuery();
-  const queries = [];
-  if (q) queries.push(q);
-  if (currentSetId) queries.push(`set.id:${currentSetId}`);
-  
-  if (queries.length) params.set('q', queries.join(' '));
+  const query = buildQuery();
+  if (query) params.set('name', query);
 
   try {
-    const res = await fetch(`${API_BASE}/cards?${params}`, {
-    });
+    const res = await fetch(`${API_BASE}/cards?${params}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     totalCount = data.totalCount;
@@ -464,7 +476,6 @@ function renderPagination(isHome = false) {
   const pgTop = document.getElementById('paginationTop');
   if (totalPages <= 1) { pg.innerHTML = ''; pgTop.innerHTML = ''; return; }
 
-  const pages = [];
   const show = new Set([1, totalPages, currentPage, currentPage - 1, currentPage + 1, currentPage - 2, currentPage + 2]);
   const sorted = [...show].filter(p => p >= 1 && p <= totalPages).sort((a, b) => a - b);
 
@@ -540,47 +551,11 @@ function renderModal(card) {
   document.getElementById('modalTitle').textContent = getPokemonName(card.name);
 
   const img = card.images?.large || card.images?.small || '';
-  const types = (card.types || []).map(t => typeMap[t] || t).join('、') || '—';
-  const subtypes = (card.subtypes || []).join('、') || '—';
   const shortRarity = translateRarity(card.rarity);
-  const rarityDesc = card.rarity ? `${card.rarity} (${shortRarity})` : '—';
   
   // 日版參數
   const jpConfig = JP_SET_MAP[card.set?.id];
   const hasJpPrice = !!jpConfig;
-
-  const weaknesses = (card.weaknesses || []).map(w => `${w.type} ${w.value}`).join('、') || '—';
-  const resistances = (card.resistances || []).map(r => `${r.type} ${r.value}`).join('、') || '—';
-  const retreatCost = card.retreatCost?.length ?? '—';
-  const pokedex = card.nationalPokedexNumbers?.join('、') || '—';
-  const artist = card.artist || '—';
-  const flavorText = card.flavorText || '';
-  const regulationMark = card.regulationMark || '—';
-
-  // 合法性
-  const legalityHtml = (() => {
-    const l = card.legalities || {};
-    const formats = ['standard', 'expanded', 'unlimited'];
-    const labelMap = { standard: '標準', expanded: '擴展', unlimited: '無限制' };
-    return formats.map(f => {
-      const status = l[f];
-      if (!status) return `<span class="legal-tag unknown">${labelMap[f]}：不適用</span>`;
-      return `<span class="legal-tag ${status.toLowerCase()}">${labelMap[f]}：${status === 'Legal' ? '合法' : '禁止'}</span>`;
-    }).join('');
-  })();
-
-  // 特性
-  const abilities = (card.abilities || []).map(ab => `
-    <div class="attack-item">
-      <div style="display:flex;justify-content:space-between">
-        <span class="attack-name">${ab.name}</span>
-        <span style="color:#c77dff;font-size:0.75rem">[${ab.type}]</span>
-      </div>
-      <div style="font-size:0.82rem;color:#bbb;margin-top:4px">${ab.text}</div>
-    </div>`).join('');
-
-  // 攻擊技能已根據要求移除
-  const attacks = '';
 
   // TCGPlayer 價格
   const tcgPrices = card.tcgplayer?.prices
@@ -744,4 +719,4 @@ document.addEventListener('keydown', e => {
 });
 
 // 初始化
-loadSetsData().then(() => loadSets());
+loadStaticData().then(() => loadSets());

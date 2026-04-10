@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "啟動後端服務",
+  "description": "啟動 TCG 卡牌瀏覽器的後端 API 服務",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "cd backend && npm start",
+    "timeout": 0
+  }
+}

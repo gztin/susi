@@ -1,0 +1,14 @@
+{
+  "sets": [],
+  "cards": {},
+  "lastUpdated": null,
+  "metadata": {
+    "description": "日版寶可夢卡片資料",
+    "source": "grading.pokeca-chart.com",
+    "currency": "JPY",
+    "exchangeRate": {
+      "jpyToTwd": 0.21,
+      "lastUpdated": null
+    }
+  }
+}

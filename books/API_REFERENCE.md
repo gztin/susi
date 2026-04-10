@@ -2,19 +2,20 @@
 
 ## 外部 API
 
-### 1. pokemontcg.io
-- **用途**：卡片資料、系列資料（主要資料來源）
-- **Base URL**：`https://api.pokemontcg.io/v2`
-- **認證**：Header `X-Api-Key`（由後端代理，前端不直接呼叫）
+### 1. TCGdx API (主要資料來源)
+- **用途**：卡片資料、系列資料、多語言名稱（主要資料來源）
+- **Base URL**：`https://api.tcgdx.net/v2`
+- **認證**：無需認證（開源免費 API）
+- **多語言支援**：en, zh-TW, ja, fr, es, it, pt, de 等
 - **使用端點**：
   | 端點 | 說明 |
   |------|------|
-  | `GET /cards` | 搜尋卡片，支援 `q`、`pageSize`、`page`、`orderBy` |
-  | `GET /cards/:id` | 取得單張卡片詳細資料（含 tcgplayer/cardmarket 價格）|
-  | `GET /sets` | 取得系列列表 |
+  | `GET /v2/{lang}/sets` | 取得系列列表 |
+  | `GET /v2/{lang}/cards` | 搜尋卡片，支援 `name`、`set` 等參數 |
+  | `GET /v2/{lang}/cards/{id}` | 取得單張卡片詳細資料（含價格）|
 - **價格欄位**：
-  - `tcgplayer.prices.{holofoil,normal,reverseHolofoil}.{low,mid,market,high}` — 美版 USD
-  - `cardmarket.prices.{lowPrice,trendPrice,averageSellPrice,...}` — 歐版 EUR
+  - `pricing.tcgplayer.{normal,holofoil,reverse}.{lowPrice,midPrice,marketPrice}` — 美版 USD
+  - `pricing.cardmarket.{avg,low,trend}` — 歐版 EUR
 
 ### 2. exchangerate-api.com
 - **用途**：取得即時匯率（USD 為基準）
@@ -37,16 +38,13 @@
 
 | 方法 | 端點 | 說明 |
 |------|------|------|
-| `GET` | `/api/cards` | 代理 pokemontcg.io `/cards` |
-| `GET` | `/api/cards/:id` | 代理 pokemontcg.io `/cards/:id` |
-| `GET` | `/api/sets` | 代理 pokemontcg.io `/sets` |
-| `GET` | `/api/price/:ptcgId` | 從 DB 取 PokeTrace 價格快取 |
+| `GET` | `/api/cards` | 代理 TCGdx `/cards`，支援多語言 |
+| `GET` | `/api/cards/:id` | 代理 TCGdx `/cards/:id`，支援多語言 |
+| `GET` | `/api/sets` | 代理 TCGdx `/sets`，支援多語言 |
 | `GET` | `/api/jp-price` | 呼叫 puppeteer scraper 抓日版價格，params: `setId`, `number`, `total` |
 | `GET` | `/api/rates` | 取得目前匯率快取（USD/JPY/TWD） |
 | `GET` | `/api/popular-cards` | 取得點擊次數前 10 名卡片 |
 | `POST` | `/api/cards/:id/click` | 紀錄卡片點擊次數 |
-| `POST` | `/api/admin/sync-set` | 手動同步某系列價格，body: `{ setId }` |
-| `GET` | `/api/admin/sync-status` | 查看同步狀態 |
 
 ---
 

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "啟動 Docker 服務",
+  "description": "啟動 Pokemon 卡牌應用的 Docker Compose 服務",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "docker-compose up -d --build"
+  }
+}

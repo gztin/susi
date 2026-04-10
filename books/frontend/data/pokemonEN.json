@@ -1,0 +1,14 @@
+{
+  "sets": [],
+  "cards": {},
+  "lastUpdated": null,
+  "metadata": {
+    "description": "英版寶可夢卡片資料",
+    "source": "pokemontcg.io",
+    "currencies": ["USD", "EUR"],
+    "priceTypes": {
+      "tcgplayer": "USD",
+      "cardmarket": "EUR"
+    }
+  }
+}
