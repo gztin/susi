@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>後台管理 - 大富翁活動網站</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+      --accent: #3b82f6;
+    }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem;
+    }
+    .admin-card {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+    h1 { margin-bottom: 2rem; font-size: 1.5rem; }
+    .form-group { margin-bottom: 1.5rem; }
+    label { display: block; margin-bottom: 0.5rem; color: #94a3b8; }
+    input[type="number"], input[type="text"], textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 6px;
+      border: 1px solid #334155;
+      background: #0f172a;
+      color: #fff;
+    }
+    button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+    }
+    button:hover { background: #2563eb; }
+    .back-link { margin-top: 1rem; color: #94a3b8; text-decoration: none; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="admin-card">
+    <h1>版面設定</h1>
+    <div class="form-group">
+      <label for="cols">水平格數 (Cols, 含角落):</label>
+      <input type="number" id="cols" value="8" min="4" max="20">
+    </div>
+    <div class="form-group">
+      <label for="rows">垂直格數 (已固定為 5 格):</label>
+      <input type="number" id="rows" value="5" disabled>
+    </div>
+    <div class="form-group">
+      <label>示範講者 1 姓名:</label>
+      <input type="text" id="speaker1Name" placeholder="例如: 張小明">
+    </div>
+    <div class="form-group">
+      <label>示範講者 1 主題:</label>
+      <input type="text" id="speaker1Topic" placeholder="例如: 未來趨勢">
+    </div>
+    <button id="saveBtn">儲存設定</button>
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="index.html" class="back-link">← 返回導覽頁</a>
+    </div>
+  </div>
+
+  <script>
+    const saveBtn = document.getElementById('saveBtn');
+    const colsInput = document.getElementById('cols');
+    const rowsInput = document.getElementById('rows');
+    const speaker1NameInput = document.getElementById('speaker1Name');
+    const speaker1TopicInput = document.getElementById('speaker1Topic');
+
+    // Load existing config
+    const saved = localStorage.getItem('monopoly_config');
+    if (saved) {
+      const config = JSON.parse(saved);
+      colsInput.value = config.cols || 8;
+      rowsInput.value = config.rows || 6;
+      if (config.speakers && config.speakers.length > 0) {
+          speaker1NameInput.value = config.speakers[0].name || "";
+          speaker1TopicInput.value = config.speakers[0].topic || "";
+      }
+    }
+
+    saveBtn.onclick = () => {
+      const config = {
+        cols: parseInt(colsInput.value),
+        rows: parseInt(rowsInput.value),
+        speakers: [
+          {
+            id: 1, 
+            name: speaker1NameInput.value || "講者 1",
+            topic: speaker1TopicInput.value || "演講主題",
+            photo: "https://picsum.photos/seed/1/200",
+            bio: "這是一位專業的講師..."
+          }
+        ]
+      };
+      localStorage.setItem('monopoly_config', JSON.stringify(config));
+      alert('設定已儲存！');
+      window.location.href = 'index.html';
+    };
+  </script>
+</body>
+</html>

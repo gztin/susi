@@ -1,0 +1,142 @@
+[
+  {
+    "id": "18421",
+    "name": "獨角蟲",
+    "image": "https://asia.pokemon-card.com/tw/card-img/tw00018421.png",
+    "type": "Grass",
+    "rarity": "J",
+    "collectorNumber": "001/083",
+    "expansion": "忍者飛旋",
+    "expansionCode": "M4",
+    "evolveStage": "基礎",
+    "attacks": [
+      {
+        "name": "偷襲",
+        "damage": "30",
+        "text": "擲1次硬幣若為反面，則這個招式失敗。"
+      }
+    ],
+    "abilities": [],
+    "weakness": [
+      {
+        "type": "Fire",
+        "value": "×2"
+      }
+    ],
+    "retreat": 1,
+    "dexNumber": "13",
+    "artist": "sowsow"
+  },
+  {
+    "id": "18422",
+    "name": "鐵殼蛹",
+    "image": "https://asia.pokemon-card.com/tw/card-img/tw00018422.png",
+    "type": "Grass",
+    "rarity": "J",
+    "collectorNumber": "002/083",
+    "expansion": "忍者飛旋",
+    "expansionCode": "M4",
+    "evolveStage": "1階進化",
+    "attacks": [
+      {
+        "name": "[特性] 堅硬身軀",
+        "damage": "",
+        "text": "這隻寶可夢受到招式的傷害「-20」點。"
+      }
+    ],
+    "abilities": [],
+    "weakness": [
+      {
+        "type": "Fire",
+        "value": "×2"
+      }
+    ],
+    "retreat": 3,
+    "dexNumber": "14",
+    "artist": "Mugi Hamada"
+  },
+  {
+    "id": "18423",
+    "name": "大針蜂ex",
+    "image": "https://asia.pokemon-card.com/tw/card-img/tw00018423.png",
+    "type": "Grass",
+    "rarity": "J",
+    "collectorNumber": "003/083",
+    "expansion": "忍者飛旋",
+    "expansionCode": "M4",
+    "evolveStage": "2階進化",
+    "attacks": [
+      {
+        "name": "針蜂轟鳴",
+        "damage": "110×",
+        "text": "造成自己的場上的「大針蜂（包含『寶可夢【ex】』）」的數量×110點傷害。"
+      }
+    ],
+    "abilities": [],
+    "weakness": [
+      {
+        "type": "Fire",
+        "value": "×2"
+      }
+    ],
+    "retreat": 1,
+    "dexNumber": "15",
+    "artist": "toriyufu"
+  },
+  {
+    "id": "18424",
+    "name": "尖牙籠",
+    "image": "https://asia.pokemon-card.com/tw/card-img/tw00018424.png",
+    "type": "Grass",
+    "rarity": "J",
+    "collectorNumber": "004/083",
+    "expansion": "忍者飛旋",
+    "expansionCode": "M4",
+    "evolveStage": "基礎",
+    "attacks": [
+      {
+        "name": "整隻咬",
+        "damage": "80+",
+        "text": "若對手的戰鬥寶可夢沒有【撤退】所需的能量，則增加80點傷害。"
+      }
+    ],
+    "abilities": [],
+    "weakness": [
+      {
+        "type": "Fire",
+        "value": "×2"
+      }
+    ],
+    "retreat": 2,
+    "dexNumber": "455",
+    "artist": "Heisuke Kitazawa"
+  },
+  {
+    "id": "18425",
+    "name": "哈力栗",
+    "image": "https://asia.pokemon-card.com/tw/card-img/tw00018425.png",
+    "type": "Grass",
+    "rarity": "J",
+    "collectorNumber": "005/083",
+    "expansion": "忍者飛旋",
+    "expansionCode": "M4",
+    "evolveStage": "基礎",
+    "attacks": [
+      {
+        "name": "敲擊",
+        "damage": "10",
+        "text": ""
+      }
+    ],
+    "abilities": [],
+    "weakness": [
+      {
+        "type": "Fire",
+        "value": "×2"
+      }
+    ],
+    "retreat": 2,
+    "dexNumber": "650",
+    "artist": "HACCAN"
+  }
+]

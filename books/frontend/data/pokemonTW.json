@@ -1,0 +1,80 @@
+{
+  "lastUpdated": "2026-04-13T02:24:05.291Z",
+  "language": "zh-TW",
+  "cards": {
+    "火系": {},
+    "水系": {},
+    "草系": {},
+    "雷系": {},
+    "超能系": {},
+    "格鬥系": {},
+    "惡系": {},
+    "鋼系": {},
+    "龍系": {},
+    "無色系": {
+      "繁體中文系列": [
+        {
+          "id": "tw-1776047315187-20mjw25c2",
+          "name": "搜尋此頁面標題",
+          "supertype": "Pokémon",
+          "subtypes": [],
+          "types": [
+            "Colorless"
+          ],
+          "hp": null,
+          "rarity": null,
+          "number": null,
+          "artist": null,
+          "image": null,
+          "set": {
+            "id": "tw-set",
+            "name": "繁體中文系列",
+            "series": "Traditional Chinese",
+            "releaseDate": "2026-04-13"
+          },
+          "attacks": [],
+          "abilities": [],
+          "weaknesses": [],
+          "resistances": [],
+          "retreatCost": [],
+          "convertedRetreatCost": 0,
+          "tcgplayer": null,
+          "cardmarket": null,
+          "language": "zh-TW",
+          "sourceUrl": "https://wiki.52poke.com/wiki/Special:%E6%90%9C%E7%B4%A2/%E5%8D%A1%E7%89%87%E5%88%97%E8%A1%A8"
+        },
+        {
+          "id": "tw-1776047315188-pnd2m2vb8",
+          "name": "https://wiki.52poke.com/wiki/卡片列表",
+          "supertype": "Pokémon",
+          "subtypes": [],
+          "types": [
+            "Colorless"
+          ],
+          "hp": null,
+          "rarity": null,
+          "number": null,
+          "artist": null,
+          "image": null,
+          "set": {
+            "id": "tw-set",
+            "name": "繁體中文系列",
+            "series": "Traditional Chinese",
+            "releaseDate": "2026-04-13"
+          },
+          "attacks": [],
+          "abilities": [],
+          "weaknesses": [],
+          "resistances": [],
+          "retreatCost": [],
+          "convertedRetreatCost": 0,
+          "tcgplayer": null,
+          "cardmarket": null,
+          "language": "zh-TW",
+          "sourceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E7%89%87%E5%88%97%E8%A1%A8"
+        }
+      ]
+    },
+    "妖精系": {}
+  }
+}

@@ -34,25 +34,26 @@ export default function App() {
     pauseRoute,
     resumeRoute,
     stopRoute,
+    resetLocation,
     joystickMove,
   } = useRoute(selectedDevice?.id ?? null, myPosition)
 
-  // 取得瀏覽器定位作為初始位置
+  // 追蹤是否已經重置過 GPS
+  const [hasResetGPS, setHasResetGPS] = useState(false)
+
+  // 取得瀏覽器定位作為初始位置（只在首次載入且未重置過時執行）
   useEffect(() => {
-    if (navigator.geolocation) {
+    if (navigator.geolocation && selectedDevice && !myPosition && !hasResetGPS) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           const coord = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
           setMyPosition(coord)
-          // 自動設定為搖桿的初始位置
-          if (selectedDevice) {
-            apiClient.setLocation({ ...coord, deviceId: selectedDevice.id }).catch(() => {})
-          }
+          // 不自動設定到設備，讓用戶手動選擇
         },
         () => {}
       )
     }
-  }, [selectedDevice])
+  }, [selectedDevice, myPosition, hasResetGPS])
 
   const showToast = useCallback((message: string) => {
     const id = ++toastIdCounter
@@ -190,21 +191,21 @@ export default function App() {
         <div style={styles.leftPanel}>
           <div style={styles.section}>
             <DeviceStatus devices={devices} selectedDevice={selectedDevice} onSelectDevice={selectDevice} isLoading={isLoading} error={error} />
-            {(routeStatus.currentPosition || myPosition) && (
-              <div style={{ marginTop: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                <div style={{ fontSize: 12, color: '#64748B', lineHeight: 1.6 }}>
-                  <div style={{ fontWeight: 500, color: '#374151', marginBottom: 2 }}>📍 {routeStatus.currentPosition ? '模擬位置' : '目前位置'}</div>
-                  <div>緯度：{(routeStatus.currentPosition ?? myPosition)!.latitude.toFixed(6)}</div>
-                  <div>經度：{(routeStatus.currentPosition ?? myPosition)!.longitude.toFixed(6)}</div>
-                </div>
+            
+            {/* Reset GPS 按鈕 - 只在有位置信息或正在模擬時顯示 */}
+            {selectedDevice && (routeStatus.currentPosition || myPosition || routeStatus.state !== 'idle') && (
+              <div style={{ marginTop: 8, display: 'flex', justifyContent: 'flex-end' }}>
                 <button
                   style={{ fontSize: 11, padding: '4px 10px', cursor: 'pointer', borderRadius: 6, background: '#FEF2F2', color: '#DC2626', border: '1px solid #FECACA', fontWeight: 500 }}
                   onClick={async () => {
-                    if (!selectedDevice) return
                     try {
-                      await apiClient.resetLocation(selectedDevice.id)
+                      // 重置後端 GPS 模擬
+                      await resetLocation()
+                      // 清除前端位置狀態，讓用戶可以重新設定
                       setMyPosition(null)
-                      showToast('GPS 已重置，恢復真實位置')
+                      // 標記已經重置過，防止自動載入座標
+                      setHasResetGPS(true)
+                      showToast('GPS 已重置，可重新設定位置')
                     } catch (err) {
                       showToast(err instanceof Error ? err.message : 'Reset 失敗')
                     }
@@ -212,6 +213,20 @@ export default function App() {
                 >
                   Reset GPS
                 </button>
+              </div>
+            )}
+            
+            {/* 位置信息顯示 */}
+            {(routeStatus.currentPosition || myPosition) && (
+              <div style={{ marginTop: 8 }}>
+                <div style={{ fontSize: 12, color: '#64748B', lineHeight: 1.6 }}>
+                  <div style={{ fontWeight: 500, color: '#374151', marginBottom: 2 }}>
+                    📍 {routeStatus.currentPosition ? '模擬位置' : '目前位置'}
+                    {routeStatus.state !== 'idle' && ` (${routeStatus.state === 'moving' ? '移動中' : '暫停'})`}
+                  </div>
+                  <div>緯度：{(routeStatus.currentPosition ?? myPosition)!.latitude.toFixed(6)}</div>
+                  <div>經度：{(routeStatus.currentPosition ?? myPosition)!.longitude.toFixed(6)}</div>
+                </div>
               </div>
             )}
             {!myPosition && (
@@ -226,7 +241,10 @@ export default function App() {
                     }
                     navigator.geolocation.getCurrentPosition(
                       (pos) => {
-                        setMyPosition({ latitude: pos.coords.latitude, longitude: pos.coords.longitude })
+                        const coord = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
+                        setMyPosition(coord)
+                        // 重新啟用自動定位後，清除重置標記
+                        setHasResetGPS(false)
                         showToast('位置取得成功')
                       },
                       (err) => showToast(`無法取得位置：${err.message}，請手動輸入`),
@@ -249,6 +267,7 @@ export default function App() {
                         const parts = val.split(',').map(s => parseFloat(s.trim()))
                         if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
                           setMyPosition({ latitude: parts[0], longitude: parts[1] })
+                          setHasResetGPS(false) // 清除重置標記
                         }
                       }
                     }}
@@ -261,6 +280,7 @@ export default function App() {
                       const parts = val.split(',').map(s => parseFloat(s.trim()))
                       if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
                         setMyPosition({ latitude: parts[0], longitude: parts[1] })
+                        setHasResetGPS(false) // 清除重置標記
                       }
                     }}
                   >
@@ -287,7 +307,11 @@ export default function App() {
                           const coord = { latitude: parts[0], longitude: parts[1] }
                           try {
                             await apiClient.setLocation({ ...coord, deviceId: selectedDevice.id })
+                            // 更新本地位置狀態，確保顯示新的座標
                             setMyPosition(coord)
+                            setHasResetGPS(false) // 清除重置標記
+                            // 清除輸入框
+                            ;(e.target as HTMLInputElement).value = ''
                           } catch (err) { showToast(err instanceof Error ? err.message : '飛行失敗') }
                         }
                       }
@@ -303,7 +327,11 @@ export default function App() {
                         const coord = { latitude: parts[0], longitude: parts[1] }
                         try {
                           await apiClient.setLocation({ ...coord, deviceId: selectedDevice.id })
+                          // 更新本地位置狀態，確保顯示新的座標
                           setMyPosition(coord)
+                          setHasResetGPS(false) // 清除重置標記
+                          // 清除輸入框
+                          input.value = ''
                         } catch (err) { showToast(err instanceof Error ? err.message : '飛行失敗') }
                       }
                     }}

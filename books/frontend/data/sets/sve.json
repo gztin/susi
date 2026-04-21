@@ -1,0 +1,674 @@
+{
+  "lastUpdated": "2026-04-13T04:42:01.821Z",
+  "set": {
+    "id": "sve",
+    "name": {
+      "en": "Scarlet & Violet Energies",
+      "ja": "Scarlet & Violet Energies",
+      "zh-TW": "Scarlet & Violet Energies"
+    },
+    "series": "Scarlet & Violet",
+    "releaseDate": "2023/03/31",
+    "cardCount": 16,
+    "logo": "https://images.pokemontcg.io/sve/logo.png",
+    "symbol": "https://images.pokemontcg.io/sve/symbol.png"
+  },
+  "cards": [
+    {
+      "id": "sve-3",
+      "name": {
+        "en": "Basic Water Energy",
+        "ja": "Basic Water Energy",
+        "zh-TW": "Basic Water Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "3",
+      "image": "https://images.pokemontcg.io/sve/3_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-3",
+        "updatedAt": "2023/07/20"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-3",
+        "updatedAt": "2023/07/20"
+      }
+    },
+    {
+      "id": "sve-1",
+      "name": {
+        "en": "Basic Grass Energy",
+        "ja": "Basic Grass Energy",
+        "zh-TW": "Basic Grass Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "1",
+      "image": "https://images.pokemontcg.io/sve/1_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-1",
+        "updatedAt": "2023/07/20"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-1",
+        "updatedAt": "2023/07/20"
+      }
+    },
+    {
+      "id": "sve-7",
+      "name": {
+        "en": "Basic Darkness Energy",
+        "ja": "Basic Darkness Energy",
+        "zh-TW": "Basic Darkness Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "7",
+      "image": "https://images.pokemontcg.io/sve/7_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-7",
+        "updatedAt": "2023/07/20"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-7",
+        "updatedAt": "2023/07/20"
+      }
+    },
+    {
+      "id": "sve-4",
+      "name": {
+        "en": "Basic Lightning Energy",
+        "ja": "Basic Lightning Energy",
+        "zh-TW": "Basic Lightning Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "4",
+      "image": "https://images.pokemontcg.io/sve/4_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-4",
+        "updatedAt": "2023/07/20"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-4",
+        "updatedAt": "2023/07/20"
+      }
+    },
+    {
+      "id": "sve-8",
+      "name": {
+        "en": "Basic Metal Energy",
+        "ja": "Basic Metal Energy",
+        "zh-TW": "Basic Metal Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "8",
+      "image": "https://images.pokemontcg.io/sve/8_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-8",
+        "updatedAt": "2023/07/20"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-8",
+        "updatedAt": "2023/07/20"
+      }
+    },
+    {
+      "id": "sve-2",
+      "name": {
+        "en": "Basic Fire Energy",
+        "ja": "Basic Fire Energy",
+        "zh-TW": "Basic Fire Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "2",
+      "image": "https://images.pokemontcg.io/sve/2_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-2",
+        "updatedAt": "2023/07/20"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-2",
+        "updatedAt": "2023/07/20"
+      }
+    },
+    {
+      "id": "sve-5",
+      "name": {
+        "en": "Basic Psychic Energy",
+        "ja": "Basic Psychic Energy",
+        "zh-TW": "Basic Psychic Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "5",
+      "image": "https://images.pokemontcg.io/sve/5_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-5",
+        "updatedAt": "2023/07/20"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-5",
+        "updatedAt": "2023/07/20"
+      }
+    },
+    {
+      "id": "sve-6",
+      "name": {
+        "en": "Basic Fighting Energy",
+        "ja": "Basic Fighting Energy",
+        "zh-TW": "Basic Fighting Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "6",
+      "image": "https://images.pokemontcg.io/sve/6_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-6",
+        "updatedAt": "2023/07/20"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-6",
+        "updatedAt": "2023/07/20"
+      }
+    },
+    {
+      "id": "sve-10",
+      "name": {
+        "en": "Basic Fire Energy",
+        "ja": "Basic Fire Energy",
+        "zh-TW": "Basic Fire Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fire",
+          "ja": "炎",
+          "zh-TW": "火"
+        }
+      ],
+      "rarity": {
+        "en": "",
+        "ja": "",
+        "zh-TW": ""
+      },
+      "number": "10",
+      "image": "https://images.pokemontcg.io/sve/10_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-10",
+        "updatedAt": "2024/09/19"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-10",
+        "updatedAt": "2024/09/19"
+      }
+    },
+    {
+      "id": "sve-11",
+      "name": {
+        "en": "Basic Water Energy",
+        "ja": "Basic Water Energy",
+        "zh-TW": "Basic Water Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "rarity": {
+        "en": "",
+        "ja": "",
+        "zh-TW": ""
+      },
+      "number": "11",
+      "image": "https://images.pokemontcg.io/sve/11_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-11",
+        "updatedAt": "2024/09/19"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-11",
+        "updatedAt": "2024/09/19"
+      }
+    },
+    {
+      "id": "sve-12",
+      "name": {
+        "en": "Basic Lightning Energy",
+        "ja": "Basic Lightning Energy",
+        "zh-TW": "Basic Lightning Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "rarity": {
+        "en": "",
+        "ja": "",
+        "zh-TW": ""
+      },
+      "number": "12",
+      "image": "https://images.pokemontcg.io/sve/12_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-12",
+        "updatedAt": "2024/09/19"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-12",
+        "updatedAt": "2024/09/19"
+      }
+    },
+    {
+      "id": "sve-16",
+      "name": {
+        "en": "Basic Metal Energy",
+        "ja": "Basic Metal Energy",
+        "zh-TW": "Basic Metal Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Metal",
+          "ja": "鋼",
+          "zh-TW": "鋼"
+        }
+      ],
+      "rarity": {
+        "en": "",
+        "ja": "",
+        "zh-TW": ""
+      },
+      "number": "16",
+      "image": "https://images.pokemontcg.io/sve/16_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-16",
+        "updatedAt": "2024/09/19"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-16",
+        "updatedAt": "2024/09/19"
+      }
+    },
+    {
+      "id": "sve-9",
+      "name": {
+        "en": "Basic Grass Energy",
+        "ja": "Basic Grass Energy",
+        "zh-TW": "Basic Grass Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "rarity": {
+        "en": "",
+        "ja": "",
+        "zh-TW": ""
+      },
+      "number": "9",
+      "image": "https://images.pokemontcg.io/sve/9_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-9",
+        "updatedAt": "2024/09/19"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-9",
+        "updatedAt": "2024/09/19"
+      }
+    },
+    {
+      "id": "sve-14",
+      "name": {
+        "en": "Basic Fighting Energy",
+        "ja": "Basic Fighting Energy",
+        "zh-TW": "Basic Fighting Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "rarity": {
+        "en": "",
+        "ja": "",
+        "zh-TW": ""
+      },
+      "number": "14",
+      "image": "https://images.pokemontcg.io/sve/14_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-14",
+        "updatedAt": "2024/09/19"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-14",
+        "updatedAt": "2024/09/19"
+      }
+    },
+    {
+      "id": "sve-13",
+      "name": {
+        "en": "Basic Psychic Energy",
+        "ja": "Basic Psychic Energy",
+        "zh-TW": "Basic Psychic Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "rarity": {
+        "en": "",
+        "ja": "",
+        "zh-TW": ""
+      },
+      "number": "13",
+      "image": "https://images.pokemontcg.io/sve/13_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-13",
+        "updatedAt": "2024/09/19"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-13",
+        "updatedAt": "2024/09/19"
+      }
+    },
+    {
+      "id": "sve-15",
+      "name": {
+        "en": "Basic Darkness Energy",
+        "ja": "Basic Darkness Energy",
+        "zh-TW": "Basic Darkness Energy"
+      },
+      "supertype": {
+        "en": "Energy",
+        "ja": "エネルギー",
+        "zh-TW": "能量"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Darkness",
+          "ja": "悪",
+          "zh-TW": "惡"
+        }
+      ],
+      "rarity": {
+        "en": "",
+        "ja": "",
+        "zh-TW": ""
+      },
+      "number": "15",
+      "image": "https://images.pokemontcg.io/sve/15_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/sve-15",
+        "updatedAt": "2024/09/19"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/sve-15",
+        "updatedAt": "2024/09/19"
+      }
+    }
+  ]
+}

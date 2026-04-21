@@ -1,0 +1,6831 @@
+{
+  "lastUpdated": "2026-04-13T04:42:57.736Z",
+  "set": {
+    "id": "neo3",
+    "name": {
+      "en": "Neo Revelation",
+      "ja": "金・銀 めざめる超能力",
+      "zh-TW": "新啟示"
+    },
+    "series": "Neo",
+    "releaseDate": "2001/09/21",
+    "cardCount": 66,
+    "logo": "https://images.pokemontcg.io/neo3/logo.png",
+    "symbol": "https://images.pokemontcg.io/neo3/symbol.png"
+  },
+  "cards": [
+    {
+      "id": "neo3-1",
+      "name": {
+        "en": "Ampharos",
+        "ja": "Ampharos",
+        "zh-TW": "Ampharos"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "1",
+      "artist": "Toshinao Aoki",
+      "image": "https://images.pokemontcg.io/neo3/1_hires.png",
+      "attacks": [
+        {
+          "name": "Attract Current",
+          "cost": [
+            "Lightning"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "20",
+          "text": "Flip 3 coins. For each heads, you may search your deck for a Lightning Energy card and attach it to 1 of your Lightning Pokémon. Shuffle your deck afterward."
+        },
+        {
+          "name": "Gigavolt",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "40+",
+          "text": "Flip a coin. If heads, this attack does 40 damage plus 20 more damage. If tails, this attack does 40 damage and the Defending Pokémon is now Paralyzed."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-1",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 169.99,
+            "mid": 219.93,
+            "high": 229.99,
+            "market": 90.46,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 66.77,
+            "mid": 77,
+            "high": 679.93,
+            "market": 65.65,
+            "directLow": 96.95
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-1",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 38.92,
+          "lowPrice": 4.99,
+          "trendPrice": 54.43,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 16,
+          "lowPriceExPlus": 30,
+          "avg1": 133.48,
+          "avg7": 54.17,
+          "avg30": 37.14,
+          "reverseHoloAvg1": 24.19,
+          "reverseHoloAvg7": 18.31,
+          "reverseHoloAvg30": 14.84
+        }
+      }
+    },
+    {
+      "id": "neo3-2",
+      "name": {
+        "en": "Blissey",
+        "ja": "Blissey",
+        "zh-TW": "Blissey"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "120",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "2",
+      "artist": "Yuka Morii",
+      "image": "https://images.pokemontcg.io/neo3/2_hires.png",
+      "attacks": [
+        {
+          "name": "Body Slam",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "30",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Softboiled",
+          "text": "When you play Blissey from your hand, you may flip a coin. If heads, remove 8 damage counters from Blissey. If tails, remove 4 damage counters from Blissey. Either way, if Blissey has fewer damage counters than that, remove all of them.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-2",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 139.99,
+            "mid": 175,
+            "high": 1703.5,
+            "market": 172.5,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 55,
+            "mid": 98.39,
+            "high": 9999,
+            "market": 82.74,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-2",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 41.26,
+          "lowPrice": 7,
+          "trendPrice": 36.55,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 11.84,
+          "lowPriceExPlus": 27,
+          "avg1": 30,
+          "avg7": 26.33,
+          "avg30": 35.77,
+          "reverseHoloAvg1": 6.45,
+          "reverseHoloAvg7": 13.8,
+          "reverseHoloAvg30": 16.97
+        }
+      }
+    },
+    {
+      "id": "neo3-3",
+      "name": {
+        "en": "Celebi",
+        "ja": "Celebi",
+        "zh-TW": "Celebi"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "3",
+      "artist": "Hironobu Yoshida",
+      "image": "https://images.pokemontcg.io/neo3/3_hires.png",
+      "attacks": [
+        {
+          "name": "Psychic Damage",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip 3 coins. For each heads, put 1 damage counter on the Defending Pokémon."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Time Travel",
+          "text": "If an opponent's attack would Knock Out Celebi, flip a coin. If heads, Celebi isn't Knocked Out and you shuffle it and all cards attached to it into your deck. This power doesn't work if Celebi is already Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-3",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 299.99,
+            "mid": 5149.5,
+            "high": 9999,
+            "market": 144.1,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 84.99,
+            "mid": 125.88,
+            "high": 9999,
+            "market": 124.55,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-3",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 261.72,
+          "lowPrice": 13,
+          "trendPrice": 99.55,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 47.59,
+          "lowPriceExPlus": 45,
+          "avg1": 57.5,
+          "avg7": 81.76,
+          "avg30": 157.41,
+          "reverseHoloAvg1": 34.99,
+          "reverseHoloAvg7": 71.32,
+          "reverseHoloAvg30": 46.49
+        }
+      }
+    },
+    {
+      "id": "neo3-4",
+      "name": {
+        "en": "Crobat",
+        "ja": "Crobat",
+        "zh-TW": "Crobat"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "4",
+      "artist": "Shin-ichi Yoshida",
+      "image": "https://images.pokemontcg.io/neo3/4_hires.png",
+      "attacks": [
+        {
+          "name": "Triggered Poison",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "20",
+          "text": "If your opponent attaches an Energy card to the Defending Pokémon during his or her next turn, that Pokémon becomes Poisoned."
+        },
+        {
+          "name": "Cross Attack",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "20×",
+          "text": "Flip 4 coins. This attack does 20 damage times the number of heads. If you get 2 or more heads, the Defending Pokémon is now Confused."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-4",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 100,
+            "mid": 565,
+            "high": 1199.9,
+            "market": 72.63,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 33.15,
+            "mid": 43.97,
+            "high": 589.9,
+            "market": 42.96,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-4",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 38.6,
+          "lowPrice": 10,
+          "trendPrice": 41.58,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 17.06,
+          "lowPriceExPlus": 27,
+          "avg1": 48.33,
+          "avg7": 38.39,
+          "avg30": 37.86,
+          "reverseHoloAvg1": 19.09,
+          "reverseHoloAvg7": 18.54,
+          "reverseHoloAvg30": 15.68
+        }
+      }
+    },
+    {
+      "id": "neo3-5",
+      "name": {
+        "en": "Delibird",
+        "ja": "Delibird",
+        "zh-TW": "Delibird"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "5",
+      "artist": "Tomokazu Komiya",
+      "image": "https://images.pokemontcg.io/neo3/5_hires.png",
+      "attacks": [
+        {
+          "name": "Present",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Flip 3 coins. If exactly 1 is heads, this attack does 40 damage. If exactly 2 are heads, remove 3 damage counters from the Defending Pokémon. If the Defending Pokémon has fewer damage counters than that, remove all of them. If all 3 are heads, this attack does 60 damage. If all 3 are tails, remove all damage counters from the Defending Pokémon."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-5",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 69.99,
+            "mid": 77.44,
+            "high": 135,
+            "market": 70.35,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 31.49,
+            "mid": 38.1,
+            "high": 843,
+            "market": 37.5,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-5",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 38.52,
+          "lowPrice": 8.9,
+          "trendPrice": 25.86,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 13.71,
+          "lowPriceExPlus": 27,
+          "avg1": 24,
+          "avg7": 29.65,
+          "avg30": 51.2,
+          "reverseHoloAvg1": 14.99,
+          "reverseHoloAvg7": 16.04,
+          "reverseHoloAvg30": 13.45
+        }
+      }
+    },
+    {
+      "id": "neo3-6",
+      "name": {
+        "en": "Entei",
+        "ja": "Entei",
+        "zh-TW": "Entei"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fire",
+          "ja": "炎",
+          "zh-TW": "火"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "6",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/neo3/6_hires.png",
+      "attacks": [
+        {
+          "name": "Searing Flames",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Fire"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "60",
+          "text": "Discard 2 Fire Energy cards attached to Entei or this attack does nothing."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Howl",
+          "text": "When you play Entei from your hand, you may discard the top 5 cards of your deck. (If you have fewer cards in your deck than that, discard all of them.) If any of those are Fire Energy cards, attach them to any of your Fire Pokémon of your choice. Using this power ends your turn.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-6",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 646.39,
+            "mid": 9999,
+            "high": 10000,
+            "market": 324.68,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 128.74,
+            "mid": 179.66,
+            "high": 1979.63,
+            "market": 154.47,
+            "directLow": 119.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-6",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 126.95,
+          "lowPrice": 15,
+          "trendPrice": 143.21,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 71.29,
+          "lowPriceExPlus": 30,
+          "avg1": 37.5,
+          "avg7": 179.52,
+          "avg30": 140.02,
+          "reverseHoloAvg1": 99.99,
+          "reverseHoloAvg7": 80.43,
+          "reverseHoloAvg30": 48.47
+        }
+      }
+    },
+    {
+      "id": "neo3-7",
+      "name": {
+        "en": "Ho-oh",
+        "ja": "Ho-oh",
+        "zh-TW": "Ho-oh"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fire",
+          "ja": "炎",
+          "zh-TW": "火"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "7",
+      "artist": "Kimiya Masago",
+      "image": "https://images.pokemontcg.io/neo3/7_hires.png",
+      "attacks": [
+        {
+          "name": "Stoke",
+          "cost": [
+            "Fire"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "You may search your deck for a Fire Energy card and attach it to Ho-Oh. Shuffle your deck afterward."
+        },
+        {
+          "name": "Sacred Fire",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Fire"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "",
+          "text": "Flip a coin. If heads, choose 1 of your opponent's Pokémon. This attack does 40 damage to that Pokémon. Don't apply Weakness and Resistance."
+        },
+        {
+          "name": "Dive Bomb",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Fire",
+            "Fire",
+            "Fire"
+          ],
+          "convertedEnergyCost": 5,
+          "damage": "90",
+          "text": "Flip a coin. If tails, this attack does nothing."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-7",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 313.49,
+            "mid": 420,
+            "high": 488.52,
+            "market": 350,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 174.75,
+            "mid": 550,
+            "high": 9999,
+            "market": 251.72,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-7",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 163.99,
+          "lowPrice": 27,
+          "trendPrice": 144.12,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 105.04,
+          "lowPriceExPlus": 100,
+          "avg1": 144.5,
+          "avg7": 106.77,
+          "avg30": 130.01,
+          "reverseHoloAvg1": 139.99,
+          "reverseHoloAvg7": 97.74,
+          "reverseHoloAvg30": 65.36
+        }
+      }
+    },
+    {
+      "id": "neo3-8",
+      "name": {
+        "en": "Houndoom",
+        "ja": "Houndoom",
+        "zh-TW": "Houndoom"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Darkness",
+          "ja": "悪",
+          "zh-TW": "惡"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "8",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/neo3/8_hires.png",
+      "attacks": [
+        {
+          "name": "Dark Flame",
+          "cost": [
+            "Fire"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "20",
+          "text": "Discard 1 Fire Energy card attached to Houndoom or this attack does nothing. If there are any Darkness Energy cards in your discard pile, attach 1 of them to Houndoom."
+        },
+        {
+          "name": "Black Fang",
+          "cost": [
+            "Darkness",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30+",
+          "text": "Flip a number of coins equal to the number of Darkness Energy attached to Houndoom. This attack does 30 damage plus 10 more damage for each heads."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-8",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "unlimitedHolofoil": {
+            "low": 299.99,
+            "mid": 399.99,
+            "high": 9999,
+            "market": 223.62,
+            "directLow": 899.97
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-8",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 108.4,
+          "lowPrice": 12.99,
+          "trendPrice": 177.47,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 36.23,
+          "lowPriceExPlus": 87.99,
+          "avg1": 67.5,
+          "avg7": 180.39,
+          "avg30": 97.64,
+          "reverseHoloAvg1": 37.66,
+          "reverseHoloAvg7": 39.5,
+          "reverseHoloAvg30": 44.17
+        }
+      }
+    },
+    {
+      "id": "neo3-9",
+      "name": {
+        "en": "Jumpluff",
+        "ja": "Jumpluff",
+        "zh-TW": "Jumpluff"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "9",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/neo3/9_hires.png",
+      "attacks": [
+        {
+          "name": "Evolutionary Spore",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Choose any number of your Hoppips and Skiplooms. Then, for each Pokémon you chose in this way, you may search your deck for a card that evolves from that Pokémon and attach it to that Pokémon. (This counts as evolving those Pokémon.) Shuffle your deck afterward."
+        },
+        {
+          "name": "Solarbeam",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "30",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-9",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 45.99,
+            "mid": 59.99,
+            "high": 459.9,
+            "market": 49.68,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 25,
+            "mid": 26.99,
+            "high": 334.7,
+            "market": 30.22,
+            "directLow": 26.97
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-9",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 24.44,
+          "lowPrice": 5.99,
+          "trendPrice": 20.86,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 9.88,
+          "lowPriceExPlus": 18.5,
+          "avg1": 21,
+          "avg7": 24.35,
+          "avg30": 24.17,
+          "reverseHoloAvg1": 7,
+          "reverseHoloAvg7": 10.39,
+          "reverseHoloAvg30": 9.4
+        }
+      }
+    },
+    {
+      "id": "neo3-10",
+      "name": {
+        "en": "Magneton",
+        "ja": "Magneton",
+        "zh-TW": "Magneton"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Metal",
+          "ja": "鋼",
+          "zh-TW": "鋼"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "10",
+      "artist": "\"Big Mama\" Tagawa, CR CG gangs",
+      "image": "https://images.pokemontcg.io/neo3/10_hires.png",
+      "attacks": [
+        {
+          "name": "Plasma",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "If there are any Lightning Energy cards in your discard pile, attach 1 of them to Magneton."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Electromagnetic Power",
+          "text": "As often as you like during your turn (before your attack), you may take 1 Energy card attached to 1 of your Magnemites, Magnetons, or Dark Magnetons and attach it to a different 1 of your Magnemites, Magnetons, and Dark Magnetons. This power can't be used if Magneton is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-10",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 44.99,
+            "mid": 80.72,
+            "high": 806.26,
+            "market": 57.08,
+            "directLow": 80.65
+          },
+          "unlimitedHolofoil": {
+            "low": 19.43,
+            "mid": 31.06,
+            "high": 313.1,
+            "market": 28.23,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-10",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 23.24,
+          "lowPrice": 3.99,
+          "trendPrice": 16.57,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 9.26,
+          "lowPriceExPlus": 19.5,
+          "avg1": 14.99,
+          "avg7": 17.35,
+          "avg30": 22.39,
+          "reverseHoloAvg1": 15.31,
+          "reverseHoloAvg7": 11.99,
+          "reverseHoloAvg30": 12.33
+        }
+      }
+    },
+    {
+      "id": "neo3-11",
+      "name": {
+        "en": "Misdreavus",
+        "ja": "Misdreavus",
+        "zh-TW": "Misdreavus"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "11",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/neo3/11_hires.png",
+      "attacks": [
+        {
+          "name": "Night Eyes",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "The Defending Pokémon is now Asleep."
+        },
+        {
+          "name": "Perish Song",
+          "cost": [
+            "Psychic",
+            "Psychic",
+            "Psychic"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "",
+          "text": "If the Defending Pokémon is Asleep and was attacked with Night Eyes during your last turn, it is Knocked Out."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-11",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 93.99,
+            "mid": 129.99,
+            "high": 9999,
+            "market": 138.74,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 99.99,
+            "mid": 336,
+            "high": 338.98,
+            "market": 51.73,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-11",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 60.45,
+          "lowPrice": 8,
+          "trendPrice": 46.25,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 19.08,
+          "lowPriceExPlus": 24,
+          "avg1": 23.33,
+          "avg7": 20.59,
+          "avg30": 42.5,
+          "reverseHoloAvg1": 19.32,
+          "reverseHoloAvg7": 17.72,
+          "reverseHoloAvg30": 17
+        }
+      }
+    },
+    {
+      "id": "neo3-12",
+      "name": {
+        "en": "Porygon2",
+        "ja": "Porygon2",
+        "zh-TW": "Porygon2"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "12",
+      "artist": "Keiji Kinebuchi",
+      "image": "https://images.pokemontcg.io/neo3/12_hires.png",
+      "attacks": [
+        {
+          "name": "Delta Beam",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "20",
+          "text": "Flip a coin. If heads, choose whether the Defending Pokémon becomes Asleep, Confused, or Paralyzed."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Energy Converter",
+          "text": "Once during your turn (before your attack), you may choose 1 basic Energy card attached to 1 of your Pokémon and choose an Energy type. Treat that Energy card as that type until the end of your turn. This power can't be used if Porygon2 is Asleep, Confused, or Paralyzed. If Porygon2 becomes Asleep, Confused, or Paralyzed, the Energy card goes back to its original type.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-12",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 70,
+            "mid": 99.99,
+            "high": 9999,
+            "market": 97,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 37.99,
+            "mid": 47.88,
+            "high": 447.54,
+            "market": 44.4,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-12",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 29.44,
+          "lowPrice": 3.2,
+          "trendPrice": 37.49,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 18.08,
+          "lowPriceExPlus": 24.99,
+          "avg1": 29.5,
+          "avg7": 32.53,
+          "avg30": 29.86,
+          "reverseHoloAvg1": 19.24,
+          "reverseHoloAvg7": 15.28,
+          "reverseHoloAvg30": 12.55
+        }
+      }
+    },
+    {
+      "id": "neo3-13",
+      "name": {
+        "en": "Raikou",
+        "ja": "Raikou",
+        "zh-TW": "Raikou"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "13",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/neo3/13_hires.png",
+      "attacks": [
+        {
+          "name": "Lightning Tackle",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Lightning"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "50",
+          "text": "Flip a coin. If tails, Raikou does 20 damage to itself."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Lightning Burst",
+          "text": "Whenever you attach a Lightning Energy card from your hand to Raikou, if your opponent has any Benched Pokémon, he or she chooses 1 of them and switches it with the Defending Pokémon. This power stops working while Raikou is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-13",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 499.01,
+            "mid": 499.9,
+            "high": 9999,
+            "market": 500,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 139.99,
+            "mid": 200,
+            "high": 1529.5,
+            "market": 201.88,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-13",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 129.71,
+          "lowPrice": 14,
+          "trendPrice": 139.32,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 70.09,
+          "lowPriceExPlus": 80,
+          "avg1": 30,
+          "avg7": 133.42,
+          "avg30": 118.39,
+          "reverseHoloAvg1": 33.32,
+          "reverseHoloAvg7": 54.62,
+          "reverseHoloAvg30": 42.4
+        }
+      }
+    },
+    {
+      "id": "neo3-14",
+      "name": {
+        "en": "Suicune",
+        "ja": "Suicune",
+        "zh-TW": "Suicune"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "14",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/neo3/14_hires.png",
+      "attacks": [
+        {
+          "name": "Aurora Wave",
+          "cost": [
+            "Water",
+            "Water",
+            "Water"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "Flip 2 coins. If both are heads, the Defending Pokémon is now Paralyzed. If only 1 is heads, the Defending Pokémon is now Asleep."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Crystal Body",
+          "text": "Prevent all effects of your opponent's attacks, other than damage, done to Suicune. This power stops working while Suicune is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-14",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 338.99,
+            "mid": 339.99,
+            "high": 9999,
+            "market": 461.45,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 179.99,
+            "mid": 201.99,
+            "high": 9999,
+            "market": 134.82,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-14",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 237.41,
+          "lowPrice": 20,
+          "trendPrice": 257.21,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 70.86,
+          "lowPriceExPlus": 69.9,
+          "avg1": 70,
+          "avg7": 220.44,
+          "avg30": 178.67,
+          "reverseHoloAvg1": 59.5,
+          "reverseHoloAvg7": 59.99,
+          "reverseHoloAvg30": 49.24
+        }
+      }
+    },
+    {
+      "id": "neo3-15",
+      "name": {
+        "en": "Aerodactyl",
+        "ja": "Aerodactyl",
+        "zh-TW": "Aerodactyl"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "15",
+      "artist": "Shin-ichi Yoshida",
+      "image": "https://images.pokemontcg.io/neo3/15_hires.png",
+      "attacks": [
+        {
+          "name": "Fly",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "Flip a coin. If heads, during your opponent's next turn, prevent all effects of attacks, including damage, done to Aerodactyl. If tails, this attack does nothing (not even damage)."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Prehistoric Memory",
+          "text": "Whenever an Evolved Pokémon attacks (even if it's your opponent's), it can use any attack from its Basic Pokémon card or any Evolution card attached to it. It still has to pay for that attack's Energy cost. This power stops working while Aerodactyl is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-15",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 5.99,
+            "mid": 35,
+            "high": 245.8,
+            "market": 23.18,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 4.1,
+            "mid": 7.91,
+            "high": 60.9,
+            "market": 6.18,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-15",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 7.82,
+          "lowPrice": 1,
+          "trendPrice": 5.48,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 15.42,
+          "lowPriceExPlus": 3.5,
+          "avg1": 14.95,
+          "avg7": 6.74,
+          "avg30": 7.1,
+          "reverseHoloAvg1": 12,
+          "reverseHoloAvg7": 19.76,
+          "reverseHoloAvg30": 9.55
+        }
+      }
+    },
+    {
+      "id": "neo3-16",
+      "name": {
+        "en": "Celebi",
+        "ja": "Celebi",
+        "zh-TW": "Celebi"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "16",
+      "artist": "Sumiyoshi Kizuki",
+      "image": "https://images.pokemontcg.io/neo3/16_hires.png",
+      "attacks": [
+        {
+          "name": "Psychic Leaf",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Flip a coin for each Energy attached to the Defending Pokémon. This attack does 10 damage plus 10 more damage for each heads. Remove a number of damage counters from Celebi equal to the damage done to the Defending Pokémon (after applying Weakness and Resistance). If Celebi has fewer damage counters than that, remove all of them."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-16",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 17.38,
+            "mid": 24.99,
+            "high": 229.9,
+            "market": 24.49,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 14.17,
+            "mid": 17.52,
+            "high": 9999,
+            "market": 14.4,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-16",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 13.03,
+          "lowPrice": 2.98,
+          "trendPrice": 12.83,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 29.77,
+          "lowPriceExPlus": 7,
+          "avg1": 10,
+          "avg7": 13.63,
+          "avg30": 11.6,
+          "reverseHoloAvg1": 34,
+          "reverseHoloAvg7": 26.75,
+          "reverseHoloAvg30": 17.81
+        }
+      }
+    },
+    {
+      "id": "neo3-17",
+      "name": {
+        "en": "Entei",
+        "ja": "Entei",
+        "zh-TW": "Entei"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fire",
+          "ja": "炎",
+          "zh-TW": "火"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "17",
+      "artist": "Naoyo Kimura",
+      "image": "https://images.pokemontcg.io/neo3/17_hires.png",
+      "attacks": [
+        {
+          "name": "Mega Flame",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Fire"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "50",
+          "text": "Flip 2 coins. For each tails, discard 1 Fire Energy card from Entei, if it has any."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Legendary Body",
+          "text": "As long as Entei is your Active Pokémon, Entei and Energy cards attached to it aren't affected by effects from Trainer cards other than Stadium cards. As long as this Power is active, discard any Trainer cards attached to Entei. (This power works even if Entei is Asleep, Confused, or Paralyzed.)",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-17",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 29.99,
+            "mid": 84.9,
+            "high": 849,
+            "market": 45.64,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 13.24,
+            "mid": 19.99,
+            "high": 189.74,
+            "market": 19.45,
+            "directLow": 23.59
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-17",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 11.36,
+          "lowPrice": 1,
+          "trendPrice": 10.79,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 11.26,
+          "lowPriceExPlus": 9.99,
+          "avg1": 3.99,
+          "avg7": 13.26,
+          "avg30": 11.73,
+          "reverseHoloAvg1": 28.99,
+          "reverseHoloAvg7": 8.78,
+          "reverseHoloAvg30": 6.83
+        }
+      }
+    },
+    {
+      "id": "neo3-18",
+      "name": {
+        "en": "Ho-oh",
+        "ja": "Ho-oh",
+        "zh-TW": "Ho-oh"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "18",
+      "artist": "Aya Kusube",
+      "image": "https://images.pokemontcg.io/neo3/18_hires.png",
+      "attacks": [
+        {
+          "name": "Rainbow Burn",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "30+",
+          "text": "This attack does 30 damage plus 10 more damage for each type of Basic Energy card, if any, attached to Ho-Oh."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-18",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 94.85,
+            "mid": 521.73,
+            "high": 9999,
+            "market": 41.04,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 13.03,
+            "mid": 19.24,
+            "high": 192.5,
+            "market": 19.09,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-18",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 16.64,
+          "lowPrice": 2.98,
+          "trendPrice": 11.65,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 13.84,
+          "lowPriceExPlus": 12.5,
+          "avg1": 7.5,
+          "avg7": 16.13,
+          "avg30": 16.49,
+          "reverseHoloAvg1": 16.69,
+          "reverseHoloAvg7": 14.58,
+          "reverseHoloAvg30": 10.82
+        }
+      }
+    },
+    {
+      "id": "neo3-19",
+      "name": {
+        "en": "Kingdra",
+        "ja": "Kingdra",
+        "zh-TW": "Kingdra"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "19",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/neo3/19_hires.png",
+      "attacks": [
+        {
+          "name": "Genetic Memory",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Use any attack from Kingdra's Basic Pokémon card or Evolution card. (Kingdra doesn't have to pay for that attack's Energy cost.)"
+        },
+        {
+          "name": "Twister",
+          "cost": [
+            "Water",
+            "Water",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "50",
+          "text": "Flip 2 coins. For each heads, choose 1 Energy card attached to the Defending Pokémon, if any, and discard it. If both are tails, this attack does nothing (not even damage)."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-19",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 20,
+            "mid": 114.96,
+            "high": 249.43,
+            "market": 12.81,
+            "directLow": 199.93
+          },
+          "unlimited": {
+            "low": 5.5,
+            "mid": 6.89,
+            "high": 65.4,
+            "market": 7.39,
+            "directLow": 8.5
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-19",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 5.3,
+          "lowPrice": 0.99,
+          "trendPrice": 5.78,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 10.96,
+          "lowPriceExPlus": 4,
+          "avg1": 1.8,
+          "avg7": 5.72,
+          "avg30": 5.82,
+          "reverseHoloAvg1": 3.9,
+          "reverseHoloAvg7": 8.92,
+          "reverseHoloAvg30": 6.9
+        }
+      }
+    },
+    {
+      "id": "neo3-20",
+      "name": {
+        "en": "Lugia",
+        "ja": "Lugia",
+        "zh-TW": "Lugia"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "20",
+      "artist": "Aya Kusube",
+      "image": "https://images.pokemontcg.io/neo3/20_hires.png",
+      "attacks": [
+        {
+          "name": "Aerowing",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "40",
+          "text": "You may flip a coin. If heads, this attack does 80 damage. If tails, this attack does nothing."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-20",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 95,
+            "mid": 483.07,
+            "high": 4355.46,
+            "market": 91.63,
+            "directLow": 871.14
+          },
+          "unlimited": {
+            "low": 32.98,
+            "mid": 350.13,
+            "high": 9999,
+            "market": 34.6,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-20",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 21.49,
+          "lowPrice": 4.5,
+          "trendPrice": 19.87,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 2.66,
+          "lowPriceExPlus": 18,
+          "avg1": 8,
+          "avg7": 19.98,
+          "avg30": 17.92,
+          "reverseHoloAvg1": 3,
+          "reverseHoloAvg7": 4.59,
+          "reverseHoloAvg30": 4.59
+        }
+      }
+    },
+    {
+      "id": "neo3-21",
+      "name": {
+        "en": "Raichu",
+        "ja": "ライチュウ",
+        "zh-TW": "雷丘"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "21",
+      "artist": "Masako Yamashita",
+      "image": "https://images.pokemontcg.io/neo3/21_hires.png",
+      "attacks": [
+        {
+          "name": "Thundershock",
+          "cost": [
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        },
+        {
+          "name": "Lightning Strike",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Lightning"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "40",
+          "text": "You may discard all Lightning Energy cards attached to Raichu. If you do, this attack does 80 damage."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-21",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 9.51,
+            "mid": 195.8,
+            "high": 398.48,
+            "market": 28.81,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 7.5,
+            "mid": 12.92,
+            "high": 96.94,
+            "market": 14.22,
+            "directLow": 9.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-21",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 16.07,
+          "lowPrice": 0.94,
+          "trendPrice": 13.72,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 2.41,
+          "lowPriceExPlus": 4.88,
+          "avg1": 6.9,
+          "avg7": 13.41,
+          "avg30": 14.84,
+          "reverseHoloAvg1": 2.25,
+          "reverseHoloAvg7": 3.58,
+          "reverseHoloAvg30": 3.58
+        }
+      }
+    },
+    {
+      "id": "neo3-22",
+      "name": {
+        "en": "Raikou",
+        "ja": "Raikou",
+        "zh-TW": "Raikou"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "22",
+      "artist": "Naoyo Kimura",
+      "image": "https://images.pokemontcg.io/neo3/22_hires.png",
+      "attacks": [
+        {
+          "name": "Lightning Spark",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Lightning"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "If your opponent has any Benched Pokémon, flip a coin. If heads, choose 1 of them and this attack does 20 damage to it. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Legendary Body",
+          "text": "As long as Raikou is your Active Pokémon, Raikou and Energy cards attached to it aren't affected by effects from Trainer cards other than Stadium cards. As long as this Power is active, discard any Trainer cards attached to Raikou. (This power works even if Raikou is Asleep, Confused, or Paralyzed.)",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-22",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 25,
+            "mid": 43.24,
+            "high": 263.1,
+            "market": 43.4,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 8,
+            "mid": 10,
+            "high": 130,
+            "market": 14.56,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-22",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 11.17,
+          "lowPrice": 1.45,
+          "trendPrice": 10.41,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 5.81,
+          "lowPriceExPlus": 8,
+          "avg1": 5.45,
+          "avg7": 12.41,
+          "avg30": 11.09,
+          "reverseHoloAvg1": 3.5,
+          "reverseHoloAvg7": 4.34,
+          "reverseHoloAvg30": 4.34
+        }
+      }
+    },
+    {
+      "id": "neo3-23",
+      "name": {
+        "en": "Skarmory",
+        "ja": "Skarmory",
+        "zh-TW": "Skarmory"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Metal",
+          "ja": "鋼",
+          "zh-TW": "鋼"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "23",
+      "artist": "Aya Kusube",
+      "image": "https://images.pokemontcg.io/neo3/23_hires.png",
+      "attacks": [
+        {
+          "name": "Fury Attack",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10×",
+          "text": "Flip 2 coins. This attack does 10 damage times the number of heads."
+        },
+        {
+          "name": "Agility",
+          "cost": [
+            "Metal",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "20",
+          "text": "Flip a coin. If heads, during your opponent's next turn, prevent all effects of attacks, including damage, done to Skarmory."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-23",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 198.3,
+            "mid": 279.4,
+            "high": 281.08,
+            "market": 22.61,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 5,
+            "mid": 9.65,
+            "high": 87.5,
+            "market": 9.53,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-23",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 5.23,
+          "lowPrice": 0.75,
+          "trendPrice": 8.18,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 3.16,
+          "lowPriceExPlus": 4,
+          "avg1": 2.35,
+          "avg7": 8.8,
+          "avg30": 6.54,
+          "reverseHoloAvg1": 3,
+          "reverseHoloAvg7": 2.39,
+          "reverseHoloAvg30": 2.39
+        }
+      }
+    },
+    {
+      "id": "neo3-24",
+      "name": {
+        "en": "Sneasel",
+        "ja": "Sneasel",
+        "zh-TW": "Sneasel"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Darkness",
+          "ja": "悪",
+          "zh-TW": "惡"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "24",
+      "artist": "Sumiyoshi Kizuki",
+      "image": "https://images.pokemontcg.io/neo3/24_hires.png",
+      "attacks": [
+        {
+          "name": "Swipe",
+          "cost": [
+            "Darkness"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip a coin. If heads, discard all Trainer cards attached to your opponent's Pokémon."
+        },
+        {
+          "name": "Quick Attack",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Flip a coin. If heads, this attack does 10 damage plus 20 more damage."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-24",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 7,
+            "mid": 8.09,
+            "high": 82.5,
+            "market": 9.38,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 3.99,
+            "mid": 7.98,
+            "high": 99.88,
+            "market": 6.46,
+            "directLow": 5.49
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-24",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 3.59,
+          "lowPrice": 0.89,
+          "trendPrice": 3.82,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 3.5,
+          "avg1": 5.9,
+          "avg7": 4.9,
+          "avg30": 4.21,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-25",
+      "name": {
+        "en": "Starmie",
+        "ja": "Starmie",
+        "zh-TW": "Starmie"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "25",
+      "artist": "Keita Komatsuya, CR CG gangs",
+      "image": "https://images.pokemontcg.io/neo3/25_hires.png",
+      "attacks": [
+        {
+          "name": "Confuse Ray",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Confused."
+        },
+        {
+          "name": "Core Stream",
+          "cost": [
+            "Psychic",
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "",
+          "text": "Choose an Energy type other than Colorless. This attack does 20 damage to each of your opponent's Pokémon with any Energy cards of that type attached to it. Don't apply Weakness and Resistance."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-25",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 7,
+            "mid": 11.4,
+            "high": 112.05,
+            "market": 10.78,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 2.81,
+            "mid": 6.04,
+            "high": 67.9,
+            "market": 5.72,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-25",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 4.94,
+          "lowPrice": 0.4,
+          "trendPrice": 4.25,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 12.47,
+          "lowPriceExPlus": 2,
+          "avg1": 2.75,
+          "avg7": 2.83,
+          "avg30": 4.37,
+          "reverseHoloAvg1": 13,
+          "reverseHoloAvg7": 10.56,
+          "reverseHoloAvg30": 5.52
+        }
+      }
+    },
+    {
+      "id": "neo3-26",
+      "name": {
+        "en": "Sudowoodo",
+        "ja": "Sudowoodo",
+        "zh-TW": "Sudowoodo"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "26",
+      "artist": "Sumiyoshi Kizuki",
+      "image": "https://images.pokemontcg.io/neo3/26_hires.png",
+      "attacks": [
+        {
+          "name": "Slam",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20×",
+          "text": "Flip 2 coins. This attack does 20 damage times the number of heads."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Mimic",
+          "text": "As long as Sudowoodo is your Active Pokémon, it copies all of the Defending Pokémon's attacks, including their costs. This power can't be used if Sudowoodo is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-26",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 11.99,
+            "mid": 20.6,
+            "high": 212,
+            "market": 14,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 3.98,
+            "mid": 6.5,
+            "high": 65.64,
+            "market": 6.84,
+            "directLow": 65.64
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-26",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 4.58,
+          "lowPrice": 1,
+          "trendPrice": 3.68,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 1.5,
+          "lowPriceExPlus": 3.49,
+          "avg1": 3.5,
+          "avg7": 4.21,
+          "avg30": 4.74,
+          "reverseHoloAvg1": 1.5,
+          "reverseHoloAvg7": 1.5,
+          "reverseHoloAvg30": 1.5
+        }
+      }
+    },
+    {
+      "id": "neo3-27",
+      "name": {
+        "en": "Suicune",
+        "ja": "Suicune",
+        "zh-TW": "Suicune"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "27",
+      "artist": "Naoyo Kimura",
+      "image": "https://images.pokemontcg.io/neo3/27_hires.png",
+      "attacks": [
+        {
+          "name": "Crystal Wave",
+          "cost": [
+            "Water",
+            "Water",
+            "Water"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30+",
+          "text": "Flip a coin. If heads, this attack does 30 damage plus 10 more damage. If tails, this attack does 30 damage and, if your opponent has any Benched Pokémon, he or she chooses 1 of them and switches it with the Defending Pokémon. (Do the damage before switching the Pokémon.)"
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Legendary Body",
+          "text": "As long as Suicune is your Active Pokémon, Suicune and Energy cards attached to it aren't affected by effects from Trainer cards other than Stadium cards. As long as this Power is active, discard any Trainer cards attached to Suicune. (This power works even if Suicune is Asleep, Confused, or Paralyzed.)",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-27",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 39.1,
+            "mid": 71.45,
+            "high": 632.5,
+            "market": 43.51,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 15.49,
+            "mid": 19.91,
+            "high": 179.9,
+            "market": 19.83,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-27",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 11.16,
+          "lowPrice": 1.99,
+          "trendPrice": 11.92,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 9.9,
+          "lowPriceExPlus": 10,
+          "avg1": 17.75,
+          "avg7": 14.36,
+          "avg30": 13.01,
+          "reverseHoloAvg1": 15.99,
+          "reverseHoloAvg7": 4.77,
+          "reverseHoloAvg30": 4.77
+        }
+      }
+    },
+    {
+      "id": "neo3-28",
+      "name": {
+        "en": "Flaaffy",
+        "ja": "Flaaffy",
+        "zh-TW": "Flaaffy"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "28",
+      "artist": "Toshinao Aoki",
+      "image": "https://images.pokemontcg.io/neo3/28_hires.png",
+      "attacks": [
+        {
+          "name": "Electric Punch",
+          "cost": [
+            "Lightning"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "20",
+          "text": ""
+        },
+        {
+          "name": "Tail Shock",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "Flip a coin. If heads, this attack does 10 damage to each of your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-28",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 2.75,
+            "mid": 4,
+            "high": 4321,
+            "market": 3.62,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.75,
+            "mid": 1.8,
+            "high": 27007.04,
+            "market": 1.77,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-28",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.34,
+          "lowPrice": 0.05,
+          "trendPrice": 1.11,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.2,
+          "avg1": 0.55,
+          "avg7": 1.03,
+          "avg30": 1.24,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-29",
+      "name": {
+        "en": "Golbat",
+        "ja": "Golbat",
+        "zh-TW": "Golbat"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "29",
+      "artist": "Masako Yamashita",
+      "image": "https://images.pokemontcg.io/neo3/29_hires.png",
+      "attacks": [
+        {
+          "name": "Screech",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Until the end of your next turn, if an attack damages the Defending Pokémon (after applying Weakness and Resistance), that attack does 20 more damage to the Defending Pokémon."
+        },
+        {
+          "name": "Poison Bite",
+          "cost": [
+            "Grass",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10",
+          "text": "If this attack damages the Defending Pokémon, the Defending Pokémon is now Poisoned and you remove a number of damage counters from Golbat equal to half that damage (rounded up to the nearest 10). If Golbat has fewer damage counters than that, remove all of them. Either way, the Defending Pokémon is now Poisoned."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-29",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.35,
+            "mid": 2.87,
+            "high": 34.2,
+            "market": 2.81,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.45,
+            "mid": 0.99,
+            "high": 23,
+            "market": 0.96,
+            "directLow": 3.74
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-29",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.05,
+          "lowPrice": 0.05,
+          "trendPrice": 1.3,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.2,
+          "avg1": 1.18,
+          "avg7": 1.32,
+          "avg30": 1.12,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-30",
+      "name": {
+        "en": "Graveler",
+        "ja": "Graveler",
+        "zh-TW": "Graveler"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "30",
+      "artist": "Yukiko Baba",
+      "image": "https://images.pokemontcg.io/neo3/30_hires.png",
+      "attacks": [
+        {
+          "name": "Earthquake",
+          "cost": [
+            "Fighting",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "40",
+          "text": "Does 10 damage to each of your own Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        },
+        {
+          "name": "Rock Tumble",
+          "cost": [
+            "Fighting",
+            "Fighting",
+            "Fighting"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "50",
+          "text": "Don't apply Resistance."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-30",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.49,
+            "mid": 2.31,
+            "high": 31.3,
+            "market": 2.31,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.31,
+            "mid": 1,
+            "high": 20.88,
+            "market": 0.99,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-30",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 0.82,
+          "lowPrice": 0.05,
+          "trendPrice": 3.69,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.4,
+          "lowPriceExPlus": 0.2,
+          "avg1": 0.54,
+          "avg7": 3.29,
+          "avg30": 1.34,
+          "reverseHoloAvg1": 0.4,
+          "reverseHoloAvg7": 0.4,
+          "reverseHoloAvg30": 0.4
+        }
+      }
+    },
+    {
+      "id": "neo3-31",
+      "name": {
+        "en": "Jynx",
+        "ja": "Jynx",
+        "zh-TW": "Jynx"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "31",
+      "artist": "Tomokazu Komiya",
+      "image": "https://images.pokemontcg.io/neo3/31_hires.png",
+      "attacks": [
+        {
+          "name": "Freezing Kiss Goodnight",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "The Defending Pokémon is now Asleep."
+        },
+        {
+          "name": "Strange Dance",
+          "cost": [
+            "Psychic",
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "20+",
+          "text": "Flip a coin. If heads, this attack does 20 damage plus 20 more damage and the Defending Pokémon is now Confused. If tails, this attack does 20 damage."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-31",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 8.99,
+            "mid": 14.99,
+            "high": 89.66,
+            "market": 7.85,
+            "directLow": 8.99
+          },
+          "unlimited": {
+            "low": 1.19,
+            "mid": 3.14,
+            "high": 96.95,
+            "market": 3.07,
+            "directLow": 3.43
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-31",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.99,
+          "lowPrice": 0.04,
+          "trendPrice": 3.65,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.25,
+          "avg1": 0.47,
+          "avg7": 1.91,
+          "avg30": 2.25,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-32",
+      "name": {
+        "en": "Lanturn",
+        "ja": "Lanturn",
+        "zh-TW": "Lanturn"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "32",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/neo3/32_hires.png",
+      "attacks": [
+        {
+          "name": "Blinding Light",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Confused."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Submerge",
+          "text": "Once during your turn (before your attack), you may change Lanturn's type to Water until the end of your turn. This power can't be used if Lanturn is Asleep, Confused, or Paralyzed. If Lanturn becomes Asleep, Confused, or Paralyzed after you have used this power, its type changes back to Lightning.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-32",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.5,
+            "mid": 2.25,
+            "high": 29.1,
+            "market": 2.33,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.5,
+            "mid": 1.15,
+            "high": 21.18,
+            "market": 1.19,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-32",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.06,
+          "lowPrice": 0.03,
+          "trendPrice": 1.69,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.2,
+          "avg1": 0.4,
+          "avg7": 2.9,
+          "avg30": 1.6,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-33",
+      "name": {
+        "en": "Magcargo",
+        "ja": "Magcargo",
+        "zh-TW": "Magcargo"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Fire",
+          "ja": "炎",
+          "zh-TW": "火"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "33",
+      "artist": "Shin-ichi Yoshida",
+      "image": "https://images.pokemontcg.io/neo3/33_hires.png",
+      "attacks": [
+        {
+          "name": "Lava Flow",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Fire"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "40+",
+          "text": "You may discard any number of Fire Energy cards attached to Magcargo when you use this attack. If you do, this attack does 40 damage plus 20 more damage for each Fire Energy card you discarded in this way."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Magma Pool",
+          "text": "If Magcargo is your Active Pokémon and moves to the Bench, remove 1 Fire Energy card attached to Magcargo, if any, and attach it to the new Active Pokémon. (You can't choose an Energy card that you used to pay the Retreat Cost.)",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-33",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 2.36,
+            "mid": 4.11,
+            "high": 998.99,
+            "market": 4.32,
+            "directLow": 179.7
+          },
+          "unlimited": {
+            "low": 0.35,
+            "mid": 1.5,
+            "high": 96.95,
+            "market": 1.6,
+            "directLow": 1.97
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-33",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.45,
+          "lowPrice": 0.02,
+          "trendPrice": 0.97,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.48,
+          "avg7": 0.62,
+          "avg30": 1.15,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-34",
+      "name": {
+        "en": "Octillery",
+        "ja": "Octillery",
+        "zh-TW": "Octillery"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "34",
+      "artist": "Tomokazu Komiya",
+      "image": "https://images.pokemontcg.io/neo3/34_hires.png",
+      "attacks": [
+        {
+          "name": "Constrict",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        },
+        {
+          "name": "Octazooka",
+          "cost": [
+            "Water",
+            "Water",
+            "Water"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "40",
+          "text": "Flip a coin. If heads, whenever the Defending Pokémon attacks, your opponent flips a coin. If tails, that attack does nothing. (Benching or evolving that Pokémon ends this effect.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-34",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 3.04,
+            "mid": 8,
+            "high": 59.9,
+            "market": 4.69,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.99,
+            "mid": 1.9,
+            "high": 22.25,
+            "market": 2.25,
+            "directLow": 1.95
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-34",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.89,
+          "lowPrice": 0.09,
+          "trendPrice": 1.65,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.4,
+          "avg1": 1.7,
+          "avg7": 1.42,
+          "avg30": 1.69,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-35",
+      "name": {
+        "en": "Parasect",
+        "ja": "Parasect",
+        "zh-TW": "Parasect"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "35",
+      "artist": "Atsuko Nishida",
+      "image": "https://images.pokemontcg.io/neo3/35_hires.png",
+      "attacks": [
+        {
+          "name": "Sleep Pinchers",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Asleep."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Allergic Pollen",
+          "text": "As long as Parasect is in play, cards in any player's discard piles are not affected by attacks or Pokémon Powers. This power stops working if Parasect becomes Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-35",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.67,
+            "mid": 3.49,
+            "high": 33.1,
+            "market": 2.4,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.31,
+            "mid": 0.99,
+            "high": 27831.64,
+            "market": 1.25,
+            "directLow": 1.44
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-35",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 0.85,
+          "lowPrice": 0.05,
+          "trendPrice": 1.46,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.19,
+          "avg1": 0.98,
+          "avg7": 2.62,
+          "avg30": 1.42,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-36",
+      "name": {
+        "en": "Piloswine",
+        "ja": "Piloswine",
+        "zh-TW": "Piloswine"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "36",
+      "artist": "Atsuko Nishida",
+      "image": "https://images.pokemontcg.io/neo3/36_hires.png",
+      "attacks": [
+        {
+          "name": "Nap",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Remove 3 damage counters from Piloswine. If it has fewer damage counters than that, remove all of them."
+        },
+        {
+          "name": "High-Speed Charge",
+          "cost": [
+            "Fighting",
+            "Fighting",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "80",
+          "text": "Piloswine does 30 damage to itself. Piloswine can't use this attack during your next turn."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Lightning",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-36",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.52,
+            "mid": 2.57,
+            "high": 33.1,
+            "market": 2.44,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.35,
+            "mid": 1,
+            "high": 19.98,
+            "market": 1.27,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-36",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.16,
+          "lowPrice": 0.05,
+          "trendPrice": 1.09,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.1,
+          "avg1": 1.1,
+          "avg7": 1.07,
+          "avg30": 1.15,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-37",
+      "name": {
+        "en": "Seaking",
+        "ja": "Seaking",
+        "zh-TW": "Seaking"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "37",
+      "artist": "Miki Tanaka",
+      "image": "https://images.pokemontcg.io/neo3/37_hires.png",
+      "attacks": [
+        {
+          "name": "Rising Lunge",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10+",
+          "text": "Flip a coin. If heads, this attack does 10 damage plus 10 more damage. If tails, this attack does 10 damage."
+        },
+        {
+          "name": "Horn Swipe",
+          "cost": [
+            "Water",
+            "Water"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20+",
+          "text": "Flip 2 coins. If both are heads, this attack does 20 damage plus 40 more damage. If 1 or both of them are tails, this attack does 20 damage."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-37",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.55,
+            "mid": 2.49,
+            "high": 31.7,
+            "market": 2.21,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.59,
+            "mid": 1.06,
+            "high": 22.49,
+            "market": 2.49,
+            "directLow": 0.75
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-37",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 0.93,
+          "lowPrice": 0.02,
+          "trendPrice": 1.01,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.2,
+          "avg1": 0.96,
+          "avg7": 0.91,
+          "avg30": 0.96,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-38",
+      "name": {
+        "en": "Stantler",
+        "ja": "Stantler",
+        "zh-TW": "Stantler"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "38",
+      "artist": "Yukiko Baba",
+      "image": "https://images.pokemontcg.io/neo3/38_hires.png",
+      "attacks": [
+        {
+          "name": "Terrorize",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "If the Defending Pokémon is a Basic Pokémon, choose 1 of its attacks. That Pokémon can't use that attack during your opponent's next turn."
+        },
+        {
+          "name": "Overhead Toss",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "If you have any Benched Pokémon, flip a coin. If tails, this attack does 10 damage to 1 of them. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-38",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1,
+            "mid": 3.47,
+            "high": 32.1,
+            "market": 1.99,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.52,
+            "mid": 0.99,
+            "high": 19.74,
+            "market": 1.02,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-38",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 0.69,
+          "lowPrice": 0.1,
+          "trendPrice": 0.72,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.19,
+          "avg1": 0.2,
+          "avg7": 0.99,
+          "avg30": 0.74,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-39",
+      "name": {
+        "en": "Unown [B]",
+        "ja": "Unown [B]",
+        "zh-TW": "Unown [B]"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "39",
+      "artist": "CR CG gangs",
+      "image": "https://images.pokemontcg.io/neo3/39_hires.png",
+      "attacks": [
+        {
+          "name": "Hidden Power",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        }
+      ],
+      "abilities": [
+        {
+          "name": "[Bear]",
+          "text": "Once during your turn (before your attack), you may move 1 damage counter from 1 of your Pokémon with Unown in its name to Unown [B]. This power can't be used if Unown [B] has 10 HP left. This power can be used even if Unown [B] is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-39",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.99,
+            "mid": 4.99,
+            "high": 62.5,
+            "market": 2.94,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.75,
+            "mid": 1.48,
+            "high": 111.47,
+            "market": 1.62,
+            "directLow": 1.49
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-39",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.18,
+          "lowPrice": 0.05,
+          "trendPrice": 1.4,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.45,
+          "avg7": 1.1,
+          "avg30": 1.17,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-40",
+      "name": {
+        "en": "Unown [Y]",
+        "ja": "Unown [Y]",
+        "zh-TW": "Unown [Y]"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "40",
+      "artist": "CR CG gangs",
+      "image": "https://images.pokemontcg.io/neo3/40_hires.png",
+      "attacks": [
+        {
+          "name": "Hidden Power",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        }
+      ],
+      "abilities": [
+        {
+          "name": "[Yield]",
+          "text": "Once during your turn (before your attack), you may flip a coin. If heads, search your deck for a Psychic Energy card and attach it to 1 of your Pokémon with Unown in its name. Shuffle your deck afterward. This power can be used even if Unown [Y] is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-40",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 2.3,
+            "mid": 3.99,
+            "high": 44.27,
+            "market": 3,
+            "directLow": 2.99
+          },
+          "unlimited": {
+            "low": 0.56,
+            "mid": 1.73,
+            "high": 96.88,
+            "market": 1.84,
+            "directLow": 1.08
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-40",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.07,
+          "lowPrice": 0.1,
+          "trendPrice": 0.87,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.4,
+          "avg7": 0.93,
+          "avg30": 1.04,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-41",
+      "name": {
+        "en": "Aipom",
+        "ja": "Aipom",
+        "zh-TW": "Aipom"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "41",
+      "artist": "Sumiyoshi Kizuki",
+      "image": "https://images.pokemontcg.io/neo3/41_hires.png",
+      "attacks": [
+        {
+          "name": "Grab",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Choose a Trainer card attached to 1 of your opponent's Pokémon. Your opponent shuffles that card into his or her deck."
+        },
+        {
+          "name": "Tail Punch",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-41",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.99,
+            "mid": 2,
+            "high": 25.1,
+            "market": 1.92,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.35,
+            "mid": 0.6,
+            "high": 20.81,
+            "market": 0.82,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-41",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 0.81,
+          "lowPrice": 0.02,
+          "trendPrice": 0.79,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.09,
+          "avg1": 0.37,
+          "avg7": 0.7,
+          "avg30": 0.76,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-42",
+      "name": {
+        "en": "Chinchou",
+        "ja": "Chinchou",
+        "zh-TW": "Chinchou"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "42",
+      "artist": "Atsuko Nishida",
+      "image": "https://images.pokemontcg.io/neo3/42_hires.png",
+      "attacks": [
+        {
+          "name": "Positive Ion",
+          "cost": [
+            "Lightning"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10+",
+          "text": "Flip a coin. If heads, this attack does 10 damage plus 10 more damage. If tails, this attack does 10 damage."
+        },
+        {
+          "name": "Negative Ion",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "If the Defending Pokémon attacks Chinchou during your opponent's next turn, any damage done to Chinchou is reduced by 10 (before applying Weakness and Resistance). (Benching or evolving either Pokémon ends this effect.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-42",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.96,
+            "mid": 1.97,
+            "high": 25.8,
+            "market": 1.43,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.5,
+            "high": 50,
+            "market": 0.47,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-42",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 0.4,
+          "lowPrice": 0.02,
+          "trendPrice": 0.45,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.03,
+          "avg1": 0.3,
+          "avg7": 0.44,
+          "avg30": 0.42,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-43",
+      "name": {
+        "en": "Farfetch'd",
+        "ja": "Farfetch'd",
+        "zh-TW": "Farfetch'd"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "43",
+      "artist": "Miki Tanaka",
+      "image": "https://images.pokemontcg.io/neo3/43_hires.png",
+      "attacks": [
+        {
+          "name": "Gust",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Leek Jab",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "40",
+          "text": "This attack can't be used during your next turn. (Benching Farfetch'd ends this effect.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-43",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.25,
+            "mid": 1.85,
+            "high": 30.7,
+            "market": 2.06,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.54,
+            "high": 23,
+            "market": 0.55,
+            "directLow": 0.41
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-43",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.7,
+          "lowPrice": 0.02,
+          "trendPrice": 0.7,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.05,
+          "avg1": 0.3,
+          "avg7": 0.61,
+          "avg30": 0.69,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-44",
+      "name": {
+        "en": "Geodude",
+        "ja": "Geodude",
+        "zh-TW": "Geodude"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "44",
+      "artist": "Masako Yamashita",
+      "image": "https://images.pokemontcg.io/neo3/44_hires.png",
+      "attacks": [
+        {
+          "name": "Knuckle Punch",
+          "cost": [
+            "Fighting"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "20",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-44",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.95,
+            "mid": 1.94,
+            "high": 25.6,
+            "market": 1.58,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.5,
+            "high": 23,
+            "market": 0.51,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-44",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.69,
+          "lowPrice": 0.02,
+          "trendPrice": 0.91,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.09,
+          "avg1": 2.82,
+          "avg7": 1.65,
+          "avg30": 0.93,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-45",
+      "name": {
+        "en": "Goldeen",
+        "ja": "Goldeen",
+        "zh-TW": "Goldeen"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "45",
+      "artist": "Yuka Morii",
+      "image": "https://images.pokemontcg.io/neo3/45_hires.png",
+      "attacks": [
+        {
+          "name": "Fin Smack",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10×",
+          "text": "Flip 2 coins. This attack does 10 damage times the number of heads."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-45",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.75,
+            "mid": 3,
+            "high": 38,
+            "market": 2.78,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.45,
+            "mid": 1.32,
+            "high": 23,
+            "market": 1.32,
+            "directLow": 2.54
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-45",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.63,
+          "lowPrice": 0.02,
+          "trendPrice": 1.25,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.28,
+          "avg7": 1.31,
+          "avg30": 0.86,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-46",
+      "name": {
+        "en": "Murkrow",
+        "ja": "Murkrow",
+        "zh-TW": "Murkrow"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Darkness",
+          "ja": "悪",
+          "zh-TW": "惡"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "46",
+      "artist": "Hironobu Yoshida",
+      "image": "https://images.pokemontcg.io/neo3/46_hires.png",
+      "attacks": [
+        {
+          "name": "Call for Family",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Search your deck for a Basic Pokémon card named Murkrow and put it onto your Bench. Shuffle your deck afterward. (You can't use this attack if your Bench is full.)"
+        },
+        {
+          "name": "Flock Attack",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Flip a number of coins equal to the number of Murkrows on your Bench. This attack does 10 damage plus 10 more damage for each heads."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-46",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.47,
+            "mid": 4.31,
+            "high": 39.8,
+            "market": 2.16,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.22,
+            "mid": 0.72,
+            "high": 501.5,
+            "market": 0.73,
+            "directLow": 0.5
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-46",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.82,
+          "lowPrice": 0.02,
+          "trendPrice": 1.31,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.25,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.88,
+          "avg7": 0.76,
+          "avg30": 0.8,
+          "reverseHoloAvg1": 0.25,
+          "reverseHoloAvg7": 0.25,
+          "reverseHoloAvg30": 0.25
+        }
+      }
+    },
+    {
+      "id": "neo3-47",
+      "name": {
+        "en": "Paras",
+        "ja": "Paras",
+        "zh-TW": "Paras"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "47",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/neo3/47_hires.png",
+      "attacks": [
+        {
+          "name": "Sleep Spore",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Asleep."
+        },
+        {
+          "name": "Scratch",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-47",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.19,
+            "mid": 2.36,
+            "high": 31.4,
+            "market": 2.13,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.3,
+            "mid": 0.63,
+            "high": 23,
+            "market": 0.63,
+            "directLow": 0.38
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-47",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.52,
+          "lowPrice": 0.02,
+          "trendPrice": 0.32,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.27,
+          "avg7": 0.34,
+          "avg30": 0.48,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-48",
+      "name": {
+        "en": "Quagsire",
+        "ja": "Quagsire",
+        "zh-TW": "Quagsire"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "48",
+      "artist": "Yuka Morii",
+      "image": "https://images.pokemontcg.io/neo3/48_hires.png",
+      "attacks": [
+        {
+          "name": "Mud Slap",
+          "cost": [
+            "Fighting",
+            "Fighting"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": ""
+        },
+        {
+          "name": "Whirlpool",
+          "cost": [
+            "Water",
+            "Water",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "40",
+          "text": "If the Defending Pokémon has any Energy cards attached to it, choose 1 of them and discard it."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Lightning",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-48",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 3.33,
+            "mid": 24.99,
+            "high": 57.44,
+            "market": 4.71,
+            "directLow": 24.99
+          },
+          "unlimited": {
+            "low": 1.31,
+            "mid": 2.35,
+            "high": 501.5,
+            "market": 2.44,
+            "directLow": 1.74
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-48",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.79,
+          "lowPrice": 0.02,
+          "trendPrice": 0.96,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.05,
+          "avg1": 0.4,
+          "avg7": 1.41,
+          "avg30": 0.94,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-49",
+      "name": {
+        "en": "Qwilfish",
+        "ja": "Qwilfish",
+        "zh-TW": "Qwilfish"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "49",
+      "artist": "Sumiyoshi Kizuki",
+      "image": "https://images.pokemontcg.io/neo3/49_hires.png",
+      "attacks": [
+        {
+          "name": "Poison Sting",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Poisoned."
+        },
+        {
+          "name": "Needle Storm",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20×",
+          "text": "Flip a coin until you get tails. This attack does 20 damage times the number of heads you get."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-49",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.2,
+            "mid": 3.14,
+            "high": 33,
+            "market": 1.57,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.68,
+            "high": 20.69,
+            "market": 0.68,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-49",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.62,
+          "lowPrice": 0.02,
+          "trendPrice": 0.5,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.05,
+          "avg1": 0.24,
+          "avg7": 0.39,
+          "avg30": 0.56,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-50",
+      "name": {
+        "en": "Remoraid",
+        "ja": "Remoraid",
+        "zh-TW": "Remoraid"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "50",
+      "artist": "Miki Tanaka",
+      "image": "https://images.pokemontcg.io/neo3/50_hires.png",
+      "attacks": [
+        {
+          "name": "Sharpshooting",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip a coin. If heads, choose 1 of your opponent's Pokémon. This attack does 20 damage to that Pokémon. Don't apply Weakness and Resistance."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-50",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.99,
+            "mid": 1.68,
+            "high": 26.2,
+            "market": 1.53,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.57,
+            "high": 20.69,
+            "market": 0.71,
+            "directLow": 0.35
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-50",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.82,
+          "lowPrice": 0.02,
+          "trendPrice": 0.5,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.08,
+          "avg1": 0.46,
+          "avg7": 0.61,
+          "avg30": 0.82,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-51",
+      "name": {
+        "en": "Shuckle",
+        "ja": "Shuckle",
+        "zh-TW": "Shuckle"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "51",
+      "artist": "Yuka Morii",
+      "image": "https://images.pokemontcg.io/neo3/51_hires.png",
+      "attacks": [
+        {
+          "name": "Toxic Saliva",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Poisoned. It now takes 20 Poison damage instead of 10 after each player's turn (even if it was already Poisoned)."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Hard Shell",
+          "text": "Whenever an attack (including your own) does 40 or less damage to Shuckle (after applying Weakness and Resistance), reduce that damage to 10. (Any other effects of attacks still happen.) This power stops working while Shuckle is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-51",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 13.45,
+            "mid": 16.34,
+            "high": 113.1,
+            "market": 9.1,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.48,
+            "mid": 2.31,
+            "high": 33.06,
+            "market": 2.68,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-51",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.83,
+          "lowPrice": 0.02,
+          "trendPrice": 1.74,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.05,
+          "avg1": 0.51,
+          "avg7": 0.82,
+          "avg30": 0.83,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-52",
+      "name": {
+        "en": "Skiploom",
+        "ja": "Skiploom",
+        "zh-TW": "Skiploom"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "52",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/neo3/52_hires.png",
+      "attacks": [
+        {
+          "name": "Hop",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "20",
+          "text": ""
+        },
+        {
+          "name": "Mysterious Powder",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Confused."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-52",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.7,
+            "mid": 2.95,
+            "high": 39.99,
+            "market": 2.88,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.75,
+            "high": 501.5,
+            "market": 0.69,
+            "directLow": 0.47
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-52",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 1.59,
+          "lowPrice": 0.02,
+          "trendPrice": 1.22,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.04,
+          "avg1": 0.4,
+          "avg7": 0.5,
+          "avg30": 1.41,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-53",
+      "name": {
+        "en": "Slugma",
+        "ja": "Slugma",
+        "zh-TW": "Slugma"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fire",
+          "ja": "炎",
+          "zh-TW": "火"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "53",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/neo3/53_hires.png",
+      "attacks": [
+        {
+          "name": "Flare",
+          "cost": [
+            "Fire"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Magma Ring",
+          "cost": [
+            "Fire",
+            "Fire"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "The Defending Pokémon can't retreat during your opponent's next turn."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-53",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1,
+            "mid": 1.53,
+            "high": 19.98,
+            "market": 1.56,
+            "directLow": 1.97
+          },
+          "unlimited": {
+            "low": 0.28,
+            "mid": 0.59,
+            "high": 501.5,
+            "market": 0.64,
+            "directLow": 0.66
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-53",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.81,
+          "lowPrice": 0.02,
+          "trendPrice": 0.61,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.28,
+          "avg7": 0.57,
+          "avg30": 0.87,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-54",
+      "name": {
+        "en": "Smoochum",
+        "ja": "Smoochum",
+        "zh-TW": "Smoochum"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Baby"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "30",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "54",
+      "artist": "Atsuko Nishida",
+      "image": "https://images.pokemontcg.io/neo3/54_hires.png",
+      "attacks": [
+        {
+          "name": "Psykiss",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip a coin. If heads, choose a Special Energy card attached to 1 of your opponent's Pokémon. Your opponent shuffles that card into his or her deck."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-54",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1,
+            "mid": 2.75,
+            "high": 96.79,
+            "market": 2.34,
+            "directLow": 96.78
+          },
+          "unlimited": {
+            "low": 0.39,
+            "mid": 1.19,
+            "high": 501.5,
+            "market": 1.29,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-54",
+        "updatedAt": "2026/03/08",
+        "prices": {
+          "averageSellPrice": 0.62,
+          "lowPrice": 0.02,
+          "trendPrice": 3.71,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.08,
+          "avg1": 0.43,
+          "avg7": 1.41,
+          "avg30": 1.73,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-55",
+      "name": {
+        "en": "Snubbull",
+        "ja": "Snubbull",
+        "zh-TW": "Snubbull"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "55",
+      "artist": "Tomokazu Komiya",
+      "image": "https://images.pokemontcg.io/neo3/55_hires.png",
+      "attacks": [
+        {
+          "name": "Bite",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Raging Headbutt",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Flip a coin. If heads, this attack does 10 damage plus 10 damage times the number of damage counters on Snubbull. If tails, this attack does 10 damage."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-55",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.9,
+            "mid": 2.8,
+            "high": 37.62,
+            "market": 2.53,
+            "directLow": 37.62
+          },
+          "unlimited": {
+            "low": 0.27,
+            "mid": 0.8,
+            "high": 20.8,
+            "market": 0.8,
+            "directLow": 0.43
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-55",
+        "updatedAt": "2026/03/08",
+        "prices": {
+          "averageSellPrice": 0.79,
+          "lowPrice": 0.02,
+          "trendPrice": 0.66,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.05,
+          "avg1": 0.29,
+          "avg7": 0.66,
+          "avg30": 0.73,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-56",
+      "name": {
+        "en": "Staryu",
+        "ja": "Staryu",
+        "zh-TW": "Staryu"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "56",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/neo3/56_hires.png",
+      "attacks": [
+        {
+          "name": "Tackle",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Bubblebeam",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-56",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1,
+            "mid": 2.99,
+            "high": 35.1,
+            "market": 2.05,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.55,
+            "high": 20.49,
+            "market": 0.72,
+            "directLow": 0.36
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-56",
+        "updatedAt": "2026/03/08",
+        "prices": {
+          "averageSellPrice": 0.43,
+          "lowPrice": 0.02,
+          "trendPrice": 0.44,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.05,
+          "avg1": 0.43,
+          "avg7": 0.39,
+          "avg30": 0.46,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-57",
+      "name": {
+        "en": "Swinub",
+        "ja": "Swinub",
+        "zh-TW": "Swinub"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "57",
+      "artist": "Miki Tanaka",
+      "image": "https://images.pokemontcg.io/neo3/57_hires.png",
+      "attacks": [
+        {
+          "name": "Tackle",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Take Down",
+          "cost": [
+            "Fighting",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": "Swinub does 10 damage to itself."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Lightning",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-57",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.12,
+            "mid": 1.96,
+            "high": 19.98,
+            "market": 1.78,
+            "directLow": 1.97
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.53,
+            "high": 19.98,
+            "market": 0.6,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-57",
+        "updatedAt": "2026/03/08",
+        "prices": {
+          "averageSellPrice": 0.37,
+          "lowPrice": 0.02,
+          "trendPrice": 0.42,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.08,
+          "avg1": 0.14,
+          "avg7": 0.4,
+          "avg30": 0.4,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-58",
+      "name": {
+        "en": "Unown [K]",
+        "ja": "Unown [K]",
+        "zh-TW": "Unown [K]"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "58",
+      "artist": "CR CG gangs",
+      "image": "https://images.pokemontcg.io/neo3/58_hires.png",
+      "attacks": [
+        {
+          "name": "Hidden Power",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        }
+      ],
+      "abilities": [
+        {
+          "name": "[Keep]",
+          "text": "Your opponent's attacks, Pokémon Powers, and Trainer cards can't discard Energy cards from your Pokémon with Unown in their names. (Any other effects still happen.)",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-58",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.2,
+            "mid": 2.25,
+            "high": 28.04,
+            "market": 2.27,
+            "directLow": 19.93
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.65,
+            "high": 20.7,
+            "market": 0.7,
+            "directLow": 0.4
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-58",
+        "updatedAt": "2026/03/08",
+        "prices": {
+          "averageSellPrice": 0.59,
+          "lowPrice": 0.02,
+          "trendPrice": 0.57,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.05,
+          "avg1": 0.25,
+          "avg7": 0.63,
+          "avg30": 0.61,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-59",
+      "name": {
+        "en": "Zubat",
+        "ja": "Zubat",
+        "zh-TW": "Zubat"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "59",
+      "artist": "Yukiko Baba",
+      "image": "https://images.pokemontcg.io/neo3/59_hires.png",
+      "attacks": [
+        {
+          "name": "Bite",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Poison Spray",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "The Defending Pokémon is now Poisoned."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-59",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.2,
+            "mid": 2.51,
+            "high": 33.9,
+            "market": 2.18,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.55,
+            "high": 23,
+            "market": 0.55,
+            "directLow": 0.58
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-59",
+        "updatedAt": "2026/03/08",
+        "prices": {
+          "averageSellPrice": 0.55,
+          "lowPrice": 0.02,
+          "trendPrice": 0.52,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.16,
+          "avg7": 0.45,
+          "avg30": 0.45,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-60",
+      "name": {
+        "en": "Balloon Berry",
+        "ja": "Balloon Berry",
+        "zh-TW": "Balloon Berry"
+      },
+      "supertype": {
+        "en": "Trainer",
+        "ja": "トレーナー",
+        "zh-TW": "訓練家"
+      },
+      "subtypes": [
+        "Pokémon Tool"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "60",
+      "artist": "Keiji Kinebuchi",
+      "image": "https://images.pokemontcg.io/neo3/60_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-60",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.5,
+            "mid": 1.02,
+            "high": 19.98,
+            "market": 1.03,
+            "directLow": 0.93
+          },
+          "unlimited": {
+            "low": 0.2,
+            "mid": 0.67,
+            "high": 20.51,
+            "market": 0.67,
+            "directLow": 0.4
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-60",
+        "updatedAt": "2026/03/07",
+        "prices": {
+          "averageSellPrice": 0.6,
+          "lowPrice": 0.02,
+          "trendPrice": 0.45,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.02,
+          "avg1": 1,
+          "avg7": 0.46,
+          "avg30": 0.58,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-61",
+      "name": {
+        "en": "Healing Field",
+        "ja": "Healing Field",
+        "zh-TW": "Healing Field"
+      },
+      "supertype": {
+        "en": "Trainer",
+        "ja": "トレーナー",
+        "zh-TW": "訓練家"
+      },
+      "subtypes": [
+        "Stadium"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "61",
+      "artist": "Keiji Kinebuchi",
+      "image": "https://images.pokemontcg.io/neo3/61_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-61",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.72,
+            "mid": 1.49,
+            "high": 19.98,
+            "market": 1.28,
+            "directLow": 3.97
+          },
+          "unlimited": {
+            "low": 0.45,
+            "mid": 0.78,
+            "high": 19.98,
+            "market": 0.78,
+            "directLow": 0.58
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-61",
+        "updatedAt": "2026/03/07",
+        "prices": {
+          "averageSellPrice": 0.73,
+          "lowPrice": 0.03,
+          "trendPrice": 0.75,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.2,
+          "avg1": 1.95,
+          "avg7": 0.81,
+          "avg30": 0.78,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-62",
+      "name": {
+        "en": "Pokémon Breeder Fields",
+        "ja": "Pokémon Breeder Fields",
+        "zh-TW": "Pokémon Breeder Fields"
+      },
+      "supertype": {
+        "en": "Trainer",
+        "ja": "トレーナー",
+        "zh-TW": "訓練家"
+      },
+      "subtypes": [],
+      "types": [],
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "62",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/neo3/62_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-62",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.24,
+            "mid": 23,
+            "high": 242.7,
+            "market": 7.62,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.88,
+            "mid": 2.1,
+            "high": 43.07,
+            "market": 1.18,
+            "directLow": 1.22
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-62",
+        "updatedAt": "2026/03/07",
+        "prices": {
+          "averageSellPrice": 0.91,
+          "lowPrice": 0.03,
+          "trendPrice": 2.74,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.1,
+          "avg1": 1.5,
+          "avg7": 3.1,
+          "avg30": 1.41,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-63",
+      "name": {
+        "en": "Rocket's Hideout",
+        "ja": "Rocket's Hideout",
+        "zh-TW": "Rocket's Hideout"
+      },
+      "supertype": {
+        "en": "Trainer",
+        "ja": "トレーナー",
+        "zh-TW": "訓練家"
+      },
+      "subtypes": [
+        "Stadium"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "63",
+      "artist": "Keiji Kinebuchi",
+      "image": "https://images.pokemontcg.io/neo3/63_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-63",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 34.99,
+            "mid": 124.9,
+            "high": 2500,
+            "market": 27.82,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 2.32,
+            "mid": 5.16,
+            "high": 319.49,
+            "market": 6.14,
+            "directLow": 18.93
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-63",
+        "updatedAt": "2026/03/07",
+        "prices": {
+          "averageSellPrice": 3.18,
+          "lowPrice": 0.03,
+          "trendPrice": 2.69,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.4,
+          "avg1": 1.49,
+          "avg7": 2.02,
+          "avg30": 2.83,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-64",
+      "name": {
+        "en": "Old Rod",
+        "ja": "Old Rod",
+        "zh-TW": "Old Rod"
+      },
+      "supertype": {
+        "en": "Trainer",
+        "ja": "トレーナー",
+        "zh-TW": "訓練家"
+      },
+      "subtypes": [],
+      "types": [],
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "64",
+      "artist": "Keiji Kinebuchi",
+      "image": "https://images.pokemontcg.io/neo3/64_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-64",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.3,
+            "mid": 0.74,
+            "high": 4.99,
+            "market": 0.88,
+            "directLow": 0.45
+          },
+          "unlimited": {
+            "low": 0.2,
+            "mid": 0.36,
+            "high": 501.5,
+            "market": 0.36,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-64",
+        "updatedAt": "2026/03/07",
+        "prices": {
+          "averageSellPrice": 0.27,
+          "lowPrice": 0.02,
+          "trendPrice": 0.33,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.04,
+          "avg1": 0.71,
+          "avg7": 0.31,
+          "avg30": 0.28,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "neo3-65",
+      "name": {
+        "en": "Shining Gyarados",
+        "ja": "Shining Gyarados",
+        "zh-TW": "Shining Gyarados"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "100",
+      "rarity": {
+        "en": "Rare Shining",
+        "ja": "Rare Shining",
+        "zh-TW": "Rare Shining"
+      },
+      "number": "65",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/neo3/65_hires.png",
+      "attacks": [
+        {
+          "name": "Outrage",
+          "cost": [
+            "Water",
+            "Fighting",
+            "Fighting"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30+",
+          "text": "Flip a coin. If heads, this attack does 30 damage plus 10 more damage for each damage counter on Shining Gyarados. If tails, this attack does nothing."
+        },
+        {
+          "name": "Devastate",
+          "cost": [
+            "Water",
+            "Water",
+            "Fire",
+            "Fire"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "50",
+          "text": "Discard 2 Fire Energy cards attached to Shining Gyarados or this attack does nothing. This attack does 10 damage to each of your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.) Then, flip a coin. If heads, choose 1 Energy card attached to each of your opponent's Pokémon that has any Energy cards attached to it and discard those Energy cards."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-65",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "unlimitedHolofoil": {
+            "low": 1110.69,
+            "mid": 1680.34,
+            "high": 2249.99,
+            "market": 532.81,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-65",
+        "updatedAt": "2026/02/19",
+        "prices": {
+          "averageSellPrice": 690.35,
+          "lowPrice": 100,
+          "trendPrice": 557.37,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 73.71,
+          "lowPriceExPlus": 499.99,
+          "avg1": 2040,
+          "avg7": 841.74,
+          "avg30": 598.64,
+          "reverseHoloAvg1": 85,
+          "reverseHoloAvg7": 100.95,
+          "reverseHoloAvg30": 110.06
+        }
+      }
+    },
+    {
+      "id": "neo3-66",
+      "name": {
+        "en": "Shining Magikarp",
+        "ja": "Shining Magikarp",
+        "zh-TW": "Shining Magikarp"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "30",
+      "rarity": {
+        "en": "Rare Shining",
+        "ja": "Rare Shining",
+        "zh-TW": "Rare Shining"
+      },
+      "number": "66",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/neo3/66_hires.png",
+      "attacks": [
+        {
+          "name": "Gold Scale",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Your opponent may draw 2 cards. Either way, you may draw 2 cards."
+        },
+        {
+          "name": "Dragon Bond",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Search your deck for a card named Gyarados, Dark Gyarados, or Shining Gyarados. Show it to your opponent and put it into your hand. Shuffle your deck afterward."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/neo3-66",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "unlimitedHolofoil": {
+            "low": 328.67,
+            "mid": 439.99,
+            "high": 475,
+            "market": 441.82,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/neo3-66",
+        "updatedAt": "2026/02/19",
+        "prices": {
+          "averageSellPrice": 350.89,
+          "lowPrice": 79.95,
+          "trendPrice": 343.56,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 85.59,
+          "lowPriceExPlus": 220,
+          "avg1": 247.5,
+          "avg7": 302.99,
+          "avg30": 281.86,
+          "reverseHoloAvg1": 55,
+          "reverseHoloAvg7": 120.9,
+          "reverseHoloAvg30": 126.4
+        }
+      }
+    }
+  ]
+}

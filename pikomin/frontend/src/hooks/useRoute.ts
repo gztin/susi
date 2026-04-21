@@ -39,6 +39,7 @@ export function useRoute(deviceId: string | null, initialPosition?: GPSCoordinat
   pauseRoute: () => Promise<void>
   resumeRoute: () => Promise<void>
   stopRoute: () => Promise<void>
+  resetLocation: () => Promise<void>
   joystickMove: (vector: MoveVector, speed: number) => Promise<void>
 } {
   const [waypoints, setWaypoints] = useState<GPSCoordinate[]>([])
@@ -135,6 +136,15 @@ export function useRoute(deviceId: string | null, initialPosition?: GPSCoordinat
     setRouteStatus((prev) => ({ ...prev, state: 'idle', progress: 0 }))
   }, [])
 
+  // Reset GPS location
+  const resetLocation = useCallback(async () => {
+    if (!deviceId) throw new Error('No device selected')
+    await apiClient.resetLocation(deviceId)
+    // 清除當前位置狀態，讓用戶可以重新設定
+    setRouteStatus((prev) => ({ ...prev, currentPosition: null, state: 'idle', progress: 0 }))
+    currentPositionRef.current = null
+  }, [deviceId])
+
   // Joystick control: calculate new coordinate from bearing + speed and push to backend
   const joystickMove = useCallback(
     async (vector: MoveVector, speed: number) => {
@@ -168,6 +178,7 @@ export function useRoute(deviceId: string | null, initialPosition?: GPSCoordinat
     pauseRoute,
     resumeRoute,
     stopRoute,
+    resetLocation,
     joystickMove,
   }
 }

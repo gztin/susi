@@ -2,8 +2,8 @@
 const API_BASE = '/api';
 
 // 語言設定
-let currentLang = 'en'; // 預設英文
-const LANG_OPTIONS = { 'en': 'English', 'ja': '日本語' };
+let currentLang = 'zh-TW'; // 預設繁體中文
+const LANG_OPTIONS = { 'zh-TW': '繁體中文', 'en': 'English', 'ja': '日本語' };
 
 // 快取資料
 let pokemonCache = new Map();
@@ -135,22 +135,34 @@ function getPokemonName(name) {
 function changeLang(newLang) {
   if (currentLang === newLang) return;
   
+  console.log(`切換語言: ${currentLang} -> ${newLang}`);
   currentLang = newLang;
+  
+  // 更新下拉選單的選中狀態
+  document.getElementById('langSelect').value = newLang;
   
   // 清除快取，重新載入資料
   pokemonCache.clear();
   setCache.clear();
   
-  // 重新渲染目前畫面
+  // 立即重新渲染目前畫面
   if (!currentSetId) {
-    loadSets().then(() => renderSets(currentPage));
+    // 如果在首頁，重新載入系列和人氣卡片
+    console.log('重新載入首頁內容...');
+    loadSets().then(() => {
+      renderSets(currentPage);
+      fetchPopularCards();
+    });
   } else {
+    // 如果在系列頁面，重新載入該系列的卡片
+    console.log(`重新載入系列 ${currentSetName} 的卡片...`);
     fetchCardsForDisplay(1);
   }
   
-  // 若 modal 開著也更新
+  // 如果 modal 開著也更新
   const overlay = document.getElementById('modalOverlay');
   if (overlay.classList.contains('open') && lastModalCard) {
+    console.log('更新 Modal 內容...');
     openModal(lastModalCard.id);
   }
 }
@@ -249,7 +261,7 @@ function selectSet(id, name) {
 async function fetchSetsForDisplay(page = 1) {
   document.getElementById('popularSection').style.display = 'block';
   renderSets(page);
-  document.getElementById('status').textContent = `共 ${allSets.length} 個系列，第 ${currentPage} 頁`;
+  document.getElementById('status').textContent = `共 ${allSets.length} 個系列，第 ${currentPage} 頁 (${LANG_OPTIONS[currentLang]})`;
 }
 
 // ---- 搜尋 ----
@@ -269,7 +281,7 @@ async function fetchCardsForDisplay(page = 1) {
   renderBreadcrumb();
 
   grid.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
-  status.textContent = '載入中...';
+  status.textContent = `載入中... (${LANG_OPTIONS[currentLang]})`;
 
   const params = new URLSearchParams({
     lang: currentLang,
@@ -297,7 +309,7 @@ async function fetchCardsForDisplay(page = 1) {
     totalCount = data.totalCount;
     renderCards(data.data);
     renderPagination();
-    status.textContent = `找到 ${totalCount.toLocaleString()} 張卡片，第 ${currentPage} 頁`;
+    status.textContent = `找到 ${totalCount.toLocaleString()} 張卡片，第 ${currentPage} 頁 (${LANG_OPTIONS[currentLang]})`;
   } catch (err) {
     grid.innerHTML = '';
     status.textContent = `載入失敗：${err.message}`;
@@ -316,7 +328,6 @@ function renderCards(cards) {
     const types = (card.types || []).map(t => `<span class="tag tag-type">${typeMap[t] || t}</span>`).join('');
     const shortRarity = translateRarity(card.rarity);
     const rarity = card.rarity ? `<span class="tag tag-rarity rarity-${shortRarity.toLowerCase()}">${shortRarity}</span>` : '';
-    const hp = card.hp ? `<span class="tag tag-hp">HP ${card.hp}</span>` : '';
 
     return `
       <div class="card" onclick="openModal('${card.id}')">
@@ -327,7 +338,7 @@ function renderCards(cards) {
         <div class="card-body">
           <div class="card-name">${getPokemonName(card.name)}</div>
           <div class="card-set">${card.set?.name || ''} · ${card.localId || ''}</div>
-          <div class="card-tags">${types}${rarity}${hp}</div>
+          <div class="card-tags">${types}${rarity}</div>
         </div>
       </div>`;
   }).join('');
@@ -462,7 +473,6 @@ function renderModal(card) {
         <p><span class="info-label">系列：</span>${card.set?.name || '—'}</p>
         <p><span class="info-label">編號：</span>${card.localId || '—'} / ${card.set?.cardCount?.total || '—'}</p>
         <p><span class="info-label">稀有度：</span><span class="tag tag-rarity rarity-${shortRarity.toLowerCase()}">${shortRarity}</span></p>
-        <p><span class="info-label">HP：</span>${card.hp || '—'}</p>
       </div>
       
       <div class="market-section">
@@ -560,6 +570,9 @@ function resetSearch() {
 
 // Enter 鍵搜尋
 document.addEventListener('DOMContentLoaded', () => {
+  // 設定語言選擇器的預設值
+  document.getElementById('langSelect').value = currentLang;
+  
   document.getElementById('searchInput').addEventListener('keydown', e => {
     if (e.key === 'Enter') {
       if (!currentSetId) showHome(1);

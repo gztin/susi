@@ -1,0 +1,6924 @@
+{
+  "lastUpdated": "2026-04-13T04:43:28.491Z",
+  "set": {
+    "id": "base2",
+    "name": {
+      "en": "Jungle",
+      "ja": "ポケモンジャングル",
+      "zh-TW": "叢林"
+    },
+    "series": "Base",
+    "releaseDate": "1999/06/16",
+    "cardCount": 64,
+    "logo": "https://images.pokemontcg.io/base2/logo.png",
+    "symbol": "https://images.pokemontcg.io/base2/symbol.png"
+  },
+  "cards": [
+    {
+      "id": "base2-1",
+      "name": {
+        "en": "Clefable",
+        "ja": "Clefable",
+        "zh-TW": "Clefable"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "1",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/1_hires.png",
+      "attacks": [
+        {
+          "name": "Metronome",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Choose 1 of the Defending Pokémon's attacks. Metronome copies that attack except for its Energy costs and anything else required in order to use that attack, such as discarding Energy cards. (No matter what type the Defending Pokémon is, Clefable's type is still Colorless.)"
+        },
+        {
+          "name": "Minimize",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "All damage done by attacks to Clefable during your opponent's next turn is reduced by 20 (after applying Weakness and Resistance)."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-1",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 67.49,
+            "mid": 90.14,
+            "high": 1045.6,
+            "market": 85,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 19.99,
+            "mid": 27.99,
+            "high": 193,
+            "market": 34.4,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-1",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 0,
+          "lowPrice": 600,
+          "trendPrice": 302.31,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 122.22,
+          "lowPriceExPlus": 0,
+          "avg1": 37.5,
+          "avg7": 286.21,
+          "avg30": 195.45,
+          "reverseHoloAvg1": 122.22,
+          "reverseHoloAvg7": 122.22,
+          "reverseHoloAvg30": 122.22
+        }
+      }
+    },
+    {
+      "id": "base2-2",
+      "name": {
+        "en": "Electrode",
+        "ja": "Electrode",
+        "zh-TW": "Electrode"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "2",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/2_hires.png",
+      "attacks": [
+        {
+          "name": "Tackle",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        },
+        {
+          "name": "Chain Lightning",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Lightning"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "20",
+          "text": "If the Defending Pokémon isn't Colorless, this attack does 10 damage to each Benched Pokémon of the same type as the Defending Pokémon (including your own)."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-2",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 33.99,
+            "mid": 65,
+            "high": 639.9,
+            "market": 52.66,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 15,
+            "mid": 22.33,
+            "high": 243.3,
+            "market": 24.96,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-2",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 22.04,
+          "lowPrice": 4.2,
+          "trendPrice": 26.08,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 9.59,
+          "lowPriceExPlus": 12.5,
+          "avg1": 40.37,
+          "avg7": 26.85,
+          "avg30": 22.87,
+          "reverseHoloAvg1": 7.3,
+          "reverseHoloAvg7": 10.05,
+          "reverseHoloAvg30": 11.29
+        }
+      }
+    },
+    {
+      "id": "base2-3",
+      "name": {
+        "en": "Flareon",
+        "ja": "Flareon",
+        "zh-TW": "Flareon"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Fire",
+          "ja": "炎",
+          "zh-TW": "火"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "3",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/3_hires.png",
+      "attacks": [
+        {
+          "name": "Quick Attack",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Flip a coin. If heads, this attack does 10 damage plus 20 more damage; if tails, this attack does 10 damage."
+        },
+        {
+          "name": "Flamethrower",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "60",
+          "text": "Discard 1 Fire Energy card attached to Flareon in order to use this attack."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-3",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 149.99,
+            "mid": 320.13,
+            "high": 949.9,
+            "market": 163.71,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 59.66,
+            "mid": 87.42,
+            "high": 399.91,
+            "market": 85.94,
+            "directLow": 91.7
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-3",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 51.24,
+          "lowPrice": 8,
+          "trendPrice": 63.3,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 24.68,
+          "lowPriceExPlus": 35,
+          "avg1": 56.6,
+          "avg7": 73.14,
+          "avg30": 50.4,
+          "reverseHoloAvg1": 19.99,
+          "reverseHoloAvg7": 31.33,
+          "reverseHoloAvg30": 26.41
+        }
+      }
+    },
+    {
+      "id": "base2-4",
+      "name": {
+        "en": "Jolteon",
+        "ja": "Jolteon",
+        "zh-TW": "Jolteon"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "4",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/4_hires.png",
+      "attacks": [
+        {
+          "name": "Quick Attack",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Flip a coin. If heads, this attack does 10 damage plus 20 more damage; if tails, this attack does 10 damage."
+        },
+        {
+          "name": "Pin Missile",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "20×",
+          "text": "Flip 4 coins. This attack does 20 damage times the number of heads."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-4",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 134.99,
+            "mid": 206.08,
+            "high": 1909.8,
+            "market": 170.9,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 45.99,
+            "mid": 82.99,
+            "high": 149.99,
+            "market": 90.49,
+            "directLow": 149.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-4",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 51.32,
+          "lowPrice": 7.5,
+          "trendPrice": 34.53,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 18.72,
+          "lowPriceExPlus": 28.4,
+          "avg1": 23.95,
+          "avg7": 36.26,
+          "avg30": 43.9,
+          "reverseHoloAvg1": 10.83,
+          "reverseHoloAvg7": 18.81,
+          "reverseHoloAvg30": 19.33
+        }
+      }
+    },
+    {
+      "id": "base2-5",
+      "name": {
+        "en": "Kangaskhan",
+        "ja": "Kangaskhan",
+        "zh-TW": "Kangaskhan"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "5",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/5_hires.png",
+      "attacks": [
+        {
+          "name": "Fetch",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Draw a card."
+        },
+        {
+          "name": "Comet Punch",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "20×",
+          "text": "Flip 4 coins. This attack does 20 damage times the number of heads."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-5",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 40.93,
+            "mid": 62.47,
+            "high": 795.4,
+            "market": 74.96,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 7,
+            "mid": 12.99,
+            "high": 4321,
+            "market": 14.53,
+            "directLow": 290.2
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-5",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 7.61,
+          "lowPrice": 0.2,
+          "trendPrice": 14.37,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 5.73,
+          "lowPriceExPlus": 5,
+          "avg1": 4.82,
+          "avg7": 9.77,
+          "avg30": 7.96,
+          "reverseHoloAvg1": 2.55,
+          "reverseHoloAvg7": 4.5,
+          "reverseHoloAvg30": 5.31
+        }
+      }
+    },
+    {
+      "id": "base2-6",
+      "name": {
+        "en": "Mr. Mime",
+        "ja": "Mr. Mime",
+        "zh-TW": "Mr. Mime"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "6",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/6_hires.png",
+      "attacks": [
+        {
+          "name": "Meditate",
+          "cost": [
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Does 10 damage plus 10 more damage for each damage counter on the Defending Pokémon."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Invisible Wall",
+          "text": "Whenever an attack (including your own) does 30 or more damage to Mr. Mime (after applying Weakness and Resistance), prevent that damage. (Any other effects of attacks still happen.) This power can't be used if Mr. Mime is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-6",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 81.1,
+            "mid": 156.16,
+            "high": 866.63,
+            "market": 85.31,
+            "directLow": 866.63
+          },
+          "unlimitedHolofoil": {
+            "low": 18.59,
+            "mid": 28.01,
+            "high": 9999,
+            "market": 26.59,
+            "directLow": 289.83
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-6",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 25.92,
+          "lowPrice": 2.9,
+          "trendPrice": 17.77,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 11.05,
+          "lowPriceExPlus": 15.5,
+          "avg1": 12.66,
+          "avg7": 27.65,
+          "avg30": 24.73,
+          "reverseHoloAvg1": 10,
+          "reverseHoloAvg7": 11.78,
+          "reverseHoloAvg30": 10.44
+        }
+      }
+    },
+    {
+      "id": "base2-7",
+      "name": {
+        "en": "Nidoqueen",
+        "ja": "Nidoqueen",
+        "zh-TW": "Nidoqueen"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "7",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/7_hires.png",
+      "attacks": [
+        {
+          "name": "Boyfriends",
+          "cost": [
+            "Grass",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20+",
+          "text": "Does 20 damage plus 20 more damage for each Nidoking you have in play."
+        },
+        {
+          "name": "Mega Punch",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "50",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-7",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 69.99,
+            "mid": 117.99,
+            "high": 999.98,
+            "market": 94.35,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 20.72,
+            "mid": 36,
+            "high": 409.73,
+            "market": 39.38,
+            "directLow": 17.09
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-7",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 25.36,
+          "lowPrice": 4.24,
+          "trendPrice": 20.61,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 14.34,
+          "lowPriceExPlus": 20,
+          "avg1": 56.5,
+          "avg7": 34.06,
+          "avg30": 27.26,
+          "reverseHoloAvg1": 3.8,
+          "reverseHoloAvg7": 15.09,
+          "reverseHoloAvg30": 12.68
+        }
+      }
+    },
+    {
+      "id": "base2-8",
+      "name": {
+        "en": "Pidgeot",
+        "ja": "Pidgeot",
+        "zh-TW": "Pidgeot"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "8",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/8_hires.png",
+      "attacks": [
+        {
+          "name": "Wing Attack",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        },
+        {
+          "name": "Hurricane",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "Unless this attack Knocks Out the Defending Pokémon, return the Defending Pokémon and all cards attached to it to your opponent's hand."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-8",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 80.23,
+            "mid": 119.99,
+            "high": 1414.3,
+            "market": 130.88,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 24.99,
+            "mid": 36.61,
+            "high": 268.81,
+            "market": 54.49,
+            "directLow": 39.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-8",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 38.7,
+          "lowPrice": 4.8,
+          "trendPrice": 30.18,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 22.22,
+          "lowPriceExPlus": 23,
+          "avg1": 18.41,
+          "avg7": 32.85,
+          "avg30": 33.62,
+          "reverseHoloAvg1": 10.66,
+          "reverseHoloAvg7": 15.55,
+          "reverseHoloAvg30": 15.09
+        }
+      }
+    },
+    {
+      "id": "base2-9",
+      "name": {
+        "en": "Pinsir",
+        "ja": "Pinsir",
+        "zh-TW": "Pinsir"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "9",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/9_hires.png",
+      "attacks": [
+        {
+          "name": "Irongrip",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        },
+        {
+          "name": "Guillotine",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "50",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-9",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 54.99,
+            "mid": 76.23,
+            "high": 1040,
+            "market": 85.53,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 20.81,
+            "mid": 31.93,
+            "high": 285.58,
+            "market": 32.89,
+            "directLow": 285.58
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-9",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 21.87,
+          "lowPrice": 2.9,
+          "trendPrice": 24.94,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 15.99,
+          "lowPriceExPlus": 15.5,
+          "avg1": 9.16,
+          "avg7": 18.42,
+          "avg30": 20.65,
+          "reverseHoloAvg1": 7.74,
+          "reverseHoloAvg7": 11.86,
+          "reverseHoloAvg30": 14.3
+        }
+      }
+    },
+    {
+      "id": "base2-10",
+      "name": {
+        "en": "Scyther",
+        "ja": "Scyther",
+        "zh-TW": "Scyther"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "10",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/10_hires.png",
+      "attacks": [
+        {
+          "name": "Swords Dance",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "During your next turn, Scyther's Slash attack's base damage is 60 instead of 30."
+        },
+        {
+          "name": "Slash",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-10",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 79.99,
+            "mid": 240,
+            "high": 899.92,
+            "market": 124.62,
+            "directLow": 899.92
+          },
+          "unlimitedHolofoil": {
+            "low": 26,
+            "mid": 41.65,
+            "high": 9999,
+            "market": 45.86,
+            "directLow": 149.9
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-10",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 38.82,
+          "lowPrice": 6.99,
+          "trendPrice": 25.42,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 19.69,
+          "lowPriceExPlus": 24.99,
+          "avg1": 23.3,
+          "avg7": 21.11,
+          "avg30": 33.58,
+          "reverseHoloAvg1": 7.82,
+          "reverseHoloAvg7": 19.27,
+          "reverseHoloAvg30": 15.3
+        }
+      }
+    },
+    {
+      "id": "base2-11",
+      "name": {
+        "en": "Snorlax",
+        "ja": "Snorlax",
+        "zh-TW": "Snorlax"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "11",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/11_hires.png",
+      "attacks": [
+        {
+          "name": "Body Slam",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "30",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Thick Skinned",
+          "text": "Snorlax can't become Asleep, Confused, Paralyzed, or Poisoned. This power can't be used if Snorlax is already Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 4,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-11",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 277.05,
+            "mid": 438.52,
+            "high": 599.99,
+            "market": 313.38,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 65.19,
+            "mid": 96.16,
+            "high": 699.7,
+            "market": 120.68,
+            "directLow": 299.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-11",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 92.23,
+          "lowPrice": 5,
+          "trendPrice": 59.11,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 15.66,
+          "lowPriceExPlus": 38,
+          "avg1": 19.45,
+          "avg7": 68.93,
+          "avg30": 79.13,
+          "reverseHoloAvg1": 21.37,
+          "reverseHoloAvg7": 18.39,
+          "reverseHoloAvg30": 17.72
+        }
+      }
+    },
+    {
+      "id": "base2-12",
+      "name": {
+        "en": "Vaporeon",
+        "ja": "Vaporeon",
+        "zh-TW": "Vaporeon"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "12",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/12_hires.png",
+      "attacks": [
+        {
+          "name": "Quick Attack",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Flip a coin. If heads, this attack does 10 damage plus 20 more damage; if tails, this attack does 10 damage."
+        },
+        {
+          "name": "Water Gun",
+          "cost": [
+            "Water",
+            "Water",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30+",
+          "text": "Does 30 damage plus 10 more damage for each Water Energy attached to Vaporeon but not used to pay for this attack's Energy cost. Extra Water Energy after the 2nd doesn't count."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-12",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 174.99,
+            "mid": 239.98,
+            "high": 1530.4,
+            "market": 239.19,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 19.74,
+            "mid": 29.99,
+            "high": 199.94,
+            "market": 42.04,
+            "directLow": 49.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-12",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 14.6,
+          "lowPrice": 1.9,
+          "trendPrice": 26.31,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 8.72,
+          "lowPriceExPlus": 8,
+          "avg1": 14.24,
+          "avg7": 23.89,
+          "avg30": 17.22,
+          "reverseHoloAvg1": 3.25,
+          "reverseHoloAvg7": 7.47,
+          "reverseHoloAvg30": 7.66
+        }
+      }
+    },
+    {
+      "id": "base2-13",
+      "name": {
+        "en": "Venomoth",
+        "ja": "Venomoth",
+        "zh-TW": "Venomoth"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "13",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/13_hires.png",
+      "attacks": [
+        {
+          "name": "Venom Powder",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Confused and Poisoned."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Shift",
+          "text": "Once during your turn (before your attack), you may change the type of Venomoth to the type of any other Pokémon in play other than Colorless. This power can't be used if Venomoth is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-13",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 40.9,
+            "mid": 79.12,
+            "high": 899,
+            "market": 79.12,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 17.75,
+            "mid": 24.99,
+            "high": 999.99,
+            "market": 37.63,
+            "directLow": 24.79
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-13",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 18.69,
+          "lowPrice": 2,
+          "trendPrice": 20.37,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 13.55,
+          "lowPriceExPlus": 15,
+          "avg1": 12.39,
+          "avg7": 26.19,
+          "avg30": 21.35,
+          "reverseHoloAvg1": 7.47,
+          "reverseHoloAvg7": 12.26,
+          "reverseHoloAvg30": 9.75
+        }
+      }
+    },
+    {
+      "id": "base2-14",
+      "name": {
+        "en": "Victreebel",
+        "ja": "Victreebel",
+        "zh-TW": "Victreebel"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "14",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/14_hires.png",
+      "attacks": [
+        {
+          "name": "Lure",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "If your opponent has any Benched Pokémon, choose 1 of them and switch it with his or her Active Pokémon."
+        },
+        {
+          "name": "Acid",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "Flip a coin. If heads, the Defending Pokémon can't retreat during your next turn."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-14",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 49.99,
+            "mid": 100,
+            "high": 1069.9,
+            "market": 96.64,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 24.35,
+            "mid": 30.5,
+            "high": 99.91,
+            "market": 31.14,
+            "directLow": 89.91
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-14",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 31.16,
+          "lowPrice": 4.8,
+          "trendPrice": 30.02,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 13.09,
+          "lowPriceExPlus": 19.99,
+          "avg1": 53.98,
+          "avg7": 39.68,
+          "avg30": 33.75,
+          "reverseHoloAvg1": 5.93,
+          "reverseHoloAvg7": 14.82,
+          "reverseHoloAvg30": 12.11
+        }
+      }
+    },
+    {
+      "id": "base2-15",
+      "name": {
+        "en": "Vileplume",
+        "ja": "Vileplume",
+        "zh-TW": "Vileplume"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "15",
+      "artist": "Keiji Kinebuchi",
+      "image": "https://images.pokemontcg.io/base2/15_hires.png",
+      "attacks": [
+        {
+          "name": "Petal Dance",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "40×",
+          "text": "Flip 3 coins. This attack does 40 damage times the number of heads. Vileplume is now Confused (after doing damage)."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Heal",
+          "text": "Once during your turn (before your attack), you may flip a coin. If heads, remove 1 damage counter from 1 of your Pokémon. This power can't be used if Vileplume is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-15",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 47.01,
+            "mid": 88.83,
+            "high": 929.9,
+            "market": 88.2,
+            "directLow": null
+          },
+          "unlimitedHolofoil": {
+            "low": 19.99,
+            "mid": 33.27,
+            "high": 409.9,
+            "market": 41.46,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-15",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 22.93,
+          "lowPrice": 1.5,
+          "trendPrice": 28.57,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 10.26,
+          "lowPriceExPlus": 18,
+          "avg1": 20.33,
+          "avg7": 27.26,
+          "avg30": 26.11,
+          "reverseHoloAvg1": 4.73,
+          "reverseHoloAvg7": 10.11,
+          "reverseHoloAvg30": 9.16
+        }
+      }
+    },
+    {
+      "id": "base2-16",
+      "name": {
+        "en": "Wigglytuff",
+        "ja": "Wigglytuff",
+        "zh-TW": "Wigglytuff"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare Holo",
+        "ja": "レアホロ",
+        "zh-TW": "稀有閃卡"
+      },
+      "number": "16",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/16_hires.png",
+      "attacks": [
+        {
+          "name": "Lullaby",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "The Defending Pokémon is now Asleep."
+        },
+        {
+          "name": "Do the Wave",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "10+",
+          "text": "Does 10 damage plus 10 more damage for each of your Benched Pokémon."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-16",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEditionHolofoil": {
+            "low": 34.75,
+            "mid": 53.78,
+            "high": 693.8,
+            "market": 76.83,
+            "directLow": 66.83
+          },
+          "unlimitedHolofoil": {
+            "low": 19.97,
+            "mid": 39.55,
+            "high": 4321,
+            "market": 40.35,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-16",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 31.7,
+          "lowPrice": 5,
+          "trendPrice": 38.89,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 13.79,
+          "lowPriceExPlus": 20,
+          "avg1": 47,
+          "avg7": 33,
+          "avg30": 32.16,
+          "reverseHoloAvg1": 10,
+          "reverseHoloAvg7": 16.33,
+          "reverseHoloAvg30": 15.88
+        }
+      }
+    },
+    {
+      "id": "base2-17",
+      "name": {
+        "en": "Clefable",
+        "ja": "Clefable",
+        "zh-TW": "Clefable"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "17",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/17_hires.png",
+      "attacks": [
+        {
+          "name": "Metronome",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Choose 1 of the Defending Pokémon's attacks. Metronome copies that attack except for its Energy costs and anything else required in order to use that attack, such as discarding Energy cards. (No matter what type the Defending Pokémon is, Clefable's type is still Colorless.)"
+        },
+        {
+          "name": "Minimize",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "All damage done by attacks to Clefable during your opponent's next turn is reduced by 20 (after applying Weakness and Resistance)."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-17",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 8,
+            "mid": 13,
+            "high": 155.5,
+            "market": 14.66,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 2,
+            "mid": 5,
+            "high": 4321,
+            "market": 5.68,
+            "directLow": 3.91
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-17",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 6.06,
+          "lowPrice": 0.5,
+          "trendPrice": 5.37,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 8.39,
+          "lowPriceExPlus": 3,
+          "avg1": 5.54,
+          "avg7": 4.96,
+          "avg30": 6.33,
+          "reverseHoloAvg1": 2.5,
+          "reverseHoloAvg7": 11.5,
+          "reverseHoloAvg30": 10.43
+        }
+      }
+    },
+    {
+      "id": "base2-18",
+      "name": {
+        "en": "Electrode",
+        "ja": "Electrode",
+        "zh-TW": "Electrode"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "18",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/18_hires.png",
+      "attacks": [
+        {
+          "name": "Tackle",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        },
+        {
+          "name": "Chain Lightning",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Lightning"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "20",
+          "text": "If the Defending Pokémon isn't Colorless, this attack does 10 damage to each Benched Pokémon of the same type as the Defending Pokémon (including your own)."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-18",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 19.99,
+            "mid": 27.8,
+            "high": 4321,
+            "market": 27.55,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 2.99,
+            "mid": 5,
+            "high": 60.6,
+            "market": 5.02,
+            "directLow": 5.02
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-18",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 7,
+          "lowPrice": 0.5,
+          "trendPrice": 7.88,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 9.67,
+          "lowPriceExPlus": 3,
+          "avg1": 2.29,
+          "avg7": 9.24,
+          "avg30": 7.01,
+          "reverseHoloAvg1": 1.6,
+          "reverseHoloAvg7": 6.23,
+          "reverseHoloAvg30": 9.31
+        }
+      }
+    },
+    {
+      "id": "base2-19",
+      "name": {
+        "en": "Flareon",
+        "ja": "Flareon",
+        "zh-TW": "Flareon"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Fire",
+          "ja": "炎",
+          "zh-TW": "火"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "19",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/19_hires.png",
+      "attacks": [
+        {
+          "name": "Quick Attack",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Flip a coin. If heads, this attack does 10 damage plus 20 more damage; if tails, this attack does 10 damage."
+        },
+        {
+          "name": "Flamethrower",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "60",
+          "text": "Discard 1 Fire Energy card attached to Flareon in order to use this attack."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-19",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 12.99,
+            "mid": 72.5,
+            "high": 9999,
+            "market": 27.96,
+            "directLow": 299.97
+          },
+          "unlimited": {
+            "low": 7.5,
+            "mid": 13.14,
+            "high": 9999,
+            "market": 13.15,
+            "directLow": 11.32
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-19",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 10.45,
+          "lowPrice": 1,
+          "trendPrice": 17.7,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 21.97,
+          "lowPriceExPlus": 9,
+          "avg1": 4.65,
+          "avg7": 9.84,
+          "avg30": 11.19,
+          "reverseHoloAvg1": 19,
+          "reverseHoloAvg7": 21.75,
+          "reverseHoloAvg30": 15.42
+        }
+      }
+    },
+    {
+      "id": "base2-20",
+      "name": {
+        "en": "Jolteon",
+        "ja": "Jolteon",
+        "zh-TW": "Jolteon"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "20",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/20_hires.png",
+      "attacks": [
+        {
+          "name": "Quick Attack",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Flip a coin. If heads, this attack does 10 damage plus 20 more damage; if tails, this attack does 10 damage."
+        },
+        {
+          "name": "Pin Missile",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "20×",
+          "text": "Flip 4 coins. This attack does 20 damage times the number of heads."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-20",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 40,
+            "mid": 44.99,
+            "high": 9999,
+            "market": 35.63,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 7.6,
+            "mid": 13.87,
+            "high": 9999,
+            "market": 14.15,
+            "directLow": 148.5
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-20",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 8.84,
+          "lowPrice": 0.5,
+          "trendPrice": 10.7,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 5.37,
+          "lowPriceExPlus": 9,
+          "avg1": 7.9,
+          "avg7": 13.32,
+          "avg30": 10.36,
+          "reverseHoloAvg1": 6,
+          "reverseHoloAvg7": 11.06,
+          "reverseHoloAvg30": 22.86
+        }
+      }
+    },
+    {
+      "id": "base2-21",
+      "name": {
+        "en": "Kangaskhan",
+        "ja": "Kangaskhan",
+        "zh-TW": "Kangaskhan"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "21",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/21_hires.png",
+      "attacks": [
+        {
+          "name": "Fetch",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Draw a card."
+        },
+        {
+          "name": "Comet Punch",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "20×",
+          "text": "Flip 4 coins. This attack does 20 damage times the number of heads."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-21",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 10,
+            "mid": 20.71,
+            "high": 300,
+            "market": 13.12,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 2.39,
+            "mid": 4,
+            "high": 59.1,
+            "market": 4.65,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-21",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 4.65,
+          "lowPrice": 0.3,
+          "trendPrice": 5.65,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 2.38,
+          "lowPriceExPlus": 5,
+          "avg1": 5.13,
+          "avg7": 5.09,
+          "avg30": 5.88,
+          "reverseHoloAvg1": 5,
+          "reverseHoloAvg7": 2.73,
+          "reverseHoloAvg30": 3.06
+        }
+      }
+    },
+    {
+      "id": "base2-22",
+      "name": {
+        "en": "Mr. Mime",
+        "ja": "Mr. Mime",
+        "zh-TW": "Mr. Mime"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "22",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/22_hires.png",
+      "attacks": [
+        {
+          "name": "Meditate",
+          "cost": [
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Does 10 damage plus 10 more damage for each damage counter on the Defending Pokémon."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Invisible Wall",
+          "text": "Whenever an attack (including your own) does 30 or more damage to Mr. Mime (after applying Weakness and Resistance), prevent that damage. (Any other effects of attacks still happen.) This power can't be used if Mr. Mime is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-22",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 10.51,
+            "mid": 18.68,
+            "high": 214.5,
+            "market": 18.53,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 4,
+            "mid": 7.71,
+            "high": 78.93,
+            "market": 8.22,
+            "directLow": 78.93
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-22",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 7.03,
+          "lowPrice": 0.5,
+          "trendPrice": 4.37,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 6.66,
+          "lowPriceExPlus": 2.99,
+          "avg1": 4.99,
+          "avg7": 6.96,
+          "avg30": 6.66,
+          "reverseHoloAvg1": 34.48,
+          "reverseHoloAvg7": 9.85,
+          "reverseHoloAvg30": 9.07
+        }
+      }
+    },
+    {
+      "id": "base2-23",
+      "name": {
+        "en": "Nidoqueen",
+        "ja": "Nidoqueen",
+        "zh-TW": "Nidoqueen"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "23",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/23_hires.png",
+      "attacks": [
+        {
+          "name": "Boyfriends",
+          "cost": [
+            "Grass",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20+",
+          "text": "Does 20 damage plus 20 more damage for each Nidoking you have in play."
+        },
+        {
+          "name": "Mega Punch",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "50",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-23",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 12.9,
+            "mid": 64.99,
+            "high": 224.95,
+            "market": 15.37,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 4.06,
+            "mid": 7.17,
+            "high": 9999,
+            "market": 7.24,
+            "directLow": 24.92
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-23",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 6.77,
+          "lowPrice": 0.2,
+          "trendPrice": 5.75,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 23.13,
+          "lowPriceExPlus": 3,
+          "avg1": 7.6,
+          "avg7": 7.08,
+          "avg30": 6.39,
+          "reverseHoloAvg1": 11,
+          "reverseHoloAvg7": 13.17,
+          "reverseHoloAvg30": 13.27
+        }
+      }
+    },
+    {
+      "id": "base2-24",
+      "name": {
+        "en": "Pidgeot",
+        "ja": "Pidgeot",
+        "zh-TW": "Pidgeot"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "24",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/24_hires.png",
+      "attacks": [
+        {
+          "name": "Wing Attack",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        },
+        {
+          "name": "Hurricane",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "Unless this attack Knocks Out the Defending Pokémon, return the Defending Pokémon and all cards attached to it to your opponent's hand."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-24",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 13,
+            "mid": 14.94,
+            "high": 170,
+            "market": 13.91,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 2.96,
+            "mid": 5,
+            "high": 9999,
+            "market": 5.62,
+            "directLow": 7.63
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-24",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 6.84,
+          "lowPrice": 0.49,
+          "trendPrice": 3.94,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 14.41,
+          "lowPriceExPlus": 3.33,
+          "avg1": 3.24,
+          "avg7": 3.64,
+          "avg30": 6.68,
+          "reverseHoloAvg1": 20,
+          "reverseHoloAvg7": 18.4,
+          "reverseHoloAvg30": 11.79
+        }
+      }
+    },
+    {
+      "id": "base2-25",
+      "name": {
+        "en": "Pinsir",
+        "ja": "Pinsir",
+        "zh-TW": "Pinsir"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "25",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/25_hires.png",
+      "attacks": [
+        {
+          "name": "Irongrip",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        },
+        {
+          "name": "Guillotine",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "50",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-25",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 8.54,
+            "mid": 86.42,
+            "high": 9999,
+            "market": 17.75,
+            "directLow": 146.85
+          },
+          "unlimited": {
+            "low": 2.1,
+            "mid": 4.42,
+            "high": 9999,
+            "market": 4.76,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-25",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 6.81,
+          "lowPrice": 0.1,
+          "trendPrice": 6,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 6.49,
+          "lowPriceExPlus": 1.5,
+          "avg1": 12.36,
+          "avg7": 7.07,
+          "avg30": 7.27,
+          "reverseHoloAvg1": 2,
+          "reverseHoloAvg7": 7.56,
+          "reverseHoloAvg30": 6.25
+        }
+      }
+    },
+    {
+      "id": "base2-26",
+      "name": {
+        "en": "Scyther",
+        "ja": "Scyther",
+        "zh-TW": "Scyther"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "26",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/26_hires.png",
+      "attacks": [
+        {
+          "name": "Swords Dance",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "During your next turn, Scyther's Slash attack's base damage is 60 instead of 30."
+        },
+        {
+          "name": "Slash",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-26",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 14.09,
+            "mid": 32.49,
+            "high": 9999,
+            "market": 30.74,
+            "directLow": 35.3
+          },
+          "unlimited": {
+            "low": 6.99,
+            "mid": 12.5,
+            "high": 397.8,
+            "market": 13.8,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-26",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 9.89,
+          "lowPrice": 0.75,
+          "trendPrice": 7.65,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 15.2,
+          "lowPriceExPlus": 7,
+          "avg1": 6.45,
+          "avg7": 6.82,
+          "avg30": 9.04,
+          "reverseHoloAvg1": 29.99,
+          "reverseHoloAvg7": 14.21,
+          "reverseHoloAvg30": 22.9
+        }
+      }
+    },
+    {
+      "id": "base2-27",
+      "name": {
+        "en": "Snorlax",
+        "ja": "Snorlax",
+        "zh-TW": "Snorlax"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "27",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/27_hires.png",
+      "attacks": [
+        {
+          "name": "Body Slam",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "30",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Thick Skinned",
+          "text": "Snorlax can't become Asleep, Confused, Paralyzed, or Poisoned. This power can't be used if Snorlax is already Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 4,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-27",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 49.93,
+            "mid": 445,
+            "high": 9999,
+            "market": 54.08,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 7.42,
+            "mid": 14.73,
+            "high": 129.99,
+            "market": 14.94,
+            "directLow": 29.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-27",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 10.26,
+          "lowPrice": 0.9,
+          "trendPrice": 11.12,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 18.82,
+          "lowPriceExPlus": 6,
+          "avg1": 12.41,
+          "avg7": 11.08,
+          "avg30": 10.69,
+          "reverseHoloAvg1": 8,
+          "reverseHoloAvg7": 14.56,
+          "reverseHoloAvg30": 11.62
+        }
+      }
+    },
+    {
+      "id": "base2-28",
+      "name": {
+        "en": "Vaporeon",
+        "ja": "Vaporeon",
+        "zh-TW": "Vaporeon"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "28",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/28_hires.png",
+      "attacks": [
+        {
+          "name": "Quick Attack",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Flip a coin. If heads, this attack does 10 damage plus 20 more damage; if tails, this attack does 10 damage."
+        },
+        {
+          "name": "Water Gun",
+          "cost": [
+            "Water",
+            "Water",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30+",
+          "text": "Does 30 damage plus 10 more damage for each Water Energy attached to Vaporeon but not used to pay for this attack's Energy cost. Extra Water Energy after the 2nd doesn't count."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-28",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 21,
+            "mid": 39.98,
+            "high": 9999,
+            "market": 31.45,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 8.06,
+            "mid": 12.3,
+            "high": 109.82,
+            "market": 11.91,
+            "directLow": 92.15
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-28",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 13.71,
+          "lowPrice": 1.5,
+          "trendPrice": 18.02,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 5.44,
+          "lowPriceExPlus": 7,
+          "avg1": 4.66,
+          "avg7": 11.16,
+          "avg30": 16.11,
+          "reverseHoloAvg1": 1.99,
+          "reverseHoloAvg7": 6.56,
+          "reverseHoloAvg30": 5.58
+        }
+      }
+    },
+    {
+      "id": "base2-29",
+      "name": {
+        "en": "Venomoth",
+        "ja": "Venomoth",
+        "zh-TW": "Venomoth"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "29",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/29_hires.png",
+      "attacks": [
+        {
+          "name": "Venom Powder",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Confused and Poisoned."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Shift",
+          "text": "Once during your turn (before your attack), you may change the type of Venomoth to the type of any other Pokémon in play other than Colorless. This power can't be used if Venomoth is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-29",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 8.13,
+            "mid": 14,
+            "high": 243.9,
+            "market": 12.73,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 2,
+            "mid": 3.99,
+            "high": 96.94,
+            "market": 5.51,
+            "directLow": 9.24
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-29",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 5.72,
+          "lowPrice": 0.4,
+          "trendPrice": 4.45,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 10.96,
+          "lowPriceExPlus": 2.99,
+          "avg1": 4,
+          "avg7": 3.06,
+          "avg30": 4.81,
+          "reverseHoloAvg1": 5,
+          "reverseHoloAvg7": 12.47,
+          "reverseHoloAvg30": 13.1
+        }
+      }
+    },
+    {
+      "id": "base2-30",
+      "name": {
+        "en": "Victreebel",
+        "ja": "Victreebel",
+        "zh-TW": "Victreebel"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "30",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/30_hires.png",
+      "attacks": [
+        {
+          "name": "Lure",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "If your opponent has any Benched Pokémon, choose 1 of them and switch it with his or her Active Pokémon."
+        },
+        {
+          "name": "Acid",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "Flip a coin. If heads, the Defending Pokémon can't retreat during your next turn."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-30",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 8.96,
+            "mid": 18.47,
+            "high": 1510.41,
+            "market": 14.09,
+            "directLow": 302.13
+          },
+          "unlimited": {
+            "low": 2.83,
+            "mid": 5,
+            "high": 52.5,
+            "market": 5.54,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-30",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 8.35,
+          "lowPrice": 0.6,
+          "trendPrice": 5.76,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.94,
+          "lowPriceExPlus": 3,
+          "avg1": 2.89,
+          "avg7": 4.23,
+          "avg30": 7.48,
+          "reverseHoloAvg1": 1,
+          "reverseHoloAvg7": 10.24,
+          "reverseHoloAvg30": 12.03
+        }
+      }
+    },
+    {
+      "id": "base2-31",
+      "name": {
+        "en": "Vileplume",
+        "ja": "Vileplume",
+        "zh-TW": "Vileplume"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "31",
+      "artist": "Keiji Kinebuchi",
+      "image": "https://images.pokemontcg.io/base2/31_hires.png",
+      "attacks": [
+        {
+          "name": "Petal Dance",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "40×",
+          "text": "Flip 3 coins. This attack does 40 damage times the number of heads. Vileplume is now Confused (after doing damage)."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Heal",
+          "text": "Once during your turn (before your attack), you may flip a coin. If heads, remove 1 damage counter from 1 of your Pokémon. This power can't be used if Vileplume is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-31",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 6.09,
+            "mid": 16.98,
+            "high": 79.86,
+            "market": 15.84,
+            "directLow": 10.71
+          },
+          "unlimited": {
+            "low": 3.11,
+            "mid": 6.7,
+            "high": 69.14,
+            "market": 7.01,
+            "directLow": 69.13
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-31",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 5.89,
+          "lowPrice": 0.2,
+          "trendPrice": 9.48,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.02,
+          "lowPriceExPlus": 4,
+          "avg1": 15.88,
+          "avg7": 9.63,
+          "avg30": 6.31,
+          "reverseHoloAvg1": 1.5,
+          "reverseHoloAvg7": 4.81,
+          "reverseHoloAvg30": 13.79
+        }
+      }
+    },
+    {
+      "id": "base2-32",
+      "name": {
+        "en": "Wigglytuff",
+        "ja": "Wigglytuff",
+        "zh-TW": "Wigglytuff"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Rare",
+        "ja": "レア",
+        "zh-TW": "稀有"
+      },
+      "number": "32",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/32_hires.png",
+      "attacks": [
+        {
+          "name": "Lullaby",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "The Defending Pokémon is now Asleep."
+        },
+        {
+          "name": "Do the Wave",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "10+",
+          "text": "Does 10 damage plus 10 more damage for each of your Benched Pokémon."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-32",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 8.88,
+            "mid": 15,
+            "high": 101.9,
+            "market": 19.93,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 2.22,
+            "mid": 5.38,
+            "high": 96.95,
+            "market": 5.59,
+            "directLow": 57.74
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-32",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 5.38,
+          "lowPrice": 0.8,
+          "trendPrice": 7.98,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.02,
+          "lowPriceExPlus": 3.49,
+          "avg1": 7.56,
+          "avg7": 7.66,
+          "avg30": 6.12,
+          "reverseHoloAvg1": 3.2,
+          "reverseHoloAvg7": 5.69,
+          "reverseHoloAvg30": 14.02
+        }
+      }
+    },
+    {
+      "id": "base2-33",
+      "name": {
+        "en": "Butterfree",
+        "ja": "Butterfree",
+        "zh-TW": "Butterfree"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "33",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/33_hires.png",
+      "attacks": [
+        {
+          "name": "Whirlwind",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "If your opponent has any Benched Pokémon, he or she chooses 1 of them and switches it with the Defending Pokémon. (Do the damage before switching the Pokémon.)"
+        },
+        {
+          "name": "Mega Drain",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "40",
+          "text": "Remove a number of damage counters from Butterfree equal to half the damage done to the Defending Pokémon (after applying Weakness and Resistance) (rounded up to the nearest 10)."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-33",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 3.5,
+            "mid": 5.73,
+            "high": 159.7,
+            "market": 10.3,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.31,
+            "mid": 1,
+            "high": 100,
+            "market": 1.69,
+            "directLow": 0.52
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-33",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.89,
+          "lowPrice": 0.05,
+          "trendPrice": 2.27,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.41,
+          "lowPriceExPlus": 0.3,
+          "avg1": 1.87,
+          "avg7": 2.22,
+          "avg30": 2.02,
+          "reverseHoloAvg1": 0.1,
+          "reverseHoloAvg7": 0.48,
+          "reverseHoloAvg30": 0.48
+        }
+      }
+    },
+    {
+      "id": "base2-34",
+      "name": {
+        "en": "Dodrio",
+        "ja": "Dodrio",
+        "zh-TW": "Dodrio"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "34",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/34_hires.png",
+      "attacks": [
+        {
+          "name": "Rage",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "10+",
+          "text": "Does 10 damage plus 10 more damage for each damage counter on Dodrio."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Retreat Aid",
+          "text": "As long as Dodrio is Benched, pay Colorless less to retreat your Active Pokémon.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-34",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.11,
+            "mid": 2.99,
+            "high": 41,
+            "market": 3.91,
+            "directLow": 3.19
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.8,
+            "high": 19.98,
+            "market": 1.26,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-34",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.2,
+          "lowPrice": 0.02,
+          "trendPrice": 1.43,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.72,
+          "lowPriceExPlus": 0.19,
+          "avg1": 0.81,
+          "avg7": 1.29,
+          "avg30": 1.11,
+          "reverseHoloAvg1": 0.8,
+          "reverseHoloAvg7": 0.56,
+          "reverseHoloAvg30": 0.56
+        }
+      }
+    },
+    {
+      "id": "base2-35",
+      "name": {
+        "en": "Exeggutor",
+        "ja": "Exeggutor",
+        "zh-TW": "Exeggutor"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "80",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "35",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/35_hires.png",
+      "attacks": [
+        {
+          "name": "Teleport",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Switch Exeggutor with 1 of your Benched Pokémon."
+        },
+        {
+          "name": "Big Eggsplosion",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "20×",
+          "text": "Flip a number of coins equal to the number of Energy attached to Exeggutor. This attack does 20 damage times the number of heads."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-35",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.95,
+            "mid": 3.79,
+            "high": 97.8,
+            "market": 4.78,
+            "directLow": 4
+          },
+          "unlimited": {
+            "low": 0.2,
+            "mid": 0.92,
+            "high": 70,
+            "market": 1.73,
+            "directLow": 1.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-35",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.31,
+          "lowPrice": 0.02,
+          "trendPrice": 1.09,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 1,
+          "lowPriceExPlus": 0.24,
+          "avg1": 0.25,
+          "avg7": 0.87,
+          "avg30": 1.22,
+          "reverseHoloAvg1": 1,
+          "reverseHoloAvg7": 0.75,
+          "reverseHoloAvg30": 0.75
+        }
+      }
+    },
+    {
+      "id": "base2-36",
+      "name": {
+        "en": "Fearow",
+        "ja": "Fearow",
+        "zh-TW": "Fearow"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "36",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/36_hires.png",
+      "attacks": [
+        {
+          "name": "Agility",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "20",
+          "text": "Flip a coin. If heads, during your opponent's next turn, prevent all effects of attacks, including damage, done to Fearow."
+        },
+        {
+          "name": "Drill Peck",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "40",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-36",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.2,
+            "mid": 3,
+            "high": 56.59,
+            "market": 3.86,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.19,
+            "mid": 0.69,
+            "high": 8.99,
+            "market": 1.16,
+            "directLow": 1.27
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-36",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.03,
+          "lowPrice": 0.02,
+          "trendPrice": 1.12,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.5,
+          "lowPriceExPlus": 0.18,
+          "avg1": 0.91,
+          "avg7": 0.78,
+          "avg30": 0.99,
+          "reverseHoloAvg1": 0.5,
+          "reverseHoloAvg7": 0.5,
+          "reverseHoloAvg30": 0.5
+        }
+      }
+    },
+    {
+      "id": "base2-37",
+      "name": {
+        "en": "Gloom",
+        "ja": "Gloom",
+        "zh-TW": "Gloom"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "37",
+      "artist": "Keiji Kinebuchi",
+      "image": "https://images.pokemontcg.io/base2/37_hires.png",
+      "attacks": [
+        {
+          "name": "Poisonpowder",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "The Defending Pokémon is now Poisoned."
+        },
+        {
+          "name": "Foul Odor",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "Both the Defending Pokémon and Gloom are now Confused (after doing damage)."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-37",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.98,
+            "mid": 3.77,
+            "high": 4321,
+            "market": 4.14,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.2,
+            "mid": 0.61,
+            "high": 19.98,
+            "market": 0.73,
+            "directLow": 0.3
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-37",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 0.7,
+          "lowPrice": 0.02,
+          "trendPrice": 1.31,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.35,
+          "lowPriceExPlus": 0.07,
+          "avg1": 0.32,
+          "avg7": 0.78,
+          "avg30": 1.31,
+          "reverseHoloAvg1": 0.35,
+          "reverseHoloAvg7": 0.47,
+          "reverseHoloAvg30": 0.47
+        }
+      }
+    },
+    {
+      "id": "base2-38",
+      "name": {
+        "en": "Lickitung",
+        "ja": "Lickitung",
+        "zh-TW": "Lickitung"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "38",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/38_hires.png",
+      "attacks": [
+        {
+          "name": "Tongue Wrap",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        },
+        {
+          "name": "Supersonic",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Confused."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-38",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 2.19,
+            "mid": 3.73,
+            "high": 96.95,
+            "market": 6.72,
+            "directLow": 9.89
+          },
+          "unlimited": {
+            "low": 0.2,
+            "mid": 0.9,
+            "high": 4.99,
+            "market": 1.41,
+            "directLow": 0.48
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-38",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 2.26,
+          "lowPrice": 0.02,
+          "trendPrice": 1.59,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.8,
+          "lowPriceExPlus": 0.15,
+          "avg1": 0.6,
+          "avg7": 0.92,
+          "avg30": 2.08,
+          "reverseHoloAvg1": 0.8,
+          "reverseHoloAvg7": 0.6,
+          "reverseHoloAvg30": 0.6
+        }
+      }
+    },
+    {
+      "id": "base2-39",
+      "name": {
+        "en": "Marowak",
+        "ja": "Marowak",
+        "zh-TW": "Marowak"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "39",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/39_hires.png",
+      "attacks": [
+        {
+          "name": "Bonemerang",
+          "cost": [
+            "Fighting",
+            "Fighting"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30×",
+          "text": "Flip 2 coins. This attack does 30 damage times the number of heads."
+        },
+        {
+          "name": "Call for Friend",
+          "cost": [
+            "Fighting",
+            "Fighting",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "",
+          "text": "Search your deck for a Fighting Basic Pokémon card and put it onto your Bench. Shuffle your deck afterward. (You can't use this attack if your Bench is full.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Lightning",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-39",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.49,
+            "mid": 8.45,
+            "high": 4321,
+            "market": 10.14,
+            "directLow": 2.97
+          },
+          "unlimited": {
+            "low": 0.34,
+            "mid": 0.89,
+            "high": 4321,
+            "market": 1.49,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-39",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.16,
+          "lowPrice": 0.02,
+          "trendPrice": 1,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.65,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.93,
+          "avg7": 1.3,
+          "avg30": 1.06,
+          "reverseHoloAvg1": 0.5,
+          "reverseHoloAvg7": 0.56,
+          "reverseHoloAvg30": 0.56
+        }
+      }
+    },
+    {
+      "id": "base2-40",
+      "name": {
+        "en": "Nidorina",
+        "ja": "Nidorina",
+        "zh-TW": "Nidorina"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "40",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/40_hires.png",
+      "attacks": [
+        {
+          "name": "Supersonic",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Confused."
+        },
+        {
+          "name": "Double Kick",
+          "cost": [
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30×",
+          "text": "Flip 2 coins. This attack does 30 damage times the number of heads."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-40",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1,
+            "mid": 2.99,
+            "high": 39.76,
+            "market": 3.13,
+            "directLow": 2.25
+          },
+          "unlimited": {
+            "low": 0.15,
+            "mid": 0.5,
+            "high": 19.98,
+            "market": 0.55,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-40",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.93,
+          "lowPrice": 0.02,
+          "trendPrice": 0.43,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 1.46,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.34,
+          "avg7": 0.58,
+          "avg30": 0.87,
+          "reverseHoloAvg1": 2,
+          "reverseHoloAvg7": 1.26,
+          "reverseHoloAvg30": 1.26
+        }
+      }
+    },
+    {
+      "id": "base2-41",
+      "name": {
+        "en": "Parasect",
+        "ja": "Parasect",
+        "zh-TW": "Parasect"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "41",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/41_hires.png",
+      "attacks": [
+        {
+          "name": "Spore",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "The Defending Pokémon is now Asleep."
+        },
+        {
+          "name": "Slash",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-41",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.98,
+            "mid": 2.85,
+            "high": 38,
+            "market": 3.95,
+            "directLow": 1.37
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.69,
+            "high": 501.5,
+            "market": 0.88,
+            "directLow": 0.32
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-41",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 1.27,
+          "lowPrice": 0.02,
+          "trendPrice": 0.9,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.8,
+          "lowPriceExPlus": 0.09,
+          "avg1": 0.47,
+          "avg7": 0.76,
+          "avg30": 0.95,
+          "reverseHoloAvg1": 0.8,
+          "reverseHoloAvg7": 0.58,
+          "reverseHoloAvg30": 0.58
+        }
+      }
+    },
+    {
+      "id": "base2-42",
+      "name": {
+        "en": "Persian",
+        "ja": "Persian",
+        "zh-TW": "Persian"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "42",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/42_hires.png",
+      "attacks": [
+        {
+          "name": "Scratch",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        },
+        {
+          "name": "Pounce",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "If the Defending Pokémon attacks Persian during your next turn, any damage done by the attack is reduced by 10 (after applying Weakness and Resistance). (Benching either Pokémon ends this effect.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-42",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.25,
+            "mid": 2.11,
+            "high": 4321,
+            "market": 4.91,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.24,
+            "mid": 0.69,
+            "high": 999,
+            "market": 0.76,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-42",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 1.46,
+          "lowPrice": 0.02,
+          "trendPrice": 0.9,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.8,
+          "lowPriceExPlus": 0.09,
+          "avg1": 0.5,
+          "avg7": 1.02,
+          "avg30": 1.18,
+          "reverseHoloAvg1": 0.8,
+          "reverseHoloAvg7": 0.6,
+          "reverseHoloAvg30": 0.6
+        }
+      }
+    },
+    {
+      "id": "base2-43",
+      "name": {
+        "en": "Primeape",
+        "ja": "Primeape",
+        "zh-TW": "Primeape"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "43",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/43_hires.png",
+      "attacks": [
+        {
+          "name": "Fury Swipes",
+          "cost": [
+            "Fighting",
+            "Fighting"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20×",
+          "text": "Flip 3 coins. This attack does 20 damage times the number of heads."
+        },
+        {
+          "name": "Tantrum",
+          "cost": [
+            "Fighting",
+            "Fighting",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "50",
+          "text": "Flip a coin. If tails, Primeape is now Confused (after doing damage)."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-43",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.86,
+            "mid": 7.7,
+            "high": 4321,
+            "market": 9.59,
+            "directLow": 9.99
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.75,
+            "high": 24.99,
+            "market": 1.18,
+            "directLow": 0.49
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-43",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.97,
+          "lowPrice": 0.02,
+          "trendPrice": 2.79,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 2.05,
+          "lowPriceExPlus": 0.14,
+          "avg1": 0.3,
+          "avg7": 4.63,
+          "avg30": 1.74,
+          "reverseHoloAvg1": 0.4,
+          "reverseHoloAvg7": 1.44,
+          "reverseHoloAvg30": 1.44
+        }
+      }
+    },
+    {
+      "id": "base2-44",
+      "name": {
+        "en": "Rapidash",
+        "ja": "Rapidash",
+        "zh-TW": "Rapidash"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Fire",
+          "ja": "炎",
+          "zh-TW": "火"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "44",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/44_hires.png",
+      "attacks": [
+        {
+          "name": "Stomp",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20+",
+          "text": "Flip a coin. If heads, this attack does 20 damage plus 10 more damage; if tails, this attack does 20 damage."
+        },
+        {
+          "name": "Agility",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "Flip a coin. If heads, during your opponent's next turn, prevent all effects of attacks, including damage, done to Rapidash."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-44",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 3.72,
+            "mid": 5.88,
+            "high": 4321,
+            "market": 9.58,
+            "directLow": null
+          },
+          "unlimited": {
+            "low": 0.39,
+            "mid": 1.12,
+            "high": 4321,
+            "market": 1.9,
+            "directLow": 0.88
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-44",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 1.52,
+          "lowPrice": 0.02,
+          "trendPrice": 1.33,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.1,
+          "lowPriceExPlus": 0.2,
+          "avg1": 2.17,
+          "avg7": 1.51,
+          "avg30": 1.47,
+          "reverseHoloAvg1": 0.05,
+          "reverseHoloAvg7": 0.47,
+          "reverseHoloAvg30": 0.47
+        }
+      }
+    },
+    {
+      "id": "base2-45",
+      "name": {
+        "en": "Rhydon",
+        "ja": "Rhydon",
+        "zh-TW": "Rhydon"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "100",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "45",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/45_hires.png",
+      "attacks": [
+        {
+          "name": "Horn Attack",
+          "cost": [
+            "Fighting",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": ""
+        },
+        {
+          "name": "Ram",
+          "cost": [
+            "Fighting",
+            "Fighting",
+            "Fighting",
+            "Fighting"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "50",
+          "text": "Rhydon does 20 damage to itself. If your opponent has any Benched Pokémon, he or she chooses 1 of them and switches it with the Defending Pokémon. (Do the damage before switching the Pokémon. Switch the Pokémon even if Rhydon is knocked out.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Lightning",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-45",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 10.62,
+            "mid": 17.25,
+            "high": 4321,
+            "market": 14.73,
+            "directLow": 16.94
+          },
+          "unlimited": {
+            "low": 0.2,
+            "mid": 0.75,
+            "high": 26.99,
+            "market": 1.21,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-45",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 1,
+          "lowPrice": 0.02,
+          "trendPrice": 0.93,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 1.02,
+          "lowPriceExPlus": 0.15,
+          "avg1": 0.2,
+          "avg7": 0.99,
+          "avg30": 0.94,
+          "reverseHoloAvg1": 1.5,
+          "reverseHoloAvg7": 0.93,
+          "reverseHoloAvg30": 0.93
+        }
+      }
+    },
+    {
+      "id": "base2-46",
+      "name": {
+        "en": "Seaking",
+        "ja": "Seaking",
+        "zh-TW": "Seaking"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "46",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/46_hires.png",
+      "attacks": [
+        {
+          "name": "Horn Attack",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Waterfall",
+          "cost": [
+            "Water",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-46",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.35,
+            "mid": 3.69,
+            "high": 28.1,
+            "market": 4.26,
+            "directLow": 2.61
+          },
+          "unlimited": {
+            "low": 0.24,
+            "mid": 0.75,
+            "high": 4.99,
+            "market": 1.1,
+            "directLow": 1.24
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-46",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.99,
+          "lowPrice": 0.02,
+          "trendPrice": 0.97,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 2,
+          "lowPriceExPlus": 0.05,
+          "avg1": 0.38,
+          "avg7": 0.98,
+          "avg30": 0.94,
+          "reverseHoloAvg1": 2,
+          "reverseHoloAvg7": 1.4,
+          "reverseHoloAvg30": 1.4
+        }
+      }
+    },
+    {
+      "id": "base2-47",
+      "name": {
+        "en": "Tauros",
+        "ja": "Tauros",
+        "zh-TW": "Tauros"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "47",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/47_hires.png",
+      "attacks": [
+        {
+          "name": "Stomp",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20+",
+          "text": "Flip a coin. If heads, this attack does 20 damage plus 10 more damage; if tails, this attack does 20 damage."
+        },
+        {
+          "name": "Rampage",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "20+",
+          "text": "Does 20 damage plus 10 more damage for each damage counter on Tauros. Flip a coin. If tails, Tauros is now Confused (after doing damage)."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-47",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.75,
+            "mid": 3,
+            "high": 20,
+            "market": 7.1,
+            "directLow": 3
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.6,
+            "high": 21.99,
+            "market": 0.97,
+            "directLow": 0.4
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-47",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 1.32,
+          "lowPrice": 0.02,
+          "trendPrice": 0.26,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.04,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.39,
+          "avg7": 0.75,
+          "avg30": 1.1,
+          "reverseHoloAvg1": 0.04,
+          "reverseHoloAvg7": 0.39,
+          "reverseHoloAvg30": 0.39
+        }
+      }
+    },
+    {
+      "id": "base2-48",
+      "name": {
+        "en": "Weepinbell",
+        "ja": "Weepinbell",
+        "zh-TW": "Weepinbell"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Uncommon",
+        "ja": "アンコモン",
+        "zh-TW": "不常見"
+      },
+      "number": "48",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/48_hires.png",
+      "attacks": [
+        {
+          "name": "Poisonpowder",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Poisoned."
+        },
+        {
+          "name": "Razor Leaf",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-48",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.21,
+            "mid": 2.97,
+            "high": 4321,
+            "market": 3.74,
+            "directLow": 2.97
+          },
+          "unlimited": {
+            "low": 0.19,
+            "mid": 0.5,
+            "high": 19.98,
+            "market": 0.64,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-48",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 2.05,
+          "lowPrice": 0.02,
+          "trendPrice": 2.11,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.5,
+          "lowPriceExPlus": 0.05,
+          "avg1": 0.32,
+          "avg7": 0.47,
+          "avg30": 1.87,
+          "reverseHoloAvg1": 0.5,
+          "reverseHoloAvg7": 0.43,
+          "reverseHoloAvg30": 0.43
+        }
+      }
+    },
+    {
+      "id": "base2-49",
+      "name": {
+        "en": "Bellsprout",
+        "ja": "Bellsprout",
+        "zh-TW": "Bellsprout"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "49",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/49_hires.png",
+      "attacks": [
+        {
+          "name": "Vine Whip",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Call for Family",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Search your deck for a Basic Pokémon named Bellsprout and put it onto your Bench. Shuffle your deck afterward. (You can't use this attack if your Bench is full.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-49",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.58,
+            "mid": 6,
+            "high": 4321,
+            "market": 7.2,
+            "directLow": 6.49
+          },
+          "unlimited": {
+            "low": 0.09,
+            "mid": 0.4,
+            "high": 500,
+            "market": 0.4,
+            "directLow": 0.22
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-49",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 0.32,
+          "lowPrice": 0.02,
+          "trendPrice": 0.37,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.04,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.2,
+          "avg7": 0.47,
+          "avg30": 0.37,
+          "reverseHoloAvg1": 0.03,
+          "reverseHoloAvg7": 0.23,
+          "reverseHoloAvg30": 0.23
+        }
+      }
+    },
+    {
+      "id": "base2-50",
+      "name": {
+        "en": "Cubone",
+        "ja": "Cubone",
+        "zh-TW": "Cubone"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "50",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/50_hires.png",
+      "attacks": [
+        {
+          "name": "Snivel",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "If the Defending Pokémon attacks Cubone during your opponent's next turn, any damage done by the attack is reduced by 20 (after applying Weakness and Resistance). (Benching either Pokémon ends this effect.)"
+        },
+        {
+          "name": "Rage",
+          "cost": [
+            "Fighting",
+            "Fighting"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Does 10 damage plus 10 more damage for each damage counter on Cubone."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Lightning",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-50",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 5.49,
+            "mid": 11.84,
+            "high": 96.95,
+            "market": 13.38,
+            "directLow": 6.93
+          },
+          "unlimited": {
+            "low": 0.17,
+            "mid": 0.7,
+            "high": 4321,
+            "market": 1.82,
+            "directLow": 2.46
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-50",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 1.78,
+          "lowPrice": 0.02,
+          "trendPrice": 0.79,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.78,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.21,
+          "avg7": 0.6,
+          "avg30": 0.66,
+          "reverseHoloAvg1": 1.5,
+          "reverseHoloAvg7": 0.46,
+          "reverseHoloAvg30": 0.46
+        }
+      }
+    },
+    {
+      "id": "base2-51",
+      "name": {
+        "en": "Eevee",
+        "ja": "Eevee",
+        "zh-TW": "Eevee"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "51",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/51_hires.png",
+      "attacks": [
+        {
+          "name": "Tail Wag",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip a coin. If heads, the Defending Pokémon can't attack Eevee during your opponent's next turn. (Benching either Pokémon ends this effect.)"
+        },
+        {
+          "name": "Quick Attack",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "Flip a coin. If heads, this attack does 10 damage plus 20 more damage; if tails, this attack does 10 damage."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-51",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 4.95,
+            "mid": 14.5,
+            "high": 96.95,
+            "market": 15.06,
+            "directLow": 5.84
+          },
+          "unlimited": {
+            "low": 0.25,
+            "mid": 0.89,
+            "high": 34.99,
+            "market": 1.62,
+            "directLow": 0.77
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-51",
+        "updatedAt": "2026/03/11",
+        "prices": {
+          "averageSellPrice": 0.85,
+          "lowPrice": 0.02,
+          "trendPrice": 0.81,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 2.88,
+          "lowPriceExPlus": 0.1,
+          "avg1": 1.03,
+          "avg7": 0.72,
+          "avg30": 0.88,
+          "reverseHoloAvg1": 9.49,
+          "reverseHoloAvg7": 1.22,
+          "reverseHoloAvg30": 0.96
+        }
+      }
+    },
+    {
+      "id": "base2-52",
+      "name": {
+        "en": "Exeggcute",
+        "ja": "Exeggcute",
+        "zh-TW": "Exeggcute"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "52",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/52_hires.png",
+      "attacks": [
+        {
+          "name": "Hypnosis",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "The Defending Pokémon is now Asleep."
+        },
+        {
+          "name": "Leech Seed",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "Unless all damage from this attack is prevented, you may remove 1 damage counter from Exeggcute."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-52",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.63,
+            "mid": 2.25,
+            "high": 4321,
+            "market": 3.41,
+            "directLow": 0.96
+          },
+          "unlimited": {
+            "low": 0.07,
+            "mid": 0.41,
+            "high": 27831.88,
+            "market": 0.38,
+            "directLow": 0.2
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-52",
+        "updatedAt": "2026/03/11",
+        "prices": {
+          "averageSellPrice": 0.42,
+          "lowPrice": 0.02,
+          "trendPrice": 0.36,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 1.15,
+          "lowPriceExPlus": 0.05,
+          "avg1": 0.17,
+          "avg7": 0.42,
+          "avg30": 0.41,
+          "reverseHoloAvg1": 0.04,
+          "reverseHoloAvg7": 0.83,
+          "reverseHoloAvg30": 0.71
+        }
+      }
+    },
+    {
+      "id": "base2-53",
+      "name": {
+        "en": "Goldeen",
+        "ja": "Goldeen",
+        "zh-TW": "Goldeen"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "53",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/53_hires.png",
+      "attacks": [
+        {
+          "name": "Horn Attack",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-53",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.5,
+            "mid": 2.06,
+            "high": 19.99,
+            "market": 3.76,
+            "directLow": 1.37
+          },
+          "unlimited": {
+            "low": 0.04,
+            "mid": 0.42,
+            "high": 501.5,
+            "market": 0.42,
+            "directLow": 0.18
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-53",
+        "updatedAt": "2026/03/11",
+        "prices": {
+          "averageSellPrice": 1.14,
+          "lowPrice": 0.02,
+          "trendPrice": 0.04,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.3,
+          "lowPriceExPlus": 0.05,
+          "avg1": 0.63,
+          "avg7": 0.39,
+          "avg30": 1.09,
+          "reverseHoloAvg1": 0.3,
+          "reverseHoloAvg7": 0.3,
+          "reverseHoloAvg30": 0.3
+        }
+      }
+    },
+    {
+      "id": "base2-54",
+      "name": {
+        "en": "Jigglypuff",
+        "ja": "Jigglypuff",
+        "zh-TW": "Jigglypuff"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "54",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/54_hires.png",
+      "attacks": [
+        {
+          "name": "Lullaby",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "The Defending Pokémon is now Asleep."
+        },
+        {
+          "name": "Pound",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-54",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.6,
+            "mid": 6,
+            "high": 299,
+            "market": 7.02,
+            "directLow": 1.72
+          },
+          "unlimited": {
+            "low": 0.11,
+            "mid": 0.58,
+            "high": 19.84,
+            "market": 1.67,
+            "directLow": 2
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-54",
+        "updatedAt": "2026/03/11",
+        "prices": {
+          "averageSellPrice": 1.69,
+          "lowPrice": 0.02,
+          "trendPrice": 1.18,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.06,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.6,
+          "avg7": 0.72,
+          "avg30": 1.61,
+          "reverseHoloAvg1": 0.05,
+          "reverseHoloAvg7": 0.25,
+          "reverseHoloAvg30": 0.25
+        }
+      }
+    },
+    {
+      "id": "base2-55",
+      "name": {
+        "en": "Mankey",
+        "ja": "Mankey",
+        "zh-TW": "Mankey"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "30",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "55",
+      "artist": "Kagemaru Himeno",
+      "image": "https://images.pokemontcg.io/base2/55_hires.png",
+      "attacks": [
+        {
+          "name": "Scratch",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Peek",
+          "text": "Once during your turn (before your attack), you may look at one of the following: the top card of either player's deck, a random card from your opponent's hand, or one of either player's Prizes. This power can't be used if Mankey is Asleep, Confused, or Paralyzed.",
+          "type": "Pokémon Power"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-55",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.75,
+            "mid": 2.71,
+            "high": 22.99,
+            "market": 2.99,
+            "directLow": 1.18
+          },
+          "unlimited": {
+            "low": 0.1,
+            "mid": 0.47,
+            "high": 29,
+            "market": 0.5,
+            "directLow": 0.22
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-55",
+        "updatedAt": "2026/03/11",
+        "prices": {
+          "averageSellPrice": 0.95,
+          "lowPrice": 0.02,
+          "trendPrice": 0.53,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.1,
+          "lowPriceExPlus": 0.04,
+          "avg1": 0.52,
+          "avg7": 0.38,
+          "avg30": 0.91,
+          "reverseHoloAvg1": 0.1,
+          "reverseHoloAvg7": 0.26,
+          "reverseHoloAvg30": 0.26
+        }
+      }
+    },
+    {
+      "id": "base2-56",
+      "name": {
+        "en": "Meowth",
+        "ja": "Meowth",
+        "zh-TW": "Meowth"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "56",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/56_hires.png",
+      "attacks": [
+        {
+          "name": "Pay Day",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10",
+          "text": "Flip a coin. If heads, draw a card."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-56",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 1.35,
+            "mid": 5.57,
+            "high": 96.94,
+            "market": 5.88,
+            "directLow": 1.95
+          },
+          "unlimited": {
+            "low": 0.1,
+            "mid": 0.5,
+            "high": 29699.9,
+            "market": 0.91,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-56",
+        "updatedAt": "2026/03/11",
+        "prices": {
+          "averageSellPrice": 67.29,
+          "lowPrice": 0.09,
+          "trendPrice": 39.81,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 15,
+          "lowPriceExPlus": 9,
+          "avg1": 2.5,
+          "avg7": 48.56,
+          "avg30": 19.34,
+          "reverseHoloAvg1": 15,
+          "reverseHoloAvg7": 7.62,
+          "reverseHoloAvg30": 7.62
+        }
+      }
+    },
+    {
+      "id": "base2-57",
+      "name": {
+        "en": "Nidoran ♀",
+        "ja": "Nidoran ♀",
+        "zh-TW": "Nidoran ♀"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "60",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "57",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/57_hires.png",
+      "attacks": [
+        {
+          "name": "Fury Swipes",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10×",
+          "text": "Flip 3 coins. This attack does 10 damage times the number of heads."
+        },
+        {
+          "name": "Call for Family",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Search your deck for a Basic Pokémon named Nidoran ♂ or Nidoran ♀ and put it onto your Bench. Shuffle your deck afterward. (You can't use this attack if your Bench is full.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-57",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.49,
+            "mid": 1.59,
+            "high": 18.69,
+            "market": 2.16,
+            "directLow": 1.45
+          },
+          "unlimited": {
+            "low": 0.15,
+            "mid": 0.39,
+            "high": 501.5,
+            "market": 0.38,
+            "directLow": 0.18
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-57",
+        "updatedAt": "2026/03/11",
+        "prices": {
+          "averageSellPrice": 0.36,
+          "lowPrice": 0.02,
+          "trendPrice": 0.31,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.54,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.12,
+          "avg7": 0.26,
+          "avg30": 0.38,
+          "reverseHoloAvg1": 1,
+          "reverseHoloAvg7": 0.41,
+          "reverseHoloAvg30": 0.41
+        }
+      }
+    },
+    {
+      "id": "base2-58",
+      "name": {
+        "en": "Oddish",
+        "ja": "Oddish",
+        "zh-TW": "Oddish"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "58",
+      "artist": "Keiji Kinebuchi",
+      "image": "https://images.pokemontcg.io/base2/58_hires.png",
+      "attacks": [
+        {
+          "name": "Stun Spore",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        },
+        {
+          "name": "Sprout",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Search your deck for a Basic Pokémon named Oddish and put it onto your Bench. Shuffle your deck afterward. (You can't use this attack if your Bench is full.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-58",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.97,
+            "mid": 4.02,
+            "high": 96.95,
+            "market": 4.03,
+            "directLow": 0.97
+          },
+          "unlimited": {
+            "low": 0.09,
+            "mid": 0.4,
+            "high": 501.5,
+            "market": 0.4,
+            "directLow": 0.33
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-58",
+        "updatedAt": "2026/03/11",
+        "prices": {
+          "averageSellPrice": 0.59,
+          "lowPrice": 0.02,
+          "trendPrice": 0.22,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.29,
+          "lowPriceExPlus": 0.03,
+          "avg1": 0.11,
+          "avg7": 0.38,
+          "avg30": 0.56,
+          "reverseHoloAvg1": 0.29,
+          "reverseHoloAvg7": 0.3,
+          "reverseHoloAvg30": 0.3
+        }
+      }
+    },
+    {
+      "id": "base2-59",
+      "name": {
+        "en": "Paras",
+        "ja": "Paras",
+        "zh-TW": "Paras"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "59",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/59_hires.png",
+      "attacks": [
+        {
+          "name": "Scratch",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        },
+        {
+          "name": "Spore",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "The Defending Pokémon is now Asleep."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-59",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.5,
+            "mid": 2.12,
+            "high": 14.99,
+            "market": 2.55,
+            "directLow": 1.19
+          },
+          "unlimited": {
+            "low": 0.12,
+            "mid": 0.42,
+            "high": 501.5,
+            "market": 0.45,
+            "directLow": 0.2
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-59",
+        "updatedAt": "2026/03/11",
+        "prices": {
+          "averageSellPrice": 0.52,
+          "lowPrice": 0.02,
+          "trendPrice": 0.53,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.29,
+          "lowPriceExPlus": 0.04,
+          "avg1": 0.38,
+          "avg7": 0.31,
+          "avg30": 0.5,
+          "reverseHoloAvg1": 0.29,
+          "reverseHoloAvg7": 0.3,
+          "reverseHoloAvg30": 0.3
+        }
+      }
+    },
+    {
+      "id": "base2-60",
+      "name": {
+        "en": "Pikachu",
+        "ja": "ピカチュウ",
+        "zh-TW": "皮卡丘"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "60",
+      "artist": "Ken Sugimori",
+      "image": "https://images.pokemontcg.io/base2/60_hires.png",
+      "attacks": [
+        {
+          "name": "Spark",
+          "cost": [
+            "Lightning",
+            "Lightning"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "If your opponent has any Benched Pokémon, choose 1 of them and this attack does 10 damage to it. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-60",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 9.12,
+            "mid": 22.07,
+            "high": 4321,
+            "market": 22.77,
+            "directLow": 9.74
+          },
+          "unlimited": {
+            "low": 0.47,
+            "mid": 1.99,
+            "high": 4321,
+            "market": 4.61,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-60",
+        "updatedAt": "2026/03/11",
+        "prices": {
+          "averageSellPrice": 2.63,
+          "lowPrice": 0.03,
+          "trendPrice": 1.62,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 20.37,
+          "lowPriceExPlus": 0.3,
+          "avg1": 1.1,
+          "avg7": 2.37,
+          "avg30": 2.62,
+          "reverseHoloAvg1": 0.75,
+          "reverseHoloAvg7": 17.97,
+          "reverseHoloAvg30": 10.49
+        }
+      }
+    },
+    {
+      "id": "base2-61",
+      "name": {
+        "en": "Rhyhorn",
+        "ja": "Rhyhorn",
+        "zh-TW": "Rhyhorn"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "61",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/61_hires.png",
+      "attacks": [
+        {
+          "name": "Leer",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip a coin. If heads, the Defending Pokémon can't attack Rhyhorn during your opponent's next turn. (Benching either Pokémon ends this effect.)"
+        },
+        {
+          "name": "Horn Attack",
+          "cost": [
+            "Fighting",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Lightning",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-61",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.49,
+            "mid": 2.76,
+            "high": 4321,
+            "market": 3.2,
+            "directLow": 2.89
+          },
+          "unlimited": {
+            "low": 0.05,
+            "mid": 0.4,
+            "high": 9999,
+            "market": 0.41,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-61",
+        "updatedAt": "2026/03/11",
+        "prices": {
+          "averageSellPrice": 0.63,
+          "lowPrice": 0.02,
+          "trendPrice": 0.7,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.29,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.57,
+          "avg7": 0.36,
+          "avg30": 0.6,
+          "reverseHoloAvg1": 0.29,
+          "reverseHoloAvg7": 0.3,
+          "reverseHoloAvg30": 0.3
+        }
+      }
+    },
+    {
+      "id": "base2-62",
+      "name": {
+        "en": "Spearow",
+        "ja": "Spearow",
+        "zh-TW": "Spearow"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "50",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "62",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/62_hires.png",
+      "attacks": [
+        {
+          "name": "Peck",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Mirror Move",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "",
+          "text": "If Spearow was attacked last turn, do the final result of that attack on Spearow to the Defending Pokémon."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-62",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.16,
+            "mid": 2.75,
+            "high": 28.69,
+            "market": 3.25,
+            "directLow": 1.96
+          },
+          "unlimited": {
+            "low": 0.1,
+            "mid": 0.39,
+            "high": 5,
+            "market": 0.38,
+            "directLow": 0.16
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-62",
+        "updatedAt": "2026/03/11",
+        "prices": {
+          "averageSellPrice": 0.45,
+          "lowPrice": 0.02,
+          "trendPrice": 0.38,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.3,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.66,
+          "avg7": 0.3,
+          "avg30": 0.43,
+          "reverseHoloAvg1": 0.3,
+          "reverseHoloAvg7": 0.3,
+          "reverseHoloAvg30": 0.3
+        }
+      }
+    },
+    {
+      "id": "base2-63",
+      "name": {
+        "en": "Venonat",
+        "ja": "Venonat",
+        "zh-TW": "Venonat"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "40",
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "63",
+      "artist": "Mitsuhiro Arita",
+      "image": "https://images.pokemontcg.io/base2/63_hires.png",
+      "attacks": [
+        {
+          "name": "Stun Spore",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        },
+        {
+          "name": "Leech Life",
+          "cost": [
+            "Grass",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10",
+          "text": "Remove a number of damage counters from Venonat equal to the damage done to the Defending Pokémon (after applying Weakness and Resistance)."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-63",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.6,
+            "mid": 2.19,
+            "high": 18.69,
+            "market": 2.33,
+            "directLow": 0.99
+          },
+          "unlimited": {
+            "low": 0.1,
+            "mid": 0.42,
+            "high": 501.5,
+            "market": 0.45,
+            "directLow": 0.23
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-63",
+        "updatedAt": "2026/03/08",
+        "prices": {
+          "averageSellPrice": 0.47,
+          "lowPrice": 0.02,
+          "trendPrice": 0.56,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.3,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.24,
+          "avg7": 0.34,
+          "avg30": 0.51,
+          "reverseHoloAvg1": 0.3,
+          "reverseHoloAvg7": 0.3,
+          "reverseHoloAvg30": 0.3
+        }
+      }
+    },
+    {
+      "id": "base2-64",
+      "name": {
+        "en": "Poké Ball",
+        "ja": "Poké Ball",
+        "zh-TW": "Poké Ball"
+      },
+      "supertype": {
+        "en": "Trainer",
+        "ja": "トレーナー",
+        "zh-TW": "訓練家"
+      },
+      "subtypes": [],
+      "types": [],
+      "rarity": {
+        "en": "Common",
+        "ja": "コモン",
+        "zh-TW": "普通"
+      },
+      "number": "64",
+      "artist": "Keiji Kinebuchi",
+      "image": "https://images.pokemontcg.io/base2/64_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/base2-64",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "1stEdition": {
+            "low": 0.25,
+            "mid": 1.67,
+            "high": 54.6,
+            "market": 6.74,
+            "directLow": 0.5
+          },
+          "unlimited": {
+            "low": 0.01,
+            "mid": 0.3,
+            "high": 29219.8,
+            "market": 0.36,
+            "directLow": 0.12
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/base2-64",
+        "updatedAt": "2026/03/08",
+        "prices": {
+          "averageSellPrice": 1.21,
+          "lowPrice": 0.02,
+          "trendPrice": 0.83,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0.3,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.31,
+          "avg7": 0.4,
+          "avg30": 0.83,
+          "reverseHoloAvg1": 0.3,
+          "reverseHoloAvg7": 0.3,
+          "reverseHoloAvg30": 0.3
+        }
+      }
+    }
+  ]
+}

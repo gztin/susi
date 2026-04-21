@@ -1,14 +1,17 @@
 {
-  "sets": [],
-  "cards": {},
-  "lastUpdated": null,
-  "metadata": {
-    "description": "日版寶可夢卡片資料",
-    "source": "grading.pokeca-chart.com",
-    "currency": "JPY",
-    "exchangeRate": {
-      "jpyToTwd": 0.21,
-      "lastUpdated": null
-    }
+  "lastUpdated": "2026-04-13T02:24:05.291Z",
+  "language": "ja",
+  "cards": {
+    "炎": {},
+    "水": {},
+    "草": {},
+    "雷": {},
+    "超": {},
+    "闘": {},
+    "悪": {},
+    "鋼": {},
+    "ドラゴン": {},
+    "無": {},
+    "フェアリー": {}
   }
 }

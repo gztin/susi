@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>大富翁活動網站 - 演講者地圖</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  </head>
+  <body>
+    <div id="app">
+      <div id="monopoly-board" class="monopoly-board">
+        <!-- Title will be dynamically placed in the center -->
+        <div id="board-center-content" class="board-center">
+            <h1 class="main-title">iPlayground 2026</h1>
+            <h2 class="sub-title">徵稿正式開跑！</h2>
+            <p class="description">如果你對 iOS、AI、產品開發，或任何讓人眼睛一亮的主題有想法<br>現在就是站上舞台的時候</p>
+            <a href="https://forms.gle/rocYKo7zQuKiGvTx9" target="_blank" class="cta-link">立即投稿</a>
+            <p class="deadline">⏰ 截止時間：6/19 24:00</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Speaker Info -->
+    <div id="modal-overlay" class="modal-overlay">
+      <div class="modal-content">
+        <span id="close-btn-speaker" class="close-btn">&times;</span>
+        <div class="modal-left">
+          <img id="modal-photo" class="modal-photo" src="" alt="講者照片" />
+          <div id="modal-social" class="modal-social"></div>
+        </div>
+        <div class="modal-info">
+          <h2 id="modal-name">講者姓名</h2>
+          <div id="modal-topic" class="modal-topic">演講主題</div>
+          <div id="modal-description" class="modal-description">
+            <!-- 300 words description will go here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Activity Location -->
+    <div id="modal-location" class="modal-overlay">
+      <div class="modal-content location-modal">
+        <span class="close-btn" onclick="document.getElementById('modal-location').classList.remove('active')">&times;</span>
+        <div class="modal-full">
+          <h2 class="location-title">政大公企中心</h2>
+          <p class="location-address">106 台北市大安區金華街 187 號</p>
+          <div class="map-container">
+            <img src="https://api.placekitten.com/600/300" alt="Map Placeholder" id="map-img" class="map-placeholder" />
+            <div class="map-overlay-text">Google Map 預覽區域</div>
+          </div>
+          <div class="transport-info">
+            <h3><i class="fa-solid fa-bus"></i> 交通方式</h3>
+            <div class="transport-section">
+              <h4>搭乘公車</h4>
+              <p>0南、214、214直、237、253、606、670、671</p>
+            </div>
+            <div class="transport-section">
+              <h4>搭乘捷運</h4>
+              <p>淡水線(紅線) / 蘆洲線(橘線) → <strong>東門站 3 號出口</strong>：步行約 6-8 分鐘</p>
+              <p>新店線(綠線) / 蘆洲線(橘線) → <strong>古亭站 4 號出口</strong>：至和平東路轉搭 214、606 公車至公企中心站。</p>
+            </div>
+            <div class="transport-section">
+              <h4>聯絡電話</h4>
+              <p>02-23419151</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Activity Schedule/Content -->
+    <div id="modal-schedule" class="modal-overlay">
+      <div class="modal-content schedule-modal">
+        <span class="close-btn" onclick="document.getElementById('modal-schedule').classList.remove('active')">&times;</span>
+        <div class="modal-full">
+          <div class="schedule-tabs">
+            <button class="tab-btn active" onclick="switchTab(1)">第一天</button>
+            <button class="tab-btn" id="day2-btn" onclick="switchTab(2)">第二天</button>
+          </div>
+          <div id="schedule-content" class="schedule-body">
+            <div class="cfp-announcement">
+              <h2>徵稿正式開跑！</h2>
+              <p>如果你對 iOS、AI、產品開發，或任何讓人眼睛一亮的主題有想法，現在就是站上舞台的時候。</p>
+              <a href="https://forms.gle/rocYKo7zQuKiGvTx9" target="_blank" class="cta-link modal-cta">立即投稿</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="admin.html" class="admin-link">後台設定</a>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

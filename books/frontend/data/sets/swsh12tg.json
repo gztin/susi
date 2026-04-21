@@ -1,0 +1,2771 @@
+{
+  "lastUpdated": "2026-04-13T04:42:27.798Z",
+  "set": {
+    "id": "swsh12tg",
+    "name": {
+      "en": "Silver Tempest Trainer Gallery",
+      "ja": "Silver Tempest Trainer Gallery",
+      "zh-TW": "Silver Tempest Trainer Gallery"
+    },
+    "series": "Sword & Shield",
+    "releaseDate": "2022/11/11",
+    "cardCount": 30,
+    "logo": "https://images.pokemontcg.io/swsh12tg/logo.png",
+    "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png"
+  },
+  "cards": [
+    {
+      "id": "swsh12tg-TG01",
+      "name": {
+        "en": "Braixen",
+        "ja": "Braixen",
+        "zh-TW": "Braixen"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Fire",
+          "ja": "炎",
+          "zh-TW": "火"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Trainer Gallery Rare Holo",
+        "ja": "Trainer Gallery Rare Holo",
+        "zh-TW": "Trainer Gallery Rare Holo"
+      },
+      "number": "TG01",
+      "artist": "Naoki Saito",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG01_hires.png",
+      "attacks": [
+        {
+          "name": "Combustion",
+          "cost": [
+            "Fire"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "30",
+          "text": ""
+        },
+        {
+          "name": "Flare Parade",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "60×",
+          "text": "This attack does 60 damage for each Serena card in your discard pile."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG01",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 2.5,
+            "mid": 4.35,
+            "high": 999.99,
+            "market": 4.16,
+            "directLow": 6.08
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG01",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 3.21,
+          "lowPrice": 1,
+          "trendPrice": 3.36,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1,
+          "avg1": 3.44,
+          "avg7": 3.43,
+          "avg30": 3.24,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG02",
+      "name": {
+        "en": "Milotic",
+        "ja": "Milotic",
+        "zh-TW": "Milotic"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Water",
+          "ja": "水",
+          "zh-TW": "水"
+        }
+      ],
+      "hp": "130",
+      "rarity": {
+        "en": "Trainer Gallery Rare Holo",
+        "ja": "Trainer Gallery Rare Holo",
+        "zh-TW": "Trainer Gallery Rare Holo"
+      },
+      "number": "TG02",
+      "artist": "chibi",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG02_hires.png",
+      "attacks": [
+        {
+          "name": "Water Arrow",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "This attack does 50 damage to 1 of your opponent's Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        },
+        {
+          "name": "Mellow Wave",
+          "cost": [
+            "Water",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "60",
+          "text": "Your opponent's Active Pokémon is now Asleep."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG02",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 4,
+            "mid": 6.95,
+            "high": 30,
+            "market": 6.52,
+            "directLow": 9.98
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG02",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 5.52,
+          "lowPrice": 2.49,
+          "trendPrice": 5.5,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 2.94,
+          "avg1": 5.46,
+          "avg7": 5.4,
+          "avg30": 5.47,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG03",
+      "name": {
+        "en": "Flaaffy",
+        "ja": "Flaaffy",
+        "zh-TW": "Flaaffy"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "90",
+      "rarity": {
+        "en": "Trainer Gallery Rare Holo",
+        "ja": "Trainer Gallery Rare Holo",
+        "zh-TW": "Trainer Gallery Rare Holo"
+      },
+      "number": "TG03",
+      "artist": "saino misaki",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG03_hires.png",
+      "attacks": [
+        {
+          "name": "Electro Ball",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "50",
+          "text": ""
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Dynamotor",
+          "text": "Once during your turn (before your attack), you may attach a Lightning Energy card from your discard pile to 1 of your Benched Pokémon.",
+          "type": "Ability"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG03",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 2.5,
+            "mid": 4.1,
+            "high": 29.5,
+            "market": 3.83,
+            "directLow": 6.5
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG03",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 3,
+          "lowPrice": 0.2,
+          "trendPrice": 3.2,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.47,
+          "avg1": 3.07,
+          "avg7": 2.97,
+          "avg30": 3.02,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG04",
+      "name": {
+        "en": "Jynx",
+        "ja": "Jynx",
+        "zh-TW": "Jynx"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "100",
+      "rarity": {
+        "en": "Trainer Gallery Rare Holo",
+        "ja": "Trainer Gallery Rare Holo",
+        "zh-TW": "Trainer Gallery Rare Holo"
+      },
+      "number": "TG04",
+      "artist": "HYOGONOSUKE",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG04_hires.png",
+      "attacks": [
+        {
+          "name": "Psychic Assault",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "This attack does 10 more damage for each damage counter on your opponent's Active Pokémon."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Selfish Lips",
+          "text": "If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon V, your opponent can't take any Prize cards for it.",
+          "type": "Ability"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Darkness",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG04",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 1.5,
+            "mid": 2.7,
+            "high": 4321,
+            "market": 2.52,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG04",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 2.77,
+          "lowPrice": 0.6,
+          "trendPrice": 2.33,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.8,
+          "avg1": 2.19,
+          "avg7": 2.25,
+          "avg30": 2.85,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG05",
+      "name": {
+        "en": "Gardevoir",
+        "ja": "Gardevoir",
+        "zh-TW": "Gardevoir"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 2"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "150",
+      "rarity": {
+        "en": "Trainer Gallery Rare Holo",
+        "ja": "Trainer Gallery Rare Holo",
+        "zh-TW": "Trainer Gallery Rare Holo"
+      },
+      "number": "TG05",
+      "artist": "AKIRA EGAWA",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG05_hires.png",
+      "attacks": [
+        {
+          "name": "Magical Shot",
+          "cost": [
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "120",
+          "text": ""
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Refinement",
+          "text": "You must discard a card from your hand in order to use this Ability. Once during your turn, you may draw 2 cards.",
+          "type": "Ability"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Metal",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG05",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 3.99,
+            "mid": 7,
+            "high": 504.53,
+            "market": 6.63,
+            "directLow": 7.73
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG05",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 5.68,
+          "lowPrice": 3,
+          "trendPrice": 5.28,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 3,
+          "avg1": 5.41,
+          "avg7": 5.3,
+          "avg30": 5.68,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG06",
+      "name": {
+        "en": "Malamar",
+        "ja": "Malamar",
+        "zh-TW": "Malamar"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1",
+        "Rapid Strike"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "120",
+      "rarity": {
+        "en": "Trainer Gallery Rare Holo",
+        "ja": "Trainer Gallery Rare Holo",
+        "zh-TW": "Trainer Gallery Rare Holo"
+      },
+      "number": "TG06",
+      "artist": "Fumie Kittaka",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG06_hires.png",
+      "attacks": [
+        {
+          "name": "Rapid Strike Tentacles",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "40×",
+          "text": "Reveal any number of Rapid Strike cards from your hand. This attack does 40 damage for each card you revealed in this way. Then, shuffle those cards into your deck."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Darkness",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG06",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 0.5,
+            "mid": 1.6,
+            "high": 999.99,
+            "market": 1.25,
+            "directLow": 1.39
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG06",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.36,
+          "lowPrice": 0.49,
+          "trendPrice": 1.36,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.5,
+          "avg1": 1.53,
+          "avg7": 1.36,
+          "avg30": 1.38,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG07",
+      "name": {
+        "en": "Rockruff",
+        "ja": "Rockruff",
+        "zh-TW": "Rockruff"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic",
+        "Single Strike"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Trainer Gallery Rare Holo",
+        "ja": "Trainer Gallery Rare Holo",
+        "zh-TW": "Trainer Gallery Rare Holo"
+      },
+      "number": "TG07",
+      "artist": "Hideki Ishikawa",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG07_hires.png",
+      "attacks": [
+        {
+          "name": "Crunch",
+          "cost": [
+            "Fighting",
+            "Fighting"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": "Flip a coin. If heads, discard an Energy from your opponent's Active Pokémon."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG07",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 2.49,
+            "mid": 4,
+            "high": 200,
+            "market": 3.6,
+            "directLow": 5.7
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG07",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 2.68,
+          "lowPrice": 0.6,
+          "trendPrice": 2.9,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1,
+          "avg1": 3.07,
+          "avg7": 3,
+          "avg30": 2.7,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG08",
+      "name": {
+        "en": "Passimian",
+        "ja": "Passimian",
+        "zh-TW": "Passimian"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic",
+        "Rapid Strike"
+      ],
+      "types": [
+        {
+          "en": "Fighting",
+          "ja": "闘",
+          "zh-TW": "格鬥"
+        }
+      ],
+      "hp": "110",
+      "rarity": {
+        "en": "Trainer Gallery Rare Holo",
+        "ja": "Trainer Gallery Rare Holo",
+        "zh-TW": "Trainer Gallery Rare Holo"
+      },
+      "number": "TG08",
+      "artist": "nagimiso",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG08_hires.png",
+      "attacks": [
+        {
+          "name": "Fling",
+          "cost": [
+            "Fighting"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "This attack does 20 damage to 1 of your opponent's Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Throwing Coach",
+          "text": "Your Rapid Strike Pokémon's attacks do 30 more damage to your opponent's Benched Pokémon V and Benched Pokémon-GX (before applying Weakness and Resistance). You can't apply more than 1 Throwing Coach Ability at a time.",
+          "type": "Ability"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG08",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 0.78,
+            "mid": 1.49,
+            "high": 999.99,
+            "market": 1.11,
+            "directLow": 1.26
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG08",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.27,
+          "lowPrice": 0.2,
+          "trendPrice": 1.31,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.3,
+          "avg1": 1.15,
+          "avg7": 1.33,
+          "avg30": 1.29,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG09",
+      "name": {
+        "en": "Druddigon",
+        "ja": "Druddigon",
+        "zh-TW": "Druddigon"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Dragon",
+          "ja": "ドラゴン",
+          "zh-TW": "龍"
+        }
+      ],
+      "hp": "120",
+      "rarity": {
+        "en": "Trainer Gallery Rare Holo",
+        "ja": "Trainer Gallery Rare Holo",
+        "zh-TW": "Trainer Gallery Rare Holo"
+      },
+      "number": "TG09",
+      "artist": "Teeziro",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG09_hires.png",
+      "attacks": [
+        {
+          "name": "Revenge",
+          "cost": [
+            "Fire",
+            "Water"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "40+",
+          "text": "If any of your Pokémon were Knocked Out by damage from an attack from your opponent's Pokémon during their last turn, this attack does 120 more damage."
+        },
+        {
+          "name": "Dragon Claw",
+          "cost": [
+            "Fire",
+            "Water",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "120",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG09",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 2.2,
+            "mid": 3.96,
+            "high": 999.99,
+            "market": 3.79,
+            "directLow": 5
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG09",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 2.63,
+          "lowPrice": 0.99,
+          "trendPrice": 2.6,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.99,
+          "avg1": 2.66,
+          "avg7": 2.57,
+          "avg30": 2.64,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG10",
+      "name": {
+        "en": "Smeargle",
+        "ja": "Smeargle",
+        "zh-TW": "Smeargle"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "70",
+      "rarity": {
+        "en": "Trainer Gallery Rare Holo",
+        "ja": "Trainer Gallery Rare Holo",
+        "zh-TW": "Trainer Gallery Rare Holo"
+      },
+      "number": "TG10",
+      "artist": "KIYOTAKA OSHIYAMA",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG10_hires.png",
+      "attacks": [
+        {
+          "name": "Colorful Palette",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Look at the top 5 cards of your deck. You may attach any number of basic Energy cards you find there to 1 of your Pokémon. Shuffle the other cards back into your deck."
+        },
+        {
+          "name": "Ram",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG10",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 1.83,
+            "mid": 3.7,
+            "high": 999.99,
+            "market": 3.45,
+            "directLow": 3.93
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG10",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 2.34,
+          "lowPrice": 1,
+          "trendPrice": 2.47,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1,
+          "avg1": 2.56,
+          "avg7": 2.44,
+          "avg30": 2.35,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG11",
+      "name": {
+        "en": "Altaria",
+        "ja": "Altaria",
+        "zh-TW": "Altaria"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Stage 1"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "110",
+      "rarity": {
+        "en": "Trainer Gallery Rare Holo",
+        "ja": "Trainer Gallery Rare Holo",
+        "zh-TW": "Trainer Gallery Rare Holo"
+      },
+      "number": "TG11",
+      "artist": "Yuu Nishida",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG11_hires.png",
+      "attacks": [
+        {
+          "name": "Magical Echo",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Move all damage counters from 1 of your Benched Pokémon to your opponent's Active Pokémon."
+        },
+        {
+          "name": "Blasting Wind",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "90",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG11",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 4.3,
+            "mid": 6.46,
+            "high": 503.27,
+            "market": 6.43,
+            "directLow": 9.95
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG11",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 4.69,
+          "lowPrice": 2.9,
+          "trendPrice": 4.79,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 2.9,
+          "avg1": 4.66,
+          "avg7": 4.8,
+          "avg30": 4.69,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG12",
+      "name": {
+        "en": "Kricketune V",
+        "ja": "Kricketune V",
+        "zh-TW": "Kricketune V"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "180",
+      "rarity": {
+        "en": "Rare Holo V",
+        "ja": "Rare Holo V",
+        "zh-TW": "Rare Holo V"
+      },
+      "number": "TG12",
+      "artist": "HYOGONOSUKE",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG12_hires.png",
+      "attacks": [
+        {
+          "name": "X-Scissor",
+          "cost": [
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "80+",
+          "text": "Flip a coin. If heads, this attack does 80 more damage."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Exciting Stage",
+          "text": "Once during your turn, you may draw cards until you have 3 cards in your hand. If this Pokémon is in the Active Spot, you may draw cards until you have 4 cards in your hand instead. You can't use more than 1 Exciting Stage Ability each turn.",
+          "type": "Ability"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG12",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 3,
+            "mid": 4,
+            "high": 43.9,
+            "market": 3.98,
+            "directLow": 5
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG12",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 5.04,
+          "lowPrice": 2.5,
+          "trendPrice": 5.22,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 2.5,
+          "avg1": 5.75,
+          "avg7": 5.56,
+          "avg30": 5.04,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG13",
+      "name": {
+        "en": "Serperior V",
+        "ja": "Serperior V",
+        "zh-TW": "Serperior V"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "types": [
+        {
+          "en": "Grass",
+          "ja": "草",
+          "zh-TW": "草"
+        }
+      ],
+      "hp": "210",
+      "rarity": {
+        "en": "Rare Holo V",
+        "ja": "Rare Holo V",
+        "zh-TW": "Rare Holo V"
+      },
+      "number": "TG13",
+      "artist": "Teeziro",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG13_hires.png",
+      "attacks": [
+        {
+          "name": "Noble Light",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Heal 30 damage from each Pokémon (both yours and your opponent's)."
+        },
+        {
+          "name": "Solar Beam",
+          "cost": [
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "120",
+          "text": ""
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG13",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 16,
+            "mid": 19.7,
+            "high": 4321,
+            "market": 17.91,
+            "directLow": 17.55
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG13",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 20.14,
+          "lowPrice": 9,
+          "trendPrice": 20.85,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 9.99,
+          "avg1": 13.62,
+          "avg7": 24.06,
+          "avg30": 19.93,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG14",
+      "name": {
+        "en": "Blaziken V",
+        "ja": "Blaziken V",
+        "zh-TW": "Blaziken V"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic",
+        "V",
+        "Rapid Strike"
+      ],
+      "types": [
+        {
+          "en": "Fire",
+          "ja": "炎",
+          "zh-TW": "火"
+        }
+      ],
+      "hp": "210",
+      "rarity": {
+        "en": "Rare Holo V",
+        "ja": "Rare Holo V",
+        "zh-TW": "Rare Holo V"
+      },
+      "number": "TG14",
+      "artist": "nagimiso",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG14_hires.png",
+      "attacks": [
+        {
+          "name": "High Jump Kick",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "50",
+          "text": ""
+        },
+        {
+          "name": "Fire Spin",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "210",
+          "text": "Discard 2 Energy from this Pokémon."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG14",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 23.38,
+            "mid": 28.45,
+            "high": 256.25,
+            "market": 26.48,
+            "directLow": 29.37
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG14",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 21.3,
+          "lowPrice": 10,
+          "trendPrice": 22.04,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 13.99,
+          "avg1": 21.86,
+          "avg7": 22.13,
+          "avg30": 21.43,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG15",
+      "name": {
+        "en": "Blaziken VMAX",
+        "ja": "Blaziken VMAX",
+        "zh-TW": "Blaziken VMAX"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "VMAX",
+        "Rapid Strike"
+      ],
+      "types": [
+        {
+          "en": "Fire",
+          "ja": "炎",
+          "zh-TW": "火"
+        }
+      ],
+      "hp": "320",
+      "rarity": {
+        "en": "Rare Holo VMAX",
+        "ja": "Rare Holo VMAX",
+        "zh-TW": "Rare Holo VMAX"
+      },
+      "number": "TG15",
+      "artist": "KIYOTAKA OSHIYAMA",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG15_hires.png",
+      "attacks": [
+        {
+          "name": "Clutch",
+          "cost": [
+            "Fire"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "60",
+          "text": "During your opponent's next turn, the Defending Pokémon can't retreat."
+        },
+        {
+          "name": "Max Blaze",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "130",
+          "text": "Choose up to 2 of your Benched Rapid Strike Pokémon and attach an Energy card from your discard pile to each of them."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG15",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 25.65,
+            "mid": 34.94,
+            "high": 109,
+            "market": 31.71,
+            "directLow": 36.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG15",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 21.22,
+          "lowPrice": 9.9,
+          "trendPrice": 20.42,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 10,
+          "avg1": 18.18,
+          "avg7": 22.11,
+          "avg30": 20.92,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG16",
+      "name": {
+        "en": "Zeraora V",
+        "ja": "Zeraora V",
+        "zh-TW": "Zeraora V"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic",
+        "V",
+        "Rapid Strike"
+      ],
+      "types": [
+        {
+          "en": "Lightning",
+          "ja": "雷",
+          "zh-TW": "雷"
+        }
+      ],
+      "hp": "210",
+      "rarity": {
+        "en": "Rare Holo V",
+        "ja": "Rare Holo V",
+        "zh-TW": "Rare Holo V"
+      },
+      "number": "TG16",
+      "artist": "yuu",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG16_hires.png",
+      "attacks": [
+        {
+          "name": "Cross Fist",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "100",
+          "text": "If 1 of your other Rapid Strike Pokémon used an attack during your last turn, this attack also does 160 damage to 1 of your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG16",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 7.99,
+            "mid": 10.58,
+            "high": 40,
+            "market": 9.94,
+            "directLow": 13.19
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG16",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 10.19,
+          "lowPrice": 4.75,
+          "trendPrice": 9.88,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 4.75,
+          "avg1": 8.82,
+          "avg7": 10.49,
+          "avg30": 10.34,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG17",
+      "name": {
+        "en": "Mawile V",
+        "ja": "Mawile V",
+        "zh-TW": "Mawile V"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "types": [
+        {
+          "en": "Psychic",
+          "ja": "超",
+          "zh-TW": "超"
+        }
+      ],
+      "hp": "200",
+      "rarity": {
+        "en": "Rare Holo V",
+        "ja": "Rare Holo V",
+        "zh-TW": "Rare Holo V"
+      },
+      "number": "TG17",
+      "artist": "saino misaki",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG17_hires.png",
+      "attacks": [
+        {
+          "name": "Pouty Slap",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "30",
+          "text": "Flip a coin. If heads, discard an Energy from your opponent's Active Pokémon."
+        },
+        {
+          "name": "Chomp Down",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "100",
+          "text": "Discard a random card from your opponent's hand."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Metal",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG17",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 7.92,
+            "mid": 11,
+            "high": 96.95,
+            "market": 10.6,
+            "directLow": 17.5
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG17",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 10.36,
+          "lowPrice": 4,
+          "trendPrice": 9.26,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 5,
+          "avg1": 6.55,
+          "avg7": 9.45,
+          "avg30": 10.26,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG18",
+      "name": {
+        "en": "Corviknight V",
+        "ja": "Corviknight V",
+        "zh-TW": "Corviknight V"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "types": [
+        {
+          "en": "Metal",
+          "ja": "鋼",
+          "zh-TW": "鋼"
+        }
+      ],
+      "hp": "210",
+      "rarity": {
+        "en": "Rare Holo V",
+        "ja": "Rare Holo V",
+        "zh-TW": "Rare Holo V"
+      },
+      "number": "TG18",
+      "artist": "KIYOTAKA OSHIYAMA",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG18_hires.png",
+      "attacks": [
+        {
+          "name": "Clutch",
+          "cost": [
+            "Metal"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "30",
+          "text": "During your opponent's next turn, the Defending Pokémon can't retreat."
+        },
+        {
+          "name": "Sky Hurricane",
+          "cost": [
+            "Metal",
+            "Metal",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "190",
+          "text": "During your next turn, this Pokémon can't use Sky Hurricane."
+        }
+      ],
+      "abilities": [],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG18",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 8.69,
+            "mid": 11.01,
+            "high": 186.75,
+            "market": 10.97,
+            "directLow": 186.75
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG18",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 8.59,
+          "lowPrice": 4.49,
+          "trendPrice": 8.84,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 4.49,
+          "avg1": 8.44,
+          "avg7": 8.6,
+          "avg30": 8.53,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG19",
+      "name": {
+        "en": "Corviknight VMAX",
+        "ja": "Corviknight VMAX",
+        "zh-TW": "Corviknight VMAX"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "VMAX"
+      ],
+      "types": [
+        {
+          "en": "Metal",
+          "ja": "鋼",
+          "zh-TW": "鋼"
+        }
+      ],
+      "hp": "320",
+      "rarity": {
+        "en": "Rare Holo VMAX",
+        "ja": "Rare Holo VMAX",
+        "zh-TW": "Rare Holo VMAX"
+      },
+      "number": "TG19",
+      "artist": "Shigenori Negishi",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG19_hires.png",
+      "attacks": [
+        {
+          "name": "G-Max Hurricane",
+          "cost": [
+            "Metal",
+            "Metal",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "240",
+          "text": "During your next turn, this Pokémon can't use G-Max Hurricane."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Lustrous Body",
+          "text": "Prevent all effects of your opponent's Pokémon's Abilities done to this Pokémon.",
+          "type": "Ability"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG19",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 5.85,
+            "mid": 8,
+            "high": 26.61,
+            "market": 7.9,
+            "directLow": 10.67
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG19",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 6.55,
+          "lowPrice": 3.95,
+          "trendPrice": 6.51,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 3.99,
+          "avg1": 4.79,
+          "avg7": 5.83,
+          "avg30": 6.52,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG20",
+      "name": {
+        "en": "Rayquaza VMAX",
+        "ja": "Rayquaza VMAX",
+        "zh-TW": "Rayquaza VMAX"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "VMAX",
+        "Rapid Strike"
+      ],
+      "types": [
+        {
+          "en": "Dragon",
+          "ja": "ドラゴン",
+          "zh-TW": "龍"
+        }
+      ],
+      "hp": "320",
+      "rarity": {
+        "en": "Rare Holo VMAX",
+        "ja": "Rare Holo VMAX",
+        "zh-TW": "Rare Holo VMAX"
+      },
+      "number": "TG20",
+      "artist": "Hideki Ishikawa",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG20_hires.png",
+      "attacks": [
+        {
+          "name": "Max Burst",
+          "cost": [
+            "Fire",
+            "Lightning"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20+",
+          "text": "You may discard any amount of basic Fire Energy or any amount of basic Lightning Energy from this Pokémon. This attack does 80 more damage for each card you discarded in this way."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Azure Pulse",
+          "text": "Once during your turn, you may discard your hand and draw 3 cards.",
+          "type": "Ability"
+        }
+      ],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG20",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 115,
+            "mid": 144.49,
+            "high": 999.66,
+            "market": 117.85,
+            "directLow": 149.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG20",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 114.24,
+          "lowPrice": 49.99,
+          "trendPrice": 140,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 60,
+          "avg1": 69,
+          "avg7": 119.26,
+          "avg30": 112.81,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG21",
+      "name": {
+        "en": "Duraludon VMAX",
+        "ja": "Duraludon VMAX",
+        "zh-TW": "Duraludon VMAX"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "VMAX",
+        "Single Strike"
+      ],
+      "types": [
+        {
+          "en": "Dragon",
+          "ja": "ドラゴン",
+          "zh-TW": "龍"
+        }
+      ],
+      "hp": "330",
+      "rarity": {
+        "en": "Rare Holo VMAX",
+        "ja": "Rare Holo VMAX",
+        "zh-TW": "Rare Holo VMAX"
+      },
+      "number": "TG21",
+      "artist": "AKIRA EGAWA",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG21_hires.png",
+      "attacks": [
+        {
+          "name": "G-Max Pulverization",
+          "cost": [
+            "Fighting",
+            "Metal",
+            "Metal"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "220",
+          "text": "This attack's damage isn't affected by any effects on your opponent's Active Pokémon."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Skyscraper",
+          "text": "Prevent all damage done to this Pokémon by attacks from your opponent's Pokémon that have Special Energy attached.",
+          "type": "Ability"
+        }
+      ],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG21",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 8.42,
+            "mid": 10.48,
+            "high": 99.5,
+            "market": 9.42,
+            "directLow": 9
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG21",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 10.18,
+          "lowPrice": 5,
+          "trendPrice": 10.77,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 5.99,
+          "avg1": 9.98,
+          "avg7": 11.47,
+          "avg30": 10.28,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG22",
+      "name": {
+        "en": "Blissey V",
+        "ja": "Blissey V",
+        "zh-TW": "Blissey V"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "types": [
+        {
+          "en": "Colorless",
+          "ja": "無",
+          "zh-TW": "無色"
+        }
+      ],
+      "hp": "250",
+      "rarity": {
+        "en": "Rare Holo V",
+        "ja": "Rare Holo V",
+        "zh-TW": "Rare Holo V"
+      },
+      "number": "TG22",
+      "artist": "You Iribi",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG22_hires.png",
+      "attacks": [
+        {
+          "name": "Blissful Blast",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10+",
+          "text": "This attack does 30 more damage for each Energy attached to this Pokémon. If you did any damage with this attack, you may attach up to 3 Energy cards from your discard pile to this Pokémon."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Natural Cure",
+          "text": "Whenever you attach an Energy card from your hand to this Pokémon, remove all Special Conditions from it.",
+          "type": "Ability"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 4,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG22",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 14.86,
+            "mid": 18.97,
+            "high": 151.44,
+            "market": 18.18,
+            "directLow": 21.33
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG22",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 11.26,
+          "lowPrice": 4,
+          "trendPrice": 11.84,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 6.4,
+          "avg1": 14.63,
+          "avg7": 12.95,
+          "avg30": 11.41,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG23",
+      "name": {
+        "en": "Friends in Galar",
+        "ja": "Friends in Galar",
+        "zh-TW": "Friends in Galar"
+      },
+      "supertype": {
+        "en": "Trainer",
+        "ja": "トレーナー",
+        "zh-TW": "訓練家"
+      },
+      "subtypes": [
+        "Supporter"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Rare Ultra",
+        "ja": "Rare Ultra",
+        "zh-TW": "Rare Ultra"
+      },
+      "number": "TG23",
+      "artist": "Sanosuke Sakuma",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG23_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG23",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 7.38,
+            "mid": 9,
+            "high": 42,
+            "market": 8.56,
+            "directLow": 9.21
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG23",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 6.65,
+          "lowPrice": 2.4,
+          "trendPrice": 6.38,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 2.4,
+          "avg1": 7.75,
+          "avg7": 6.6,
+          "avg30": 6.75,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG24",
+      "name": {
+        "en": "Gordie",
+        "ja": "Gordie",
+        "zh-TW": "Gordie"
+      },
+      "supertype": {
+        "en": "Trainer",
+        "ja": "トレーナー",
+        "zh-TW": "訓練家"
+      },
+      "subtypes": [
+        "Supporter"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Rare Ultra",
+        "ja": "Rare Ultra",
+        "zh-TW": "Rare Ultra"
+      },
+      "number": "TG24",
+      "artist": "Ryuta Fuse",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG24_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG24",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 1.2,
+            "mid": 1.76,
+            "high": 96.92,
+            "market": 1.75,
+            "directLow": 1.87
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG24",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 1.97,
+          "lowPrice": 1,
+          "trendPrice": 1.91,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1,
+          "avg1": 1,
+          "avg7": 2.14,
+          "avg30": 1.91,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG25",
+      "name": {
+        "en": "Judge",
+        "ja": "Judge",
+        "zh-TW": "Judge"
+      },
+      "supertype": {
+        "en": "Trainer",
+        "ja": "トレーナー",
+        "zh-TW": "訓練家"
+      },
+      "subtypes": [
+        "Supporter"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Rare Ultra",
+        "ja": "Rare Ultra",
+        "zh-TW": "Rare Ultra"
+      },
+      "number": "TG25",
+      "artist": "Ryuta Fuse",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG25_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG25",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 8.5,
+            "mid": 10.25,
+            "high": 96.74,
+            "market": 10.1,
+            "directLow": 12.5
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG25",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 4.91,
+          "lowPrice": 2,
+          "trendPrice": 5.72,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 2,
+          "avg1": 6.08,
+          "avg7": 5.86,
+          "avg30": 4.91,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG26",
+      "name": {
+        "en": "Professor Burnet",
+        "ja": "Professor Burnet",
+        "zh-TW": "Professor Burnet"
+      },
+      "supertype": {
+        "en": "Trainer",
+        "ja": "トレーナー",
+        "zh-TW": "訓練家"
+      },
+      "subtypes": [
+        "Supporter"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Rare Ultra",
+        "ja": "Rare Ultra",
+        "zh-TW": "Rare Ultra"
+      },
+      "number": "TG26",
+      "artist": "kirisAki",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG26_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG26",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 2.99,
+            "mid": 3.93,
+            "high": 96.69,
+            "market": 3.55,
+            "directLow": 5
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG26",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "averageSellPrice": 2.99,
+          "lowPrice": 1.59,
+          "trendPrice": 2.75,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.59,
+          "avg1": 3.51,
+          "avg7": 3.15,
+          "avg30": 3.18,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG27",
+      "name": {
+        "en": "Raihan",
+        "ja": "Raihan",
+        "zh-TW": "Raihan"
+      },
+      "supertype": {
+        "en": "Trainer",
+        "ja": "トレーナー",
+        "zh-TW": "訓練家"
+      },
+      "subtypes": [
+        "Supporter"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Rare Ultra",
+        "ja": "Rare Ultra",
+        "zh-TW": "Rare Ultra"
+      },
+      "number": "TG27",
+      "artist": "take",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG27_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG27",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 1.75,
+            "mid": 2.98,
+            "high": 4321,
+            "market": 2.84,
+            "directLow": 3.38
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG27",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 2.76,
+          "lowPrice": 1,
+          "trendPrice": 2.57,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.48,
+          "avg1": 2.85,
+          "avg7": 2.51,
+          "avg30": 2.77,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG28",
+      "name": {
+        "en": "Sordward & Shielbert",
+        "ja": "Sordward & Shielbert",
+        "zh-TW": "Sordward & Shielbert"
+      },
+      "supertype": {
+        "en": "Trainer",
+        "ja": "トレーナー",
+        "zh-TW": "訓練家"
+      },
+      "subtypes": [
+        "Supporter"
+      ],
+      "types": [],
+      "rarity": {
+        "en": "Rare Ultra",
+        "ja": "Rare Ultra",
+        "zh-TW": "Rare Ultra"
+      },
+      "number": "TG28",
+      "artist": "nagimiso",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG28_hires.png",
+      "attacks": [],
+      "abilities": [],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [],
+      "convertedRetreatCost": 0,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG28",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 0.99,
+            "mid": 1.79,
+            "high": 20,
+            "market": 1.46,
+            "directLow": 1.54
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG28",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 2.05,
+          "lowPrice": 0.65,
+          "trendPrice": 2.14,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.65,
+          "avg1": 2.21,
+          "avg7": 2.05,
+          "avg30": 2.09,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG29",
+      "name": {
+        "en": "Rayquaza VMAX",
+        "ja": "Rayquaza VMAX",
+        "zh-TW": "Rayquaza VMAX"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "VMAX",
+        "Rapid Strike"
+      ],
+      "types": [
+        {
+          "en": "Dragon",
+          "ja": "ドラゴン",
+          "zh-TW": "龍"
+        }
+      ],
+      "hp": "320",
+      "rarity": {
+        "en": "Rare Secret",
+        "ja": "Rare Secret",
+        "zh-TW": "Rare Secret"
+      },
+      "number": "TG29",
+      "artist": "PLANETA Mochizuki",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG29_hires.png",
+      "attacks": [
+        {
+          "name": "Max Burst",
+          "cost": [
+            "Fire",
+            "Lightning"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20+",
+          "text": "You may discard any amount of basic Fire Energy or any amount of basic Lightning Energy from this Pokémon. This attack does 80 more damage for each card you discarded in this way."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Azure Pulse",
+          "text": "Once during your turn, you may discard your hand and draw 3 cards.",
+          "type": "Ability"
+        }
+      ],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG29",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 14.49,
+            "mid": 25,
+            "high": 4321,
+            "market": 21.9,
+            "directLow": 14.49
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG29",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 14.65,
+          "lowPrice": 6.95,
+          "trendPrice": 14.17,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 6.95,
+          "avg1": 12.27,
+          "avg7": 13.5,
+          "avg30": 14.64,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG30",
+      "name": {
+        "en": "Duraludon VMAX",
+        "ja": "Duraludon VMAX",
+        "zh-TW": "Duraludon VMAX"
+      },
+      "supertype": {
+        "en": "Pokémon",
+        "ja": "ポケモン",
+        "zh-TW": "寶可夢"
+      },
+      "subtypes": [
+        "VMAX",
+        "Single Strike"
+      ],
+      "types": [
+        {
+          "en": "Dragon",
+          "ja": "ドラゴン",
+          "zh-TW": "龍"
+        }
+      ],
+      "hp": "330",
+      "rarity": {
+        "en": "Rare Secret",
+        "ja": "Rare Secret",
+        "zh-TW": "Rare Secret"
+      },
+      "number": "TG30",
+      "artist": "PLANETA Mochizuki",
+      "image": "https://images.pokemontcg.io/swsh12tg/TG30_hires.png",
+      "attacks": [
+        {
+          "name": "G-Max Pulverization",
+          "cost": [
+            "Fighting",
+            "Metal",
+            "Metal"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "220",
+          "text": "This attack's damage isn't affected by any effects on your opponent's Active Pokémon."
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Skyscraper",
+          "text": "Prevent all damage done to this Pokémon by attacks from your opponent's Pokémon that have Special Energy attached.",
+          "type": "Ability"
+        }
+      ],
+      "weaknesses": [],
+      "resistances": [],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG30",
+        "updatedAt": "2026/04/12",
+        "prices": {
+          "holofoil": {
+            "low": 2.13,
+            "mid": 4,
+            "high": 20,
+            "market": 3.63,
+            "directLow": 5.6
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG30",
+        "updatedAt": "2026/04/11",
+        "prices": {
+          "averageSellPrice": 1.94,
+          "lowPrice": 0.9,
+          "trendPrice": 1.88,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.9,
+          "avg1": 2.2,
+          "avg7": 1.95,
+          "avg30": 1.94,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --glass-bg: #ffffff;
+  --border-color: #E6E6E6;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  
+  --accent-start: #10b981;
+  --accent-venue: #3b82f6;
+  --accent-sponsor: #f59e0b;
+  --accent-staff: #ef4444;
+  --accent-speaker: #E666FF;
+
+  --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Full screen sizing */
+  --board-width: min(95vw, 90vh * (16 / 9));
+  --board-height: calc(var(--board-width) * (9 / 16));
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board-container {
+  position: relative;
+  width: var(--board-width);
+  height: var(--board-height);
+  background: white;
+  padding: 10px;
+}
+
+#monopoly-board {
+  width: 100%;
+  height: 100%;
+  border: 0.5px solid var(--border-color);
+  display: grid;
+  background: #fff;
+  position: relative;
+}
+
+.cell {
+  background: var(--card-bg);
+  border: 0.5px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.cell:hover {
+  background: #f8fafc;
+  z-index: 10;
+}
+
+.cell-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cell-header {
+  flex-basis: 25%;
+  width: 100%;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cell-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 4px;
+}
+
+.swift-logo {
+  font-size: 2.2rem;
+  opacity: 0.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Directional Card Orientation - Inward Facing */
+.cell.side-bottom .cell-inner { flex-direction: column; }
+.cell.side-top .cell-inner { flex-direction: column-reverse; }
+
+.cell.side-left .cell-inner { flex-direction: row-reverse; }
+.cell.side-left .cell-header {
+  flex-basis: auto; width: 25%; height: 100%;
+  writing-mode: vertical-rl; text-orientation: mixed;
+}
+.cell.side-left .cell-body { flex-direction: column; width: 75%; }
+
+.cell.side-right .cell-inner { flex-direction: row; }
+.cell.side-right .cell-header {
+  flex-basis: auto; width: 25%; height: 100%;
+  writing-mode: vertical-lr; text-orientation: mixed;
+}
+.cell.side-right .cell-body { flex-direction: column; width: 75%; }
+
+.session-info {
+  width: 100%;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.session-info .date { font-size: 12px; font-weight: 600; }
+.session-info .time { font-size: 12px; font-weight: 400; }
+
+#board-center-content {
+  grid-column: 2 / -2;
+  grid-row: 2 / -2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 40px;
+  text-align: center;
+}
+
+.center-logo h1 { font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; }
+.center-title { font-size: clamp(1.2rem, 3vw, 2.5rem); margin: 10px 0; }
+.center-description { font-size: 1.1rem; max-width: 600px; color: #64748b; }
+
+.cta-button {
+  background: #3b82f6;
+  color: white;
+  padding: 15px 40px;
+  border-radius: 50px;
+  font-weight: 600;
+  margin-top: 30px;
+}
+
+.cell.corner {
+  background: transparent;
+  font-weight: 800;
+  font-size: 0.8rem;
+  z-index: 5;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Inner quarter-circle element for each corner */
+.corner-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.corner-icon { font-size: 1.5rem; color: #fff; }
+
+/* Fixed Quarter-circle corners - rounded cutout at OUTER board corner */
+.start-inner {
+  background-color: var(--accent-start);
+  border-bottom-right-radius: 100%;
+}
+.venue-inner {
+  background-color: var(--accent-venue);
+  border-bottom-left-radius: 100%;
+}
+.sponsor-inner {
+  background-color: var(--accent-sponsor);
+  border-top-left-radius: 100%;
+}
+.staff-inner {
+  background-color: var(--accent-staff);
+  border-top-right-radius: 100%;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-overlay.active { display: flex; }
+.modal-content { background: #fff; padding: 30px; border-radius: 20px; width: 500px; position: relative; }
+.close-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; }
