@@ -27,6 +27,7 @@ export function useRoute(
   const [waypoints, setWaypoints] = useState<GPSCoordinate[]>([])
   const [routeStatus, setRouteStatus] = useState<RouteStatus>(INITIAL_ROUTE_STATUS)
   const currentPositionRef = useRef<GPSCoordinate | null>(initialPosition ?? null)
+  const lastWsPositionAtRef = useRef(0)
 
   useEffect(() => {
     if (initialPosition && !currentPositionRef.current) {
@@ -38,6 +39,7 @@ export function useRoute(
     if (update.type === 'position') {
       const data = update.data as { latitude?: number; longitude?: number; progress?: number }
       if (data.latitude !== undefined && data.longitude !== undefined) {
+        lastWsPositionAtRef.current = Date.now()
         const coord: GPSCoordinate = { latitude: data.latitude, longitude: data.longitude }
         currentPositionRef.current = coord
         setRouteStatus((prev) => ({
@@ -83,6 +85,37 @@ export function useRoute(
       ws.close()
     }
   }, [handleWsMessage])
+
+  useEffect(() => {
+    if (routeStatus.state !== 'moving' && routeStatus.state !== 'paused') return
+
+    let cancelled = false
+    const timer = setInterval(async () => {
+      // WS 仍在穩定推送時，不要用輪詢結果覆蓋，避免位置拉扯
+      if (Date.now() - lastWsPositionAtRef.current < 1500) return
+
+      try {
+        const status = await apiClient.getStatus()
+        if (cancelled) return
+        setRouteStatus((prev) => {
+          const next: RouteStatus = {
+            state: status.state ?? prev.state,
+            currentPosition: status.currentPosition ?? prev.currentPosition,
+            progress: status.progress ?? prev.progress,
+          }
+          currentPositionRef.current = next.currentPosition
+          return next
+        })
+      } catch {
+        // fallback polling should be silent
+      }
+    }, 500)
+
+    return () => {
+      cancelled = true
+      clearInterval(timer)
+    }
+  }, [routeStatus.state])
 
   const addWaypoint = useCallback((coord: GPSCoordinate) => {
     setWaypoints((prev) => [...prev, coord])
