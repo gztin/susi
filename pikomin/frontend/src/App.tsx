@@ -1,12 +1,14 @@
-import { useState, useCallback, useEffect } from 'react'
-import { useDevice } from './hooks/useDevice'
-import { useRoute } from './hooks/useRoute'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import './app.css'
+import { Navigation, Save, X } from 'lucide-react'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
-import { RoutePanel } from './components/RoutePanel'
-import JoystickController from './components/JoystickController'
 import MapInterface from './components/MapInterface'
-import type { GPSCoordinate, MoveVector } from './types'
+import { RoutePanel } from './components/RoutePanel'
+import { useDevice } from './hooks/useDevice'
+import { useRoute } from './hooks/useRoute'
+import { useTunnel } from './hooks/useTunnel'
+import type { GPSCoordinate } from './types'
 
 type Mode = 'single' | 'route'
 
@@ -17,13 +19,37 @@ interface Toast {
 
 let toastIdCounter = 0
 
+function parseCoordinateInput(value: string): GPSCoordinate | null {
+  const parts = value.split(',').map((segment) => Number.parseFloat(segment.trim()))
+  if (parts.length !== 2 || parts.some((part) => Number.isNaN(part))) {
+    return null
+  }
+
+  return { latitude: parts[0], longitude: parts[1] }
+}
+
+function formatCoordinate(coord: GPSCoordinate | null): string {
+  if (!coord) return '尚未設定'
+  return `${coord.latitude.toFixed(6)}, ${coord.longitude.toFixed(6)}`
+}
+
 export default function App() {
   const [mode, setMode] = useState<Mode>('single')
-  const [joystickSpeed, setJoystickSpeed] = useState(3)
   const [toasts, setToasts] = useState<Toast[]>([])
   const [myPosition, setMyPosition] = useState<GPSCoordinate | null>(null)
+  const [manualCoordInput, setManualCoordInput] = useState('')
+  const [destinationInput, setDestinationInput] = useState('')
+  const [rsdInput, setRsdInput] = useState('')
+  const [isLocating, setIsLocating] = useState(false)
+  const [isFlying, setIsFlying] = useState(false)
+  const [isSavingRsd, setIsSavingRsd] = useState(false)
+  const [hasResetGPS, setHasResetGPS] = useState(false)
+  const [isStatusModalOpen, setIsStatusModalOpen] = useState(false)
+  const statusTriggerRef = useRef<HTMLButtonElement>(null)
+  const showToastRef = useRef<(message: string) => void>(() => {})
 
   const { devices, selectedDevice, selectDevice, isLoading, error } = useDevice()
+  const tunnel = useTunnel()
   const {
     waypoints,
     addWaypoint,
@@ -35,22 +61,17 @@ export default function App() {
     resumeRoute,
     stopRoute,
     resetLocation,
-    joystickMove,
-  } = useRoute(selectedDevice?.id ?? null, myPosition)
+  } = useRoute(selectedDevice?.id ?? null, myPosition, (message) => {
+    showToastRef.current(`路徑推送失敗：${message}`)
+  })
 
-  // 追蹤是否已經重置過 GPS
-  const [hasResetGPS, setHasResetGPS] = useState(false)
-
-  // 取得瀏覽器定位作為初始位置（只在首次載入且未重置過時執行）
   useEffect(() => {
     if (navigator.geolocation && selectedDevice && !myPosition && !hasResetGPS) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
-          const coord = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
-          setMyPosition(coord)
-          // 不自動設定到設備，讓用戶手動選擇
+          setMyPosition({ latitude: pos.coords.latitude, longitude: pos.coords.longitude })
         },
-        () => {}
+        () => {},
       )
     }
   }, [selectedDevice, myPosition, hasResetGPS])
@@ -59,9 +80,13 @@ export default function App() {
     const id = ++toastIdCounter
     setToasts((prev) => [...prev, { id, message }])
     setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id))
+      setToasts((prev) => prev.filter((toast) => toast.id !== id))
     }, 3000)
   }, [])
+
+  useEffect(() => {
+    showToastRef.current = showToast
+  }, [showToast])
 
   const handleMapClick = useCallback(
     async (coord: GPSCoordinate) => {
@@ -69,52 +94,33 @@ export default function App() {
         addWaypoint(coord)
         return
       }
-      // single mode
+
       if (!selectedDevice) {
         showToast('請先選擇裝置')
         return
       }
+
       try {
         await apiClient.setLocation({
           latitude: coord.latitude,
           longitude: coord.longitude,
           deviceId: selectedDevice.id,
         })
+        setMyPosition(coord)
+        setHasResetGPS(false)
+        showToast('位置已更新')
       } catch (err) {
         showToast(err instanceof Error ? err.message : '設定位置失敗')
       }
     },
-    [mode, selectedDevice, addWaypoint, showToast],
+    [addWaypoint, mode, selectedDevice, showToast],
   )
-
-  const handleJoystickMove = useCallback(
-    async (vector: MoveVector) => {
-      if (routeStatus.state === 'moving') {
-        try {
-          await pauseRoute()
-        } catch {
-          // ignore pause errors
-        }
-      }
-      try {
-        await joystickMove(vector, joystickSpeed)
-      } catch (err) {
-        showToast(err instanceof Error ? err.message : '搖桿移動失敗')
-      }
-    },
-    [routeStatus.state, pauseRoute, joystickMove, joystickSpeed, showToast],
-  )
-
-  const handleJoystickRelease = useCallback(() => {
-    // nothing needed on release
-  }, [])
 
   const handleStartRoute = useCallback(
     async (speed: number, loop: boolean) => {
       try {
         await startRoute(speed, loop)
       } catch (err) {
-        // 409 代表路徑已在執行，先停止再重試
         if (err instanceof Error && 'status' in err && (err as { status: number }).status === 409) {
           try {
             await stopRoute()
@@ -127,7 +133,7 @@ export default function App() {
         }
       }
     },
-    [startRoute, stopRoute, showToast],
+    [showToast, startRoute, stopRoute],
   )
 
   const handlePauseRoute = useCallback(async () => {
@@ -149,386 +155,412 @@ export default function App() {
   const handleStopRoute = useCallback(async () => {
     try {
       await stopRoute()
-      showToast('✅ 已停止種花')
+      showToast('✅ 已停止路徑')
     } catch (err) {
       showToast(err instanceof Error ? err.message : '停止路徑失敗')
     }
-  }, [stopRoute, showToast])
+  }, [showToast, stopRoute])
 
+  const handleLocateMe = useCallback(() => {
+    if (!navigator.geolocation) {
+      showToast('瀏覽器不支援定位')
+      return
+    }
+
+    setIsLocating(true)
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const coord = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
+        setMyPosition(coord)
+        setManualCoordInput(formatCoordinate(coord))
+        setHasResetGPS(false)
+        setIsLocating(false)
+        showToast('位置取得成功')
+      },
+      (err) => {
+        setIsLocating(false)
+        showToast(`無法取得位置：${err.message}`)
+      },
+      { enableHighAccuracy: true, timeout: 10000 },
+    )
+  }, [showToast])
+
+  const handleApplyManualPosition = useCallback(async () => {
+    const coord = parseCoordinateInput(manualCoordInput)
+    if (!coord) {
+      showToast('請輸入正確座標格式：25.033, 121.565')
+      return
+    }
+
+    setMyPosition(coord)
+    setHasResetGPS(false)
+    showToast('起始座標已更新')
+  }, [manualCoordInput, showToast])
+
+  const handleFlyTo = useCallback(async () => {
+    if (!selectedDevice) {
+      showToast('請先選擇裝置')
+      return
+    }
+
+    const coord = parseCoordinateInput(destinationInput)
+    if (!coord) {
+      showToast('請輸入正確目的地座標')
+      return
+    }
+
+    setIsFlying(true)
+    try {
+      await apiClient.setLocation({ ...coord, deviceId: selectedDevice.id })
+      setMyPosition(coord)
+      setDestinationInput('')
+      setHasResetGPS(false)
+      showToast('已飛行到目的地')
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : '飛行失敗')
+    } finally {
+      setIsFlying(false)
+    }
+  }, [destinationInput, selectedDevice, showToast])
+
+  const handleResetGps = useCallback(async () => {
+    try {
+      await resetLocation()
+      setMyPosition(null)
+      setManualCoordInput('')
+      setDestinationInput('')
+      setHasResetGPS(true)
+      showToast('GPS 已重置，可重新設定位置')
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : 'Reset 失敗')
+    }
+  }, [resetLocation, showToast])
+
+  const handleSaveRsd = useCallback(async () => {
+    if (!selectedDevice) {
+      showToast('請先選擇裝置')
+      return
+    }
+
+    let address: string
+    let port: number
+
+    const spaceParts = rsdInput.trim().split(/\s+/)
+    if (spaceParts.length === 2) {
+      address = spaceParts[0]
+      port = Number.parseInt(spaceParts[1], 10)
+    } else {
+      // 支援 "address:port" 格式（如 RSD ready 輸出）
+      const lastColon = rsdInput.lastIndexOf(':')
+      const maybPort = Number.parseInt(rsdInput.slice(lastColon + 1), 10)
+      if (lastColon === -1 || Number.isNaN(maybPort) || maybPort < 1 || maybPort > 65535) {
+        showToast('格式錯誤，請輸入：fd2f:e968:f9d3::1:62112')
+        return
+      }
+      address = rsdInput.slice(0, lastColon)
+      port = maybPort
+    }
+
+    if (Number.isNaN(port)) {
+      showToast('Port 必須是數字')
+      return
+    }
+
+    setIsSavingRsd(true)
+    try {
+      await apiClient.setRsd(selectedDevice.id, address, port)
+      showToast('RSD 設定完成')
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : 'RSD 設定失敗')
+    } finally {
+      setIsSavingRsd(false)
+    }
+  }, [rsdInput, selectedDevice, showToast])
+
+  const currentPosition = routeStatus.currentPosition ?? myPosition
   const showDisconnectBanner = !isLoading && selectedDevice === null
 
+  useEffect(() => {
+    if (!isStatusModalOpen) return
+    const panel = document.getElementById('status-modal-panel')
+    if (!panel) return
+    const getFocusables = () =>
+      Array.from(panel.querySelectorAll<HTMLElement>(
+        'button:not(:disabled), input:not(:disabled), select:not(:disabled), [tabindex]:not([tabindex="-1"])'
+      ))
+    getFocusables()[0]?.focus()
+    const trapFocus = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return
+      const focusables = getFocusables()
+      if (!focusables.length) return
+      const first = focusables[0]
+      const last = focusables[focusables.length - 1]
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus() }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus() }
+      }
+    }
+    document.addEventListener('keydown', trapFocus)
+    return () => {
+      document.removeEventListener('keydown', trapFocus)
+      statusTriggerRef.current?.focus()
+    }
+  }, [isStatusModalOpen])
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsStatusModalOpen(false)
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden', background: '#F8FAFC', color: '#0F172A', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
-      {/* Top toolbar */}
-      <div style={styles.toolbar}>
-        <span style={styles.appName}>📍 iOS GPS 模擬器</span>
-        <div style={styles.modeToggle}>
-          <button
-            onClick={() => setMode('single')}
-            style={{ ...styles.modeBtn, ...(mode === 'single' ? styles.modeBtnActive : {}) }}
-          >
-            單點模式
-          </button>
-          <button
-            onClick={() => setMode('route')}
-            style={{ ...styles.modeBtn, ...(mode === 'route' ? styles.modeBtnActive : {}) }}
-          >
-            路徑模式
-          </button>
-        </div>
-      </div>
+    <div className="app-shell">
+      <section className="map-stage map-stage-full">
+        <MapInterface
+          mode={mode}
+          currentPosition={currentPosition}
+          waypoints={waypoints}
+          onMapClick={handleMapClick}
+        />
+      </section>
 
-      {/* Disconnect warning banner */}
-      {showDisconnectBanner && (
-        <div style={styles.disconnectBanner}>
-          ⚠️ 未偵測到裝置，請透過 USB 連接 iPhone
-        </div>
-      )}
+      <div className="overlay-shell">
+        {showDisconnectBanner && (
+          <div className="disconnect-banner" role="alert" aria-live="assertive">未偵測到裝置，請透過 USB 連接 iPhone 或確認 tunneld 已啟動</div>
+        )}
 
-      {/* Main content */}
-      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-        {/* Left panel */}
-        <div style={styles.leftPanel}>
-          <div style={styles.section}>
-            <DeviceStatus devices={devices} selectedDevice={selectedDevice} onSelectDevice={selectDevice} isLoading={isLoading} error={error} />
-            
-            {/* Reset GPS 按鈕 - 只在有位置信息或正在模擬時顯示 */}
-            {selectedDevice && (routeStatus.currentPosition || myPosition || routeStatus.state !== 'idle') && (
-              <div style={{ marginTop: 8, display: 'flex', justifyContent: 'flex-end' }}>
-                <button
-                  style={{ fontSize: 11, padding: '4px 10px', cursor: 'pointer', borderRadius: 6, background: '#FEF2F2', color: '#DC2626', border: '1px solid #FECACA', fontWeight: 500 }}
-                  onClick={async () => {
-                    try {
-                      // 重置後端 GPS 模擬
-                      await resetLocation()
-                      // 清除前端位置狀態，讓用戶可以重新設定
-                      setMyPosition(null)
-                      // 標記已經重置過，防止自動載入座標
-                      setHasResetGPS(true)
-                      showToast('GPS 已重置，可重新設定位置')
-                    } catch (err) {
-                      showToast(err instanceof Error ? err.message : 'Reset 失敗')
-                    }
-                  }}
-                >
+        <main className="workspace workspace-overlay">
+          <aside className="sidebar sidebar-floating">
+          <section className="panel panel-hero">
+            <div className="panel-heading">
+              <div>
+                <p className="panel-kicker">裝置與狀態</p>
+                <h2>{currentPosition ? formatCoordinate(currentPosition) : '尚未設定定位座標'}</h2>
+              </div>
+            </div>
+
+            <DeviceStatus
+              devices={devices}
+              selectedDevice={selectedDevice}
+              onSelectDevice={selectDevice}
+              isLoading={isLoading}
+              error={error}
+            />
+
+            <label className="field">
+              <span>操作模式</span>
+              <select
+                value={mode}
+                onChange={(e) => setMode(e.target.value as Mode)}
+                aria-label="操作模式"
+              >
+                <option value="single">單點定位</option>
+                <option value="route">路徑模式</option>
+              </select>
+            </label>
+            <p className="helper-text" aria-live="polite">
+              {mode === 'single'
+                ? '點擊地圖直接移動裝置定位'
+                : '點擊地圖加入路徑點'}
+            </p>
+
+            <div className="action-row">
+              <button ref={statusTriggerRef} className="secondary-button" onClick={() => setIsStatusModalOpen(true)}>
+                定位設定
+              </button>
+              {currentPosition && (
+                <button className="ghost-button danger" onClick={handleResetGps}>
                   Reset GPS
                 </button>
+              )}
+            </div>
+
+            <div className="inline-route-panel">
+              <RoutePanel
+                waypoints={waypoints}
+                routeStatus={routeStatus}
+                onStartRoute={handleStartRoute}
+                onPauseRoute={handlePauseRoute}
+                onResumeRoute={handleResumeRoute}
+                onStopRoute={handleStopRoute}
+              />
+            </div>
+          </section>
+          </aside>
+        </main>
+
+        <aside className="route-data-sidebar">
+          <section className="route-data-panel">
+            <div className="panel-heading compact">
+              <div>
+                <p className="panel-kicker">新增路徑點</p>
+                <h2>路線資料</h2>
               </div>
-            )}
-            
-            {/* 位置信息顯示 */}
-            {(routeStatus.currentPosition || myPosition) && (
-              <div style={{ marginTop: 8 }}>
-                <div style={{ fontSize: 12, color: '#64748B', lineHeight: 1.6 }}>
-                  <div style={{ fontWeight: 500, color: '#374151', marginBottom: 2 }}>
-                    📍 {routeStatus.currentPosition ? '模擬位置' : '目前位置'}
-                    {routeStatus.state !== 'idle' && ` (${routeStatus.state === 'moving' ? '移動中' : '暫停'})`}
-                  </div>
-                  <div>緯度：{(routeStatus.currentPosition ?? myPosition)!.latitude.toFixed(6)}</div>
-                  <div>經度：{(routeStatus.currentPosition ?? myPosition)!.longitude.toFixed(6)}</div>
-                </div>
-              </div>
-            )}
-            {!myPosition && (
-              <div style={{ marginTop: 8 }}>
-                <div style={{ fontSize: 12, color: '#64748B', marginBottom: 6, fontWeight: 500 }}>📍 設備目前座標：</div>
-                <button
-                  style={{ width: '100%', fontSize: 13, padding: '8px', cursor: 'pointer', borderRadius: 6, background: '#3B82F6', color: '#fff', border: 'none', marginBottom: 8, fontWeight: 500 }}
-                  onClick={() => {
-                    if (!navigator.geolocation) {
-                      showToast('瀏覽器不支援定位')
-                      return
-                    }
-                    navigator.geolocation.getCurrentPosition(
-                      (pos) => {
-                        const coord = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
-                        setMyPosition(coord)
-                        // 重新啟用自動定位後，清除重置標記
-                        setHasResetGPS(false)
-                        showToast('位置取得成功')
-                      },
-                      (err) => showToast(`無法取得位置：${err.message}，請手動輸入`),
-                      { enableHighAccuracy: true, timeout: 10000 }
-                    )
-                  }}
-                >
-                  📡 使用瀏覽器定位
+              {waypoints.length > 0 && routeStatus.state === 'idle' && (
+                <button className="ghost-button" onClick={clearWaypoints}>
+                  清除全部
                 </button>
-                <div style={{ fontSize: 11, color: '#94A3B8', marginBottom: 6 }}>或手動輸入：</div>
-                <div style={{ display: 'flex', gap: 6 }}>
-                  <input
-                    id="coord-input"
-                    type="text"
-                    placeholder="25.033, 121.565"
-                    style={{ flex: 1, fontSize: 13, padding: '7px 10px', borderRadius: 6, border: '1px solid #E2E8F0', background: '#fff', color: '#0F172A', outline: 'none' }}
-                    onKeyDown={async (e) => {
-                      if (e.key === 'Enter') {
-                        const val = (e.target as HTMLInputElement).value
-                        const parts = val.split(',').map(s => parseFloat(s.trim()))
-                        if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
-                          setMyPosition({ latitude: parts[0], longitude: parts[1] })
-                          setHasResetGPS(false) // 清除重置標記
-                        }
-                      }
-                    }}
-                  />
-                  <button
-                    style={{ fontSize: 13, padding: '7px 14px', cursor: 'pointer', borderRadius: 6, background: '#3B82F6', color: '#fff', border: 'none', fontWeight: 500 }}
-                    onClick={() => {
-                      const input = document.getElementById('coord-input') as HTMLInputElement
-                      const val = input?.value ?? ''
-                      const parts = val.split(',').map(s => parseFloat(s.trim()))
-                      if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
-                        setMyPosition({ latitude: parts[0], longitude: parts[1] })
-                        setHasResetGPS(false) // 清除重置標記
-                      }
-                    }}
-                  >
-                    設定
-                  </button>
-                </div>
-                <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>從手機地圖複製座標貼上</div>
-              </div>
-            )}
-            {myPosition && (
-              <div style={{ marginTop: 8 }}>
-                <div style={{ fontSize: 12, color: '#64748B', marginBottom: 6, fontWeight: 500 }}>✈️ 飛行到目的地：</div>
-                <div style={{ display: 'flex', gap: 6 }}>
-                  <input
-                    id="dest-input"
-                    type="text"
-                    placeholder="25.033, 121.565"
-                    style={{ flex: 1, fontSize: 13, padding: '7px 10px', borderRadius: 6, border: '1px solid #E2E8F0', background: '#fff', color: '#0F172A', outline: 'none' }}
-                    onKeyDown={async (e) => {
-                      if (e.key === 'Enter') {
-                        const val = (e.target as HTMLInputElement).value
-                        const parts = val.split(',').map(s => parseFloat(s.trim()))
-                        if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) && selectedDevice) {
-                          const coord = { latitude: parts[0], longitude: parts[1] }
-                          try {
-                            await apiClient.setLocation({ ...coord, deviceId: selectedDevice.id })
-                            // 更新本地位置狀態，確保顯示新的座標
-                            setMyPosition(coord)
-                            setHasResetGPS(false) // 清除重置標記
-                            // 清除輸入框
-                            ;(e.target as HTMLInputElement).value = ''
-                          } catch (err) { showToast(err instanceof Error ? err.message : '飛行失敗') }
-                        }
-                      }
-                    }}
-                  />
-                  <button
-                    style={{ fontSize: 13, padding: '7px 14px', cursor: 'pointer', borderRadius: 6, background: '#10B981', color: '#fff', border: 'none', fontWeight: 500 }}
-                    onClick={async () => {
-                      const input = document.getElementById('dest-input') as HTMLInputElement
-                      const val = input?.value ?? ''
-                      const parts = val.split(',').map(s => parseFloat(s.trim()))
-                      if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) && selectedDevice) {
-                        const coord = { latitude: parts[0], longitude: parts[1] }
-                        try {
-                          await apiClient.setLocation({ ...coord, deviceId: selectedDevice.id })
-                          // 更新本地位置狀態，確保顯示新的座標
-                          setMyPosition(coord)
-                          setHasResetGPS(false) // 清除重置標記
-                          // 清除輸入框
-                          input.value = ''
-                        } catch (err) { showToast(err instanceof Error ? err.message : '飛行失敗') }
-                      }
-                    }}
-                  >
-                    飛行
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div style={styles.section}>
-            {/* RSD 設定 */}
-            <div style={{ fontSize: 12, color: '#64748B', marginBottom: 6, fontWeight: 500 }}>🔗 RSD Tunnel（每次重連後更新）</div>
-            <div style={{ display: 'flex', gap: 6 }}>
-              <input
-                id="rsd-input"
-                type="text"
-                placeholder="fd60:90c7:8df9::1 56177"
-                style={{ flex: 1, fontSize: 13, padding: '7px 10px', borderRadius: 6, border: '1px solid #E2E8F0', background: '#fff', color: '#0F172A', outline: 'none' }}
-              />
-              <button
-                style={{ fontSize: 13, padding: '7px 14px', cursor: 'pointer', borderRadius: 6, background: '#3B82F6', color: '#fff', border: 'none', whiteSpace: 'nowrap', fontWeight: 500 }}
-                onClick={async () => {
-                  const input = document.getElementById('rsd-input') as HTMLInputElement
-                  const val = input?.value.trim() ?? ''
-                  const parts = val.split(/\s+/)
-                  if (parts.length !== 2 || !selectedDevice) {
-                    alert('格式錯誤，請輸入：address port\n例如：fd60:90c7:8df9::1 56177')
-                    return
-                  }
-                  const port = parseInt(parts[1])
-                  if (isNaN(port)) {
-                    alert('Port 必須是數字')
-                    return
-                  }
-                  try {
-                    await apiClient.setRsd(selectedDevice.id, parts[0], port)
-                    alert(`✅ RSD 設定成功！\n裝置：${selectedDevice.name}\nAddress：${parts[0]}\nPort：${port}`)
-                  } catch (e) {
-                    alert(`❌ RSD 設定失敗：${e instanceof Error ? e.message : '未知錯誤'}`)
-                  }
-                }}
-              >
-                設定
-              </button>
+              )}
             </div>
-            <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>格式：address 空格 port</div>
-          </div>
-
-          <div style={styles.section}>
-            <RoutePanel
-              waypoints={waypoints}
-              routeStatus={routeStatus}
-              onRemoveWaypoint={removeWaypoint}
-              onClearWaypoints={clearWaypoints}
-              onAddWaypoint={addWaypoint}
-              onStartRoute={handleStartRoute}
-              onPauseRoute={handlePauseRoute}
-              onResumeRoute={handleResumeRoute}
-              onStopRoute={handleStopRoute}
-            />
-          </div>
-
-          <div style={{ ...styles.section, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <label style={{ fontSize: '13px', color: '#64748B', whiteSpace: 'nowrap', fontWeight: 500 }}>搖桿速度</label>
-              <input
-                type="range"
-                min={1}
-                max={10}
-                step={1}
-                value={joystickSpeed}
-                onChange={(e) => setJoystickSpeed(Number(e.target.value))}
-                style={{ flex: 1, accentColor: '#3B82F6' }}
-              />
-              <span style={{ fontSize: '13px', color: '#374151', minWidth: '48px', fontWeight: 600 }}>{joystickSpeed} m/s</span>
+            <div className="waypoint-list">
+              {waypoints.length === 0 ? (
+                <div className="empty-note">先點地圖加入路徑點，這裡會顯示已加入的路線資料。</div>
+              ) : (
+                waypoints.map((wp, index) => (
+                  <div key={`${wp.latitude}-${wp.longitude}-${index}`} className="waypoint-item">
+                    <div className="waypoint-index">{index + 1}</div>
+                    <div className="waypoint-text">
+                      <strong>{wp.latitude.toFixed(5)}</strong>
+                      <span>{wp.longitude.toFixed(5)}</span>
+                    </div>
+                    {(routeStatus.state === 'idle') && (
+                      <button className="waypoint-remove" onClick={() => removeWaypoint(index)}>
+                        移除
+                      </button>
+                    )}
+                  </div>
+                ))
+              )}
             </div>
-            <JoystickController
-              speed={joystickSpeed}
-              onMove={handleJoystickMove}
-              onRelease={handleJoystickRelease}
-              disabled={!selectedDevice}
-            />
-          </div>
-        </div>
-
-        {/* Map */}
-        <div style={{ flex: 1, height: '100%' }}>
-          <MapInterface
-            mode={mode}
-            currentPosition={routeStatus.currentPosition ?? myPosition}
-            waypoints={waypoints}
-            onMapClick={handleMapClick}
-          />
-        </div>
+          </section>
+        </aside>
       </div>
 
-      {/* Toast notifications */}
-      <div style={styles.toastContainer}>
+      <div className="toast-container" role="status" aria-live="polite" aria-atomic="false">
         {toasts.map((toast) => (
-          <div key={toast.id} style={{
-            ...styles.toast,
-            background: toast.message.startsWith('✅') ? '#10B981' : '#0F172A',
-          }}>
+          <div
+            key={toast.id}
+            className={`toast ${toast.message.startsWith('✅') ? 'is-success' : ''}`}
+          >
             {toast.message}
           </div>
         ))}
       </div>
+
+      {isStatusModalOpen && (
+        <div className="modal-backdrop" onClick={() => setIsStatusModalOpen(false)}>
+          <div
+            id="status-modal-panel"
+            className="modal-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="status-modal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="modal-header">
+              <h3 id="status-modal-title">定位設定</h3>
+              <button className="ghost-button modal-close-btn" onClick={() => setIsStatusModalOpen(false)} aria-label="關閉">
+                <X size={20} aria-hidden="true" />
+              </button>
+            </div>
+            <div className="modal-body">
+              <button className="primary-button" onClick={handleLocateMe} disabled={isLocating}>
+                {isLocating ? '定位中...' : '重新取得目前位置'}
+              </button>
+
+              {/* Tunnel 狀態區塊 */}
+              <div className={`tunnel-status ${tunnel.tunneldAvailable ? 'tunnel-status--online' : 'tunnel-status--offline'}`}>
+                <span className={`device-led ${tunnel.tunneldAvailable ? 'is-online' : 'is-offline'}`} aria-hidden="true" />
+                <div className="tunnel-status-text">
+                  {tunnel.tunneldAvailable ? (
+                    <>
+                      <strong>Tunneld 自動管理中</strong>
+                      <span className="helper-text">
+                        已偵測到 {tunnel.tunnels.length} 個 tunnel，RSD 自動設定，無需手動輸入。
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <strong>Tunneld 未啟動</strong>
+                      <span className="helper-text">
+                        執行一次 <code>sudo pymobiledevice3 remote tunneld</code> 即可自動管理所有裝置。
+                      </span>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* 手動 RSD 輸入（tunneld 未在線時才顯示） */}
+              {!tunnel.tunneldAvailable && (
+                <label className="field">
+                  <span>手動設定 RSD Address 與 Port</span>
+                  <div className="field-inline">
+                    <input
+                      value={rsdInput}
+                      onChange={(e) => setRsdInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          void handleSaveRsd()
+                        }
+                      }}
+                      placeholder="例如：fd2f:e968:f9d3::1:62112"
+                      disabled={!selectedDevice || isSavingRsd}
+                    />
+                    <button
+                      className="secondary-button"
+                      onClick={() => void handleSaveRsd()}
+                      disabled={!selectedDevice || isSavingRsd}
+                      aria-label={isSavingRsd ? '儲存中' : '儲存 RSD 設定'}
+                    >
+                      {isSavingRsd ? '…' : <Save size={18} aria-hidden="true" />}
+                    </button>
+                  </div>
+                </label>
+              )}
+              <label className="field">
+                <span>起始座標</span>
+                <div className="field-inline">
+                  <input
+                    value={manualCoordInput}
+                    onChange={(e) => setManualCoordInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        void handleApplyManualPosition()
+                      }
+                    }}
+                    placeholder="請輸入起始座標，例如：25.033, 121.565"
+                  />
+                  <button className="secondary-button" onClick={() => void handleApplyManualPosition()} aria-label="套用起始座標">
+                    <Save size={18} aria-hidden="true" />
+                  </button>
+                </div>
+              </label>
+              <label className="field">
+                <span>飛行到目的地</span>
+                <div className="field-inline">
+                  <input
+                    value={destinationInput}
+                    onChange={(e) => setDestinationInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        void handleFlyTo()
+                      }
+                    }}
+                    placeholder="請輸入目的地座標，例如：25.033, 121.565"
+                    disabled={!selectedDevice || isFlying}
+                  />
+                  <button
+                    className="accent-button"
+                    onClick={() => void handleFlyTo()}
+                    disabled={!selectedDevice || isFlying}
+                    aria-label={isFlying ? '移動中' : '飛行'}
+                  >
+                    {isFlying ? '…' : <Navigation size={18} aria-hidden="true" />}
+                  </button>
+                </div>
+              </label>
+              <p className="helper-text">直接貼上 RSD ready 輸出的位址即可，每次重連後需重新更新。</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+
     </div>
   )
-}
-
-const styles: Record<string, React.CSSProperties> = {
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '0 20px',
-    height: '52px',
-    background: '#ffffff',
-    borderBottom: '1px solid #E2E8F0',
-    flexShrink: 0,
-  },
-  appName: {
-    fontSize: '15px',
-    fontWeight: '600',
-    color: '#0F172A',
-    letterSpacing: '-0.01em',
-  },
-  modeToggle: {
-    display: 'flex',
-    gap: '2px',
-    background: '#F1F5F9',
-    borderRadius: '8px',
-    padding: '3px',
-  },
-  modeBtn: {
-    padding: '5px 14px',
-    border: 'none',
-    borderRadius: '6px',
-    cursor: 'pointer',
-    fontSize: '13px',
-    background: 'transparent',
-    color: '#64748B',
-    fontWeight: '500',
-    transition: 'all 0.15s',
-  },
-  modeBtnActive: {
-    background: '#ffffff',
-    color: '#0F172A',
-    fontWeight: '600',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-  },
-  disconnectBanner: {
-    background: '#FEF2F2',
-    color: '#DC2626',
-    padding: '8px 20px',
-    fontSize: '13px',
-    textAlign: 'center',
-    flexShrink: 0,
-    borderBottom: '1px solid #FECACA',
-    fontWeight: '500',
-  },
-  leftPanel: {
-    width: '300px',
-    flexShrink: 0,
-    height: '100%',
-    overflowY: 'auto',
-    background: '#F8FAFC',
-    borderRight: '1px solid #E2E8F0',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  section: {
-    borderBottom: '1px solid #E2E8F0',
-    padding: '14px 16px',
-    background: '#ffffff',
-  },
-  toastContainer: {
-    position: 'fixed',
-    bottom: '24px',
-    right: '24px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '8px',
-    zIndex: 9999,
-    pointerEvents: 'none',
-  },
-  toast: {
-    background: '#0F172A',
-    color: '#ffffff',
-    padding: '10px 16px',
-    borderRadius: '8px',
-    fontSize: '13px',
-    boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
-    maxWidth: '300px',
-    fontWeight: '500',
-  },
 }

@@ -24,6 +24,11 @@ async def start_route(
                 "progress": progress,
             },
         })
+    async def on_route_error(message: str) -> None:
+        await ws_manager.broadcast({
+            "type": "route_error",
+            "data": {"message": message},
+        })
 
     try:
         await route_engine.start_route(
@@ -32,6 +37,7 @@ async def start_route(
             speed=request.speed,
             loop=request.loop,
             on_position_update=on_position_update,
+            on_route_error=on_route_error,
         )
     except RuntimeError as exc:
         raise HTTPException(
