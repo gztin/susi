@@ -562,9 +562,9 @@ function previewPage() {
     .inner_box > *{margin-bottom:20px;}
     ul,ol{padding-left:1.5em;margin:0.5em 0;}
     li{line-height:1.8;}
-    h5.tit{font-size:20px;margin:0 0 20px;color:#bb9157;border-left:4px solid #bb9157;padding-left:10px;display:flex;align-items:center;gap:16px;}
+    h5.tit{font-size:20px;margin:0 0 20px;color:#000;border-left:4px solid #bb9157;padding-left:10px;display:flex;align-items:center;gap:16px;}
     h5.tit::after{content:'';flex:1;height:1px;background:#e8ddd0;}
-    .subT{font-size:14px;margin-bottom:12px;}
+    .subT{color:#fff;font-size:18px;line-height:1.2;background-color:#c4b993;padding:6px 15px;display:inline-block;margin:0 0 15px 0;}
     details summary{cursor:pointer;font-weight:bold;}
     .fold-section{border-bottom:1px solid #e0e0e0;margin-bottom:0;}
     .fold-section-header{display:flex;align-items:center;justify-content:space-between;height:40px;padding:0;cursor:pointer;}
@@ -581,8 +581,8 @@ function previewPage() {
     table.environmental,table.file-table{width:100%;border-collapse:collapse;font-size:14px;border:1px solid #e0d9ce;margin-bottom:12px;}
     table.environmental th,table.file-table th{background:#f8f8f8;border-bottom:2px solid #c8a96e;border-top:1px solid #e0d9ce;border-right:1px solid #e0d9ce;padding:12px 16px;text-align:left;font-weight:500;color:#4c4c4c;}
     table.environmental td,table.file-table td{border-bottom:1px solid #e0d9ce;border-right:1px solid #e0d9ce;padding:12px 16px;vertical-align:middle;color:#4c4c4c;font-size:14px;transition:color 0.15s;}
-    table.environmental tr:hover td,table.file-table tr:hover td{color:#c8a96e;}
-    table.environmental th:last-child,table.file-table th:last-child,table.environmental td:last-child,table.file-table td:last-child{border-right:none;}
+    table.environmental tr:hover td,table.file-table tr:hover td{background-color:#f9f9f9;color:#bb9157;}
+    table.environmental th:last-child,table.file-table th:last-child,table.environmental td:last-child,table.file-table td:last-child{border-right:none;color:#4c4c4c;}
     table.environmental tr:last-child td,table.file-table tr:last-child td{border-bottom:none;}
     .td-download{width:80px;text-align:center;}
     .td-download a{display:block;width:20px;height:18px;background:url(img/icon_downLoad.png) bottom no-repeat;background-size:20px auto;margin:0 auto;text-decoration:none;}

@@ -4,7 +4,7 @@ import type { DeviceInfo } from '../types'
 
 const POLL_INTERVAL_MS = 5000
 
-export function useDevice(): {
+export function useDevice(enabled = true): {
   devices: DeviceInfo[]
   selectedDevice: DeviceInfo | null
   selectDevice: (id: string) => void
@@ -35,6 +35,11 @@ export function useDevice(): {
   }, [])
 
   useEffect(() => {
+    if (!enabled) {
+      setIsLoading(false)
+      return
+    }
+
     fetchDevices()
     intervalRef.current = setInterval(fetchDevices, POLL_INTERVAL_MS)
     return () => {
@@ -42,7 +47,7 @@ export function useDevice(): {
         clearInterval(intervalRef.current)
       }
     }
-  }, [fetchDevices])
+  }, [enabled, fetchDevices])
 
   const selectDevice = useCallback(
     (id: string) => {

@@ -130,6 +130,20 @@ export const apiClient = {
   async getGeolocation(): Promise<{ latitude: number; longitude: number; city: string }> {
     return request('/api/geolocation')
   },
+
+  async getTunnelStatus(): Promise<{
+    tunneldAvailable: boolean
+    tunnels: { udid: string; address: string; port: number; interface: string }[]
+  }> {
+    const data = await request<{
+      tunneld_available: boolean
+      tunnels: { udid: string; address: string; port: number; interface: string }[]
+    }>('/api/tunnel/status')
+    return {
+      tunneldAvailable: data.tunneld_available,
+      tunnels: data.tunnels,
+    }
+  },
 }
 
 const MAX_RETRIES = 5

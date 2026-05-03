@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>網頁編輯器</title>
   <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       background: oklch(93% 0.02 80);
       font-family: 'Microsoft JhengHei', sans-serif;
@@ -15,9 +21,12 @@
     }
 
     .editor-wrapper {
-      display: block;
-      max-width: 980px;
+      display: flex;
+      max-width: 1120px;
+      /* 980 + 20 + 120 */
       margin: 0 auto;
+      gap: 24px;
+      align-items: flex-start;
     }
 
     /* 左側主編輯區 */
@@ -48,8 +57,15 @@
       transition: border-color 0.2s ease-out, background 0.2s ease-out;
       padding-bottom: 52px;
     }
-    .block-item:active { cursor: grabbing; }
-    .block-item.dragging { opacity: 0.35; }
+
+    .block-item:active {
+      cursor: grabbing;
+    }
+
+    .block-item.dragging {
+      opacity: 0.35;
+    }
+
     .block-item.drag-over {
       border-color: oklch(60% 0.08 80);
       background: oklch(97% 0.015 80);
@@ -69,9 +85,15 @@
       font-family: inherit;
       transition: background 0.15s ease-out;
     }
-    .block-close:hover { background: oklch(45% 0.12 25); border-color: oklch(45% 0.12 25); }
 
-    .block-table .table-controls { margin-top: 16px; }
+    .block-close:hover {
+      background: oklch(45% 0.12 25);
+      border-color: oklch(45% 0.12 25);
+    }
+
+    .block-table .table-controls {
+      margin-top: 16px;
+    }
 
     /* contenteditable */
     .block-item [contenteditable] {
@@ -80,18 +102,22 @@
       outline: none;
       line-height: 1.7;
     }
+
     .block-item [contenteditable][data-placeholder][data-empty="true"]::before {
       content: attr(data-placeholder);
       color: oklch(70% 0.02 80);
       pointer-events: none;
     }
-    .block-item [contenteditable][data-placeholder] { position: relative; }
+
+    .block-item [contenteditable][data-placeholder] {
+      position: relative;
+    }
 
     /* 主標題 */
     .block-heading h5.tit {
       font-size: 20px;
       margin: 0 0 4px;
-      color: #bb9157;
+      color: #000;
       border-left: 4px solid #bb9157;
       padding-left: 12px;
       outline: none;
@@ -102,6 +128,7 @@
       align-items: center;
       gap: 16px;
     }
+
     .block-heading h5.tit::after {
       content: '';
       flex: 1;
@@ -110,11 +137,16 @@
     }
 
     /* 副標題 */
-    .block-subheading .subT {
-      font-size: 15px;
+    .subT {
+      color: #fff;
+      font-size: 18px;
+      line-height: 1.2;
+      background-color: #c4b993;
+      padding: 6px 15px;
+      display: inline-block;
+      margin: 0 0 15px 0;
       outline: none;
       font-weight: 500;
-      color: oklch(30% 0.02 80);
       letter-spacing: 0.02em;
     }
 
@@ -126,6 +158,7 @@
       padding-bottom: 10px;
       border-bottom: 1px solid #e0d9ce;
     }
+
     .block-fold .fold-title-input {
       flex: 1;
       font-size: 15px;
@@ -134,11 +167,16 @@
       outline: none;
       font-family: inherit;
     }
-    .block-fold .fold-toggle-btn { display: none; }
+
+    .block-fold .fold-toggle-btn {
+      display: none;
+    }
+
     .block-fold .fold-body {
       padding-top: 12px;
       display: block;
     }
+
     .fold-toolbar {
       display: flex;
       gap: 6px;
@@ -148,11 +186,13 @@
       padding-bottom: 10px;
       border-bottom: 1px dashed oklch(82% 0.03 80);
     }
+
     .fold-toolbar-label {
       font-size: 11px;
       color: oklch(60% 0.04 80);
       letter-spacing: 0.05em;
     }
+
     .fold-toolbar button {
       padding: 3px 10px;
       font-size: 11px;
@@ -164,8 +204,15 @@
       letter-spacing: 0.03em;
       transition: background 0.15s;
     }
-    .fold-toolbar button:hover { background: oklch(94% 0.02 80); }
-    .fold-drop-zone { min-height: 20px; }
+
+    .fold-toolbar button:hover {
+      background: oklch(94% 0.02 80);
+    }
+
+    .fold-drop-zone {
+      min-height: 20px;
+    }
+
     /* 折文內的子區塊 */
     .fold-child {
       border: 1px dashed oklch(80% 0.03 80);
@@ -175,20 +222,41 @@
       background: oklch(99.5% 0.003 80);
       cursor: grab;
     }
-    .fold-child:active { cursor: grabbing; }
-    .fold-child.dragging { opacity: 0.35; }
-    .fold-child.drag-over { border-color: #bb9157; background: oklch(97% 0.015 80); }
+
+    .fold-child:active {
+      cursor: grabbing;
+    }
+
+    .fold-child.dragging {
+      opacity: 0.35;
+    }
+
+    .fold-child.drag-over {
+      border-color: #bb9157;
+      background: oklch(97% 0.015 80);
+    }
+
     .fold-child .fold-child-remove {
       position: absolute;
-      bottom: 8px; left: 12px;
+      bottom: 8px;
+      left: 12px;
       background: oklch(25% 0.01 80);
-      color: #fff; border: none;
-      font-size: 10px; padding: 3px 10px;
-      cursor: pointer; font-family: inherit;
+      color: #fff;
+      border: none;
+      font-size: 10px;
+      padding: 3px 10px;
+      cursor: pointer;
+      font-family: inherit;
       letter-spacing: 0.04em;
     }
-    .fold-child .fold-child-remove:hover { background: oklch(45% 0.12 25); }
-    .fold-child { padding-bottom: 36px; }
+
+    .fold-child .fold-child-remove:hover {
+      background: oklch(45% 0.12 25);
+    }
+
+    .fold-child {
+      padding-bottom: 36px;
+    }
 
     /* 圖片群組 */
     .block-image-group .img-group-grid {
@@ -196,10 +264,15 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
-    .block-image-group .img-group-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+    .block-image-group .img-group-grid.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
     .block-image-group .img-slot {
       position: relative;
     }
+
     .block-image-group .img-slot .upload-area {
       border: 1px dashed oklch(72% 0.04 80);
       padding: 24px 12px;
@@ -215,41 +288,92 @@
       align-items: center;
       justify-content: center;
     }
-    .block-image-group .img-slot .upload-area:hover { border-color: #bb9157; color: #bb9157; }
-    .block-image-group .img-slot input[type=file] { display: none; }
-    .block-image-group .img-slot img { width: 100%; display: block; }
+
+    .block-image-group .img-slot .upload-area:hover {
+      border-color: #bb9157;
+      color: #bb9157;
+    }
+
+    .block-image-group .img-slot input[type=file] {
+      display: none;
+    }
+
+    .block-image-group .img-slot img {
+      width: 100%;
+      display: block;
+    }
+
     .block-image-group .img-slot .slot-remove {
-      position: absolute; top: 4px; right: 4px;
-      background: oklch(25% 0.01 80 / 0.7); color: #fff;
-      border: none; cursor: pointer; font-size: 11px;
-      padding: 2px 6px; display: none;
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: oklch(25% 0.01 80 / 0.7);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 11px;
+      padding: 2px 6px;
+      display: none;
     }
-    .block-image-group .img-slot:hover .slot-remove { display: block; }
+
+    .block-image-group .img-slot:hover .slot-remove {
+      display: block;
+    }
+
     .block-image-group .img-group-controls {
-      display: flex; gap: 8px; margin-top: 12px; align-items: center;
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      align-items: center;
     }
+
     .block-image-group .img-group-controls button {
-      padding: 4px 14px; font-size: 11px; letter-spacing: 0.04em;
+      padding: 4px 14px;
+      font-size: 11px;
+      letter-spacing: 0.04em;
       border: 1px solid oklch(78% 0.03 80);
-      background: transparent; cursor: pointer;
-      font-family: inherit; color: oklch(40% 0.02 80);
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
+      color: oklch(40% 0.02 80);
       transition: background 0.15s;
     }
-    .block-image-group .img-group-controls button:hover { background: oklch(94% 0.02 80); }
+
+    .block-image-group .img-group-controls button:hover {
+      background: oklch(94% 0.02 80);
+    }
+
     .block-image-group .cols-toggle {
-      font-size: 11px; color: oklch(50% 0.03 80); margin-left: auto;
-      display: flex; gap: 4px; align-items: center;
+      font-size: 11px;
+      color: oklch(50% 0.03 80);
+      margin-left: auto;
+      display: flex;
+      gap: 4px;
+      align-items: center;
     }
+
     .block-image-group .cols-toggle button {
-      padding: 3px 8px; font-size: 11px;
+      padding: 3px 8px;
+      font-size: 11px;
       border: 1px solid oklch(78% 0.03 80);
-      background: transparent; cursor: pointer; font-family: inherit;
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
     }
+
     .block-image-group .cols-toggle button.active {
-      background: oklch(25% 0.01 80); color: #fff; border-color: oklch(25% 0.01 80);
+      background: oklch(25% 0.01 80);
+      color: #fff;
+      border-color: oklch(25% 0.01 80);
     }
-    .block-text .cke { border: 1px solid oklch(82% 0.03 80) !important; }
-    .block-item.dragging .cke { pointer-events: none; }
+
+    .block-text .cke {
+      border: 1px solid oklch(82% 0.03 80) !important;
+    }
+
+    .block-item.dragging .cke {
+      pointer-events: none;
+    }
 
     /* 圖片 */
     .block-image .upload-area {
@@ -262,60 +386,123 @@
       letter-spacing: 0.05em;
       transition: border-color 0.2s ease-out, color 0.2s ease-out;
     }
+
     .block-image .upload-area:hover {
       border-color: #bb9157;
       color: #bb9157;
     }
-    .block-image .upload-area.has-image { padding: 0; border: none; }
-    .block-image input[type=file] { display: none; }
-    .block-image .preview-img { width: 740px; max-width: 100%; display: block; }
-    .block-image .img-actions { margin-top: 8px; display: flex; gap: 8px; }
+
+    .block-image .upload-area.has-image {
+      padding: 0;
+      border: none;
+    }
+
+    .block-image input[type=file] {
+      display: none;
+    }
+
+    .block-image .preview-img {
+      width: 740px;
+      max-width: 100%;
+      display: block;
+    }
+
+    .block-image .img-actions {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+    }
+
     .block-image .img-actions button {
-      padding: 4px 12px; font-size: 11px;
+      padding: 4px 12px;
+      font-size: 11px;
       border: 1px solid oklch(78% 0.03 80);
-      background: transparent; cursor: pointer;
-      font-family: inherit; letter-spacing: 0.03em;
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
+      letter-spacing: 0.03em;
       color: oklch(40% 0.02 80);
       transition: background 0.15s;
     }
-    .block-image .img-actions button:hover { background: oklch(94% 0.02 80); }
+
+    .block-image .img-actions button:hover {
+      background: oklch(94% 0.02 80);
+    }
 
     /* 檔案下載 */
     .block-file .file-table {
-      width: 100%; border-collapse: collapse; font-size: 14px;
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
       border: 1px solid #e0d9ce;
     }
+
     .block-file .file-table th {
       background: #f8f8f8;
       border-bottom: 2px solid #c8a96e;
       border-top: 1px solid #e0d9ce;
       border-right: 1px solid #e0d9ce;
-      padding: 12px 16px; text-align: left;
-      font-weight: 500; color: #4c4c4c;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 500;
+      color: #4c4c4c;
       font-family: 'Microsoft JhengHei', sans-serif;
-      letter-spacing: 0.03em; outline: none;
+      letter-spacing: 0.03em;
+      outline: none;
     }
-    .block-file .file-table th:last-child { border-right: none; }
+
+    .block-file .file-table th:last-child {
+      border-right: none;
+    }
+
     .block-file .file-table td {
       border-bottom: 1px solid #e0d9ce;
       border-right: 1px solid #e0d9ce;
-      padding: 12px 16px; vertical-align: middle;
-      color: #4c4c4c; outline: none;
+      padding: 12px 16px;
+      vertical-align: middle;
+      color: #4c4c4c;
+      outline: none;
       transition: color 0.15s;
     }
-    .block-file .file-table td:last-child { border-right: none; }
-    .block-file .file-table tr:hover td { color: #c8a96e; }
-    .block-file .file-table tr:last-child td { border-bottom: none; }
-    .block-file .file-table .td-download { width: 80px; text-align: center; }
-    .block-file .file-table input[type=file] { display: none; }
+
+    .block-file .file-table td:last-child {
+      border-right: none;
+    }
+
+    .block-file .file-table tr:hover td {
+      background-color: #f9f9f9;
+      color: #bb9157;
+    }
+
+    .block-file .file-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .block-file .file-table .td-download {
+      width: 80px;
+      text-align: center;
+    }
+
+    .block-file .file-table input[type=file] {
+      display: none;
+    }
+
     .block-file .file-table .upload-link-btn {
-      background: none; border: none; cursor: pointer;
-      padding: 0; display: inline-block;
-      width: 20px; height: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: inline-block;
+      width: 20px;
+      height: 18px;
       overflow: hidden;
       position: relative;
     }
-    .block-file .file-table .upload-link-btn img { display: none; }
+
+    .block-file .file-table .upload-link-btn img {
+      display: none;
+    }
+
     .block-file .file-table .upload-link-btn::after {
       content: '';
       display: block;
@@ -325,96 +512,176 @@
       background-size: 20px auto;
       transition: background-position 0.15s;
     }
+
     .block-file .file-table .upload-link-btn:hover::after {
       background-position: top;
     }
-        /* URL Modal */
+
+    /* URL Modal */
     #urlModal {
-      display: none; position: fixed; inset: 0;
-      background: oklch(10% 0.01 80 / 0.5); z-index: 9999;
-      align-items: center; justify-content: center;
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: oklch(10% 0.01 80 / 0.5);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
     }
+
     #urlModal .url-modal-box {
       background: oklch(99% 0.005 80);
       border: 1px solid oklch(85% 0.03 80);
-      padding: 28px; width: 420px; max-width: 90vw;
-      display: flex; flex-direction: column; gap: 14px;
+      padding: 28px;
+      width: 420px;
+      max-width: 90vw;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
+
     #urlModal .url-modal-box label {
-      font-size: 13px; color: oklch(35% 0.02 80);
-      letter-spacing: 0.05em; font-weight: 500;
+      font-size: 13px;
+      color: oklch(35% 0.02 80);
+      letter-spacing: 0.05em;
+      font-weight: 500;
     }
+
     #urlModal .url-modal-box input {
-      border: 1px solid oklch(80% 0.03 80); padding: 9px 12px;
-      font-size: 14px; font-family: inherit; width: 100%;
-      background: oklch(98% 0.008 80); outline: none;
+      border: 1px solid oklch(80% 0.03 80);
+      padding: 9px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      width: 100%;
+      background: oklch(98% 0.008 80);
+      outline: none;
       transition: border-color 0.15s;
     }
-    #urlModal .url-modal-box input:focus { border-color: #bb9157; }
-    #urlModal .url-modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
-    #urlModal .url-modal-actions button {
-      padding: 7px 20px; font-size: 12px; letter-spacing: 0.05em;
-      cursor: pointer; font-family: inherit;
-      border: 1px solid oklch(78% 0.03 80); background: transparent;
-      color: oklch(35% 0.02 80); transition: background 0.15s;
-    }
-    #urlModal .url-modal-actions button:hover { background: oklch(94% 0.02 80); }
-    #urlModal .url-modal-actions .btn-confirm {
-      background: oklch(25% 0.01 80); color: oklch(95% 0.005 80);
-      border-color: oklch(25% 0.01 80);
-    }
-    #urlModal .url-modal-actions .btn-confirm:hover { background: oklch(35% 0.01 80); }
 
-    .block-file .file-controls { display: flex; gap: 8px; margin-top: 12px; }
-    .block-file .file-controls button,
-    .block-table .table-controls button {
-      padding: 4px 14px; font-size: 11px; letter-spacing: 0.04em;
+    #urlModal .url-modal-box input:focus {
+      border-color: #bb9157;
+    }
+
+    #urlModal .url-modal-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    #urlModal .url-modal-actions button {
+      padding: 7px 20px;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      font-family: inherit;
       border: 1px solid oklch(78% 0.03 80);
-      background: transparent; cursor: pointer;
-      font-family: inherit; color: oklch(40% 0.02 80);
+      background: transparent;
+      color: oklch(35% 0.02 80);
       transition: background 0.15s;
     }
+
+    #urlModal .url-modal-actions button:hover {
+      background: oklch(94% 0.02 80);
+    }
+
+    #urlModal .url-modal-actions .btn-confirm {
+      background: oklch(25% 0.01 80);
+      color: oklch(95% 0.005 80);
+      border-color: oklch(25% 0.01 80);
+    }
+
+    #urlModal .url-modal-actions .btn-confirm:hover {
+      background: oklch(35% 0.01 80);
+    }
+
+    .block-file .file-controls {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .block-file .file-controls button,
+    .block-table .table-controls button {
+      padding: 4px 14px;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      border: 1px solid oklch(78% 0.03 80);
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
+      color: oklch(40% 0.02 80);
+      transition: background 0.15s;
+    }
+
     .block-file .file-controls button:hover,
-    .block-table .table-controls button:hover { background: oklch(94% 0.02 80); }
+    .block-table .table-controls button:hover {
+      background: oklch(94% 0.02 80);
+    }
+
     .block-file .file-controls .btn-del-row,
     .block-table .table-controls .btn-del-row {
-      color: oklch(45% 0.15 25); border-color: oklch(70% 0.1 25);
+      color: oklch(45% 0.15 25);
+      border-color: oklch(70% 0.1 25);
     }
+
     .block-file .file-controls .btn-del-row:hover,
-    .block-table .table-controls .btn-del-row:hover { background: oklch(96% 0.04 25); }
+    .block-table .table-controls .btn-del-row:hover {
+      background: oklch(96% 0.04 25);
+    }
 
     /* 表格 */
     .block-table .table-editor,
     .block-table .environmental {
-      width: 100%; border-collapse: collapse; font-size: 14px;
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
       border: 1px solid #e0d9ce;
     }
+
     .block-table .environmental th,
     .block-table .table-editor th {
       background: #f8f8f8;
       border-bottom: 2px solid #c8a96e;
       border-top: 1px solid #e0d9ce;
       border-right: 1px solid #e0d9ce;
-      padding: 12px 16px; text-align: left;
-      font-weight: 500; color: #4c4c4c;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 500;
+      color: #4c4c4c;
       font-family: 'Microsoft JhengHei', sans-serif;
-      letter-spacing: 0.03em; outline: none;
+      letter-spacing: 0.03em;
+      outline: none;
     }
+
     .block-table .environmental td,
     .block-table .table-editor td {
       border-bottom: 1px solid #e0d9ce;
       border-right: 1px solid #e0d9ce;
-      padding: 12px 16px; vertical-align: middle;
-      color: #4c4c4c; outline: none;
+      padding: 12px 16px;
+      vertical-align: middle;
+      color: #4c4c4c;
+      outline: none;
       transition: color 0.15s;
     }
+
     .block-table .environmental th:last-child,
     .block-table .table-editor th:last-child,
     .block-table .environmental td:last-child,
-    .block-table .table-editor td:last-child { border-right: none; }
+    .block-table .table-editor td:last-child {
+      border-right: none;
+      color: #4c4c4c;
+    }
+
     .block-table .environmental tr:hover td,
-    .block-table .table-editor tr:hover td { color: #c8a96e; }
-        .block-table .table-controls { display: flex; gap: 8px; margin-top: 16px; }
+    .block-table .table-editor tr:hover td {
+      background-color: #f9f9f9;
+      color: #bb9157;
+    }
+
+    .block-table .table-controls {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
 
     /* 底部按鈕 */
     .editor-footer {
@@ -425,6 +692,7 @@
       padding-top: 20px;
       border-top: 1px solid oklch(88% 0.025 80);
     }
+
     .editor-footer button {
       padding: 10px 28px;
       font-size: 13px;
@@ -436,25 +704,35 @@
       color: oklch(35% 0.02 80);
       transition: background 0.15s ease-out, color 0.15s ease-out;
     }
-    .editor-footer button:hover { background: oklch(94% 0.02 80); }
+
+    .editor-footer button:hover {
+      background: oklch(94% 0.02 80);
+    }
+
     .editor-footer .btn-preview {
       background: oklch(25% 0.01 80);
       color: oklch(95% 0.005 80);
       border-color: oklch(25% 0.01 80);
     }
-    .editor-footer .btn-preview:hover { background: oklch(35% 0.01 80); }
+
+    .editor-footer .btn-preview:hover {
+      background: oklch(35% 0.01 80);
+    }
+
     .editor-footer .btn-publish {
       background: #bb9157;
       color: oklch(99% 0.005 80);
       border-color: #bb9157;
     }
-    .editor-footer .btn-publish:hover { background: oklch(58% 0.1 65); border-color: oklch(58% 0.1 65); }
 
-    /* 右側元件面板 */
+    .editor-footer .btn-publish:hover {
+      background: oklch(58% 0.1 65);
+      border-color: oklch(58% 0.1 65);
+    }
+
     .component-panel {
-      position: fixed;
-      right: clamp(16px, 3vw, 40px);
-      top: clamp(16px, 3vw, 40px);
+      position: sticky;
+      top: 0;
       width: 110px;
       background: oklch(99% 0.005 80);
       border: 1px solid oklch(85% 0.03 80);
@@ -466,6 +744,7 @@
       overflow-y: auto;
       z-index: 100;
     }
+
     .panel-label {
       font-size: 10px;
       letter-spacing: 0.1em;
@@ -476,7 +755,11 @@
       margin-bottom: 4px;
       font-family: inherit;
     }
-    .comp-row-item { display: flex; }
+
+    .comp-row-item {
+      display: flex;
+    }
+
     .comp-btn {
       flex: 1;
       padding: 8px 6px;
@@ -490,13 +773,23 @@
       text-align: center;
       transition: background 0.15s ease-out, border-color 0.15s, color 0.15s;
     }
+
     .comp-btn:hover {
       background: oklch(25% 0.01 80);
       color: oklch(95% 0.005 80);
       border-color: oklch(25% 0.01 80);
     }
-    .comp-btn:disabled { color: oklch(75% 0.02 80); cursor: not-allowed; }
-    .comp-btn:disabled:hover { background: transparent; color: oklch(75% 0.02 80); border-color: oklch(82% 0.03 80); }
+
+    .comp-btn:disabled {
+      color: oklch(75% 0.02 80);
+      cursor: not-allowed;
+    }
+
+    .comp-btn:disabled:hover {
+      background: transparent;
+      color: oklch(75% 0.02 80);
+      border-color: oklch(82% 0.03 80);
+    }
 
     /* 空白提示 */
     .empty-hint {
@@ -510,77 +803,84 @@
     }
   </style>
 </head>
+
 <body>
 
-<div class="editor-wrapper">
-  <!-- 左側編輯區 -->
-  <div class="editor-main">
+  <div class="editor-wrapper">
+    <!-- 左側編輯區 -->
+    <div class="editor-main">
 
 
-    <div class="drop-zone" id="dropZone">
-      <div class="empty-hint" id="emptyHint">點擊上方按鈕或右側「加入」來新增元件</div>
+      <div class="drop-zone" id="dropZone">
+        <div class="empty-hint" id="emptyHint">點擊上方按鈕或右側「加入」來新增元件</div>
+      </div>
+
+      <div class="editor-footer">
+        <button onclick="resetEditor()">重置</button>
+        <button class="btn-preview" onclick="previewPage()">預覽頁面</button>
+        <button class="btn-publish" onclick="if(validateBlocks()) alert('發佈成功！')">發佈上架</button>
+      </div>
     </div>
 
-    <div class="editor-footer">
-      <button onclick="resetEditor()">重置</button>
-      <button class="btn-preview" onclick="previewPage()">預覽頁面</button>
-      <button class="btn-publish" onclick="if(validateBlocks()) alert('發佈成功！')">發佈上架</button>
+    <!-- 右側元件面板 -->
+    <div class="component-panel">
+      <div class="panel-label">元件</div>
+      <div class="comp-row-item">
+        <button class="comp-btn" disabled>主標題</button>
+      </div>
+      <div class="comp-row-item">
+        <button class="comp-btn" onclick="addBlock('subheading')">副標題</button>
+      </div>
+      <div class="comp-row-item">
+        <button class="comp-btn" onclick="addBlock('text')">內文</button>
+      </div>
+      <div class="comp-row-item">
+        <button class="comp-btn" onclick="addBlock('image')">圖片</button>
+      </div>
+      <div class="comp-row-item">
+        <button class="comp-btn" onclick="addBlock('image-group')">圖片群組</button>
+      </div>
+      <div class="comp-row-item">
+        <button class="comp-btn" onclick="addBlock('file')">檔案下載</button>
+      </div>
+      <div class="comp-row-item">
+        <button class="comp-btn" onclick="addBlock('fold')">折文</button>
+      </div>
+      <div class="comp-row-item">
+        <button class="comp-btn" onclick="addBlock('table')">表格</button>
+      </div>
     </div>
   </div>
 
-  <!-- 右側元件面板 -->
-  <div class="component-panel">
-    <div class="panel-label">元件</div>
-    <div class="comp-row-item">
-      <button class="comp-btn" disabled>主標題</button>
-    </div>
-    <div class="comp-row-item">
-      <button class="comp-btn" onclick="addBlock('subheading')">副標題</button>
-    </div>
-    <div class="comp-row-item">
-      <button class="comp-btn" onclick="addBlock('text')">內文</button>
-    </div>
-    <div class="comp-row-item">
-      <button class="comp-btn" onclick="addBlock('image')">圖片</button>
-    </div>
-    <div class="comp-row-item">
-      <button class="comp-btn" onclick="addBlock('image-group')">圖片群組</button>
-    </div>
-    <div class="comp-row-item">
-      <button class="comp-btn" onclick="addBlock('file')">檔案下載</button>
-    </div>
-    <div class="comp-row-item">
-      <button class="comp-btn" onclick="addBlock('fold')">折文</button>
-    </div>
-    <div class="comp-row-item">
-      <button class="comp-btn" onclick="addBlock('table')">表格</button>
+  <!-- 程式碼預覽 Modal -->
+  <div id="codeModal"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;">
+    <div
+      style="background:#1e1e1e;color:#d4d4d4;border-radius:6px;width:600px;max-width:90vw;max-height:80vh;display:flex;flex-direction:column;">
+      <div
+        style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #333;">
+        <span id="codeModalTitle" style="font-size:14px;font-family:monospace;color:#9cdcfe;"></span>
+        <button onclick="document.getElementById('codeModal').style.display='none'"
+          style="background:none;border:none;color:#aaa;font-size:18px;cursor:pointer;">✕</button>
+      </div>
+      <pre id="codeModalContent"
+        style="margin:0;padding:16px;overflow:auto;font-size:13px;font-family:monospace;line-height:1.6;white-space:pre-wrap;"></pre>
     </div>
   </div>
-</div>
 
-<!-- 程式碼預覽 Modal -->
-<div id="codeModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;">
-  <div style="background:#1e1e1e;color:#d4d4d4;border-radius:6px;width:600px;max-width:90vw;max-height:80vh;display:flex;flex-direction:column;">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #333;">
-      <span id="codeModalTitle" style="font-size:14px;font-family:monospace;color:#9cdcfe;"></span>
-      <button onclick="document.getElementById('codeModal').style.display='none'" style="background:none;border:none;color:#aaa;font-size:18px;cursor:pointer;">✕</button>
-    </div>
-    <pre id="codeModalContent" style="margin:0;padding:16px;overflow:auto;font-size:13px;font-family:monospace;line-height:1.6;white-space:pre-wrap;"></pre>
-  </div>
-</div>
-
-<!-- URL 設定 Modal -->
-<div id="urlModal">
-  <div class="url-modal-box">
-    <label>設定下載連結</label>
-    <input type="text" id="urlModalInput" placeholder="貼上檔案網址 https://...">
-    <div class="url-modal-actions">
-      <button onclick="closeUrlModal()">取消</button>
-      <button class="btn-confirm" onclick="confirmUrl()">確認</button>
+  <!-- URL 設定 Modal -->
+  <div id="urlModal">
+    <div class="url-modal-box">
+      <label>設定下載連結</label>
+      <input type="text" id="urlModalInput" placeholder="貼上檔案網址 https://...">
+      <div class="url-modal-actions">
+        <button onclick="closeUrlModal()">取消</button>
+        <button class="btn-confirm" onclick="confirmUrl()">確認</button>
+      </div>
     </div>
   </div>
-</div>
 
-<script src="js/editor.js"></script>
+  <script src="js/editor.js"></script>
 </body>
+
 </html>

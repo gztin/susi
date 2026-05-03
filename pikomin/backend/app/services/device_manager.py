@@ -1,9 +1,9 @@
 """
 DeviceManager：封裝 pymobiledevice3 操作，管理 iOS 裝置連線與 GPS 指令傳送。
 
-iOS 17+ (含 iOS 26) 需透過 RSD tunnel 方式操作，無法在 Docker 容器內運作。
-請先在主機執行：sudo pymobiledevice3 lockdown start-tunnel
-取得 RSD address/port 後，透過 set_rsd_info() 設定。
+iOS 17+ (含 iOS 26) 需透過 RSD tunnel 方式操作。
+請先在主機執行：sudo pymobiledevice3 remote tunneld
+TunneldPoller 會自動讀取 RSD 資訊，不需手動設定。
 """
 from __future__ import annotations
 
@@ -67,8 +67,18 @@ class DeviceManager:
         # device_id -> (rsd_address, rsd_port)
         self._rsd_info: dict[str, tuple[str, int]] = {}
 
-        # device_id -> 正在執行的 simulate-location 程序
+        # device_id -> 正在執行的 simulate-location 程序（stop 用）
         self._location_procs: dict[str, asyncio.subprocess.Process] = {}
+
+        # device_id -> 快取的 LocationSimulation 連線
+        self._location_sessions: dict[str, object] = {}
+        # device_id -> 對應的 RSD / DvtProvider context（用於關閉）
+        self._location_contexts: dict[str, list] = {}
+        # 保護同一裝置不同時建立多個連線
+        self._session_locks: dict[str, asyncio.Lock] = {}
+
+        # tunneld 自動加入的裝置 ID（WiFi 裝置，非 USB 掃描）
+        self._tunneld_device_ids: set[str] = set()
 
         # 事件回呼（可由外部設定）
         self.on_device_connected: Callable[[DeviceInfo], Awaitable[None]] | None = None
@@ -145,18 +155,87 @@ class DeviceManager:
         return self._registry.get(device_id)
 
     def set_rsd_info(self, device_id: str, address: str, port: int) -> None:
-        """設定裝置的 RSD tunnel 資訊（iOS 17+ 必須）。
-
-        在主機執行 ``sudo pymobiledevice3 lockdown start-tunnel`` 後，
-        將取得的 address 與 port 透過此方法傳入。
-
-        Args:
-            device_id: 目標裝置 ID。
-            address: RSD tunnel 的 IPv6/IPv4 位址。
-            port: RSD tunnel 的 port 號。
-        """
+        """設定裝置的 RSD tunnel 資訊（iOS 17+ 必須）。"""
+        old = self._rsd_info.get(device_id)
         self._rsd_info[device_id] = (address, port)
         logger.info("RSD info 已設定 device=%s addr=%s port=%d", device_id, address, port)
+        # RSD 資訊變更時，清除舊的快取連線（下次 set_location 時重建）
+        if old != (address, port) and device_id in self._location_sessions:
+            asyncio.ensure_future(self._close_location_session(device_id))
+            logger.info("RSD 已更新，清除 LocationSimulation 快取 device=%s", device_id)
+
+    def ensure_device(self, device_id: str) -> None:
+        """確保裝置存在於 registry（供 tunneld WiFi 裝置使用）。
+
+        若裝置已在 registry 則不做任何事；
+        若不存在則建立一筆記錄，並嘗試透過 pymobiledevice3 查詢真實裝置名稱。
+        """
+        if self.mock_mode:
+            return
+        if device_id not in self._registry:
+            device = DeviceInfo(
+                id=device_id,
+                name=device_id,  # 先用 UDID，背景任務會更新為真實名稱
+                is_connected=True,
+                model=None,
+            )
+            self._registry[device_id] = device
+            self._tunneld_device_ids.add(device_id)
+            logger.info("tunneld 裝置加入 registry: %s", device_id)
+            if self.on_device_connected is not None:
+                asyncio.ensure_future(self.on_device_connected(device))
+            # 背景查詢真實裝置名稱
+            asyncio.ensure_future(self._fetch_device_name(device_id))
+
+    async def _fetch_device_name(self, device_id: str) -> None:
+        """背景查詢裝置真實名稱，更新 registry。"""
+        import json as _json
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                PMD3, "usbmux", "list",
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+            )
+            stdout, _ = await proc.communicate()
+            raw = stdout.decode().strip()
+            lines = raw.splitlines()
+            json_start = next((i for i, l in enumerate(lines) if l.strip().startswith("[")), None)
+            if json_start is None:
+                return
+            data = _json.loads("\n".join(lines[json_start:]))
+            for entry in data:
+                if entry.get("Identifier") == device_id:
+                    name = entry.get("DeviceName", device_id)
+                    model = entry.get("ProductType")
+                    if device_id in self._registry:
+                        self._registry[device_id] = DeviceInfo(
+                            id=device_id,
+                            name=name,
+                            is_connected=True,
+                            model=model,
+                        )
+                        logger.info("裝置名稱已更新: %s → %s", device_id, name)
+                    return
+        except Exception as exc:  # noqa: BLE001
+            logger.debug("查詢裝置名稱失敗 %s: %s", device_id, exc)
+
+    def remove_tunneld_device(self, device_id: str) -> None:
+        """移除由 tunneld 管理、且 tunnel 已消失的裝置。
+
+        只移除透過 ensure_device 加入的裝置，不影響 USB 掃描到的裝置。
+        """
+        if device_id not in self._tunneld_device_ids:
+            return
+        self._tunneld_device_ids.discard(device_id)
+        device = self._registry.pop(device_id, None)
+        if device is not None:
+            logger.info("tunneld 裝置移出 registry: %s", device_id)
+            disconnected = DeviceInfo(
+                id=device.id, name=device.name,
+                is_connected=False, model=device.model,
+            )
+            if self.on_device_disconnected is not None:
+                asyncio.ensure_future(self.on_device_disconnected(disconnected))
 
     # ── 背景輪詢 ──────────────────────────────────────────────────────────────
 
@@ -250,55 +329,97 @@ class DeviceManager:
         device_id: str,
         coordinate: GPSCoordinate,
     ) -> None:
-        """透過 RSD tunnel 呼叫 pymobiledevice3 CLI 設定 GPS 位置（iOS 17+）。"""
+        """透過快取的 LocationSimulation 連線設定 GPS 位置（iOS 17+）。
+
+        第一次呼叫時建立 RSD 連線並快取；後續呼叫直接複用，不重新連線。
+        若連線已失效，自動重建。
+        """
         rsd = self._rsd_info.get(device_id)
         if not rsd:
             raise LocationSetError(
                 device_id,
-                "RSD tunnel not available. "
-                "請先執行 'sudo pymobiledevice3 lockdown start-tunnel' "
-                "並呼叫 set_rsd_info() 設定 address/port。",
+                "RSD tunnel not available. 請確認 tunneld 已啟動。",
             )
-        addr, port = rsd
 
-        # 先終止舊的 simulate-location 程序
-        if device_id in self._location_procs:
-            old_proc = self._location_procs.pop(device_id)
+        # 確保每個裝置有自己的 lock
+        if device_id not in self._session_locks:
+            self._session_locks[device_id] = asyncio.Lock()
+
+        async with self._session_locks[device_id]:
+            session = self._location_sessions.get(device_id)
+            if session is None:
+                session = await self._create_location_session(device_id, rsd)
+                self._location_sessions[device_id] = session
+
             try:
-                old_proc.terminate()
-            except Exception:
-                pass
+                await session.set(coordinate.latitude, coordinate.longitude)
+                logger.debug(
+                    "set_location OK device=%s lat=%.6f lng=%.6f",
+                    device_id, coordinate.latitude, coordinate.longitude,
+                )
+            except Exception as exc:
+                # 連線失效，清除快取，下次重建
+                logger.warning("LocationSimulation.set 失敗，清除連線快取: %s", exc)
+                self._location_sessions.pop(device_id, None)
+                raise LocationSetError(device_id, str(exc)) from exc
 
-        cmd = [
-            PMD3, "developer", "dvt", "simulate-location", "set",
-            "--rsd", addr, str(port), "--",
-            str(coordinate.latitude), str(coordinate.longitude),
-        ]
-        logger.debug("執行指令: %s", " ".join(cmd))
+    async def _create_location_session(
+        self,
+        device_id: str,
+        rsd: tuple[str, int],
+    ) -> object:
+        """建立並回傳一個已連線的 LocationSimulation 實例，同時快取 context 供關閉用。"""
+        from pymobiledevice3.remote.remote_service_discovery import RemoteServiceDiscoveryService
+        from pymobiledevice3.services.dvt.instruments.dvt_provider import DvtProvider
+        from pymobiledevice3.services.dvt.instruments.location_simulation import LocationSimulation
+
+        addr, port = rsd
+        logger.info("建立 LocationSimulation 連線 device=%s addr=%s port=%d", device_id, addr, port)
         try:
-            # 背景執行，不等待結束
-            proc = await asyncio.create_subprocess_exec(
-                *cmd,
-                stdout=asyncio.subprocess.DEVNULL,
-                stderr=asyncio.subprocess.DEVNULL,
-            )
-            self._location_procs[device_id] = proc
+            rsd_service = RemoteServiceDiscoveryService((addr, port))
+            await rsd_service.connect()
+            dvt = DvtProvider(rsd_service)
+            await dvt.__aenter__()
+            session = LocationSimulation(dvt)
+            await session.__aenter__()
+            # 記錄 context 供之後關閉
+            self._location_contexts[device_id] = [session, dvt, rsd_service]
+            return session
         except Exception as exc:
-            raise LocationSetError(device_id, str(exc)) from exc
+            raise LocationSetError(device_id, f"無法建立 LocationSimulation 連線: {exc}") from exc
+
+    async def _close_location_session(self, device_id: str) -> None:
+        """關閉並清除快取的 LocationSimulation 連線。"""
+        self._location_sessions.pop(device_id, None)
+        contexts = self._location_contexts.pop(device_id, None)
+        if contexts:
+            session, dvt, rsd_service = contexts
+            for ctx in [session, dvt, rsd_service]:
+                try:
+                    await ctx.__aexit__(None, None, None)
+                except Exception:
+                    pass
 
     async def _pymobiledevice_stop_simulation(self, device_id: str) -> None:
-        """透過 RSD tunnel 呼叫 pymobiledevice3 CLI 停止 GPS 模擬（iOS 17+）。"""
+        """停止 GPS 模擬，清除快取連線。"""
+        # 先嘗試用快取連線送 clear
+        session = self._location_sessions.get(device_id)
+        if session is not None:
+            try:
+                await session.clear()
+                logger.info("stop_simulation OK device=%s", device_id)
+            except Exception as exc:
+                logger.warning("LocationSimulation.clear 失敗: %s", exc)
+            finally:
+                await self._close_location_session(device_id)
+            return
+
+        # fallback：用 CLI（無快取連線時）
         rsd = self._rsd_info.get(device_id)
         if not rsd:
-            raise LocationSetError(
-                device_id,
-                "RSD tunnel not available. "
-                "請先執行 'sudo pymobiledevice3 lockdown start-tunnel' "
-                "並呼叫 set_rsd_info() 設定 address/port。",
-            )
+            raise LocationSetError(device_id, "RSD tunnel not available.")
         addr, port = rsd
 
-        # 先終止正在執行的 simulate-location 程序
         if device_id in self._location_procs:
             old_proc = self._location_procs.pop(device_id)
             try:
@@ -316,7 +437,6 @@ class DeviceManager:
                 stdout=asyncio.subprocess.DEVNULL,
                 stderr=asyncio.subprocess.DEVNULL,
             )
-            # clear 指令會持續執行，不等待結束
             self._location_procs[device_id] = proc
         except Exception as exc:
             raise LocationSetError(device_id, str(exc)) from exc

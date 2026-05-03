@@ -1,59 +1,78 @@
+import { useEffect } from 'react'
+import { useDevice } from '../hooks/useDevice'
 import type { DeviceInfo } from '../types'
 
 interface DeviceStatusProps {
-  devices: DeviceInfo[]
-  selectedDevice: DeviceInfo | null
-  onSelectDevice: (id: string) => void
-  isLoading: boolean
+  devices?: DeviceInfo[]
+  selectedDevice?: DeviceInfo | null
+  onSelectDevice?: (id: string) => void
+  onDeviceSelect?: (device: DeviceInfo | null) => void
+  isLoading?: boolean
   error?: string | null
 }
 
-export function DeviceStatus({ devices, selectedDevice, onSelectDevice, isLoading, error }: DeviceStatusProps) {
-  if (isLoading) {
-    return <div style={{ fontSize: 13, color: '#94A3B8', padding: '4px 0' }}>載入裝置中...</div>
+export function DeviceStatus({
+  devices,
+  selectedDevice,
+  onSelectDevice,
+  onDeviceSelect,
+  isLoading,
+  error,
+}: DeviceStatusProps) {
+  const needsFallback =
+    devices === undefined ||
+    selectedDevice === undefined ||
+    onSelectDevice === undefined ||
+    isLoading === undefined ||
+    error === undefined
+
+  const deviceState = useDevice(needsFallback)
+  const resolvedDevices = devices ?? deviceState.devices
+  const resolvedSelectedDevice = selectedDevice ?? deviceState.selectedDevice
+  const resolvedSelectDevice = onSelectDevice ?? deviceState.selectDevice
+  const resolvedLoading = isLoading ?? deviceState.isLoading
+  const resolvedError = error ?? deviceState.error
+
+  useEffect(() => {
+    onDeviceSelect?.(resolvedSelectedDevice)
+  }, [onDeviceSelect, resolvedSelectedDevice])
+
+  if (resolvedLoading) {
+    return <div className="helper-text">載入裝置中...</div>
   }
 
-  if (error) {
-    return <div style={{ fontSize: 13, color: '#EF4444' }}>錯誤：{error}</div>
+  if (resolvedError) {
+    return <div className="helper-text helper-text--error">錯誤：{resolvedError}</div>
   }
 
-  if (devices.length === 0) {
-    return (
-      <div style={{ fontSize: 13, color: '#94A3B8', padding: '4px 0' }}>
-        未偵測到裝置，請透過 USB 連接 iPhone
-      </div>
-    )
+  if (resolvedDevices.length === 0) {
+    return <div className="helper-text">未偵測到裝置，請透過 USB 連接 iPhone 或確認 tunneld 已啟動</div>
   }
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-      <select
-        style={{
-          flex: 1, padding: '7px 10px', borderRadius: 6, border: '1px solid #E2E8F0',
-          background: '#fff', color: '#0F172A', fontSize: 13, cursor: 'pointer', outline: 'none',
-        }}
-        value={selectedDevice?.id ?? ''}
-        onChange={(e) => onSelectDevice(e.target.value)}
-      >
-        <option value="" disabled>選擇裝置</option>
-        {devices.map((d) => (
-          <option key={d.id} value={d.id}>
-            {d.name}{d.model ? ` (${d.model})` : ''}
-          </option>
-        ))}
-      </select>
-      {selectedDevice && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-          <span style={{
-            width: 8, height: 8, borderRadius: '50%',
-            background: selectedDevice.isConnected ? '#10B981' : '#EF4444',
-            display: 'inline-block', flexShrink: 0,
-          }} />
-          <span style={{ fontSize: 12, color: '#64748B', whiteSpace: 'nowrap' }}>
-            {selectedDevice.isConnected ? '已連線' : '未連線'}
-          </span>
+    <div className="device-select">
+      <label className="field">
+        <span>目前裝置</span>
+        <div className="device-select-wrap">
+          <span className={`device-led select-led ${resolvedSelectedDevice?.isConnected ? 'is-online' : 'is-offline'}`} />
+          <span className="sr-only">{resolvedSelectedDevice?.isConnected ? '已連線' : '未連線'}</span>
+          <select
+            value={resolvedSelectedDevice?.id ?? ''}
+            onChange={(e) => resolvedSelectDevice(e.target.value)}
+            className="device-select-input"
+          >
+            <option value="" disabled>
+              選擇裝置
+            </option>
+            {resolvedDevices.map((device) => (
+              <option key={device.id} value={device.id}>
+                {device.name}
+                {device.model ? ` (${device.model})` : ''}
+              </option>
+            ))}
+          </select>
         </div>
-      )}
+      </label>
     </div>
   )
 }

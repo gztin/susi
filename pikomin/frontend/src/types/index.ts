@@ -31,11 +31,6 @@ export interface RouteStatus {
   progress: number // 0.0 ~ 1.0
 }
 
-export interface MoveVector {
-  angle: number     // 方位角，0 = 正北，順時針，單位：度
-  magnitude: number // 0.0 ~ 1.0，搖桿偏移比例
-}
-
 export interface StatusUpdate {
   type: string
   data: Record<string, unknown>

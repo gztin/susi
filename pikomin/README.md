@@ -1,6 +1,6 @@
 # iOS GPS 模擬器
 
-在電腦上透過網頁介面，即時控制 iPhone 的 GPS 位置。支援單點傳送、路徑自動行走與搖桿操控。
+在電腦上透過網頁介面，即時控制 iPhone 的 GPS 位置。支援單點傳送與路徑自動行走。
 
 ---
 
@@ -30,22 +30,21 @@ pip install pymobiledevice3
 
 ## 啟動方式
 
-### 方式一：使用啟動腳本（推薦）
+### 方式一：單一終端機啟動（推薦）
 
 ```bash
-# 步驟 1：啟動 RSD tunnel（需要 sudo，在獨立終端機執行）
-sudo pymobiledevice3 lockdown start-tunnel
-
-# 步驟 2：記下輸出的 address 與 port，設定環境變數
-export RSD_ADDRESS=<address>
-export RSD_PORT=<port>
-
-# 步驟 3：執行啟動腳本
 chmod +x start.sh
 ./start.sh
 ```
 
-### 方式二：手動啟動
+`start.sh` 會在同一個終端機自動完成：
+1. 啟動 RSD tunnel（可能要求輸入 sudo 密碼）
+2. 從 tunnel 輸出擷取 `RSD_ADDRESS/RSD_PORT`
+3. 啟動 backend（5679）與 frontend（5678）
+
+按 `Ctrl+C` 會一次停止全部服務，並保留 tunnel/backend/frontend 的 log 檔路徑。
+
+### 方式二：手動啟動（除錯用）
 
 ```bash
 # 後端
@@ -76,10 +75,6 @@ npm run dev
 3. 設定移動速度（公尺/秒）
 4. 點擊「開始」，iPhone 會沿路徑自動移動
 5. 點擊「停止」可隨時中斷
-
-### 搖桿模式
-
-畫面右下角的虛擬搖桿可即時控制移動方向與速度，適合需要連續移動的場景。
 
 ### 停止模擬
 
