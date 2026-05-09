@@ -1,8 +1,11 @@
-const App = {
     // State management
     state: {
         currentUser: null,
-        friends: []
+        friends: [],
+        // --- JSONBin Configuration ---
+        // 請填入您的資訊，資料才能跨手機同步
+        binId: '69fee526250b1311c3255ade', 
+        masterKey: '$2b$10$hcZFDzetXXNrMlQaILsXOO5XIazCw6fNtyu3M6uw1fx8nodcCGDKi' 
     },
 
     // Initialization
@@ -21,6 +24,34 @@ const App = {
             } else {
                 window.location.href = 'profile.html';
             }
+        }
+    },
+
+    // --- Cloud Sync (JSONBin) ---
+    async syncToCloud(newUser) {
+        if (this.state.binId.includes('YOUR_')) return;
+
+        try {
+            const res = await fetch(`https://api.jsonbin.io/v3/b/${this.state.binId}/latest`, {
+                headers: { 'X-Master-Key': this.state.masterKey }
+            });
+            const result = await res.json();
+            // Handle both array root or {members: []} structure
+            let allMembers = Array.isArray(result.record) ? result.record : (result.record.members || []);
+
+            if (!allMembers.some(m => m.id === newUser.id)) {
+                allMembers.push(newUser);
+                await fetch(`https://api.jsonbin.io/v3/b/${this.state.binId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': this.state.masterKey
+                    },
+                    body: JSON.stringify({ members: allMembers })
+                });
+            }
+        } catch (e) {
+            console.error('Cloud Sync Error', e);
         }
     },
 
@@ -73,18 +104,39 @@ const App = {
             name: '新用戶',
             title: '尚未設定職稱',
             bio: '掃描我的 QR Code 加我好友！',
-            avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${Math.random()}`
+            avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${Math.random()}`,
+            friends: [] // Track individual friends
         };
         this.state.currentUser = newUser;
         this.saveState();
+
+        // Simulate saving to a global registry
+        this.addToGlobalRegistry(newUser);
+        
+        // Sync to cloud
+        this.syncToCloud(newUser);
+
         window.location.href = 'profile.html';
+    },
+
+    addToGlobalRegistry(user) {
+        let all = JSON.parse(localStorage.getItem('all_members') || '[]');
+        if (!all.some(m => m.id === user.id)) {
+            all.push(user);
+            localStorage.setItem('all_members', JSON.stringify(all));
+        }
     },
 
     // Login with existing ID
     login(id) {
-        // In this prototype, we simulate finding the user. 
-        // Real systems would fetch from DB.
+        if (id === 'admin1234') {
+            window.location.href = 'admin.html';
+            return true;
+        }
+
         if (id && id.length === 4) {
+            // In a real system, fetch from DB. 
+            // For now, we simulate finding the user.
             this.state.currentUser = {
                 id: id.toUpperCase(),
                 name: '回歸用戶',
