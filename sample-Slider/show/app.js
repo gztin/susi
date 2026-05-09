@@ -15,8 +15,12 @@ const App = {
     // Handle URL parameters (e.g., ?reg=1)
     handleParams() {
         const params = new URLSearchParams(window.location.search);
-        if (params.get('reg') === '1' && !this.state.currentUser) {
-            this.register();
+        if (params.get('reg') === '1') {
+            if (!this.state.currentUser) {
+                this.register();
+            } else {
+                window.location.href = 'profile.html';
+            }
         }
     },
 
@@ -40,6 +44,13 @@ const App = {
         const path = window.location.pathname;
         const isAuthPage = path.endsWith('/') || path.includes('index.html') || path.includes('login.html');
         
+        // If logged in and on index/login, go to profile
+        if (this.state.currentUser && isAuthPage) {
+            window.location.href = 'profile.html';
+            return;
+        }
+
+        // If NOT logged in and NOT on an auth page, go to index
         if (!this.state.currentUser && !isAuthPage) {
             window.location.href = 'index.html';
         }
