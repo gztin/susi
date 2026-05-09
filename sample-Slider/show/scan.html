@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>掃描加好友 | QR Connect</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="html5-qrcode.min.js"></script>
+    <style>
+        #reader {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 2px solid var(--surface-border);
+            background: #000;
+        }
+        #reader__dashboard_section_csr button {
+            background: var(--primary-color) !important;
+            color: black !important;
+            border: none !important;
+            padding: 8px 16px !important;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            margin: 10px 0 !important;
+        }
+        .scan-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            border: 40px solid rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .scan-target {
+            width: 250px;
+            height: 250px;
+            border: 2px solid var(--primary-color);
+            position: relative;
+            box-shadow: 0 0 0 1000px rgba(0,0,0,0.5);
+        }
+        .scan-line {
+            width: 100%;
+            height: 2px;
+            background: var(--primary-color);
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: scanMove 2s infinite linear;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+        @keyframes scanMove {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="height: 100vh; display: flex; flex-direction: column;">
+        <header style="padding: 20px 0;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <button onclick="window.history.back()" style="background: var(--surface-color); border: none; width: 40px; height: 40px; border-radius: 20px; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                </button>
+                <h2 style="font-size: 1.2rem;">掃描加好友</h2>
+            </div>
+        </header>
+
+        <main style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 80px;">
+            <div style="position: relative;">
+                <div id="reader"></div>
+                <div id="scan-feedback" style="margin-top: 24px; text-align: center; color: var(--text-secondary);">
+                    請對準好友的 QR Code
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        function onScanSuccess(decodedText, decodedResult) {
+            // decodedText should be the 4-char ID
+            console.log(`Scan result: ${decodedText}`);
+            
+            // Basic validation: 4 chars, alphanumeric
+            if (decodedText.length === 4) {
+                html5QrcodeScanner.clear();
+                App.addFriend(decodedText.toUpperCase());
+            } else {
+                // Check if it's a URL (maybe they scanned the system QR)
+                try {
+                    const url = new URL(decodedText);
+                    alert('這似乎是系統連結，請掃描好友的個人 ID QR Code！');
+                } catch(e) {
+                    // Not a URL, just invalid
+                }
+            }
+        }
+
+        const html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", { fps: 10, qrbox: 250 }
+        );
+        html5QrcodeScanner.render(onScanSuccess);
+    </script>
+</body>
+</html>
