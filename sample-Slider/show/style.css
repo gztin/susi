@@ -14,6 +14,12 @@
     --text-med: #4B5563;
     --text-low: #9CA3AF;
     
+    /* HTML Compat Aliases */
+    --text-secondary: var(--text-med);
+    --surface-color: var(--bg-surface);
+    --surface-border: var(--border-subtle);
+    --primary-glow: rgba(0, 122, 255, 0.2);
+    
     --border-subtle: rgba(0, 0, 0, 0.08);
     --border-active: rgba(0, 0, 0, 0.15);
     
