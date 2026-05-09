@@ -121,8 +121,11 @@
 
             // Generate Personal QR
             try {
+                const shareUrl = window.location.origin + window.location.pathname.replace('profile.html', 'index.html') + 
+                               '?reg=1&add=' + user.id;
+                
                 new QRCode(document.getElementById("personal-qr"), {
-                    text: user.id, // Only send the ID
+                    text: shareUrl,
                     width: 160,
                     height: 160,
                     colorDark : "#000000",

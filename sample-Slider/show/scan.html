@@ -221,11 +221,23 @@
 
         function onScanSuccess(decodedText) {
             if (navigator.vibrate) navigator.vibrate(100);
+            
+            let friendId = decodedText;
+            
+            // 如果掃描到的是完整 URL，嘗試提取 add 參數
+            try {
+                if (decodedText.includes('add=')) {
+                    const url = new URL(decodedText);
+                    friendId = url.searchParams.get('add') || decodedText;
+                }
+            } catch (e) {
+                console.error('URL 解析失敗，將使用原始文字', e);
+            }
+
             html5QrCode.stop().then(() => {
-                App.addFriend(decodedText.toUpperCase());
+                App.addFriend(friendId.toUpperCase());
             }).catch(() => {
-                // If scan was from file, stop might not be needed
-                App.addFriend(decodedText.toUpperCase());
+                App.addFriend(friendId.toUpperCase());
             });
         }
 

@@ -1,3 +1,4 @@
+const App = {
     // State management
     state: {
         currentUser: null,
@@ -11,19 +12,41 @@
     // Initialization
     init() {
         this.loadState();
-        this.handleParams(); // 先處理註冊參數
+        this.handleParams(); // 先處理註冊與好友參數
         this.checkAuth();   // 再處理登入狀態
     },
 
-    // Handle URL parameters (e.g., ?reg=1)
+    // Handle URL parameters (e.g., ?reg=1, ?add=ABCD)
     handleParams() {
         const params = new URLSearchParams(window.location.search);
+        const addId = params.get('add');
+        
+        // 暫存掃描到的好友 ID
+        if (addId) {
+            sessionStorage.setItem('pending_friend', addId.toUpperCase());
+        }
+
         if (params.get('reg') === '1') {
             if (!this.state.currentUser) {
                 this.register();
             } else {
-                window.location.href = 'profile.html';
+                // 已登入，直接檢查是否有待處理的好友
+                this.checkPendingFriend();
+                // 只有在首頁才跳轉，避免在其他頁面一直跳轉
+                const path = window.location.pathname;
+                if (path.endsWith('/') || path.includes('index')) {
+                    window.location.href = 'profile.html';
+                }
             }
+        }
+    },
+
+    // 檢查是否有待處理的好友請求
+    checkPendingFriend() {
+        const pendingId = sessionStorage.getItem('pending_friend');
+        if (pendingId && this.state.currentUser) {
+            sessionStorage.removeItem('pending_friend');
+            this.addFriend(pendingId);
         }
     },
 
@@ -157,26 +180,35 @@
 
     // Add a friend by ID
     addFriend(friendId) {
-        if (friendId === this.state.currentUser.id) {
-            alert('這是您自己的 QR Code！');
+        if (!friendId || !this.state.currentUser) return;
+        
+        const id = friendId.toUpperCase();
+        if (id === this.state.currentUser.id) {
+            console.log('這是您自己的 QR Code！');
             return;
         }
         
-        if (this.state.friends.some(f => f.id === friendId)) {
-            alert('已經是好友了！');
+        if (this.state.friends.some(f => f.id === id)) {
+            console.log('已經是好友了！');
             return;
         }
 
         const newFriend = {
-            id: friendId,
-            name: `好友 ${friendId}`,
-            avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${friendId}`
+            id: id,
+            name: `好友 ${id}`,
+            avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${id}`
         };
 
         this.state.friends.push(newFriend);
         this.saveState();
-        alert('成功加入好友！');
-        window.location.href = 'profile.html';
+        
+        // 如果在 profile 頁面，重新整理清單
+        if (window.location.pathname.includes('profile.html')) {
+            window.location.reload();
+        } else {
+            alert('成功加入好友！');
+            window.location.href = 'profile.html';
+        }
     },
 
     // Update profile
