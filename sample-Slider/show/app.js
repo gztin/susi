@@ -11,8 +11,8 @@
     // Initialization
     init() {
         this.loadState();
-        this.checkAuth();
-        this.handleParams();
+        this.handleParams(); // 先處理註冊參數
+        this.checkAuth();   // 再處理登入狀態
     },
 
     // Handle URL parameters (e.g., ?reg=1)
@@ -73,10 +73,14 @@
     // Check if user is logged in
     checkAuth() {
         const path = window.location.pathname;
-        const isAuthPage = path.endsWith('/') || path.includes('index.html') || path.includes('login.html');
+        // 支援 index.html, index01.html, 以及根目錄 /
+        const isAuthPage = path.endsWith('/') || path.includes('index');
         
-        // If logged in and on index/login, go to profile
+        // If logged in and on index page, go to profile
         if (this.state.currentUser && isAuthPage) {
+            // 如果 URL 有 reg=1 參數，代表用戶想重新註冊，此時不強制跳轉
+            if (window.location.search.includes('reg=1')) return;
+            
             window.location.href = 'profile.html';
             return;
         }
