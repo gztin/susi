@@ -129,7 +129,7 @@
 
     // Login with existing ID
     login(id) {
-        if (id === 'admin1234') {
+        if (id.toLowerCase() === 'admin1234') {
             window.location.href = 'admin.html';
             return true;
         }

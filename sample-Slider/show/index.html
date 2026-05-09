@@ -32,8 +32,8 @@
                 </div>
 
                 <div style="display: flex; gap: 8px; width: 100%;">
-                    <input type="text" id="login-id" placeholder="4 碼序號" class="mono" style="flex: 1; background: var(--surface-color); border: 1px solid var(--surface-border); border-radius: var(--radius-md); padding: 12px; color: var(--text-high); text-align: center; text-transform: uppercase; font-size: 1.2rem;">
-                    <button onclick="handleLogin()" class="btn" style="background: var(--text-high); color: black; border: 1px solid var(--surface-border); padding: 12px 20px;">登入</button>
+                    <input type="text" id="login-id" placeholder="4 碼序號" class="mono" style="flex: 1; background: var(--surface-color); border: 1px solid var(--surface-border); border-radius: var(--radius-md); padding: 12px; color: var(--text-high); text-align: center; font-size: 1.2rem;">
+                    <button onclick="handleLogin()" class="btn btn-secondary" style="padding: 12px 20px; border-radius: var(--radius-md);">登入</button>
                 </div>
             </div>
         </main>
@@ -55,11 +55,26 @@
         });
 
         function handleLogin() {
-            const id = document.getElementById('login-id').value;
-            if (id.length === 4 || id === 'admin1234') {
-                App.login(id);
+            const idInput = document.getElementById('login-id');
+            const id = idInput.value.trim();
+            console.log('嘗試登入 ID:', id); // 偵錯用
+            
+            if (id === '') {
+                alert('請輸入序號');
+                return;
+            }
+            
+            if (id.length === 4 || id.toLowerCase() === 'admin1234') {
+                try {
+                    App.login(id);
+                } catch (e) {
+                    console.error('登入出錯:', e);
+                    // 強制跳轉作為後備方案
+                    if (id.toLowerCase() === 'admin1234') window.location.href = 'admin.html';
+                    else window.location.href = 'profile.html';
+                }
             } else {
-                alert('請輸入正確的序號或管理員帳號');
+                alert('請輸入正確的 4 碼序號或管理員帳號');
             }
         }
     </script>
