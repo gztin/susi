@@ -6,10 +6,11 @@
 - **Monospace**: "JetBrains Mono" 或系統預設。用於顯示 4 碼序號，強調科技感。
 
 ## 02 Color
-- **Primary**: `#00D1FF` (Electric Blue). 用於主要按鈕與強調色。
-- **Background**: `#0A0A0B` (Deep Charcoal). 極深灰色，比純黑更有質感。
-- **Surface**: `rgba(255, 255, 255, 0.05)`. 用於磨砂玻璃效果的容器背景。
-- **Text**: `#F8F9FA` (High Contrast White).
+- **Primary**: `#007AFF` (Vibrant Blue). 在淺色背景下提供更好的可讀性。
+- **Background**: `#F9FAFB` (Soft White). 帶有極微量暖色的白色，減少視覺疲勞。
+- **Surface**: `rgba(255, 255, 255, 0.7)`. 用於磨砂玻璃效果，底色較淺。
+- **Text**: `#111827` (Deep Charcoal). 高對比度文字色。
+- **Text-Muted**: `#6B7280`. 用於輔助資訊。
 
 ## 03 Elevation & Spatial
 - **Grid**: 採用 8px 網格系統。
