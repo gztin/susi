@@ -10,3 +10,5 @@ backend/app/data/*.json
 
 # OS files
 .DS_Store
+
+/open-design/
