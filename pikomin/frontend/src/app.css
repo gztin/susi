@@ -1,29 +1,29 @@
 :root {
   /* ── Hue anchor ─────────────────────────────────── */
-  --hue: 220;
+  --hue: 210;
 
   /* ── Base ───────────────────────────────────────── */
-  --bg-base:   oklch(6%  0.026 var(--hue));
-  --bg-raised: oklch(10% 0.030 var(--hue));
+  --bg-base:   oklch(10%  0.018 var(--hue));
+  --bg-raised: oklch(13% 0.020 var(--hue));
 
   /* ── Surfaces ───────────────────────────────────── */
-  --surface-panel:           oklch(16% 0.026 var(--hue) / 0.84);
-  --surface-hero-a:          oklch(19% 0.028 var(--hue) / 0.98);
-  --surface-hero-b:          oklch(15% 0.024 var(--hue) / 0.96);
-  --surface-input:           oklch(18% 0.032 var(--hue) / 0.92);
+  --surface-panel:           oklch(18% 0.018 var(--hue) / 0.88);
+  --surface-hero-a:          oklch(20% 0.020 var(--hue) / 0.98);
+  --surface-hero-b:          oklch(17% 0.016 var(--hue) / 0.97);
+  --surface-input:           oklch(20% 0.018 var(--hue) / 0.94);
   --surface-device:          oklch(20% 0.034 var(--hue) / 0.82);
   --surface-metric:          oklch(22% 0.036 var(--hue) / 0.86);
   --surface-chip:            oklch(18% 0.032 var(--hue) / 0.86);
   --surface-toast:           oklch(28% 0.034 var(--hue) / 0.96);
-  --surface-modal-a:         oklch(14% 0.034 var(--hue) / 0.99);
-  --surface-modal-b:         oklch(12% 0.030 var(--hue) / 0.98);
+  --surface-modal-a:         oklch(19% 0.018 var(--hue) / 0.99);
+  --surface-modal-b:         oklch(16% 0.016 var(--hue) / 0.98);
   --surface-backdrop:        oklch(8%  0.030 var(--hue) / 0.60);
-  --surface-light:           oklch(97% 0.007 var(--hue) / 0.95);
-  --surface-light-sel:       oklch(92% 0.012 var(--hue) / 0.96);
+  --surface-light:           oklch(95% 0.006 var(--hue) / 0.96);
+  --surface-light-sel:       oklch(90% 0.010 var(--hue) / 0.96);
   --surface-map-overlay:     oklch(99% 0.005 var(--hue));
   --surface-btn-secondary-a: oklch(23% 0.032 var(--hue) / 0.96);
   --surface-btn-secondary-b: oklch(29% 0.038 var(--hue) / 0.96);
-  --btn-primary-bg:          oklch(62% 0.19 32);
+  --btn-primary-bg:          oklch(57% 0.15 222);
   --map-bg:                  oklch(92% 0.018 220);
 
   /* ── Text ───────────────────────────────────────── */
@@ -44,17 +44,17 @@
   --border-divider: oklch(45% 0.080 var(--hue) / 0.42);
 
   /* ── Accent: cyan (focus / interactive highlight) ── */
-  --accent:      oklch(85% 0.19 192);
-  --accent-glow: oklch(85% 0.19 192 / 0.22);
-  --accent-ring: oklch(85% 0.19 192 / 0.52);
+  --accent:      oklch(72% 0.14 214);
+  --accent-glow: oklch(72% 0.14 214 / 0.20);
+  --accent-ring: oklch(72% 0.14 214 / 0.44);
 
   /* ── Accent: violet (primary / active state) ─────── */
-  --accent-violet-lo: oklch(72% 0.16 210);
-  --accent-violet-hi: oklch(56% 0.18 225);
+  --accent-violet-lo: oklch(63% 0.13 214);
+  --accent-violet-hi: oklch(50% 0.11 224);
 
   /* ── Accent: orange (action buttons) ────────────── */
-  --accent-warm-a: oklch(68% 0.20 35);
-  --accent-warm-b: oklch(77% 0.17 48);
+  --accent-warm-a: oklch(60% 0.13 222);
+  --accent-warm-b: oklch(54% 0.11 232);
 
   /* ── State ──────────────────────────────────────── */
   --state-ok:              oklch(83% 0.14 162);
@@ -77,8 +77,8 @@
   /* ── Root properties ────────────────────────────── */
   color: var(--text-primary);
   background:
-    radial-gradient(ellipse at top left, oklch(56% 0.16 210 / 0.38), transparent 36%),
-    radial-gradient(ellipse at 82% -6%, oklch(83% 0.13 185 / 0.22), transparent 34%),
+    radial-gradient(ellipse at top left, oklch(42% 0.08 214 / 0.28), transparent 36%),
+    radial-gradient(ellipse at 82% -6%, oklch(68% 0.07 198 / 0.14), transparent 34%),
     linear-gradient(180deg, var(--bg-base) 0%, var(--bg-raised) 100%);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
 }
@@ -180,7 +180,6 @@ select {
 .overlay-shell input,
 .overlay-shell select,
 .overlay-shell .panel,
-.overlay-shell .modal-backdrop,
 .overlay-shell .toast-container {
   pointer-events: auto;
 }
@@ -339,22 +338,22 @@ select {
 .route-data-panel {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   border-radius: 24px;
   background: var(--surface-panel);
   border: 1px solid var(--border-soft);
-  padding: 16px;
+  padding: 18px;
   pointer-events: auto;
 }
 
 .panel {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   border-radius: 24px;
   background: var(--surface-panel);
   border: 1px solid var(--border-soft);
-  padding: 18px;
+  padding: 20px;
 }
 
 .panel-hero {
@@ -429,15 +428,15 @@ select {
 
 
 .inline-route-panel {
-  margin-top: 10px;
+  margin-top: 14px;
   border-top: 1px solid var(--border-divider);
-  padding-top: 12px;
+  padding-top: 16px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .field span {
@@ -448,7 +447,7 @@ select {
 
 .field-inline {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 .field-inline button {
@@ -594,26 +593,27 @@ select {
 .accent-button,
 .ghost-button {
   border: 1px solid transparent;
-  border-radius: 14px;
-  padding: 11px 14px;
+  border-radius: 12px;
+  padding: 12px 15px;
   font-weight: 700;
-  min-height: 44px;
+  min-height: 46px;
+  letter-spacing: 0.01em;
 }
 
 .primary-button {
-  background: linear-gradient(145deg, oklch(70% 0.20 38), oklch(57% 0.18 24));
-  color: oklch(99% 0.01 95);
-  border-color: oklch(78% 0.16 45 / 0.65);
+  background: linear-gradient(145deg, oklch(62% 0.14 216), oklch(52% 0.12 226));
+  color: oklch(98% 0.007 220);
+  border-color: oklch(72% 0.10 220 / 0.62);
   box-shadow:
-    0 10px 24px oklch(38% 0.15 28 / 0.55),
-    inset 0 1px 0 oklch(95% 0.04 70 / 0.35);
+    0 10px 24px oklch(30% 0.08 224 / 0.40),
+    inset 0 1px 0 oklch(94% 0.02 220 / 0.28);
 }
 
 .secondary-button {
   background: linear-gradient(160deg, var(--surface-btn-secondary-a), var(--surface-btn-secondary-b));
   color: var(--text-primary);
   border-color: var(--border-ghost);
-  box-shadow: 0 10px 22px oklch(13% 0.022 var(--hue) / 0.36);
+  box-shadow: 0 8px 18px oklch(13% 0.022 var(--hue) / 0.30);
 }
 
 .accent-button {
@@ -625,6 +625,7 @@ select {
   background: transparent;
   border-color: var(--border-ghost);
   color: var(--text-secondary);
+  backdrop-filter: saturate(120%);
 }
 
 .ghost-button.danger {
@@ -666,7 +667,7 @@ select {
 .route-panel {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .route-summary {
@@ -746,10 +747,83 @@ select {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 12px;
+  padding: 12px 13px;
   border-radius: 16px;
   background: var(--surface-light);
   border: 1px solid var(--border-light);
+}
+
+.landmark-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.landmark-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  color: var(--text-secondary);
+}
+
+.landmark-section-head span {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.landmark-section-head small {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.landmark-empty {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px dashed var(--border-light);
+  border-radius: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: oklch(94% 0.006 var(--hue) / 0.5);
+}
+
+.landmark-item {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  background: var(--surface-light);
+  padding: 8px;
+}
+
+.landmark-main {
+  flex: 1;
+  border: none;
+  background: transparent;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 44px;
+}
+
+.field-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.landmark-main strong {
+  font-size: 13px;
+  color: var(--text-dark);
+}
+
+.landmark-main span {
+  font-size: 12px;
+  color: var(--text-dark-muted);
 }
 
 .waypoint-index {
@@ -855,50 +929,115 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 16px;
 }
 
 .modal-panel {
-  width: min(560px, 100%);
-  max-height: min(85vh, 760px);
+  width: min(350px, calc(100vw - 48px));
+  max-height: calc(100vh - 48px);
   overflow-y: auto;
-  border-radius: 10px;
-  border: 1px solid var(--border-soft);
-  background: linear-gradient(180deg, var(--surface-modal-a), var(--surface-modal-b));
-  box-shadow: 0 30px 78px oklch(6% 0.01 var(--hue) / 0.66);
-  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid oklch(58% 0.035 var(--hue) / 0.55);
+  background: linear-gradient(180deg, oklch(17% 0.014 var(--hue) / 0.98), oklch(15% 0.012 var(--hue) / 0.98));
+  box-shadow: 0 24px 56px oklch(6% 0.01 var(--hue) / 0.54);
+  padding: 20px 18px 16px;
+}
+
+.modal-panel-narrow {
+  width: min(322px, calc(100vw - 48px));
 }
 
 .modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-divider);
 }
 
 .modal-header h3 {
   margin: 0;
-  font-size: 34px;
-  letter-spacing: -0.02em;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   color: var(--text-near-white);
-}
-
-.modal-close-btn {
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  line-height: 1;
 }
 
 .modal-body {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
+}
+
+.modal-section {
+  display: grid;
+  gap: 10px;
+}
+
+.modal-body .helper-text {
+  font-size: 11px;
+  color: oklch(74% 0.012 var(--hue));
+  margin: 0;
+  max-width: 56ch;
+}
+
+.modal-body .field span {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: oklch(84% 0.012 var(--hue));
+}
+
+.modal-body input,
+.modal-body select {
+  background: oklch(15% 0.010 var(--hue) / 0.92);
+  border-color: oklch(46% 0.03 var(--hue) / 0.62);
+  box-shadow: none;
+}
+
+.modal-body input::placeholder {
+  color: oklch(62% 0.012 var(--hue));
+}
+
+.modal-body .field-inline button {
+  min-width: 92px;
+  width: auto;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.flow-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.modal-body .primary-button,
+.modal-body .secondary-button,
+.modal-body .accent-button {
+  min-height: 42px;
+  border-radius: 10px;
+}
+
+.modal-body .primary-button {
+  width: 100%;
+  min-width: 0;
+}
+
+.modal-stack-button {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .modal-panel {
+    width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+    padding: 18px 16px 16px;
+  }
+
+  .flow-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }
 
 /* ── Tunnel 狀態區塊 ─────────────────────────────────────────────────────── */
@@ -1023,16 +1162,15 @@ select {
 
 .action-row {
   display: flex;
-  gap: 8px;
+  gap: 12px;
+  align-items: stretch;
 }
 
 .action-row .secondary-button {
   flex: 1;
 }
 
-.action-row .ghost-button {
-  flex-shrink: 0;
-}
+
 
 .toast-container {
   position: fixed;
@@ -1072,6 +1210,7 @@ select {
   .map-stage {
     min-height: 58vh;
   }
+
 }
 
 @media (max-width: 720px) {
@@ -1123,9 +1262,6 @@ select {
     inset: auto 12px 12px 12px;
   }
 
-  .modal-backdrop {
-    padding: 14px;
-  }
 
   .map-overlay-card {
     max-width: none;

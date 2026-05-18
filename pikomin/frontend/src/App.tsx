@@ -1,14 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import './app.css'
-import { Navigation, Save, X } from 'lucide-react'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
 import MapInterface from './components/MapInterface'
 import { RoutePanel } from './components/RoutePanel'
 import { useDevice } from './hooks/useDevice'
 import { useRoute } from './hooks/useRoute'
-import { useTunnel } from './hooks/useTunnel'
-import type { GPSCoordinate } from './types'
+import type { GPSCoordinate, SavedLandmark } from './types'
 
 type Mode = 'single' | 'route'
 
@@ -20,7 +18,8 @@ interface Toast {
 let toastIdCounter = 0
 
 function parseCoordinateInput(value: string): GPSCoordinate | null {
-  const parts = value.split(',').map((segment) => Number.parseFloat(segment.trim()))
+  const normalized = value.replace(/，/g, ',').trim()
+  const parts = normalized.split(',').map((segment) => Number.parseFloat(segment.trim()))
   if (parts.length !== 2 || parts.some((part) => Number.isNaN(part))) {
     return null
   }
@@ -37,19 +36,22 @@ export default function App() {
   const [mode, setMode] = useState<Mode>('single')
   const [toasts, setToasts] = useState<Toast[]>([])
   const [myPosition, setMyPosition] = useState<GPSCoordinate | null>(null)
-  const [manualCoordInput, setManualCoordInput] = useState('')
   const [destinationInput, setDestinationInput] = useState('')
-  const [rsdInput, setRsdInput] = useState('')
   const [isLocating, setIsLocating] = useState(false)
   const [isFlying, setIsFlying] = useState(false)
-  const [isSavingRsd, setIsSavingRsd] = useState(false)
   const [hasResetGPS, setHasResetGPS] = useState(false)
-  const [isStatusModalOpen, setIsStatusModalOpen] = useState(false)
-  const statusTriggerRef = useRef<HTMLButtonElement>(null)
+  const [landmarkNameInput, setLandmarkNameInput] = useState('')
+  const [landmarkCoordInput, setLandmarkCoordInput] = useState('')
+  const [landmarkFormTouched, setLandmarkFormTouched] = useState(false)
+  const [landmarkSaving, setLandmarkSaving] = useState(false)
+  const [selectedLandmarkId, setSelectedLandmarkId] = useState('')
+  const [isManageModalOpen, setIsManageModalOpen] = useState(false)
+  const [isFlySettingsOpen, setIsFlySettingsOpen] = useState(false)
+  const [isLandmarkManagerOpen, setIsLandmarkManagerOpen] = useState(false)
+  const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
   const showToastRef = useRef<(message: string) => void>(() => {})
 
   const { devices, selectedDevice, selectDevice, isLoading, error } = useDevice()
-  const tunnel = useTunnel()
   const {
     waypoints,
     addWaypoint,
@@ -60,10 +62,21 @@ export default function App() {
     pauseRoute,
     resumeRoute,
     stopRoute,
-    resetLocation,
   } = useRoute(selectedDevice?.id ?? null, myPosition, (message) => {
     showToastRef.current(`路徑推送失敗：${message}`)
   })
+
+  useEffect(() => {
+    let cancelled = false
+    void apiClient.getLandmarks()
+      .then((items) => {
+        if (!cancelled) setSavedLandmarks(items)
+      })
+      .catch(() => {
+        if (!cancelled) setSavedLandmarks([])
+      })
+    return () => { cancelled = true }
+  }, [])
 
   useEffect(() => {
     if (navigator.geolocation && selectedDevice && !myPosition && !hasResetGPS) {
@@ -172,7 +185,6 @@ export default function App() {
       (pos) => {
         const coord = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
         setMyPosition(coord)
-        setManualCoordInput(formatCoordinate(coord))
         setHasResetGPS(false)
         setIsLocating(false)
         showToast('位置取得成功')
@@ -185,25 +197,14 @@ export default function App() {
     )
   }, [showToast])
 
-  const handleApplyManualPosition = useCallback(async () => {
-    const coord = parseCoordinateInput(manualCoordInput)
-    if (!coord) {
-      showToast('請輸入正確座標格式：25.033, 121.565')
-      return
-    }
-
-    setMyPosition(coord)
-    setHasResetGPS(false)
-    showToast('起始座標已更新')
-  }, [manualCoordInput, showToast])
-
   const handleFlyTo = useCallback(async () => {
     if (!selectedDevice) {
       showToast('請先選擇裝置')
       return
     }
 
-    const coord = parseCoordinateInput(destinationInput)
+    const landmark = savedLandmarks.find((item) => item.name === destinationInput.trim())
+    const coord = landmark?.coordinate ?? parseCoordinateInput(destinationInput)
     if (!coord) {
       showToast('請輸入正確目的地座標')
       return
@@ -213,7 +214,7 @@ export default function App() {
     try {
       await apiClient.setLocation({ ...coord, deviceId: selectedDevice.id })
       setMyPosition(coord)
-      setDestinationInput('')
+      setDestinationInput(landmark ? landmark.name : '')
       setHasResetGPS(false)
       showToast('已飛行到目的地')
     } catch (err) {
@@ -221,102 +222,63 @@ export default function App() {
     } finally {
       setIsFlying(false)
     }
-  }, [destinationInput, selectedDevice, showToast])
+  }, [destinationInput, savedLandmarks, selectedDevice, showToast])
 
-  const handleResetGps = useCallback(async () => {
-    try {
-      await resetLocation()
-      setMyPosition(null)
-      setManualCoordInput('')
-      setDestinationInput('')
-      setHasResetGPS(true)
-      showToast('GPS 已重置，可重新設定位置')
-    } catch (err) {
-      showToast(err instanceof Error ? err.message : 'Reset 失敗')
+  const handleSaveLandmark = useCallback(async () => {
+    setLandmarkFormTouched(true)
+    const target = parseCoordinateInput(landmarkCoordInput)
+    if (!target) {
+      showToast('請輸入正確座標格式：25.033, 121.565')
+      return
     }
-  }, [resetLocation, showToast])
-
-  const handleSaveRsd = useCallback(async () => {
-    if (!selectedDevice) {
-      showToast('請先選擇裝置')
+    const name = landmarkNameInput.trim()
+    if (!name) {
+      showToast('請先輸入地標名稱')
       return
     }
 
-    let address: string
-    let port: number
-
-    const spaceParts = rsdInput.trim().split(/\s+/)
-    if (spaceParts.length === 2) {
-      address = spaceParts[0]
-      port = Number.parseInt(spaceParts[1], 10)
-    } else {
-      // 支援 "address:port" 格式（如 RSD ready 輸出）
-      const lastColon = rsdInput.lastIndexOf(':')
-      const maybPort = Number.parseInt(rsdInput.slice(lastColon + 1), 10)
-      if (lastColon === -1 || Number.isNaN(maybPort) || maybPort < 1 || maybPort > 65535) {
-        showToast('格式錯誤，請輸入：fd2f:e968:f9d3::1:62112')
-        return
-      }
-      address = rsdInput.slice(0, lastColon)
-      port = maybPort
-    }
-
-    if (Number.isNaN(port)) {
-      showToast('Port 必須是數字')
-      return
-    }
-
-    setIsSavingRsd(true)
     try {
-      await apiClient.setRsd(selectedDevice.id, address, port)
-      showToast('RSD 設定完成')
+      setLandmarkSaving(true)
+      const created = await apiClient.createLandmark({ name, coordinate: target })
+      setSavedLandmarks((prev) => [created, ...prev])
+      setLandmarkNameInput('')
+      setLandmarkCoordInput('')
+      setLandmarkFormTouched(false)
+      showToast('地標已儲存')
     } catch (err) {
-      showToast(err instanceof Error ? err.message : 'RSD 設定失敗')
+      showToast(err instanceof Error ? err.message : '儲存地標失敗')
     } finally {
-      setIsSavingRsd(false)
+      setLandmarkSaving(false)
     }
-  }, [rsdInput, selectedDevice, showToast])
+  }, [landmarkCoordInput, landmarkNameInput, showToast])
+
+  const handleDeleteLandmark = useCallback(async (id: string) => {
+    try {
+      await apiClient.deleteLandmark(id)
+      setSavedLandmarks((prev) => prev.filter((landmark) => landmark.id !== id))
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : '刪除地標失敗')
+      return
+    }
+    if (selectedLandmarkId === id) {
+      setSelectedLandmarkId('')
+    }
+  }, [selectedLandmarkId, showToast])
+
+  const handleSelectLandmarkToFly = useCallback((landmarkName: string) => {
+    setDestinationInput(landmarkName)
+    const target = savedLandmarks.find((item) => item.name === landmarkName)
+    if (!target) return
+    setSelectedLandmarkId(target.id)
+  }, [savedLandmarks])
 
   const currentPosition = routeStatus.currentPosition ?? myPosition
   const showDisconnectBanner = !isLoading && selectedDevice === null
-
-  useEffect(() => {
-    if (!isStatusModalOpen) return
-    const panel = document.getElementById('status-modal-panel')
-    if (!panel) return
-    const getFocusables = () =>
-      Array.from(panel.querySelectorAll<HTMLElement>(
-        'button:not(:disabled), input:not(:disabled), select:not(:disabled), [tabindex]:not([tabindex="-1"])'
-      ))
-    getFocusables()[0]?.focus()
-    const trapFocus = (e: KeyboardEvent) => {
-      if (e.key !== 'Tab') return
-      const focusables = getFocusables()
-      if (!focusables.length) return
-      const first = focusables[0]
-      const last = focusables[focusables.length - 1]
-      if (e.shiftKey) {
-        if (document.activeElement === first) { e.preventDefault(); last.focus() }
-      } else {
-        if (document.activeElement === last) { e.preventDefault(); first.focus() }
-      }
-    }
-    document.addEventListener('keydown', trapFocus)
-    return () => {
-      document.removeEventListener('keydown', trapFocus)
-      statusTriggerRef.current?.focus()
-    }
-  }, [isStatusModalOpen])
-
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsStatusModalOpen(false)
-      }
-    }
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  }, [])
+  const trimmedLandmarkName = landmarkNameInput.trim()
+  const parsedLandmarkCoord = parseCoordinateInput(landmarkCoordInput)
+  const nameError = landmarkFormTouched && !trimmedLandmarkName ? '請輸入地標名稱' : ''
+  const coordError = landmarkFormTouched && !parsedLandmarkCoord ? '座標格式錯誤，請用 25.033, 121.565' : ''
+  const isLandmarkFormValid = Boolean(trimmedLandmarkName && parsedLandmarkCoord)
 
   return (
     <div className="app-shell">
@@ -325,6 +287,7 @@ export default function App() {
           mode={mode}
           currentPosition={currentPosition}
           waypoints={waypoints}
+          savedLandmarks={savedLandmarks}
           onMapClick={handleMapClick}
         />
       </section>
@@ -370,14 +333,7 @@ export default function App() {
             </p>
 
             <div className="action-row">
-              <button ref={statusTriggerRef} className="secondary-button" onClick={() => setIsStatusModalOpen(true)}>
-                定位設定
-              </button>
-              {currentPosition && (
-                <button className="ghost-button danger" onClick={handleResetGps}>
-                  Reset GPS
-                </button>
-              )}
+              <button className="secondary-button" onClick={() => setIsManageModalOpen(true)}>位置設定</button>
             </div>
 
             <div className="inline-route-panel">
@@ -402,9 +358,7 @@ export default function App() {
                 <h2>路線資料</h2>
               </div>
               {waypoints.length > 0 && routeStatus.state === 'idle' && (
-                <button className="ghost-button" onClick={clearWaypoints}>
-                  清除全部
-                </button>
+                <button className="ghost-button" onClick={clearWaypoints}>清除全部</button>
               )}
             </div>
             <div className="waypoint-list">
@@ -442,119 +396,107 @@ export default function App() {
         ))}
       </div>
 
-      {isStatusModalOpen && (
-        <div className="modal-backdrop" onClick={() => setIsStatusModalOpen(false)}>
-          <div
-            id="status-modal-panel"
-            className="modal-panel"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="status-modal-title"
-            onClick={(event) => event.stopPropagation()}
-          >
+      {isManageModalOpen && (
+        <div className="modal-backdrop" onClick={() => setIsManageModalOpen(false)}>
+          <div className="modal-panel" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h3 id="status-modal-title">定位設定</h3>
-              <button className="ghost-button modal-close-btn" onClick={() => setIsStatusModalOpen(false)} aria-label="關閉">
-                <X size={20} aria-hidden="true" />
-              </button>
+              <h3>位置資訊設定</h3>
             </div>
             <div className="modal-body">
-              <button className="primary-button" onClick={handleLocateMe} disabled={isLocating}>
-                {isLocating ? '定位中...' : '重新取得目前位置'}
-              </button>
+              <section className="modal-section">
+                <button className="primary-button" onClick={handleLocateMe} disabled={isLocating}>
+                  {isLocating ? '定位中...' : '重新取得目前位置'}
+                </button>
+                <button className="ghost-button modal-stack-button" onClick={() => setIsLandmarkManagerOpen(true)}>地標管理</button>
+                <button className="secondary-button modal-stack-button" onClick={() => setIsFlySettingsOpen(true)}>飛行設定</button>
+                <p className="helper-text">已儲存 {savedLandmarks.length} 個地標，可在飛行設定中直接搜尋。</p>
+              </section>
+            </div>
+          </div>
+        </div>
+      )}
 
-              {/* Tunnel 狀態區塊 */}
-              <div className={`tunnel-status ${tunnel.tunneldAvailable ? 'tunnel-status--online' : 'tunnel-status--offline'}`}>
-                <span className={`device-led ${tunnel.tunneldAvailable ? 'is-online' : 'is-offline'}`} aria-hidden="true" />
-                <div className="tunnel-status-text">
-                  {tunnel.tunneldAvailable ? (
-                    <>
-                      <strong>Tunneld 自動管理中</strong>
-                      <span className="helper-text">
-                        已偵測到 {tunnel.tunnels.length} 個 tunnel，RSD 自動設定，無需手動輸入。
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <strong>Tunneld 未啟動</strong>
-                      <span className="helper-text">
-                        執行一次 <code>sudo pymobiledevice3 remote tunneld</code> 即可自動管理所有裝置。
-                      </span>
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {/* 手動 RSD 輸入（tunneld 未在線時才顯示） */}
-              {!tunnel.tunneldAvailable && (
+      {isFlySettingsOpen && (
+        <div className="modal-backdrop" onClick={() => setIsFlySettingsOpen(false)}>
+          <div className="modal-panel modal-panel-narrow" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header"><h3>飛行設定</h3></div>
+            <div className="modal-body">
+              <section className="modal-section">
                 <label className="field">
-                  <span>手動設定 RSD Address 與 Port</span>
-                  <div className="field-inline">
-                    <input
-                      value={rsdInput}
-                      onChange={(e) => setRsdInput(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                          void handleSaveRsd()
-                        }
-                      }}
-                      placeholder="例如：fd2f:e968:f9d3::1:62112"
-                      disabled={!selectedDevice || isSavingRsd}
-                    />
-                    <button
-                      className="secondary-button"
-                      onClick={() => void handleSaveRsd()}
-                      disabled={!selectedDevice || isSavingRsd}
-                      aria-label={isSavingRsd ? '儲存中' : '儲存 RSD 設定'}
-                    >
-                      {isSavingRsd ? '…' : <Save size={18} aria-hidden="true" />}
+                  <span>目的地</span>
+                  <div className="field-inline flow-row">
+                    <input list="saved-landmarks" value={destinationInput} onChange={(e) => setDestinationInput(e.target.value)} placeholder="地標名稱或座標" />
+                    <datalist id="saved-landmarks">
+                      {savedLandmarks.map((landmark) => (
+                        <option key={landmark.id} value={landmark.name} />
+                      ))}
+                    </datalist>
+                    <button className="accent-button" onClick={() => void handleFlyTo()} disabled={!selectedDevice || isFlying}>
+                      {isFlying ? '執行中' : '飛行'}
                     </button>
                   </div>
                 </label>
-              )}
-              <label className="field">
-                <span>起始座標</span>
-                <div className="field-inline">
+                <p className="helper-text">可直接輸入座標，或輸入已儲存地標名稱快速飛行。</p>
+              </section>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isLandmarkManagerOpen && (
+        <div className="modal-backdrop" onClick={() => setIsLandmarkManagerOpen(false)}>
+          <div className="modal-panel" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header"><h3>地標管理</h3></div>
+            <div className="modal-body">
+              <section className="modal-section">
+                <label className="field">
+                  <span>名稱</span>
                   <input
-                    value={manualCoordInput}
-                    onChange={(e) => setManualCoordInput(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        void handleApplyManualPosition()
-                      }
-                    }}
-                    placeholder="請輸入起始座標，例如：25.033, 121.565"
+                    value={landmarkNameInput}
+                    onChange={(e) => setLandmarkNameInput(e.target.value)}
+                    onBlur={() => setLandmarkFormTouched(true)}
+                    placeholder="例如：台北車站"
+                    aria-invalid={Boolean(nameError)}
                   />
-                  <button className="secondary-button" onClick={() => void handleApplyManualPosition()} aria-label="套用起始座標">
-                    <Save size={18} aria-hidden="true" />
-                  </button>
+                  {nameError && <p className="helper-text helper-text--error">{nameError}</p>}
+                </label>
+                <label className="field">
+                  <span>座標</span>
+                  <div className="field-inline flow-row">
+                    <input
+                      value={landmarkCoordInput}
+                      onChange={(e) => setLandmarkCoordInput(e.target.value)}
+                      onBlur={() => setLandmarkFormTouched(true)}
+                      placeholder="25.047924, 121.517081"
+                      aria-invalid={Boolean(coordError)}
+                    />
+                    <button className="secondary-button" onClick={() => void handleSaveLandmark()} disabled={!isLandmarkFormValid || landmarkSaving}>
+                      {landmarkSaving ? '儲存中' : '儲存'}
+                    </button>
+                  </div>
+                  {coordError && <p className="helper-text helper-text--error">{coordError}</p>}
+                </label>
+                <div className="landmark-section-head">
+                  <span>已新增地標</span>
+                  <small>{savedLandmarks.length} 筆</small>
                 </div>
-              </label>
-              <label className="field">
-                <span>飛行到目的地</span>
-                <div className="field-inline">
-                  <input
-                    value={destinationInput}
-                    onChange={(e) => setDestinationInput(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        void handleFlyTo()
-                      }
-                    }}
-                    placeholder="請輸入目的地座標，例如：25.033, 121.565"
-                    disabled={!selectedDevice || isFlying}
-                  />
-                  <button
-                    className="accent-button"
-                    onClick={() => void handleFlyTo()}
-                    disabled={!selectedDevice || isFlying}
-                    aria-label={isFlying ? '移動中' : '飛行'}
-                  >
-                    {isFlying ? '…' : <Navigation size={18} aria-hidden="true" />}
-                  </button>
-                </div>
-              </label>
-              <p className="helper-text">直接貼上 RSD ready 輸出的位址即可，每次重連後需重新更新。</p>
+                {savedLandmarks.length === 0 ? (
+                  <p className="landmark-empty">目前尚無地標，先新增一筆開始使用。</p>
+                ) : (
+                  <div className="landmark-list">
+                    {savedLandmarks.map((landmark) => (
+                      <div key={landmark.id} className="landmark-item">
+                        <button className="landmark-main" onClick={() => handleSelectLandmarkToFly(landmark.name)} type="button">
+                          <strong>{landmark.name}</strong>
+                          <span>{formatCoordinate(landmark.coordinate)}</span>
+                        </button>
+                        <button className="waypoint-remove" onClick={() => void handleDeleteLandmark(landmark.id)}>刪除</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <p className="helper-text">儲存成功後欄位會自動清空，點選地標可帶入目的地。</p>
+              </section>
             </div>
           </div>
         </div>
