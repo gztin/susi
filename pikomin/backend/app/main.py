@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import devices, location, route, status, rsd, geolocation, tunnel
+from app.routers import devices, location, route, status, rsd, geolocation, tunnel, landmarks
 from app.services.device_manager import DeviceManager
 from app.services.route_engine import RouteEngine
 from app.services.tunneld_poller import TunneldPoller
@@ -62,6 +62,7 @@ app.include_router(status.router, prefix="/api/status", tags=["status"])
 app.include_router(rsd.router, prefix="/api/rsd", tags=["rsd"])
 app.include_router(geolocation.router, prefix="/api/geolocation", tags=["geolocation"])
 app.include_router(tunnel.router, prefix="/api/tunnel", tags=["tunnel"])
+app.include_router(landmarks.router, prefix="/api/landmarks", tags=["landmarks"])
 
 
 @app.websocket("/ws/status")

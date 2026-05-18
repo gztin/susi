@@ -3,6 +3,12 @@ export interface GPSCoordinate {
   longitude: number
 }
 
+export interface SavedLandmark {
+  id: string
+  name: string
+  coordinate: GPSCoordinate
+}
+
 export interface DeviceInfo {
   id: string
   name: string

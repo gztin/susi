@@ -131,6 +131,26 @@ export const apiClient = {
     return request('/api/geolocation')
   },
 
+
+
+  async getLandmarks(): Promise<{ id: string; name: string; coordinate: { latitude: number; longitude: number } }[]> {
+    return request('/api/landmarks')
+  },
+
+  async createLandmark(payload: {
+    name: string
+    coordinate: { latitude: number; longitude: number }
+  }): Promise<{ id: string; name: string; coordinate: { latitude: number; longitude: number } }> {
+    return request('/api/landmarks', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    })
+  },
+
+  async deleteLandmark(landmarkId: string): Promise<void> {
+    await request(`/api/landmarks/${landmarkId}`, { method: 'DELETE' })
+  },
+
   async getTunnelStatus(): Promise<{
     tunneldAvailable: boolean
     tunnels: { udid: string; address: string; port: number; interface: string }[]

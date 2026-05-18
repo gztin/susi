@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import type { GPSCoordinate } from '../types'
+import type { GPSCoordinate, SavedLandmark } from '../types'
 
 delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl
 L.Icon.Default.mergeOptions({
@@ -37,6 +37,7 @@ interface MapInterfaceProps {
   mode: 'single' | 'route'
   currentPosition: GPSCoordinate | null
   waypoints: GPSCoordinate[]
+  savedLandmarks: SavedLandmark[]
   onMapClick: (coord: GPSCoordinate) => void
 }
 
@@ -44,6 +45,7 @@ export default function MapInterface({
   mode,
   currentPosition,
   waypoints,
+  savedLandmarks,
   onMapClick,
 }: MapInterfaceProps) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -51,6 +53,7 @@ export default function MapInterface({
   const tileLayerRef = useRef<L.TileLayer | null>(null)
   const currentMarkerRef = useRef<L.CircleMarker | null>(null)
   const waypointMarkersRef = useRef<L.Marker[]>([])
+  const landmarkMarkersRef = useRef<L.Marker[]>([])
   const polylineRef = useRef<L.Polyline | null>(null)
   const prevPositionRef = useRef<GPSCoordinate | null>(null)
   const [styleId, setStyleId] = useState<TileStyleId>('positron')
@@ -188,6 +191,22 @@ export default function MapInterface({
       }).addTo(map)
     }
   }, [waypoints, mode])
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map) return
+
+    landmarkMarkersRef.current.forEach((m) => m.remove())
+    landmarkMarkersRef.current = []
+
+    savedLandmarks.forEach((landmark) => {
+      const marker = L.marker([landmark.coordinate.latitude, landmark.coordinate.longitude]).addTo(map)
+      marker.bindPopup(
+        `<strong>${landmark.name}</strong><br/>${landmark.coordinate.latitude.toFixed(6)}, ${landmark.coordinate.longitude.toFixed(6)}`
+      )
+      landmarkMarkersRef.current.push(marker)
+    })
+  }, [savedLandmarks])
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>

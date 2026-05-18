@@ -1,0 +1,12 @@
+# Python cache
+**/__pycache__/
+*.py[cod]
+
+# Frontend build output
+frontend/dist/
+
+# Runtime data
+backend/app/data/*.json
+
+# OS files
+.DS_Store
