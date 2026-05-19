@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import os
 from typing import TYPE_CHECKING
 
 import httpx
@@ -21,9 +22,10 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-TUNNELD_HOST = "127.0.0.1"
-TUNNELD_PORT = 49151
-TUNNELD_URL = f"http://{TUNNELD_HOST}:{TUNNELD_PORT}"
+TUNNELD_HOST = os.environ.get("TUNNELD_HOST", "127.0.0.1")
+TUNNELD_PORT = int(os.environ.get("TUNNELD_PORT", "49151"))
+TUNNELD_URL = os.environ.get("TUNNELD_URL", f"http://{TUNNELD_HOST}:{TUNNELD_PORT}")
+RSD_ADDRESS_OVERRIDE = os.environ.get("RSD_ADDRESS_OVERRIDE", "").strip()
 POLL_INTERVAL = 5  # 秒
 
 
@@ -106,9 +108,29 @@ class TunneldPoller:
             address = detail.get("tunnel-address", "")
             port = detail.get("tunnel-port", 0)
             interface = detail.get("interface", "")
+            if RSD_ADDRESS_OVERRIDE:
+                address = RSD_ADDRESS_OVERRIDE
+            # tunneld 某些版本會帶裝置識別資訊，優先拿來顯示名稱
+            device_name = (
+                detail.get("device-name")
+                or detail.get("name")
+                or detail.get("DeviceName")
+                or ""
+            )
+            product_type = (
+                detail.get("product-type")
+                or detail.get("ProductType")
+                or None
+            )
             if not address or not port:
                 continue
-            new_tunnels[udid] = {"address": address, "port": port, "interface": interface}
+            new_tunnels[udid] = {
+                "address": address,
+                "port": port,
+                "interface": interface,
+                "name": device_name,
+                "model": product_type,
+            }
 
         # 更新 DeviceManager 的 RSD 資訊，並確保裝置存在於 registry
         for udid, info in new_tunnels.items():
@@ -120,7 +142,7 @@ class TunneldPoller:
                     udid, info["address"], info["port"], info["interface"],
                 )
             # WiFi 裝置不會出現在 USB 掃描結果，需手動確保 registry 有此裝置
-            self._dm.ensure_device(udid)
+            self._dm.ensure_device(udid, name=info.get("name") or None, model=info.get("model"))
 
         # 移除已消失的 tunnel 對應裝置（僅限 tunneld 管理的，不影響 USB 裝置）
         for udid in set(self._tunnels) - set(new_tunnels):

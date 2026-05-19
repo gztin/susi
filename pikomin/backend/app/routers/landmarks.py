@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Literal
 
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
@@ -18,11 +19,13 @@ class Landmark(BaseModel):
     id: str
     name: str = Field(..., min_length=1)
     coordinate: GPSCoordinate
+    landmarkType: Literal["flower", "mushroom"] = "mushroom"
 
 
 class LandmarkCreateRequest(BaseModel):
     name: str = Field(..., min_length=1)
     coordinate: GPSCoordinate
+    landmarkType: Literal["flower", "mushroom"] = "mushroom"
 
 
 def _read_landmarks() -> list[Landmark]:
@@ -52,7 +55,12 @@ async def list_landmarks() -> list[Landmark]:
 async def create_landmark(req: LandmarkCreateRequest) -> Landmark:
     landmarks = _read_landmarks()
     new_id = f"{int(__import__('time').time() * 1000)}-{len(landmarks) + 1}"
-    item = Landmark(id=new_id, name=req.name.strip(), coordinate=req.coordinate)
+    item = Landmark(
+        id=new_id,
+        name=req.name.strip(),
+        coordinate=req.coordinate,
+        landmarkType=req.landmarkType,
+    )
     landmarks.insert(0, item)
     _write_landmarks(landmarks)
     return item

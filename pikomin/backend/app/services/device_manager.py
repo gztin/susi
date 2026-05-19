@@ -11,10 +11,12 @@ import asyncio
 import logging
 import os
 from typing import Callable, Awaitable
+import httpx
 
 from app.models.schemas import DeviceInfo, GPSCoordinate
 
-PMD3 = "/Users/ggt/Library/Python/3.9/bin/pymobiledevice3"
+PMD3 = os.environ.get("PMD3_PATH", "pymobiledevice3")
+HOST_BRIDGE_URL = os.environ.get("HOST_BRIDGE_URL", "").strip()
 logger = logging.getLogger(__name__)
 
 # ── 自訂例外 ──────────────────────────────────────────────────────────────────
@@ -127,6 +129,9 @@ class DeviceManager:
             )
             return
 
+        if HOST_BRIDGE_URL:
+            await self._host_bridge_set_location(device_id, coordinate)
+            return
         await self._pymobiledevice_set_location(device_id, coordinate)
 
     async def stop_simulation(self, device_id: str) -> None:
@@ -146,7 +151,44 @@ class DeviceManager:
             logger.info("[mock] stop_simulation device=%s", device_id)
             return
 
+        if HOST_BRIDGE_URL:
+            await self._host_bridge_stop_simulation(device_id)
+            return
         await self._pymobiledevice_stop_simulation(device_id)
+
+    async def _host_bridge_set_location(self, device_id: str, coordinate: GPSCoordinate) -> None:
+        try:
+            async with httpx.AsyncClient(timeout=8.0) as client:
+                resp = await client.post(
+                    f"{HOST_BRIDGE_URL}/set-location",
+                    json={
+                        "device_id": device_id,
+                        "latitude": coordinate.latitude,
+                        "longitude": coordinate.longitude,
+                    },
+                )
+                if resp.status_code >= 400:
+                    raise LocationSetError(
+                        device_id,
+                        f"host bridge set-location HTTP {resp.status_code}: {resp.text}",
+                    )
+        except Exception as exc:
+            raise LocationSetError(device_id, f"host bridge set-location 失敗: {exc}") from exc
+
+    async def _host_bridge_stop_simulation(self, device_id: str) -> None:
+        try:
+            async with httpx.AsyncClient(timeout=8.0) as client:
+                resp = await client.post(
+                    f"{HOST_BRIDGE_URL}/clear-location",
+                    json={"device_id": device_id},
+                )
+                if resp.status_code >= 400:
+                    raise LocationSetError(
+                        device_id,
+                        f"host bridge clear-location HTTP {resp.status_code}: {resp.text}",
+                    )
+        except Exception as exc:
+            raise LocationSetError(device_id, f"host bridge clear-location 失敗: {exc}") from exc
 
     def get_device(self, device_id: str) -> DeviceInfo | None:
         """取得單一裝置資訊，不存在回傳 None。"""
@@ -164,7 +206,7 @@ class DeviceManager:
             asyncio.ensure_future(self._close_location_session(device_id))
             logger.info("RSD 已更新，清除 LocationSimulation 快取 device=%s", device_id)
 
-    def ensure_device(self, device_id: str) -> None:
+    def ensure_device(self, device_id: str, name: str | None = None, model: str | None = None) -> None:
         """確保裝置存在於 registry（供 tunneld WiFi 裝置使用）。
 
         若裝置已在 registry 則不做任何事；
@@ -173,19 +215,31 @@ class DeviceManager:
         if self.mock_mode:
             return
         if device_id not in self._registry:
+            resolved_name = (name or "").strip() or device_id
             device = DeviceInfo(
                 id=device_id,
-                name=device_id,  # 先用 UDID，背景任務會更新為真實名稱
+                name=resolved_name,
                 is_connected=True,
-                model=None,
+                model=model,
             )
             self._registry[device_id] = device
             self._tunneld_device_ids.add(device_id)
             logger.info("tunneld 裝置加入 registry: %s", device_id)
             if self.on_device_connected is not None:
                 asyncio.ensure_future(self.on_device_connected(device))
-            # 背景查詢真實裝置名稱
-            asyncio.ensure_future(self._fetch_device_name(device_id))
+            # 若初始名稱仍是 UDID，再背景查詢真實裝置名稱
+            if resolved_name == device_id:
+                asyncio.ensure_future(self._fetch_device_name(device_id))
+        elif name and device_id in self._registry:
+            current = self._registry[device_id]
+            if current.name == device_id:
+                self._registry[device_id] = DeviceInfo(
+                    id=device_id,
+                    name=name,
+                    is_connected=True,
+                    model=model or current.model,
+                )
+                logger.info("tunneld 裝置名稱更新: %s → %s", device_id, name)
 
     async def _fetch_device_name(self, device_id: str) -> None:
         """背景查詢裝置真實名稱，更新 registry。"""

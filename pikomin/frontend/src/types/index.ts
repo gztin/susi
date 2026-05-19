@@ -7,6 +7,7 @@ export interface SavedLandmark {
   id: string
   name: string
   coordinate: GPSCoordinate
+  landmarkType: 'flower' | 'mushroom'
 }
 
 export interface DeviceInfo {

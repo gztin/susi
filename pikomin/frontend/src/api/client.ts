@@ -15,10 +15,23 @@ async function request<T>(
   path: string,
   options?: RequestInit
 ): Promise<T> {
-  const res = await fetch(`${BASE_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
-    ...options,
-  })
+  const controller = new AbortController()
+  const timeout = window.setTimeout(() => controller.abort(), 15000)
+  let res: Response
+  try {
+    res = await fetch(`${BASE_URL}${path}`, {
+      headers: { 'Content-Type': 'application/json' },
+      ...options,
+      signal: controller.signal,
+    })
+  } catch (err) {
+    if (err instanceof DOMException && err.name === 'AbortError') {
+      throw new Error('請求逾時，請再試一次')
+    }
+    throw err
+  } finally {
+    window.clearTimeout(timeout)
+  }
   if (!res.ok) {
     const body = await res.json().catch(() => ({}))
     throw Object.assign(new Error(body.error ?? `HTTP ${res.status}`), {
@@ -133,14 +146,15 @@ export const apiClient = {
 
 
 
-  async getLandmarks(): Promise<{ id: string; name: string; coordinate: { latitude: number; longitude: number } }[]> {
+  async getLandmarks(): Promise<{ id: string; name: string; coordinate: { latitude: number; longitude: number }; landmarkType: 'flower' | 'mushroom' }[]> {
     return request('/api/landmarks')
   },
 
   async createLandmark(payload: {
     name: string
     coordinate: { latitude: number; longitude: number }
-  }): Promise<{ id: string; name: string; coordinate: { latitude: number; longitude: number } }> {
+    landmarkType: 'flower' | 'mushroom'
+  }): Promise<{ id: string; name: string; coordinate: { latitude: number; longitude: number }; landmarkType: 'flower' | 'mushroom' }> {
     return request('/api/landmarks', {
       method: 'POST',
       body: JSON.stringify(payload),
