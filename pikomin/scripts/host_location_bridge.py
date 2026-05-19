@@ -18,6 +18,7 @@ LOG_PATH = os.environ.get("HOST_BRIDGE_LOG_PATH", "/tmp/host_location_bridge.log
 
 app = FastAPI(title="Host Location Bridge", version="0.1.0")
 _device_locks: dict[str, Lock] = {}
+_location_procs: dict[str, subprocess.Popen[str]] = {}
 
 
 class SetLocationReq(BaseModel):
@@ -46,6 +47,41 @@ def _run(cmd: list[str], timeout_sec: int = 30) -> None:
         raise HTTPException(status_code=400, detail=f"[cmd={' '.join(cmd)}] {detail}")
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(f"[{datetime.now().isoformat()}] OK\n")
+
+
+def _spawn_location_process(device_id: str, cmd: list[str]) -> None:
+    with open(LOG_PATH, "a", encoding="utf-8") as f:
+        f.write(f"\n[{datetime.now().isoformat()}] SPAWN {' '.join(cmd)}\n")
+
+    try:
+        proc = subprocess.Popen(
+            cmd,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            text=True,
+        )
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=f"[cmd={' '.join(cmd)}] spawn failed: {exc}") from exc
+
+    _location_procs[device_id] = proc
+
+
+def _terminate_location_process(device_id: str) -> None:
+    proc = _location_procs.pop(device_id, None)
+    if proc is None:
+        return
+
+    with open(LOG_PATH, "a", encoding="utf-8") as f:
+        f.write(f"[{datetime.now().isoformat()}] TERM pid={proc.pid} device={device_id}\n")
+
+    try:
+        proc.terminate()
+        proc.wait(timeout=5)
+    except subprocess.TimeoutExpired:
+        proc.kill()
+        proc.wait(timeout=5)
+    except Exception:
+        pass
 
 
 def _resolve_rsd(device_id: str) -> tuple[str, int]:
@@ -78,7 +114,6 @@ def _get_device_lock(device_id: str) -> Lock:
 @app.post("/set-location")
 def set_location(req: SetLocationReq) -> dict:
     address, port = _resolve_rsd(req.device_id)
-    clear_cmd = [PMD3, "developer", "dvt", "simulate-location", "clear", "--rsd", address, str(port)]
     cmd = [
         PMD3, "developer", "dvt", "simulate-location", "set",
         "--rsd", address, str(port),
@@ -88,13 +123,13 @@ def set_location(req: SetLocationReq) -> dict:
     lock = _get_device_lock(req.device_id)
     with lock:
         try:
-            _run(clear_cmd, timeout_sec=12)
-            _run(cmd, timeout_sec=25)
+            _terminate_location_process(req.device_id)
+            _spawn_location_process(req.device_id, cmd)
         except HTTPException as exc:
-            # 常見是前一次 set 卡住，先 clear 後重試一次
             try:
-                _run(clear_cmd, timeout_sec=15)
-                _run(cmd, timeout_sec=25)
+                _terminate_location_process(req.device_id)
+                _run([PMD3, "developer", "dvt", "simulate-location", "clear", "--rsd", address, str(port)], timeout_sec=15)
+                _spawn_location_process(req.device_id, cmd)
             except HTTPException:
                 raise exc
     return {"success": True}
@@ -106,5 +141,6 @@ def clear_location(req: ClearLocationReq) -> dict:
     cmd = [PMD3, "developer", "dvt", "simulate-location", "clear", "--rsd", address, str(port)]
     lock = _get_device_lock(req.device_id)
     with lock:
+        _terminate_location_process(req.device_id)
         _run(cmd, timeout_sec=20)
     return {"success": True}

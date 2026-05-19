@@ -245,12 +245,14 @@ class RouteEngine:
                         if self._device_id:
                             await self._device_manager.set_location(self._device_id, coord)
                     except Exception as exc:
-                        logger.warning("set_location 失敗（繼續下一點）: %s", exc)
+                        logger.warning("set_location 失敗，停止路徑: %s", exc)
                         if on_route_error is not None:
                             try:
                                 await on_route_error(str(exc))
                             except Exception:
                                 pass
+                        self._reset_state()
+                        return
 
                     # 更新狀態
                     self._current_position = coord

@@ -380,7 +380,9 @@ export default function App() {
     setSelectedLandmarkId(target.id)
   }, [savedLandmarks])
 
-  const currentPosition = routeStatus.currentPosition ?? myPosition
+  const currentPosition = mode === 'single'
+    ? (myPosition ?? routeStatus.currentPosition)
+    : (routeStatus.currentPosition ?? myPosition)
   const handleSwitchFlyMode = useCallback((nextMode: FlyMode) => {
     if (nextMode === flyMode) return
     setFlyMode(nextMode)

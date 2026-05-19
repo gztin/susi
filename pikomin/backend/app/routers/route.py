@@ -29,6 +29,10 @@ async def start_route(
             "type": "route_error",
             "data": {"message": message},
         })
+        await ws_manager.broadcast({
+            "type": "status",
+            "data": {"state": "idle", "progress": 0},
+        })
 
     try:
         await route_engine.start_route(
