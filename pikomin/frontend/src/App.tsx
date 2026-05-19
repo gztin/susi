@@ -73,6 +73,7 @@ export default function App() {
     pauseRoute,
     resumeRoute,
     stopRoute,
+    syncCurrentPosition,
   } = useRoute(selectedDevice?.id ?? null, myPosition, (message) => {
     showToastRef.current(`路徑推送失敗：${message}`)
   })
@@ -93,12 +94,14 @@ export default function App() {
     if (navigator.geolocation && selectedDevice && !myPosition && !hasResetGPS) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
-          setMyPosition({ latitude: pos.coords.latitude, longitude: pos.coords.longitude })
+          const coord = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
+          setMyPosition(coord)
+          syncCurrentPosition(coord, 'idle')
         },
         () => {},
       )
     }
-  }, [selectedDevice, myPosition, hasResetGPS])
+  }, [selectedDevice, myPosition, hasResetGPS, syncCurrentPosition])
 
   const showToast = useCallback((message: string) => {
     const id = ++toastIdCounter
@@ -207,13 +210,14 @@ export default function App() {
       if (!ok) return
       try {
         setMyPosition(coord)
+        syncCurrentPosition(coord, 'idle')
         setHasResetGPS(false)
         showToast('位置已更新')
       } catch (err) {
         showToast(err instanceof Error ? err.message : '設定位置失敗')
       }
     },
-    [addWaypoint, mode, selectedDevice?.id, sendLocationFast, showToast],
+    [addWaypoint, mode, selectedDevice?.id, sendLocationFast, showToast, syncCurrentPosition],
   )
 
   const handleStartRoute = useCallback(
@@ -273,6 +277,7 @@ export default function App() {
         (pos) => {
           const coord = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
           setMyPosition(coord)
+          syncCurrentPosition(coord, 'idle')
           setHasResetGPS(false)
           setIsLocating(false)
           showToast('位置取得成功')
@@ -290,6 +295,7 @@ export default function App() {
         .then((geo) => {
           const coord = { latitude: geo.latitude, longitude: geo.longitude }
           setMyPosition(coord)
+          syncCurrentPosition(coord, 'idle')
           setHasResetGPS(false)
           setIsLocating(false)
           showToast('位置取得成功')
@@ -301,7 +307,7 @@ export default function App() {
     }
 
     locateByBrowser()
-  }, [selectedDevice, showToast])
+  }, [selectedDevice, showToast, syncCurrentPosition])
 
   const handleFlyTo = useCallback(async () => {
     const landmark = savedLandmarks.find((item) => item.name === destinationInput.trim())
@@ -315,7 +321,9 @@ export default function App() {
     try {
       const ok = await sendLocationFast(coord, selectedDevice?.id)
       if (!ok) return
+      setMode('single')
       setMyPosition(coord)
+      syncCurrentPosition(coord, 'idle')
       setDestinationInput(landmark ? landmark.name : '')
       setHasResetGPS(false)
       showToast('已飛行到目的地')
@@ -324,7 +332,7 @@ export default function App() {
     } finally {
       setIsFlying(false)
     }
-  }, [destinationInput, savedLandmarks, selectedDevice?.id, sendLocationFast, showToast])
+  }, [destinationInput, savedLandmarks, selectedDevice?.id, sendLocationFast, showToast, syncCurrentPosition])
 
   const selectedFlyLandmark = savedLandmarks.find((item) => item.id === selectedLandmarkId) ?? null
   const flyTargetText = flyMode === 'landmark'

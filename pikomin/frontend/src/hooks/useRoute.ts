@@ -23,6 +23,7 @@ export function useRoute(
   resumeRoute: () => Promise<void>
   stopRoute: () => Promise<void>
   resetLocation: () => Promise<void>
+  syncCurrentPosition: (coord: GPSCoordinate | null, nextState?: RouteStatus['state']) => void
 } {
   const [waypoints, setWaypoints] = useState<GPSCoordinate[]>([])
   const [routeStatus, setRouteStatus] = useState<RouteStatus>(INITIAL_ROUTE_STATUS)
@@ -158,6 +159,16 @@ export function useRoute(
     currentPositionRef.current = null
   }, [deviceId])
 
+  const syncCurrentPosition = useCallback((coord: GPSCoordinate | null, nextState?: RouteStatus['state']) => {
+    setRouteStatus((prev) => ({
+      ...prev,
+      currentPosition: coord,
+      state: nextState ?? prev.state,
+      progress: nextState === 'idle' ? 0 : prev.progress,
+    }))
+    currentPositionRef.current = coord
+  }, [])
+
   return {
     waypoints,
     addWaypoint,
@@ -169,5 +180,6 @@ export function useRoute(
     resumeRoute,
     stopRoute,
     resetLocation,
+    syncCurrentPosition,
   }
 }
