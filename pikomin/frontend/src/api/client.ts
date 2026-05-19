@@ -13,15 +13,17 @@ const WS_BASE_URL = BASE_URL ? BASE_URL.replace(/^http/, 'ws') : `ws://${window.
 
 async function request<T>(
   path: string,
-  options?: RequestInit
+  options?: RequestInit & { timeoutMs?: number }
 ): Promise<T> {
+  const timeoutMs = options?.timeoutMs ?? 15000
   const controller = new AbortController()
-  const timeout = window.setTimeout(() => controller.abort(), 15000)
+  const timeout = window.setTimeout(() => controller.abort(), timeoutMs)
+  const { timeoutMs: _timeoutMs, ...fetchOptions } = options ?? {}
   let res: Response
   try {
     res = await fetch(`${BASE_URL}${path}`, {
       headers: { 'Content-Type': 'application/json' },
-      ...options,
+      ...fetchOptions,
       signal: controller.signal,
     })
   } catch (err) {
@@ -34,9 +36,10 @@ async function request<T>(
   }
   if (!res.ok) {
     const body = await res.json().catch(() => ({}))
-    throw Object.assign(new Error(body.error ?? `HTTP ${res.status}`), {
+    const detail = typeof body.detail === 'object' && body.detail ? body.detail as { error?: string; code?: string } : null
+    throw Object.assign(new Error(body.error ?? detail?.error ?? `HTTP ${res.status}`), {
       status: res.status,
-      code: body.code,
+      code: body.code ?? detail?.code,
     })
   }
   // 204 No Content
@@ -84,6 +87,7 @@ export const apiClient = {
   async setLocation(req: SetLocationRequest): Promise<void> {
     await request<void>('/api/location', {
       method: 'POST',
+      timeoutMs: 22000,
       body: JSON.stringify({
         latitude: req.latitude,
         longitude: req.longitude,

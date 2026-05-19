@@ -120,6 +120,82 @@ export default function App() {
     return connected
   }, [selectDevice])
 
+  const sendLocationFast = useCallback(async (coord: GPSCoordinate, preferredDeviceId?: string | null) => {
+    let deviceId = preferredDeviceId ?? selectedDevice?.id ?? null
+    if (!deviceId) {
+      const refreshed = await resolveActiveDevice()
+      if (!refreshed) {
+        showToast('請先選擇裝置')
+        return false
+      }
+      deviceId = refreshed.id
+    }
+
+    try {
+      await apiClient.setLocation({
+        latitude: coord.latitude,
+        longitude: coord.longitude,
+        deviceId,
+      })
+      return true
+    } catch (err) {
+      const status = typeof err === 'object' && err && 'status' in err ? (err as { status?: number }).status : undefined
+      const code = typeof err === 'object' && err && 'code' in err ? (err as { code?: string }).code : undefined
+      const message = err instanceof Error ? err.message : '設定位置失敗'
+
+      if (code === 'LOCATION_SET_FAILED') {
+        showToast('定位橋接失敗，請重試')
+        return false
+      }
+
+      if (!(err instanceof Error) || !/Device not found|DEVICE_NOT_FOUND|HTTP 404|HTTP 400/i.test(message) || (status === 400 && code !== 'DEVICE_NOT_FOUND')) {
+        showToast(message)
+        return false
+      }
+      const refreshed = await resolveActiveDevice()
+      if (!refreshed) {
+        // 裝置清單偶發抖動時，先用原本 device 再補一次短重試，避免誤判為已變更
+        if (deviceId) {
+          try {
+            await new Promise((resolve) => window.setTimeout(resolve, 800))
+            await apiClient.setLocation({
+              latitude: coord.latitude,
+              longitude: coord.longitude,
+              deviceId,
+            })
+            return true
+          } catch (retryErr) {
+            const retryCode = typeof retryErr === 'object' && retryErr && 'code' in retryErr ? (retryErr as { code?: string }).code : undefined
+            if (retryCode === 'LOCATION_SET_FAILED') {
+              showToast('定位橋接失敗，請重試')
+            } else {
+              showToast(retryErr instanceof Error ? retryErr.message : '設定位置失敗')
+            }
+            return false
+          }
+        }
+        showToast('裝置連線已變更，請重新選擇裝置後再試一次')
+        return false
+      }
+      try {
+        await apiClient.setLocation({
+          latitude: coord.latitude,
+          longitude: coord.longitude,
+          deviceId: refreshed.id,
+        })
+        return true
+      } catch (retryErr) {
+        const retryCode = typeof retryErr === 'object' && retryErr && 'code' in retryErr ? (retryErr as { code?: string }).code : undefined
+        if (retryCode === 'LOCATION_SET_FAILED') {
+          showToast('定位橋接失敗，請重試')
+        } else {
+          showToast(retryErr instanceof Error ? retryErr.message : '設定位置失敗')
+        }
+        return false
+      }
+    }
+  }, [resolveActiveDevice, selectedDevice?.id, showToast])
+
   const handleMapClick = useCallback(
     async (coord: GPSCoordinate) => {
       if (mode === 'route') {
@@ -127,33 +203,8 @@ export default function App() {
         return
       }
 
-      if (!selectedDevice) {
-        showToast('請先選擇裝置')
-        return
-      }
-
-      try {
-        await apiClient.setLocation({
-          latitude: coord.latitude,
-          longitude: coord.longitude,
-          deviceId: selectedDevice.id,
-        })
-      } catch (err) {
-        if (!(err instanceof Error) || !/Device not found|DEVICE_NOT_FOUND|HTTP 404|HTTP 400/i.test(err.message)) {
-          showToast(err instanceof Error ? err.message : '設定位置失敗')
-          return
-        }
-        const refreshed = await resolveActiveDevice()
-        if (!refreshed) {
-          showToast('裝置連線已變更，請重新選擇裝置後再試一次')
-          return
-        }
-        await apiClient.setLocation({
-          latitude: coord.latitude,
-          longitude: coord.longitude,
-          deviceId: refreshed.id,
-        })
-      }
+      const ok = await sendLocationFast(coord, selectedDevice?.id)
+      if (!ok) return
       try {
         setMyPosition(coord)
         setHasResetGPS(false)
@@ -162,7 +213,7 @@ export default function App() {
         showToast(err instanceof Error ? err.message : '設定位置失敗')
       }
     },
-    [addWaypoint, mode, resolveActiveDevice, selectedDevice, showToast],
+    [addWaypoint, mode, selectedDevice?.id, sendLocationFast, showToast],
   )
 
   const handleStartRoute = useCallback(
@@ -253,21 +304,6 @@ export default function App() {
   }, [selectedDevice, showToast])
 
   const handleFlyTo = useCallback(async () => {
-    let activeDevice = selectedDevice
-
-    if (!activeDevice) {
-      try {
-        activeDevice = await resolveActiveDevice()
-      } catch {
-        // ignore and fall through
-      }
-    }
-
-    if (!activeDevice) {
-      showToast('請先選擇裝置')
-      return
-    }
-
     const landmark = savedLandmarks.find((item) => item.name === destinationInput.trim())
     const coord = landmark?.coordinate ?? parseCoordinateInput(destinationInput)
     if (!coord) {
@@ -277,31 +313,18 @@ export default function App() {
 
     setIsFlying(true)
     try {
-      await apiClient.setLocation({ ...coord, deviceId: activeDevice.id })
-    } catch (err) {
-      if (!(err instanceof Error) || !/Device not found|DEVICE_NOT_FOUND|HTTP 404|HTTP 400/i.test(err.message)) {
-        throw err
-      }
-      const refreshed = await resolveActiveDevice()
-      if (!refreshed) throw err
-      await apiClient.setLocation({ ...coord, deviceId: refreshed.id })
-      activeDevice = refreshed
-    }
-    try {
+      const ok = await sendLocationFast(coord, selectedDevice?.id)
+      if (!ok) return
       setMyPosition(coord)
       setDestinationInput(landmark ? landmark.name : '')
       setHasResetGPS(false)
       showToast('已飛行到目的地')
     } catch (err) {
-      if (err instanceof Error && /Device not found|DEVICE_NOT_FOUND|HTTP 404|HTTP 400/i.test(err.message)) {
-        showToast('裝置連線已變更，請重新選擇裝置後再試一次')
-      } else {
-        showToast(err instanceof Error ? err.message : '飛行失敗')
-      }
+      showToast(err instanceof Error ? err.message : '飛行失敗')
     } finally {
       setIsFlying(false)
     }
-  }, [destinationInput, resolveActiveDevice, savedLandmarks, selectedDevice, showToast])
+  }, [destinationInput, savedLandmarks, selectedDevice?.id, sendLocationFast, showToast])
 
   const selectedFlyLandmark = savedLandmarks.find((item) => item.id === selectedLandmarkId) ?? null
   const flyTargetText = flyMode === 'landmark'

@@ -6,6 +6,7 @@ import subprocess
 import urllib.request
 import json
 from datetime import datetime
+from threading import Lock
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -16,6 +17,7 @@ TUNNELD_URL = os.environ.get("TUNNELD_URL", "http://127.0.0.1:49151")
 LOG_PATH = os.environ.get("HOST_BRIDGE_LOG_PATH", "/tmp/host_location_bridge.log")
 
 app = FastAPI(title="Host Location Bridge", version="0.1.0")
+_device_locks: dict[str, Lock] = {}
 
 
 class SetLocationReq(BaseModel):
@@ -65,15 +67,36 @@ def _resolve_rsd(device_id: str) -> tuple[str, int]:
     return str(address), int(port)
 
 
+def _get_device_lock(device_id: str) -> Lock:
+    lock = _device_locks.get(device_id)
+    if lock is None:
+        lock = Lock()
+        _device_locks[device_id] = lock
+    return lock
+
+
 @app.post("/set-location")
 def set_location(req: SetLocationReq) -> dict:
     address, port = _resolve_rsd(req.device_id)
+    clear_cmd = [PMD3, "developer", "dvt", "simulate-location", "clear", "--rsd", address, str(port)]
     cmd = [
         PMD3, "developer", "dvt", "simulate-location", "set",
-        str(req.latitude), str(req.longitude),
         "--rsd", address, str(port),
+        "--",
+        str(req.latitude), str(req.longitude),
     ]
-    _run(cmd, timeout_sec=60)
+    lock = _get_device_lock(req.device_id)
+    with lock:
+        try:
+            _run(clear_cmd, timeout_sec=12)
+            _run(cmd, timeout_sec=25)
+        except HTTPException as exc:
+            # 常見是前一次 set 卡住，先 clear 後重試一次
+            try:
+                _run(clear_cmd, timeout_sec=15)
+                _run(cmd, timeout_sec=25)
+            except HTTPException:
+                raise exc
     return {"success": True}
 
 
@@ -81,5 +104,7 @@ def set_location(req: SetLocationReq) -> dict:
 def clear_location(req: ClearLocationReq) -> dict:
     address, port = _resolve_rsd(req.device_id)
     cmd = [PMD3, "developer", "dvt", "simulate-location", "clear", "--rsd", address, str(port)]
-    _run(cmd, timeout_sec=30)
+    lock = _get_device_lock(req.device_id)
+    with lock:
+        _run(cmd, timeout_sec=20)
     return {"success": True}

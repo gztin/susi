@@ -117,6 +117,10 @@ class DeviceManager:
             LocationSetError: pymobiledevice3 呼叫失敗（非 mock mode）。
         """
         device = self.get_device(device_id)
+        # 自癒：若 registry 暫時抖動遺失，但 RSD 仍存在，先補回裝置再執行。
+        if device is None and device_id in self._rsd_info:
+            self.ensure_device(device_id)
+            device = self.get_device(device_id)
         if device is None:
             raise DeviceNotFoundError(device_id)
 
@@ -158,7 +162,7 @@ class DeviceManager:
 
     async def _host_bridge_set_location(self, device_id: str, coordinate: GPSCoordinate) -> None:
         try:
-            async with httpx.AsyncClient(timeout=8.0) as client:
+            async with httpx.AsyncClient(timeout=20.0) as client:
                 resp = await client.post(
                     f"{HOST_BRIDGE_URL}/set-location",
                     json={
@@ -173,11 +177,12 @@ class DeviceManager:
                         f"host bridge set-location HTTP {resp.status_code}: {resp.text}",
                     )
         except Exception as exc:
-            raise LocationSetError(device_id, f"host bridge set-location 失敗: {exc}") from exc
+            detail = str(exc).strip() or repr(exc)
+            raise LocationSetError(device_id, f"host bridge set-location 失敗: {detail}") from exc
 
     async def _host_bridge_stop_simulation(self, device_id: str) -> None:
         try:
-            async with httpx.AsyncClient(timeout=8.0) as client:
+            async with httpx.AsyncClient(timeout=20.0) as client:
                 resp = await client.post(
                     f"{HOST_BRIDGE_URL}/clear-location",
                     json={"device_id": device_id},
@@ -188,7 +193,8 @@ class DeviceManager:
                         f"host bridge clear-location HTTP {resp.status_code}: {resp.text}",
                     )
         except Exception as exc:
-            raise LocationSetError(device_id, f"host bridge clear-location 失敗: {exc}") from exc
+            detail = str(exc).strip() or repr(exc)
+            raise LocationSetError(device_id, f"host bridge clear-location 失敗: {detail}") from exc
 
     def get_device(self, device_id: str) -> DeviceInfo | None:
         """取得單一裝置資訊，不存在回傳 None。"""
@@ -320,6 +326,11 @@ class DeviceManager:
         Args:
             connected: 最新掃描到的裝置清單。
         """
+        # USB 掃描偶發空陣列時，避免把仍可用的裝置全部誤判為斷線。
+        if not connected:
+            logger.warning("USB 掃描結果為空，略過本輪 registry 更新以避免誤判斷線。")
+            return
+
         connected_ids = {d.id for d in connected}
         existing_ids = set(self._registry.keys())
 
@@ -347,11 +358,9 @@ class DeviceManager:
     async def _scan_usb_devices(self) -> list[DeviceInfo]:
         """呼叫 pymobiledevice3 CLI 掃描 USB 裝置，回傳裝置清單。"""
         import json
-        import sys
-        pmd3 = "/Users/ggt/Library/Python/3.9/bin/pymobiledevice3"
         try:
             proc = await asyncio.create_subprocess_exec(
-                pmd3, "usbmux", "list", "--usb",
+                PMD3, "usbmux", "list", "--usb",
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )
@@ -402,8 +411,17 @@ class DeviceManager:
         async with self._session_locks[device_id]:
             session = self._location_sessions.get(device_id)
             if session is None:
-                session = await self._create_location_session(device_id, rsd)
-                self._location_sessions[device_id] = session
+                try:
+                    session = await self._create_location_session(device_id, rsd)
+                    self._location_sessions[device_id] = session
+                except LocationSetError as exc:
+                    logger.warning(
+                        "LocationSimulation 建立失敗，改用 CLI fallback: device=%s error=%s",
+                        device_id,
+                        exc,
+                    )
+                    await self._pymobiledevice_set_location_via_cli(device_id, coordinate, rsd)
+                    return
 
             try:
                 await session.set(coordinate.latitude, coordinate.longitude)
@@ -412,10 +430,10 @@ class DeviceManager:
                     device_id, coordinate.latitude, coordinate.longitude,
                 )
             except Exception as exc:
-                # 連線失效，清除快取，下次重建
-                logger.warning("LocationSimulation.set 失敗，清除連線快取: %s", exc)
-                self._location_sessions.pop(device_id, None)
-                raise LocationSetError(device_id, str(exc)) from exc
+                # 連線失效時改走 CLI，避免單點模式完全失效。
+                logger.warning("LocationSimulation.set 失敗，改用 CLI fallback: %s", exc)
+                await self._close_location_session(device_id)
+                await self._pymobiledevice_set_location_via_cli(device_id, coordinate, rsd)
 
     async def _create_location_session(
         self,
@@ -454,6 +472,38 @@ class DeviceManager:
                 except Exception:
                     pass
 
+    async def _pymobiledevice_set_location_via_cli(
+        self,
+        device_id: str,
+        coordinate: GPSCoordinate,
+        rsd: tuple[str, int],
+    ) -> None:
+        """CLI fallback：用 simulate-location 指令設定位置。"""
+        addr, port = rsd
+
+        if device_id in self._location_procs:
+            old_proc = self._location_procs.pop(device_id)
+            try:
+                old_proc.terminate()
+            except Exception:
+                pass
+
+        cmd = [
+            PMD3, "developer", "dvt", "simulate-location", "set",
+            "--rsd", addr, str(port), "--",
+            str(coordinate.latitude), str(coordinate.longitude),
+        ]
+        logger.debug("執行 CLI set_location fallback: %s", " ".join(cmd))
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdout=asyncio.subprocess.DEVNULL,
+                stderr=asyncio.subprocess.DEVNULL,
+            )
+            self._location_procs[device_id] = proc
+        except Exception as exc:
+            raise LocationSetError(device_id, str(exc)) from exc
+
     async def _pymobiledevice_stop_simulation(self, device_id: str) -> None:
         """停止 GPS 模擬，清除快取連線。"""
         # 先嘗試用快取連線送 clear
@@ -463,10 +513,11 @@ class DeviceManager:
                 await session.clear()
                 logger.info("stop_simulation OK device=%s", device_id)
             except Exception as exc:
-                logger.warning("LocationSimulation.clear 失敗: %s", exc)
+                logger.warning("LocationSimulation.clear 失敗，改用 CLI fallback: %s", exc)
             finally:
                 await self._close_location_session(device_id)
-            return
+            if device_id not in self._location_procs:
+                return
 
         # fallback：用 CLI（無快取連線時）
         rsd = self._rsd_info.get(device_id)
