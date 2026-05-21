@@ -60,6 +60,15 @@ npm run dev
 
 開啟瀏覽器前往 http://localhost:3000
 
+### 方式三：Docker 啟動（含 host bridge）
+
+```bash
+chmod +x scripts/docker-stack.sh
+./scripts/docker-stack.sh up
+```
+
+這個入口會先確認並啟動 host bridge，再執行 `docker compose up -d`。如果你平常是用 Docker，建議固定走這個腳本，避免 backend 已啟動但 host bridge 沒在跑，導致出現「定位橋接失敗」。
+
 ---
 
 ## 使用說明

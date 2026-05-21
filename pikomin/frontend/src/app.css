@@ -333,6 +333,7 @@ select {
   top: 28px;
   right: 28px;
   width: min(266px, calc(100vw - 32px));
+  max-height: calc(100vh - 56px);
   z-index: 30;
   pointer-events: none;
 }
@@ -346,7 +347,8 @@ select {
   border: 1px solid var(--border-medium);
   padding: 18px;
   pointer-events: auto;
-  height: calc(100vh - 56px);
+  max-height: calc(100vh - 56px);
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -745,8 +747,10 @@ select {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: min(56vh, 520px);
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
+  padding-right: 4px;
 }
 
 @media (max-width: 1100px) {
@@ -1306,6 +1310,12 @@ select {
 
 .action-row .secondary-button {
   flex: 1;
+}
+
+.action-row .secondary-button.is-active {
+  background: oklch(90% 0.03 214 / 0.98);
+  border-color: oklch(66% 0.07 214 / 0.72);
+  color: oklch(28% 0.04 214);
 }
 
 

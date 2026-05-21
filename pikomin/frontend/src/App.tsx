@@ -43,6 +43,8 @@ export default function App() {
   const [mode, setMode] = useState<Mode>('single')
   const [toasts, setToasts] = useState<Toast[]>([])
   const [myPosition, setMyPosition] = useState<GPSCoordinate | null>(null)
+  const [viewTarget, setViewTarget] = useState<GPSCoordinate | null>(null)
+  const [isMapClickArmed, setIsMapClickArmed] = useState(false)
   const [destinationInput, setDestinationInput] = useState('')
   const [isLocating, setIsLocating] = useState(false)
   const [isFlying, setIsFlying] = useState(false)
@@ -201,6 +203,8 @@ export default function App() {
 
   const handleMapClick = useCallback(
     async (coord: GPSCoordinate) => {
+      if (!isMapClickArmed) return
+
       if (mode === 'route') {
         addWaypoint(coord)
         return
@@ -211,13 +215,14 @@ export default function App() {
       try {
         setMyPosition(coord)
         syncCurrentPosition(coord, 'idle')
+        setViewTarget(coord)
         setHasResetGPS(false)
         showToast('位置已更新')
       } catch (err) {
         showToast(err instanceof Error ? err.message : '設定位置失敗')
       }
     },
-    [addWaypoint, mode, selectedDevice?.id, sendLocationFast, showToast, syncCurrentPosition],
+    [addWaypoint, isMapClickArmed, mode, selectedDevice?.id, sendLocationFast, showToast, syncCurrentPosition],
   )
 
   const handleStartRoute = useCallback(
@@ -278,6 +283,7 @@ export default function App() {
           const coord = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
           setMyPosition(coord)
           syncCurrentPosition(coord, 'idle')
+          setViewTarget(coord)
           setHasResetGPS(false)
           setIsLocating(false)
           showToast('位置取得成功')
@@ -296,6 +302,7 @@ export default function App() {
           const coord = { latitude: geo.latitude, longitude: geo.longitude }
           setMyPosition(coord)
           syncCurrentPosition(coord, 'idle')
+          setViewTarget(coord)
           setHasResetGPS(false)
           setIsLocating(false)
           showToast('位置取得成功')
@@ -324,6 +331,7 @@ export default function App() {
       setMode('single')
       setMyPosition(coord)
       syncCurrentPosition(coord, 'idle')
+      setViewTarget(coord)
       setDestinationInput(landmark ? landmark.name : '')
       setHasResetGPS(false)
       showToast('已飛行到目的地')
@@ -420,6 +428,7 @@ export default function App() {
         <MapInterface
           mode={mode}
           currentPosition={currentPosition}
+          viewTarget={viewTarget}
           waypoints={waypoints}
           savedLandmarks={savedLandmarks}
           onMapClick={handleMapClick}
@@ -460,12 +469,21 @@ export default function App() {
               </select>
             </label>
             <p className="helper-text" aria-live="polite">
-              {mode === 'single'
-                ? '點擊地圖直接移動裝置定位'
-                : '點擊地圖加入路徑點'}
+              {!isMapClickArmed
+                ? '地圖點擊目前已鎖定，開啟「點圖生效」後才會寫入位置或新增路徑點'
+                : mode === 'single'
+                  ? '點擊地圖直接移動裝置定位'
+                  : '點擊地圖加入路徑點'}
             </p>
 
             <div className="action-row">
+              <button
+                className={`secondary-button${isMapClickArmed ? ' is-active' : ''}`}
+                onClick={() => setIsMapClickArmed((prev) => !prev)}
+                aria-pressed={isMapClickArmed}
+              >
+                {isMapClickArmed ? '點圖生效中' : '點圖已鎖定'}
+              </button>
               <button className="secondary-button" onClick={() => setIsManageModalOpen(true)}>位置設定</button>
             </div>
 

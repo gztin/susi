@@ -36,6 +36,7 @@ type TileStyleId = (typeof TILE_STYLES)[number]['id']
 interface MapInterfaceProps {
   mode: 'single' | 'route'
   currentPosition: GPSCoordinate | null
+  viewTarget: GPSCoordinate | null
   waypoints: GPSCoordinate[]
   savedLandmarks: SavedLandmark[]
   onMapClick: (coord: GPSCoordinate) => void
@@ -44,6 +45,7 @@ interface MapInterfaceProps {
 export default function MapInterface({
   mode,
   currentPosition,
+  viewTarget,
   waypoints,
   savedLandmarks,
   onMapClick,
@@ -142,6 +144,13 @@ export default function MapInterface({
       prevPositionRef.current = null
     }
   }, [currentPosition])
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !viewTarget) return
+
+    map.setView([viewTarget.latitude, viewTarget.longitude], 16, { animate: true })
+  }, [viewTarget])
 
   // 更新路徑點標記與連線
   useEffect(() => {
