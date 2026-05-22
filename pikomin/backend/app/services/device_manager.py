@@ -79,6 +79,9 @@ class DeviceManager:
         # 保護同一裝置不同時建立多個連線
         self._session_locks: dict[str, asyncio.Lock] = {}
 
+        # device_id -> power-assertion process (用於保持 Wi-Fi 連線)
+        self._power_assertions: dict[str, asyncio.subprocess.Process] = {}
+
         # tunneld 自動加入的裝置 ID（WiFi 裝置，非 USB 掃描）
         self._tunneld_device_ids: set[str] = set()
 
@@ -207,10 +210,34 @@ class DeviceManager:
         old = self._rsd_info.get(device_id)
         self._rsd_info[device_id] = (address, port)
         logger.info("RSD info 已設定 device=%s addr=%s port=%d", device_id, address, port)
-        # RSD 資訊變更時，清除舊的快取連線（下次 set_location 時重建）
-        if old != (address, port) and device_id in self._location_sessions:
-            asyncio.ensure_future(self._close_location_session(device_id))
-            logger.info("RSD 已更新，清除 LocationSimulation 快取 device=%s", device_id)
+        # RSD 資訊變更時，清除舊的快取連線（下次 set_location 時重建），並啟動 power-assertion 避免裝置休眠斷線
+        if old != (address, port):
+            if device_id in self._location_sessions:
+                asyncio.ensure_future(self._close_location_session(device_id))
+                logger.info("RSD 已更新，清除 LocationSimulation 快取 device=%s", device_id)
+            asyncio.ensure_future(self._start_power_assertion(device_id, address, port))
+
+    async def _start_power_assertion(self, device_id: str, addr: str, port: int) -> None:
+        if device_id in self._power_assertions:
+            try:
+                self._power_assertions[device_id].terminate()
+            except Exception:
+                pass
+        
+        cmd = [
+            PMD3, "power-assertion", "AMDPowerAssertionTypeWirelessSync", "pikomin", "86400",
+            "--rsd", addr, str(port)
+        ]
+        logger.info("啟動 power-assertion 以保持 Wi-Fi 連線: device=%s", device_id)
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdout=asyncio.subprocess.DEVNULL,
+                stderr=asyncio.subprocess.DEVNULL,
+            )
+            self._power_assertions[device_id] = proc
+        except Exception as exc:
+            logger.warning("無法啟動 power-assertion: %s", exc)
 
     def ensure_device(self, device_id: str, name: str | None = None, model: str | None = None) -> None:
         """確保裝置存在於 registry（供 tunneld WiFi 裝置使用）。
