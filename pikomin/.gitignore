@@ -6,7 +6,6 @@
 frontend/dist/
 
 # Runtime data
-backend/app/data/*.json
 
 # OS files
 .DS_Store
