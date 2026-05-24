@@ -21,6 +21,46 @@ function Invoke-Native {
   }
 }
 
+function Optimize-PortableRuntime {
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$VenvDir
+  )
+
+  $SitePackages = Join-Path $VenvDir "Lib\site-packages"
+  if (!(Test-Path $SitePackages)) { return }
+
+  Write-Host "Optimizing portable runtime..."
+
+  Get-ChildItem $VenvDir -Recurse -Directory -Filter "__pycache__" -ErrorAction SilentlyContinue |
+    Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+
+  Get-ChildItem $VenvDir -Recurse -File -Include "*.pyc", "*.pyo" -ErrorAction SilentlyContinue |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+
+  $removePatterns = @(
+    "pip",
+    "pip-*.dist-info",
+    "setuptools",
+    "setuptools-*.dist-info",
+    "wheel",
+    "wheel-*.dist-info",
+    "pythonwin",
+    "Crypto\SelfTest",
+    "jedi\third_party\typeshed",
+    "win32\test",
+    "win32com\test"
+  )
+
+  foreach ($pattern in $removePatterns) {
+    Get-ChildItem -Path (Join-Path $SitePackages $pattern) -ErrorAction SilentlyContinue |
+      Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+  }
+
+  Get-ChildItem $VenvDir -Recurse -Directory -Filter ".pytest_cache" -ErrorAction SilentlyContinue |
+    Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+}
+
 if ([string]::IsNullOrWhiteSpace($ProjectDir)) {
   $ProjectDir = (Resolve-Path "$PSScriptRoot\..").Path
 }
@@ -86,6 +126,7 @@ Invoke-Native $VenvPip install `
   "uvicorn[standard]>=0.29.0" `
   "pymobiledevice3>=4.14.0" `
   "httpx>=0.27.0"
+Optimize-PortableRuntime -VenvDir (Join-Path $OutDir "venv")
 
 Write-Host "[5/6] Create portable launchers..."
 Copy-Item -Force (Join-Path $ProjectDir "scripts\run_portable_windows.bat") (Join-Path $OutDir "run.bat")
@@ -127,6 +168,8 @@ Notes:
 Write-Host "[6/6] Create zip..."
 $ZipPath = Join-Path $ProjectDir "release\pikomin-win-portable.zip"
 if (Test-Path $ZipPath) { Remove-Item -Force $ZipPath }
+Optimize-PortableRuntime -VenvDir (Join-Path $OutDir "venv")
+Start-Sleep -Seconds 1
 Compress-Archive -Path (Join-Path $OutDir "*") -DestinationPath $ZipPath
 
 Write-Host "Done."

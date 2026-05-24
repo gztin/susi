@@ -11,6 +11,7 @@ logs/
 .gitconfig-codex
 release/npm-cache/
 release/pikomin-win-portable/venv/
+release/pikomin-win-portable-old/
 
 # OS files
 .DS_Store
