@@ -90,7 +90,9 @@ Invoke-Native $VenvPip install `
 Write-Host "[5/6] Create portable launchers..."
 Copy-Item -Force (Join-Path $ProjectDir "scripts\run_portable_windows.bat") (Join-Path $OutDir "run.bat")
 Copy-Item -Force (Join-Path $ProjectDir "scripts\run_portable_windows.ps1") (Join-Path $OutDir "run.ps1")
+Copy-Item -Force (Join-Path $ProjectDir "scripts\stop_portable_windows.bat") (Join-Path $OutDir "stop.bat")
 Copy-Item -Force (Join-Path $ProjectDir "scripts\windows_launcher.py") (Join-Path $OutDir "windows_launcher.py")
+Copy-Item -Force (Join-Path $ProjectDir "scripts\windows_service.py") (Join-Path $OutDir "windows_service.py")
 
 if ($BuildExe) {
   Write-Host "[5.5/6] Build PikominLauncher.exe..."
@@ -111,13 +113,15 @@ Pikomin Windows Portable
 How to run:
 1) Open this folder
 2) Double-click run.bat
+3) Allow the Windows administrator permission prompt
 
 Notes:
 - Keep iPhone unlocked while running.
 - Requires Apple drivers / iTunes components on Windows for device communication.
 - Administrator permission is required to start pymobiledevice3 tunneld.
 - The app opens at http://localhost:5679.
-- run.bat starts tunneld and the app server. Close the opened terminal windows to stop them.
+- run.bat starts tunneld and the app server in the background.
+- Double-click stop.bat to stop Pikomin.
 "@ | Out-File -Encoding utf8 (Join-Path $OutDir "README.txt")
 
 Write-Host "[6/6] Create zip..."

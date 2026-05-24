@@ -11,4 +11,5 @@ Notes:
 - Requires Apple drivers / iTunes components on Windows for device communication.
 - Administrator permission is required to start pymobiledevice3 tunneld.
 - The app opens at http://localhost:5679.
-- run.bat starts tunneld and the app server. Close the opened terminal windows to stop them.
+- run.bat starts tunneld and the app server in the background.
+- Double-click stop.bat to stop Pikomin.
