@@ -2,6 +2,7 @@ param(
   [string]$PythonExe = "python",
   [string]$ProjectDir = "",
   [string]$NodeExe = "",
+  [string]$PythonVersion = "3.12.10",
   [switch]$BuildExe
 )
 
@@ -61,6 +62,71 @@ function Optimize-PortableRuntime {
     Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
 }
 
+function Repair-PortablePermissions {
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$Path
+  )
+
+  if ($env:OS -ne "Windows_NT" -or !(Test-Path $Path)) { return }
+
+  $Identity = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+  Write-Host "Repairing portable runtime permissions..."
+  & icacls $Path /inheritance:e /grant "$($Identity):(OI)(CI)F" /T /C | Out-Null
+  if ($LASTEXITCODE -ne 0) {
+    Write-Host "Permission repair reported warnings. Continuing because zip packaging does not preserve NTFS ACLs."
+  }
+}
+
+function New-PortablePython {
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$OutDir,
+    [Parameter(Mandatory = $true)]
+    [string]$PythonVersion,
+    [Parameter(Mandatory = $true)]
+    [string]$BuildPythonExe
+  )
+
+  $PythonDir = Join-Path $OutDir "python"
+  $CacheDir = Join-Path (Split-Path -Parent $OutDir) "python-cache"
+  $EmbedZip = Join-Path $CacheDir "python-$PythonVersion-embed-amd64.zip"
+  $Url = "https://www.python.org/ftp/python/$PythonVersion/python-$PythonVersion-embed-amd64.zip"
+
+  New-Item -ItemType Directory -Force -Path $CacheDir | Out-Null
+  if (!(Test-Path $EmbedZip)) {
+    Write-Host "Downloading Python embeddable runtime $PythonVersion..."
+    Invoke-WebRequest -Uri $Url -OutFile $EmbedZip
+  }
+
+  if (Test-Path $PythonDir) { Remove-Item -Recurse -Force $PythonDir }
+  New-Item -ItemType Directory -Force -Path $PythonDir | Out-Null
+  Expand-Archive -Path $EmbedZip -DestinationPath $PythonDir -Force
+
+  $SitePackages = Join-Path $PythonDir "Lib\site-packages"
+  New-Item -ItemType Directory -Force -Path $SitePackages | Out-Null
+
+  $Pth = Get-ChildItem $PythonDir -Filter "python*._pth" | Select-Object -First 1
+  if ($Pth) {
+    $PthContent = @(
+      "python312.zip",
+      ".",
+      "Lib\site-packages",
+      "import site"
+    )
+    $PthContent | Out-File -Encoding ascii $Pth.FullName
+  }
+
+  Invoke-Native $BuildPythonExe -m pip install --upgrade --ignore-installed --no-cache-dir --target $SitePackages `
+    "fastapi>=0.111.0" `
+    "uvicorn[standard]>=0.29.0" `
+    "pymobiledevice3>=4.14.0" `
+    "httpx>=0.27.0"
+
+  Repair-PortablePermissions -Path $PythonDir
+  Optimize-PortableRuntime -VenvDir $PythonDir
+}
+
 if ([string]::IsNullOrWhiteSpace($ProjectDir)) {
   $ProjectDir = (Resolve-Path "$PSScriptRoot\..").Path
 }
@@ -113,20 +179,11 @@ Copy-Item -Recurse -Force (Join-Path $ProjectDir "backend\app") (Join-Path $OutD
 Copy-Item -Force (Join-Path $ProjectDir "backend\requirements.txt") (Join-Path $OutDir "backend\requirements.txt")
 Copy-Item -Recurse -Force (Join-Path $ProjectDir "frontend\dist") (Join-Path $OutDir "frontend\dist")
 Copy-Item -Force (Join-Path $ProjectDir "docs\*.md") (Join-Path $OutDir "docs\") -ErrorAction SilentlyContinue
+Copy-Item -Force (Join-Path $ProjectDir "docs\*.html") (Join-Path $OutDir "docs\") -ErrorAction SilentlyContinue
 "DOC_VERSION=$((Get-Date).ToString('yyyy-MM-dd_HH-mm-ss'))" | Out-File -Encoding utf8 (Join-Path $OutDir "docs\DOC_VERSION.txt")
 
-Write-Host "[4/6] Create backend virtualenv..."
-Invoke-Native $PythonExe -m venv (Join-Path $OutDir "venv")
-$VenvPy = Join-Path $OutDir "venv\Scripts\python.exe"
-$VenvPip = Join-Path $OutDir "venv\Scripts\pip.exe"
-
-Invoke-Native $VenvPy -m pip install --upgrade pip
-Invoke-Native $VenvPip install `
-  "fastapi>=0.111.0" `
-  "uvicorn[standard]>=0.29.0" `
-  "pymobiledevice3>=4.14.0" `
-  "httpx>=0.27.0"
-Optimize-PortableRuntime -VenvDir (Join-Path $OutDir "venv")
+Write-Host "[4/6] Create portable Python runtime..."
+New-PortablePython -OutDir $OutDir -PythonVersion $PythonVersion -BuildPythonExe $PythonExe
 
 Write-Host "[5/6] Create portable launchers..."
 Copy-Item -Force (Join-Path $ProjectDir "scripts\run_portable_windows.bat") (Join-Path $OutDir "run.bat")
@@ -134,12 +191,14 @@ Copy-Item -Force (Join-Path $ProjectDir "scripts\run_portable_windows.ps1") (Joi
 Copy-Item -Force (Join-Path $ProjectDir "scripts\stop_portable_windows.bat") (Join-Path $OutDir "stop.bat")
 Copy-Item -Force (Join-Path $ProjectDir "scripts\windows_launcher.py") (Join-Path $OutDir "windows_launcher.py")
 Copy-Item -Force (Join-Path $ProjectDir "scripts\windows_service.py") (Join-Path $OutDir "windows_service.py")
+Copy-Item -Force (Join-Path $ProjectDir "scripts\pymobiledevice3_portable.py") (Join-Path $OutDir "pymobiledevice3_portable.py")
+Copy-Item -Force (Join-Path $ProjectDir "scripts\uvicorn_portable.py") (Join-Path $OutDir "uvicorn_portable.py")
 
 if ($BuildExe) {
   Write-Host "[5.5/6] Build PikominLauncher.exe..."
-  Invoke-Native $VenvPip install pyinstaller
+  Invoke-Native $PythonExe -m pip install pyinstaller
   Push-Location $OutDir
-  Invoke-Native (Join-Path $OutDir "venv\Scripts\pyinstaller.exe") `
+  Invoke-Native $PythonExe -m PyInstaller `
     --onefile `
     --name PikominLauncher `
     windows_launcher.py
@@ -168,7 +227,7 @@ Notes:
 Write-Host "[6/6] Create zip..."
 $ZipPath = Join-Path $ProjectDir "release\pikomin-win-portable.zip"
 if (Test-Path $ZipPath) { Remove-Item -Force $ZipPath }
-Optimize-PortableRuntime -VenvDir (Join-Path $OutDir "venv")
+Optimize-PortableRuntime -VenvDir (Join-Path $OutDir "python")
 Start-Sleep -Seconds 1
 Compress-Archive -Path (Join-Path $OutDir "*") -DestinationPath $ZipPath
 

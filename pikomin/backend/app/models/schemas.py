@@ -15,6 +15,7 @@ class DeviceInfo(BaseModel):
     name: str
     is_connected: bool
     model: str | None = None
+    developer_mode_enabled: bool | None = None
 
 
 class SetLocationRequest(BaseModel):

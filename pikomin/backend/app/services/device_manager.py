@@ -10,14 +10,42 @@ from __future__ import annotations
 import asyncio
 import logging
 import os
+import shlex
 from typing import Callable, Awaitable
 import httpx
 
 from app.models.schemas import DeviceInfo, GPSCoordinate
 
 PMD3 = os.environ.get("PMD3_PATH", "pymobiledevice3")
+PMD3_COMMAND = shlex.split(os.environ.get("PMD3_COMMAND", "").strip()) or [PMD3]
 HOST_BRIDGE_URL = os.environ.get("HOST_BRIDGE_URL", "").strip()
 logger = logging.getLogger(__name__)
+
+
+def pmd3_cmd(*args: str) -> list[str]:
+    return [*PMD3_COMMAND, *args]
+
+
+def _decode_process_output(data: bytes | None) -> str:
+    if not data:
+        return ""
+    return data.decode("utf-8", errors="replace").strip()
+
+
+def _developer_mode_hint(detail: str) -> str:
+    lowered = detail.lower()
+    hints: list[str] = []
+    if "dtservicehub" in lowered or "invalidservice" in lowered or "no such service" in lowered:
+        hints.append(
+            "iPhone 沒有開放 DVT / dtservicehub。請確認 Developer Mode 已開啟，並且 iOS 17+ 已掛載 DDI。"
+        )
+    if "developer mode" in lowered or "amfi" in lowered:
+        hints.append("請在 iPhone 設定 > 隱私權與安全性 開啟 Developer Mode，重開機後再次確認。")
+    if "rsd" in lowered or "tunnel" in lowered:
+        hints.append("請確認 Pikomin Tunnel 仍在執行，Windows 端需用系統管理員身分啟動。")
+    if hints:
+        return f"{detail} {' '.join(hints)}"
+    return detail
 
 # ── 自訂例外 ──────────────────────────────────────────────────────────────────
 
@@ -163,6 +191,32 @@ class DeviceManager:
             return
         await self._pymobiledevice_stop_simulation(device_id)
 
+    async def reveal_developer_mode(self, device_id: str) -> None:
+        """Ask iOS to show the Developer Mode toggle in Settings.
+
+        This does not enable Developer Mode by itself. The user still has to
+        turn it on from the iPhone and confirm after the reboot.
+        """
+        device = self.get_device(device_id)
+        if device is None:
+            raise DeviceNotFoundError(device_id)
+        if self.mock_mode:
+            logger.info("[mock] reveal_developer_mode device=%s", device_id)
+            return
+        try:
+            from pymobiledevice3.lockdown import create_using_usbmux
+            from pymobiledevice3.services.amfi import AmfiService
+
+            lockdown = await create_using_usbmux(serial=device_id, autopair=True, connection_type="USB")
+            await AmfiService(lockdown).reveal_developer_mode_option_in_ui()
+            logger.info("Developer Mode reveal requested device=%s", device_id)
+        except Exception as exc:
+            detail = str(exc).strip() or exc.__class__.__name__
+            raise RuntimeError(
+                "無法顯示 Developer Mode 選項。請確認 iPhone 已用 USB 連接、已解鎖並信任此電腦。"
+                f" 原始錯誤: {detail}"
+            ) from exc
+
     async def _host_bridge_set_location(self, device_id: str, coordinate: GPSCoordinate) -> None:
         try:
             async with httpx.AsyncClient(timeout=20.0) as client:
@@ -224,10 +278,10 @@ class DeviceManager:
             except Exception:
                 pass
         
-        cmd = [
-            PMD3, "power-assertion", "AMDPowerAssertionTypeWirelessSync", "pikomin", "86400",
+        cmd = pmd3_cmd(
+            "power-assertion", "AMDPowerAssertionTypeWirelessSync", "pikomin", "86400",
             "--rsd", addr, str(port)
-        ]
+        )
         logger.info("啟動 power-assertion 以保持 Wi-Fi 連線: device=%s", device_id)
         try:
             proc = await asyncio.create_subprocess_exec(
@@ -279,7 +333,7 @@ class DeviceManager:
         import json as _json
         try:
             proc = await asyncio.create_subprocess_exec(
-                PMD3, "usbmux", "list",
+                *pmd3_cmd("usbmux", "list"),
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )
@@ -387,7 +441,7 @@ class DeviceManager:
         import json
         try:
             proc = await asyncio.create_subprocess_exec(
-                PMD3, "usbmux", "list", "--usb",
+                *pmd3_cmd("usbmux", "list", "--usb"),
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )
@@ -447,6 +501,8 @@ class DeviceManager:
                         device_id,
                         exc,
                     )
+                    if await self._pymobiledevice_set_location_via_legacy(device_id, coordinate):
+                        return
                     await self._pymobiledevice_set_location_via_cli(device_id, coordinate, rsd)
                     return
 
@@ -460,6 +516,8 @@ class DeviceManager:
                 # 連線失效時改走 CLI，避免單點模式完全失效。
                 logger.warning("LocationSimulation.set 失敗，改用 CLI fallback: %s", exc)
                 await self._close_location_session(device_id)
+                if await self._pymobiledevice_set_location_via_legacy(device_id, coordinate):
+                    return
                 await self._pymobiledevice_set_location_via_cli(device_id, coordinate, rsd)
 
     async def _create_location_session(
@@ -499,6 +557,27 @@ class DeviceManager:
                 except Exception:
                     pass
 
+    async def _pymobiledevice_set_location_via_legacy(
+        self,
+        device_id: str,
+        coordinate: GPSCoordinate,
+    ) -> bool:
+        """Try the older com.apple.dt.simulatelocation service."""
+        try:
+            from pymobiledevice3.lockdown import create_using_usbmux
+            from pymobiledevice3.services.simulate_location import DtSimulateLocation
+
+            lockdown = await create_using_usbmux(serial=device_id, autopair=True)
+            service = DtSimulateLocation(lockdown)
+            result = service.set(coordinate.latitude, coordinate.longitude)
+            if asyncio.iscoroutine(result):
+                await result
+            logger.info("Legacy location set OK device=%s", device_id)
+            return True
+        except Exception as exc:
+            logger.info("Legacy location fallback unavailable device=%s error=%s", device_id, exc)
+            return False
+
     async def _pymobiledevice_set_location_via_cli(
         self,
         device_id: str,
@@ -515,20 +594,33 @@ class DeviceManager:
             except Exception:
                 pass
 
-        cmd = [
-            PMD3, "developer", "dvt", "simulate-location", "set",
+        cmd = pmd3_cmd(
+            "developer", "dvt", "simulate-location", "set",
             "--rsd", addr, str(port), "--",
             str(coordinate.latitude), str(coordinate.longitude),
-        ]
+        )
         logger.debug("執行 CLI set_location fallback: %s", " ".join(cmd))
         try:
             proc = await asyncio.create_subprocess_exec(
                 *cmd,
-                stdout=asyncio.subprocess.DEVNULL,
-                stderr=asyncio.subprocess.DEVNULL,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
             )
+            try:
+                stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=1.5)
+            except asyncio.TimeoutError:
+                self._location_procs[device_id] = proc
+                return
+            detail = "\n".join(
+                text for text in (_decode_process_output(stdout), _decode_process_output(stderr)) if text
+            )
+            if proc.returncode != 0:
+                detail = detail or f"pymobiledevice3 exited with code {proc.returncode}"
+                raise LocationSetError(device_id, _developer_mode_hint(detail))
             self._location_procs[device_id] = proc
         except Exception as exc:
+            if isinstance(exc, LocationSetError):
+                raise
             raise LocationSetError(device_id, str(exc)) from exc
 
     async def _pymobiledevice_stop_simulation(self, device_id: str) -> None:
@@ -559,16 +651,25 @@ class DeviceManager:
             except Exception:
                 pass
 
-        cmd = [
-            PMD3, "developer", "dvt", "simulate-location", "clear",
+        cmd = pmd3_cmd(
+            "developer", "dvt", "simulate-location", "clear",
             "--rsd", addr, str(port),
-        ]
+        )
         try:
             proc = await asyncio.create_subprocess_exec(
                 *cmd,
-                stdout=asyncio.subprocess.DEVNULL,
-                stderr=asyncio.subprocess.DEVNULL,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
             )
+            stdout, stderr = await proc.communicate()
+            if proc.returncode != 0:
+                detail = "\n".join(
+                    text for text in (_decode_process_output(stdout), _decode_process_output(stderr)) if text
+                )
+                detail = detail or f"pymobiledevice3 exited with code {proc.returncode}"
+                raise LocationSetError(device_id, _developer_mode_hint(detail))
             self._location_procs[device_id] = proc
         except Exception as exc:
+            if isinstance(exc, LocationSetError):
+                raise
             raise LocationSetError(device_id, str(exc)) from exc

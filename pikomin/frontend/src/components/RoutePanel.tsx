@@ -10,13 +10,14 @@ interface RoutePanelProps {
   onStopRoute: () => Promise<void>
 }
 
-type MoveStyle = 'walk' | 'fast_walk' | 'walk_5' | 'run_10'
+type MoveStyle = 'walk' | 'fast_walk' | 'walk_5' | 'run_10' | 'jog_15'
 
 const MOVE_STYLE_OPTIONS: Record<MoveStyle, { label: string; helper: string; speedMs: number }> = {
   walk: { label: '走路', helper: '2 km/h', speedMs: 2 / 3.6 },
   fast_walk: { label: '快步走', helper: '3.5 km/h', speedMs: 3.5 / 3.6 },
   walk_5: { label: '步行', helper: '5 km/h', speedMs: 5 / 3.6 },
   run_10: { label: '慢跑', helper: '10 km/h', speedMs: 10 / 3.6 },
+  jog_15: { label: '小跑步', helper: '15 km/h', speedMs: 15 / 3.6 },
 }
 
 export function RoutePanel({
@@ -60,6 +61,7 @@ export function RoutePanel({
           <option value="fast_walk">快步走 (3.5 km/h)</option>
           <option value="walk_5">步行 (5 km/h)</option>
           <option value="run_10">慢跑 (10 km/h)</option>
+          <option value="jog_15">小跑步 (15 km/h)</option>
         </select>
       </label>
 

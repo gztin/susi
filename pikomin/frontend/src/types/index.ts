@@ -15,6 +15,7 @@ export interface DeviceInfo {
   name: string
   isConnected: boolean
   model?: string
+  developerModeEnabled?: boolean | null
 }
 
 export interface SetLocationRequest {

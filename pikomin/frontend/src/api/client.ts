@@ -53,12 +53,14 @@ function mapDevice(d: {
   name: string
   is_connected: boolean
   model?: string
+  developer_mode_enabled?: boolean | null
 }): DeviceInfo {
   return {
     id: d.id,
     name: d.name,
     isConnected: d.is_connected,
     model: d.model,
+    developerModeEnabled: d.developer_mode_enabled,
   }
 }
 
@@ -79,9 +81,16 @@ function mapRouteStatus(s: {
 export const apiClient = {
   async getDevices(): Promise<DeviceInfo[]> {
     const data = await request<
-      { id: string; name: string; is_connected: boolean; model?: string }[]
+      { id: string; name: string; is_connected: boolean; model?: string; developer_mode_enabled?: boolean | null }[]
     >('/api/devices')
     return data.map(mapDevice)
+  },
+
+  async revealDeveloperMode(deviceId: string): Promise<void> {
+    await request<void>(`/api/devices/${encodeURIComponent(deviceId)}/developer-mode/reveal`, {
+      method: 'POST',
+      timeoutMs: 22000,
+    })
   },
 
   async setLocation(req: SetLocationRequest): Promise<void> {

@@ -484,6 +484,18 @@ select {
   gap: 12px;
 }
 
+.developer-mode-tools {
+  display: grid;
+  gap: 8px;
+}
+
+.developer-mode-tools .secondary-button {
+  justify-self: start;
+  min-height: 40px;
+  padding: 9px 12px;
+  border-radius: 10px;
+}
+
 .device-select-wrap {
   position: relative;
 }
