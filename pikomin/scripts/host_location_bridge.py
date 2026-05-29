@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import shlex
 import subprocess
 import urllib.request
 import json
@@ -11,7 +12,7 @@ from threading import Lock
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-PMD3 = os.environ.get("PMD3_PATH", "pymobiledevice3")
+PMD3 = shlex.split(os.environ.get("PMD3_COMMAND") or os.environ.get("PMD3_PATH", "pymobiledevice3"))
 DEFAULT_RSD_HOST = os.environ.get("RSD_HOST", "127.0.0.1")
 TUNNELD_URL = os.environ.get("TUNNELD_URL", "http://127.0.0.1:49151")
 LOG_PATH = os.environ.get("HOST_BRIDGE_LOG_PATH", "/tmp/host_location_bridge.log")
@@ -43,6 +44,11 @@ class UsbDeviceResp(BaseModel):
     model: str | None = None
 
 
+@app.get("/health")
+def health() -> dict[str, str | bool]:
+    return {"ok": True, "service": "pikomin-host-bridge"}
+
+
 def _run(cmd: list[str], timeout_sec: int = 30) -> None:
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(f"\n[{datetime.now().isoformat()}] RUN {' '.join(cmd)} timeout={timeout_sec}\n")
@@ -59,6 +65,10 @@ def _run(cmd: list[str], timeout_sec: int = 30) -> None:
         raise HTTPException(status_code=400, detail=f"[cmd={' '.join(cmd)}] {detail}")
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(f"[{datetime.now().isoformat()}] OK\n")
+
+
+def _pmd3_cmd(*args: str) -> list[str]:
+    return [*PMD3, *args]
 
 
 def _spawn_location_process(device_id: str, cmd: list[str]) -> None:
@@ -126,12 +136,12 @@ def _get_device_lock(device_id: str) -> Lock:
 @app.post("/set-location")
 def set_location(req: SetLocationReq) -> dict:
     address, port = _resolve_rsd(req.device_id)
-    cmd = [
-        PMD3, "developer", "dvt", "simulate-location", "set",
+    cmd = _pmd3_cmd(
+        "developer", "dvt", "simulate-location", "set",
         "--rsd", address, str(port),
         "--",
         str(req.latitude), str(req.longitude),
-    ]
+    )
     lock = _get_device_lock(req.device_id)
     with lock:
         try:
@@ -140,7 +150,7 @@ def set_location(req: SetLocationReq) -> dict:
         except HTTPException as exc:
             try:
                 _terminate_location_process(req.device_id)
-                _run([PMD3, "developer", "dvt", "simulate-location", "clear", "--rsd", address, str(port)], timeout_sec=15)
+                _run(_pmd3_cmd("developer", "dvt", "simulate-location", "clear", "--rsd", address, str(port)), timeout_sec=15)
                 _spawn_location_process(req.device_id, cmd)
             except HTTPException:
                 raise exc
@@ -149,7 +159,7 @@ def set_location(req: SetLocationReq) -> dict:
 
 @app.get("/usb-devices", response_model=list[UsbDeviceResp])
 def list_usb_devices() -> list[UsbDeviceResp]:
-    cmd = [PMD3, "usbmux", "list", "--usb"]
+    cmd = _pmd3_cmd("usbmux", "list", "--usb")
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(f"\n[{datetime.now().isoformat()}] RUN {' '.join(cmd)} timeout=8\n")
     try:
@@ -181,7 +191,7 @@ def list_usb_devices() -> list[UsbDeviceResp]:
 @app.get("/device-info/{device_id}", response_model=DeviceInfoResp)
 def get_device_info(device_id: str) -> DeviceInfoResp:
     address, port = _resolve_rsd(device_id)
-    cmd = [PMD3, "lockdown", "get", "--rsd", address, str(port)]
+    cmd = _pmd3_cmd("lockdown", "get", "--rsd", address, str(port))
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(f"\n[{datetime.now().isoformat()}] RUN {' '.join(cmd)} timeout=8\n")
     try:
@@ -206,7 +216,7 @@ def get_device_info(device_id: str) -> DeviceInfoResp:
 @app.post("/clear-location")
 def clear_location(req: ClearLocationReq) -> dict:
     address, port = _resolve_rsd(req.device_id)
-    cmd = [PMD3, "developer", "dvt", "simulate-location", "clear", "--rsd", address, str(port)]
+    cmd = _pmd3_cmd("developer", "dvt", "simulate-location", "clear", "--rsd", address, str(port))
     lock = _get_device_lock(req.device_id)
     with lock:
         _terminate_location_process(req.device_id)

@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { apiClient } from '../api/client'
+import { useEffect } from 'react'
 import { useDevice } from '../hooks/useDevice'
 import type { DeviceInfo } from '../types'
 
@@ -20,10 +19,6 @@ export function DeviceStatus({
   isLoading,
   error,
 }: DeviceStatusProps) {
-  const [developerModeMessage, setDeveloperModeMessage] = useState<string | null>(null)
-  const [developerModeError, setDeveloperModeError] = useState<string | null>(null)
-  const [isRevealingDeveloperMode, setIsRevealingDeveloperMode] = useState(false)
-
   const needsFallback =
     devices === undefined ||
     selectedDevice === undefined ||
@@ -40,24 +35,7 @@ export function DeviceStatus({
 
   useEffect(() => {
     onDeviceSelect?.(resolvedSelectedDevice)
-    setDeveloperModeMessage(null)
-    setDeveloperModeError(null)
   }, [onDeviceSelect, resolvedSelectedDevice])
-
-  async function handleRevealDeveloperMode() {
-    if (!resolvedSelectedDevice) return
-    setIsRevealingDeveloperMode(true)
-    setDeveloperModeMessage(null)
-    setDeveloperModeError(null)
-    try {
-      await apiClient.revealDeveloperMode(resolvedSelectedDevice.id)
-      setDeveloperModeMessage('已請 iPhone 顯示 Developer Mode 選項，請到設定 > 隱私權與安全性開啟並重開機確認。')
-    } catch (err) {
-      setDeveloperModeError(err instanceof Error ? err.message : '無法顯示 Developer Mode 選項')
-    } finally {
-      setIsRevealingDeveloperMode(false)
-    }
-  }
 
   if (resolvedLoading) {
     return <div className="helper-text">載入裝置中...</div>
@@ -96,20 +74,6 @@ export function DeviceStatus({
         </div>
       </label>
 
-      {resolvedSelectedDevice && resolvedSelectedDevice.developerModeEnabled !== true && (
-        <div className="developer-mode-tools">
-          <button
-            type="button"
-            className="secondary-button"
-            onClick={handleRevealDeveloperMode}
-            disabled={isRevealingDeveloperMode}
-          >
-            {isRevealingDeveloperMode ? '處理中...' : '顯示 Developer Mode'}
-          </button>
-          {developerModeMessage && <p className="helper-text">{developerModeMessage}</p>}
-          {developerModeError && <p className="helper-text helper-text--error">{developerModeError}</p>}
-        </div>
-      )}
     </div>
   )
 }

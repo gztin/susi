@@ -9,10 +9,11 @@ BRIDGE_PID_FILE="${BRIDGE_PID_FILE:-/tmp/pikomin-host-bridge.pid}"
 BRIDGE_LOG_FILE="${BRIDGE_LOG_FILE:-/tmp/pikomin-host-bridge.log}"
 BRIDGE_SCREEN_NAME="${BRIDGE_SCREEN_NAME:-pikomin-host-bridge}"
 
-bridge_url="http://${BRIDGE_HOST}:${BRIDGE_PORT}/docs"
+bridge_url="http://${BRIDGE_HOST}:${BRIDGE_PORT}"
+bridge_health_url="${bridge_url}/health"
 
 is_bridge_healthy() {
-  curl -fsS "${bridge_url}" >/dev/null 2>&1
+  curl -fsS "${bridge_health_url}" | grep -q "pikomin-host-bridge"
 }
 
 is_screen_running() {
@@ -45,7 +46,7 @@ start_bridge() {
   cleanup_stale_pid
 
   if is_bridge_healthy; then
-    echo "Host bridge already running: ${bridge_url}"
+    echo "Host bridge already running: ${bridge_health_url}"
     return
   fi
 
@@ -68,7 +69,7 @@ start_bridge() {
 
   for _ in $(seq 1 20); do
     if is_bridge_healthy; then
-      echo "Host bridge ready: ${bridge_url}"
+      echo "Host bridge ready: ${bridge_health_url}"
       return
     fi
     if [[ -f "${BRIDGE_PID_FILE}" ]] && [[ "$(cat "${BRIDGE_PID_FILE}")" == screen:* ]]; then
@@ -117,7 +118,7 @@ stop_bridge() {
 
 show_status() {
   if is_bridge_healthy; then
-    echo "Host bridge: running (${bridge_url})"
+    echo "Host bridge: running (${bridge_health_url})"
   else
     echo "Host bridge: stopped"
   fi
