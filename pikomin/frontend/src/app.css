@@ -818,6 +818,18 @@ select {
   border-top: 1px solid var(--border-divider);
 }
 
+.saved-route-toolbar {
+  display: flex;
+  gap: 8px;
+}
+
+.saved-route-toolbar .secondary-button {
+  width: 100%;
+  min-height: 34px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
 .saved-route-list {
   display: grid;
   gap: 8px;
@@ -828,7 +840,7 @@ select {
 
 .saved-route-item {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
   gap: 8px;
   align-items: center;
   padding: 8px;
@@ -868,6 +880,17 @@ select {
 .saved-route-main span {
   color: var(--text-muted);
   font-size: 11px;
+}
+
+.saved-route-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.saved-route-actions .waypoint-remove {
+  min-width: 0;
+  width: 100%;
 }
 
 @media (max-width: 1100px) {

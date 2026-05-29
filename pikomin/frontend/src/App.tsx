@@ -16,6 +16,13 @@ interface Toast {
   message: string
 }
 
+interface RouteFilePayload {
+  version?: unknown
+  name?: unknown
+  exportedAt?: unknown
+  waypoints?: unknown
+}
+
 let toastIdCounter = 0
 
 function parseCoordinateInput(value: string): GPSCoordinate | null {
@@ -37,6 +44,43 @@ function parseCoordinateInput(value: string): GPSCoordinate | null {
 function formatCoordinate(coord: GPSCoordinate | null): string {
   if (!coord) return '尚未設定'
   return `${coord.latitude.toFixed(6)}, ${coord.longitude.toFixed(6)}`
+}
+
+function isValidCoordinate(value: unknown): value is GPSCoordinate {
+  if (!value || typeof value !== 'object') return false
+  const coord = value as Partial<GPSCoordinate>
+  return (
+    typeof coord.latitude === 'number' &&
+    typeof coord.longitude === 'number' &&
+    Number.isFinite(coord.latitude) &&
+    Number.isFinite(coord.longitude) &&
+    coord.latitude >= -90 &&
+    coord.latitude <= 90 &&
+    coord.longitude >= -180 &&
+    coord.longitude <= 180
+  )
+}
+
+function normalizeImportedRoute(payload: RouteFilePayload): { name: string; waypoints: GPSCoordinate[] } {
+  if (!Array.isArray(payload.waypoints)) {
+    throw new Error('檔案格式錯誤，找不到路徑點資料')
+  }
+  const waypoints = payload.waypoints
+  if (waypoints.length < 2) {
+    throw new Error('路徑至少需要 2 個路徑點')
+  }
+  if (!waypoints.every(isValidCoordinate)) {
+    throw new Error('路徑檔案內有無效座標，請確認經緯度')
+  }
+  const name = typeof payload.name === 'string' && payload.name.trim()
+    ? payload.name.trim()
+    : '匯入的種花路徑'
+  return { name, waypoints }
+}
+
+function sanitizeFilename(value: string): string {
+  const normalized = value.trim().replace(/[\\/:*?"<>|]+/g, '-').replace(/\s+/g, '-')
+  return normalized || '未命名路徑'
 }
 
 export default function App() {
@@ -67,6 +111,7 @@ export default function App() {
   const [flyMode, setFlyMode] = useState<FlyMode>('coordinate')
   const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
   const showToastRef = useRef<(message: string) => void>(() => {})
+  const routeImportInputRef = useRef<HTMLInputElement | null>(null)
 
   const { devices, selectedDevice, selectDevice, isLoading, error } = useDevice()
   const {
@@ -488,6 +533,48 @@ export default function App() {
     }
   }, [showToast])
 
+  const handleExportSavedRoute = useCallback((route: SavedRoute) => {
+    const payload = {
+      version: 1,
+      name: route.name,
+      exportedAt: new Date().toISOString(),
+      waypoints: route.waypoints,
+    }
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `pikomin-route-${sanitizeFilename(route.name)}.json`
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+    URL.revokeObjectURL(url)
+    showToast(`已匯出路徑：${route.name}`)
+  }, [showToast])
+
+  const handleImportRouteFile = useCallback(async (file: File | null) => {
+    if (!file) return
+    if (!file.name.toLowerCase().endsWith('.json')) {
+      showToast('檔案格式錯誤，請選擇種花路徑 JSON 檔')
+      return
+    }
+
+    try {
+      const text = await file.text()
+      const payload = JSON.parse(text) as RouteFilePayload
+      const imported = normalizeImportedRoute(payload)
+      const created = await apiClient.createSavedRoute(imported)
+      setSavedRoutes((prev) => [created, ...prev])
+      showToast('路徑已匯入，可從清單載入')
+    } catch (err) {
+      if (err instanceof SyntaxError) {
+        showToast('檔案格式錯誤，請選擇種花路徑 JSON 檔')
+        return
+      }
+      showToast(err instanceof Error ? err.message : '匯入路徑失敗')
+    }
+  }, [showToast])
+
   const currentPosition = mode === 'single'
     ? (myPosition ?? routeStatus.currentPosition)
     : (routeStatus.currentPosition ?? myPosition)
@@ -654,6 +741,26 @@ export default function App() {
                   <span>已儲存路徑</span>
                   <small>{savedRoutes.length} 筆</small>
                 </div>
+                <div className="saved-route-toolbar">
+                  <button
+                    className="secondary-button"
+                    onClick={() => routeImportInputRef.current?.click()}
+                    type="button"
+                  >
+                    匯入路徑
+                  </button>
+                  <input
+                    ref={routeImportInputRef}
+                    className="sr-only"
+                    type="file"
+                    accept="application/json,.json"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0] ?? null
+                      void handleImportRouteFile(file)
+                      e.currentTarget.value = ''
+                    }}
+                  />
+                </div>
                 {savedRoutes.length === 0 ? (
                   <p className="route-empty">目前還沒有儲存路徑。</p>
                 ) : (
@@ -669,13 +776,22 @@ export default function App() {
                           <strong>{route.name}</strong>
                           <span>{route.waypoints.length} 個路徑點</span>
                         </button>
-                        <button
-                          className="waypoint-remove"
-                          onClick={() => void handleDeleteSavedRoute(route.id)}
-                          type="button"
-                        >
-                          刪除
-                        </button>
+                        <div className="saved-route-actions">
+                          <button
+                            className="waypoint-remove"
+                            onClick={() => handleExportSavedRoute(route)}
+                            type="button"
+                          >
+                            匯出
+                          </button>
+                          <button
+                            className="waypoint-remove"
+                            onClick={() => void handleDeleteSavedRoute(route.id)}
+                            type="button"
+                          >
+                            刪除
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
