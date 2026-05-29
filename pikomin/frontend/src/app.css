@@ -220,6 +220,27 @@ select {
   color: var(--text-muted);
 }
 
+.panel-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.version-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 18px;
+  padding: 0 7px;
+  border-radius: 999px;
+  border: 1px solid var(--border-light);
+  background: var(--surface-chip);
+  color: var(--text-faint);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
 .topbar-actions {
   display: flex;
   align-items: center;
@@ -1043,8 +1064,16 @@ select {
   width: min(322px, calc(100vw - 48px));
 }
 
+.landmark-manager-panel {
+  width: min(760px, calc(100vw - 56px));
+}
+
 .modal-panel:has(.modal-body-split) {
   width: min(560px, calc(100vw - 56px));
+}
+
+.landmark-manager-panel:has(.modal-body-split) {
+  width: min(760px, calc(100vw - 56px));
 }
 
 .modal-header {
@@ -1083,6 +1112,99 @@ select {
   display: grid;
   gap: 10px;
   min-width: 0;
+}
+
+.landmark-manager-layout {
+  grid-template-columns: minmax(260px, 0.85fr) minmax(300px, 1.15fr);
+}
+
+.landmark-manager-list-panel {
+  min-height: 0;
+}
+
+.editing-hint {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid oklch(75% 0.10 222 / 0.45);
+  background: oklch(94% 0.025 222 / 0.72);
+  color: var(--text-secondary);
+}
+
+.landmark-edit-list {
+  display: grid;
+  gap: 8px;
+  max-height: 430px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.landmark-edit-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  background: var(--surface-light);
+}
+
+.landmark-edit-item.is-editing {
+  border-color: oklch(70% 0.12 222 / 0.62);
+  background: oklch(94% 0.020 222 / 0.76);
+}
+
+.landmark-edit-main {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: 3px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.landmark-edit-main strong,
+.landmark-edit-main span,
+.landmark-edit-main small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.landmark-edit-main strong {
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.landmark-edit-main span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.landmark-edit-main small {
+  width: fit-content;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: oklch(91% 0.012 var(--hue) / 0.90);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.landmark-edit-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.landmark-edit-actions .secondary-button,
+.landmark-edit-actions .ghost-button {
+  min-height: 30px;
+  min-width: 48px;
+  padding: 0 9px;
+  border-radius: 9px;
+  font-size: 12px;
 }
 
 .modal-body .helper-text {
@@ -1174,6 +1296,18 @@ select {
   .modal-body-split {
     grid-template-columns: 1fr;
     gap: 12px;
+  }
+
+  .landmark-manager-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .landmark-edit-item {
+    grid-template-columns: 1fr;
+  }
+
+  .landmark-edit-actions {
+    justify-content: flex-end;
   }
 
   .landmark-toolbar {

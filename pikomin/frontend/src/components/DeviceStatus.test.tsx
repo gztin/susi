@@ -53,7 +53,7 @@ describe('DeviceStatus', () => {
   it('無裝置時顯示提示訊息', () => {
     setupMock({ devices: [] })
     render(<DeviceStatus />)
-    expect(screen.getByText('未偵測到裝置，請透過 USB 連接 iPhone')).toBeTruthy()
+    expect(screen.getByText('未偵測到裝置，請透過 USB 連接 iPhone 或確認 tunneld 已啟動')).toBeTruthy()
   })
 
   it('有裝置時顯示下拉選單', () => {

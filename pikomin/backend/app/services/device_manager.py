@@ -8,6 +8,7 @@ TunneldPoller 會自動讀取 RSD 資訊，不需手動設定。
 from __future__ import annotations
 
 import asyncio
+import json
 import logging
 import os
 from typing import Callable, Awaitable
@@ -102,6 +103,8 @@ class DeviceManager:
         """
         if self.mock_mode:
             return [_MOCK_DEVICE]
+        if HOST_BRIDGE_URL:
+            return await self._list_usb_devices_via_host_bridge()
         return list(self._registry.values())
 
     async def set_location(
@@ -199,6 +202,25 @@ class DeviceManager:
             detail = str(exc).strip() or repr(exc)
             raise LocationSetError(device_id, f"host bridge clear-location 失敗: {detail}") from exc
 
+    async def _list_usb_devices_via_host_bridge(self) -> list[DeviceInfo]:
+        try:
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                resp = await client.get(f"{HOST_BRIDGE_URL}/usb-devices")
+            resp.raise_for_status()
+            devices = [DeviceInfo.model_validate(item) for item in resp.json()]
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("host bridge USB 裝置查詢失敗: %s", exc)
+            return [
+                device
+                for device_id, device in self._registry.items()
+                if device_id not in self._tunneld_device_ids
+            ]
+
+        for device in devices:
+            self._registry[device.id] = device
+            self._tunneld_device_ids.discard(device.id)
+        return devices
+
     def get_device(self, device_id: str) -> DeviceInfo | None:
         """取得單一裝置資訊，不存在回傳 None。"""
         if self.mock_mode:
@@ -216,6 +238,7 @@ class DeviceManager:
                 asyncio.ensure_future(self._close_location_session(device_id))
                 logger.info("RSD 已更新，清除 LocationSimulation 快取 device=%s", device_id)
             asyncio.ensure_future(self._start_power_assertion(device_id, address, port))
+            asyncio.ensure_future(self._fetch_device_metadata_via_rsd(device_id, address, port))
 
     async def _start_power_assertion(self, device_id: str, addr: str, port: int) -> None:
         if device_id in self._power_assertions:
@@ -276,35 +299,113 @@ class DeviceManager:
 
     async def _fetch_device_name(self, device_id: str) -> None:
         """背景查詢裝置真實名稱，更新 registry。"""
-        import json as _json
         try:
             proc = await asyncio.create_subprocess_exec(
                 PMD3, "usbmux", "list",
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )
-            stdout, _ = await proc.communicate()
+            try:
+                stdout, _ = await asyncio.wait_for(proc.communicate(), timeout=5)
+            except asyncio.TimeoutError:
+                proc.kill()
+                await proc.communicate()
+                logger.debug("usbmux 裝置名稱查詢逾時: %s", device_id)
+                return
+            if proc.returncode != 0:
+                return
             raw = stdout.decode().strip()
             lines = raw.splitlines()
             json_start = next((i for i, l in enumerate(lines) if l.strip().startswith("[")), None)
             if json_start is None:
                 return
-            data = _json.loads("\n".join(lines[json_start:]))
+            data = json.loads("\n".join(lines[json_start:]))
             for entry in data:
                 if entry.get("Identifier") == device_id:
                     name = entry.get("DeviceName", device_id)
                     model = entry.get("ProductType")
-                    if device_id in self._registry:
-                        self._registry[device_id] = DeviceInfo(
-                            id=device_id,
-                            name=name,
-                            is_connected=True,
-                            model=model,
-                        )
-                        logger.info("裝置名稱已更新: %s → %s", device_id, name)
+                    self._update_device_metadata(device_id, name=name, model=model)
                     return
         except Exception as exc:  # noqa: BLE001
             logger.debug("查詢裝置名稱失敗 %s: %s", device_id, exc)
+
+    async def _fetch_device_metadata_via_rsd(self, device_id: str, address: str, port: int) -> None:
+        """透過 RSD lockdown 查詢裝置名稱，避免只顯示 UDID。"""
+        if HOST_BRIDGE_URL:
+            try:
+                async with httpx.AsyncClient(timeout=10.0) as client:
+                    resp = await client.get(f"{HOST_BRIDGE_URL}/device-info/{device_id}")
+                if resp.status_code < 400:
+                    payload = resp.json()
+                    self._update_device_metadata(
+                        device_id,
+                        name=payload.get("name"),
+                        model=payload.get("model"),
+                    )
+                    return
+            except Exception as exc:  # noqa: BLE001
+                logger.debug("host bridge 裝置名稱查詢失敗 %s: %s", device_id, exc)
+
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                PMD3, "lockdown", "get",
+                "--rsd", address, str(port),
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+            )
+            try:
+                stdout, _ = await asyncio.wait_for(proc.communicate(), timeout=6)
+            except asyncio.TimeoutError:
+                proc.kill()
+                await proc.communicate()
+                logger.debug("RSD 裝置名稱查詢逾時: %s", device_id)
+                return
+
+            if proc.returncode != 0:
+                return
+
+            payload = json.loads(stdout.decode().strip())
+            if not isinstance(payload, dict):
+                return
+            name = payload.get("DeviceName")
+            model = payload.get("ProductType")
+            self._update_device_metadata(
+                device_id,
+                name=str(name) if name else None,
+                model=str(model) if model else None,
+            )
+        except Exception as exc:  # noqa: BLE001
+            logger.debug("RSD 裝置名稱查詢失敗 %s: %s", device_id, exc)
+
+    def _update_device_metadata(
+        self,
+        device_id: str,
+        name: str | None = None,
+        model: str | None = None,
+    ) -> None:
+        device = self._registry.get(device_id)
+        if device is None:
+            return
+
+        next_name = (name or "").strip()
+        next_model = (model or "").strip()
+        should_update_name = bool(next_name) and device.name == device_id
+        should_update_model = bool(next_model) and device.model != next_model
+        if not should_update_name and not should_update_model:
+            return
+
+        self._registry[device_id] = DeviceInfo(
+            id=device.id,
+            name=next_name if should_update_name else device.name,
+            is_connected=True,
+            model=next_model if should_update_model else device.model,
+        )
+        logger.info(
+            "裝置資訊已更新: %s name=%s model=%s",
+            device_id,
+            self._registry[device_id].name,
+            self._registry[device_id].model,
+        )
 
     def remove_tunneld_device(self, device_id: str) -> None:
         """移除由 tunneld 管理、且 tunnel 已消失的裝置。
@@ -368,6 +469,8 @@ class DeviceManager:
                 logger.info("裝置連線: %s (%s)", device.id, device.name)
                 if self.on_device_connected is not None:
                     asyncio.ensure_future(self.on_device_connected(device))
+            else:
+                self._update_device_metadata(device.id, name=device.name, model=device.model)
 
         # 消失裝置
         for device_id in existing_ids - connected_ids:

@@ -7,6 +7,7 @@ BRIDGE_HOST="${BRIDGE_HOST:-127.0.0.1}"
 BRIDGE_PORT="${BRIDGE_PORT:-5680}"
 BRIDGE_PID_FILE="${BRIDGE_PID_FILE:-/tmp/pikomin-host-bridge.pid}"
 BRIDGE_LOG_FILE="${BRIDGE_LOG_FILE:-/tmp/pikomin-host-bridge.log}"
+BRIDGE_SCREEN_NAME="${BRIDGE_SCREEN_NAME:-pikomin-host-bridge}"
 
 bridge_url="http://${BRIDGE_HOST}:${BRIDGE_PORT}/docs"
 
@@ -14,10 +15,25 @@ is_bridge_healthy() {
   curl -fsS "${bridge_url}" >/dev/null 2>&1
 }
 
+is_screen_running() {
+  local screen_name="$1"
+  local output
+  output="$(screen -list 2>/dev/null || true)"
+  grep -q "${screen_name}" <<<"${output}"
+}
+
 cleanup_stale_pid() {
   if [[ -f "${BRIDGE_PID_FILE}" ]]; then
     local pid
     pid="$(cat "${BRIDGE_PID_FILE}")"
+    if [[ "${pid}" == screen:* ]]; then
+      local screen_name="${pid#screen:}"
+      if is_screen_running "${screen_name}"; then
+        return
+      fi
+      rm -f "${BRIDGE_PID_FILE}"
+      return
+    fi
     if [[ -n "${pid}" ]] && kill -0 "${pid}" 2>/dev/null; then
       return
     fi
@@ -34,19 +50,37 @@ start_bridge() {
   fi
 
   echo "Starting host bridge on ${BRIDGE_HOST}:${BRIDGE_PORT}..."
-  (
-    cd "${PROJECT_DIR}"
-    "${PYTHON_BIN}" -m uvicorn scripts.host_location_bridge:app --host "${BRIDGE_HOST}" --port "${BRIDGE_PORT}"
-  ) >"${BRIDGE_LOG_FILE}" 2>&1 &
-  local pid=$!
-  echo "${pid}" > "${BRIDGE_PID_FILE}"
+  if command -v screen >/dev/null 2>&1; then
+    screen -S "${BRIDGE_SCREEN_NAME}" -X quit >/dev/null 2>&1 || true
+    (
+      cd "${PROJECT_DIR}"
+      screen -dmS "${BRIDGE_SCREEN_NAME}" "${PYTHON_BIN}" -m uvicorn scripts.host_location_bridge:app --host "${BRIDGE_HOST}" --port "${BRIDGE_PORT}"
+    )
+    echo "screen:${BRIDGE_SCREEN_NAME}" > "${BRIDGE_PID_FILE}"
+  else
+    (
+      cd "${PROJECT_DIR}"
+      nohup "${PYTHON_BIN}" -m uvicorn scripts.host_location_bridge:app --host "${BRIDGE_HOST}" --port "${BRIDGE_PORT}"
+    ) >"${BRIDGE_LOG_FILE}" 2>&1 &
+    local pid=$!
+    echo "${pid}" > "${BRIDGE_PID_FILE}"
+  fi
 
   for _ in $(seq 1 20); do
     if is_bridge_healthy; then
       echo "Host bridge ready: ${bridge_url}"
       return
     fi
-    if ! kill -0 "${pid}" 2>/dev/null; then
+    if [[ -f "${BRIDGE_PID_FILE}" ]] && [[ "$(cat "${BRIDGE_PID_FILE}")" == screen:* ]]; then
+      local screen_name
+      screen_name="$(cat "${BRIDGE_PID_FILE}")"
+      screen_name="${screen_name#screen:}"
+      if ! is_screen_running "${screen_name}"; then
+        echo "Host bridge exited early. Check log: ${BRIDGE_LOG_FILE}"
+        tail -n 120 "${BRIDGE_LOG_FILE}" || true
+        exit 1
+      fi
+    elif ! kill -0 "${pid}" 2>/dev/null; then
       echo "Host bridge exited early. Check log: ${BRIDGE_LOG_FILE}"
       tail -n 120 "${BRIDGE_LOG_FILE}" || true
       exit 1
@@ -67,6 +101,13 @@ stop_bridge() {
 
   local pid
   pid="$(cat "${BRIDGE_PID_FILE}")"
+  if [[ "${pid}" == screen:* ]]; then
+    local screen_name="${pid#screen:}"
+    echo "Stopping host bridge screen session (${screen_name})..."
+    screen -S "${screen_name}" -X quit >/dev/null 2>&1 || true
+    rm -f "${BRIDGE_PID_FILE}"
+    return
+  fi
   if [[ -n "${pid}" ]] && kill -0 "${pid}" 2>/dev/null; then
     echo "Stopping host bridge (pid=${pid})..."
     kill "${pid}" 2>/dev/null || true

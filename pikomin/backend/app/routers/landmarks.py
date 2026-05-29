@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Literal
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from app.models.schemas import GPSCoordinate
@@ -23,6 +23,12 @@ class Landmark(BaseModel):
 
 
 class LandmarkCreateRequest(BaseModel):
+    name: str = Field(..., min_length=1)
+    coordinate: GPSCoordinate
+    landmarkType: Literal["flower", "mushroom"] = "mushroom"
+
+
+class LandmarkUpdateRequest(BaseModel):
     name: str = Field(..., min_length=1)
     coordinate: GPSCoordinate
     landmarkType: Literal["flower", "mushroom"] = "mushroom"
@@ -64,6 +70,24 @@ async def create_landmark(req: LandmarkCreateRequest) -> Landmark:
     landmarks.insert(0, item)
     _write_landmarks(landmarks)
     return item
+
+
+@router.put("/{landmark_id}", response_model=Landmark)
+async def update_landmark(landmark_id: str, req: LandmarkUpdateRequest) -> Landmark:
+    landmarks = _read_landmarks()
+    for index, item in enumerate(landmarks):
+        if item.id != landmark_id:
+            continue
+        updated = Landmark(
+            id=item.id,
+            name=req.name.strip(),
+            coordinate=req.coordinate,
+            landmarkType=req.landmarkType,
+        )
+        landmarks[index] = updated
+        _write_landmarks(landmarks)
+        return updated
+    raise HTTPException(status_code=404, detail={"error": "Landmark not found", "code": "LANDMARK_NOT_FOUND"})
 
 
 @router.delete("/{landmark_id}")

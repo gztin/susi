@@ -1,5 +1,185 @@
 [
   {
+    "id": "1780032346310-45",
+    "name": "越南花海",
+    "coordinate": {
+      "latitude": 10.795884,
+      "longitude": 106.669635
+    },
+    "landmarkType": "flower"
+  },
+  {
+    "id": "1780023669404-44",
+    "name": "赤鳥居",
+    "coordinate": {
+      "latitude": 34.686744,
+      "longitude": 137.600978
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780016831480-43",
+    "name": "Mikemuni 神社",
+    "coordinate": {
+      "latitude": 36.726776,
+      "longitude": 136.793717
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780016508388-42",
+    "name": "箱根神社",
+    "coordinate": {
+      "latitude": 35.205019135350916,
+      "longitude": 139.0256786031923
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779936930641-43",
+    "name": "杜拜城堡",
+    "coordinate": {
+      "latitude": 25.0954,
+      "longitude": 55.149835
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779927430355-42",
+    "name": "花田",
+    "coordinate": {
+      "latitude": 10.795883,
+      "longitude": 106.669738
+    },
+    "landmarkType": "flower"
+  },
+  {
+    "id": "1779868844941-41",
+    "name": "神田",
+    "coordinate": {
+      "latitude": 10.795883,
+      "longitude": 106.669738
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779861185836-40",
+    "name": "馬特洪峰03",
+    "coordinate": {
+      "latitude": 46.011305,
+      "longitude": 7.765544
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779860851576-39",
+    "name": "馬特洪峰02",
+    "coordinate": {
+      "latitude": 45.983305,
+      "longitude": 7.782194
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779860639232-38",
+    "name": "馬特洪峰01",
+    "coordinate": {
+      "latitude": 45.983305,
+      "longitude": 7.782194
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779855338218-37",
+    "name": "馬紹爾洞窟夕陽",
+    "coordinate": {
+      "latitude": 11.352339,
+      "longitude": 162.343078
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779852121845-36",
+    "name": "東堂觀音山",
+    "coordinate": {
+      "latitude": 35.2960665,
+      "longitude": 138.9591336
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779844072019-35",
+    "name": "極光盪鞦韆",
+    "coordinate": {
+      "latitude": 67.276805,
+      "longitude": 14.5161
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779700261506-34",
+    "name": "挪威極光軍堡",
+    "coordinate": {
+      "latitude": 70.07488660487377,
+      "longitude": 29.80152040163843
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779699749452-33",
+    "name": "挪威碉堡",
+    "coordinate": {
+      "latitude": 70.0786414747974,
+      "longitude": 29.754516761359927
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779676008435-32",
+    "name": "真名井瀑布",
+    "coordinate": {
+      "latitude": 32.702593836723636,
+      "longitude": 131.30131796692362
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779673803321-31",
+    "name": "Zeustar教堂",
+    "coordinate": {
+      "latitude": 52.128581,
+      "longitude": 14.269705
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779673580219-30",
+    "name": "花丘鈴鐺",
+    "coordinate": {
+      "latitude": 38.57814,
+      "longitude": 140.723172
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779672433682-29",
+    "name": "竹島落日餘暉",
+    "coordinate": {
+      "latitude": 34.81126,
+      "longitude": 137.23236
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1779671741887-28",
+    "name": "首爾櫻花",
+    "coordinate": {
+      "latitude": 37.517614,
+      "longitude": 126.926317
+    },
+    "landmarkType": "mushroom"
+  },
+  {
     "id": "1779420049143-27",
     "name": "萊辛巴赫瀑布",
     "coordinate": {
@@ -14,15 +194,6 @@
     "coordinate": {
       "latitude": 34.2973,
       "longitude": 132.3181
-    },
-    "landmarkType": "mushroom"
-  },
-  {
-    "id": "1779419425553-25",
-    "name": "金字塔",
-    "coordinate": {
-      "latitude": 29.9725,
-      "longitude": 31.1286
     },
     "landmarkType": "mushroom"
   },
@@ -194,15 +365,6 @@
     "coordinate": {
       "latitude": 24.064262,
       "longitude": 123.762388
-    },
-    "landmarkType": "mushroom"
-  },
-  {
-    "id": "1779084665001-5",
-    "name": "淡江大橋",
-    "coordinate": {
-      "latitude": 25.175341,
-      "longitude": 121.417823
     },
     "landmarkType": "mushroom"
   },

@@ -165,6 +165,17 @@ export const apiClient = {
     })
   },
 
+  async updateLandmark(landmarkId: string, payload: {
+    name: string
+    coordinate: { latitude: number; longitude: number }
+    landmarkType: 'flower' | 'mushroom'
+  }): Promise<{ id: string; name: string; coordinate: { latitude: number; longitude: number }; landmarkType: 'flower' | 'mushroom' }> {
+    return request(`/api/landmarks/${landmarkId}`, {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+    })
+  },
+
   async deleteLandmark(landmarkId: string): Promise<void> {
     await request(`/api/landmarks/${landmarkId}`, { method: 'DELETE' })
   },

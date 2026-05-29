@@ -31,6 +31,18 @@ class ClearLocationReq(BaseModel):
     device_id: str
 
 
+class DeviceInfoResp(BaseModel):
+    name: str | None = None
+    model: str | None = None
+
+
+class UsbDeviceResp(BaseModel):
+    id: str
+    name: str
+    is_connected: bool = True
+    model: str | None = None
+
+
 def _run(cmd: list[str], timeout_sec: int = 30) -> None:
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(f"\n[{datetime.now().isoformat()}] RUN {' '.join(cmd)} timeout={timeout_sec}\n")
@@ -133,6 +145,62 @@ def set_location(req: SetLocationReq) -> dict:
             except HTTPException:
                 raise exc
     return {"success": True}
+
+
+@app.get("/usb-devices", response_model=list[UsbDeviceResp])
+def list_usb_devices() -> list[UsbDeviceResp]:
+    cmd = [PMD3, "usbmux", "list", "--usb"]
+    with open(LOG_PATH, "a", encoding="utf-8") as f:
+        f.write(f"\n[{datetime.now().isoformat()}] RUN {' '.join(cmd)} timeout=8\n")
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=8)
+    except subprocess.TimeoutExpired as exc:
+        with open(LOG_PATH, "a", encoding="utf-8") as f:
+            f.write(f"[{datetime.now().isoformat()}] TIMEOUT after 8s\n")
+        raise HTTPException(status_code=504, detail="usb device lookup timeout") from exc
+    if proc.returncode != 0:
+        detail = (proc.stderr or proc.stdout or "command failed").strip()
+        raise HTTPException(status_code=400, detail=detail)
+
+    data = json.loads(proc.stdout or "[]")
+    devices: list[UsbDeviceResp] = []
+    for entry in data:
+        if entry.get("ConnectionType") != "USB":
+            continue
+        device_id = entry.get("Identifier") or entry.get("UniqueDeviceID")
+        if not device_id:
+            continue
+        devices.append(UsbDeviceResp(
+            id=device_id,
+            name=entry.get("DeviceName") or device_id,
+            model=entry.get("ProductType"),
+        ))
+    return devices
+
+
+@app.get("/device-info/{device_id}", response_model=DeviceInfoResp)
+def get_device_info(device_id: str) -> DeviceInfoResp:
+    address, port = _resolve_rsd(device_id)
+    cmd = [PMD3, "lockdown", "get", "--rsd", address, str(port)]
+    with open(LOG_PATH, "a", encoding="utf-8") as f:
+        f.write(f"\n[{datetime.now().isoformat()}] RUN {' '.join(cmd)} timeout=8\n")
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=8)
+    except subprocess.TimeoutExpired as exc:
+        with open(LOG_PATH, "a", encoding="utf-8") as f:
+            f.write(f"[{datetime.now().isoformat()}] TIMEOUT after 8s\n")
+        raise HTTPException(status_code=504, detail="device info lookup timeout") from exc
+    if proc.returncode != 0:
+        detail = (proc.stderr or proc.stdout or "command failed").strip()
+        with open(LOG_PATH, "a", encoding="utf-8") as f:
+            f.write(f"[{datetime.now().isoformat()}] FAIL code={proc.returncode}\n{detail}\n")
+        raise HTTPException(status_code=400, detail=detail)
+
+    payload = json.loads(proc.stdout)
+    return DeviceInfoResp(
+        name=payload.get("DeviceName"),
+        model=payload.get("ProductType"),
+    )
 
 
 @app.post("/clear-location")

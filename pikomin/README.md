@@ -28,50 +28,29 @@ pip install pymobiledevice3
 
 ---
 
-## 啟動方式
+## 啟動方式（固定）
 
-### 方式一：單一終端機啟動（推薦）
-
-```bash
-chmod +x start.sh
-./start.sh
-```
-
-`start.sh` 會在同一個終端機自動完成：
-1. 啟動 RSD tunnel（可能要求輸入 sudo 密碼）
-2. 從 tunnel 輸出擷取 `RSD_ADDRESS/RSD_PORT`
-3. 啟動 backend（5679）與 frontend（5678）
-
-按 `Ctrl+C` 會一次停止全部服務，並保留 tunnel/backend/frontend 的 log 檔路徑。
-
-### 方式二：手動啟動（除錯用）
-
-```bash
-# 後端
-cd backend
-pip install -r requirements.txt
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-
-# 前端（另開終端機）
-cd frontend
-npm install
-npm run dev
-```
-
-開啟瀏覽器前往 http://localhost:3000
-
-### 方式三：Docker 啟動（含 host bridge）
+### Docker Stack（推薦且固定使用）
 
 ```bash
 chmod +x scripts/docker-stack.sh
-./scripts/docker-stack.sh up
+./scripts/docker-stack.sh restart
 ```
 
-這個入口會先確認並啟動 host bridge，再執行 `docker compose up -d`。如果你平常是用 Docker，建議固定走這個腳本，避免 backend 已啟動但 host bridge 沒在跑，導致出現「定位橋接失敗」。
+這個入口會先確認並啟動 host bridge，再重建/重啟 backend 與 frontend。  
+請固定使用這條指令，避免 backend 已啟動但 host bridge 沒在跑，導致出現「定位橋接失敗」。
+
+開啟瀏覽器前往 http://localhost:5678
+
+### 除錯用（非預設）
+
+僅在除錯時才使用 `start.sh` 或手動三視窗啟動方式。
 
 ---
 
 ## 使用說明
+
+詳細改動請見：[docs/更新紀錄.md](docs/更新紀錄.md)
 
 ### 單點模式
 
