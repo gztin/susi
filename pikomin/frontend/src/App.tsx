@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Download, Trash2 } from 'lucide-react'
+import { Download, FolderOpen, Save, Trash2 } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -109,6 +109,7 @@ export default function App() {
   const [isManageModalOpen, setIsManageModalOpen] = useState(false)
   const [isFlySettingsOpen, setIsFlySettingsOpen] = useState(false)
   const [isLandmarkManagerOpen, setIsLandmarkManagerOpen] = useState(false)
+  const [isRouteLibraryOpen, setIsRouteLibraryOpen] = useState(false)
   const [flyMode, setFlyMode] = useState<FlyMode>('coordinate')
   const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
   const showToastRef = useRef<(message: string) => void>(() => {})
@@ -521,6 +522,7 @@ export default function App() {
     }
     replaceWaypoints(route.waypoints)
     setMode('route')
+    setIsRouteLibraryOpen(false)
     showToast(`已載入路徑：${route.name}`)
   }, [replaceWaypoints, routeStatus.state, showToast])
 
@@ -566,7 +568,7 @@ export default function App() {
       const imported = normalizeImportedRoute(payload)
       const created = await apiClient.createSavedRoute(imported)
       setSavedRoutes((prev) => [created, ...prev])
-      showToast('路徑已匯入，可從清單載入')
+      showToast('路徑已匯入，可從讀取路徑選擇')
     } catch (err) {
       if (err instanceof SyntaxError) {
         showToast('檔案格式錯誤，請選擇種花路徑 JSON 檔')
@@ -694,9 +696,28 @@ export default function App() {
                   <p className="panel-kicker">新增路徑點</p>
                   <h2>路線資料</h2>
                 </div>
-                {routeStatus.state === 'idle' && (
-                  <button className="ghost-button" onClick={clearWaypoints}>清除全部</button>
-                )}
+                <div className="route-panel-tools">
+                  <button
+                    className="icon-button"
+                    onClick={() => void handleSaveRoute()}
+                    disabled={routeStatus.state !== 'idle' || waypoints.length < 2 || !routeNameInput.trim() || routeSaving}
+                    aria-label="儲存目前路徑"
+                    title="儲存目前路徑"
+                    type="button"
+                  >
+                    <Save aria-hidden="true" size={16} strokeWidth={2.4} />
+                  </button>
+                  <button
+                    className="icon-button danger"
+                    onClick={clearWaypoints}
+                    disabled={routeStatus.state !== 'idle' || waypoints.length === 0}
+                    aria-label="清除全部路徑點"
+                    title="清除全部路徑點"
+                    type="button"
+                  >
+                    <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
+                  </button>
+                </div>
               </div>
               {routeStatus.state === 'idle' && (
                 <div className="saved-route-form">
@@ -708,18 +729,42 @@ export default function App() {
                       placeholder="例如：機場巡點 A"
                     />
                   </label>
-                  <button
-                    className="secondary-button"
-                    onClick={() => void handleSaveRoute()}
-                    disabled={waypoints.length < 2 || !routeNameInput.trim() || routeSaving}
-                  >
-                    {routeSaving ? '儲存中' : '儲存目前路徑'}
-                  </button>
+                  <div className="route-file-actions">
+                    <button
+                      className="secondary-button"
+                      onClick={() => setIsRouteLibraryOpen(true)}
+                      type="button"
+                    >
+                      讀取路徑
+                    </button>
+                    <button
+                      className="secondary-button"
+                      onClick={() => routeImportInputRef.current?.click()}
+                      type="button"
+                    >
+                      匯入路徑
+                    </button>
+                  </div>
+                  <input
+                    ref={routeImportInputRef}
+                    className="sr-only"
+                    type="file"
+                    accept="application/json,.json"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0] ?? null
+                      void handleImportRouteFile(file)
+                      e.currentTarget.value = ''
+                    }}
+                  />
                 </div>
               )}
+              <div className="route-section-title">
+                <span>目前路徑點</span>
+                <small>{waypoints.length} 點</small>
+              </div>
               <div className="waypoint-list">
                 {waypoints.length === 0 ? (
-                  <p className="route-empty">還沒有路徑點。點擊地圖新增，或從下方載入已儲存路徑。</p>
+                  <p className="route-empty">還沒有路徑點。點擊地圖新增，或讀取已儲存路徑。</p>
                 ) : (
                   waypoints.map((wp, index) => (
                     <div key={`${wp.latitude}-${wp.longitude}-${index}`} className="waypoint-item">
@@ -735,71 +780,6 @@ export default function App() {
                       )}
                     </div>
                   ))
-                )}
-              </div>
-              <div className="saved-route-section">
-                <div className="landmark-section-head">
-                  <span>已儲存路徑</span>
-                  <small>{savedRoutes.length} 筆</small>
-                </div>
-                <div className="saved-route-toolbar">
-                  <button
-                    className="secondary-button"
-                    onClick={() => routeImportInputRef.current?.click()}
-                    type="button"
-                  >
-                    匯入路徑
-                  </button>
-                  <input
-                    ref={routeImportInputRef}
-                    className="sr-only"
-                    type="file"
-                    accept="application/json,.json"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0] ?? null
-                      void handleImportRouteFile(file)
-                      e.currentTarget.value = ''
-                    }}
-                  />
-                </div>
-                {savedRoutes.length === 0 ? (
-                  <p className="route-empty">目前還沒有儲存路徑。</p>
-                ) : (
-                  <div className="saved-route-list">
-                    {savedRoutes.map((route) => (
-                      <div key={route.id} className="saved-route-item">
-                        <button
-                          className="saved-route-main"
-                          onClick={() => handleLoadSavedRoute(route)}
-                          disabled={routeStatus.state !== 'idle'}
-                          type="button"
-                        >
-                          <strong>{route.name}</strong>
-                          <span>{route.waypoints.length} 個路徑點</span>
-                        </button>
-                        <div className="saved-route-actions">
-                          <button
-                            className="icon-button"
-                            onClick={() => handleExportSavedRoute(route)}
-                            aria-label={`匯出路徑：${route.name}`}
-                            title={`匯出路徑：${route.name}`}
-                            type="button"
-                          >
-                            <Download aria-hidden="true" size={16} strokeWidth={2.4} />
-                          </button>
-                          <button
-                            className="icon-button danger"
-                            onClick={() => void handleDeleteSavedRoute(route.id)}
-                            aria-label={`刪除路徑：${route.name}`}
-                            title={`刪除路徑：${route.name}`}
-                            type="button"
-                          >
-                            <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
                 )}
               </div>
             </section>
@@ -833,6 +813,71 @@ export default function App() {
                 <button className="secondary-button modal-stack-button" onClick={() => setIsFlySettingsOpen(true)}>飛行設定</button>
                 <p className="helper-text">已儲存 {savedLandmarks.length} 個地標，可在飛行設定中直接搜尋。</p>
               </section>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isRouteLibraryOpen && (
+        <div className="modal-backdrop" onClick={() => setIsRouteLibraryOpen(false)}>
+          <div className="modal-panel route-library-panel" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header route-library-header">
+              <div>
+                <p className="panel-kicker">已儲存路徑</p>
+                <h3>讀取路徑</h3>
+              </div>
+              <span className="route-count-pill">{savedRoutes.length} 筆</span>
+            </div>
+            <div className="modal-body">
+              {savedRoutes.length === 0 ? (
+                <p className="route-empty">還沒有儲存路徑，先儲存目前路徑或匯入路徑檔案。</p>
+              ) : (
+                <div className="saved-route-list route-library-list">
+                  {savedRoutes.map((route) => (
+                    <div key={route.id} className="saved-route-item">
+                      <button
+                        className="saved-route-main"
+                        onClick={() => handleLoadSavedRoute(route)}
+                        disabled={routeStatus.state !== 'idle'}
+                        type="button"
+                      >
+                        <strong>{route.name}</strong>
+                        <span>{route.waypoints.length} 個路徑點</span>
+                      </button>
+                      <div className="saved-route-actions">
+                        <button
+                          className="icon-button"
+                          onClick={() => handleLoadSavedRoute(route)}
+                          disabled={routeStatus.state !== 'idle'}
+                          aria-label={`載入路徑：${route.name}`}
+                          title={`載入路徑：${route.name}`}
+                          type="button"
+                        >
+                          <FolderOpen aria-hidden="true" size={16} strokeWidth={2.4} />
+                        </button>
+                        <button
+                          className="icon-button"
+                          onClick={() => handleExportSavedRoute(route)}
+                          aria-label={`匯出路徑：${route.name}`}
+                          title={`匯出路徑：${route.name}`}
+                          type="button"
+                        >
+                          <Download aria-hidden="true" size={16} strokeWidth={2.4} />
+                        </button>
+                        <button
+                          className="icon-button danger"
+                          onClick={() => void handleDeleteSavedRoute(route.id)}
+                          aria-label={`刪除路徑：${route.name}`}
+                          title={`刪除路徑：${route.name}`}
+                          type="button"
+                        >
+                          <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
