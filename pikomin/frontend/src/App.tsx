@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { Download, Trash2 } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -778,18 +779,22 @@ export default function App() {
                         </button>
                         <div className="saved-route-actions">
                           <button
-                            className="waypoint-remove"
+                            className="icon-button"
                             onClick={() => handleExportSavedRoute(route)}
+                            aria-label={`匯出路徑：${route.name}`}
+                            title={`匯出路徑：${route.name}`}
                             type="button"
                           >
-                            匯出
+                            <Download aria-hidden="true" size={16} strokeWidth={2.4} />
                           </button>
                           <button
-                            className="waypoint-remove"
+                            className="icon-button danger"
                             onClick={() => void handleDeleteSavedRoute(route.id)}
+                            aria-label={`刪除路徑：${route.name}`}
+                            title={`刪除路徑：${route.name}`}
                             type="button"
                           >
-                            刪除
+                            <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
                           </button>
                         </div>
                       </div>
