@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from app.routers import devices, location, route, status, rsd, geolocation, tunnel, landmarks
+from app.routers import devices, location, route, status, rsd, geolocation, tunnel, landmarks, saved_routes
 from app.services.device_manager import DeviceManager
 from app.services.route_engine import RouteEngine
 from app.services.tunneld_poller import TunneldPoller
@@ -67,6 +67,7 @@ app.include_router(rsd.router, prefix="/api/rsd", tags=["rsd"])
 app.include_router(geolocation.router, prefix="/api/geolocation", tags=["geolocation"])
 app.include_router(tunnel.router, prefix="/api/tunnel", tags=["tunnel"])
 app.include_router(landmarks.router, prefix="/api/landmarks", tags=["landmarks"])
+app.include_router(saved_routes.router, prefix="/api/saved-routes", tags=["saved-routes"])
 
 
 @app.websocket("/ws/status")

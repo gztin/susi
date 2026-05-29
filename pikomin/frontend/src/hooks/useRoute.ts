@@ -15,6 +15,8 @@ export function useRoute(
 ): {
   waypoints: GPSCoordinate[]
   addWaypoint: (coord: GPSCoordinate) => void
+  updateWaypoint: (index: number, coord: GPSCoordinate) => void
+  replaceWaypoints: (coords: GPSCoordinate[]) => void
   removeWaypoint: (index: number) => void
   clearWaypoints: () => void
   routeStatus: RouteStatus
@@ -122,6 +124,14 @@ export function useRoute(
     setWaypoints((prev) => [...prev, coord])
   }, [])
 
+  const updateWaypoint = useCallback((index: number, coord: GPSCoordinate) => {
+    setWaypoints((prev) => prev.map((waypoint, i) => (i === index ? coord : waypoint)))
+  }, [])
+
+  const replaceWaypoints = useCallback((coords: GPSCoordinate[]) => {
+    setWaypoints(coords)
+  }, [])
+
   const removeWaypoint = useCallback((index: number) => {
     setWaypoints((prev) => prev.filter((_, i) => i !== index))
   }, [])
@@ -172,6 +182,8 @@ export function useRoute(
   return {
     waypoints,
     addWaypoint,
+    updateWaypoint,
+    replaceWaypoints,
     removeWaypoint,
     clearWaypoints,
     routeStatus,

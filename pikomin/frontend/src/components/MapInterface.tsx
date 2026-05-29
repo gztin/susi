@@ -40,6 +40,8 @@ interface MapInterfaceProps {
   waypoints: GPSCoordinate[]
   savedLandmarks: SavedLandmark[]
   onMapClick: (coord: GPSCoordinate) => void
+  onWaypointMove?: (index: number, coord: GPSCoordinate) => void
+  canEditWaypoints?: boolean
 }
 
 export default function MapInterface({
@@ -49,6 +51,8 @@ export default function MapInterface({
   waypoints,
   savedLandmarks,
   onMapClick,
+  onWaypointMove,
+  canEditWaypoints = false,
 }: MapInterfaceProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<L.Map | null>(null)
@@ -58,6 +62,7 @@ export default function MapInterface({
   const landmarkMarkersRef = useRef<L.Marker[]>([])
   const polylineRef = useRef<L.Polyline | null>(null)
   const prevPositionRef = useRef<GPSCoordinate | null>(null)
+  const isDraggingWaypointRef = useRef(false)
   const [styleId, setStyleId] = useState<TileStyleId>('positron')
 
   // 初始化地圖
@@ -113,6 +118,7 @@ export default function MapInterface({
     if (!map) return
 
     const handler = (e: L.LeafletMouseEvent) => {
+      if (isDraggingWaypointRef.current) return
       onMapClick({ latitude: e.latlng.lat, longitude: e.latlng.lng })
     }
 
@@ -187,6 +193,19 @@ export default function MapInterface({
       })
 
       const marker = L.marker([wp.latitude, wp.longitude], { icon }).addTo(map)
+      if (canEditWaypoints && onWaypointMove) {
+        marker.dragging?.enable()
+        marker.on('dragstart', () => {
+          isDraggingWaypointRef.current = true
+        })
+        marker.on('dragend', () => {
+          const next = marker.getLatLng()
+          onWaypointMove(index, { latitude: next.lat, longitude: next.lng })
+          window.setTimeout(() => {
+            isDraggingWaypointRef.current = false
+          }, 0)
+        })
+      }
       waypointMarkersRef.current.push(marker)
     })
 
@@ -199,7 +218,7 @@ export default function MapInterface({
         dashArray: '6, 4',
       }).addTo(map)
     }
-  }, [waypoints, mode])
+  }, [waypoints, mode, canEditWaypoints, onWaypointMove])
 
   useEffect(() => {
     const map = mapRef.current

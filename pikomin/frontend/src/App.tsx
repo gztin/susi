@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { Download, FolderOpen, Save, Trash2 } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -6,7 +7,7 @@ import MapInterface from './components/MapInterface'
 import { RoutePanel } from './components/RoutePanel'
 import { useDevice } from './hooks/useDevice'
 import { useRoute } from './hooks/useRoute'
-import type { GPSCoordinate, SavedLandmark } from './types'
+import type { GPSCoordinate, SavedLandmark, SavedRoute } from './types'
 
 type Mode = 'single' | 'route'
 type FlyMode = 'coordinate' | 'landmark'
@@ -14,6 +15,13 @@ type FlyMode = 'coordinate' | 'landmark'
 interface Toast {
   id: number
   message: string
+}
+
+interface RouteFilePayload {
+  version?: unknown
+  name?: unknown
+  exportedAt?: unknown
+  waypoints?: unknown
 }
 
 let toastIdCounter = 0
@@ -39,6 +47,43 @@ function formatCoordinate(coord: GPSCoordinate | null): string {
   return `${coord.latitude.toFixed(6)}, ${coord.longitude.toFixed(6)}`
 }
 
+function isValidCoordinate(value: unknown): value is GPSCoordinate {
+  if (!value || typeof value !== 'object') return false
+  const coord = value as Partial<GPSCoordinate>
+  return (
+    typeof coord.latitude === 'number' &&
+    typeof coord.longitude === 'number' &&
+    Number.isFinite(coord.latitude) &&
+    Number.isFinite(coord.longitude) &&
+    coord.latitude >= -90 &&
+    coord.latitude <= 90 &&
+    coord.longitude >= -180 &&
+    coord.longitude <= 180
+  )
+}
+
+function normalizeImportedRoute(payload: RouteFilePayload): { name: string; waypoints: GPSCoordinate[] } {
+  if (!Array.isArray(payload.waypoints)) {
+    throw new Error('檔案格式錯誤，找不到路徑點資料')
+  }
+  const waypoints = payload.waypoints
+  if (waypoints.length < 2) {
+    throw new Error('路徑至少需要 2 個路徑點')
+  }
+  if (!waypoints.every(isValidCoordinate)) {
+    throw new Error('路徑檔案內有無效座標，請確認經緯度')
+  }
+  const name = typeof payload.name === 'string' && payload.name.trim()
+    ? payload.name.trim()
+    : '匯入的種花路徑'
+  return { name, waypoints }
+}
+
+function sanitizeFilename(value: string): string {
+  const normalized = value.trim().replace(/[\\/:*?"<>|]+/g, '-').replace(/\s+/g, '-')
+  return normalized || '未命名路徑'
+}
+
 export default function App() {
   const [mode, setMode] = useState<Mode>('single')
   const [toasts, setToasts] = useState<Toast[]>([])
@@ -56,18 +101,26 @@ export default function App() {
   const [landmarkTypeFilter, setLandmarkTypeFilter] = useState<'all' | 'flower' | 'mushroom'>('all')
   const [landmarkFormTouched, setLandmarkFormTouched] = useState(false)
   const [landmarkSaving, setLandmarkSaving] = useState(false)
+  const [editingLandmarkId, setEditingLandmarkId] = useState('')
   const [selectedLandmarkId, setSelectedLandmarkId] = useState('')
+  const [routeNameInput, setRouteNameInput] = useState('')
+  const [savedRoutes, setSavedRoutes] = useState<SavedRoute[]>([])
+  const [routeSaving, setRouteSaving] = useState(false)
   const [isManageModalOpen, setIsManageModalOpen] = useState(false)
   const [isFlySettingsOpen, setIsFlySettingsOpen] = useState(false)
   const [isLandmarkManagerOpen, setIsLandmarkManagerOpen] = useState(false)
+  const [isRouteLibraryOpen, setIsRouteLibraryOpen] = useState(false)
   const [flyMode, setFlyMode] = useState<FlyMode>('coordinate')
   const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
   const showToastRef = useRef<(message: string) => void>(() => {})
+  const routeImportInputRef = useRef<HTMLInputElement | null>(null)
 
   const { devices, selectedDevice, selectDevice, isLoading, error } = useDevice()
   const {
     waypoints,
     addWaypoint,
+    updateWaypoint,
+    replaceWaypoints,
     removeWaypoint,
     clearWaypoints,
     routeStatus,
@@ -88,6 +141,18 @@ export default function App() {
       })
       .catch(() => {
         if (!cancelled) setSavedLandmarks([])
+      })
+    return () => { cancelled = true }
+  }, [])
+
+  useEffect(() => {
+    let cancelled = false
+    void apiClient.getSavedRoutes()
+      .then((items) => {
+        if (!cancelled) setSavedRoutes(items)
+      })
+      .catch(() => {
+        if (!cancelled) setSavedRoutes([])
       })
     return () => { cancelled = true }
   }, [])
@@ -148,7 +213,7 @@ export default function App() {
       const code = typeof err === 'object' && err && 'code' in err ? (err as { code?: string }).code : undefined
       const message = err instanceof Error ? err.message : '設定位置失敗'
 
-      if (code === 'LOCATION_SET_FAILED') {
+      if (code === 'LOCATION_BRIDGE_FAILED') {
         showToast('定位橋接失敗，請重試')
         return false
       }
@@ -171,7 +236,7 @@ export default function App() {
             return true
           } catch (retryErr) {
             const retryCode = typeof retryErr === 'object' && retryErr && 'code' in retryErr ? (retryErr as { code?: string }).code : undefined
-            if (retryCode === 'LOCATION_SET_FAILED') {
+            if (retryCode === 'LOCATION_BRIDGE_FAILED') {
               showToast('定位橋接失敗，請重試')
             } else {
               showToast(retryErr instanceof Error ? retryErr.message : '設定位置失敗')
@@ -191,7 +256,7 @@ export default function App() {
         return true
       } catch (retryErr) {
         const retryCode = typeof retryErr === 'object' && retryErr && 'code' in retryErr ? (retryErr as { code?: string }).code : undefined
-        if (retryCode === 'LOCATION_SET_FAILED') {
+        if (retryCode === 'LOCATION_BRIDGE_FAILED') {
           showToast('定位橋接失敗，請重試')
         } else {
           showToast(retryErr instanceof Error ? retryErr.message : '設定位置失敗')
@@ -351,7 +416,8 @@ export default function App() {
     setLandmarkFormTouched(true)
     const target = parseCoordinateInput(landmarkCoordInput)
     if (!target) {
-      showToast('請輸入正確座標格式：25.033, 121.565')
+      setLandmarkCoordInput('')
+      showToast('座標無效，請重新輸入，例如：25.033, 121.565')
       return
     }
     const name = landmarkNameInput.trim()
@@ -362,19 +428,45 @@ export default function App() {
 
     try {
       setLandmarkSaving(true)
-      const created = await apiClient.createLandmark({ name, coordinate: target, landmarkType: landmarkTypeInput })
-      setSavedLandmarks((prev) => [created, ...prev])
+      if (editingLandmarkId) {
+        const updated = await apiClient.updateLandmark(editingLandmarkId, { name, coordinate: target, landmarkType: landmarkTypeInput })
+        setSavedLandmarks((prev) => prev.map((landmark) => landmark.id === updated.id ? updated : landmark))
+        if (selectedLandmarkId === updated.id) {
+          setDestinationInput(updated.name)
+        }
+        showToast('地標已更新')
+      } else {
+        const created = await apiClient.createLandmark({ name, coordinate: target, landmarkType: landmarkTypeInput })
+        setSavedLandmarks((prev) => [created, ...prev])
+        showToast('地標已儲存')
+      }
       setLandmarkNameInput('')
       setLandmarkCoordInput('')
       setLandmarkTypeInput('mushroom')
+      setEditingLandmarkId('')
       setLandmarkFormTouched(false)
-      showToast('地標已儲存')
     } catch (err) {
-      showToast(err instanceof Error ? err.message : '儲存地標失敗')
+      showToast(err instanceof Error ? err.message : editingLandmarkId ? '更新地標失敗' : '儲存地標失敗')
     } finally {
       setLandmarkSaving(false)
     }
-  }, [landmarkCoordInput, landmarkNameInput, landmarkTypeInput, showToast])
+  }, [editingLandmarkId, landmarkCoordInput, landmarkNameInput, landmarkTypeInput, selectedLandmarkId, showToast])
+
+  const handleEditLandmark = useCallback((landmark: SavedLandmark) => {
+    setEditingLandmarkId(landmark.id)
+    setLandmarkNameInput(landmark.name)
+    setLandmarkCoordInput(formatCoordinate(landmark.coordinate))
+    setLandmarkTypeInput(landmark.landmarkType)
+    setLandmarkFormTouched(false)
+  }, [])
+
+  const handleCancelLandmarkEdit = useCallback(() => {
+    setEditingLandmarkId('')
+    setLandmarkNameInput('')
+    setLandmarkCoordInput('')
+    setLandmarkTypeInput('mushroom')
+    setLandmarkFormTouched(false)
+  }, [])
 
   const handleDeleteLandmark = useCallback(async (id: string) => {
     try {
@@ -387,7 +479,10 @@ export default function App() {
     if (selectedLandmarkId === id) {
       setSelectedLandmarkId('')
     }
-  }, [selectedLandmarkId, showToast])
+    if (editingLandmarkId === id) {
+      handleCancelLandmarkEdit()
+    }
+  }, [editingLandmarkId, handleCancelLandmarkEdit, selectedLandmarkId, showToast])
 
   const handleSelectLandmarkToFly = useCallback((landmarkName: string) => {
     setDestinationInput(landmarkName)
@@ -395,6 +490,93 @@ export default function App() {
     if (!target) return
     setSelectedLandmarkId(target.id)
   }, [savedLandmarks])
+
+  const handleSaveRoute = useCallback(async () => {
+    const name = routeNameInput.trim()
+    if (!name) {
+      showToast('請輸入路徑名稱')
+      return
+    }
+    if (waypoints.length < 2) {
+      showToast('路徑至少需要 2 個路徑點')
+      return
+    }
+
+    try {
+      setRouteSaving(true)
+      const created = await apiClient.createSavedRoute({ name, waypoints })
+      setSavedRoutes((prev) => [created, ...prev])
+      setRouteNameInput('')
+      showToast('路徑已儲存')
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : '儲存路徑失敗')
+    } finally {
+      setRouteSaving(false)
+    }
+  }, [routeNameInput, showToast, waypoints])
+
+  const handleLoadSavedRoute = useCallback((route: SavedRoute) => {
+    if (routeStatus.state !== 'idle') {
+      showToast('路徑執行中，請先停止後再載入')
+      return
+    }
+    replaceWaypoints(route.waypoints)
+    setMode('route')
+    setIsRouteLibraryOpen(false)
+    showToast(`已載入路徑：${route.name}`)
+  }, [replaceWaypoints, routeStatus.state, showToast])
+
+  const handleDeleteSavedRoute = useCallback(async (id: string) => {
+    try {
+      await apiClient.deleteSavedRoute(id)
+      setSavedRoutes((prev) => prev.filter((route) => route.id !== id))
+      showToast('路徑已刪除')
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : '刪除路徑失敗')
+    }
+  }, [showToast])
+
+  const handleExportSavedRoute = useCallback((route: SavedRoute) => {
+    const payload = {
+      version: 1,
+      name: route.name,
+      exportedAt: new Date().toISOString(),
+      waypoints: route.waypoints,
+    }
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `pikomin-route-${sanitizeFilename(route.name)}.json`
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+    URL.revokeObjectURL(url)
+    showToast(`已匯出路徑：${route.name}`)
+  }, [showToast])
+
+  const handleImportRouteFile = useCallback(async (file: File | null) => {
+    if (!file) return
+    if (!file.name.toLowerCase().endsWith('.json')) {
+      showToast('檔案格式錯誤，請選擇種花路徑 JSON 檔')
+      return
+    }
+
+    try {
+      const text = await file.text()
+      const payload = JSON.parse(text) as RouteFilePayload
+      const imported = normalizeImportedRoute(payload)
+      const created = await apiClient.createSavedRoute(imported)
+      setSavedRoutes((prev) => [created, ...prev])
+      showToast('路徑已匯入，可從讀取路徑選擇')
+    } catch (err) {
+      if (err instanceof SyntaxError) {
+        showToast('檔案格式錯誤，請選擇種花路徑 JSON 檔')
+        return
+      }
+      showToast(err instanceof Error ? err.message : '匯入路徑失敗')
+    }
+  }, [showToast])
 
   const currentPosition = mode === 'single'
     ? (myPosition ?? routeStatus.currentPosition)
@@ -432,6 +614,8 @@ export default function App() {
           waypoints={waypoints}
           savedLandmarks={savedLandmarks}
           onMapClick={handleMapClick}
+          onWaypointMove={updateWaypoint}
+          canEditWaypoints={mode === 'route' && routeStatus.state === 'idle'}
         />
       </section>
 
@@ -441,7 +625,10 @@ export default function App() {
           <section className="panel panel-hero">
             <div className="panel-heading">
               <div>
-                <p className="panel-kicker">裝置與狀態</p>
+                <p className="panel-kicker">
+                  裝置與狀態
+                  <span className="version-badge">v{__APP_VERSION__}</span>
+                </p>
                 <h2>
                   {currentPosition ? formatCoordinate(currentPosition) : '尚未設定定位座標'}
                   {showDisconnectBanner && <span className="inline-alert">未偵測到裝置</span>}
@@ -501,7 +688,7 @@ export default function App() {
           </aside>
         </main>
 
-        {waypoints.length > 0 && (
+        {mode === 'route' && (
           <aside className="route-data-sidebar">
             <section className="route-data-panel">
               <div className="panel-heading compact">
@@ -509,25 +696,91 @@ export default function App() {
                   <p className="panel-kicker">新增路徑點</p>
                   <h2>路線資料</h2>
                 </div>
-                {routeStatus.state === 'idle' && (
-                  <button className="ghost-button" onClick={clearWaypoints}>清除全部</button>
-                )}
+                <div className="route-panel-tools">
+                  <button
+                    className="icon-button"
+                    onClick={() => void handleSaveRoute()}
+                    disabled={routeStatus.state !== 'idle' || waypoints.length < 2 || !routeNameInput.trim() || routeSaving}
+                    aria-label="儲存目前路徑"
+                    title="儲存目前路徑"
+                    type="button"
+                  >
+                    <Save aria-hidden="true" size={16} strokeWidth={2.4} />
+                  </button>
+                  <button
+                    className="icon-button danger"
+                    onClick={clearWaypoints}
+                    disabled={routeStatus.state !== 'idle' || waypoints.length === 0}
+                    aria-label="清除全部路徑點"
+                    title="清除全部路徑點"
+                    type="button"
+                  >
+                    <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
+                  </button>
+                </div>
+              </div>
+              {routeStatus.state === 'idle' && (
+                <div className="saved-route-form">
+                  <label className="field">
+                    <span>路徑名稱</span>
+                    <input
+                      value={routeNameInput}
+                      onChange={(e) => setRouteNameInput(e.target.value)}
+                      placeholder="例如：機場巡點 A"
+                    />
+                  </label>
+                  <div className="route-file-actions">
+                    <button
+                      className="secondary-button"
+                      onClick={() => setIsRouteLibraryOpen(true)}
+                      type="button"
+                    >
+                      讀取路徑
+                    </button>
+                    <button
+                      className="secondary-button"
+                      onClick={() => routeImportInputRef.current?.click()}
+                      type="button"
+                    >
+                      匯入路徑
+                    </button>
+                  </div>
+                  <input
+                    ref={routeImportInputRef}
+                    className="sr-only"
+                    type="file"
+                    accept="application/json,.json"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0] ?? null
+                      void handleImportRouteFile(file)
+                      e.currentTarget.value = ''
+                    }}
+                  />
+                </div>
+              )}
+              <div className="route-section-title">
+                <span>目前路徑點</span>
+                <small>{waypoints.length} 點</small>
               </div>
               <div className="waypoint-list">
-                {waypoints.map((wp, index) => (
-                  <div key={`${wp.latitude}-${wp.longitude}-${index}`} className="waypoint-item">
-                    <div className="waypoint-index">{index + 1}</div>
-                    <div className="waypoint-text">
-                      <strong>{wp.latitude.toFixed(5)}</strong>
-                      <span>{wp.longitude.toFixed(5)}</span>
+                {waypoints.length === 0 ? (
+                  <p className="route-empty">還沒有路徑點。點擊地圖新增，或讀取已儲存路徑。</p>
+                ) : (
+                  waypoints.map((wp, index) => (
+                    <div key={`${wp.latitude}-${wp.longitude}-${index}`} className="waypoint-item">
+                      <div className="waypoint-index">{index + 1}</div>
+                      <div className="waypoint-text">
+                        <strong>{wp.latitude.toFixed(5)}</strong>
+                        <span>{wp.longitude.toFixed(5)}</span>
+                      </div>
+                      {(routeStatus.state === 'idle') && (
+                        <button className="waypoint-remove" onClick={() => removeWaypoint(index)}>
+                          移除
+                        </button>
+                      )}
                     </div>
-                    {(routeStatus.state === 'idle') && (
-                      <button className="waypoint-remove" onClick={() => removeWaypoint(index)}>
-                        移除
-                      </button>
-                    )}
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </section>
           </aside>
@@ -560,6 +813,71 @@ export default function App() {
                 <button className="secondary-button modal-stack-button" onClick={() => setIsFlySettingsOpen(true)}>飛行設定</button>
                 <p className="helper-text">已儲存 {savedLandmarks.length} 個地標，可在飛行設定中直接搜尋。</p>
               </section>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isRouteLibraryOpen && (
+        <div className="modal-backdrop" onClick={() => setIsRouteLibraryOpen(false)}>
+          <div className="modal-panel route-library-panel" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header route-library-header">
+              <div>
+                <p className="panel-kicker">已儲存路徑</p>
+                <h3>讀取路徑</h3>
+              </div>
+              <span className="route-count-pill">{savedRoutes.length} 筆</span>
+            </div>
+            <div className="modal-body">
+              {savedRoutes.length === 0 ? (
+                <p className="route-empty">還沒有儲存路徑，先儲存目前路徑或匯入路徑檔案。</p>
+              ) : (
+                <div className="saved-route-list route-library-list">
+                  {savedRoutes.map((route) => (
+                    <div key={route.id} className="saved-route-item">
+                      <button
+                        className="saved-route-main"
+                        onClick={() => handleLoadSavedRoute(route)}
+                        disabled={routeStatus.state !== 'idle'}
+                        type="button"
+                      >
+                        <strong>{route.name}</strong>
+                        <span>{route.waypoints.length} 個路徑點</span>
+                      </button>
+                      <div className="saved-route-actions">
+                        <button
+                          className="icon-button"
+                          onClick={() => handleLoadSavedRoute(route)}
+                          disabled={routeStatus.state !== 'idle'}
+                          aria-label={`載入路徑：${route.name}`}
+                          title={`載入路徑：${route.name}`}
+                          type="button"
+                        >
+                          <FolderOpen aria-hidden="true" size={16} strokeWidth={2.4} />
+                        </button>
+                        <button
+                          className="icon-button"
+                          onClick={() => handleExportSavedRoute(route)}
+                          aria-label={`匯出路徑：${route.name}`}
+                          title={`匯出路徑：${route.name}`}
+                          type="button"
+                        >
+                          <Download aria-hidden="true" size={16} strokeWidth={2.4} />
+                        </button>
+                        <button
+                          className="icon-button danger"
+                          onClick={() => void handleDeleteSavedRoute(route.id)}
+                          aria-label={`刪除路徑：${route.name}`}
+                          title={`刪除路徑：${route.name}`}
+                          type="button"
+                        >
+                          <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -667,10 +985,11 @@ export default function App() {
 
       {isLandmarkManagerOpen && (
         <div className="modal-backdrop" onClick={() => setIsLandmarkManagerOpen(false)}>
-          <div className="modal-panel modal-panel-narrow" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-panel landmark-manager-panel" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header"><h3>地標管理</h3></div>
-            <div className="modal-body">
+            <div className="modal-body modal-body-split landmark-manager-layout">
               <section className="modal-section">
+                {editingLandmarkId && <p className="helper-text editing-hint">正在編輯已儲存地標</p>}
                 <label className="field">
                   <span>名稱</span>
                   <input
@@ -693,7 +1012,7 @@ export default function App() {
                       aria-invalid={Boolean(coordError)}
                     />
                     <button className="secondary-button" onClick={() => void handleSaveLandmark()} disabled={!isLandmarkFormValid || landmarkSaving}>
-                      {landmarkSaving ? '儲存中' : '儲存'}
+                      {landmarkSaving ? (editingLandmarkId ? '更新中' : '儲存中') : (editingLandmarkId ? '更新' : '儲存')}
                     </button>
                   </div>
                   {coordError && <p className="helper-text helper-text--error">{coordError}</p>}
@@ -705,7 +1024,84 @@ export default function App() {
                     <option value="flower">花點</option>
                   </select>
                 </label>
-                <p className="helper-text">儲存成功後欄位會自動清空，點選地標可帶入目的地。</p>
+                {editingLandmarkId && (
+                  <button className="ghost-button modal-stack-button" onClick={handleCancelLandmarkEdit}>
+                    取消編輯
+                  </button>
+                )}
+                <p className="helper-text">{editingLandmarkId ? '更新成功後欄位會自動清空，右側清單會同步更新。' : '儲存成功後欄位會自動清空，點選地標可帶入目的地。'}</p>
+              </section>
+
+              <section className="modal-section landmark-manager-list-panel">
+                <div className="landmark-toolbar">
+                  <label className="field landmark-search-field">
+                    <span>搜尋地標</span>
+                    <input
+                      value={landmarkSearchInput}
+                      onChange={(e) => setLandmarkSearchInput(e.target.value)}
+                      placeholder="輸入名稱或座標"
+                    />
+                  </label>
+                  <div className="field">
+                    <span>篩選</span>
+                    <div className="segmented-control" role="tablist" aria-label="地標管理類型篩選">
+                      <button
+                        type="button"
+                        className={landmarkTypeFilter === 'all' ? 'is-active' : ''}
+                        onClick={() => setLandmarkTypeFilter('all')}
+                      >
+                        全部
+                      </button>
+                      <button
+                        type="button"
+                        className={landmarkTypeFilter === 'flower' ? 'is-active' : ''}
+                        onClick={() => setLandmarkTypeFilter('flower')}
+                      >
+                        花點
+                      </button>
+                      <button
+                        type="button"
+                        className={landmarkTypeFilter === 'mushroom' ? 'is-active' : ''}
+                        onClick={() => setLandmarkTypeFilter('mushroom')}
+                      >
+                        菇點
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="landmark-section-head">
+                  <span>已儲存地標</span>
+                  <small>{filteredLandmarks.length} / {savedLandmarks.length} 筆</small>
+                </div>
+                {savedLandmarks.length === 0 ? (
+                  <p className="landmark-empty">目前還沒有地標，先在左側新增一筆。</p>
+                ) : filteredLandmarks.length === 0 ? (
+                  <p className="landmark-empty">找不到符合條件的地標。</p>
+                ) : (
+                  <div className="landmark-edit-list">
+                    {filteredLandmarks.map((landmark) => (
+                      <div key={landmark.id} className={`landmark-edit-item${editingLandmarkId === landmark.id ? ' is-editing' : ''}`}>
+                        <button className="landmark-edit-main" onClick={() => handleSelectLandmarkToFly(landmark.name)} type="button">
+                          <strong>{landmark.name}</strong>
+                          <span>{formatCoordinate(landmark.coordinate)}</span>
+                          <small>{landmark.landmarkType === 'flower' ? '花點' : '菇點'}</small>
+                        </button>
+                        <div className="landmark-edit-actions">
+                          <button className="secondary-button" onClick={() => handleEditLandmark(landmark)} type="button">
+                            編輯
+                          </button>
+                          <button
+                            className="ghost-button danger"
+                            onClick={() => void handleDeleteLandmark(landmark.id)}
+                            type="button"
+                          >
+                            刪除
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </section>
             </div>
           </div>

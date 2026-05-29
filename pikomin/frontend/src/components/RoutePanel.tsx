@@ -72,13 +72,13 @@ export function RoutePanel({
           onChange={(e) => setLoop(e.target.checked)}
           disabled={locked}
         />
-        <span>循環模式</span>
+        <span>循環路線</span>
       </label>
 
       {isRunning && (
         <div className="progress-block">
           <div className="progress-label">
-            <span>{isPaused ? '路徑已暫停' : '路徑執行中'}</span>
+            <span>{isPaused ? '路線已暫停' : '路線移動中'}</span>
             <strong>{Math.round(routeStatus.progress * 100)}%</strong>
           </div>
           <div className="progress-bar">

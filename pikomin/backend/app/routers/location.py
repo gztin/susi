@@ -26,9 +26,11 @@ async def set_location(
             detail=ErrorResponse(error=str(exc), code="DEVICE_NOT_FOUND").model_dump(),
         ) from exc
     except LocationSetError as exc:
+        message = str(exc).lower()
+        code = "LOCATION_BRIDGE_FAILED" if "host bridge" in message else "LOCATION_SET_FAILED"
         raise HTTPException(
             status_code=400,
-            detail=ErrorResponse(error=str(exc), code="LOCATION_SET_FAILED").model_dump(),
+            detail=ErrorResponse(error=str(exc), code=code).model_dump(),
         ) from exc
     return {"success": True}
 
@@ -48,5 +50,7 @@ async def reset_location(
     except DeviceNotFoundError as exc:
         raise HTTPException(status_code=404, detail=ErrorResponse(error=str(exc), code="DEVICE_NOT_FOUND").model_dump()) from exc
     except LocationSetError as exc:
-        raise HTTPException(status_code=400, detail=ErrorResponse(error=str(exc), code="LOCATION_SET_FAILED").model_dump()) from exc
+        message = str(exc).lower()
+        code = "LOCATION_BRIDGE_FAILED" if "host bridge" in message else "LOCATION_SET_FAILED"
+        raise HTTPException(status_code=400, detail=ErrorResponse(error=str(exc), code=code).model_dump()) from exc
     return {"success": True}

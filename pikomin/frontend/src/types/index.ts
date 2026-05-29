@@ -10,6 +10,14 @@ export interface SavedLandmark {
   landmarkType: 'flower' | 'mushroom'
 }
 
+export interface SavedRoute {
+  id: string
+  name: string
+  waypoints: GPSCoordinate[]
+  createdAt: string
+  updatedAt: string
+}
+
 export interface DeviceInfo {
   id: string
   name: string
