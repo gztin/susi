@@ -6,7 +6,7 @@ import MapInterface from './components/MapInterface'
 import { RoutePanel } from './components/RoutePanel'
 import { useDevice } from './hooks/useDevice'
 import { useRoute } from './hooks/useRoute'
-import type { GPSCoordinate, SavedLandmark } from './types'
+import type { GPSCoordinate, SavedLandmark, SavedRoute } from './types'
 
 type Mode = 'single' | 'route'
 type FlyMode = 'coordinate' | 'landmark'
@@ -58,6 +58,9 @@ export default function App() {
   const [landmarkSaving, setLandmarkSaving] = useState(false)
   const [editingLandmarkId, setEditingLandmarkId] = useState('')
   const [selectedLandmarkId, setSelectedLandmarkId] = useState('')
+  const [routeNameInput, setRouteNameInput] = useState('')
+  const [savedRoutes, setSavedRoutes] = useState<SavedRoute[]>([])
+  const [routeSaving, setRouteSaving] = useState(false)
   const [isManageModalOpen, setIsManageModalOpen] = useState(false)
   const [isFlySettingsOpen, setIsFlySettingsOpen] = useState(false)
   const [isLandmarkManagerOpen, setIsLandmarkManagerOpen] = useState(false)
@@ -70,6 +73,7 @@ export default function App() {
     waypoints,
     addWaypoint,
     updateWaypoint,
+    replaceWaypoints,
     removeWaypoint,
     clearWaypoints,
     routeStatus,
@@ -90,6 +94,18 @@ export default function App() {
       })
       .catch(() => {
         if (!cancelled) setSavedLandmarks([])
+      })
+    return () => { cancelled = true }
+  }, [])
+
+  useEffect(() => {
+    let cancelled = false
+    void apiClient.getSavedRoutes()
+      .then((items) => {
+        if (!cancelled) setSavedRoutes(items)
+      })
+      .catch(() => {
+        if (!cancelled) setSavedRoutes([])
       })
     return () => { cancelled = true }
   }, [])
@@ -428,6 +444,50 @@ export default function App() {
     setSelectedLandmarkId(target.id)
   }, [savedLandmarks])
 
+  const handleSaveRoute = useCallback(async () => {
+    const name = routeNameInput.trim()
+    if (!name) {
+      showToast('請輸入路徑名稱')
+      return
+    }
+    if (waypoints.length < 2) {
+      showToast('路徑至少需要 2 個路徑點')
+      return
+    }
+
+    try {
+      setRouteSaving(true)
+      const created = await apiClient.createSavedRoute({ name, waypoints })
+      setSavedRoutes((prev) => [created, ...prev])
+      setRouteNameInput('')
+      showToast('路徑已儲存')
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : '儲存路徑失敗')
+    } finally {
+      setRouteSaving(false)
+    }
+  }, [routeNameInput, showToast, waypoints])
+
+  const handleLoadSavedRoute = useCallback((route: SavedRoute) => {
+    if (routeStatus.state !== 'idle') {
+      showToast('路徑執行中，請先停止後再載入')
+      return
+    }
+    replaceWaypoints(route.waypoints)
+    setMode('route')
+    showToast(`已載入路徑：${route.name}`)
+  }, [replaceWaypoints, routeStatus.state, showToast])
+
+  const handleDeleteSavedRoute = useCallback(async (id: string) => {
+    try {
+      await apiClient.deleteSavedRoute(id)
+      setSavedRoutes((prev) => prev.filter((route) => route.id !== id))
+      showToast('路徑已刪除')
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : '刪除路徑失敗')
+    }
+  }, [showToast])
+
   const currentPosition = mode === 'single'
     ? (myPosition ?? routeStatus.currentPosition)
     : (routeStatus.currentPosition ?? myPosition)
@@ -538,7 +598,7 @@ export default function App() {
           </aside>
         </main>
 
-        {waypoints.length > 0 && (
+        {mode === 'route' && (
           <aside className="route-data-sidebar">
             <section className="route-data-panel">
               <div className="panel-heading compact">
@@ -550,21 +610,76 @@ export default function App() {
                   <button className="ghost-button" onClick={clearWaypoints}>清除全部</button>
                 )}
               </div>
+              {routeStatus.state === 'idle' && (
+                <div className="saved-route-form">
+                  <label className="field">
+                    <span>路徑名稱</span>
+                    <input
+                      value={routeNameInput}
+                      onChange={(e) => setRouteNameInput(e.target.value)}
+                      placeholder="例如：機場巡點 A"
+                    />
+                  </label>
+                  <button
+                    className="secondary-button"
+                    onClick={() => void handleSaveRoute()}
+                    disabled={waypoints.length < 2 || !routeNameInput.trim() || routeSaving}
+                  >
+                    {routeSaving ? '儲存中' : '儲存目前路徑'}
+                  </button>
+                </div>
+              )}
               <div className="waypoint-list">
-                {waypoints.map((wp, index) => (
-                  <div key={`${wp.latitude}-${wp.longitude}-${index}`} className="waypoint-item">
-                    <div className="waypoint-index">{index + 1}</div>
-                    <div className="waypoint-text">
-                      <strong>{wp.latitude.toFixed(5)}</strong>
-                      <span>{wp.longitude.toFixed(5)}</span>
+                {waypoints.length === 0 ? (
+                  <p className="route-empty">還沒有路徑點。點擊地圖新增，或從下方載入已儲存路徑。</p>
+                ) : (
+                  waypoints.map((wp, index) => (
+                    <div key={`${wp.latitude}-${wp.longitude}-${index}`} className="waypoint-item">
+                      <div className="waypoint-index">{index + 1}</div>
+                      <div className="waypoint-text">
+                        <strong>{wp.latitude.toFixed(5)}</strong>
+                        <span>{wp.longitude.toFixed(5)}</span>
+                      </div>
+                      {(routeStatus.state === 'idle') && (
+                        <button className="waypoint-remove" onClick={() => removeWaypoint(index)}>
+                          移除
+                        </button>
+                      )}
                     </div>
-                    {(routeStatus.state === 'idle') && (
-                      <button className="waypoint-remove" onClick={() => removeWaypoint(index)}>
-                        移除
-                      </button>
-                    )}
+                  ))
+                )}
+              </div>
+              <div className="saved-route-section">
+                <div className="landmark-section-head">
+                  <span>已儲存路徑</span>
+                  <small>{savedRoutes.length} 筆</small>
+                </div>
+                {savedRoutes.length === 0 ? (
+                  <p className="route-empty">目前還沒有儲存路徑。</p>
+                ) : (
+                  <div className="saved-route-list">
+                    {savedRoutes.map((route) => (
+                      <div key={route.id} className="saved-route-item">
+                        <button
+                          className="saved-route-main"
+                          onClick={() => handleLoadSavedRoute(route)}
+                          disabled={routeStatus.state !== 'idle'}
+                          type="button"
+                        >
+                          <strong>{route.name}</strong>
+                          <span>{route.waypoints.length} 個路徑點</span>
+                        </button>
+                        <button
+                          className="waypoint-remove"
+                          onClick={() => void handleDeleteSavedRoute(route.id)}
+                          type="button"
+                        >
+                          刪除
+                        </button>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
               </div>
             </section>
           </aside>

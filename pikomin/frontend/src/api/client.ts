@@ -4,6 +4,7 @@ import type {
   RouteRequest,
   RouteStatus,
   StatusUpdate,
+  SavedRoute,
 } from '../types'
 
 const BASE_URL = (typeof import.meta !== 'undefined' && (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL) || ''
@@ -178,6 +179,34 @@ export const apiClient = {
 
   async deleteLandmark(landmarkId: string): Promise<void> {
     await request(`/api/landmarks/${landmarkId}`, { method: 'DELETE' })
+  },
+
+  async getSavedRoutes(): Promise<SavedRoute[]> {
+    return request('/api/saved-routes')
+  },
+
+  async createSavedRoute(payload: {
+    name: string
+    waypoints: { latitude: number; longitude: number }[]
+  }): Promise<SavedRoute> {
+    return request('/api/saved-routes', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    })
+  },
+
+  async updateSavedRoute(routeId: string, payload: {
+    name: string
+    waypoints: { latitude: number; longitude: number }[]
+  }): Promise<SavedRoute> {
+    return request(`/api/saved-routes/${routeId}`, {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+    })
+  },
+
+  async deleteSavedRoute(routeId: string): Promise<void> {
+    await request(`/api/saved-routes/${routeId}`, { method: 'DELETE' })
   },
 
   async getTunnelStatus(): Promise<{
