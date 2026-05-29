@@ -41,7 +41,17 @@ interface MapInterfaceProps {
   savedLandmarks: SavedLandmark[]
   onMapClick: (coord: GPSCoordinate) => void
   onWaypointMove?: (index: number, coord: GPSCoordinate) => void
+  onWaypointRemove?: (index: number) => void
+  onWaypointSetAsStart?: (index: number) => void
+  onWaypointSetAsEnd?: (index: number) => void
   canEditWaypoints?: boolean
+}
+
+interface WaypointContextMenu {
+  index: number
+  x: number
+  y: number
+  showCoordinate: boolean
 }
 
 export default function MapInterface({
@@ -52,6 +62,9 @@ export default function MapInterface({
   savedLandmarks,
   onMapClick,
   onWaypointMove,
+  onWaypointRemove,
+  onWaypointSetAsStart,
+  onWaypointSetAsEnd,
   canEditWaypoints = false,
 }: MapInterfaceProps) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -64,6 +77,7 @@ export default function MapInterface({
   const prevPositionRef = useRef<GPSCoordinate | null>(null)
   const isDraggingWaypointRef = useRef(false)
   const [styleId, setStyleId] = useState<TileStyleId>('positron')
+  const [waypointMenu, setWaypointMenu] = useState<WaypointContextMenu | null>(null)
 
   // 初始化地圖
   useEffect(() => {
@@ -119,6 +133,7 @@ export default function MapInterface({
 
     const handler = (e: L.LeafletMouseEvent) => {
       if (isDraggingWaypointRef.current) return
+      setWaypointMenu(null)
       onMapClick({ latitude: e.latlng.lat, longitude: e.latlng.lng })
     }
 
@@ -196,6 +211,7 @@ export default function MapInterface({
       if (canEditWaypoints && onWaypointMove) {
         marker.dragging?.enable()
         marker.on('dragstart', () => {
+          setWaypointMenu(null)
           isDraggingWaypointRef.current = true
         })
         marker.on('dragend', () => {
@@ -204,6 +220,17 @@ export default function MapInterface({
           window.setTimeout(() => {
             isDraggingWaypointRef.current = false
           }, 0)
+        })
+      }
+      if (canEditWaypoints) {
+        marker.on('contextmenu', (event: L.LeafletMouseEvent) => {
+          const originalEvent = event.originalEvent
+          originalEvent.preventDefault()
+          originalEvent.stopPropagation()
+          const bounds = containerRef.current?.getBoundingClientRect()
+          const x = bounds ? originalEvent.clientX - bounds.left : event.containerPoint.x
+          const y = bounds ? originalEvent.clientY - bounds.top : event.containerPoint.y
+          setWaypointMenu({ index, x, y, showCoordinate: false })
         })
       }
       waypointMarkersRef.current.push(marker)
@@ -219,6 +246,28 @@ export default function MapInterface({
       }).addTo(map)
     }
   }, [waypoints, mode, canEditWaypoints, onWaypointMove])
+
+  useEffect(() => {
+    setWaypointMenu(null)
+  }, [waypoints.length, canEditWaypoints])
+
+  useEffect(() => {
+    if (!waypointMenu) return
+
+    const closeMenu = () => setWaypointMenu(null)
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeMenu()
+    }
+
+    window.addEventListener('click', closeMenu)
+    window.addEventListener('keydown', closeOnEscape)
+    return () => {
+      window.removeEventListener('click', closeMenu)
+      window.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [waypointMenu])
+
+  const selectedWaypoint = waypointMenu ? waypoints[waypointMenu.index] : null
 
   useEffect(() => {
     const map = mapRef.current
@@ -239,6 +288,59 @@ export default function MapInterface({
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
+      {waypointMenu && selectedWaypoint && (
+        <div
+          className="waypoint-context-menu"
+          style={{ left: waypointMenu.x, top: waypointMenu.y }}
+          onClick={(event) => event.stopPropagation()}
+          onContextMenu={(event) => event.preventDefault()}
+        >
+          <button
+            type="button"
+            onClick={() => {
+              setWaypointMenu((current) => current ? { ...current, showCoordinate: true } : current)
+            }}
+          >
+            顯示座標
+          </button>
+          {waypointMenu.showCoordinate && (
+            <div className="waypoint-coordinate-info">
+              <span>{selectedWaypoint.latitude.toFixed(6)}</span>
+              <span>{selectedWaypoint.longitude.toFixed(6)}</span>
+            </div>
+          )}
+          <button
+            type="button"
+            onClick={() => {
+              onWaypointSetAsStart?.(waypointMenu.index)
+              setWaypointMenu(null)
+            }}
+            disabled={waypointMenu.index === 0}
+          >
+            設為起點
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              onWaypointSetAsEnd?.(waypointMenu.index)
+              setWaypointMenu(null)
+            }}
+            disabled={waypointMenu.index === waypoints.length - 1}
+          >
+            設為終點
+          </button>
+          <button
+            type="button"
+            className="is-danger"
+            onClick={() => {
+              onWaypointRemove?.(waypointMenu.index)
+              setWaypointMenu(null)
+            }}
+          >
+            移除節點
+          </button>
+        </div>
+      )}
       <div className="map-style-switcher">
         {TILE_STYLES.map((s) => (
           <button

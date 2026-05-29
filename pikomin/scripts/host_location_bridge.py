@@ -6,8 +6,9 @@ import shlex
 import subprocess
 import urllib.request
 import json
+import time
+import asyncio
 from datetime import datetime
-from threading import Lock
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -18,8 +19,10 @@ TUNNELD_URL = os.environ.get("TUNNELD_URL", "http://127.0.0.1:49151")
 LOG_PATH = os.environ.get("HOST_BRIDGE_LOG_PATH", "/tmp/host_location_bridge.log")
 
 app = FastAPI(title="Host Location Bridge", version="0.1.0")
-_device_locks: dict[str, Lock] = {}
-_location_procs: dict[str, subprocess.Popen[str]] = {}
+_device_locks: dict[str, asyncio.Lock] = {}
+_location_procs: dict[str, list[subprocess.Popen[str]]] = {}
+_location_sessions: dict[str, object] = {}
+_location_contexts: dict[str, list[object]] = {}
 
 
 class SetLocationReq(BaseModel):
@@ -71,28 +74,40 @@ def _pmd3_cmd(*args: str) -> list[str]:
     return [*PMD3, *args]
 
 
-def _spawn_location_process(device_id: str, cmd: list[str]) -> None:
+def _spawn_location_process(cmd: list[str]) -> subprocess.Popen[str]:
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(f"\n[{datetime.now().isoformat()}] SPAWN {' '.join(cmd)}\n")
 
     try:
         proc = subprocess.Popen(
             cmd,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
         )
     except Exception as exc:
         raise HTTPException(status_code=400, detail=f"[cmd={' '.join(cmd)}] spawn failed: {exc}") from exc
 
-    _location_procs[device_id] = proc
+    time.sleep(0.8)
+    if proc.poll() is not None:
+        stdout, stderr = proc.communicate(timeout=1)
+        detail = (stderr or stdout or f"process exited with code {proc.returncode}").strip()
+        with open(LOG_PATH, "a", encoding="utf-8") as f:
+            f.write(f"[{datetime.now().isoformat()}] EXIT code={proc.returncode}\nSTDERR:\n{stderr}\nSTDOUT:\n{stdout}\n")
+        raise HTTPException(status_code=400, detail=f"[cmd={' '.join(cmd)}] {detail}")
+
+    return proc
 
 
 def _terminate_location_process(device_id: str) -> None:
-    proc = _location_procs.pop(device_id, None)
-    if proc is None:
+    procs = _location_procs.pop(device_id, [])
+    if not procs:
         return
+    for proc in procs:
+        _terminate_process(device_id, proc)
 
+
+def _terminate_process(device_id: str, proc: subprocess.Popen[str]) -> None:
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(f"[{datetime.now().isoformat()}] TERM pid={proc.pid} device={device_id}\n")
 
@@ -125,36 +140,68 @@ def _resolve_rsd(device_id: str) -> tuple[str, int]:
     return str(address), int(port)
 
 
-def _get_device_lock(device_id: str) -> Lock:
+def _get_device_lock(device_id: str) -> asyncio.Lock:
     lock = _device_locks.get(device_id)
     if lock is None:
-        lock = Lock()
+        lock = asyncio.Lock()
         _device_locks[device_id] = lock
     return lock
 
 
 @app.post("/set-location")
-def set_location(req: SetLocationReq) -> dict:
+async def set_location(req: SetLocationReq) -> dict:
     address, port = _resolve_rsd(req.device_id)
-    cmd = _pmd3_cmd(
-        "developer", "dvt", "simulate-location", "set",
-        "--rsd", address, str(port),
-        "--",
-        str(req.latitude), str(req.longitude),
-    )
     lock = _get_device_lock(req.device_id)
-    with lock:
+    async with lock:
         try:
-            _terminate_location_process(req.device_id)
-            _spawn_location_process(req.device_id, cmd)
-        except HTTPException as exc:
-            try:
-                _terminate_location_process(req.device_id)
-                _run(_pmd3_cmd("developer", "dvt", "simulate-location", "clear", "--rsd", address, str(port)), timeout_sec=15)
-                _spawn_location_process(req.device_id, cmd)
-            except HTTPException:
-                raise exc
+            session = await _get_location_session(req.device_id, address, port)
+            await session.set(req.latitude, req.longitude)
+            with open(LOG_PATH, "a", encoding="utf-8") as f:
+                f.write(f"[{datetime.now().isoformat()}] LocationSimulation.set OK device={req.device_id} lat={req.latitude:.6f} lng={req.longitude:.6f}\n")
+        except HTTPException:
+            raise
+        except Exception as exc:
+            await _close_location_session(req.device_id)
+            raise HTTPException(status_code=400, detail=f"LocationSimulation.set failed: {exc}") from exc
     return {"success": True}
+
+
+async def _get_location_session(device_id: str, address: str, port: int):
+    session = _location_sessions.get(device_id)
+    if session is not None:
+        return session
+
+    try:
+        from pymobiledevice3.remote.remote_service_discovery import RemoteServiceDiscoveryService
+        from pymobiledevice3.services.dvt.instruments.dvt_provider import DvtProvider
+        from pymobiledevice3.services.dvt.instruments.location_simulation import LocationSimulation
+
+        with open(LOG_PATH, "a", encoding="utf-8") as f:
+            f.write(f"[{datetime.now().isoformat()}] CREATE LocationSimulation device={device_id} addr={address} port={port}\n")
+        rsd_service = RemoteServiceDiscoveryService((address, port))
+        await rsd_service.connect()
+        dvt = DvtProvider(rsd_service)
+        await dvt.__aenter__()
+        session = LocationSimulation(dvt)
+        await session.__aenter__()
+        _location_contexts[device_id] = [session, dvt, rsd_service]
+        _location_sessions[device_id] = session
+        return session
+    except Exception as exc:
+        await _close_location_session(device_id)
+        raise HTTPException(status_code=400, detail=f"LocationSimulation session failed: {exc}") from exc
+
+
+async def _close_location_session(device_id: str) -> None:
+    _location_sessions.pop(device_id, None)
+    contexts = _location_contexts.pop(device_id, None)
+    if not contexts:
+        return
+    for ctx in contexts:
+        try:
+            await ctx.__aexit__(None, None, None)
+        except Exception:
+            pass
 
 
 @app.get("/usb-devices", response_model=list[UsbDeviceResp])
@@ -214,11 +261,17 @@ def get_device_info(device_id: str) -> DeviceInfoResp:
 
 
 @app.post("/clear-location")
-def clear_location(req: ClearLocationReq) -> dict:
+async def clear_location(req: ClearLocationReq) -> dict:
     address, port = _resolve_rsd(req.device_id)
     cmd = _pmd3_cmd("developer", "dvt", "simulate-location", "clear", "--rsd", address, str(port))
     lock = _get_device_lock(req.device_id)
-    with lock:
+    async with lock:
         _terminate_location_process(req.device_id)
+        session = _location_sessions.get(req.device_id)
+        if session is not None:
+            try:
+                await session.clear()
+            finally:
+                await _close_location_session(req.device_id)
         _run(cmd, timeout_sec=20)
     return {"success": True}

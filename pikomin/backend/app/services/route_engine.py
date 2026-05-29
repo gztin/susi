@@ -118,15 +118,21 @@ class RouteEngine:
         if self._state != SimulationState.IDLE:
             raise RuntimeError("已有路徑在執行中")
 
+        route_waypoints = waypoints
+        if self._current_position is not None:
+            distance_to_start = haversine_distance(self._current_position, waypoints[0])
+            if distance_to_start > 1.0:
+                route_waypoints = [self._current_position, *waypoints]
+
         self._device_id = device_id
         self._progress = 0.0
-        self._current_position = waypoints[0]
+        self._current_position = route_waypoints[0]
         self._stop_event.clear()
         self._resume_event.set()  # 確保不在暫停狀態
 
         self._state = SimulationState.MOVING
         self._task = asyncio.create_task(
-            self._movement_loop(waypoints, speed, loop, on_position_update, on_route_error)
+            self._movement_loop(route_waypoints, speed, loop, on_position_update, on_route_error)
         )
 
     async def pause_route(self) -> None:
@@ -154,7 +160,7 @@ class RouteEngine:
                     await asyncio.wait_for(asyncio.shield(self._task), timeout=0.5)
                 except (asyncio.TimeoutError, asyncio.CancelledError, Exception):
                     pass
-            self._reset_state()
+            self._reset_state(clear_position=False)
             logger.info("路徑已停止")
 
     def get_status(self) -> RouteStatus:
@@ -165,6 +171,14 @@ class RouteEngine:
             progress=self._progress,
             device_id=self._device_id,
         )
+
+    def sync_manual_position(self, device_id: str, coordinate: GPSCoordinate | None) -> None:
+        """同步單點定位結果，讓 status API 與前端顯示保有最新位置。"""
+        if self._state != SimulationState.IDLE:
+            return
+        self._device_id = device_id
+        self._current_position = coordinate
+        self._progress = 0.0
 
     # ── 靜態方法 ──────────────────────────────────────────────────────────────
 
@@ -237,7 +251,7 @@ class RouteEngine:
                     # 確認裝置仍連線
                     if self._device_id and self._device_manager.get_device(self._device_id) is None:
                         logger.warning("裝置 %s 已斷線，強制停止路徑", self._device_id)
-                        self._reset_state()
+                        self._reset_state(clear_position=False)
                         return
 
                     # 設定 GPS 位置
@@ -251,7 +265,7 @@ class RouteEngine:
                                 await on_route_error(str(exc))
                             except Exception:
                                 pass
-                        self._reset_state()
+                        self._reset_state(clear_position=False)
                         return
 
                     # 更新狀態
@@ -300,12 +314,14 @@ class RouteEngine:
         finally:
             # 若非外部呼叫 stop_route，自行轉為 IDLE
             if self._state != SimulationState.IDLE:
-                self._reset_state()
+                self._reset_state(clear_position=False)
 
-    def _reset_state(self) -> None:
+    def _reset_state(self, *, clear_position: bool = True) -> None:
         """重置狀態機至 IDLE。"""
         self._state = SimulationState.IDLE
         self._progress = 0.0
         self._device_id = None
+        if clear_position:
+            self._current_position = None
         self._stop_event.clear()
         self._resume_event.set()

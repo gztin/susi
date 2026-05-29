@@ -10,15 +10,8 @@ interface RoutePanelProps {
   onStopRoute: () => Promise<void>
 }
 
-type MoveStyle = 'walk' | 'fast_walk' | 'walk_5' | 'run_10' | 'jog_15'
-
-const MOVE_STYLE_OPTIONS: Record<MoveStyle, { label: string; helper: string; speedMs: number }> = {
-  walk: { label: '走路', helper: '2 km/h', speedMs: 2 / 3.6 },
-  fast_walk: { label: '快步走', helper: '3.5 km/h', speedMs: 3.5 / 3.6 },
-  walk_5: { label: '步行', helper: '5 km/h', speedMs: 5 / 3.6 },
-  run_10: { label: '慢跑', helper: '10 km/h', speedMs: 10 / 3.6 },
-  jog_15: { label: '小跑步', helper: '15 km/h', speedMs: 15 / 3.6 },
-}
+const JOG_SPEED = 15 / 3.6
+const JOG_SPEED_LABEL = '小跑步 15 km/h'
 
 export function RoutePanel({
   waypoints,
@@ -28,11 +21,9 @@ export function RoutePanel({
   onResumeRoute,
   onStopRoute,
 }: RoutePanelProps) {
-  const [moveStyle, setMoveStyle] = useState<MoveStyle>('walk')
   const [loop, setLoop] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const speed = MOVE_STYLE_OPTIONS[moveStyle].speedMs
   const canStart = waypoints.length >= 2
   const isMoving = routeStatus.state === 'moving'
   const isPaused = routeStatus.state === 'paused'
@@ -50,21 +41,6 @@ export function RoutePanel({
 
   return (
     <div className="route-panel">
-      <label className="field">
-        <span>移動方式</span>
-        <select
-          value={moveStyle}
-          onChange={(e) => setMoveStyle(e.target.value as MoveStyle)}
-          disabled={locked}
-        >
-          <option value="walk">走路 (2 km/h)</option>
-          <option value="fast_walk">快步走 (3.5 km/h)</option>
-          <option value="walk_5">步行 (5 km/h)</option>
-          <option value="run_10">慢跑 (10 km/h)</option>
-          <option value="jog_15">小跑步 (15 km/h)</option>
-        </select>
-      </label>
-
       <label className="toggle-row">
         <input
           type="checkbox"
@@ -90,11 +66,12 @@ export function RoutePanel({
       <div className="route-actions">
         {!isRunning ? (
           <button
-            className="primary-button"
-            onClick={() => void withLoading(() => onStartRoute(speed, loop))}
+            className="primary-button route-start-button"
+            onClick={() => void withLoading(() => onStartRoute(JOG_SPEED, loop))}
             disabled={!canStart || loading}
           >
-            開始種花
+            <span>{loading ? '啟動中' : '開始種花'}</span>
+            <small>{JOG_SPEED_LABEL}</small>
           </button>
         ) : (
           <>

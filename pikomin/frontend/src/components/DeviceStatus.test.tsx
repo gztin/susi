@@ -57,8 +57,8 @@ describe('DeviceStatus', () => {
 
   it('shows empty state', () => {
     setupMock({ devices: [] })
-    render(<DeviceStatus />)
-    expect(screen.getByText(/未偵測到裝置/)).toBeTruthy()
+    const { container } = render(<DeviceStatus />)
+    expect(container.firstChild).toBeNull()
   })
 
   it('renders available devices', () => {

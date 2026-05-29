@@ -1,85 +1,88 @@
 :root {
   /* ── Hue anchor ─────────────────────────────────── */
-  --hue: 250;
+  --hue: 222;
 
   /* ── Base ───────────────────────────────────────── */
-  --bg-base:   oklch(97% 0.006 var(--hue));
-  --bg-raised: oklch(99% 0.003 var(--hue));
+  --bg-base:   oklch(97.5% 0.006 var(--hue));
+  --bg-raised: oklch(99% 0.004 var(--hue));
 
   /* ── Surfaces ───────────────────────────────────── */
-  --surface-panel:           oklch(98% 0.004 var(--hue) / 0.94);
-  --surface-hero-a:          oklch(99% 0.003 var(--hue) / 0.98);
-  --surface-hero-b:          oklch(96% 0.006 var(--hue) / 0.98);
-  --surface-input:           oklch(99% 0.003 var(--hue) / 0.98);
-  --surface-device:          oklch(97% 0.010 var(--hue) / 0.92);
-  --surface-metric:          oklch(96% 0.012 var(--hue) / 0.94);
-  --surface-chip:            oklch(97% 0.010 var(--hue) / 0.96);
-  --surface-toast:           oklch(98% 0.008 var(--hue) / 0.98);
-  --surface-modal-a:         oklch(99% 0.004 var(--hue) / 0.98);
-  --surface-modal-b:         oklch(97% 0.007 var(--hue) / 0.98);
-  --surface-backdrop:        oklch(30% 0.020 var(--hue) / 0.22);
-  --surface-light:           oklch(95% 0.006 var(--hue) / 0.96);
-  --surface-light-sel:       oklch(90% 0.010 var(--hue) / 0.96);
+  --surface-panel:           oklch(98.5% 0.006 var(--hue) / 0.95);
+  --surface-hero-a:          oklch(99% 0.004 var(--hue) / 0.98);
+  --surface-hero-b:          oklch(96.5% 0.009 var(--hue) / 0.98);
+  --surface-input:           oklch(99% 0.004 var(--hue) / 0.98);
+  --surface-device:          oklch(97.5% 0.011 var(--hue) / 0.92);
+  --surface-metric:          oklch(96% 0.011 var(--hue) / 0.94);
+  --surface-chip:            oklch(96.5% 0.014 var(--hue) / 0.96);
+  --surface-toast:           oklch(98.5% 0.008 var(--hue) / 0.98);
+  --surface-modal-a:         oklch(99% 0.005 var(--hue) / 0.99);
+  --surface-modal-b:         oklch(97.5% 0.009 var(--hue) / 0.99);
+  --surface-backdrop:        oklch(40% 0.018 var(--hue) / 0.22);
+  --surface-light:           oklch(95.5% 0.008 var(--hue) / 0.96);
+  --surface-light-sel:       oklch(91% 0.020 205 / 0.96);
   --surface-map-overlay:     oklch(99% 0.005 var(--hue));
-  --surface-btn-secondary-a: oklch(94% 0.010 var(--hue) / 0.98);
-  --surface-btn-secondary-b: oklch(91% 0.014 var(--hue) / 0.98);
-  --btn-primary-bg:          oklch(57% 0.15 222);
-  --btn-shadow:              0 3px 10px oklch(48% 0.01 var(--hue) / 0.12);
-  --map-bg:                  oklch(95% 0.008 var(--hue));
+  --surface-btn-secondary-a: oklch(96% 0.010 var(--hue) / 0.98);
+  --surface-btn-secondary-b: oklch(92.5% 0.016 var(--hue) / 0.98);
+  --btn-primary-bg:          oklch(74% 0.070 205);
+  --btn-primary-bg-hover:    oklch(70% 0.078 205);
+  --btn-primary-text:        oklch(24% 0.028 215);
+  --btn-primary-border:      oklch(64% 0.072 205 / 0.68);
+  --btn-shadow:              0 3px 10px oklch(42% 0.014 var(--hue) / 0.12);
+  --map-bg:                  oklch(95.5% 0.008 var(--hue));
 
   /* ── Text ───────────────────────────────────────── */
-  --text-primary:    oklch(26% 0.014 var(--hue));
-  --text-secondary:  oklch(36% 0.012 var(--hue));
-  --text-muted:      oklch(48% 0.010 var(--hue));
-  --text-faint:      oklch(58% 0.008 var(--hue));
+  --text-primary:    oklch(24% 0.016 var(--hue));
+  --text-secondary:  oklch(36% 0.014 var(--hue));
+  --text-muted:      oklch(49% 0.012 var(--hue));
+  --text-faint:      oklch(60% 0.010 var(--hue));
   --text-near-white: oklch(18% 0.016 var(--hue));
   --text-dark:       oklch(20% 0.018 var(--hue));
   --text-dark-muted: oklch(42% 0.016 var(--hue));
 
   /* ── Borders ────────────────────────────────────── */
-  --border-soft:    oklch(84% 0.016 var(--hue) / 0.74);
-  --border-medium:  oklch(80% 0.014 var(--hue) / 0.88);
-  --border-ghost:   oklch(76% 0.015 var(--hue) / 0.90);
-  --border-light:   oklch(86% 0.010 var(--hue) / 0.90);
-  --border-dashed:  oklch(80% 0.010 var(--hue) / 0.90);
-  --border-divider: oklch(84% 0.030 var(--hue) / 0.70);
+  --border-soft:    oklch(84.5% 0.018 var(--hue) / 0.74);
+  --border-medium:  oklch(79.5% 0.016 var(--hue) / 0.88);
+  --border-ghost:   oklch(76% 0.017 var(--hue) / 0.90);
+  --border-light:   oklch(87% 0.012 var(--hue) / 0.90);
+  --border-dashed:  oklch(80% 0.012 var(--hue) / 0.90);
+  --border-divider: oklch(84% 0.026 var(--hue) / 0.70);
 
   /* ── Accent: cyan (focus / interactive highlight) ── */
-  --accent:      oklch(63% 0.18 258);
-  --accent-glow: oklch(63% 0.18 258 / 0.20);
-  --accent-ring: oklch(63% 0.18 258 / 0.35);
+  --accent:      oklch(62% 0.105 205);
+  --accent-glow: oklch(62% 0.105 205 / 0.20);
+  --accent-ring: oklch(62% 0.105 205 / 0.35);
 
   /* ── Accent: violet (primary / active state) ─────── */
-  --accent-violet-lo: oklch(63% 0.13 214);
-  --accent-violet-hi: oklch(50% 0.11 224);
+  --accent-violet-lo: oklch(64% 0.080 220);
+  --accent-violet-hi: oklch(52% 0.070 230);
 
   /* ── Accent: orange (action buttons) ────────────── */
-  --accent-warm-a: oklch(60% 0.13 222);
-  --accent-warm-b: oklch(54% 0.11 232);
+  --accent-warm-a: oklch(66% 0.080 205);
+  --accent-warm-b: oklch(58% 0.075 214);
 
   /* ── State ──────────────────────────────────────── */
-  --state-ok:              oklch(83% 0.14 162);
-  --state-ok-bg:           oklch(38% 0.09 162 / 0.96);
-  --state-err:             oklch(74% 0.13   5);
-  --state-err-text:        oklch(42% 0.10   5);
-  --state-err-bg:          oklch(17% 0.07   5 / 0.78);
-  --state-err-border:      oklch(35% 0.14   5 / 0.80);
-  --state-err-banner-text: oklch(77% 0.09   5);
+  --state-ok:              oklch(78% 0.115 155);
+  --state-ok-bg:           oklch(42% 0.080 155 / 0.96);
+  --state-err:             oklch(68% 0.115 18);
+  --state-err-text:        oklch(42% 0.075 18);
+  --state-err-bg:          oklch(95% 0.026 18 / 0.92);
+  --state-err-border:      oklch(75% 0.055 18 / 0.88);
+  --state-err-banner-text: oklch(42% 0.075 18);
 
   /* ── Progress ───────────────────────────────────── */
-  --progress-track: oklch(30% 0.050 var(--hue) / 0.92);
-  --progress-a:     oklch(85% 0.19 192);
-  --progress-b:     oklch(66% 0.28 285);
+  --progress-track: oklch(88% 0.020 var(--hue) / 0.92);
+  --progress-a:     oklch(76% 0.095 190);
+  --progress-b:     oklch(64% 0.085 220);
 
   /* ── Detail ─────────────────────────────────────── */
-  --waypoint-idx-bg:   oklch(92% 0.010 var(--hue));
-  --waypoint-idx-text: oklch(35% 0.10  var(--hue));
+  --waypoint-idx-bg:   oklch(92.5% 0.014 var(--hue));
+  --waypoint-idx-text: oklch(35% 0.070 var(--hue));
 
   /* ── Root properties ────────────────────────────── */
   color: var(--text-primary);
   background:
-    radial-gradient(ellipse at top left, oklch(92% 0.015 255 / 0.18), transparent 42%),
-    radial-gradient(ellipse at 82% -6%, oklch(94% 0.012 232 / 0.14), transparent 38%),
+    radial-gradient(ellipse at top left, oklch(92% 0.020 205 / 0.18), transparent 42%),
+    radial-gradient(ellipse at 82% -6%, oklch(94% 0.014 180 / 0.14), transparent 38%),
     linear-gradient(180deg, var(--bg-base) 0%, var(--bg-raised) 100%);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
 }
@@ -353,24 +356,16 @@ select {
   position: fixed;
   top: 28px;
   right: 28px;
-  width: min(266px, calc(100vw - 32px));
+  width: 50px;
   max-height: calc(100vh - 56px);
   z-index: 30;
   pointer-events: none;
 }
 
 .route-data-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  border-radius: 24px;
-  background: var(--surface-panel);
-  border: 1px solid var(--border-medium);
-  padding: 18px;
+  display: block;
   pointer-events: auto;
-  max-height: calc(100vh - 56px);
-  min-height: 0;
-  overflow: hidden;
+  width: 50px;
 }
 
 .route-panel-tools {
@@ -414,16 +409,43 @@ select {
 
 .inline-alert {
   display: inline-block;
-  margin-left: 10px;
   padding: 2px 8px;
   border-radius: 999px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0;
   vertical-align: middle;
-  color: oklch(42% 0.08 5);
-  background: oklch(92% 0.03 5 / 0.85);
-  border: 1px solid oklch(76% 0.05 5 / 0.9);
+  color: var(--state-err-text);
+  background: var(--state-err-bg);
+  border: 1px solid var(--state-err-border);
+}
+
+.disconnect-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.inline-help-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid var(--border-light);
+  background: oklch(97% 0.006 var(--hue) / 0.9);
+  color: var(--text-muted);
+}
+
+.inline-help-button:hover:not(:disabled) {
+  transform: none;
+  border-color: var(--border-medium);
+  background: var(--surface-btn-secondary-b);
+  color: var(--text-primary);
 }
 
 .status-grid {
@@ -488,6 +510,35 @@ select {
   font-size: 13px;
   font-weight: 600;
   color: var(--text-secondary);
+}
+
+.mode-control-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.mode-control-row select {
+  height: 44px;
+}
+
+.mode-field-actions {
+  display: inline-grid;
+  grid-auto-flow: column;
+  gap: 6px;
+}
+
+.mode-action-button {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+}
+
+.mode-action-button.is-active {
+  border-color: var(--btn-primary-border);
+  background: oklch(91% 0.030 205 / 0.98);
+  color: var(--btn-primary-text);
 }
 
 .field-inline {
@@ -646,10 +697,16 @@ select {
 }
 
 .primary-button {
-  background: oklch(73% 0.08 214);
-  color: oklch(23% 0.02 214);
-  border-color: oklch(66% 0.07 214 / 0.66);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-border);
   box-shadow: var(--btn-shadow);
+}
+
+.primary-button:hover:not(:disabled),
+.accent-button:hover:not(:disabled) {
+  background: var(--btn-primary-bg-hover);
+  border-color: var(--btn-primary-border);
 }
 
 .secondary-button {
@@ -660,9 +717,9 @@ select {
 }
 
 .accent-button {
-  background: oklch(73% 0.08 214);
-  color: oklch(23% 0.02 214);
-  border-color: oklch(66% 0.07 214 / 0.66);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-border);
   box-shadow: var(--btn-shadow);
 }
 
@@ -784,38 +841,19 @@ select {
   padding-right: 4px;
 }
 
-.saved-route-form {
+.route-toolbar {
   display: grid;
-  gap: 10px;
-  padding: 12px;
-  border-radius: 16px;
-  background: var(--surface-light);
-  border: 1px solid var(--border-light);
-}
-
-.saved-route-form .field {
+  grid-auto-flow: row;
+  grid-auto-rows: 50px;
+  align-items: center;
   gap: 6px;
+  width: 50px;
 }
 
-.saved-route-form .field span {
-  font-size: 12px;
-}
-
-.saved-route-form input {
-  min-height: 38px;
-}
-
-.route-file-actions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.route-file-actions .secondary-button {
-  width: 100%;
-  min-height: 36px;
-  border-radius: 10px;
-  font-size: 12px;
+.route-toolbar-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
 }
 
 .route-empty {
@@ -827,23 +865,6 @@ select {
   color: var(--text-muted);
   font-size: 12px;
   line-height: 1.5;
-}
-
-.route-section-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  padding-top: 2px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-secondary);
-}
-
-.route-section-title small {
-  color: var(--text-muted);
-  font-size: 11px;
-  font-weight: 700;
 }
 
 .saved-route-list {
@@ -946,6 +967,20 @@ select {
   border-color: var(--state-err-border);
   background: var(--state-err-bg);
   color: var(--state-err);
+}
+
+.route-toolbar .route-toolbar-button {
+  width: 50px;
+  min-width: 0;
+  height: 50px;
+  border-radius: 12px;
+}
+
+.mode-field-actions .mode-action-button {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  border-radius: 12px;
 }
 
 .route-library-panel {
@@ -1249,6 +1284,20 @@ select {
   flex: 1;
 }
 
+.route-start-button {
+  display: grid;
+  gap: 2px;
+  place-items: center;
+  min-height: 52px;
+  line-height: 1.15;
+}
+
+.route-start-button small {
+  font-size: 11px;
+  font-weight: 700;
+  color: oklch(34% 0.026 205 / 0.78);
+}
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -1268,7 +1317,7 @@ select {
   border-radius: 16px;
   border: 1px solid var(--border-medium);
   background: linear-gradient(180deg, var(--surface-modal-a), var(--surface-modal-b));
-  box-shadow: 0 16px 36px oklch(56% 0.02 var(--hue) / 0.18);
+  box-shadow: 0 16px 36px oklch(46% 0.02 var(--hue) / 0.16);
   padding: 20px 18px 16px;
 }
 
@@ -1306,6 +1355,18 @@ select {
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.modal-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.modal-actions > button {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
 }
 
 .modal-body-split {
@@ -1648,6 +1709,58 @@ select {
   color: oklch(99% 0.006 var(--hue));
 }
 
+.waypoint-context-menu {
+  position: absolute;
+  z-index: 850;
+  display: grid;
+  min-width: 126px;
+  padding: 5px;
+  border-radius: 12px;
+  border: 1px solid var(--border-medium);
+  background: oklch(99% 0.005 var(--hue) / 0.96);
+  box-shadow: 0 10px 24px oklch(18% 0.02 var(--hue) / 0.22);
+  transform: translate(8px, 8px);
+}
+
+.waypoint-context-menu button {
+  min-height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.waypoint-context-menu button:hover:not(:disabled) {
+  transform: none;
+  background: oklch(92% 0.010 var(--hue) / 0.86);
+  color: var(--text-primary);
+}
+
+.waypoint-context-menu button.is-danger {
+  color: var(--state-err-text);
+}
+
+.waypoint-context-menu button.is-danger:hover:not(:disabled) {
+  background: oklch(95% 0.025 5 / 0.9);
+}
+
+.waypoint-coordinate-info {
+  display: grid;
+  gap: 2px;
+  margin: 2px 0 4px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: oklch(95% 0.006 var(--hue) / 0.86);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
 .action-row {
   display: flex;
   gap: 10px;
@@ -1668,17 +1781,21 @@ select {
 
 .toast-container {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 8px;
   z-index: 9999;
   pointer-events: none;
+  width: min(360px, calc(100vw - 32px));
 }
 
 .toast {
   max-width: 320px;
+  width: fit-content;
   padding: 12px 15px;
   border-radius: 14px;
   background: var(--surface-toast);

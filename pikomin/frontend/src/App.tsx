@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Download, FolderOpen, Save, Trash2 } from 'lucide-react'
+import { Download, FileInput, FolderOpen, HelpCircle, Lock, Map, MousePointerClick, Save, Trash2 } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -103,17 +103,22 @@ export default function App() {
   const [landmarkSaving, setLandmarkSaving] = useState(false)
   const [editingLandmarkId, setEditingLandmarkId] = useState('')
   const [selectedLandmarkId, setSelectedLandmarkId] = useState('')
-  const [routeNameInput, setRouteNameInput] = useState('')
   const [savedRoutes, setSavedRoutes] = useState<SavedRoute[]>([])
   const [routeSaving, setRouteSaving] = useState(false)
   const [isManageModalOpen, setIsManageModalOpen] = useState(false)
   const [isFlySettingsOpen, setIsFlySettingsOpen] = useState(false)
   const [isLandmarkManagerOpen, setIsLandmarkManagerOpen] = useState(false)
   const [isRouteLibraryOpen, setIsRouteLibraryOpen] = useState(false)
+  const [isSaveRouteModalOpen, setIsSaveRouteModalOpen] = useState(false)
+  const [isDisconnectHelpOpen, setIsDisconnectHelpOpen] = useState(false)
+  const [routeNameInput, setRouteNameInput] = useState('')
   const [flyMode, setFlyMode] = useState<FlyMode>('coordinate')
   const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
   const showToastRef = useRef<(message: string) => void>(() => {})
   const routeImportInputRef = useRef<HTMLInputElement | null>(null)
+  const handleRouteError = useCallback((message: string) => {
+    showToastRef.current(`路徑推送失敗：${message}`)
+  }, [])
 
   const { devices, selectedDevice, selectDevice, isLoading, error } = useDevice()
   const {
@@ -129,9 +134,7 @@ export default function App() {
     resumeRoute,
     stopRoute,
     syncCurrentPosition,
-  } = useRoute(selectedDevice?.id ?? null, myPosition, (message) => {
-    showToastRef.current(`路徑推送失敗：${message}`)
-  })
+  } = useRoute(selectedDevice?.id ?? null, myPosition, handleRouteError)
 
   useEffect(() => {
     let cancelled = false
@@ -289,6 +292,41 @@ export default function App() {
     },
     [addWaypoint, isMapClickArmed, mode, selectedDevice?.id, sendLocationFast, showToast, syncCurrentPosition],
   )
+
+  const handleToggleMapClickArmed = useCallback(() => {
+    setIsMapClickArmed((prev) => {
+      const next = !prev
+      showToast(next ? '點圖生效中' : '點圖已鎖定')
+      return next
+    })
+  }, [showToast])
+
+  const handleRemoveWaypoint = useCallback((index: number) => {
+    removeWaypoint(index)
+    showToast('已移除路徑節點')
+  }, [removeWaypoint, showToast])
+
+  const handleSetWaypointAsStart = useCallback((index: number) => {
+    if (index <= 0 || index >= waypoints.length) return
+    const selected = waypoints[index]
+    replaceWaypoints([
+      selected,
+      ...waypoints.slice(0, index),
+      ...waypoints.slice(index + 1),
+    ])
+    showToast('已設為起點')
+  }, [replaceWaypoints, showToast, waypoints])
+
+  const handleSetWaypointAsEnd = useCallback((index: number) => {
+    if (index < 0 || index >= waypoints.length - 1) return
+    const selected = waypoints[index]
+    replaceWaypoints([
+      ...waypoints.slice(0, index),
+      ...waypoints.slice(index + 1),
+      selected,
+    ])
+    showToast('已設為終點')
+  }, [replaceWaypoints, showToast, waypoints])
 
   const handleStartRoute = useCallback(
     async (speed: number, loop: boolean) => {
@@ -491,14 +529,33 @@ export default function App() {
     setSelectedLandmarkId(target.id)
   }, [savedLandmarks])
 
-  const handleSaveRoute = useCallback(async () => {
+  const handleOpenSaveRouteModal = useCallback(() => {
+    if (waypoints.length < 2) {
+      showToast('路徑至少需要 2 個路徑點')
+      return
+    }
+
+    setRouteNameInput('')
+    setIsSaveRouteModalOpen(true)
+  }, [showToast, waypoints.length])
+
+  const handleCloseSaveRouteModal = useCallback(() => {
+    if (routeSaving) return
+    setIsSaveRouteModalOpen(false)
+    setRouteNameInput('')
+  }, [routeSaving])
+
+  const handleConfirmSaveRoute = useCallback(async () => {
+    if (routeSaving) return
+    if (waypoints.length < 2) {
+      showToast('路徑至少需要 2 個路徑點')
+      setIsSaveRouteModalOpen(false)
+      return
+    }
+
     const name = routeNameInput.trim()
     if (!name) {
       showToast('請輸入路徑名稱')
-      return
-    }
-    if (waypoints.length < 2) {
-      showToast('路徑至少需要 2 個路徑點')
       return
     }
 
@@ -506,6 +563,7 @@ export default function App() {
       setRouteSaving(true)
       const created = await apiClient.createSavedRoute({ name, waypoints })
       setSavedRoutes((prev) => [created, ...prev])
+      setIsSaveRouteModalOpen(false)
       setRouteNameInput('')
       showToast('路徑已儲存')
     } catch (err) {
@@ -513,7 +571,7 @@ export default function App() {
     } finally {
       setRouteSaving(false)
     }
-  }, [routeNameInput, showToast, waypoints])
+  }, [routeNameInput, routeSaving, showToast, waypoints])
 
   const handleLoadSavedRoute = useCallback((route: SavedRoute) => {
     if (routeStatus.state !== 'idle') {
@@ -578,9 +636,7 @@ export default function App() {
     }
   }, [showToast])
 
-  const currentPosition = mode === 'single'
-    ? (myPosition ?? routeStatus.currentPosition)
-    : (routeStatus.currentPosition ?? myPosition)
+  const currentPosition = routeStatus.currentPosition ?? myPosition
   const handleSwitchFlyMode = useCallback((nextMode: FlyMode) => {
     if (nextMode === flyMode) return
     setFlyMode(nextMode)
@@ -615,6 +671,9 @@ export default function App() {
           savedLandmarks={savedLandmarks}
           onMapClick={handleMapClick}
           onWaypointMove={updateWaypoint}
+          onWaypointRemove={handleRemoveWaypoint}
+          onWaypointSetAsStart={handleSetWaypointAsStart}
+          onWaypointSetAsEnd={handleSetWaypointAsEnd}
           canEditWaypoints={mode === 'route' && routeStatus.state === 'idle'}
         />
       </section>
@@ -631,7 +690,20 @@ export default function App() {
                 </p>
                 <h2>
                   {currentPosition ? formatCoordinate(currentPosition) : '尚未設定定位座標'}
-                  {showDisconnectBanner && <span className="inline-alert">未偵測到裝置</span>}
+                  {showDisconnectBanner && (
+                    <span className="disconnect-status">
+                      <span className="inline-alert">未偵測到裝置</span>
+                      <button
+                        className="inline-help-button"
+                        onClick={() => setIsDisconnectHelpOpen(true)}
+                        aria-label="顯示未偵測到裝置指引"
+                        title="顯示未偵測到裝置指引"
+                        type="button"
+                      >
+                        <HelpCircle aria-hidden="true" size={14} strokeWidth={2.4} />
+                      </button>
+                    </span>
+                  )}
                 </h2>
               </div>
             </div>
@@ -646,33 +718,49 @@ export default function App() {
 
             <label className="field">
               <span>操作模式</span>
-              <select
-                value={mode}
-                onChange={(e) => setMode(e.target.value as Mode)}
-                aria-label="操作模式"
-              >
-                <option value="single">單點定位</option>
-                <option value="route">路徑模式</option>
-              </select>
+              <div className="mode-control-row">
+                <select
+                  value={mode}
+                  onChange={(e) => setMode(e.target.value as Mode)}
+                  aria-label="操作模式"
+                >
+                  <option value="single">單點定位</option>
+                  <option value="route">路徑模式</option>
+                </select>
+                <div className="mode-field-actions">
+                  <button
+                    className={`icon-button mode-action-button${isMapClickArmed ? ' is-active' : ''}`}
+                    onClick={handleToggleMapClickArmed}
+                    aria-label={isMapClickArmed ? '關閉點圖生效' : '開啟點圖生效'}
+                    aria-pressed={isMapClickArmed}
+                    title={isMapClickArmed ? '點圖生效中' : '點圖已鎖定'}
+                    type="button"
+                  >
+                    {isMapClickArmed ? (
+                      <MousePointerClick aria-hidden="true" size={16} strokeWidth={2.4} />
+                    ) : (
+                      <Lock aria-hidden="true" size={16} strokeWidth={2.4} />
+                    )}
+                  </button>
+                  <button
+                    className="icon-button mode-action-button"
+                    onClick={() => setIsManageModalOpen(true)}
+                    aria-label="位置設定"
+                    title="位置設定"
+                    type="button"
+                  >
+                    <Map aria-hidden="true" size={16} strokeWidth={2.4} />
+                  </button>
+                </div>
+              </div>
             </label>
             <p className="helper-text" aria-live="polite">
               {!isMapClickArmed
                 ? '地圖點擊目前已鎖定，開啟「點圖生效」後才會寫入位置或新增路徑點'
                 : mode === 'single'
                   ? '點擊地圖直接移動裝置定位'
-                  : '點擊地圖加入路徑點'}
+                : '點擊地圖加入路徑點'}
             </p>
-
-            <div className="action-row">
-              <button
-                className={`secondary-button${isMapClickArmed ? ' is-active' : ''}`}
-                onClick={() => setIsMapClickArmed((prev) => !prev)}
-                aria-pressed={isMapClickArmed}
-              >
-                {isMapClickArmed ? '點圖生效中' : '點圖已鎖定'}
-              </button>
-              <button className="secondary-button" onClick={() => setIsManageModalOpen(true)}>位置設定</button>
-            </div>
 
             <div className="inline-route-panel">
               <RoutePanel
@@ -691,60 +779,49 @@ export default function App() {
         {mode === 'route' && (
           <aside className="route-data-sidebar">
             <section className="route-data-panel">
-              <div className="panel-heading compact">
-                <div>
-                  <p className="panel-kicker">新增路徑點</p>
-                  <h2>路線資料</h2>
-                </div>
-                <div className="route-panel-tools">
-                  <button
-                    className="icon-button"
-                    onClick={() => void handleSaveRoute()}
-                    disabled={routeStatus.state !== 'idle' || waypoints.length < 2 || !routeNameInput.trim() || routeSaving}
-                    aria-label="儲存目前路徑"
-                    title="儲存目前路徑"
-                    type="button"
-                  >
-                    <Save aria-hidden="true" size={16} strokeWidth={2.4} />
-                  </button>
-                  <button
-                    className="icon-button danger"
-                    onClick={clearWaypoints}
-                    disabled={routeStatus.state !== 'idle' || waypoints.length === 0}
-                    aria-label="清除全部路徑點"
-                    title="清除全部路徑點"
-                    type="button"
-                  >
-                    <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
-                  </button>
-                </div>
-              </div>
               {routeStatus.state === 'idle' && (
-                <div className="saved-route-form">
-                  <label className="field">
-                    <span>路徑名稱</span>
-                    <input
-                      value={routeNameInput}
-                      onChange={(e) => setRouteNameInput(e.target.value)}
-                      placeholder="例如：機場巡點 A"
-                    />
-                  </label>
-                  <div className="route-file-actions">
+                <div className="route-toolbar" aria-label="路徑工具">
+                  {waypoints.length > 0 && (
                     <button
-                      className="secondary-button"
-                      onClick={() => setIsRouteLibraryOpen(true)}
+                      className="icon-button route-toolbar-button"
+                      onClick={handleOpenSaveRouteModal}
+                      disabled={routeSaving}
+                      aria-label="儲存目前路徑"
+                      title="儲存目前路徑"
                       type="button"
                     >
-                      讀取路徑
+                      <Save aria-hidden="true" size={16} strokeWidth={2.4} />
                     </button>
+                  )}
+                  <button
+                    className="icon-button route-toolbar-button"
+                    onClick={() => routeImportInputRef.current?.click()}
+                    aria-label="匯入路徑"
+                    title="匯入路徑"
+                    type="button"
+                  >
+                    <FileInput aria-hidden="true" size={16} strokeWidth={2.4} />
+                  </button>
+                  <button
+                    className="icon-button route-toolbar-button"
+                    onClick={() => setIsRouteLibraryOpen(true)}
+                    aria-label="讀取路徑"
+                    title="讀取路徑"
+                    type="button"
+                  >
+                    <FolderOpen aria-hidden="true" size={16} strokeWidth={2.4} />
+                  </button>
+                  {waypoints.length > 0 && (
                     <button
-                      className="secondary-button"
-                      onClick={() => routeImportInputRef.current?.click()}
+                      className="icon-button danger route-toolbar-button"
+                      onClick={clearWaypoints}
+                      aria-label="清除全部路徑點"
+                      title="清除全部路徑點"
                       type="button"
                     >
-                      匯入路徑
+                      <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
                     </button>
-                  </div>
+                  )}
                   <input
                     ref={routeImportInputRef}
                     className="sr-only"
@@ -758,30 +835,6 @@ export default function App() {
                   />
                 </div>
               )}
-              <div className="route-section-title">
-                <span>目前路徑點</span>
-                <small>{waypoints.length} 點</small>
-              </div>
-              <div className="waypoint-list">
-                {waypoints.length === 0 ? (
-                  <p className="route-empty">還沒有路徑點。點擊地圖新增，或讀取已儲存路徑。</p>
-                ) : (
-                  waypoints.map((wp, index) => (
-                    <div key={`${wp.latitude}-${wp.longitude}-${index}`} className="waypoint-item">
-                      <div className="waypoint-index">{index + 1}</div>
-                      <div className="waypoint-text">
-                        <strong>{wp.latitude.toFixed(5)}</strong>
-                        <span>{wp.longitude.toFixed(5)}</span>
-                      </div>
-                      {(routeStatus.state === 'idle') && (
-                        <button className="waypoint-remove" onClick={() => removeWaypoint(index)}>
-                          移除
-                        </button>
-                      )}
-                    </div>
-                  ))
-                )}
-              </div>
             </section>
           </aside>
         )}
@@ -813,6 +866,71 @@ export default function App() {
                 <button className="secondary-button modal-stack-button" onClick={() => setIsFlySettingsOpen(true)}>飛行設定</button>
                 <p className="helper-text">已儲存 {savedLandmarks.length} 個地標，可在飛行設定中直接搜尋。</p>
               </section>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isDisconnectHelpOpen && (
+        <div className="modal-backdrop" onClick={() => setIsDisconnectHelpOpen(false)}>
+          <div className="modal-panel modal-panel-narrow" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>裝置連線指引</h3>
+            </div>
+            <div className="modal-body">
+              <p className="helper-text">未偵測到裝置，請用 USB 連接 iPhone 並確認 tunnel 已啟動。</p>
+              <button
+                className="primary-button"
+                onClick={() => setIsDisconnectHelpOpen(false)}
+                type="button"
+              >
+                知道了
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isSaveRouteModalOpen && (
+        <div className="modal-backdrop" onClick={handleCloseSaveRouteModal}>
+          <div className="modal-panel modal-panel-narrow" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>儲存路徑</h3>
+            </div>
+            <div className="modal-body">
+              <label className="field">
+                <span>路徑名稱</span>
+                <input
+                  value={routeNameInput}
+                  onChange={(e) => setRouteNameInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') void handleConfirmSaveRoute()
+                    if (e.key === 'Escape') handleCloseSaveRouteModal()
+                  }}
+                  placeholder="例如：機場巡點 A"
+                  disabled={routeSaving}
+                  autoFocus
+                />
+              </label>
+              <p className="helper-text">目前路徑共有 {waypoints.length} 個路徑點。</p>
+              <div className="modal-actions">
+                <button
+                  className="ghost-button"
+                  onClick={handleCloseSaveRouteModal}
+                  disabled={routeSaving}
+                  type="button"
+                >
+                  取消
+                </button>
+                <button
+                  className="primary-button"
+                  onClick={() => void handleConfirmSaveRoute()}
+                  disabled={routeSaving || !routeNameInput.trim()}
+                  type="button"
+                >
+                  {routeSaving ? '儲存中...' : '確認儲存'}
+                </button>
+              </div>
             </div>
           </div>
         </div>

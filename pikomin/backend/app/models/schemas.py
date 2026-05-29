@@ -27,7 +27,7 @@ class SetLocationRequest(BaseModel):
 class RouteRequest(BaseModel):
     device_id: str
     waypoints: list[GPSCoordinate] = Field(..., min_length=2)
-    speed: float = Field(..., ge=0.1, le=10.0)  # m/s
+    speed: float = Field(..., ge=0.1, le=15.0)  # m/s
     loop: bool = False
 
 

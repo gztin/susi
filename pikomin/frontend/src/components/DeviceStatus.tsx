@@ -46,7 +46,7 @@ export function DeviceStatus({
   }
 
   if (resolvedDevices.length === 0) {
-    return <div className="helper-text">未偵測到裝置，請用 USB 連接 iPhone 並確認 tunnel 已啟動。</div>
+    return null
   }
 
   return (
