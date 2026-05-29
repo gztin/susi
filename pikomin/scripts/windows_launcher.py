@@ -6,15 +6,12 @@ import webbrowser
 from pathlib import Path
 
 
-def run_detached(cmd, cwd=None):
-    creationflags = 0
-    if os.name == "nt":
-        creationflags = subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS
+def run_detached(cmd, cwd=None, env=None):
+    creationflags = subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0
     return subprocess.Popen(
         cmd,
         cwd=cwd,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
+        env=env,
         creationflags=creationflags,
     )
 
@@ -27,25 +24,24 @@ def main():
         sys.exit(1)
 
     backend_port = os.environ.get("BACKEND_PORT", "5679")
-    frontend_port = os.environ.get("FRONTEND_PORT", "5678")
+    app_url = f"http://localhost:{backend_port}"
+    env = os.environ.copy()
+    env["FRONTEND_DIST_DIR"] = str(base / "frontend" / "dist")
+    env["HOST_BRIDGE_URL"] = ""
+    env["PMD3_PATH"] = str(base / "venv" / "Scripts" / "pymobiledevice3.exe")
 
     # 1) tunneld (TCP)
     run_detached([str(venv_py), "-m", "pymobiledevice3", "remote", "tunneld", "--protocol", "tcp"])
 
-    # 2) backend
+    # 2) backend + bundled frontend
     run_detached(
         [str(venv_py), "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", backend_port],
         cwd=str(base / "backend"),
-    )
-
-    # 3) frontend static server
-    run_detached(
-        [str(venv_py), "-m", "http.server", frontend_port],
-        cwd=str(base / "frontend" / "dist"),
+        env=env,
     )
 
     time.sleep(1.2)
-    webbrowser.open(f"http://localhost:{frontend_port}")
+    webbrowser.open(app_url)
     print("Pikomin started. You can close this window.")
 
 

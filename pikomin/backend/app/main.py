@@ -1,11 +1,15 @@
 from contextlib import asynccontextmanager
 import asyncio
 import logging
+import os
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.routers import devices, location, route, status, rsd, geolocation, tunnel, landmarks
 from app.services.device_manager import DeviceManager
@@ -74,3 +78,47 @@ async def websocket_status(websocket: WebSocket):
             await websocket.receive_text()
     except WebSocketDisconnect:
         await ws_manager.disconnect(websocket)
+
+
+def _frontend_dist_dir() -> Path | None:
+    configured = os.environ.get("FRONTEND_DIST_DIR", "").strip()
+    candidates = []
+    if configured:
+        candidates.append(Path(configured))
+
+    app_dir = Path(__file__).resolve().parents[1]
+    candidates.extend(
+        [
+            app_dir.parent / "frontend" / "dist",
+            app_dir.parent.parent / "frontend" / "dist",
+        ]
+    )
+
+    for candidate in candidates:
+        index_file = candidate / "index.html"
+        if index_file.exists():
+            return candidate
+    return None
+
+
+frontend_dist = _frontend_dist_dir()
+if frontend_dist is not None:
+    app.mount("/assets", StaticFiles(directory=frontend_dist / "assets"), name="assets")
+
+    for asset_name in ("marker-icon.png", "marker-icon-2x.png", "marker-shadow.png"):
+        asset_path = frontend_dist / asset_name
+        if asset_path.exists():
+            route_path = f"/{asset_name}"
+
+            async def serve_asset(path: Path = asset_path) -> FileResponse:
+                return FileResponse(path)
+
+            app.get(route_path, include_in_schema=False)(serve_asset)
+
+    @app.get("/", include_in_schema=False)
+    async def serve_frontend_index() -> FileResponse:
+        return FileResponse(frontend_dist / "index.html")
+
+    @app.get("/{path:path}", include_in_schema=False)
+    async def serve_frontend_fallback(path: str) -> FileResponse:
+        return FileResponse(frontend_dist / "index.html")
