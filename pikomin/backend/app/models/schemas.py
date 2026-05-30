@@ -58,8 +58,16 @@ class ErrorResponse(BaseModel):
 class PostcardNearbyRequest(BaseModel):
     latitude: float = Field(..., ge=-90, le=90)
     longitude: float = Field(..., ge=-180, le=180)
-    radius_m: int = Field(1000, ge=100, le=50000)
-    limit: int = Field(80, ge=1, le=200)
+    radius_m: int = Field(1000, ge=100, le=120000)
+    limit: int = Field(80, ge=1, le=500)
+
+
+class PostcardBoundsRequest(BaseModel):
+    north: float = Field(..., ge=-90, le=90)
+    south: float = Field(..., ge=-90, le=90)
+    east: float = Field(..., ge=-180, le=180)
+    west: float = Field(..., ge=-180, le=180)
+    limit: int = Field(300, ge=1, le=500)
 
 
 class PostcardLandmark(BaseModel):

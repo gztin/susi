@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Church, Download, FileInput, FolderOpen, HelpCircle, Layers3, Lock, Mail, Map, MousePointerClick, Save, Trees, Trash2, Zap } from 'lucide-react'
+import { Church, Download, FileInput, FolderOpen, HelpCircle, Layers3, Loader2, Lock, Mail, Map, MousePointerClick, Radar, Save, Trees, Trash2, Zap } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -104,7 +104,41 @@ function boundsCenter(bounds: MapBounds): GPSCoordinate {
 function boundsRadiusMeters(bounds: MapBounds): number {
   const center = boundsCenter(bounds)
   const corner = { latitude: bounds.north, longitude: bounds.east }
-  return Math.min(Math.max(distanceMeters(center, corner), 500), 50000)
+  return Math.min(Math.max(distanceMeters(center, corner), 500), 120000)
+}
+
+function postcardLimitForRadius(radiusM: number): number {
+  if (radiusM < 1500) return 80
+  if (radiusM < 4000) return 160
+  if (radiusM < 10000) return 260
+  return 300
+}
+
+function formatPostcardFilterLabel(filters: Record<PostcardFilterType, boolean>): string {
+  const enabled = POSTCARD_FILTERS.filter((filter) => filters[filter.id])
+  if (enabled.length === POSTCARD_FILTERS.length) return '明信片'
+  if (enabled.length === 1) return enabled[0].label
+  if (enabled.length === 0) return '明信片'
+  return enabled.map((filter) => filter.label).join('、')
+}
+
+function filterPostcardsInBounds(
+  items: PostcardLandmark[],
+  bounds: MapBounds,
+  filters: Record<PostcardFilterType, boolean>,
+): PostcardLandmark[] {
+  const allEnabled = POSTCARD_FILTERS.every((filter) => filters[filter.id])
+  return items.filter((postcard) => {
+    const type = getPostcardFilterType(postcard)
+    const typeMatched = allEnabled ? true : type !== null && filters[type]
+    return (
+      typeMatched &&
+      postcard.coordinate.latitude <= bounds.north &&
+      postcard.coordinate.latitude >= bounds.south &&
+      postcard.coordinate.longitude <= bounds.east &&
+      postcard.coordinate.longitude >= bounds.west
+    )
+  })
 }
 
 function getPostcardFilterType(postcard: PostcardLandmark): PostcardFilterType | null {
@@ -201,6 +235,7 @@ export default function App() {
   const [mapBounds, setMapBounds] = useState<MapBounds | null>(null)
   const [postcards, setPostcards] = useState<PostcardLandmark[]>([])
   const [postcardFilters, setPostcardFilters] = useState<Record<PostcardFilterType, boolean>>(INITIAL_POSTCARD_FILTERS)
+  const [isScanningPostcards, setIsScanningPostcards] = useState(false)
   const [routeNameInput, setRouteNameInput] = useState('')
   const [flyMode, setFlyMode] = useState<FlyMode>('coordinate')
   const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
@@ -239,34 +274,6 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    if (!showPostcards || !mapBounds) {
-      setPostcards([])
-      return
-    }
-
-    const center = boundsCenter(mapBounds)
-    const radiusM = boundsRadiusMeters(mapBounds)
-    let cancelled = false
-    const timer = window.setTimeout(() => {
-      void apiClient.getNearbyPostcards({
-        latitude: center.latitude,
-        longitude: center.longitude,
-        radiusM,
-        limit: 120,
-      }).then((items) => {
-        if (!cancelled) setPostcards(items)
-      }).catch(() => {
-        if (!cancelled) setPostcards([])
-      })
-    }, 250)
-
-    return () => {
-      cancelled = true
-      window.clearTimeout(timer)
-    }
-  }, [mapBounds, showPostcards])
-
-  useEffect(() => {
     let cancelled = false
     void apiClient.getSavedRoutes()
       .then((items) => {
@@ -302,6 +309,40 @@ export default function App() {
   useEffect(() => {
     showToastRef.current = showToast
   }, [showToast])
+
+  const handleScanPostcards = useCallback(async () => {
+    if (!mapBounds) {
+      showToast('目前還沒有可掃描的地圖範圍')
+      return
+    }
+
+    const radiusM = boundsRadiusMeters(mapBounds)
+    const limit = postcardLimitForRadius(radiusM)
+    setIsScanningPostcards(true)
+    try {
+      const items = await apiClient.getPostcardsInBounds({
+        north: mapBounds.north,
+        south: mapBounds.south,
+        east: mapBounds.east,
+        west: mapBounds.west,
+        limit,
+      })
+      setPostcards(items)
+      const visibleCount = filterPostcardsInBounds(items, mapBounds, postcardFilters).length
+      showToast(`偵測到 ${visibleCount} 個${formatPostcardFilterLabel(postcardFilters)}`)
+    } catch (err) {
+      setPostcards([])
+      showToast(err instanceof Error ? err.message : '明信片掃描失敗')
+    } finally {
+      setIsScanningPostcards(false)
+    }
+  }, [mapBounds, postcardFilters, showToast])
+
+  useEffect(() => {
+    if (!showPostcards) {
+      setPostcards([])
+    }
+  }, [showPostcards])
 
   const resolveActiveDevice = useCallback(async () => {
     const latestDevices = await apiClient.getDevices()
@@ -800,19 +841,7 @@ export default function App() {
   )
   const allPostcardFiltersEnabled = POSTCARD_FILTERS.every((filter) => postcardFilters[filter.id])
   const visiblePostcards = showPostcards && mapBounds
-    ? postcards.filter((postcard) => {
-      const type = getPostcardFilterType(postcard)
-      const typeMatched = allPostcardFiltersEnabled
-        ? true
-        : type !== null && postcardFilters[type]
-      return (
-        typeMatched &&
-        postcard.coordinate.latitude <= mapBounds.north &&
-        postcard.coordinate.latitude >= mapBounds.south &&
-        postcard.coordinate.longitude <= mapBounds.east &&
-        postcard.coordinate.longitude >= mapBounds.west
-      )
-    })
+    ? filterPostcardsInBounds(postcards, mapBounds, postcardFilters)
     : []
 
   return (
@@ -866,12 +895,26 @@ export default function App() {
                 aria-pressed={postcardFilters[filter.id]}
                 aria-label={`${postcardFilters[filter.id] ? '隱藏' : '顯示'}${filter.label}明信片`}
                 title={filter.label}
-                  onClick={() => setPostcardFilters((current) => togglePostcardFilter(current, filter.id))}
-                >
+                onClick={() => setPostcardFilters((current) => togglePostcardFilter(current, filter.id))}
+              >
                 {icon}
               </button>
             )
           })}
+          <button
+            type="button"
+            className={`postcard-filter-chip postcard-scan-button${isScanningPostcards ? ' is-loading' : ''}`}
+            aria-label="掃描目前畫面明信片"
+            title="掃描目前畫面"
+            disabled={isScanningPostcards}
+            onClick={() => void handleScanPostcards()}
+          >
+            {isScanningPostcards ? (
+              <Loader2 aria-hidden="true" size={18} strokeWidth={2.4} />
+            ) : (
+              <Radar aria-hidden="true" size={18} strokeWidth={2.4} />
+            )}
+          </button>
         </div>
       )}
 

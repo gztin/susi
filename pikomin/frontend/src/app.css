@@ -907,6 +907,21 @@ select {
   color: oklch(29% 0.060 72);
 }
 
+.postcard-scan-button {
+  margin-left: 2px;
+  border-color: var(--border-medium);
+}
+
+.postcard-scan-button.is-loading svg {
+  animation: postcard-spin 800ms linear infinite;
+}
+
+@keyframes postcard-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .route-empty {
   margin: 0;
   padding: 12px;

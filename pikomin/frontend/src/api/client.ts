@@ -194,6 +194,43 @@ export const apiClient = {
     }))
   },
 
+  async getPostcardsInBounds(payload: {
+    north: number
+    south: number
+    east: number
+    west: number
+    limit?: number
+  }): Promise<PostcardLandmark[]> {
+    const data = await request<{
+      id: string
+      name: string
+      coordinate: { latitude: number; longitude: number }
+      image_url: string
+      tags: string[]
+      distance_m?: number | null
+      holder_count: number
+    }[]>('/api/postcards/bounds', {
+      method: 'POST',
+      timeoutMs: 24000,
+      body: JSON.stringify({
+        north: payload.north,
+        south: payload.south,
+        east: payload.east,
+        west: payload.west,
+        limit: payload.limit ?? 300,
+      }),
+    })
+    return data.map((postcard) => ({
+      id: postcard.id,
+      name: postcard.name,
+      coordinate: postcard.coordinate,
+      imageUrl: postcard.image_url,
+      tags: postcard.tags,
+      distanceM: postcard.distance_m ?? null,
+      holderCount: postcard.holder_count,
+    }))
+  },
+
 
 
   async getLandmarks(): Promise<{ id: string; name: string; coordinate: { latitude: number; longitude: number }; landmarkType: 'flower' | 'mushroom' }[]> {
