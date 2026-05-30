@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Download, FileInput, FolderOpen, HelpCircle, Lock, Map, MousePointerClick, Save, Trash2 } from 'lucide-react'
+import { Church, Download, FileInput, FolderOpen, HelpCircle, Layers3, Lock, Mail, Map, MousePointerClick, Save, Trees, Trash2, Zap } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -7,10 +7,11 @@ import MapInterface from './components/MapInterface'
 import { RoutePanel } from './components/RoutePanel'
 import { useDevice } from './hooks/useDevice'
 import { useRoute } from './hooks/useRoute'
-import type { GPSCoordinate, SavedLandmark, SavedRoute } from './types'
+import type { GPSCoordinate, PostcardLandmark, SavedLandmark, SavedRoute } from './types'
 
 type Mode = 'single' | 'route'
 type FlyMode = 'coordinate' | 'landmark'
+type PostcardFilterType = 'temple' | 'transformer' | 'church' | 'park'
 
 interface Toast {
   id: number
@@ -22,6 +23,38 @@ interface RouteFilePayload {
   name?: unknown
   exportedAt?: unknown
   waypoints?: unknown
+}
+
+interface MapBounds {
+  north: number
+  south: number
+  east: number
+  west: number
+}
+
+const POSTCARD_FILTERS: { id: PostcardFilterType; label: string; keywords: string[] }[] = [
+  { id: 'temple', label: '廟宇', keywords: ['廟', '宮', '寺', '佛教', '蓮社', '精舍', '聖母', 'temple', 'shrine'] },
+  { id: 'transformer', label: '變電箱', keywords: ['變電箱', '配電箱', '電箱', '電氣箱', '光纖電箱', 'transformer'] },
+  { id: 'church', label: '教堂', keywords: ['教堂', '教會', '基督', '召會', 'church', 'cathedral', 'chapel'] },
+  { id: 'park', label: '公園', keywords: ['公園', '涼亭', '遊戲區', 'park', 'pavilion'] },
+]
+
+const INITIAL_POSTCARD_FILTERS: Record<PostcardFilterType, boolean> = {
+  temple: true,
+  transformer: true,
+  church: true,
+  park: true,
+}
+
+function TempleIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M12 2.5 4 7v2h16V7l-8-4.5Zm-7.5 8A4.4 4.4 0 0 0 8 12.2h8a4.4 4.4 0 0 0 3.5-1.7H21v2H3v-2h1.5ZM5 14h3v5H5v-5Zm5 0h4v5h-1.2v-2.2a.8.8 0 0 0-1.6 0V19H10v-5Zm6 0h3v5h-3v-5ZM3 20h18v2H3v-2Z"
+      />
+    </svg>
+  )
 }
 
 let toastIdCounter = 0
@@ -45,6 +78,59 @@ function parseCoordinateInput(value: string): GPSCoordinate | null {
 function formatCoordinate(coord: GPSCoordinate | null): string {
   if (!coord) return '尚未設定'
   return `${coord.latitude.toFixed(6)}, ${coord.longitude.toFixed(6)}`
+}
+
+function distanceMeters(a: GPSCoordinate, b: GPSCoordinate): number {
+  const earthRadius = 6371000
+  const toRadians = (value: number) => (value * Math.PI) / 180
+  const dLat = toRadians(b.latitude - a.latitude)
+  const dLng = toRadians(b.longitude - a.longitude)
+  const lat1 = toRadians(a.latitude)
+  const lat2 = toRadians(b.latitude)
+  const h = (
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2
+  )
+  return earthRadius * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h))
+}
+
+function boundsCenter(bounds: MapBounds): GPSCoordinate {
+  return {
+    latitude: (bounds.north + bounds.south) / 2,
+    longitude: (bounds.east + bounds.west) / 2,
+  }
+}
+
+function boundsRadiusMeters(bounds: MapBounds): number {
+  const center = boundsCenter(bounds)
+  const corner = { latitude: bounds.north, longitude: bounds.east }
+  return Math.min(Math.max(distanceMeters(center, corner), 500), 50000)
+}
+
+function getPostcardFilterType(postcard: PostcardLandmark): PostcardFilterType | null {
+  const haystack = `${postcard.name} ${postcard.tags.join(' ')}`.toLowerCase()
+  return POSTCARD_FILTERS.find((filter) => (
+    filter.keywords.some((keyword) => haystack.includes(keyword.toLowerCase()))
+  ))?.id ?? null
+}
+
+function togglePostcardFilter(
+  current: Record<PostcardFilterType, boolean>,
+  target: PostcardFilterType,
+): Record<PostcardFilterType, boolean> {
+  const allEnabled = POSTCARD_FILTERS.every((filter) => current[filter.id])
+  if (allEnabled) {
+    return {
+      temple: target === 'temple',
+      transformer: target === 'transformer',
+      church: target === 'church',
+      park: target === 'park',
+    }
+  }
+  return {
+    ...current,
+    [target]: !current[target],
+  }
 }
 
 function isValidCoordinate(value: unknown): value is GPSCoordinate {
@@ -111,6 +197,10 @@ export default function App() {
   const [isRouteLibraryOpen, setIsRouteLibraryOpen] = useState(false)
   const [isSaveRouteModalOpen, setIsSaveRouteModalOpen] = useState(false)
   const [isDisconnectHelpOpen, setIsDisconnectHelpOpen] = useState(false)
+  const [showPostcards, setShowPostcards] = useState(false)
+  const [mapBounds, setMapBounds] = useState<MapBounds | null>(null)
+  const [postcards, setPostcards] = useState<PostcardLandmark[]>([])
+  const [postcardFilters, setPostcardFilters] = useState<Record<PostcardFilterType, boolean>>(INITIAL_POSTCARD_FILTERS)
   const [routeNameInput, setRouteNameInput] = useState('')
   const [flyMode, setFlyMode] = useState<FlyMode>('coordinate')
   const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
@@ -147,6 +237,34 @@ export default function App() {
       })
     return () => { cancelled = true }
   }, [])
+
+  useEffect(() => {
+    if (!showPostcards || !mapBounds) {
+      setPostcards([])
+      return
+    }
+
+    const center = boundsCenter(mapBounds)
+    const radiusM = boundsRadiusMeters(mapBounds)
+    let cancelled = false
+    const timer = window.setTimeout(() => {
+      void apiClient.getNearbyPostcards({
+        latitude: center.latitude,
+        longitude: center.longitude,
+        radiusM,
+        limit: 120,
+      }).then((items) => {
+        if (!cancelled) setPostcards(items)
+      }).catch(() => {
+        if (!cancelled) setPostcards([])
+      })
+    }, 250)
+
+    return () => {
+      cancelled = true
+      window.clearTimeout(timer)
+    }
+  }, [mapBounds, showPostcards])
 
   useEffect(() => {
     let cancelled = false
@@ -522,6 +640,23 @@ export default function App() {
     }
   }, [editingLandmarkId, handleCancelLandmarkEdit, selectedLandmarkId, showToast])
 
+  const handleAddPostcardLandmark = useCallback(async (postcard: PostcardLandmark) => {
+    try {
+      const created = await apiClient.createLandmark({
+        name: postcard.name,
+        coordinate: postcard.coordinate,
+        landmarkType: 'flower',
+      })
+      setSavedLandmarks((prev) => {
+        if (prev.some((landmark) => landmark.id === created.id)) return prev
+        return [created, ...prev]
+      })
+      showToast(`已加入地標：${postcard.name}`)
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : '加入地標失敗')
+    }
+  }, [showToast])
+
   const handleSelectLandmarkToFly = useCallback((landmarkName: string) => {
     setDestinationInput(landmarkName)
     const target = savedLandmarks.find((item) => item.name === landmarkName)
@@ -659,6 +794,26 @@ export default function App() {
     const coordMatched = coordText.includes(normalizedSearchKeyword)
     return typeMatched && (nameMatched || coordMatched)
   })
+  const canEditRouteWaypoints = mode === 'route' && (
+    routeStatus.state === 'idle' ||
+    routeStatus.state === 'paused'
+  )
+  const allPostcardFiltersEnabled = POSTCARD_FILTERS.every((filter) => postcardFilters[filter.id])
+  const visiblePostcards = showPostcards && mapBounds
+    ? postcards.filter((postcard) => {
+      const type = getPostcardFilterType(postcard)
+      const typeMatched = allPostcardFiltersEnabled
+        ? true
+        : type !== null && postcardFilters[type]
+      return (
+        typeMatched &&
+        postcard.coordinate.latitude <= mapBounds.north &&
+        postcard.coordinate.latitude >= mapBounds.south &&
+        postcard.coordinate.longitude <= mapBounds.east &&
+        postcard.coordinate.longitude >= mapBounds.west
+      )
+    })
+    : []
 
   return (
     <div className="app-shell">
@@ -669,17 +824,60 @@ export default function App() {
           viewTarget={viewTarget}
           waypoints={waypoints}
           savedLandmarks={savedLandmarks}
+          postcardLandmarks={visiblePostcards}
+          showPostcards={showPostcards}
+          onViewportChange={setMapBounds}
+          onPostcardAddLandmark={handleAddPostcardLandmark}
+          onPostcardAction={showToast}
           onMapClick={handleMapClick}
           onWaypointMove={updateWaypoint}
           onWaypointRemove={handleRemoveWaypoint}
           onWaypointSetAsStart={handleSetWaypointAsStart}
           onWaypointSetAsEnd={handleSetWaypointAsEnd}
-          canEditWaypoints={mode === 'route' && routeStatus.state === 'idle'}
+          canEditWaypoints={canEditRouteWaypoints}
         />
       </section>
 
+      {showPostcards && (
+        <div className="postcard-filter-toolbar" aria-label="明信片類型篩選">
+          <button
+            type="button"
+            className={`postcard-filter-chip${allPostcardFiltersEnabled ? ' is-active' : ''}`}
+            aria-pressed={allPostcardFiltersEnabled}
+            aria-label="顯示全部類型明信片"
+            title="全部"
+            onClick={() => setPostcardFilters(INITIAL_POSTCARD_FILTERS)}
+          >
+            <Layers3 aria-hidden="true" size={18} strokeWidth={2.4} />
+          </button>
+          {POSTCARD_FILTERS.map((filter) => {
+            const icon = filter.id === 'temple'
+              ? <TempleIcon />
+              : filter.id === 'transformer'
+                ? <Zap aria-hidden="true" size={18} strokeWidth={2.5} />
+                : filter.id === 'church'
+                  ? <Church aria-hidden="true" size={18} strokeWidth={2.4} />
+                  : <Trees aria-hidden="true" size={18} strokeWidth={2.4} />
+            return (
+              <button
+                key={filter.id}
+                type="button"
+                className={`postcard-filter-chip${postcardFilters[filter.id] ? ' is-active' : ''}`}
+                aria-pressed={postcardFilters[filter.id]}
+                aria-label={`${postcardFilters[filter.id] ? '隱藏' : '顯示'}${filter.label}明信片`}
+                title={filter.label}
+                  onClick={() => setPostcardFilters((current) => togglePostcardFilter(current, filter.id))}
+                >
+                {icon}
+              </button>
+            )
+          })}
+        </div>
+      )}
+
       <div className="overlay-shell">
         <main className="workspace workspace-overlay">
+          {!showPostcards && (
           <aside className="sidebar sidebar-floating">
           <section className="panel panel-hero">
             <div className="panel-heading">
@@ -774,70 +972,81 @@ export default function App() {
             </div>
           </section>
           </aside>
+          )}
         </main>
 
-        {mode === 'route' && (
-          <aside className="route-data-sidebar">
-            <section className="route-data-panel">
-              {routeStatus.state === 'idle' && (
-                <div className="route-toolbar" aria-label="路徑工具">
-                  {waypoints.length > 0 && (
+        <aside className="route-data-sidebar">
+          <section className="route-data-panel">
+            <div className="route-toolbar" aria-label="路徑工具">
+              <button
+                className={`icon-button route-toolbar-button${showPostcards ? ' is-active' : ''}`}
+                onClick={() => setShowPostcards((current) => !current)}
+                aria-label={showPostcards ? `關閉明信片圖層，目前顯示 ${visiblePostcards.length} 張` : '開啟明信片圖層'}
+                aria-pressed={showPostcards}
+                title={showPostcards ? `明信片：${visiblePostcards.length} 張` : '明信片圖層'}
+                type="button"
+              >
+                <Mail aria-hidden="true" size={28} strokeWidth={3} />
+              </button>
+              {mode === 'route' && routeStatus.state === 'idle' && (
+                  <>
+                    {waypoints.length > 0 && (
+                      <button
+                        className="icon-button route-toolbar-button"
+                        onClick={handleOpenSaveRouteModal}
+                        disabled={routeSaving}
+                        aria-label="儲存目前路徑"
+                        title="儲存目前路徑"
+                        type="button"
+                      >
+                        <Save aria-hidden="true" size={16} strokeWidth={2.4} />
+                      </button>
+                    )}
                     <button
                       className="icon-button route-toolbar-button"
-                      onClick={handleOpenSaveRouteModal}
-                      disabled={routeSaving}
-                      aria-label="儲存目前路徑"
-                      title="儲存目前路徑"
+                      onClick={() => routeImportInputRef.current?.click()}
+                      aria-label="匯入路徑"
+                      title="匯入路徑"
                       type="button"
                     >
-                      <Save aria-hidden="true" size={16} strokeWidth={2.4} />
+                      <FileInput aria-hidden="true" size={16} strokeWidth={2.4} />
                     </button>
-                  )}
-                  <button
-                    className="icon-button route-toolbar-button"
-                    onClick={() => routeImportInputRef.current?.click()}
-                    aria-label="匯入路徑"
-                    title="匯入路徑"
-                    type="button"
-                  >
-                    <FileInput aria-hidden="true" size={16} strokeWidth={2.4} />
-                  </button>
-                  <button
-                    className="icon-button route-toolbar-button"
-                    onClick={() => setIsRouteLibraryOpen(true)}
-                    aria-label="讀取路徑"
-                    title="讀取路徑"
-                    type="button"
-                  >
-                    <FolderOpen aria-hidden="true" size={16} strokeWidth={2.4} />
-                  </button>
-                  {waypoints.length > 0 && (
                     <button
-                      className="icon-button danger route-toolbar-button"
-                      onClick={clearWaypoints}
-                      aria-label="清除全部路徑點"
-                      title="清除全部路徑點"
+                      className="icon-button route-toolbar-button"
+                      onClick={() => setIsRouteLibraryOpen(true)}
+                      aria-label="讀取路徑"
+                      title="讀取路徑"
                       type="button"
                     >
-                      <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
+                      <FolderOpen aria-hidden="true" size={16} strokeWidth={2.4} />
                     </button>
-                  )}
-                  <input
-                    ref={routeImportInputRef}
-                    className="sr-only"
-                    type="file"
-                    accept="application/json,.json"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0] ?? null
-                      void handleImportRouteFile(file)
-                      e.currentTarget.value = ''
-                    }}
-                  />
-                </div>
+                    {waypoints.length > 0 && (
+                      <button
+                        className="icon-button danger route-toolbar-button"
+                        onClick={clearWaypoints}
+                        aria-label="清除全部路徑點"
+                        title="清除全部路徑點"
+                        type="button"
+                      >
+                        <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
+                      </button>
+                    )}
+                  </>
               )}
-            </section>
-          </aside>
-        )}
+              <input
+                ref={routeImportInputRef}
+                className="sr-only"
+                type="file"
+                accept="application/json,.json"
+                onChange={(e) => {
+                  const file = e.target.files?.[0] ?? null
+                  void handleImportRouteFile(file)
+                  e.currentTarget.value = ''
+                }}
+              />
+            </div>
+          </section>
+        </aside>
       </div>
 
       <div className="toast-container" role="status" aria-live="polite" aria-atomic="false">

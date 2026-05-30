@@ -441,13 +441,18 @@
             </tr>
             <tr>
               <td>種花/路線</td>
-              <td>切到路線模式，依序點選路徑點，設定速度後開始。</td>
-              <td>路線移動會連續送定位。手機斷線或 tunnel 失效時會停止。</td>
+              <td>切到路線模式，依序點選路徑點，按「開始種花」後以 15 km/h 移動。</td>
+              <td>會從目前位置銜接到第一個路徑點。手機斷線或 tunnel 失效時會停止。</td>
             </tr>
             <tr>
               <td>地標管理</td>
               <td>儲存常用座標，之後可快速飛到該位置。</td>
               <td>地標資料存放在可攜版資料夾內，搬移資料夾時會一起帶走。</td>
+            </tr>
+            <tr>
+              <td>明信片圖層</td>
+              <td>點右側工具列的明信片圖示，瀏覽目前地圖視窗內的 Pikmin Atlas 明信片。</td>
+              <td>上方可用圖示篩選全部、廟宇、變電箱、教堂與公園。右鍵明信片可複製座標或儲存為花點地標。</td>
             </tr>
           </tbody>
         </table>
@@ -466,7 +471,7 @@
           <tbody>
             <tr>
               <td><code>logs\backend.log</code></td>
-              <td>API 請求紀錄，例如裝置、定位、路線請求。</td>
+              <td>API 請求紀錄，例如裝置、定位、路線與明信片代理請求。</td>
             </tr>
             <tr>
               <td><code>logs\backend.err.log</code></td>
@@ -479,6 +484,10 @@
             <tr>
               <td><code>logs\tunneld.err.log</code></td>
               <td>tunnel 權限、裝置連線與 RSD 錯誤。</td>
+            </tr>
+            <tr>
+              <td><code>logs\host_bridge.log</code></td>
+              <td>host bridge 定位推送紀錄。正常情況會看到 <code>LocationSimulation.set OK</code>。</td>
             </tr>
             <tr>
               <td><code>logs\pids.json</code></td>
@@ -500,8 +509,16 @@
             <p>代表 tunnel 沒成功。重新執行 <code>run.bat</code> 並允許系統管理員權限，確認手機解鎖。</p>
           </div>
           <div class="callout">
+            <strong class="warn">種花被拉回或很快停止</strong>
+            <p>確認手機未鎖定、tunnel 持續在線，並查看 <code>logs\host_bridge.log</code>。新版會從目前位置銜接第一個路徑點，若仍異常請重新執行 <code>run.bat</code>。</p>
+          </div>
+          <div class="callout">
             <strong class="warn">Windows 防火牆提示</strong>
             <p>允許本機 server 即可。Pikomin 使用 <code>localhost:5679</code> 提供本機網頁與 API。</p>
+          </div>
+          <div class="callout">
+            <strong class="warn">明信片沒有出現</strong>
+            <p>明信片需要網路連到 Pikmin Atlas 與圖片來源。請確認已開啟明信片圖層，移動或縮放地圖後等待資料更新。</p>
           </div>
           <div class="callout">
             <strong class="warn">執行後想關掉</strong>

@@ -53,3 +53,20 @@ class StatusUpdate(BaseModel):
 class ErrorResponse(BaseModel):
     error: str
     code: str  # "DEVICE_NOT_FOUND" | "LOCATION_SET_FAILED" | "INVALID_COORDINATE" 等
+
+
+class PostcardNearbyRequest(BaseModel):
+    latitude: float = Field(..., ge=-90, le=90)
+    longitude: float = Field(..., ge=-180, le=180)
+    radius_m: int = Field(1000, ge=100, le=50000)
+    limit: int = Field(80, ge=1, le=200)
+
+
+class PostcardLandmark(BaseModel):
+    id: str
+    name: str
+    coordinate: GPSCoordinate
+    image_url: str
+    tags: list[str] = []
+    distance_m: float | None = None
+    holder_count: int = 0

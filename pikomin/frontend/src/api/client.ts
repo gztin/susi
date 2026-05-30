@@ -5,6 +5,7 @@ import type {
   RouteStatus,
   StatusUpdate,
   SavedRoute,
+  PostcardLandmark,
 } from '../types'
 
 const BASE_URL = (typeof import.meta !== 'undefined' && (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL) || ''
@@ -156,6 +157,41 @@ export const apiClient = {
 
   async getGeolocation(): Promise<{ latitude: number; longitude: number; city: string }> {
     return request('/api/geolocation')
+  },
+
+  async getNearbyPostcards(payload: {
+    latitude: number
+    longitude: number
+    radiusM: number
+    limit?: number
+  }): Promise<PostcardLandmark[]> {
+    const data = await request<{
+      id: string
+      name: string
+      coordinate: { latitude: number; longitude: number }
+      image_url: string
+      tags: string[]
+      distance_m?: number | null
+      holder_count: number
+    }[]>('/api/postcards/nearby', {
+      method: 'POST',
+      timeoutMs: 18000,
+      body: JSON.stringify({
+        latitude: payload.latitude,
+        longitude: payload.longitude,
+        radius_m: Math.round(payload.radiusM),
+        limit: payload.limit ?? 120,
+      }),
+    })
+    return data.map((postcard) => ({
+      id: postcard.id,
+      name: postcard.name,
+      coordinate: postcard.coordinate,
+      imageUrl: postcard.image_url,
+      tags: postcard.tags,
+      distanceM: postcard.distance_m ?? null,
+      holderCount: postcard.holder_count,
+    }))
   },
 
 

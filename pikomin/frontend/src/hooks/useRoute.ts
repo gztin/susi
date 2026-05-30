@@ -8,6 +8,11 @@ const INITIAL_ROUTE_STATUS: RouteStatus = {
   progress: 0,
 }
 
+interface ActiveRouteOptions {
+  speed: number
+  loop: boolean
+}
+
 export function useRoute(
   deviceId: string | null,
   initialPosition?: GPSCoordinate | null,
@@ -31,6 +36,7 @@ export function useRoute(
   const [routeStatus, setRouteStatus] = useState<RouteStatus>(INITIAL_ROUTE_STATUS)
   const currentPositionRef = useRef<GPSCoordinate | null>(initialPosition ?? null)
   const lastWsPositionAtRef = useRef(0)
+  const activeRouteOptionsRef = useRef<ActiveRouteOptions | null>(null)
 
   useEffect(() => {
     if (initialPosition && !currentPositionRef.current) {
@@ -154,6 +160,7 @@ export function useRoute(
     async (speed: number, loop: boolean) => {
       if (!deviceId) throw new Error('No device selected')
       await apiClient.startRoute({ deviceId, waypoints, speed, loop })
+      activeRouteOptionsRef.current = { speed, loop }
       setRouteStatus((prev) => ({ ...prev, state: 'moving', progress: 0 }))
     },
     [deviceId, waypoints],
@@ -161,20 +168,45 @@ export function useRoute(
 
   const pauseRoute = useCallback(async () => {
     await apiClient.pauseRoute()
+    setRouteStatus((prev) => ({ ...prev, state: 'paused' }))
   }, [])
 
-  const resumeRoute = useCallback(async () => {
-    await apiClient.resumeRoute()
-  }, [])
+  const resumeRoute = useCallback(
+    async () => {
+      if (routeStatus.state === 'paused') {
+        if (!deviceId) throw new Error('No device selected')
+        if (waypoints.length < 2) throw new Error('路徑點至少需要 2 個')
+
+        const options = activeRouteOptionsRef.current
+        if (options) {
+          await apiClient.stopRoute()
+          await apiClient.startRoute({
+            deviceId,
+            waypoints,
+            speed: options.speed,
+            loop: options.loop,
+          })
+          setRouteStatus((prev) => ({ ...prev, state: 'moving', progress: 0 }))
+          return
+        }
+      }
+
+      await apiClient.resumeRoute()
+      setRouteStatus((prev) => ({ ...prev, state: 'moving' }))
+    },
+    [deviceId, routeStatus.state, waypoints],
+  )
 
   const stopRoute = useCallback(async () => {
     await apiClient.stopRoute()
+    activeRouteOptionsRef.current = null
     setRouteStatus((prev) => ({ ...prev, state: 'idle', progress: 0 }))
   }, [])
 
   const resetLocation = useCallback(async () => {
     if (!deviceId) throw new Error('No device selected')
     await apiClient.resetLocation(deviceId)
+    activeRouteOptionsRef.current = null
     setRouteStatus((prev) => ({ ...prev, currentPosition: null, state: 'idle', progress: 0 }))
     currentPositionRef.current = null
   }, [deviceId])
