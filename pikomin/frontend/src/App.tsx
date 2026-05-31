@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Church, Download, FileInput, FolderOpen, HelpCircle, Layers3, Loader2, Lock, Mail, Map, MousePointerClick, Radar, Save, Trees, Trash2, Zap } from 'lucide-react'
+import { Church, Download, FileInput, FolderOpen, HelpCircle, Layers3, Loader2, Lock, Mail, Map, MousePointerClick, Pencil, Radar, Save, Trees, Trash2, Zap } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -11,6 +11,7 @@ import type { GPSCoordinate, PostcardLandmark, SavedLandmark, SavedRoute } from 
 
 type Mode = 'single' | 'route'
 type FlyMode = 'coordinate' | 'landmark'
+type ManagerTab = 'landmarks' | 'routes'
 type PostcardFilterType = 'temple' | 'transformer' | 'church' | 'park'
 
 interface Toast {
@@ -23,6 +24,14 @@ interface RouteFilePayload {
   name?: unknown
   exportedAt?: unknown
   waypoints?: unknown
+}
+
+interface LandmarkFilePayload {
+  version?: unknown
+  name?: unknown
+  exportedAt?: unknown
+  coordinate?: unknown
+  landmarkType?: unknown
 }
 
 interface MapBounds {
@@ -199,6 +208,28 @@ function normalizeImportedRoute(payload: RouteFilePayload): { name: string; wayp
   return { name, waypoints }
 }
 
+function normalizeImportedLandmark(payload: LandmarkFilePayload): {
+  name: string
+  coordinate: GPSCoordinate
+  landmarkType: 'flower' | 'mushroom'
+} {
+  const name = typeof payload.name === 'string' ? payload.name.trim() : ''
+  if (!name) {
+    throw new Error('地標檔案格式錯誤，缺少地標名稱')
+  }
+  if (!isValidCoordinate(payload.coordinate)) {
+    throw new Error('地標檔案格式錯誤，座標必須包含有效 latitude 與 longitude')
+  }
+  if (payload.landmarkType !== 'flower' && payload.landmarkType !== 'mushroom') {
+    throw new Error('地標檔案格式錯誤，地標類型必須是 flower 或 mushroom')
+  }
+  return {
+    name,
+    coordinate: payload.coordinate,
+    landmarkType: payload.landmarkType,
+  }
+}
+
 function sanitizeFilename(value: string): string {
   const normalized = value.trim().replace(/[\\/:*?"<>|]+/g, '-').replace(/\s+/g, '-')
   return normalized || '未命名路徑'
@@ -231,6 +262,7 @@ export default function App() {
   const [isRouteLibraryOpen, setIsRouteLibraryOpen] = useState(false)
   const [isSaveRouteModalOpen, setIsSaveRouteModalOpen] = useState(false)
   const [isDisconnectHelpOpen, setIsDisconnectHelpOpen] = useState(false)
+  const [managerTab, setManagerTab] = useState<ManagerTab>('landmarks')
   const [showPostcards, setShowPostcards] = useState(false)
   const [mapBounds, setMapBounds] = useState<MapBounds | null>(null)
   const [postcards, setPostcards] = useState<PostcardLandmark[]>([])
@@ -241,6 +273,7 @@ export default function App() {
   const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
   const showToastRef = useRef<(message: string) => void>(() => {})
   const routeImportInputRef = useRef<HTMLInputElement | null>(null)
+  const landmarkImportInputRef = useRef<HTMLInputElement | null>(null)
   const handleRouteError = useCallback((message: string) => {
     showToastRef.current(`路徑推送失敗：${message}`)
   }, [])
@@ -681,6 +714,49 @@ export default function App() {
     }
   }, [editingLandmarkId, handleCancelLandmarkEdit, selectedLandmarkId, showToast])
 
+  const handleExportLandmark = useCallback((landmark: SavedLandmark) => {
+    const payload = {
+      version: 1,
+      name: landmark.name,
+      exportedAt: new Date().toISOString(),
+      coordinate: landmark.coordinate,
+      landmarkType: landmark.landmarkType,
+    }
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `pikomin-landmark-${sanitizeFilename(landmark.name)}.json`
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+    URL.revokeObjectURL(url)
+    showToast(`已匯出地標：${landmark.name}`)
+  }, [showToast])
+
+  const handleImportLandmarkFile = useCallback(async (file: File | null) => {
+    if (!file) return
+    if (!file.name.toLowerCase().endsWith('.json')) {
+      showToast('檔案格式錯誤，請選擇地標 JSON 檔')
+      return
+    }
+
+    try {
+      const text = await file.text()
+      const payload = JSON.parse(text) as LandmarkFilePayload
+      const imported = normalizeImportedLandmark(payload)
+      const created = await apiClient.createLandmark(imported)
+      setSavedLandmarks((prev) => [created, ...prev])
+      showToast(`地標已匯入：${created.name}`)
+    } catch (err) {
+      if (err instanceof SyntaxError) {
+        showToast('檔案格式錯誤，請選擇地標 JSON 檔')
+        return
+      }
+      showToast(err instanceof Error ? err.message : '匯入地標失敗')
+    }
+  }, [showToast])
+
   const handleAddPostcardLandmark = useCallback(async (postcard: PostcardLandmark) => {
     try {
       const created = await apiClient.createLandmark({
@@ -1114,7 +1190,15 @@ export default function App() {
                 <button className="primary-button" onClick={handleLocateMe} disabled={isLocating}>
                   {isLocating ? '定位中...' : '重新取得目前位置'}
                 </button>
-                <button className="ghost-button modal-stack-button" onClick={() => setIsLandmarkManagerOpen(true)}>地標管理</button>
+                <button
+                  className="ghost-button modal-stack-button"
+                  onClick={() => {
+                    setManagerTab('landmarks')
+                    setIsLandmarkManagerOpen(true)
+                  }}
+                >
+                  地標 / 路徑管理
+                </button>
                 <button className="secondary-button modal-stack-button" onClick={() => setIsFlySettingsOpen(true)}>飛行設定</button>
                 <p className="helper-text">已儲存 {savedLandmarks.length} 個地標，可在飛行設定中直接搜尋。</p>
               </section>
@@ -1356,124 +1440,223 @@ export default function App() {
       {isLandmarkManagerOpen && (
         <div className="modal-backdrop" onClick={() => setIsLandmarkManagerOpen(false)}>
           <div className="modal-panel landmark-manager-panel" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header"><h3>地標管理</h3></div>
-            <div className="modal-body modal-body-split landmark-manager-layout">
-              <section className="modal-section">
-                {editingLandmarkId && <p className="helper-text editing-hint">正在編輯已儲存地標</p>}
-                <label className="field">
-                  <span>名稱</span>
-                  <input
-                    value={landmarkNameInput}
-                    onChange={(e) => setLandmarkNameInput(e.target.value)}
-                    onBlur={() => setLandmarkFormTouched(true)}
-                    placeholder="例如：台北車站"
-                    aria-invalid={Boolean(nameError)}
-                  />
-                  {nameError && <p className="helper-text helper-text--error">{nameError}</p>}
-                </label>
-                <label className="field">
-                  <span>座標</span>
-                  <div className="field-inline flow-row">
+            <div className="modal-header manager-modal-header">
+              <h3>地標 / 路徑管理</h3>
+              <div className="segmented-control manager-tabs" role="tablist" aria-label="管理類型">
+                <button
+                  type="button"
+                  className={managerTab === 'landmarks' ? 'is-active' : ''}
+                  onClick={() => setManagerTab('landmarks')}
+                >
+                  地標
+                </button>
+                <button
+                  type="button"
+                  className={managerTab === 'routes' ? 'is-active' : ''}
+                  onClick={() => setManagerTab('routes')}
+                >
+                  路徑
+                </button>
+              </div>
+            </div>
+            {managerTab === 'landmarks' ? (
+              <div className="modal-body modal-body-split landmark-manager-layout">
+                <section className="modal-section">
+                  {editingLandmarkId && <p className="helper-text editing-hint">正在編輯已儲存地標</p>}
+                  <label className="field">
+                    <span>名稱</span>
                     <input
-                      value={landmarkCoordInput}
-                      onChange={(e) => setLandmarkCoordInput(e.target.value)}
+                      value={landmarkNameInput}
+                      onChange={(e) => setLandmarkNameInput(e.target.value)}
                       onBlur={() => setLandmarkFormTouched(true)}
-                      placeholder="25.047924, 121.517081"
-                      aria-invalid={Boolean(coordError)}
+                      placeholder="例如：台北車站"
+                      aria-invalid={Boolean(nameError)}
                     />
-                    <button className="secondary-button" onClick={() => void handleSaveLandmark()} disabled={!isLandmarkFormValid || landmarkSaving}>
-                      {landmarkSaving ? (editingLandmarkId ? '更新中' : '儲存中') : (editingLandmarkId ? '更新' : '儲存')}
-                    </button>
-                  </div>
-                  {coordError && <p className="helper-text helper-text--error">{coordError}</p>}
-                </label>
-                <label className="field">
-                  <span>地標類型</span>
-                  <select value={landmarkTypeInput} onChange={(e) => setLandmarkTypeInput(e.target.value as 'flower' | 'mushroom')}>
-                    <option value="mushroom">菇點</option>
-                    <option value="flower">花點</option>
-                  </select>
-                </label>
-                {editingLandmarkId && (
-                  <button className="ghost-button modal-stack-button" onClick={handleCancelLandmarkEdit}>
-                    取消編輯
-                  </button>
-                )}
-                <p className="helper-text">{editingLandmarkId ? '更新成功後欄位會自動清空，右側清單會同步更新。' : '儲存成功後欄位會自動清空，點選地標可帶入目的地。'}</p>
-              </section>
-
-              <section className="modal-section landmark-manager-list-panel">
-                <div className="landmark-toolbar">
-                  <label className="field landmark-search-field">
-                    <span>搜尋地標</span>
-                    <input
-                      value={landmarkSearchInput}
-                      onChange={(e) => setLandmarkSearchInput(e.target.value)}
-                      placeholder="輸入名稱或座標"
-                    />
+                    {nameError && <p className="helper-text helper-text--error">{nameError}</p>}
                   </label>
-                  <div className="field">
-                    <span>篩選</span>
-                    <div className="segmented-control" role="tablist" aria-label="地標管理類型篩選">
-                      <button
-                        type="button"
-                        className={landmarkTypeFilter === 'all' ? 'is-active' : ''}
-                        onClick={() => setLandmarkTypeFilter('all')}
-                      >
-                        全部
-                      </button>
-                      <button
-                        type="button"
-                        className={landmarkTypeFilter === 'flower' ? 'is-active' : ''}
-                        onClick={() => setLandmarkTypeFilter('flower')}
-                      >
-                        花點
-                      </button>
-                      <button
-                        type="button"
-                        className={landmarkTypeFilter === 'mushroom' ? 'is-active' : ''}
-                        onClick={() => setLandmarkTypeFilter('mushroom')}
-                      >
-                        菇點
+                  <label className="field">
+                    <span>座標</span>
+                    <div className="field-inline flow-row">
+                      <input
+                        value={landmarkCoordInput}
+                        onChange={(e) => setLandmarkCoordInput(e.target.value)}
+                        onBlur={() => setLandmarkFormTouched(true)}
+                        placeholder="25.047924, 121.517081"
+                        aria-invalid={Boolean(coordError)}
+                      />
+                      <button className="secondary-button" onClick={() => void handleSaveLandmark()} disabled={!isLandmarkFormValid || landmarkSaving}>
+                        {landmarkSaving ? (editingLandmarkId ? '更新中' : '儲存中') : (editingLandmarkId ? '更新' : '儲存')}
                       </button>
                     </div>
-                  </div>
-                </div>
-                <div className="landmark-section-head">
-                  <span>已儲存地標</span>
-                  <small>{filteredLandmarks.length} / {savedLandmarks.length} 筆</small>
-                </div>
-                {savedLandmarks.length === 0 ? (
-                  <p className="landmark-empty">目前還沒有地標，先在左側新增一筆。</p>
-                ) : filteredLandmarks.length === 0 ? (
-                  <p className="landmark-empty">找不到符合條件的地標。</p>
-                ) : (
-                  <div className="landmark-edit-list">
-                    {filteredLandmarks.map((landmark) => (
-                      <div key={landmark.id} className={`landmark-edit-item${editingLandmarkId === landmark.id ? ' is-editing' : ''}`}>
-                        <button className="landmark-edit-main" onClick={() => handleSelectLandmarkToFly(landmark.name)} type="button">
-                          <strong>{landmark.name}</strong>
-                          <span>{formatCoordinate(landmark.coordinate)}</span>
-                          <small>{landmark.landmarkType === 'flower' ? '花點' : '菇點'}</small>
+                    {coordError && <p className="helper-text helper-text--error">{coordError}</p>}
+                  </label>
+                  <label className="field">
+                    <span>地標類型</span>
+                    <select value={landmarkTypeInput} onChange={(e) => setLandmarkTypeInput(e.target.value as 'flower' | 'mushroom')}>
+                      <option value="mushroom">菇點</option>
+                      <option value="flower">花點</option>
+                    </select>
+                  </label>
+                  <button
+                    className="secondary-button modal-stack-button landmark-import-button"
+                    onClick={() => landmarkImportInputRef.current?.click()}
+                    type="button"
+                  >
+                    <FileInput aria-hidden="true" size={16} strokeWidth={2.4} />
+                    匯入地標 JSON
+                  </button>
+                  <input
+                    ref={landmarkImportInputRef}
+                    className="sr-only"
+                    type="file"
+                    accept="application/json,.json"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0] ?? null
+                      void handleImportLandmarkFile(file)
+                      e.currentTarget.value = ''
+                    }}
+                  />
+                  {editingLandmarkId && (
+                    <button className="ghost-button modal-stack-button" onClick={handleCancelLandmarkEdit}>
+                      取消編輯
+                    </button>
+                  )}
+                  <p className="helper-text">{editingLandmarkId ? '更新成功後欄位會自動清空，右側清單會同步更新。' : '儲存成功後欄位會自動清空，點選地標可帶入目的地。'}</p>
+                </section>
+
+                <section className="modal-section landmark-manager-list-panel">
+                  <div className="landmark-toolbar">
+                    <label className="field landmark-search-field">
+                      <span>搜尋地標</span>
+                      <input
+                        value={landmarkSearchInput}
+                        onChange={(e) => setLandmarkSearchInput(e.target.value)}
+                        placeholder="輸入名稱或座標"
+                      />
+                    </label>
+                    <div className="field">
+                      <span>篩選</span>
+                      <div className="segmented-control" role="tablist" aria-label="地標管理類型篩選">
+                        <button
+                          type="button"
+                          className={landmarkTypeFilter === 'all' ? 'is-active' : ''}
+                          onClick={() => setLandmarkTypeFilter('all')}
+                        >
+                          全部
                         </button>
-                        <div className="landmark-edit-actions">
-                          <button className="secondary-button" onClick={() => handleEditLandmark(landmark)} type="button">
-                            編輯
-                          </button>
-                          <button
-                            className="ghost-button danger"
-                            onClick={() => void handleDeleteLandmark(landmark.id)}
-                            type="button"
-                          >
-                            刪除
-                          </button>
-                        </div>
+                        <button
+                          type="button"
+                          className={landmarkTypeFilter === 'flower' ? 'is-active' : ''}
+                          onClick={() => setLandmarkTypeFilter('flower')}
+                        >
+                          花點
+                        </button>
+                        <button
+                          type="button"
+                          className={landmarkTypeFilter === 'mushroom' ? 'is-active' : ''}
+                          onClick={() => setLandmarkTypeFilter('mushroom')}
+                        >
+                          菇點
+                        </button>
                       </div>
-                    ))}
+                    </div>
                   </div>
-                )}
-              </section>
-            </div>
+                  <div className="landmark-section-head">
+                    <span>已儲存地標</span>
+                    <small>{filteredLandmarks.length} / {savedLandmarks.length} 筆</small>
+                  </div>
+                  {savedLandmarks.length === 0 ? (
+                    <p className="landmark-empty">目前還沒有地標，先在左側新增一筆。</p>
+                  ) : filteredLandmarks.length === 0 ? (
+                    <p className="landmark-empty">找不到符合條件的地標。</p>
+                  ) : (
+                    <div className="landmark-edit-list">
+                      {filteredLandmarks.map((landmark) => (
+                        <div key={landmark.id} className={`landmark-edit-item${editingLandmarkId === landmark.id ? ' is-editing' : ''}`}>
+                          <button className="landmark-edit-main" onClick={() => handleSelectLandmarkToFly(landmark.name)} type="button">
+                            <strong>{landmark.name}</strong>
+                            <span>{formatCoordinate(landmark.coordinate)}</span>
+                            <small>{landmark.landmarkType === 'flower' ? '花點' : '菇點'}</small>
+                          </button>
+                          <div className="landmark-edit-actions">
+                            <button
+                              className="icon-button"
+                              onClick={() => handleExportLandmark(landmark)}
+                              aria-label={`匯出地標：${landmark.name}`}
+                              title={`匯出地標：${landmark.name}`}
+                              type="button"
+                            >
+                              <Download aria-hidden="true" size={16} strokeWidth={2.4} />
+                            </button>
+                            <button
+                              className="icon-button"
+                              onClick={() => handleEditLandmark(landmark)}
+                              aria-label={`編輯地標：${landmark.name}`}
+                              title={`編輯地標：${landmark.name}`}
+                              type="button"
+                            >
+                              <Pencil aria-hidden="true" size={16} strokeWidth={2.4} />
+                            </button>
+                            <button
+                              className="icon-button danger"
+                              onClick={() => void handleDeleteLandmark(landmark.id)}
+                              aria-label={`刪除地標：${landmark.name}`}
+                              title={`刪除地標：${landmark.name}`}
+                              type="button"
+                            >
+                              <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </section>
+              </div>
+            ) : (
+              <div className="modal-body route-manager-body">
+                <section className="modal-section landmark-manager-list-panel route-manager-panel">
+                  <div className="landmark-section-head">
+                    <span>已儲存路徑</span>
+                    <small>{savedRoutes.length} 筆</small>
+                  </div>
+                  {savedRoutes.length === 0 ? (
+                    <p className="route-empty route-manager-empty">還沒有儲存路徑，先在路徑模式儲存目前路徑。</p>
+                  ) : (
+                    <div className="saved-route-list route-manager-list">
+                      {savedRoutes.map((route) => (
+                        <div key={route.id} className="saved-route-item">
+                          <div className="saved-route-main route-manager-main">
+                            <strong>{route.name}</strong>
+                            <span>{route.waypoints.length} 個路徑點</span>
+                          </div>
+                          <div className="saved-route-actions">
+                            <button
+                              className="icon-button"
+                              onClick={() => handleExportSavedRoute(route)}
+                              aria-label={`匯出路徑：${route.name}`}
+                              title={`匯出路徑：${route.name}`}
+                              type="button"
+                            >
+                              <Download aria-hidden="true" size={16} strokeWidth={2.4} />
+                            </button>
+                            <button
+                              className="icon-button danger"
+                              onClick={() => void handleDeleteSavedRoute(route.id)}
+                              aria-label={`刪除路徑：${route.name}`}
+                              title={`刪除路徑：${route.name}`}
+                              type="button"
+                            >
+                              <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </section>
+              </div>
+            )}
           </div>
         </div>
       )}

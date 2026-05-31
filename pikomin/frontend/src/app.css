@@ -1087,6 +1087,28 @@ select {
   padding: 10px 10px 10px 12px;
 }
 
+.route-manager-list {
+  max-height: min(500px, calc(100vh - 230px));
+}
+
+.route-manager-main {
+  cursor: default;
+}
+
+.route-manager-body {
+  min-height: 531px;
+}
+
+.route-manager-panel {
+  min-height: 0;
+}
+
+.route-manager-empty {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 1100px) {
   .route-data-sidebar {
     position: static;
@@ -1125,8 +1147,9 @@ select {
 
 .landmark-section-head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
+  gap: 10px;
   color: var(--text-secondary);
 }
 
@@ -1417,6 +1440,17 @@ select {
   color: var(--text-primary);
 }
 
+.manager-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.manager-tabs {
+  flex: 0 0 auto;
+}
+
 .modal-body {
   display: flex;
   flex-direction: column;
@@ -1467,6 +1501,13 @@ select {
   border: 1px solid oklch(75% 0.10 222 / 0.45);
   background: oklch(94% 0.025 222 / 0.72);
   color: var(--text-secondary);
+}
+
+.landmark-import-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .landmark-edit-list {
@@ -1537,13 +1578,12 @@ select {
   gap: 6px;
 }
 
-.landmark-edit-actions .secondary-button,
-.landmark-edit-actions .ghost-button {
+.landmark-edit-actions .icon-button {
   min-height: 30px;
-  min-width: 48px;
-  padding: 0 9px;
+  height: 30px;
   border-radius: 9px;
   font-size: 12px;
+  width: 30px;
 }
 
 .modal-body .helper-text {
