@@ -78,3 +78,10 @@ class PostcardLandmark(BaseModel):
     tags: list[str] = []
     distance_m: float | None = None
     holder_count: int = 0
+    source: str = "atlas"
+    postcard_type: str | None = None
+    city: str | None = None
+    country: str | None = None
+    is_ai_detected: bool = False
+    uploader_name: str | None = None
+    created_at: str | None = None

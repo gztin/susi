@@ -6,6 +6,7 @@ import math
 import time
 import urllib.error
 import urllib.request
+from pathlib import Path
 from typing import Any
 
 from fastapi import APIRouter, HTTPException
@@ -15,6 +16,8 @@ from app.models.schemas import GPSCoordinate, PostcardBoundsRequest, PostcardLan
 router = APIRouter()
 
 ATLAS_NEARBY_URL = "https://pikmin-atlas.com/api/postcards/nearby"
+DATA_DIR = Path(__file__).resolve().parents[1] / "data"
+PIKOOHIONG_CACHE_FILE = DATA_DIR / "pikoohiong_postcards.json"
 CACHE_TTL_SECONDS = 90
 _nearby_cache: dict[str, tuple[float, list[PostcardLandmark]]] = {}
 
@@ -121,6 +124,63 @@ def _in_bounds(postcard: PostcardLandmark, req: PostcardBoundsRequest) -> bool:
     )
 
 
+def _normalize_pikoohiong_item(item: dict[str, Any]) -> PostcardLandmark | None:
+    item_id = item.get("id")
+    name = item.get("name") or item.get("title")
+    lat = item.get("latitude")
+    lng = item.get("longitude")
+    image_url = item.get("imageUrl") or item.get("thumbnailImageUrl")
+    if item_id is None or name is None or lat is None or lng is None or not image_url:
+        return None
+
+    try:
+        coordinate = GPSCoordinate(latitude=float(lat), longitude=float(lng))
+    except Exception:
+        return None
+
+    tags = item.get("tags") or []
+    if not isinstance(tags, list):
+        tags = []
+
+    return PostcardLandmark(
+        id=f"pikoohiong:{item_id}",
+        name=str(name),
+        coordinate=coordinate,
+        image_url=str(image_url),
+        tags=[str(tag) for tag in tags],
+        holder_count=0,
+        source="pikoohiong",
+        postcard_type=str(item.get("postcardType")) if item.get("postcardType") else None,
+        city=str(item.get("city")) if item.get("city") else None,
+        country=str(item.get("country")) if item.get("country") else None,
+        is_ai_detected=bool(item.get("isAiDetected")),
+        uploader_name=str(item.get("uploaderName")) if item.get("uploaderName") else None,
+        created_at=str(item.get("createdAt")) if item.get("createdAt") else None,
+    )
+
+
+def _fetch_pikoohiong_bounds_from_cache(req: PostcardBoundsRequest) -> list[PostcardLandmark]:
+    if not PIKOOHIONG_CACHE_FILE.exists():
+        return []
+
+    data = json.loads(PIKOOHIONG_CACHE_FILE.read_text(encoding="utf-8"))
+    raw_items = data.get("items") if isinstance(data, dict) else []
+    if not isinstance(raw_items, list):
+        return []
+
+    postcards: list[PostcardLandmark] = []
+    for raw_item in raw_items:
+        if not isinstance(raw_item, dict):
+            continue
+        postcard = _normalize_pikoohiong_item(raw_item)
+        if postcard is None or not _in_bounds(postcard, req):
+            continue
+        postcards.append(postcard)
+        if len(postcards) >= req.limit:
+            break
+    return postcards
+
+
 def _fetch_bounds_from_atlas(req: PostcardBoundsRequest) -> list[PostcardLandmark]:
     if req.south > req.north or req.west > req.east:
         return []
@@ -175,6 +235,26 @@ async def get_nearby_postcards(req: PostcardNearbyRequest) -> list[PostcardLandm
         raise HTTPException(
             status_code=502,
             detail={"error": "無法取得 Pikmin Atlas 明信片資料", "code": "POSTCARD_ATLAS_FAILED"},
+        ) from exc
+
+    _nearby_cache[key] = (now, postcards)
+    return postcards
+
+
+@router.post("/pikoohiong/bounds", response_model=list[PostcardLandmark])
+async def get_pikoohiong_postcards_in_bounds(req: PostcardBoundsRequest) -> list[PostcardLandmark]:
+    key = f"pikoohiong:{_bounds_cache_key(req)}"
+    cached = _nearby_cache.get(key)
+    now = time.time()
+    if cached and now - cached[0] < CACHE_TTL_SECONDS:
+        return cached[1]
+
+    try:
+        postcards = await asyncio.to_thread(_fetch_pikoohiong_bounds_from_cache, req)
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail={"error": "無法讀取 pikoohiong 明信片快取", "code": "POSTCARD_PIKOOHIONG_CACHE_FAILED"},
         ) from exc
 
     _nearby_cache[key] = (now, postcards)

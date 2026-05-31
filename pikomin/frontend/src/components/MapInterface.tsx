@@ -348,12 +348,16 @@ export default function MapInterface({
     postcardLandmarks.forEach((postcard) => {
       const imageUrl = escapeHtml(postcard.imageUrl)
       const name = escapeHtml(postcard.name)
+      const sourceBadge = postcard.source === 'pikoohiong'
+        ? '<span class="postcard-source-badge">Pikoohiong</span>'
+        : ''
       const icon = L.divIcon({
         className: '',
         html: `<div class="postcard-map-marker">
           <div class="postcard-map-thumb">
             <img src="${imageUrl}" alt="" loading="lazy" referrerpolicy="no-referrer" />
           </div>
+          ${sourceBadge}
           <div class="postcard-map-title">${name}</div>
         </div>`,
         iconSize: [92, 104],

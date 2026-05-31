@@ -200,7 +200,7 @@ export const apiClient = {
     east: number
     west: number
     limit?: number
-  }): Promise<PostcardLandmark[]> {
+  }, source: 'atlas' | 'pikoohiong' = 'atlas'): Promise<PostcardLandmark[]> {
     const data = await request<{
       id: string
       name: string
@@ -209,7 +209,14 @@ export const apiClient = {
       tags: string[]
       distance_m?: number | null
       holder_count: number
-    }[]>('/api/postcards/bounds', {
+      source?: string
+      postcard_type?: string | null
+      city?: string | null
+      country?: string | null
+      is_ai_detected?: boolean
+      uploader_name?: string | null
+      created_at?: string | null
+    }[]>(source === 'pikoohiong' ? '/api/postcards/pikoohiong/bounds' : '/api/postcards/bounds', {
       method: 'POST',
       timeoutMs: 24000,
       body: JSON.stringify({
@@ -228,6 +235,13 @@ export const apiClient = {
       tags: postcard.tags,
       distanceM: postcard.distance_m ?? null,
       holderCount: postcard.holder_count,
+      source: postcard.source,
+      postcardType: postcard.postcard_type ?? null,
+      city: postcard.city ?? null,
+      country: postcard.country ?? null,
+      isAiDetected: postcard.is_ai_detected ?? false,
+      uploaderName: postcard.uploader_name ?? null,
+      createdAt: postcard.created_at ?? null,
     }))
   },
 

@@ -18,6 +18,13 @@ export interface PostcardLandmark {
   tags: string[]
   distanceM?: number | null
   holderCount?: number
+  source?: 'atlas' | 'pikoohiong' | string
+  postcardType?: string | null
+  city?: string | null
+  country?: string | null
+  isAiDetected?: boolean
+  uploaderName?: string | null
+  createdAt?: string | null
 }
 
 export interface SavedRoute {
