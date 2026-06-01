@@ -51,6 +51,8 @@ interface MapInterfaceProps {
   savedLandmarks: SavedLandmark[]
   postcardLandmarks?: PostcardLandmark[]
   showPostcards?: boolean
+  focusedPostcardId?: string
+  postcardFocusTarget?: GPSCoordinate | null
   onViewportChange?: (bounds: { north: number; south: number; east: number; west: number }) => void
   onPostcardAddLandmark?: (postcard: PostcardLandmark) => void
   onPostcardAction?: (message: string) => void
@@ -83,6 +85,8 @@ export default function MapInterface({
   savedLandmarks,
   postcardLandmarks = [],
   showPostcards = false,
+  focusedPostcardId = '',
+  postcardFocusTarget = null,
   onViewportChange,
   onPostcardAddLandmark,
   onPostcardAction,
@@ -220,6 +224,13 @@ export default function MapInterface({
     map.setView([viewTarget.latitude, viewTarget.longitude], 16, { animate: true })
   }, [viewTarget])
 
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !postcardFocusTarget) return
+
+    map.setView([postcardFocusTarget.latitude, postcardFocusTarget.longitude], Math.max(map.getZoom(), 17), { animate: true })
+  }, [postcardFocusTarget])
+
   // 更新路徑點標記與連線
   useEffect(() => {
     const map = mapRef.current
@@ -348,21 +359,15 @@ export default function MapInterface({
     postcardLandmarks.forEach((postcard) => {
       const imageUrl = escapeHtml(postcard.imageUrl)
       const name = escapeHtml(postcard.name)
-      const sourceBadge = postcard.source === 'pikoohiong'
-        ? '<span class="postcard-source-badge">Pikoohiong</span>'
-        : ''
+      const isFocused = focusedPostcardId === postcard.id
       const icon = L.divIcon({
         className: '',
-        html: `<div class="postcard-map-marker">
-          <div class="postcard-map-thumb">
-            <img src="${imageUrl}" alt="" loading="lazy" referrerpolicy="no-referrer" />
-          </div>
-          ${sourceBadge}
-          <div class="postcard-map-title">${name}</div>
+        html: `<div class="postcard-map-point${isFocused ? ' is-focused' : ''}" title="${name}">
+          <span></span>
         </div>`,
-        iconSize: [92, 104],
-        iconAnchor: [46, 100],
-        popupAnchor: [0, -94],
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+        popupAnchor: [0, -14],
       })
       const marker = L.marker(
         [postcard.coordinate.latitude, postcard.coordinate.longitude],
@@ -389,7 +394,7 @@ export default function MapInterface({
       }
       postcardMarkersRef.current.push(marker)
     })
-  }, [onPostcardAddLandmark, postcardLandmarks, showPostcards])
+  }, [focusedPostcardId, onPostcardAddLandmark, postcardLandmarks, showPostcards])
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>

@@ -23,9 +23,7 @@ interface Toast {
 }
 
 interface RouteFilePayload {
-  version?: unknown
   name?: unknown
-  exportedAt?: unknown
   waypoints?: unknown
 }
 
@@ -67,6 +65,13 @@ function TempleIcon({ size = 18 }: { size?: number }) {
       />
     </svg>
   )
+}
+
+function postcardFilterIcon(filterId: PostcardFilterType) {
+  if (filterId === 'temple') return <TempleIcon />
+  if (filterId === 'transformer') return <Zap aria-hidden="true" size={18} strokeWidth={2.5} />
+  if (filterId === 'church') return <Church aria-hidden="true" size={18} strokeWidth={2.4} />
+  return <Trees aria-hidden="true" size={18} strokeWidth={2.4} />
 }
 
 let toastIdCounter = 0
@@ -296,6 +301,8 @@ export default function App() {
   const [postcards, setPostcards] = useState<PostcardLandmark[]>([])
   const [postcardFilters, setPostcardFilters] = useState<Record<PostcardFilterType, boolean>>(INITIAL_POSTCARD_FILTERS)
   const [isScanningPostcards, setIsScanningPostcards] = useState(false)
+  const [focusedPostcardId, setFocusedPostcardId] = useState('')
+  const [postcardFocusTarget, setPostcardFocusTarget] = useState<GPSCoordinate | null>(null)
   const [routeNameInput, setRouteNameInput] = useState('')
   const [flyMode, setFlyMode] = useState<FlyMode>('coordinate')
   const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
@@ -413,8 +420,18 @@ export default function App() {
   useEffect(() => {
     if (!showPostcards) {
       setPostcards([])
+      setFocusedPostcardId('')
+      setPostcardFocusTarget(null)
     }
   }, [showPostcards])
+
+  const handleFocusPostcard = useCallback((postcard: PostcardLandmark) => {
+    setFocusedPostcardId(postcard.id)
+    setPostcardFocusTarget({
+      latitude: postcard.coordinate.latitude,
+      longitude: postcard.coordinate.longitude,
+    })
+  }, [])
 
   useEffect(() => {
     setLandmarkPage(1)
@@ -992,6 +1009,8 @@ export default function App() {
           savedLandmarks={savedLandmarks}
           postcardLandmarks={visiblePostcards}
           showPostcards={showPostcards}
+          focusedPostcardId={focusedPostcardId}
+          postcardFocusTarget={postcardFocusTarget}
           onViewportChange={setMapBounds}
           onPostcardAddLandmark={handleAddPostcardLandmark}
           onPostcardAction={showToast}
@@ -1004,60 +1023,63 @@ export default function App() {
         />
       </section>
 
-      {showPostcards && (
-        <div className="postcard-filter-toolbar" aria-label="明信片類型篩選">
-          <button
-            type="button"
-            className={`postcard-filter-chip${allPostcardFiltersEnabled ? ' is-active' : ''}`}
-            aria-pressed={allPostcardFiltersEnabled}
-            aria-label="顯示全部類型明信片"
-            title="全部"
-            onClick={() => setPostcardFilters(INITIAL_POSTCARD_FILTERS)}
-          >
-            <Layers3 aria-hidden="true" size={18} strokeWidth={2.4} />
-          </button>
-          {POSTCARD_FILTERS.map((filter) => {
-            const icon = filter.id === 'temple'
-              ? <TempleIcon />
-              : filter.id === 'transformer'
-                ? <Zap aria-hidden="true" size={18} strokeWidth={2.5} />
-                : filter.id === 'church'
-                  ? <Church aria-hidden="true" size={18} strokeWidth={2.4} />
-                  : <Trees aria-hidden="true" size={18} strokeWidth={2.4} />
-            return (
-              <button
-                key={filter.id}
-                type="button"
-                className={`postcard-filter-chip${postcardFilters[filter.id] ? ' is-active' : ''}`}
-                aria-pressed={postcardFilters[filter.id]}
-                aria-label={`${postcardFilters[filter.id] ? '隱藏' : '顯示'}${filter.label}明信片`}
-                title={filter.label}
-                onClick={() => setPostcardFilters((current) => togglePostcardFilter(current, filter.id))}
-              >
-                {icon}
-              </button>
-            )
-          })}
-          <button
-            type="button"
-            className={`postcard-filter-chip postcard-scan-button${isScanningPostcards ? ' is-loading' : ''}`}
-            aria-label="掃描目前畫面明信片"
-            title="掃描目前畫面"
-            disabled={isScanningPostcards}
-            onClick={() => void handleScanPostcards()}
-          >
-            {isScanningPostcards ? (
-              <Loader2 aria-hidden="true" size={18} strokeWidth={2.4} />
-            ) : (
-              <Radar aria-hidden="true" size={18} strokeWidth={2.4} />
-            )}
-          </button>
-        </div>
-      )}
-
       <div className="overlay-shell">
         <main className="workspace workspace-overlay">
-          {!showPostcards && (
+          {showPostcards ? (
+            <aside className="sidebar sidebar-floating postcard-browser-sidebar">
+              <section className="panel panel-hero postcard-browser-panel">
+                <div className="panel-heading">
+                  <div>
+                    <p className="panel-kicker">明信片瀏覽</p>
+                    <h2>{visiblePostcards.length} 個座標點</h2>
+                  </div>
+                </div>
+
+                <div className="postcard-list-head">
+                  <span>掃描到的明信片</span>
+                  <small>{visiblePostcards.length} / {postcards.length} 筆</small>
+                </div>
+                {postcards.length === 0 ? (
+                  <p className="route-empty">還沒有掃描結果。按「掃描目前畫面」取得地圖範圍內的明信片。</p>
+                ) : visiblePostcards.length === 0 ? (
+                  <p className="route-empty">目前篩選條件下沒有明信片，請調整類型或重新掃描。</p>
+                ) : (
+                  <div className="postcard-result-list">
+                    {visiblePostcards.map((postcard) => (
+                      <button
+                        key={postcard.id}
+                        className={`postcard-result-item${focusedPostcardId === postcard.id ? ' is-focused' : ''}`}
+                        onClick={() => handleFocusPostcard(postcard)}
+                        type="button"
+                      >
+                        <span className="postcard-result-thumb" aria-hidden="true">
+                          <span className="postcard-result-thumb-fallback">
+                            <Mail size={18} strokeWidth={2.4} />
+                          </span>
+                          {postcard.imageUrl && (
+                            <img
+                              src={postcard.imageUrl}
+                              alt=""
+                              loading="lazy"
+                              referrerPolicy="no-referrer"
+                              onError={(event) => {
+                                event.currentTarget.remove()
+                              }}
+                            />
+                          )}
+                          <span className="postcard-result-dot" />
+                        </span>
+                        <span className="postcard-result-main">
+                          <strong>{postcard.name}</strong>
+                          <small>{formatCoordinate(postcard.coordinate)}</small>
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </section>
+            </aside>
+          ) : (
           <aside className="sidebar sidebar-floating">
           <section className="panel panel-hero">
             <div className="panel-heading">
@@ -1168,6 +1190,47 @@ export default function App() {
               >
                 <Mail aria-hidden="true" size={28} strokeWidth={3} />
               </button>
+              {showPostcards && (
+                <div className="postcard-filter-stack" aria-label="明信片類型篩選">
+                  <button
+                    type="button"
+                    className={`postcard-filter-chip${allPostcardFiltersEnabled ? ' is-active' : ''}`}
+                    aria-pressed={allPostcardFiltersEnabled}
+                    aria-label="顯示全部類型明信片"
+                    title="全部"
+                    onClick={() => setPostcardFilters(INITIAL_POSTCARD_FILTERS)}
+                  >
+                    <Layers3 aria-hidden="true" size={18} strokeWidth={2.4} />
+                  </button>
+                  {POSTCARD_FILTERS.map((filter) => (
+                    <button
+                      key={filter.id}
+                      type="button"
+                      className={`postcard-filter-chip${postcardFilters[filter.id] ? ' is-active' : ''}`}
+                      aria-pressed={postcardFilters[filter.id]}
+                      aria-label={`${postcardFilters[filter.id] ? '隱藏' : '顯示'}${filter.label}明信片`}
+                      title={filter.label}
+                      onClick={() => setPostcardFilters((current) => togglePostcardFilter(current, filter.id))}
+                    >
+                      {postcardFilterIcon(filter.id)}
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    className={`postcard-filter-chip postcard-scan-button${isScanningPostcards ? ' is-loading' : ''}`}
+                    aria-label="掃描目前畫面明信片"
+                    title={isScanningPostcards ? '掃描中' : '掃描目前畫面'}
+                    disabled={isScanningPostcards}
+                    onClick={() => void handleScanPostcards()}
+                  >
+                    {isScanningPostcards ? (
+                      <Loader2 aria-hidden="true" size={18} strokeWidth={2.4} />
+                    ) : (
+                      <Radar aria-hidden="true" size={18} strokeWidth={2.4} />
+                    )}
+                  </button>
+                </div>
+              )}
               {mode === 'route' && routeStatus.state === 'idle' && (
                   <>
                     {waypoints.length > 0 && (
