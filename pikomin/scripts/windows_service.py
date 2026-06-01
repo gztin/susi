@@ -65,8 +65,9 @@ def main() -> int:
     logs = base / "logs"
     logs.mkdir(exist_ok=True)
     pid_file = logs / "pids.json"
-    venv_py = base / "venv" / "Scripts" / "python.exe"
-    pmd3_exe = base / "venv" / "Scripts" / "pymobiledevice3.exe"
+    runtime_py = base / "python" / "python.exe"
+    pmd3_launcher = base / "pymobiledevice3_portable.py"
+    uvicorn_launcher = base / "uvicorn_portable.py"
     backend_port = os.environ.get("BACKEND_PORT", "5679")
     app_url = f"http://localhost:{backend_port}"
 
@@ -84,27 +85,30 @@ def main() -> int:
         print("Pikomin stopped.")
         return 0
 
-    if not venv_py.exists():
-        print(f"Missing runtime: {venv_py}")
+    if not runtime_py.exists():
+        print(f"Missing bundled Python runtime: {runtime_py}")
         return 1
-    if not pmd3_exe.exists():
-        print(f"Missing pymobiledevice3 runtime: {pmd3_exe}")
+    if not pmd3_launcher.exists():
+        print(f"Missing pymobiledevice3 launcher: {pmd3_launcher}")
+        return 1
+    if not uvicorn_launcher.exists():
+        print(f"Missing uvicorn launcher: {uvicorn_launcher}")
         return 1
 
     env = os.environ.copy()
     env["FRONTEND_DIST_DIR"] = str(base / "frontend" / "dist")
     env["HOST_BRIDGE_URL"] = ""
-    env["PMD3_PATH"] = str(pmd3_exe)
+    env["PMD3_COMMAND"] = f'"{runtime_py}" "{pmd3_launcher}"'
 
     tunnel = start_process(
-        [str(venv_py), "-m", "pymobiledevice3", "remote", "tunneld", "--protocol", "tcp"],
+        [str(runtime_py), str(pmd3_launcher), "remote", "tunneld", "--protocol", "tcp"],
         None,
         env,
         logs / "tunneld.log",
         logs / "tunneld.err.log",
     )
     backend = start_process(
-        [str(venv_py), "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", backend_port],
+        [str(runtime_py), str(uvicorn_launcher), "--app-dir", str(base / "backend"), "app.main:app", "--host", "0.0.0.0", "--port", backend_port],
         base / "backend",
         env,
         logs / "backend.log",

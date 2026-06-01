@@ -1,7 +1,8 @@
+import { Copy, MapPinPlus } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import type { GPSCoordinate, SavedLandmark } from '../types'
+import type { GPSCoordinate, PostcardLandmark, SavedLandmark } from '../types'
 
 delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl
 L.Icon.Default.mergeOptions({
@@ -33,15 +34,45 @@ const TILE_STYLES = [
 
 type TileStyleId = (typeof TILE_STYLES)[number]['id']
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 interface MapInterfaceProps {
   mode: 'single' | 'route'
   currentPosition: GPSCoordinate | null
   viewTarget: GPSCoordinate | null
   waypoints: GPSCoordinate[]
   savedLandmarks: SavedLandmark[]
+  postcardLandmarks?: PostcardLandmark[]
+  showPostcards?: boolean
+  onViewportChange?: (bounds: { north: number; south: number; east: number; west: number }) => void
+  onPostcardAddLandmark?: (postcard: PostcardLandmark) => void
+  onPostcardAction?: (message: string) => void
   onMapClick: (coord: GPSCoordinate) => void
   onWaypointMove?: (index: number, coord: GPSCoordinate) => void
+  onWaypointRemove?: (index: number) => void
+  onWaypointSetAsStart?: (index: number) => void
+  onWaypointSetAsEnd?: (index: number) => void
   canEditWaypoints?: boolean
+}
+
+interface WaypointContextMenu {
+  index: number
+  x: number
+  y: number
+  showCoordinate: boolean
+}
+
+interface PostcardContextMenu {
+  postcard: PostcardLandmark
+  x: number
+  y: number
 }
 
 export default function MapInterface({
@@ -50,8 +81,16 @@ export default function MapInterface({
   viewTarget,
   waypoints,
   savedLandmarks,
+  postcardLandmarks = [],
+  showPostcards = false,
+  onViewportChange,
+  onPostcardAddLandmark,
+  onPostcardAction,
   onMapClick,
   onWaypointMove,
+  onWaypointRemove,
+  onWaypointSetAsStart,
+  onWaypointSetAsEnd,
   canEditWaypoints = false,
 }: MapInterfaceProps) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -60,10 +99,23 @@ export default function MapInterface({
   const currentMarkerRef = useRef<L.CircleMarker | null>(null)
   const waypointMarkersRef = useRef<L.Marker[]>([])
   const landmarkMarkersRef = useRef<L.Marker[]>([])
+  const postcardMarkersRef = useRef<L.Marker[]>([])
   const polylineRef = useRef<L.Polyline | null>(null)
   const prevPositionRef = useRef<GPSCoordinate | null>(null)
   const isDraggingWaypointRef = useRef(false)
   const [styleId, setStyleId] = useState<TileStyleId>('positron')
+  const [waypointMenu, setWaypointMenu] = useState<WaypointContextMenu | null>(null)
+  const [postcardMenu, setPostcardMenu] = useState<PostcardContextMenu | null>(null)
+
+  const emitViewport = (map: L.Map) => {
+    const bounds = map.getBounds()
+    onViewportChange?.({
+      north: bounds.getNorth(),
+      south: bounds.getSouth(),
+      east: bounds.getEast(),
+      west: bounds.getWest(),
+    })
+  }
 
   // 初始化地圖
   useEffect(() => {
@@ -79,8 +131,10 @@ export default function MapInterface({
     map.on('click', (e: L.LeafletMouseEvent) => {
       onMapClick({ latitude: e.latlng.lat, longitude: e.latlng.lng })
     })
+    map.on('moveend zoomend', () => emitViewport(map))
 
     mapRef.current = map
+    emitViewport(map)
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -97,6 +151,12 @@ export default function MapInterface({
       tileLayerRef.current = null
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !onViewportChange) return
+    emitViewport(map)
+  }, [onViewportChange])
 
   // 切換 tile 樣式
   useEffect(() => {
@@ -119,6 +179,8 @@ export default function MapInterface({
 
     const handler = (e: L.LeafletMouseEvent) => {
       if (isDraggingWaypointRef.current) return
+      setWaypointMenu(null)
+      setPostcardMenu(null)
       onMapClick({ latitude: e.latlng.lat, longitude: e.latlng.lng })
     }
 
@@ -196,6 +258,8 @@ export default function MapInterface({
       if (canEditWaypoints && onWaypointMove) {
         marker.dragging?.enable()
         marker.on('dragstart', () => {
+          setWaypointMenu(null)
+          setPostcardMenu(null)
           isDraggingWaypointRef.current = true
         })
         marker.on('dragend', () => {
@@ -204,6 +268,17 @@ export default function MapInterface({
           window.setTimeout(() => {
             isDraggingWaypointRef.current = false
           }, 0)
+        })
+      }
+      if (canEditWaypoints) {
+        marker.on('contextmenu', (event: L.LeafletMouseEvent) => {
+          const originalEvent = event.originalEvent
+          originalEvent.preventDefault()
+          originalEvent.stopPropagation()
+          const bounds = containerRef.current?.getBoundingClientRect()
+          const x = bounds ? originalEvent.clientX - bounds.left : event.containerPoint.x
+          const y = bounds ? originalEvent.clientY - bounds.top : event.containerPoint.y
+          setWaypointMenu({ index, x, y, showCoordinate: false })
         })
       }
       waypointMarkersRef.current.push(marker)
@@ -221,6 +296,31 @@ export default function MapInterface({
   }, [waypoints, mode, canEditWaypoints, onWaypointMove])
 
   useEffect(() => {
+    setWaypointMenu(null)
+  }, [waypoints.length, canEditWaypoints])
+
+  useEffect(() => {
+    if (!waypointMenu && !postcardMenu) return
+
+    const closeMenu = () => {
+      setWaypointMenu(null)
+      setPostcardMenu(null)
+    }
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeMenu()
+    }
+
+    window.addEventListener('click', closeMenu)
+    window.addEventListener('keydown', closeOnEscape)
+    return () => {
+      window.removeEventListener('click', closeMenu)
+      window.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [postcardMenu, waypointMenu])
+
+  const selectedWaypoint = waypointMenu ? waypoints[waypointMenu.index] : null
+
+  useEffect(() => {
     const map = mapRef.current
     if (!map) return
 
@@ -236,9 +336,162 @@ export default function MapInterface({
     })
   }, [savedLandmarks])
 
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map) return
+
+    postcardMarkersRef.current.forEach((m) => m.remove())
+    postcardMarkersRef.current = []
+
+    if (!showPostcards) return
+
+    postcardLandmarks.forEach((postcard) => {
+      const imageUrl = escapeHtml(postcard.imageUrl)
+      const name = escapeHtml(postcard.name)
+      const sourceBadge = postcard.source === 'pikoohiong'
+        ? '<span class="postcard-source-badge">Pikoohiong</span>'
+        : ''
+      const icon = L.divIcon({
+        className: '',
+        html: `<div class="postcard-map-marker">
+          <div class="postcard-map-thumb">
+            <img src="${imageUrl}" alt="" loading="lazy" referrerpolicy="no-referrer" />
+          </div>
+          ${sourceBadge}
+          <div class="postcard-map-title">${name}</div>
+        </div>`,
+        iconSize: [92, 104],
+        iconAnchor: [46, 100],
+        popupAnchor: [0, -94],
+      })
+      const marker = L.marker(
+        [postcard.coordinate.latitude, postcard.coordinate.longitude],
+        { icon },
+      ).addTo(map)
+      marker.bindPopup(
+        `<div class="postcard-popup">
+          <img src="${imageUrl}" alt="" referrerpolicy="no-referrer" />
+          <strong>${name}</strong>
+          <span>${postcard.coordinate.latitude.toFixed(6)}, ${postcard.coordinate.longitude.toFixed(6)}</span>
+        </div>`,
+      )
+      if (onPostcardAddLandmark) {
+        marker.on('contextmenu', (event: L.LeafletMouseEvent) => {
+          const originalEvent = event.originalEvent
+          originalEvent.preventDefault()
+          originalEvent.stopPropagation()
+          const bounds = containerRef.current?.getBoundingClientRect()
+          const x = bounds ? originalEvent.clientX - bounds.left : event.containerPoint.x
+          const y = bounds ? originalEvent.clientY - bounds.top : event.containerPoint.y
+          setWaypointMenu(null)
+          setPostcardMenu({ postcard, x, y })
+        })
+      }
+      postcardMarkersRef.current.push(marker)
+    })
+  }, [onPostcardAddLandmark, postcardLandmarks, showPostcards])
+
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
+      {waypointMenu && selectedWaypoint && (
+        <div
+          className="waypoint-context-menu"
+          style={{ left: waypointMenu.x, top: waypointMenu.y }}
+          onClick={(event) => event.stopPropagation()}
+          onContextMenu={(event) => event.preventDefault()}
+        >
+          <button
+            type="button"
+            onClick={() => {
+              setWaypointMenu((current) => current ? { ...current, showCoordinate: true } : current)
+            }}
+          >
+            顯示座標
+          </button>
+          {waypointMenu.showCoordinate && (
+            <div className="waypoint-coordinate-info">
+              <span>{selectedWaypoint.latitude.toFixed(6)}</span>
+              <span>{selectedWaypoint.longitude.toFixed(6)}</span>
+            </div>
+          )}
+          <button
+            type="button"
+            onClick={() => {
+              onWaypointSetAsStart?.(waypointMenu.index)
+              setWaypointMenu(null)
+            }}
+            disabled={waypointMenu.index === 0}
+          >
+            設為起點
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              onWaypointSetAsEnd?.(waypointMenu.index)
+              setWaypointMenu(null)
+            }}
+            disabled={waypointMenu.index === waypoints.length - 1}
+          >
+            設為終點
+          </button>
+          <button
+            type="button"
+            className="is-danger"
+            onClick={() => {
+              onWaypointRemove?.(waypointMenu.index)
+              setWaypointMenu(null)
+            }}
+          >
+            移除節點
+          </button>
+        </div>
+      )}
+      {postcardMenu && (
+        <div
+          className="waypoint-context-menu postcard-context-menu"
+          style={{ left: postcardMenu.x, top: postcardMenu.y }}
+          onClick={(event) => event.stopPropagation()}
+          onContextMenu={(event) => event.preventDefault()}
+        >
+          <div className="postcard-menu-header">
+            <strong>{postcardMenu.postcard.name}</strong>
+            <div className="postcard-menu-actions">
+              <button
+                type="button"
+                className="postcard-icon-action"
+                onClick={() => {
+                  const coord = postcardMenu.postcard.coordinate
+                  const text = `${postcardMenu.postcard.name}\n${coord.latitude.toFixed(6)}, ${coord.longitude.toFixed(6)}`
+                  void navigator.clipboard?.writeText(text).then(() => {
+                    onPostcardAction?.('已複製明信片資訊')
+                  })
+                }}
+                aria-label="複製明信片名稱與座標"
+                title="複製名稱與座標"
+              >
+                <Copy aria-hidden="true" size={16} strokeWidth={2.4} />
+              </button>
+              <button
+                type="button"
+                className="postcard-icon-action"
+                onClick={() => {
+                  onPostcardAddLandmark?.(postcardMenu.postcard)
+                  setPostcardMenu(null)
+                }}
+                aria-label="加入地標"
+                title="加入地標"
+              >
+                <MapPinPlus aria-hidden="true" size={17} strokeWidth={2.4} />
+              </button>
+            </div>
+          </div>
+          <div className="postcard-coordinate-info">
+            <span>{postcardMenu.postcard.coordinate.latitude.toFixed(6)}</span>
+            <span>{postcardMenu.postcard.coordinate.longitude.toFixed(6)}</span>
+          </div>
+        </div>
+      )}
       <div className="map-style-switcher">
         {TILE_STYLES.map((s) => (
           <button

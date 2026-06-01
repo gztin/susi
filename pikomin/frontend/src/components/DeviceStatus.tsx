@@ -46,13 +46,13 @@ export function DeviceStatus({
   }
 
   if (resolvedDevices.length === 0) {
-    return <div className="helper-text">未偵測到裝置，請透過 USB 連接 iPhone 或確認 tunneld 已啟動</div>
+    return null
   }
 
   return (
     <div className="device-select">
       <label className="field">
-        <span>目前裝置</span>
+        <span>選擇裝置</span>
         <div className="device-select-wrap">
           <span className={`device-led select-led ${resolvedSelectedDevice?.isConnected ? 'is-online' : 'is-offline'}`} />
           <span className="sr-only">{resolvedSelectedDevice?.isConnected ? '已連線' : '未連線'}</span>
@@ -62,7 +62,7 @@ export function DeviceStatus({
             className="device-select-input"
           >
             <option value="" disabled>
-              選擇裝置
+              請選擇裝置
             </option>
             {resolvedDevices.map((device) => (
               <option key={device.id} value={device.id}>
@@ -73,6 +73,7 @@ export function DeviceStatus({
           </select>
         </div>
       </label>
+
     </div>
   )
 }

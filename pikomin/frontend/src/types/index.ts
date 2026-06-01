@@ -10,6 +10,23 @@ export interface SavedLandmark {
   landmarkType: 'flower' | 'mushroom'
 }
 
+export interface PostcardLandmark {
+  id: string
+  name: string
+  coordinate: GPSCoordinate
+  imageUrl: string
+  tags: string[]
+  distanceM?: number | null
+  holderCount?: number
+  source?: 'atlas' | 'pikoohiong' | string
+  postcardType?: string | null
+  city?: string | null
+  country?: string | null
+  isAiDetected?: boolean
+  uploaderName?: string | null
+  createdAt?: string | null
+}
+
 export interface SavedRoute {
   id: string
   name: string
@@ -23,6 +40,7 @@ export interface DeviceInfo {
   name: string
   isConnected: boolean
   model?: string
+  developerModeEnabled?: boolean | null
 }
 
 export interface SetLocationRequest {

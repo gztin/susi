@@ -6,6 +6,11 @@ import * as useDeviceModule from '../hooks/useDevice'
 import type { DeviceInfo } from '../types'
 
 vi.mock('../hooks/useDevice')
+vi.mock('../api/client', () => ({
+  apiClient: {
+    revealDeveloperMode: vi.fn(),
+  },
+}))
 
 const mockUseDevice = vi.spyOn(useDeviceModule, 'useDevice')
 
@@ -38,44 +43,44 @@ beforeEach(() => {
 })
 
 describe('DeviceStatus', () => {
-  it('載入中時顯示載入狀態', () => {
+  it('shows loading state', () => {
     setupMock({ isLoading: true })
     render(<DeviceStatus />)
     expect(screen.getByText('載入裝置中...')).toBeTruthy()
   })
 
-  it('發生錯誤時顯示錯誤訊息', () => {
+  it('shows error state', () => {
     setupMock({ error: 'Network error' })
     render(<DeviceStatus />)
     expect(screen.getByText(/Network error/)).toBeTruthy()
   })
 
-  it('無裝置時顯示提示訊息', () => {
+  it('shows empty state', () => {
     setupMock({ devices: [] })
-    render(<DeviceStatus />)
-    expect(screen.getByText('未偵測到裝置，請透過 USB 連接 iPhone 或確認 tunneld 已啟動')).toBeTruthy()
+    const { container } = render(<DeviceStatus />)
+    expect(container.firstChild).toBeNull()
   })
 
-  it('有裝置時顯示下拉選單', () => {
+  it('renders available devices', () => {
     setupMock({ devices: [mockDevice] })
     render(<DeviceStatus />)
     expect(screen.getByRole('combobox')).toBeTruthy()
     expect(screen.getByText('My iPhone (iPhone 15)')).toBeTruthy()
   })
 
-  it('已選裝置且已連線時顯示綠色指示燈', () => {
+  it('shows connected text for selected device', () => {
     setupMock({ devices: [mockDevice], selectedDevice: mockDevice })
     render(<DeviceStatus />)
     expect(screen.getByText('已連線')).toBeTruthy()
   })
 
-  it('已選裝置但未連線時顯示紅色指示燈', () => {
+  it('shows disconnected text for selected device', () => {
     setupMock({ devices: [disconnectedDevice], selectedDevice: disconnectedDevice })
     render(<DeviceStatus />)
     expect(screen.getByText('未連線')).toBeTruthy()
   })
 
-  it('選擇裝置時呼叫 selectDevice', async () => {
+  it('calls selectDevice when the selection changes', async () => {
     const selectDevice = vi.fn()
     setupMock({ devices: [mockDevice], selectDevice })
     render(<DeviceStatus />)
@@ -84,14 +89,14 @@ describe('DeviceStatus', () => {
     expect(selectDevice).toHaveBeenCalledWith('device-001')
   })
 
-  it('selectedDevice 變更時呼叫 onDeviceSelect', () => {
+  it('calls onDeviceSelect with selectedDevice', () => {
     const onDeviceSelect = vi.fn()
     setupMock({ devices: [mockDevice], selectedDevice: mockDevice })
     render(<DeviceStatus onDeviceSelect={onDeviceSelect} />)
     expect(onDeviceSelect).toHaveBeenCalledWith(mockDevice)
   })
 
-  it('selectedDevice 為 null 時呼叫 onDeviceSelect(null)', () => {
+  it('calls onDeviceSelect(null) when selectedDevice is null', () => {
     const onDeviceSelect = vi.fn()
     setupMock({ devices: [mockDevice], selectedDevice: null })
     render(<DeviceStatus onDeviceSelect={onDeviceSelect} />)

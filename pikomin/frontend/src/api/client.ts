@@ -5,6 +5,7 @@ import type {
   RouteStatus,
   StatusUpdate,
   SavedRoute,
+  PostcardLandmark,
 } from '../types'
 
 const BASE_URL = (typeof import.meta !== 'undefined' && (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL) || ''
@@ -54,12 +55,14 @@ function mapDevice(d: {
   name: string
   is_connected: boolean
   model?: string
+  developer_mode_enabled?: boolean | null
 }): DeviceInfo {
   return {
     id: d.id,
     name: d.name,
     isConnected: d.is_connected,
     model: d.model,
+    developerModeEnabled: d.developer_mode_enabled,
   }
 }
 
@@ -80,9 +83,16 @@ function mapRouteStatus(s: {
 export const apiClient = {
   async getDevices(): Promise<DeviceInfo[]> {
     const data = await request<
-      { id: string; name: string; is_connected: boolean; model?: string }[]
+      { id: string; name: string; is_connected: boolean; model?: string; developer_mode_enabled?: boolean | null }[]
     >('/api/devices')
     return data.map(mapDevice)
+  },
+
+  async revealDeveloperMode(deviceId: string): Promise<void> {
+    await request<void>(`/api/devices/${encodeURIComponent(deviceId)}/developer-mode/reveal`, {
+      method: 'POST',
+      timeoutMs: 22000,
+    })
   },
 
   async setLocation(req: SetLocationRequest): Promise<void> {
@@ -147,6 +157,92 @@ export const apiClient = {
 
   async getGeolocation(): Promise<{ latitude: number; longitude: number; city: string }> {
     return request('/api/geolocation')
+  },
+
+  async getNearbyPostcards(payload: {
+    latitude: number
+    longitude: number
+    radiusM: number
+    limit?: number
+  }): Promise<PostcardLandmark[]> {
+    const data = await request<{
+      id: string
+      name: string
+      coordinate: { latitude: number; longitude: number }
+      image_url: string
+      tags: string[]
+      distance_m?: number | null
+      holder_count: number
+    }[]>('/api/postcards/nearby', {
+      method: 'POST',
+      timeoutMs: 18000,
+      body: JSON.stringify({
+        latitude: payload.latitude,
+        longitude: payload.longitude,
+        radius_m: Math.round(payload.radiusM),
+        limit: payload.limit ?? 120,
+      }),
+    })
+    return data.map((postcard) => ({
+      id: postcard.id,
+      name: postcard.name,
+      coordinate: postcard.coordinate,
+      imageUrl: postcard.image_url,
+      tags: postcard.tags,
+      distanceM: postcard.distance_m ?? null,
+      holderCount: postcard.holder_count,
+    }))
+  },
+
+  async getPostcardsInBounds(payload: {
+    north: number
+    south: number
+    east: number
+    west: number
+    limit?: number
+  }, source: 'atlas' | 'pikoohiong' = 'atlas'): Promise<PostcardLandmark[]> {
+    const data = await request<{
+      id: string
+      name: string
+      coordinate: { latitude: number; longitude: number }
+      image_url: string
+      tags: string[]
+      distance_m?: number | null
+      holder_count: number
+      source?: string
+      postcard_type?: string | null
+      city?: string | null
+      country?: string | null
+      is_ai_detected?: boolean
+      uploader_name?: string | null
+      created_at?: string | null
+    }[]>(source === 'pikoohiong' ? '/api/postcards/pikoohiong/bounds' : '/api/postcards/bounds', {
+      method: 'POST',
+      timeoutMs: 24000,
+      body: JSON.stringify({
+        north: payload.north,
+        south: payload.south,
+        east: payload.east,
+        west: payload.west,
+        limit: payload.limit ?? 300,
+      }),
+    })
+    return data.map((postcard) => ({
+      id: postcard.id,
+      name: postcard.name,
+      coordinate: postcard.coordinate,
+      imageUrl: postcard.image_url,
+      tags: postcard.tags,
+      distanceM: postcard.distance_m ?? null,
+      holderCount: postcard.holder_count,
+      source: postcard.source,
+      postcardType: postcard.postcard_type ?? null,
+      city: postcard.city ?? null,
+      country: postcard.country ?? null,
+      isAiDetected: postcard.is_ai_detected ?? false,
+      uploaderName: postcard.uploader_name ?? null,
+      createdAt: postcard.created_at ?? null,
+    }))
   },
 
 

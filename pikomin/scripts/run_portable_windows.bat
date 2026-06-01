@@ -1,7 +1,7 @@
 @echo off
 setlocal
 set "BASE_DIR=%~dp0"
-set "VENV_PY=%BASE_DIR%venv\Scripts\python.exe"
+set "RUNTIME_PY=%BASE_DIR%python\python.exe"
 set "SERVICE=%BASE_DIR%windows_service.py"
 
 net session >nul 2>&1
@@ -12,8 +12,8 @@ if not "%errorlevel%"=="0" (
   exit /b
 )
 
-if not exist "%VENV_PY%" (
-  echo Missing runtime: %VENV_PY%
+if not exist "%RUNTIME_PY%" (
+  echo Missing bundled Python runtime: %RUNTIME_PY%
   pause
   exit /b 1
 )
@@ -25,7 +25,7 @@ if not exist "%SERVICE%" (
 )
 
 echo Starting Pikomin in the background...
-"%VENV_PY%" "%SERVICE%"
+"%RUNTIME_PY%" "%SERVICE%"
 if errorlevel 1 (
   echo.
   echo Pikomin may not have started correctly. Check the logs folder.

@@ -18,9 +18,17 @@ def run_detached(cmd, cwd=None, env=None):
 
 def main():
     base = Path(sys.executable).resolve().parent if getattr(sys, "frozen", False) else Path(__file__).resolve().parent.parent / "release" / "pikomin-win-portable"
-    venv_py = base / "venv" / "Scripts" / "python.exe"
-    if not venv_py.exists():
-        print(f"Missing runtime: {venv_py}")
+    runtime_py = base / "python" / "python.exe"
+    pmd3_launcher = base / "pymobiledevice3_portable.py"
+    uvicorn_launcher = base / "uvicorn_portable.py"
+    if not runtime_py.exists():
+        print(f"Missing bundled Python runtime: {runtime_py}")
+        sys.exit(1)
+    if not pmd3_launcher.exists():
+        print(f"Missing pymobiledevice3 launcher: {pmd3_launcher}")
+        sys.exit(1)
+    if not uvicorn_launcher.exists():
+        print(f"Missing uvicorn launcher: {uvicorn_launcher}")
         sys.exit(1)
 
     backend_port = os.environ.get("BACKEND_PORT", "5679")
@@ -28,14 +36,14 @@ def main():
     env = os.environ.copy()
     env["FRONTEND_DIST_DIR"] = str(base / "frontend" / "dist")
     env["HOST_BRIDGE_URL"] = ""
-    env["PMD3_PATH"] = str(base / "venv" / "Scripts" / "pymobiledevice3.exe")
+    env["PMD3_COMMAND"] = f'"{runtime_py}" "{pmd3_launcher}"'
 
     # 1) tunneld (TCP)
-    run_detached([str(venv_py), "-m", "pymobiledevice3", "remote", "tunneld", "--protocol", "tcp"])
+    run_detached([str(runtime_py), str(pmd3_launcher), "remote", "tunneld", "--protocol", "tcp"], env=env)
 
     # 2) backend + bundled frontend
     run_detached(
-        [str(venv_py), "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", backend_port],
+        [str(runtime_py), str(uvicorn_launcher), "--app-dir", str(base / "backend"), "app.main:app", "--host", "0.0.0.0", "--port", backend_port],
         cwd=str(base / "backend"),
         env=env,
     )
