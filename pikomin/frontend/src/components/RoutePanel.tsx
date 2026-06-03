@@ -11,7 +11,6 @@ interface RoutePanelProps {
 }
 
 const JOG_SPEED = 15 / 3.6
-const JOG_SPEED_LABEL = '小跑步 15 km/h'
 
 export function RoutePanel({
   waypoints,
@@ -70,8 +69,7 @@ export function RoutePanel({
             onClick={() => void withLoading(() => onStartRoute(JOG_SPEED, loop))}
             disabled={!canStart || loading}
           >
-            <span>{loading ? '啟動中' : '開始種花'}</span>
-            <small>{JOG_SPEED_LABEL}</small>
+            {loading ? '啟動中' : '開始種花（15km）'}
           </button>
         ) : (
           <>

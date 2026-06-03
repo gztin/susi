@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Church, Download, FileInput, FolderOpen, HelpCircle, Layers3, Loader2, Lock, Mail, Map, MoreHorizontal, MousePointerClick, Pencil, Radar, Save, Trees, Trash2, Zap } from 'lucide-react'
+import { Church, Download, FileInput, FolderOpen, Layers3, Loader2, Lock, Mail, Map, MoreHorizontal, MousePointerClick, Pencil, Radar, Save, Trees, Trash2, Zap } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -16,6 +16,7 @@ type LandmarkManagerTab = 'create' | 'search'
 type PostcardFilterType = 'temple' | 'transformer' | 'church' | 'park'
 const LANDMARKS_PER_PAGE = 12
 const ROUTES_PER_PAGE = 12
+const ROUTE_TOOLBAR_ICON_PROPS = { size: 22, strokeWidth: 2.4 }
 
 interface Toast {
   id: number
@@ -291,7 +292,6 @@ export default function App() {
   const [isLandmarkManagerOpen, setIsLandmarkManagerOpen] = useState(false)
   const [isRouteLibraryOpen, setIsRouteLibraryOpen] = useState(false)
   const [isSaveRouteModalOpen, setIsSaveRouteModalOpen] = useState(false)
-  const [isDisconnectHelpOpen, setIsDisconnectHelpOpen] = useState(false)
   const [managerTab, setManagerTab] = useState<ManagerTab>('landmarks')
   const [landmarkManagerTab, setLandmarkManagerTab] = useState<LandmarkManagerTab>('create')
   const [landmarkPage, setLandmarkPage] = useState(1)
@@ -328,6 +328,18 @@ export default function App() {
     stopRoute,
     syncCurrentPosition,
   } = useRoute(selectedDevice?.id ?? null, myPosition, handleRouteError)
+  const isPlanting = routeStatus.state === 'moving'
+
+  useEffect(() => {
+    if (!isPlanting) return
+
+    setIsMapClickArmed(false)
+    setIsManageModalOpen(false)
+    setIsLandmarkManagerOpen(false)
+    setIsFlySettingsOpen(false)
+    setIsRouteLibraryOpen(false)
+    setIsSaveRouteModalOpen(false)
+  }, [isPlanting])
 
   useEffect(() => {
     let cancelled = false
@@ -527,6 +539,7 @@ export default function App() {
 
   const handleMapClick = useCallback(
     async (coord: GPSCoordinate) => {
+      if (isPlanting) return
       if (!isMapClickArmed) return
 
       if (mode === 'route') {
@@ -546,16 +559,20 @@ export default function App() {
         showToast(err instanceof Error ? err.message : '設定位置失敗')
       }
     },
-    [addWaypoint, isMapClickArmed, mode, selectedDevice?.id, sendLocationFast, showToast, syncCurrentPosition],
+    [addWaypoint, isMapClickArmed, isPlanting, mode, selectedDevice?.id, sendLocationFast, showToast, syncCurrentPosition],
   )
 
   const handleToggleMapClickArmed = useCallback(() => {
+    if (isPlanting) {
+      showToast('種花中已鎖定點圖操作')
+      return
+    }
     setIsMapClickArmed((prev) => {
       const next = !prev
       showToast(next ? '點圖生效中' : '點圖已鎖定')
       return next
     })
-  }, [showToast])
+  }, [isPlanting, showToast])
 
   const handleRemoveWaypoint = useCallback((index: number) => {
     removeWaypoint(index)
@@ -564,11 +581,9 @@ export default function App() {
 
   const handleSetWaypointAsStart = useCallback((index: number) => {
     if (index <= 0 || index >= waypoints.length) return
-    const selected = waypoints[index]
     replaceWaypoints([
-      selected,
+      ...waypoints.slice(index),
       ...waypoints.slice(0, index),
-      ...waypoints.slice(index + 1),
     ])
     showToast('已設為起點')
   }, [replaceWaypoints, showToast, waypoints])
@@ -1093,15 +1108,6 @@ export default function App() {
                   {showDisconnectBanner && (
                     <span className="disconnect-status">
                       <span className="inline-alert">未偵測到裝置</span>
-                      <button
-                        className="inline-help-button"
-                        onClick={() => setIsDisconnectHelpOpen(true)}
-                        aria-label="顯示未偵測到裝置指引"
-                        title="顯示未偵測到裝置指引"
-                        type="button"
-                      >
-                        <HelpCircle aria-hidden="true" size={14} strokeWidth={2.4} />
-                      </button>
                     </span>
                   )}
                 </h2>
@@ -1131,9 +1137,10 @@ export default function App() {
                   <button
                     className={`icon-button mode-action-button${isMapClickArmed ? ' is-active' : ''}`}
                     onClick={handleToggleMapClickArmed}
-                    aria-label={isMapClickArmed ? '關閉點圖生效' : '開啟點圖生效'}
+                    aria-label={isPlanting ? '種花中已鎖定點圖操作' : isMapClickArmed ? '關閉點圖生效' : '開啟點圖生效'}
                     aria-pressed={isMapClickArmed}
-                    title={isMapClickArmed ? '點圖生效中' : '點圖已鎖定'}
+                    title={isPlanting ? '種花中已鎖定點圖操作' : isMapClickArmed ? '點圖生效中' : '點圖已鎖定'}
+                    disabled={isPlanting}
                     type="button"
                   >
                     {isMapClickArmed ? (
@@ -1145,8 +1152,9 @@ export default function App() {
                   <button
                     className="icon-button mode-action-button"
                     onClick={() => setIsManageModalOpen(true)}
-                    aria-label="位置設定"
-                    title="位置設定"
+                    aria-label={isPlanting ? '種花中不可調整位置設定' : '位置設定'}
+                    title={isPlanting ? '種花中不可調整位置設定' : '位置設定'}
+                    disabled={isPlanting}
                     type="button"
                   >
                     <Map aria-hidden="true" size={16} strokeWidth={2.4} />
@@ -1155,7 +1163,9 @@ export default function App() {
               </div>
             </label>
             <p className="helper-text" aria-live="polite">
-              {!isMapClickArmed
+              {isPlanting
+                ? '種花中已鎖定點圖操作與位置設定，停止後可重新調整'
+                : !isMapClickArmed
                 ? '地圖點擊目前已鎖定，開啟「點圖生效」後才會寫入位置或新增路徑點'
                 : mode === 'single'
                   ? '點擊地圖直接移動裝置定位'
@@ -1188,7 +1198,7 @@ export default function App() {
                 title={showPostcards ? `明信片：${visiblePostcards.length} 張` : '明信片圖層'}
                 type="button"
               >
-                <Mail aria-hidden="true" size={28} strokeWidth={3} />
+                <Mail aria-hidden="true" {...ROUTE_TOOLBAR_ICON_PROPS} />
               </button>
               {showPostcards && (
                 <div className="postcard-filter-stack" aria-label="明信片類型篩選">
@@ -1242,7 +1252,7 @@ export default function App() {
                         title="儲存目前路徑"
                         type="button"
                       >
-                        <Save aria-hidden="true" size={16} strokeWidth={2.4} />
+                        <Save aria-hidden="true" {...ROUTE_TOOLBAR_ICON_PROPS} />
                       </button>
                     )}
                     <button
@@ -1252,7 +1262,7 @@ export default function App() {
                       title="匯入路徑"
                       type="button"
                     >
-                      <FileInput aria-hidden="true" size={16} strokeWidth={2.4} />
+                      <FileInput aria-hidden="true" {...ROUTE_TOOLBAR_ICON_PROPS} />
                     </button>
                     <button
                       className="icon-button route-toolbar-button"
@@ -1261,7 +1271,7 @@ export default function App() {
                       title="讀取路徑"
                       type="button"
                     >
-                      <FolderOpen aria-hidden="true" size={16} strokeWidth={2.4} />
+                      <FolderOpen aria-hidden="true" {...ROUTE_TOOLBAR_ICON_PROPS} />
                     </button>
                     {waypoints.length > 0 && (
                       <button
@@ -1271,7 +1281,7 @@ export default function App() {
                         title="清除全部路徑點"
                         type="button"
                       >
-                        <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
+                        <Trash2 aria-hidden="true" {...ROUTE_TOOLBAR_ICON_PROPS} />
                       </button>
                     )}
                   </>
@@ -1326,26 +1336,6 @@ export default function App() {
                 <button className="secondary-button modal-stack-button" onClick={() => setIsFlySettingsOpen(true)}>飛行設定</button>
                 <p className="helper-text">已儲存 {savedLandmarks.length} 個地標，可在飛行設定中直接搜尋。</p>
               </section>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {isDisconnectHelpOpen && (
-        <div className="modal-backdrop" onClick={() => setIsDisconnectHelpOpen(false)}>
-          <div className="modal-panel modal-panel-narrow" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h3>裝置連線指引</h3>
-            </div>
-            <div className="modal-body">
-              <p className="helper-text">未偵測到裝置，請用 USB 連接 iPhone 並確認 tunnel 已啟動。</p>
-              <button
-                className="primary-button"
-                onClick={() => setIsDisconnectHelpOpen(false)}
-                type="button"
-              >
-                知道了
-              </button>
             </div>
           </div>
         </div>

@@ -428,26 +428,6 @@ select {
   vertical-align: middle;
 }
 
-.inline-help-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  padding: 0;
-  border-radius: 999px;
-  border: 1px solid var(--border-light);
-  background: oklch(97% 0.006 var(--hue) / 0.9);
-  color: var(--text-muted);
-}
-
-.inline-help-button:hover:not(:disabled) {
-  transform: none;
-  border-color: var(--border-medium);
-  background: var(--surface-btn-secondary-b);
-  color: var(--text-primary);
-}
-
 .status-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1540,17 +1520,11 @@ select {
 }
 
 .route-start-button {
-  display: grid;
-  gap: 2px;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 52px;
-  line-height: 1.15;
-}
-
-.route-start-button small {
-  font-size: 11px;
-  font-weight: 700;
-  color: oklch(34% 0.026 205 / 0.78);
+  line-height: 1.2;
 }
 
 .modal-backdrop {

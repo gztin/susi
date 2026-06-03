@@ -173,28 +173,10 @@ export function useRoute(
 
   const resumeRoute = useCallback(
     async () => {
-      if (routeStatus.state === 'paused') {
-        if (!deviceId) throw new Error('No device selected')
-        if (waypoints.length < 2) throw new Error('路徑點至少需要 2 個')
-
-        const options = activeRouteOptionsRef.current
-        if (options) {
-          await apiClient.stopRoute()
-          await apiClient.startRoute({
-            deviceId,
-            waypoints,
-            speed: options.speed,
-            loop: options.loop,
-          })
-          setRouteStatus((prev) => ({ ...prev, state: 'moving', progress: 0 }))
-          return
-        }
-      }
-
       await apiClient.resumeRoute()
       setRouteStatus((prev) => ({ ...prev, state: 'moving' }))
     },
-    [deviceId, routeStatus.state, waypoints],
+    [],
   )
 
   const stopRoute = useCallback(async () => {
