@@ -104,7 +104,8 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -132,7 +133,8 @@ button:focus-visible {
 }
 
 input,
-select {
+select,
+textarea {
   width: 100%;
   border: 1px solid var(--border-medium);
   border-radius: 12px;
@@ -144,13 +146,21 @@ select {
 }
 
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 4px var(--accent-glow);
 }
 
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: oklch(66% 0.022 var(--hue) / 0.52);
+}
+
+textarea {
+  min-height: 156px;
+  resize: vertical;
+  line-height: 1.5;
 }
 
 select {
@@ -1194,7 +1204,7 @@ select {
 }
 
 .route-manager-body {
-  min-height: 531px;
+  min-height: 0;
 }
 
 .route-manager-panel {
@@ -1205,7 +1215,7 @@ select {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 10px;
-  align-items: end;
+  align-items: start;
 }
 
 .route-search-field {
@@ -1213,10 +1223,65 @@ select {
 }
 
 .route-manager-import-button {
-  width: 46px;
-  min-width: 46px;
-  height: 46px;
-  border-radius: 14px;
+  width: 42px;
+  min-width: 42px;
+  height: 42px;
+  border-radius: 12px;
+}
+
+.route-import-field {
+  margin: 0;
+}
+
+.route-import-field > span {
+  visibility: hidden;
+}
+
+.route-import-panel {
+  width: min(380px, calc(100vw - 48px));
+}
+
+.route-import-panel.is-two-column {
+  width: min(720px, calc(100vw - 56px));
+}
+
+.route-import-body {
+  gap: 16px;
+}
+
+.route-import-layout {
+  display: grid;
+  gap: 16px;
+}
+
+.route-import-panel.is-two-column .route-import-layout {
+  grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+  align-items: start;
+}
+
+.segmented-control.route-import-tabs {
+  display: grid;
+  width: 100%;
+  gap: 4px;
+}
+
+.segmented-control.route-import-tabs > button {
+  width: 100%;
+  min-height: 42px;
+}
+
+.route-import-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.route-import-coordinate-section textarea {
+  min-height: 258px;
+}
+
+.route-import-actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .route-manager-pill {
@@ -1556,6 +1621,9 @@ select {
 
 .landmark-manager-panel {
   width: min(760px, calc(100vw - 56px));
+  height: min(620px, calc(100vh - 56px));
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
@@ -1565,6 +1633,16 @@ select {
 
 .landmark-manager-panel:has(.modal-body-split) {
   width: min(760px, calc(100vw - 56px));
+}
+
+.landmark-manager-panel > .modal-header {
+  flex: 0 0 auto;
+}
+
+.landmark-manager-panel > .modal-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .modal-header {
@@ -1630,6 +1708,7 @@ select {
 
 .landmark-manager-layout {
   display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   gap: 14px;
 }
 
@@ -1640,6 +1719,7 @@ select {
 .landmark-create-panel,
 .landmark-manager-list-panel {
   min-height: 0;
+  align-content: start;
 }
 
 .editing-hint {
@@ -1817,13 +1897,15 @@ select {
 }
 
 .modal-body input,
-.modal-body select {
+.modal-body select,
+.modal-body textarea {
   background: var(--surface-input);
   border-color: var(--border-medium);
   box-shadow: none;
 }
 
-.modal-body input::placeholder {
+.modal-body input::placeholder,
+.modal-body textarea::placeholder {
   color: var(--text-faint);
 }
 
@@ -1882,6 +1964,14 @@ select {
     width: calc(100vw - 20px);
     max-height: calc(100vh - 20px);
     padding: 18px 16px 16px;
+  }
+
+  .route-import-panel.is-two-column {
+    width: calc(100vw - 20px);
+  }
+
+  .route-import-panel.is-two-column .route-import-layout {
+    grid-template-columns: 1fr;
   }
 
   .flow-row {

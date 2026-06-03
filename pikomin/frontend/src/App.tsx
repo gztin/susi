@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Church, Download, FileInput, FolderOpen, Layers3, Loader2, Lock, Mail, Map, MoreHorizontal, MousePointerClick, Pencil, Radar, Save, Trees, Trash2, Zap } from 'lucide-react'
+import { Church, Copy, Download, FileInput, FolderOpen, Layers3, Loader2, Lock, Mail, Map, MoreHorizontal, MousePointerClick, Pencil, Radar, Save, Trees, Trash2, Zap } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -14,6 +14,7 @@ type FlyMode = 'coordinate' | 'landmark'
 type ManagerTab = 'landmarks' | 'routes'
 type LandmarkManagerTab = 'create' | 'search'
 type PostcardFilterType = 'temple' | 'transformer' | 'church' | 'park'
+type RouteImportMode = 'json' | 'coordinates'
 const LANDMARKS_PER_PAGE = 12
 const ROUTES_PER_PAGE = 12
 const ROUTE_TOOLBAR_ICON_PROPS = { size: 22, strokeWidth: 2.4 }
@@ -263,6 +264,57 @@ function sanitizeFilename(value: string): string {
   return normalized || '未命名路徑'
 }
 
+function formatRouteCoordinates(route: SavedRoute): string {
+  return route.waypoints
+    .map((point) => `${point.latitude.toFixed(6)},${point.longitude.toFixed(6)}`)
+    .join('\n')
+}
+
+function parseRouteCoordinateLines(value: string): GPSCoordinate[] {
+  const lines = value
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+
+  if (lines.length < 2) {
+    throw new Error('路徑至少需要 2 個路徑點')
+  }
+
+  return lines.map((line, index) => {
+    const parts = line.split(',').map((part) => part.trim())
+    if (parts.length !== 2 || !parts[0] || !parts[1]) {
+      throw new Error(`第 ${index + 1} 行格式錯誤，請使用「緯度,經度」`)
+    }
+
+    const coordinate = {
+      latitude: Number(parts[0]),
+      longitude: Number(parts[1]),
+    }
+    if (!isValidCoordinate(coordinate)) {
+      throw new Error(`第 ${index + 1} 行座標無效，請確認經緯度範圍`)
+    }
+    return coordinate
+  })
+}
+
+async function copyTextToClipboard(text: string): Promise<void> {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text)
+    return
+  }
+
+  const textarea = document.createElement('textarea')
+  textarea.value = text
+  textarea.setAttribute('readonly', '')
+  textarea.style.position = 'fixed'
+  textarea.style.inset = '0 auto auto -9999px'
+  document.body.appendChild(textarea)
+  textarea.select()
+  const copied = document.execCommand('copy')
+  textarea.remove()
+  if (!copied) throw new Error('Clipboard copy failed')
+}
+
 export default function App() {
   const [mode, setMode] = useState<Mode>('single')
   const [toasts, setToasts] = useState<Toast[]>([])
@@ -292,6 +344,7 @@ export default function App() {
   const [isLandmarkManagerOpen, setIsLandmarkManagerOpen] = useState(false)
   const [isRouteLibraryOpen, setIsRouteLibraryOpen] = useState(false)
   const [isSaveRouteModalOpen, setIsSaveRouteModalOpen] = useState(false)
+  const [isRouteImportModalOpen, setIsRouteImportModalOpen] = useState(false)
   const [managerTab, setManagerTab] = useState<ManagerTab>('landmarks')
   const [landmarkManagerTab, setLandmarkManagerTab] = useState<LandmarkManagerTab>('create')
   const [landmarkPage, setLandmarkPage] = useState(1)
@@ -304,6 +357,10 @@ export default function App() {
   const [focusedPostcardId, setFocusedPostcardId] = useState('')
   const [postcardFocusTarget, setPostcardFocusTarget] = useState<GPSCoordinate | null>(null)
   const [routeNameInput, setRouteNameInput] = useState('')
+  const [routeImportMode, setRouteImportMode] = useState<RouteImportMode>('json')
+  const [routeImportNameInput, setRouteImportNameInput] = useState('')
+  const [routeImportCoordinatesInput, setRouteImportCoordinatesInput] = useState('')
+  const [routeImporting, setRouteImporting] = useState(false)
   const [flyMode, setFlyMode] = useState<FlyMode>('coordinate')
   const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
   const showToastRef = useRef<(message: string) => void>(() => {})
@@ -875,6 +932,29 @@ export default function App() {
     setRouteNameInput('')
   }, [routeSaving])
 
+  const handleOpenRouteImportModal = useCallback(() => {
+    setRouteImportMode('json')
+    setRouteImportNameInput('')
+    setRouteImportCoordinatesInput('')
+    setIsRouteImportModalOpen(true)
+  }, [])
+
+  const handleOpenRouteImportFromManager = useCallback(() => {
+    setIsLandmarkManagerOpen(false)
+    setOpenRouteActionId('')
+    setRouteImportMode('json')
+    setRouteImportNameInput('')
+    setRouteImportCoordinatesInput('')
+    setIsRouteImportModalOpen(true)
+  }, [])
+
+  const handleCloseRouteImportModal = useCallback(() => {
+    if (routeImporting) return
+    setIsRouteImportModalOpen(false)
+    setRouteImportNameInput('')
+    setRouteImportCoordinatesInput('')
+  }, [routeImporting])
+
   const handleConfirmSaveRoute = useCallback(async () => {
     if (routeSaving) return
     if (waypoints.length < 2) {
@@ -941,6 +1021,15 @@ export default function App() {
     showToast(`已匯出路徑：${route.name}`)
   }, [showToast])
 
+  const handleCopyRouteCoordinates = useCallback(async (route: SavedRoute) => {
+    try {
+      await copyTextToClipboard(formatRouteCoordinates(route))
+      showToast(`已複製路徑節點：${route.name}`)
+    } catch {
+      showToast('複製路徑節點失敗')
+    }
+  }, [showToast])
+
   const handleImportRouteFile = useCallback(async (file: File | null) => {
     if (!file) return
     if (!file.name.toLowerCase().endsWith('.json')) {
@@ -949,11 +1038,17 @@ export default function App() {
     }
 
     try {
+      setRouteImporting(true)
       const text = await file.text()
       const payload = JSON.parse(text) as RouteFilePayload
       const imported = normalizeImportedRoute(payload)
+      const name = routeImportNameInput.trim()
+      if (name) imported.name = name
       const created = await apiClient.createSavedRoute(imported)
       setSavedRoutes((prev) => [created, ...prev])
+      setIsRouteImportModalOpen(false)
+      setRouteImportNameInput('')
+      setRouteImportCoordinatesInput('')
       showToast('路徑已匯入，可從讀取路徑選擇')
     } catch (err) {
       if (err instanceof SyntaxError) {
@@ -961,8 +1056,30 @@ export default function App() {
         return
       }
       showToast(err instanceof Error ? err.message : '匯入路徑失敗')
+    } finally {
+      setRouteImporting(false)
     }
-  }, [showToast])
+  }, [routeImportNameInput, showToast])
+
+  const handleConfirmImportCoordinates = useCallback(async () => {
+    if (routeImporting) return
+
+    const name = routeImportNameInput.trim() || '貼上的種花路徑'
+    try {
+      setRouteImporting(true)
+      const waypoints = parseRouteCoordinateLines(routeImportCoordinatesInput)
+      const created = await apiClient.createSavedRoute({ name, waypoints })
+      setSavedRoutes((prev) => [created, ...prev])
+      setIsRouteImportModalOpen(false)
+      setRouteImportNameInput('')
+      setRouteImportCoordinatesInput('')
+      showToast('路徑已匯入，可從讀取路徑選擇')
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : '匯入路徑失敗')
+    } finally {
+      setRouteImporting(false)
+    }
+  }, [routeImportCoordinatesInput, routeImportNameInput, routeImporting, showToast])
 
   const currentPosition = routeStatus.currentPosition ?? myPosition
   const handleSwitchFlyMode = useCallback((nextMode: FlyMode) => {
@@ -1257,7 +1374,7 @@ export default function App() {
                     )}
                     <button
                       className="icon-button route-toolbar-button"
-                      onClick={() => routeImportInputRef.current?.click()}
+                      onClick={handleOpenRouteImportModal}
                       aria-label="匯入路徑"
                       title="匯入路徑"
                       type="button"
@@ -1386,6 +1503,119 @@ export default function App() {
         </div>
       )}
 
+      {isRouteImportModalOpen && (
+        <div className="modal-backdrop" onClick={handleCloseRouteImportModal}>
+          <div
+            className={`modal-panel route-import-panel${routeImportMode === 'coordinates' ? ' is-two-column' : ''}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="modal-header">
+              <h3>匯入路徑</h3>
+            </div>
+            <div className="modal-body route-import-body">
+              <div className="route-import-layout">
+                <section className="route-import-section">
+                  <label className="field">
+                    <span>路徑名稱</span>
+                    <input
+                      value={routeImportNameInput}
+                      onChange={(e) => setRouteImportNameInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Escape') handleCloseRouteImportModal()
+                      }}
+                      placeholder={routeImportMode === 'json' ? '留空則使用 JSON 內的名稱' : '例如：義大利種花 01'}
+                      disabled={routeImporting}
+                      autoFocus
+                    />
+                  </label>
+                  <div className="field">
+                    <span>匯入方式</span>
+                    <div className="segmented-control route-import-tabs" role="tablist" aria-label="路徑匯入方式">
+                      <button
+                        type="button"
+                        className={routeImportMode === 'json' ? 'is-active' : ''}
+                        onClick={() => setRouteImportMode('json')}
+                        disabled={routeImporting}
+                      >
+                        JSON 檔案
+                      </button>
+                      <button
+                        type="button"
+                        className={routeImportMode === 'coordinates' ? 'is-active' : ''}
+                        onClick={() => setRouteImportMode('coordinates')}
+                        disabled={routeImporting}
+                      >
+                        貼上經緯度
+                      </button>
+                    </div>
+                  </div>
+                  {routeImportMode === 'json' && (
+                    <p className="helper-text">支援先前匯出的種花路徑 JSON，路徑名稱可在上方覆蓋。</p>
+                  )}
+                </section>
+                {routeImportMode === 'coordinates' && (
+                  <section className="route-import-section route-import-coordinate-section">
+                    <label className="field">
+                      <span>經緯度資料</span>
+                      <textarea
+                        value={routeImportCoordinatesInput}
+                        onChange={(e) => setRouteImportCoordinatesInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Escape') handleCloseRouteImportModal()
+                        }}
+                        placeholder={'22.355873,91.821189\n22.359052,91.822167'}
+                        disabled={routeImporting}
+                        rows={8}
+                      />
+                    </label>
+                    <p className="helper-text">每行一個節點，格式為「緯度,經度」，至少需要 2 個路徑點。</p>
+                  </section>
+                )}
+              </div>
+              {routeImportMode === 'json' ? (
+                <div className="modal-actions route-import-actions">
+                  <button
+                    className="ghost-button"
+                    onClick={handleCloseRouteImportModal}
+                    disabled={routeImporting}
+                    type="button"
+                  >
+                    取消
+                  </button>
+                  <button
+                    className="secondary-button"
+                    onClick={() => routeImportInputRef.current?.click()}
+                    disabled={routeImporting}
+                    type="button"
+                  >
+                    {routeImporting ? '匯入中...' : '選擇 JSON 檔案'}
+                  </button>
+                </div>
+              ) : (
+                <div className="modal-actions route-import-actions">
+                  <button
+                    className="ghost-button"
+                    onClick={handleCloseRouteImportModal}
+                    disabled={routeImporting}
+                    type="button"
+                  >
+                    取消
+                  </button>
+                  <button
+                    className="primary-button"
+                    onClick={() => void handleConfirmImportCoordinates()}
+                    disabled={routeImporting || !routeImportCoordinatesInput.trim()}
+                    type="button"
+                  >
+                    {routeImporting ? '匯入中...' : '確認匯入'}
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {isRouteLibraryOpen && (
         <div className="modal-backdrop" onClick={() => setIsRouteLibraryOpen(false)}>
           <div className="modal-panel route-library-panel" onClick={(e) => e.stopPropagation()}>
@@ -1413,6 +1643,15 @@ export default function App() {
                         <span>{route.waypoints.length} 個路徑點</span>
                       </button>
                       <div className="saved-route-actions">
+                        <button
+                          className="icon-button"
+                          onClick={() => void handleCopyRouteCoordinates(route)}
+                          aria-label={`複製路徑節點：${route.name}`}
+                          title={`複製路徑節點：${route.name}`}
+                          type="button"
+                        >
+                          <Copy aria-hidden="true" size={16} strokeWidth={2.4} />
+                        </button>
                         <button
                           className="icon-button"
                           onClick={() => handleLoadSavedRoute(route)}
@@ -1796,15 +2035,18 @@ export default function App() {
                         placeholder="輸入路徑標題"
                       />
                     </label>
-                    <button
-                      className="icon-button route-manager-import-button"
-                      onClick={() => routeImportInputRef.current?.click()}
-                      aria-label="匯入路徑資料"
-                      title="匯入路徑資料"
-                      type="button"
-                    >
-                      <FileInput aria-hidden="true" size={16} strokeWidth={2.4} />
-                    </button>
+                    <div className="field route-import-field">
+                      <span aria-hidden="true">匯入</span>
+                      <button
+                        className="icon-button route-manager-import-button"
+                        onClick={handleOpenRouteImportFromManager}
+                        aria-label="匯入路徑"
+                        title="匯入路徑"
+                        type="button"
+                      >
+                        <FileInput aria-hidden="true" size={20} strokeWidth={2.4} />
+                      </button>
+                    </div>
                   </div>
                   <div className="landmark-section-head">
                     <span>已儲存路徑</span>
@@ -1835,6 +2077,16 @@ export default function App() {
                               </button>
                               {openRouteActionId === route.id && (
                                 <div className="landmark-action-menu">
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      void handleCopyRouteCoordinates(route)
+                                      setOpenRouteActionId('')
+                                    }}
+                                  >
+                                    <Copy aria-hidden="true" size={15} strokeWidth={2.4} />
+                                    複製節點
+                                  </button>
                                   <button
                                     type="button"
                                     onClick={() => {
