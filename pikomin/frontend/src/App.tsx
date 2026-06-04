@@ -7,6 +7,10 @@ import MapInterface from './components/MapInterface'
 import { RoutePanel } from './components/RoutePanel'
 import { useDevice } from './hooks/useDevice'
 import { useRoute } from './hooks/useRoute'
+import {
+  calculateCycleDistanceMeters,
+  optimizeFlowerRoute,
+} from './utils/routeOptimizer'
 import type { GPSCoordinate, PostcardLandmark, SavedLandmark, SavedRoute } from './types'
 
 type Mode = 'single' | 'route'
@@ -27,6 +31,10 @@ interface Toast {
 interface RouteFilePayload {
   name?: unknown
   waypoints?: unknown
+}
+
+interface GeneratedRouteSummary {
+  totalDistanceMeters: number
 }
 
 interface LandmarkFilePayload {
@@ -361,6 +369,8 @@ export default function App() {
   const [routeImportNameInput, setRouteImportNameInput] = useState('')
   const [routeImportCoordinatesInput, setRouteImportCoordinatesInput] = useState('')
   const [routeImporting, setRouteImporting] = useState(false)
+  const [hasGeneratedFlowerRoute, setHasGeneratedFlowerRoute] = useState(false)
+  const [generatedRouteSummary, setGeneratedRouteSummary] = useState<GeneratedRouteSummary | null>(null)
   const [flyMode, setFlyMode] = useState<FlyMode>('coordinate')
   const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
   const showToastRef = useRef<(message: string) => void>(() => {})
@@ -423,16 +433,35 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    if (navigator.geolocation && selectedDevice && !myPosition && !hasResetGPS) {
+    if (!selectedDevice || myPosition || hasResetGPS) return
+
+    let cancelled = false
+    const applyInitialPosition = (coord: GPSCoordinate) => {
+      if (cancelled) return
+      setMyPosition(coord)
+      syncCurrentPosition(coord, 'idle')
+      setViewTarget(coord)
+    }
+    const locateByBrowser = () => {
+      if (!navigator.geolocation) return
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           const coord = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }
-          setMyPosition(coord)
-          syncCurrentPosition(coord, 'idle')
+          applyInitialPosition(coord)
         },
         () => {},
       )
     }
+
+    void apiClient.getGeolocation()
+      .then((geo) => {
+        applyInitialPosition({ latitude: geo.latitude, longitude: geo.longitude })
+      })
+      .catch(() => {
+        locateByBrowser()
+      })
+
+    return () => { cancelled = true }
   }, [selectedDevice, myPosition, hasResetGPS, syncCurrentPosition])
 
   const showToast = useCallback((message: string) => {
@@ -600,6 +629,8 @@ export default function App() {
       if (!isMapClickArmed) return
 
       if (mode === 'route') {
+        setHasGeneratedFlowerRoute(false)
+        setGeneratedRouteSummary(null)
         addWaypoint(coord)
         return
       }
@@ -632,12 +663,16 @@ export default function App() {
   }, [isPlanting, showToast])
 
   const handleRemoveWaypoint = useCallback((index: number) => {
+    setHasGeneratedFlowerRoute(false)
+    setGeneratedRouteSummary(null)
     removeWaypoint(index)
     showToast('已移除路徑節點')
   }, [removeWaypoint, showToast])
 
   const handleSetWaypointAsStart = useCallback((index: number) => {
     if (index <= 0 || index >= waypoints.length) return
+    setHasGeneratedFlowerRoute(false)
+    setGeneratedRouteSummary(null)
     replaceWaypoints([
       ...waypoints.slice(index),
       ...waypoints.slice(0, index),
@@ -648,6 +683,8 @@ export default function App() {
   const handleSetWaypointAsEnd = useCallback((index: number) => {
     if (index < 0 || index >= waypoints.length - 1) return
     const selected = waypoints[index]
+    setHasGeneratedFlowerRoute(false)
+    setGeneratedRouteSummary(null)
     replaceWaypoints([
       ...waypoints.slice(0, index),
       ...waypoints.slice(index + 1),
@@ -655,6 +692,32 @@ export default function App() {
     ])
     showToast('已設為終點')
   }, [replaceWaypoints, showToast, waypoints])
+
+  const handleUpdateWaypoint = useCallback((index: number, coord: GPSCoordinate) => {
+    setHasGeneratedFlowerRoute(false)
+    setGeneratedRouteSummary(null)
+    updateWaypoint(index, coord)
+  }, [updateWaypoint])
+
+  const handleGenerateFlowerRoute = useCallback(() => {
+    if (routeStatus.state !== 'idle' && routeStatus.state !== 'paused') {
+      showToast('種花中不可重新產生路徑')
+      return
+    }
+    if (waypoints.length < 3) {
+      showToast('至少需要 3 個花點才能產生循環路線')
+      return
+    }
+
+    const optimized = optimizeFlowerRoute(waypoints)
+    const totalDistance = calculateCycleDistanceMeters(optimized)
+    replaceWaypoints(optimized)
+    setHasGeneratedFlowerRoute(true)
+    setGeneratedRouteSummary({
+      totalDistanceMeters: totalDistance,
+    })
+    showToast('已快速產生循環綠線')
+  }, [replaceWaypoints, routeStatus.state, showToast, waypoints])
 
   const handleStartRoute = useCallback(
     async (speed: number, loop: boolean) => {
@@ -988,6 +1051,8 @@ export default function App() {
       showToast('路徑執行中，請先停止後再載入')
       return
     }
+    setHasGeneratedFlowerRoute(false)
+    setGeneratedRouteSummary(null)
     replaceWaypoints(route.waypoints)
     setMode('route')
     setIsRouteLibraryOpen(false)
@@ -1147,11 +1212,12 @@ export default function App() {
           onPostcardAddLandmark={handleAddPostcardLandmark}
           onPostcardAction={showToast}
           onMapClick={handleMapClick}
-          onWaypointMove={updateWaypoint}
+          onWaypointMove={handleUpdateWaypoint}
           onWaypointRemove={handleRemoveWaypoint}
           onWaypointSetAsStart={handleSetWaypointAsStart}
           onWaypointSetAsEnd={handleSetWaypointAsEnd}
           canEditWaypoints={canEditRouteWaypoints}
+          showGeneratedFlowerRoute={hasGeneratedFlowerRoute}
         />
       </section>
 
@@ -1293,6 +1359,9 @@ export default function App() {
               <RoutePanel
                 waypoints={waypoints}
                 routeStatus={routeStatus}
+                hasGeneratedFlowerRoute={hasGeneratedFlowerRoute}
+                generatedRouteSummary={generatedRouteSummary}
+                onGenerateFlowerRoute={handleGenerateFlowerRoute}
                 onStartRoute={handleStartRoute}
                 onPauseRoute={handlePauseRoute}
                 onResumeRoute={handleResumeRoute}
@@ -1393,7 +1462,11 @@ export default function App() {
                     {waypoints.length > 0 && (
                       <button
                         className="icon-button danger route-toolbar-button"
-                        onClick={clearWaypoints}
+                        onClick={() => {
+                          setHasGeneratedFlowerRoute(false)
+                          setGeneratedRouteSummary(null)
+                          clearWaypoints()
+                        }}
                         aria-label="清除全部路徑點"
                         title="清除全部路徑點"
                         type="button"

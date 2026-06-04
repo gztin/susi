@@ -1,20 +1,35 @@
 import { useState } from 'react'
 import type { GPSCoordinate, RouteStatus } from '../types'
 
+interface GeneratedRouteSummary {
+  totalDistanceMeters: number
+}
+
 interface RoutePanelProps {
   waypoints: GPSCoordinate[]
   routeStatus: RouteStatus
+  hasGeneratedFlowerRoute: boolean
+  generatedRouteSummary: GeneratedRouteSummary | null
+  onGenerateFlowerRoute: () => void
   onStartRoute: (speed: number, loop: boolean) => Promise<void>
   onPauseRoute: () => Promise<void>
   onResumeRoute: () => Promise<void>
   onStopRoute: () => Promise<void>
 }
 
-const JOG_SPEED = 15 / 3.6
+const JOG_SPEED = 20 / 3.6
+
+function formatRouteDistance(meters: number): string {
+  if (meters >= 1000) return `${(meters / 1000).toFixed(2)} km`
+  return `${Math.round(meters)} m`
+}
 
 export function RoutePanel({
   waypoints,
   routeStatus,
+  hasGeneratedFlowerRoute,
+  generatedRouteSummary,
+  onGenerateFlowerRoute,
   onStartRoute,
   onPauseRoute,
   onResumeRoute,
@@ -24,10 +39,12 @@ export function RoutePanel({
   const [loading, setLoading] = useState(false)
 
   const canStart = waypoints.length >= 2
+  const canGenerateFlowerRoute = waypoints.length >= 3
   const isMoving = routeStatus.state === 'moving'
   const isPaused = routeStatus.state === 'paused'
   const isRunning = isMoving || isPaused
   const locked = isRunning || loading
+  const shouldLoop = loop || hasGeneratedFlowerRoute
 
   async function withLoading(action: () => Promise<void>) {
     setLoading(true)
@@ -40,15 +57,43 @@ export function RoutePanel({
 
   return (
     <div className="route-panel">
-      <label className="toggle-row">
-        <input
-          type="checkbox"
-          checked={loop}
-          onChange={(e) => setLoop(e.target.checked)}
-          disabled={locked}
-        />
-        <span>循環路線</span>
-      </label>
+      <div className="route-generator-block">
+        <div className="route-generator-actions">
+          <button
+            className="secondary-button route-generator-button"
+            onClick={onGenerateFlowerRoute}
+            disabled={!canGenerateFlowerRoute || locked}
+            type="button"
+          >
+            快速綠線
+          </button>
+        </div>
+        {generatedRouteSummary && (
+          <div className="route-distance-result" aria-live="polite">
+            <span>快速綠線</span>
+            <strong>循環總距離 {formatRouteDistance(generatedRouteSummary.totalDistanceMeters)}</strong>
+          </div>
+        )}
+        <p className="helper-text" aria-live="polite">
+          {hasGeneratedFlowerRoute
+            ? '已依最佳循環順序重新編號，開始種花會自動循環'
+            : canGenerateFlowerRoute
+            ? '快速產生循環路線'
+            : '至少需要 3 個花點才能產生循環路線'}
+        </p>
+      </div>
+
+      {!hasGeneratedFlowerRoute && (
+        <label className="toggle-row">
+          <input
+            type="checkbox"
+            checked={loop}
+            onChange={(e) => setLoop(e.target.checked)}
+            disabled={locked}
+          />
+          <span>循環路線</span>
+        </label>
+      )}
 
       {isRunning && (
         <div className="progress-block">
@@ -66,10 +111,10 @@ export function RoutePanel({
         {!isRunning ? (
           <button
             className="primary-button route-start-button"
-            onClick={() => void withLoading(() => onStartRoute(JOG_SPEED, loop))}
+            onClick={() => void withLoading(() => onStartRoute(JOG_SPEED, shouldLoop))}
             disabled={!canStart || loading}
           >
-            {loading ? '啟動中' : '開始種花（15km）'}
+            {loading ? '啟動中' : '開始種花（20 km/h）'}
           </button>
         ) : (
           <>

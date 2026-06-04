@@ -766,6 +766,40 @@ select {
   gap: 12px;
 }
 
+.route-generator-block {
+  display: grid;
+  gap: 8px;
+}
+
+.route-generator-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.route-generator-button {
+  width: 100%;
+  min-height: 44px;
+}
+
+.route-distance-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  background: var(--surface-light);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.route-distance-result strong {
+  color: var(--text-primary);
+  font-size: 0.98rem;
+}
+
 .route-summary {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

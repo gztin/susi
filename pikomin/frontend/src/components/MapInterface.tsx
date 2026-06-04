@@ -62,6 +62,7 @@ interface MapInterfaceProps {
   onWaypointSetAsStart?: (index: number) => void
   onWaypointSetAsEnd?: (index: number) => void
   canEditWaypoints?: boolean
+  showGeneratedFlowerRoute?: boolean
 }
 
 interface WaypointContextMenu {
@@ -96,6 +97,7 @@ export default function MapInterface({
   onWaypointSetAsStart,
   onWaypointSetAsEnd,
   canEditWaypoints = false,
+  showGeneratedFlowerRoute = false,
 }: MapInterfaceProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<L.Map | null>(null)
@@ -139,15 +141,6 @@ export default function MapInterface({
 
     mapRef.current = map
     emitViewport(map)
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          map.setView([pos.coords.latitude, pos.coords.longitude], 15)
-        },
-        () => {}
-      )
-    }
 
     return () => {
       map.remove()
@@ -295,16 +288,18 @@ export default function MapInterface({
       waypointMarkersRef.current.push(marker)
     })
 
-    if (mode === 'route' && waypoints.length >= 2) {
-      const latlngs = waypoints.map((wp) => [wp.latitude, wp.longitude] as L.LatLngTuple)
+    if (mode === 'route' && showGeneratedFlowerRoute && waypoints.length >= 3) {
+      const latlngs = [
+        ...waypoints.map((wp) => [wp.latitude, wp.longitude] as L.LatLngTuple),
+        [waypoints[0].latitude, waypoints[0].longitude] as L.LatLngTuple,
+      ]
       polylineRef.current = L.polyline(latlngs, {
-        color: '#f97316',
-        weight: 3,
-        opacity: 0.8,
-        dashArray: '6, 4',
+        color: '#16a34a',
+        weight: 4,
+        opacity: 0.9,
       }).addTo(map)
     }
-  }, [waypoints, mode, canEditWaypoints, onWaypointMove])
+  }, [waypoints, mode, canEditWaypoints, onWaypointMove, showGeneratedFlowerRoute])
 
   useEffect(() => {
     setWaypointMenu(null)
