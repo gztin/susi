@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import type { GPSCoordinate, RouteStatus } from '../types'
 
+type FlowerRouteVariant = 'fast' | 'best'
+
 interface GeneratedRouteSummary {
+  variant: FlowerRouteVariant
   totalDistanceMeters: number
 }
 
@@ -10,7 +13,7 @@ interface RoutePanelProps {
   routeStatus: RouteStatus
   hasGeneratedFlowerRoute: boolean
   generatedRouteSummary: GeneratedRouteSummary | null
-  onGenerateFlowerRoute: () => void
+  onGenerateFlowerRoute: (variant: FlowerRouteVariant) => void
   onStartRoute: (speed: number, loop: boolean) => Promise<void>
   onPauseRoute: () => Promise<void>
   onResumeRoute: () => Promise<void>
@@ -18,6 +21,10 @@ interface RoutePanelProps {
 }
 
 const JOG_SPEED = 20 / 3.6
+const FLOWER_ROUTE_LABEL: Record<FlowerRouteVariant, string> = {
+  fast: '快速綠線',
+  best: '最佳路線',
+}
 
 function formatRouteDistance(meters: number): string {
   if (meters >= 1000) return `${(meters / 1000).toFixed(2)} km`
@@ -61,16 +68,16 @@ export function RoutePanel({
         <div className="route-generator-actions">
           <button
             className="secondary-button route-generator-button"
-            onClick={onGenerateFlowerRoute}
+            onClick={() => onGenerateFlowerRoute('best')}
             disabled={!canGenerateFlowerRoute || locked}
             type="button"
           >
-            快速綠線
+            最佳路線
           </button>
         </div>
         {generatedRouteSummary && (
           <div className="route-distance-result" aria-live="polite">
-            <span>快速綠線</span>
+            <span>{FLOWER_ROUTE_LABEL[generatedRouteSummary.variant]}</span>
             <strong>循環總距離 {formatRouteDistance(generatedRouteSummary.totalDistanceMeters)}</strong>
           </div>
         )}
@@ -78,7 +85,7 @@ export function RoutePanel({
           {hasGeneratedFlowerRoute
             ? '已依最佳循環順序重新編號，開始種花會自動循環'
             : canGenerateFlowerRoute
-            ? '快速產生循環路線'
+            ? '依最佳路線重新排列路徑點'
             : '至少需要 3 個花點才能產生循環路線'}
         </p>
       </div>

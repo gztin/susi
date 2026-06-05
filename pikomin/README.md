@@ -50,6 +50,8 @@ chmod +x scripts/docker-stack.sh
 
 ## 使用說明
 
+Markdown 文件瀏覽器請開啟：[docs/index.html](docs/index.html)
+
 詳細改動請見：[docs/更新紀錄.md](docs/更新紀錄.md)
 
 ### 單點模式

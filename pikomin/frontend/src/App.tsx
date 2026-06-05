@@ -10,6 +10,7 @@ import { useRoute } from './hooks/useRoute'
 import {
   calculateCycleDistanceMeters,
   optimizeFlowerRoute,
+  optimizeFlowerRouteDeepSearch,
 } from './utils/routeOptimizer'
 import type { GPSCoordinate, PostcardLandmark, SavedLandmark, SavedRoute } from './types'
 
@@ -19,6 +20,7 @@ type ManagerTab = 'landmarks' | 'routes'
 type LandmarkManagerTab = 'create' | 'search'
 type PostcardFilterType = 'temple' | 'transformer' | 'church' | 'park'
 type RouteImportMode = 'json' | 'coordinates'
+type FlowerRouteVariant = 'fast' | 'best'
 const LANDMARKS_PER_PAGE = 12
 const ROUTES_PER_PAGE = 12
 const ROUTE_TOOLBAR_ICON_PROPS = { size: 22, strokeWidth: 2.4 }
@@ -34,6 +36,7 @@ interface RouteFilePayload {
 }
 
 interface GeneratedRouteSummary {
+  variant: FlowerRouteVariant
   totalDistanceMeters: number
 }
 
@@ -699,7 +702,7 @@ export default function App() {
     updateWaypoint(index, coord)
   }, [updateWaypoint])
 
-  const handleGenerateFlowerRoute = useCallback(() => {
+  const handleGenerateFlowerRoute = useCallback((variant: FlowerRouteVariant) => {
     if (routeStatus.state !== 'idle' && routeStatus.state !== 'paused') {
       showToast('種花中不可重新產生路徑')
       return
@@ -709,14 +712,17 @@ export default function App() {
       return
     }
 
-    const optimized = optimizeFlowerRoute(waypoints)
+    const optimized = variant === 'best'
+      ? optimizeFlowerRouteDeepSearch(waypoints)
+      : optimizeFlowerRoute(waypoints)
     const totalDistance = calculateCycleDistanceMeters(optimized)
     replaceWaypoints(optimized)
     setHasGeneratedFlowerRoute(true)
     setGeneratedRouteSummary({
+      variant,
       totalDistanceMeters: totalDistance,
     })
-    showToast('已快速產生循環綠線')
+    showToast(variant === 'best' ? '已產生最佳路線' : '已快速產生循環綠線')
   }, [replaceWaypoints, routeStatus.state, showToast, waypoints])
 
   const handleStartRoute = useCallback(
@@ -930,6 +936,15 @@ export default function App() {
     link.remove()
     URL.revokeObjectURL(url)
     showToast(`已匯出地標：${landmark.name}`)
+  }, [showToast])
+
+  const handleCopyLandmarkCoordinate = useCallback(async (landmark: SavedLandmark) => {
+    try {
+      await copyTextToClipboard(formatCoordinate(landmark.coordinate))
+      showToast(`已複製地標座標：${landmark.name}`)
+    } catch {
+      showToast('複製地標座標失敗')
+    }
   }, [showToast])
 
   const handleImportLandmarkFile = useCallback(async (file: File | null) => {
@@ -2033,6 +2048,16 @@ export default function App() {
                                 </button>
                                 {openLandmarkActionId === landmark.id && (
                                   <div className="landmark-action-menu">
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        void handleCopyLandmarkCoordinate(landmark)
+                                        setOpenLandmarkActionId('')
+                                      }}
+                                    >
+                                      <Copy aria-hidden="true" size={15} strokeWidth={2.4} />
+                                      複製座標
+                                    </button>
                                     <button
                                       type="button"
                                       onClick={() => {
