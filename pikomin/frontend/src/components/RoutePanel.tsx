@@ -1,21 +1,28 @@
 import { useState } from 'react'
+import { CircleStop, Pause, Play, RefreshCw } from 'lucide-react'
 import type { GPSCoordinate, RouteStatus } from '../types'
 
 interface RoutePanelProps {
   waypoints: GPSCoordinate[]
   routeStatus: RouteStatus
+  isRouteOptimized: boolean
+  routeCycleDuration: string | null
+  onOptimizeRoute: () => void
   onStartRoute: (speed: number, loop: boolean) => Promise<void>
   onPauseRoute: () => Promise<void>
   onResumeRoute: () => Promise<void>
   onStopRoute: () => Promise<void>
 }
 
-const JOG_SPEED = 15 / 3.6
-const JOG_SPEED_LABEL = '小跑步 15 km/h'
+const JOG_SPEED = 20 / 3.6
+const JOG_SPEED_LABEL = '小跑步 20 km/h'
 
 export function RoutePanel({
   waypoints,
   routeStatus,
+  isRouteOptimized,
+  routeCycleDuration,
+  onOptimizeRoute,
   onStartRoute,
   onPauseRoute,
   onResumeRoute,
@@ -24,7 +31,8 @@ export function RoutePanel({
   const [loop, setLoop] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const canStart = waypoints.length >= 2
+  const canOptimize = waypoints.length >= 3
+  const canStart = canOptimize && isRouteOptimized
   const isMoving = routeStatus.state === 'moving'
   const isPaused = routeStatus.state === 'paused'
   const isRunning = isMoving || isPaused
@@ -45,11 +53,28 @@ export function RoutePanel({
         <input
           type="checkbox"
           checked={loop}
-          onChange={(e) => setLoop(e.target.checked)}
+          onChange={(event) => setLoop(event.target.checked)}
           disabled={locked}
         />
         <span>循環路線</span>
       </label>
+
+      {!isRunning && (
+        <button
+          className={`secondary-button route-optimize-button${isRouteOptimized ? ' is-active' : ''}`}
+          onClick={onOptimizeRoute}
+          disabled={!canOptimize || locked}
+          type="button"
+        >
+          最佳路線規劃
+        </button>
+      )}
+
+      {routeCycleDuration && !isRunning && (
+        <p className="route-duration-summary">
+          走完一圈約 {routeCycleDuration}
+        </p>
+      )}
 
       {isRunning && (
         <div className="progress-block">
@@ -69,23 +94,57 @@ export function RoutePanel({
             className="primary-button route-start-button"
             onClick={() => void withLoading(() => onStartRoute(JOG_SPEED, loop))}
             disabled={!canStart || loading}
+            type="button"
           >
             <span>{loading ? '啟動中' : '開始種花'}</span>
-            <small>{JOG_SPEED_LABEL}</small>
+            <small>{isRouteOptimized ? JOG_SPEED_LABEL : '先完成最佳路線規劃'}</small>
           </button>
         ) : (
           <>
             {isMoving ? (
-              <button className="secondary-button" onClick={() => void withLoading(onPauseRoute)} disabled={loading}>
-                暫停
+              <button
+                className="icon-button route-control-icon-button"
+                onClick={() => void withLoading(onPauseRoute)}
+                disabled={loading}
+                aria-label="??"
+                title="??"
+                type="button"
+              >
+                <Pause aria-hidden="true" size={22} strokeWidth={2.4} />
               </button>
             ) : (
-              <button className="secondary-button" onClick={() => void withLoading(onResumeRoute)} disabled={loading}>
-                繼續
-              </button>
+              <>
+                <button
+                  className={`icon-button route-control-icon-button route-optimize-button${isRouteOptimized ? ' is-active' : ''}`}
+                  onClick={onOptimizeRoute}
+                  disabled={!canOptimize || loading}
+                  aria-label="????"
+                title="????"
+                type="button"
+              >
+                <RefreshCw aria-hidden="true" size={22} strokeWidth={2.4} />
+                </button>
+                <button
+                  className="icon-button route-control-icon-button"
+                  onClick={() => void withLoading(onResumeRoute)}
+                  disabled={loading}
+                  aria-label="??"
+                title="??"
+                type="button"
+              >
+                <Play aria-hidden="true" size={22} strokeWidth={2.4} />
+                </button>
+              </>
             )}
-            <button className="accent-button" onClick={() => void withLoading(onStopRoute)} disabled={loading}>
-              停止
+            <button
+              className="icon-button route-control-icon-button danger"
+              onClick={() => void withLoading(onStopRoute)}
+              disabled={loading}
+              aria-label="??"
+                title="??"
+                type="button"
+              >
+                <CircleStop aria-hidden="true" size={22} strokeWidth={2.4} />
             </button>
           </>
         )}

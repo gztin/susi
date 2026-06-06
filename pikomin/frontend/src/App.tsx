@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Church, Download, FileInput, FolderOpen, HelpCircle, Layers3, Loader2, Lock, Mail, Map, MoreHorizontal, MousePointerClick, Pencil, Radar, Save, Trees, Trash2, Zap } from 'lucide-react'
+import { Church, Copy, Download, FileInput, FolderOpen, HelpCircle, Layers3, Loader2, Lock, Mail, Map, MoreHorizontal, MousePointerClick, Pencil, Radar, Save, Trees, Trash2, Zap } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -16,6 +16,118 @@ type LandmarkManagerTab = 'create' | 'search'
 type PostcardFilterType = 'temple' | 'transformer' | 'church' | 'park'
 const LANDMARKS_PER_PAGE = 12
 const ROUTES_PER_PAGE = 12
+
+function formatRouteCoordinates(waypoints: GPSCoordinate[]): string {
+  return waypoints
+    .map((point) => `${point.latitude.toFixed(6)},${point.longitude.toFixed(6)}`)
+    .join('\n')
+}
+
+function routeDistance(a: GPSCoordinate, b: GPSCoordinate): number {
+  const lat1 = a.latitude * Math.PI / 180
+  const lat2 = b.latitude * Math.PI / 180
+  const deltaLat = (b.latitude - a.latitude) * Math.PI / 180
+  const deltaLon = (b.longitude - a.longitude) * Math.PI / 180
+  const h = Math.sin(deltaLat / 2) ** 2 +
+    Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLon / 2) ** 2
+  return 6371000 * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h))
+}
+
+function cycleDistance(points: GPSCoordinate[]): number {
+  let total = 0
+  for (let index = 0; index < points.length; index += 1) {
+    total += routeDistance(points[index], points[(index + 1) % points.length])
+  }
+  return total
+}
+
+function optimizeRouteExact(points: GPSCoordinate[]): GPSCoordinate[] {
+  const [start, ...rest] = points
+  let best = points
+  let bestDistance = cycleDistance(points)
+
+  function visit(prefix: GPSCoordinate[], remaining: GPSCoordinate[]) {
+    if (remaining.length === 0) {
+      const candidate = [start, ...prefix]
+      const distance = cycleDistance(candidate)
+      if (distance < bestDistance) {
+        best = candidate
+        bestDistance = distance
+      }
+      return
+    }
+
+    remaining.forEach((point, index) => {
+      visit(
+        [...prefix, point],
+        [...remaining.slice(0, index), ...remaining.slice(index + 1)],
+      )
+    })
+  }
+
+  visit([], rest)
+  return best
+}
+
+function optimizeRouteHeuristic(points: GPSCoordinate[]): GPSCoordinate[] {
+  const [start, ...rest] = points
+  const route = [start]
+  const remaining = [...rest]
+
+  while (remaining.length > 0) {
+    const current = route[route.length - 1]
+    let nearestIndex = 0
+    let nearestDistance = routeDistance(current, remaining[0])
+    for (let index = 1; index < remaining.length; index += 1) {
+      const distance = routeDistance(current, remaining[index])
+      if (distance < nearestDistance) {
+        nearestIndex = index
+        nearestDistance = distance
+      }
+    }
+    route.push(remaining.splice(nearestIndex, 1)[0])
+  }
+
+  let improved = true
+  while (improved) {
+    improved = false
+    for (let i = 1; i < route.length - 2; i += 1) {
+      for (let k = i + 1; k < route.length - 1; k += 1) {
+        const candidate = [
+          ...route.slice(0, i),
+          ...route.slice(i, k + 1).reverse(),
+          ...route.slice(k + 1),
+        ]
+        if (cycleDistance(candidate) + 0.001 < cycleDistance(route)) {
+          route.splice(0, route.length, ...candidate)
+          improved = true
+        }
+      }
+    }
+  }
+
+  return route
+}
+
+function optimizeRouteCycle(points: GPSCoordinate[]): GPSCoordinate[] {
+  if (points.length < 3) return points
+  return points.length <= 9 ? optimizeRouteExact(points) : optimizeRouteHeuristic(points)
+}
+
+function formatDuration(seconds: number): string {
+  const rounded = Math.max(1, Math.round(seconds))
+  const hours = Math.floor(rounded / 3600)
+  const minutes = Math.floor((rounded % 3600) / 60)
+  const secs = rounded % 60
+
+  if (hours > 0) {
+    return `${hours} 小時 ${minutes} 分`
+  }
+  if (minutes > 0) {
+    return `${minutes} 分 ${secs} 秒`
+  }
+  return `${secs} 秒`
+}
 
 interface Toast {
   id: number
@@ -291,6 +403,8 @@ export default function App() {
   const [landmarkManagerTab, setLandmarkManagerTab] = useState<LandmarkManagerTab>('create')
   const [landmarkPage, setLandmarkPage] = useState(1)
   const [routePage, setRoutePage] = useState(1)
+  const [waypointStartIndex, setWaypointStartIndex] = useState(0)
+  const [isRouteOptimized, setIsRouteOptimized] = useState(false)
   const [showPostcards, setShowPostcards] = useState(false)
   const [mapBounds, setMapBounds] = useState<MapBounds | null>(null)
   const [postcards, setPostcards] = useState<PostcardLandmark[]>([])
@@ -513,6 +627,8 @@ export default function App() {
       if (!isMapClickArmed) return
 
       if (mode === 'route') {
+        if (waypoints.length === 0) setWaypointStartIndex(0)
+        setIsRouteOptimized(false)
         addWaypoint(coord)
         return
       }
@@ -529,7 +645,7 @@ export default function App() {
         showToast(err instanceof Error ? err.message : '設定位置失敗')
       }
     },
-    [addWaypoint, isMapClickArmed, mode, selectedDevice?.id, sendLocationFast, showToast, syncCurrentPosition],
+    [addWaypoint, isMapClickArmed, mode, selectedDevice?.id, sendLocationFast, showToast, syncCurrentPosition, waypoints.length],
   )
 
   const handleToggleMapClickArmed = useCallback(() => {
@@ -545,30 +661,48 @@ export default function App() {
     showToast('已移除路徑節點')
   }, [removeWaypoint, showToast])
 
-  const handleSetWaypointAsStart = useCallback((index: number) => {
-    if (index <= 0 || index >= waypoints.length) return
-    const selected = waypoints[index]
-    replaceWaypoints([
-      selected,
-      ...waypoints.slice(0, index),
-      ...waypoints.slice(index + 1),
-    ])
-    showToast('已設為起點')
-  }, [replaceWaypoints, showToast, waypoints])
+  const handleUpdateWaypoint = useCallback((index: number, coord: GPSCoordinate) => {
+    const nextWaypoints = waypoints.map((wp, wpIndex) => (wpIndex === index ? coord : wp))
 
-  const handleSetWaypointAsEnd = useCallback((index: number) => {
-    if (index < 0 || index >= waypoints.length - 1) return
-    const selected = waypoints[index]
-    replaceWaypoints([
-      ...waypoints.slice(0, index),
-      ...waypoints.slice(index + 1),
-      selected,
-    ])
-    showToast('已設為終點')
+    if (routeStatus.state === 'paused' || isRouteOptimized) {
+      if (nextWaypoints.length >= 3) {
+        replaceWaypoints(optimizeRouteCycle(nextWaypoints))
+        setWaypointStartIndex(0)
+        setIsRouteOptimized(true)
+        showToast('已依新節點位置重新規劃路線')
+        return
+      }
+
+      replaceWaypoints(nextWaypoints)
+      setWaypointStartIndex(0)
+      setIsRouteOptimized(false)
+      return
+    }
+
+    updateWaypoint(index, coord)
+    setWaypointStartIndex(0)
+    setIsRouteOptimized(false)
+  }, [isRouteOptimized, replaceWaypoints, routeStatus.state, showToast, updateWaypoint, waypoints])
+
+  const handleOptimizeRoute = useCallback(() => {
+    if (waypoints.length < 3) {
+      showToast('最佳路線規劃至少需要 3 個中繼點')
+      return
+    }
+
+    replaceWaypoints(optimizeRouteCycle(waypoints))
+    setWaypointStartIndex(0)
+    setIsRouteOptimized(true)
+    showToast('已完成最佳路線規劃')
   }, [replaceWaypoints, showToast, waypoints])
 
   const handleStartRoute = useCallback(
     async (speed: number, loop: boolean) => {
+      if (!isRouteOptimized) {
+        showToast('請先執行最佳路線規劃')
+        return
+      }
+
       try {
         await startRoute(speed, loop)
       } catch (err) {
@@ -584,7 +718,7 @@ export default function App() {
         }
       }
     },
-    [showToast, startRoute, stopRoute],
+    [isRouteOptimized, showToast, startRoute, stopRoute],
   )
 
   const handlePauseRoute = useCallback(async () => {
@@ -877,6 +1011,8 @@ export default function App() {
       return
     }
     replaceWaypoints(route.waypoints)
+    setWaypointStartIndex(0)
+    setIsRouteOptimized(false)
     setMode('route')
     setIsRouteLibraryOpen(false)
     showToast(`已載入路徑：${route.name}`)
@@ -907,6 +1043,16 @@ export default function App() {
     link.remove()
     URL.revokeObjectURL(url)
     showToast(`已匯出路徑：${route.name}`)
+  }, [showToast])
+
+  const handleCopySavedRouteCoordinates = useCallback(async (route: SavedRoute) => {
+    const text = formatRouteCoordinates(route.waypoints)
+    try {
+      await navigator.clipboard.writeText(text)
+      showToast(`已複製路徑座標：${route.name}`)
+    } catch {
+      showToast('複製失敗，請確認瀏覽器剪貼簿權限')
+    }
   }, [showToast])
 
   const handleImportRouteFile = useCallback(async (file: File | null) => {
@@ -980,6 +1126,12 @@ export default function App() {
   const visiblePostcards = showPostcards && mapBounds
     ? filterPostcardsInBounds(postcards, mapBounds, postcardFilters)
     : []
+  const routeCycleSeconds = isRouteOptimized && waypoints.length >= 3
+    ? cycleDistance(waypoints) / (20 / 3.6)
+    : null
+  const shouldShowRouteLine = mode === 'route' &&
+    waypoints.length >= 3 &&
+    (isRouteOptimized || routeStatus.state === 'moving' || routeStatus.state === 'paused')
 
   return (
     <div className="app-shell">
@@ -989,6 +1141,8 @@ export default function App() {
           currentPosition={currentPosition}
           viewTarget={viewTarget}
           waypoints={waypoints}
+          waypointStartIndex={waypointStartIndex}
+          showRouteLine={shouldShowRouteLine}
           savedLandmarks={savedLandmarks}
           postcardLandmarks={visiblePostcards}
           showPostcards={showPostcards}
@@ -996,10 +1150,22 @@ export default function App() {
           onPostcardAddLandmark={handleAddPostcardLandmark}
           onPostcardAction={showToast}
           onMapClick={handleMapClick}
-          onWaypointMove={updateWaypoint}
-          onWaypointRemove={handleRemoveWaypoint}
-          onWaypointSetAsStart={handleSetWaypointAsStart}
-          onWaypointSetAsEnd={handleSetWaypointAsEnd}
+          onWaypointMove={handleUpdateWaypoint}
+          onWaypointRemove={(index) => {
+            handleRemoveWaypoint(index)
+            setWaypointStartIndex(0)
+            setIsRouteOptimized(false)
+          }}
+          onWaypointSetAsStart={(index) => {
+            if (index <= 0 || index >= waypoints.length) return
+            setWaypointStartIndex(index)
+            setIsRouteOptimized(false)
+          }}
+          onWaypointSetAsEnd={(index) => {
+            if (index < 0 || index >= waypoints.length - 1) return
+            setWaypointStartIndex((index + 1) % waypoints.length)
+            setIsRouteOptimized(false)
+          }}
           canEditWaypoints={canEditRouteWaypoints}
         />
       </section>
@@ -1144,6 +1310,9 @@ export default function App() {
               <RoutePanel
                 waypoints={waypoints}
                 routeStatus={routeStatus}
+                isRouteOptimized={isRouteOptimized}
+                routeCycleDuration={routeCycleSeconds === null ? null : formatDuration(routeCycleSeconds)}
+                onOptimizeRoute={handleOptimizeRoute}
                 onStartRoute={handleStartRoute}
                 onPauseRoute={handlePauseRoute}
                 onResumeRoute={handleResumeRoute}
@@ -1203,7 +1372,11 @@ export default function App() {
                     {waypoints.length > 0 && (
                       <button
                         className="icon-button danger route-toolbar-button"
-                        onClick={clearWaypoints}
+                        onClick={() => {
+                          clearWaypoints()
+                          setWaypointStartIndex(0)
+                          setIsRouteOptimized(false)
+                        }}
                         aria-label="清除全部路徑點"
                         title="清除全部路徑點"
                         type="button"
@@ -1369,6 +1542,15 @@ export default function App() {
                           type="button"
                         >
                           <FolderOpen aria-hidden="true" size={16} strokeWidth={2.4} />
+                        </button>
+                        <button
+                          className="icon-button"
+                          onClick={() => void handleCopySavedRouteCoordinates(route)}
+                          aria-label={`複製路徑座標：${route.name}`}
+                          title={`複製路徑座標：${route.name}`}
+                          type="button"
+                        >
+                          <Copy aria-hidden="true" size={16} strokeWidth={2.4} />
                         </button>
                         <button
                           className="icon-button"

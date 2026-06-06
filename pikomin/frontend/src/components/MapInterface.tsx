@@ -48,6 +48,8 @@ interface MapInterfaceProps {
   currentPosition: GPSCoordinate | null
   viewTarget: GPSCoordinate | null
   waypoints: GPSCoordinate[]
+  waypointStartIndex?: number
+  showRouteLine?: boolean
   savedLandmarks: SavedLandmark[]
   postcardLandmarks?: PostcardLandmark[]
   showPostcards?: boolean
@@ -66,7 +68,6 @@ interface WaypointContextMenu {
   index: number
   x: number
   y: number
-  showCoordinate: boolean
 }
 
 interface PostcardContextMenu {
@@ -80,6 +81,8 @@ export default function MapInterface({
   currentPosition,
   viewTarget,
   waypoints,
+  waypointStartIndex = 0,
+  showRouteLine = false,
   savedLandmarks,
   postcardLandmarks = [],
   showPostcards = false,
@@ -234,6 +237,9 @@ export default function MapInterface({
     }
 
     waypoints.forEach((wp, index) => {
+      const displayIndex = waypoints.length > 0
+        ? ((index - waypointStartIndex + waypoints.length) % waypoints.length) + 1
+        : index + 1
       const icon = L.divIcon({
         className: '',
         html: `<div style="
@@ -249,7 +255,7 @@ export default function MapInterface({
           font-weight: bold;
           border: 2px solid #ea580c;
           box-shadow: 0 1px 4px rgba(0,0,0,0.4);
-        ">${index + 1}</div>`,
+        ">${displayIndex}</div>`,
         iconSize: [28, 28],
         iconAnchor: [14, 14],
       })
@@ -278,14 +284,17 @@ export default function MapInterface({
           const bounds = containerRef.current?.getBoundingClientRect()
           const x = bounds ? originalEvent.clientX - bounds.left : event.containerPoint.x
           const y = bounds ? originalEvent.clientY - bounds.top : event.containerPoint.y
-          setWaypointMenu({ index, x, y, showCoordinate: false })
+          setWaypointMenu({ index, x, y })
         })
       }
       waypointMarkersRef.current.push(marker)
     })
 
-    if (mode === 'route' && waypoints.length >= 2) {
-      const latlngs = waypoints.map((wp) => [wp.latitude, wp.longitude] as L.LatLngTuple)
+    if (mode === 'route' && showRouteLine && waypoints.length >= 3) {
+      const latlngs = [
+        ...waypoints.map((wp) => [wp.latitude, wp.longitude] as L.LatLngTuple),
+        [waypoints[0].latitude, waypoints[0].longitude] as L.LatLngTuple,
+      ]
       polylineRef.current = L.polyline(latlngs, {
         color: '#f97316',
         weight: 3,
@@ -293,7 +302,7 @@ export default function MapInterface({
         dashArray: '6, 4',
       }).addTo(map)
     }
-  }, [waypoints, mode, canEditWaypoints, onWaypointMove])
+  }, [waypoints, waypointStartIndex, showRouteLine, mode, canEditWaypoints, onWaypointMove])
 
   useEffect(() => {
     setWaypointMenu(null)
@@ -404,17 +413,13 @@ export default function MapInterface({
           <button
             type="button"
             onClick={() => {
-              setWaypointMenu((current) => current ? { ...current, showCoordinate: true } : current)
+              const text = selectedWaypoint.latitude.toFixed(6) + ',' + selectedWaypoint.longitude.toFixed(6)
+              void navigator.clipboard?.writeText(text)
+              setWaypointMenu(null)
             }}
           >
-            顯示座標
+            複製座標
           </button>
-          {waypointMenu.showCoordinate && (
-            <div className="waypoint-coordinate-info">
-              <span>{selectedWaypoint.latitude.toFixed(6)}</span>
-              <span>{selectedWaypoint.longitude.toFixed(6)}</span>
-            </div>
-          )}
           <button
             type="button"
             onClick={() => {

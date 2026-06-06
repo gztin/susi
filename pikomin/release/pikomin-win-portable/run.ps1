@@ -7,4 +7,4 @@ if (!(Test-Path $RunBat)) {
   exit 1
 }
 
-& cmd /c "`"$RunBat`""
+Start-Process -FilePath $RunBat -WorkingDirectory $BaseDir -WindowStyle Hidden

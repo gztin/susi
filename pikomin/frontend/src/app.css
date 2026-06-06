@@ -776,6 +776,14 @@ select {
   gap: 12px;
 }
 
+.route-duration-summary {
+  margin: -2px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: center;
+}
+
 .route-summary {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1426,6 +1434,11 @@ select {
 
 .route-actions > button {
   flex: 1;
+}
+
+.route-actions .route-control-icon-button {
+  min-height: 58px;
+  border-radius: 16px;
 }
 
 .route-start-button {

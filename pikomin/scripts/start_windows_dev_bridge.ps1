@@ -40,6 +40,17 @@ function Resolve-Python {
   throw "Python runtime not found. Build the portable runtime first, or pass -PythonExe C:\path\to\python.exe."
 }
 
+function Resolve-Pythonw {
+  param([string]$RuntimePython)
+
+  $pythonw = Join-Path (Split-Path -Parent $RuntimePython) "pythonw.exe"
+  if (Test-Path $pythonw) {
+    return (Resolve-Path $pythonw).Path
+  }
+
+  return $RuntimePython
+}
+
 function Start-HostBridge {
   param([string]$RuntimePython)
 
@@ -74,17 +85,29 @@ function Start-TunneldElevated {
 
   $tunnelLog = Join-Path $LogsDir "tunneld.log"
   $tunnelErr = Join-Path $LogsDir "tunneld.err.log"
+  $runtimePythonw = Resolve-Pythonw -RuntimePython $RuntimePython
   $command = @"
 Set-Location '$ProjectDir'
 `$ErrorActionPreference = 'Stop'
-& '$RuntimePython' -m pymobiledevice3 remote tunneld --protocol tcp *> '$tunnelLog' 2> '$tunnelErr'
+& '$runtimePythonw' -m pymobiledevice3 remote tunneld --protocol tcp *> '$tunnelLog' 2> '$tunnelErr'
 "@
 
-  Start-Process `
-    -Verb RunAs `
-    -WindowStyle Hidden `
-    -FilePath "powershell.exe" `
-    -ArgumentList @("-NoProfile", "-ExecutionPolicy", "Bypass", "-WindowStyle", "Hidden", "-Command", $command)
+  try {
+    Start-Process `
+      -Verb RunAs `
+      -WindowStyle Hidden `
+      -FilePath "powershell.exe" `
+      -ArgumentList @("-NoProfile", "-ExecutionPolicy", "Bypass", "-WindowStyle", "Hidden", "-Command", $command)
+  } catch {
+    "RunAs hidden launch failed: $($_.Exception.Message)" | Out-File -FilePath $tunnelErr -Append -Encoding utf8
+    Start-Process `
+      -WindowStyle Hidden `
+      -FilePath $runtimePythonw `
+      -ArgumentList @("-m", "pymobiledevice3", "remote", "tunneld", "--protocol", "tcp") `
+      -WorkingDirectory $ProjectDir `
+      -RedirectStandardOutput $tunnelLog `
+      -RedirectStandardError $tunnelErr
+  }
 }
 
 $runtimePython = Resolve-Python
