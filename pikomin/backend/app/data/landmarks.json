@@ -1,5 +1,167 @@
 [
   {
+    "id": "1780967232018-67",
+    "name": "別所谷八幡神社",
+    "coordinate": {
+      "latitude": 37.336075497105575,
+      "longitude": 136.87304957364825
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780967112336-66",
+    "name": "須惠神社",
+    "coordinate": {
+      "latitude": 37.289402,
+      "longitude": 136.928058
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780965843960-65",
+    "name": "能登鹿島車站",
+    "coordinate": {
+      "latitude": 37.18086007485577,
+      "longitude": 136.9003685358939
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780897159830-64",
+    "name": "西班牙種花03起點",
+    "coordinate": {
+      "latitude": 41.575397,
+      "longitude": 2.515215
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780885137470-63",
+    "name": "新瀉熊野神社",
+    "coordinate": {
+      "latitude": 37.797374287378446,
+      "longitude": 138.8295826007813
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780884308956-62",
+    "name": "長岡槙山八幡宮",
+    "coordinate": {
+      "latitude": 37.481528,
+      "longitude": 138.840182
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780882618053-61",
+    "name": "長崎鼻燈塔",
+    "coordinate": {
+      "latitude": 35.69403427439387,
+      "longitude": 140.86155442291673
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780882549404-60",
+    "name": "Choshi Marina日落美景",
+    "coordinate": {
+      "latitude": 35.70541800567257,
+      "longitude": 140.8384911521747
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780882427950-59",
+    "name": "不動明王不動尊",
+    "coordinate": {
+      "latitude": 35.71289471816913,
+      "longitude": 140.83560584006116
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780881558377-58",
+    "name": "鏡沼海浜公園",
+    "coordinate": {
+      "latitude": 44.871443,
+      "longitude": 141.742816
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780881135334-57",
+    "name": "鋼彈水溝蓋",
+    "coordinate": {
+      "latitude": 45.41510888060319,
+      "longitude": 141.68307477702646
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780880682231-56",
+    "name": "初山別村",
+    "coordinate": {
+      "latitude": 44.563857,
+      "longitude": 141.774852
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780879404962-55",
+    "name": "小平町文化交流處",
+    "coordinate": {
+      "latitude": 44.020225,
+      "longitude": 141.662908
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780638561038-54",
+    "name": "合歡山主峰瑪雅平台",
+    "coordinate": {
+      "latitude": 24.136047,
+      "longitude": 121.271844
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780637831742-53",
+    "name": "日本雪景時鐘",
+    "coordinate": {
+      "latitude": 42.939995,
+      "longitude": 143.300449
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1780620971085-52",
+    "name": "西班牙花田04起點",
+    "coordinate": {
+      "latitude": 41.591824,
+      "longitude": 2.541382
+    },
+    "landmarkType": "flower"
+  },
+  {
+    "id": "1780535737420-51",
+    "name": "義大利花田",
+    "coordinate": {
+      "latitude": 40.82869579086399,
+      "longitude": 16.555613385344486
+    },
+    "landmarkType": "flower"
+  },
+  {
+    "id": "1780475490712-50",
+    "name": "英國詩人：海戀",
+    "coordinate": {
+      "latitude": 56.05347,
+      "longitude": -3.631921
+    },
+    "landmarkType": "mushroom"
+  },
+  {
     "id": "1780468390040-49",
     "name": "義大利水蘑菇",
     "coordinate": {

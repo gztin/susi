@@ -59,6 +59,7 @@ interface MapInterfaceProps {
   onMapClick: (coord: GPSCoordinate) => void
   onWaypointMove?: (index: number, coord: GPSCoordinate) => void
   onWaypointRemove?: (index: number) => void
+  onWaypointCopyCoordinate?: (index: number) => void
   onWaypointSetAsStart?: (index: number) => void
   onWaypointSetAsEnd?: (index: number) => void
   canEditWaypoints?: boolean
@@ -69,7 +70,6 @@ interface WaypointContextMenu {
   index: number
   x: number
   y: number
-  showCoordinate: boolean
 }
 
 interface PostcardContextMenu {
@@ -94,6 +94,7 @@ export default function MapInterface({
   onMapClick,
   onWaypointMove,
   onWaypointRemove,
+  onWaypointCopyCoordinate,
   onWaypointSetAsStart,
   onWaypointSetAsEnd,
   canEditWaypoints = false,
@@ -282,7 +283,7 @@ export default function MapInterface({
           const bounds = containerRef.current?.getBoundingClientRect()
           const x = bounds ? originalEvent.clientX - bounds.left : event.containerPoint.x
           const y = bounds ? originalEvent.clientY - bounds.top : event.containerPoint.y
-          setWaypointMenu({ index, x, y, showCoordinate: false })
+          setWaypointMenu({ index, x, y })
         })
       }
       waypointMarkersRef.current.push(marker)
@@ -404,17 +405,12 @@ export default function MapInterface({
           <button
             type="button"
             onClick={() => {
-              setWaypointMenu((current) => current ? { ...current, showCoordinate: true } : current)
+              onWaypointCopyCoordinate?.(waypointMenu.index)
+              setWaypointMenu(null)
             }}
           >
-            顯示座標
+            複製座標
           </button>
-          {waypointMenu.showCoordinate && (
-            <div className="waypoint-coordinate-info">
-              <span>{selectedWaypoint.latitude.toFixed(6)}</span>
-              <span>{selectedWaypoint.longitude.toFixed(6)}</span>
-            </div>
-          )}
           <button
             type="button"
             onClick={() => {

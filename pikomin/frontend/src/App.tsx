@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Church, Copy, Download, FileInput, FolderOpen, Layers3, Loader2, Lock, Mail, Map, MoreHorizontal, MousePointerClick, Pencil, Radar, Save, Trees, Trash2, Zap } from 'lucide-react'
+import { Church, Copy, Download, FileInput, FolderOpen, Layers3, Loader2, Lock, Mail, Map, MoreHorizontal, MousePointerClick, Pencil, Radar, Save, Search, Trees, Trash2, X, Zap } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -367,6 +367,7 @@ export default function App() {
   const [isScanningPostcards, setIsScanningPostcards] = useState(false)
   const [focusedPostcardId, setFocusedPostcardId] = useState('')
   const [postcardFocusTarget, setPostcardFocusTarget] = useState<GPSCoordinate | null>(null)
+  const [previewPostcard, setPreviewPostcard] = useState<PostcardLandmark | null>(null)
   const [routeNameInput, setRouteNameInput] = useState('')
   const [routeImportMode, setRouteImportMode] = useState<RouteImportMode>('json')
   const [routeImportNameInput, setRouteImportNameInput] = useState('')
@@ -523,8 +524,18 @@ export default function App() {
       setPostcards([])
       setFocusedPostcardId('')
       setPostcardFocusTarget(null)
+      setPreviewPostcard(null)
     }
   }, [showPostcards])
+
+  useEffect(() => {
+    if (!previewPostcard) return
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setPreviewPostcard(null)
+    }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [previewPostcard])
 
   const handleFocusPostcard = useCallback((postcard: PostcardLandmark) => {
     setFocusedPostcardId(postcard.id)
@@ -671,6 +682,18 @@ export default function App() {
     removeWaypoint(index)
     showToast('已移除路徑節點')
   }, [removeWaypoint, showToast])
+
+  const handleCopyWaypointCoordinate = useCallback(async (index: number) => {
+    const waypoint = waypoints[index]
+    if (!waypoint) return
+
+    try {
+      await copyTextToClipboard(formatCoordinate(waypoint))
+      showToast(`已複製節點 ${index + 1} 座標`)
+    } catch {
+      showToast('複製節點座標失敗')
+    }
+  }, [showToast, waypoints])
 
   const handleSetWaypointAsStart = useCallback((index: number) => {
     if (index <= 0 || index >= waypoints.length) return
@@ -1229,6 +1252,7 @@ export default function App() {
           onMapClick={handleMapClick}
           onWaypointMove={handleUpdateWaypoint}
           onWaypointRemove={handleRemoveWaypoint}
+          onWaypointCopyCoordinate={handleCopyWaypointCoordinate}
           onWaypointSetAsStart={handleSetWaypointAsStart}
           onWaypointSetAsEnd={handleSetWaypointAsEnd}
           canEditWaypoints={canEditRouteWaypoints}
@@ -1259,13 +1283,20 @@ export default function App() {
                 ) : (
                   <div className="postcard-result-list">
                     {visiblePostcards.map((postcard) => (
-                      <button
+                      <div
                         key={postcard.id}
                         className={`postcard-result-item${focusedPostcardId === postcard.id ? ' is-focused' : ''}`}
+                        role="button"
+                        tabIndex={0}
                         onClick={() => handleFocusPostcard(postcard)}
-                        type="button"
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault()
+                            handleFocusPostcard(postcard)
+                          }
+                        }}
                       >
-                        <span className="postcard-result-thumb" aria-hidden="true">
+                        <span className="postcard-result-thumb">
                           <span className="postcard-result-thumb-fallback">
                             <Mail size={18} strokeWidth={2.4} />
                           </span>
@@ -1280,13 +1311,27 @@ export default function App() {
                               }}
                             />
                           )}
+                          {postcard.imageUrl && (
+                            <button
+                              type="button"
+                              className="postcard-preview-button"
+                              aria-label={`查看明信片大圖：${postcard.name}`}
+                              title="查看大圖"
+                              onClick={(event) => {
+                                event.stopPropagation()
+                                setPreviewPostcard(postcard)
+                              }}
+                            >
+                              <Search size={14} strokeWidth={2.6} />
+                            </button>
+                          )}
                           <span className="postcard-result-dot" />
                         </span>
                         <span className="postcard-result-main">
                           <strong>{postcard.name}</strong>
                           <small>{formatCoordinate(postcard.coordinate)}</small>
                         </span>
-                      </button>
+                      </div>
                     ))}
                   </div>
                 )}
@@ -1517,6 +1562,40 @@ export default function App() {
           </div>
         ))}
       </div>
+
+      {previewPostcard && (
+        <div className="postcard-preview-backdrop" onClick={() => setPreviewPostcard(null)}>
+          <section
+            className="postcard-preview-panel"
+            aria-modal="true"
+            role="dialog"
+            aria-label={`明信片大圖：${previewPostcard.name}`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <header className="postcard-preview-head">
+              <div>
+                <strong>{previewPostcard.name}</strong>
+                <small>{formatCoordinate(previewPostcard.coordinate)}</small>
+              </div>
+              <button
+                type="button"
+                className="postcard-preview-close"
+                aria-label="關閉明信片大圖"
+                onClick={() => setPreviewPostcard(null)}
+              >
+                <X size={22} strokeWidth={2.6} />
+              </button>
+            </header>
+            <div className="postcard-preview-image-frame">
+              <img
+                src={previewPostcard.imageUrl}
+                alt={previewPostcard.name}
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          </section>
+        </div>
+      )}
 
       {isManageModalOpen && (
         <div className="modal-backdrop" onClick={() => setIsManageModalOpen(false)}>
