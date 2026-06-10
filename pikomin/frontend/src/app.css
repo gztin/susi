@@ -1,68 +1,84 @@
 :root {
   /* ── Hue anchor ─────────────────────────────────── */
-  --hue: 222;
+  --hue: 250;
 
   /* ── Base ───────────────────────────────────────── */
-  --bg-base:   oklch(97.5% 0.006 var(--hue));
-  --bg-raised: oklch(99% 0.004 var(--hue));
+  --bg-base:   oklch(96.8% 0.004 var(--hue));
+  --bg-raised: oklch(99% 0.002 var(--hue));
 
   /* ── Surfaces ───────────────────────────────────── */
-  --surface-panel:           oklch(98.5% 0.006 var(--hue) / 0.95);
-  --surface-hero-a:          oklch(99% 0.004 var(--hue) / 0.98);
-  --surface-hero-b:          oklch(96.5% 0.009 var(--hue) / 0.98);
-  --surface-input:           oklch(99% 0.004 var(--hue) / 0.98);
-  --surface-device:          oklch(97.5% 0.011 var(--hue) / 0.92);
-  --surface-metric:          oklch(96% 0.011 var(--hue) / 0.94);
-  --surface-chip:            oklch(96.5% 0.014 var(--hue) / 0.96);
-  --surface-toast:           oklch(98.5% 0.008 var(--hue) / 0.98);
-  --surface-modal-a:         oklch(99% 0.005 var(--hue) / 0.99);
-  --surface-modal-b:         oklch(97.5% 0.009 var(--hue) / 0.99);
-  --surface-backdrop:        oklch(40% 0.018 var(--hue) / 0.22);
-  --surface-light:           oklch(95.5% 0.008 var(--hue) / 0.96);
-  --surface-light-sel:       oklch(91% 0.020 205 / 0.96);
-  --surface-map-overlay:     oklch(99% 0.005 var(--hue));
-  --surface-btn-secondary-a: oklch(96% 0.010 var(--hue) / 0.98);
-  --surface-btn-secondary-b: oklch(92.5% 0.016 var(--hue) / 0.98);
-  --btn-primary-bg:          oklch(74% 0.070 205);
-  --btn-primary-bg-hover:    oklch(70% 0.078 205);
-  --btn-primary-text:        oklch(24% 0.028 215);
-  --btn-primary-border:      oklch(64% 0.072 205 / 0.68);
-  --btn-shadow:              0 3px 10px oklch(42% 0.014 var(--hue) / 0.12);
-  --map-bg:                  oklch(95.5% 0.008 var(--hue));
+  --surface-panel:           oklch(99.2% 0.002 var(--hue) / 0.94);
+  --surface-hero-a:          oklch(99.5% 0.002 var(--hue) / 0.98);
+  --surface-hero-b:          oklch(96.5% 0.004 var(--hue) / 0.98);
+  --surface-input:           oklch(98.8% 0.002 var(--hue) / 0.98);
+  --surface-device:          oklch(96.8% 0.004 var(--hue) / 0.92);
+  --surface-metric:          oklch(96.4% 0.004 var(--hue) / 0.94);
+  --surface-chip:            oklch(94.8% 0.006 var(--hue) / 0.96);
+  --surface-toast:           oklch(98.8% 0.004 var(--hue) / 0.98);
+  --surface-modal-a:         oklch(99.5% 0.002 var(--hue) / 0.99);
+  --surface-modal-b:         oklch(96.8% 0.005 var(--hue) / 0.99);
+  --surface-backdrop:        oklch(23% 0.012 var(--hue) / 0.34);
+  --surface-light:           oklch(96.2% 0.004 var(--hue) / 0.96);
+  --surface-light-sel:       oklch(94.5% 0.028 253 / 0.96);
+  --surface-map-overlay:     oklch(99% 0.002 var(--hue));
+  --surface-btn-secondary-a: oklch(97% 0.004 var(--hue) / 0.98);
+  --surface-btn-secondary-b: oklch(92.8% 0.008 var(--hue) / 0.98);
+  --btn-primary-bg:          oklch(54% 0.180 253);
+  --btn-primary-bg-hover:    oklch(47% 0.185 253);
+  --btn-primary-text:        oklch(99% 0.002 var(--hue));
+  --btn-primary-border:      oklch(49% 0.170 253 / 0.78);
+  --btn-shadow:              0 2px 7px oklch(35% 0.050 253 / 0.18);
+  --map-bg:                  oklch(94.2% 0.006 var(--hue));
+  --surface-elevated:        oklch(99.5% 0.002 var(--hue));
+  --control-height:          40px;
+  --control-radius:          10px;
+  --panel-radius:            16px;
+  --row-height:              48px;
+  --shadow-panel:            0 16px 42px oklch(18% 0.012 var(--hue) / 0.16);
+  --shadow-control:          0 1px 2px oklch(20% 0.010 var(--hue) / 0.08);
 
   /* ── Text ───────────────────────────────────────── */
-  --text-primary:    oklch(24% 0.016 var(--hue));
-  --text-secondary:  oklch(36% 0.014 var(--hue));
-  --text-muted:      oklch(49% 0.012 var(--hue));
-  --text-faint:      oklch(60% 0.010 var(--hue));
-  --text-near-white: oklch(18% 0.016 var(--hue));
-  --text-dark:       oklch(20% 0.018 var(--hue));
-  --text-dark-muted: oklch(42% 0.016 var(--hue));
+  --text-primary:    oklch(19% 0.012 var(--hue));
+  --text-secondary:  oklch(36% 0.010 var(--hue));
+  --text-muted:      oklch(50% 0.009 var(--hue));
+  --text-faint:      oklch(62% 0.008 var(--hue));
+  --text-near-white: oklch(18% 0.010 var(--hue));
+  --text-dark:       oklch(18% 0.012 var(--hue));
+  --text-dark-muted: oklch(42% 0.010 var(--hue));
 
   /* ── Borders ────────────────────────────────────── */
-  --border-soft:    oklch(84.5% 0.018 var(--hue) / 0.74);
-  --border-medium:  oklch(79.5% 0.016 var(--hue) / 0.88);
-  --border-ghost:   oklch(76% 0.017 var(--hue) / 0.90);
-  --border-light:   oklch(87% 0.012 var(--hue) / 0.90);
-  --border-dashed:  oklch(80% 0.012 var(--hue) / 0.90);
-  --border-divider: oklch(84% 0.026 var(--hue) / 0.70);
+  --border-soft:    oklch(83% 0.006 var(--hue) / 0.74);
+  --border-medium:  oklch(75% 0.008 var(--hue) / 0.88);
+  --border-ghost:   oklch(78% 0.008 var(--hue) / 0.90);
+  --border-light:   oklch(87% 0.006 var(--hue) / 0.90);
+  --border-dashed:  oklch(80% 0.006 var(--hue) / 0.90);
+  --border-divider: oklch(86% 0.006 var(--hue) / 0.78);
 
-  /* ── Accent: cyan (focus / interactive highlight) ── */
-  --accent:      oklch(62% 0.105 205);
-  --accent-glow: oklch(62% 0.105 205 / 0.20);
-  --accent-ring: oklch(62% 0.105 205 / 0.35);
+  /* ── Accent: Apple-like system blue + semantic markers ─ */
+  --accent:      oklch(54% 0.180 253);
+  --accent-strong: oklch(43% 0.165 253);
+  --accent-glow: oklch(74% 0.130 253 / 0.22);
+  --accent-ring: oklch(68% 0.145 253 / 0.40);
+  --accent-lime: oklch(77% 0.170 132);
+  --route-highlight: oklch(64% 0.160 78);
 
-  /* ── Accent: violet (primary / active state) ─────── */
-  --accent-violet-lo: oklch(64% 0.080 220);
-  --accent-violet-hi: oklch(52% 0.070 230);
+  /* ── Map semantic markers ───────────────────────── */
+  --marker-flower:        oklch(55% 0.205 350);
+  --marker-flower-soft:   oklch(93% 0.060 350);
+  --marker-mushroom:      oklch(47% 0.120 48);
+  --marker-mushroom-soft: oklch(90% 0.060 62);
+  --marker-start:         oklch(73% 0.180 132);
+  --marker-start-text:    oklch(17% 0.050 145);
 
-  /* ── Accent: orange (action buttons) ────────────── */
-  --accent-warm-a: oklch(66% 0.080 205);
-  --accent-warm-b: oklch(58% 0.075 214);
+  /* ── Accent aliases (legacy component hooks) ────── */
+  --accent-violet-lo: var(--accent-lime);
+  --accent-violet-hi: var(--accent);
+  --accent-warm-a: var(--route-highlight);
+  --accent-warm-b: oklch(58% 0.105 72);
 
   /* ── State ──────────────────────────────────────── */
-  --state-ok:              oklch(78% 0.115 155);
-  --state-ok-bg:           oklch(42% 0.080 155 / 0.96);
+  --state-ok:              oklch(56% 0.135 145);
+  --state-ok-bg:           oklch(43% 0.105 145 / 0.96);
   --state-err:             oklch(68% 0.115 18);
   --state-err-text:        oklch(42% 0.075 18);
   --state-err-bg:          oklch(95% 0.026 18 / 0.92);
@@ -70,19 +86,20 @@
   --state-err-banner-text: oklch(42% 0.075 18);
 
   /* ── Progress ───────────────────────────────────── */
-  --progress-track: oklch(88% 0.020 var(--hue) / 0.92);
-  --progress-a:     oklch(76% 0.095 190);
-  --progress-b:     oklch(64% 0.085 220);
+  --progress-track: oklch(89% 0.006 var(--hue) / 0.92);
+  --progress-a:     oklch(73% 0.180 132);
+  --progress-b:     var(--accent);
 
   /* ── Detail ─────────────────────────────────────── */
-  --waypoint-idx-bg:   oklch(92.5% 0.014 var(--hue));
-  --waypoint-idx-text: oklch(35% 0.070 var(--hue));
+  --waypoint-idx-bg:   oklch(93% 0.030 253);
+  --waypoint-idx-text: oklch(38% 0.150 253);
+  --focus-ring:        var(--accent-ring);
 
   /* ── Root properties ────────────────────────────── */
   color: var(--text-primary);
   background:
-    radial-gradient(ellipse at top left, oklch(92% 0.020 205 / 0.18), transparent 42%),
-    radial-gradient(ellipse at 82% -6%, oklch(94% 0.014 180 / 0.14), transparent 38%),
+    radial-gradient(ellipse at top left, oklch(86% 0.045 253 / 0.18), transparent 42%),
+    radial-gradient(ellipse at 82% -6%, oklch(91% 0.018 132 / 0.16), transparent 38%),
     linear-gradient(180deg, var(--bg-base) 0%, var(--bg-raised) 100%);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
 }
@@ -137,19 +154,24 @@ select,
 textarea {
   width: 100%;
   border: 1px solid var(--border-medium);
-  border-radius: 12px;
+  border-radius: var(--control-radius);
   background: var(--surface-input);
   color: var(--text-primary);
-  padding: 9px 20px 9px 13px;
+  padding: 9px 20px 9px 12px;
   outline: none;
-  box-shadow: inset 0 1px 0 oklch(75% 0.08 var(--hue) / 0.12);
+  box-shadow: inset 0 1px 1px oklch(20% 0.010 var(--hue) / 0.05);
+}
+
+input,
+select {
+  min-height: var(--control-height);
 }
 
 input:focus,
 select:focus,
 textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-glow);
+  box-shadow: 0 0 0 4px var(--accent-glow), inset 0 1px 1px oklch(20% 0.010 var(--hue) / 0.05);
 }
 
 input::placeholder,
@@ -388,10 +410,11 @@ select {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  border-radius: 24px;
+  border-radius: 18px;
   background: var(--surface-panel);
   border: 1px solid var(--border-medium);
   padding: 18px;
+  box-shadow: 0 8px 26px oklch(18% 0.010 var(--hue) / 0.08);
 }
 
 .panel-hero {
@@ -527,7 +550,7 @@ select {
 
 .mode-action-button.is-active {
   border-color: var(--btn-primary-border);
-  background: oklch(91% 0.030 205 / 0.98);
+  background: var(--surface-light-sel);
   color: var(--btn-primary-text);
 }
 
@@ -614,12 +637,11 @@ select {
 }
 
 .device-led.is-online {
-  background: radial-gradient(circle at 35% 35%, #f1ffe4 0%, #93ff2c 32%, #39ff14 62%, #08c804 100%);
+  background: radial-gradient(circle at 35% 35%, oklch(97% 0.060 132) 0%, var(--accent-lime) 45%, var(--accent) 100%);
   box-shadow:
-    0 0 0 1px rgba(163, 255, 104, 0.9),
-    0 0 12px rgba(128, 255, 0, 1),
-    0 0 28px rgba(57, 255, 20, 0.95),
-    0 0 42px rgba(57, 255, 20, 0.7);
+    0 0 0 1px oklch(73% 0.180 132 / 0.72),
+    0 0 12px oklch(73% 0.180 132 / 0.62),
+    0 0 22px oklch(54% 0.180 253 / 0.26);
   animation: led-breathe 1.2s ease-in-out infinite;
 }
 
@@ -678,12 +700,17 @@ select {
 .secondary-button,
 .accent-button,
 .ghost-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   border: 1px solid transparent;
-  border-radius: 12px;
-  padding: 10px 14px;
-  font-weight: 700;
-  min-height: 42px;
-  letter-spacing: 0.01em;
+  border-radius: var(--control-radius);
+  padding: 0 14px;
+  font-weight: 650;
+  min-height: var(--control-height);
+  letter-spacing: 0;
+  white-space: nowrap;
 }
 
 .primary-button {
@@ -703,7 +730,7 @@ select {
   background: var(--surface-btn-secondary-a);
   color: var(--text-primary);
   border-color: var(--border-ghost);
-  box-shadow: var(--btn-shadow);
+  box-shadow: var(--shadow-control);
 }
 
 .accent-button {
@@ -714,7 +741,7 @@ select {
 }
 
 .ghost-button {
-  background: oklch(98% 0.005 var(--hue) / 0.8);
+  background: oklch(98% 0.003 var(--hue) / 0.8);
   border-color: var(--border-ghost);
   color: var(--text-secondary);
   box-shadow: none;
@@ -744,10 +771,10 @@ select {
 .map-stage {
   position: relative;
   min-height: 0;
-  border-radius: 30px;
+  border-radius: 24px;
   overflow: hidden;
   border: 1px solid var(--border-light);
-  box-shadow: 0 22px 60px oklch(70% 0.02 var(--hue) / 0.22);
+  box-shadow: 0 18px 52px oklch(18% 0.010 var(--hue) / 0.16);
   background: var(--map-bg);
 }
 
@@ -880,9 +907,9 @@ select {
 }
 
 .route-toolbar-button.is-active {
-  border-color: oklch(62% 0.120 68);
-  background: oklch(93% 0.065 76 / 0.95);
-  color: oklch(29% 0.060 72);
+  border-color: var(--btn-primary-border);
+  background: var(--surface-light-sel);
+  color: var(--marker-start-text);
 }
 
 .postcard-browser-panel {
@@ -922,9 +949,9 @@ select {
 }
 
 .postcard-filter-chip.is-active {
-  border-color: oklch(62% 0.120 68);
-  background: oklch(93% 0.065 76 / 0.95);
-  color: oklch(29% 0.060 72);
+  border-color: var(--btn-primary-border);
+  background: var(--surface-light-sel);
+  color: var(--marker-start-text);
 }
 
 .postcard-scan-button {
@@ -981,13 +1008,13 @@ select {
 }
 
 .postcard-result-item:focus-visible {
-  outline: 3px solid oklch(72% 0.105 76 / 0.72);
+  outline: 3px solid var(--accent-ring);
   outline-offset: 2px;
 }
 
 .postcard-result-item.is-focused {
-  border-color: oklch(62% 0.120 68 / 0.78);
-  background: oklch(94% 0.048 76 / 0.82);
+  border-color: oklch(64% 0.105 132 / 0.78);
+  background: oklch(94% 0.045 132 / 0.82);
 }
 
 .postcard-result-thumb {
@@ -1023,10 +1050,10 @@ select {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: oklch(66% 0.15 68);
+  background: var(--marker-flower);
   box-shadow:
-    0 0 0 3px oklch(98% 0.010 76 / 0.92),
-    0 2px 6px oklch(42% 0.050 72 / 0.18);
+    0 0 0 3px var(--marker-flower-soft),
+    0 2px 6px oklch(42% 0.050 352 / 0.18);
 }
 
 .postcard-preview-button {
@@ -1050,13 +1077,13 @@ select {
 }
 
 .postcard-preview-button:focus-visible {
-  outline: 3px solid oklch(72% 0.105 76 / 0.72);
+  outline: 3px solid var(--accent-ring);
   outline-offset: 2px;
 }
 
 .postcard-result-item.is-focused .postcard-result-thumb {
-  border-color: oklch(62% 0.120 68 / 0.72);
-  box-shadow: 0 0 0 3px oklch(90% 0.055 76 / 0.72);
+  border-color: oklch(64% 0.105 132 / 0.72);
+  box-shadow: 0 0 0 3px oklch(90% 0.055 132 / 0.72);
 }
 
 .postcard-result-main {
@@ -1114,7 +1141,7 @@ select {
   align-items: center;
   padding: 8px 9px 8px 11px;
   border: 1px solid var(--border-light);
-  border-radius: 14px;
+  border-radius: 12px;
   background: var(--surface-light);
 }
 
@@ -1153,6 +1180,31 @@ select {
   font-size: 11px;
 }
 
+.route-title-line {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 7px;
+}
+
+.route-title-line strong {
+  min-width: 0;
+}
+
+.route-distance-badge {
+  flex: 0 0 auto;
+  overflow: visible;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--accent) 14%, var(--surface-input));
+  color: var(--accent-strong);
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
 .saved-route-actions {
   display: flex;
   justify-content: flex-end;
@@ -1168,7 +1220,7 @@ select {
   padding: 0;
   border-radius: 10px;
   border: 1px solid var(--border-light);
-  background: oklch(97% 0.006 var(--hue) / 0.9);
+  background: oklch(97.5% 0.003 var(--hue) / 0.9);
   color: var(--text-secondary);
   box-shadow: none;
 }
@@ -1255,13 +1307,13 @@ select {
 
 .route-manager-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: 1fr;
   align-content: flex-start;
-  gap: 8px;
-  min-height: 208px;
+  gap: 7px;
+  min-height: 0;
   max-height: none;
-  overflow: visible;
-  padding-right: 2px;
+  overflow: auto;
+  padding-right: 4px;
 }
 
 .route-manager-main {
@@ -1269,10 +1321,15 @@ select {
 }
 
 .route-manager-body {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
   min-height: 0;
 }
 
 .route-manager-panel {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  gap: 12px;
   min-height: 0;
 }
 
@@ -1280,22 +1337,31 @@ select {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 10px;
-  align-items: start;
+  align-items: end;
 }
 
 .route-search-field {
   margin: 0;
+  gap: 7px;
+}
+
+.route-search-field input {
+  min-height: var(--control-height);
 }
 
 .route-manager-import-button {
-  width: 42px;
-  min-width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  min-width: 92px;
+  min-height: var(--control-height);
+  border-radius: var(--control-radius);
+  background: var(--surface-input);
+  border-color: var(--border-medium);
+  box-shadow: none;
 }
 
 .route-import-field {
   margin: 0;
+  gap: 7px;
+  justify-items: end;
 }
 
 .route-import-field > span {
@@ -1354,17 +1420,18 @@ select {
   grid-template-columns: minmax(0, 1fr) auto;
   width: 100%;
   max-width: 100%;
-  min-height: 46px;
+  min-height: var(--row-height);
   gap: 8px;
-  padding: 5px 6px 5px 12px;
-  border-radius: 999px;
+  padding: 7px 8px 7px 11px;
+  border-radius: 12px;
+  background: var(--surface-elevated);
 }
 
 .route-manager-pill .route-manager-main {
   min-height: 34px;
   padding: 0;
   align-content: center;
-  max-width: min(260px, calc(100vw - 210px));
+  max-width: none;
 }
 
 .route-manager-pill .saved-route-actions {
@@ -1421,6 +1488,29 @@ select {
   padding-right: 2px;
 }
 
+.fly-landmark-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  max-height: none;
+  overflow: visible;
+}
+
+.fly-landmark-item {
+  min-height: 52px;
+  padding: 8px 9px 8px 11px;
+}
+
+.fly-landmark-delete {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  min-height: 34px;
+  border-radius: 999px;
+  font-size: 18px;
+  line-height: 1;
+}
+
 .landmark-section-head {
   display: flex;
   align-items: center;
@@ -1436,6 +1526,12 @@ select {
   align-items: end;
 }
 
+.landmark-manager-list-panel {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  gap: 12px;
+}
+
 .landmark-search-field {
   margin: 0;
 }
@@ -1444,26 +1540,27 @@ select {
   display: inline-flex;
   gap: 2px;
   padding: 2px;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid var(--border-light);
-  background: oklch(95% 0.008 var(--hue) / 0.96);
+  background: oklch(93.5% 0.006 var(--hue) / 0.94);
 }
 
 .segmented-control > button {
   border: none;
   background: transparent;
   color: var(--text-secondary);
-  min-height: 34px;
-  padding: 0 12px;
-  border-radius: 10px;
+  min-height: 32px;
+  padding: 0 11px;
+  border-radius: 8px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 650;
+  letter-spacing: 0;
 }
 
 .segmented-control > button.is-active {
-  background: oklch(99% 0.003 var(--hue) / 0.98);
+  background: oklch(99.5% 0.002 var(--hue) / 0.98);
   color: var(--text-primary);
-  box-shadow: 0 1px 2px oklch(45% 0.01 var(--hue) / 0.14);
+  box-shadow: 0 1px 3px oklch(20% 0.010 var(--hue) / 0.16);
 }
 
 .landmark-section-head span {
@@ -1766,10 +1863,10 @@ select {
   width: min(350px, calc(100vw - 48px));
   max-height: calc(100vh - 48px);
   overflow-y: auto;
-  border-radius: 16px;
+  border-radius: 18px;
   border: 1px solid var(--border-medium);
   background: linear-gradient(180deg, var(--surface-modal-a), var(--surface-modal-b));
-  box-shadow: 0 16px 36px oklch(46% 0.02 var(--hue) / 0.16);
+  box-shadow: 0 24px 64px oklch(18% 0.012 var(--hue) / 0.22);
   padding: 20px 18px 16px;
 }
 
@@ -1778,11 +1875,13 @@ select {
 }
 
 .landmark-manager-panel {
-  width: min(760px, calc(100vw - 56px));
-  height: min(620px, calc(100vh - 56px));
+  width: min(960px, calc(100vw - 56px));
+  height: min(600px, calc(100vh - 56px));
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding: 14px;
+  background: oklch(97.2% 0.004 var(--hue) / 0.98);
 }
 
 .modal-panel:has(.modal-body-split) {
@@ -1790,7 +1889,7 @@ select {
 }
 
 .landmark-manager-panel:has(.modal-body-split) {
-  width: min(760px, calc(100vw - 56px));
+  width: min(860px, calc(100vw - 56px));
 }
 
 .landmark-manager-panel > .modal-header {
@@ -1804,16 +1903,16 @@ select {
 }
 
 .modal-header {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--border-divider);
 }
 
 .modal-header h3 {
   margin: 0;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
+  font-size: 18px;
+  font-weight: 720;
+  letter-spacing: -0.01em;
   color: var(--text-primary);
 }
 
@@ -1822,15 +1921,155 @@ select {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
+  margin-bottom: 12px;
+  padding: 0 0 12px;
+}
+
+.manager-close-button {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--surface-elevated);
+}
+
+.manager-kicker {
+  margin: 0 0 3px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.manager-workspace {
+  display: grid;
+  grid-template-columns: 176px minmax(0, 1fr);
+  gap: 14px;
+  min-height: 0;
+}
+
+.manager-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+  padding: 12px;
+  border: 1px solid var(--border-divider);
+  border-radius: var(--panel-radius);
+  background: oklch(94.8% 0.005 var(--hue) / 0.84);
+}
+
+.manager-sidebar-summary {
+  display: grid;
+  gap: 3px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-divider);
+}
+
+.manager-sidebar-summary span,
+.manager-content-head span {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.manager-sidebar-summary strong,
+.manager-content-head strong {
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1.2;
 }
 
 .manager-tabs {
-  flex: 0 0 auto;
+  display: grid;
+  gap: 6px;
+}
+
+.manager-tabs button {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--control-height);
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: var(--control-radius);
+  background: transparent;
+  color: var(--text-secondary);
+  text-align: left;
+}
+
+.manager-tabs button span {
+  font-size: 13px;
+  font-weight: 780;
+}
+
+.manager-tabs button small {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 740;
+}
+
+.manager-tabs button.is-active {
+  border-color: oklch(77% 0.010 var(--hue) / 0.82);
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-control);
+}
+
+.manager-sidebar-note {
+  margin-top: auto;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.manager-content {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-divider);
+  border-radius: 18px;
+  background: var(--surface-elevated);
+  box-shadow: var(--shadow-control);
+}
+
+.manager-content-pane {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 14px;
+  height: 100%;
+  min-height: 0;
+  padding: 16px;
+}
+
+.manager-content-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 36px;
+}
+
+.manager-content-head > div:first-child {
+  display: grid;
+  gap: 3px;
 }
 
 .modal-body {
   display: flex;
   flex-direction: column;
+  gap: 14px;
+}
+
+.modal-body.manager-workspace {
+  display: grid;
+  grid-template-columns: 176px minmax(0, 1fr);
   gap: 14px;
 }
 
@@ -1867,7 +2106,7 @@ select {
 .landmark-manager-layout {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  gap: 14px;
+  gap: 12px;
 }
 
 .landmark-subtabs {
@@ -1880,12 +2119,185 @@ select {
   align-content: start;
 }
 
-.editing-hint {
-  padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid oklch(75% 0.10 222 / 0.45);
-  background: oklch(94% 0.025 222 / 0.72);
+.landmark-create-panel {
+  gap: 10px;
+  align-self: start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.landmark-create-shell {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--border-divider);
+  border-radius: var(--panel-radius);
+  background: var(--surface-elevated);
+  box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.82);
+}
+
+.landmark-create-title {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-divider);
+}
+
+.landmark-create-title > div {
+  display: grid;
+  gap: 3px;
+}
+
+.landmark-create-title span,
+.landmark-type-label {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.landmark-create-title strong {
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.landmark-form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 10px;
+}
+
+.landmark-type-row {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.landmark-type-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  background: var(--surface-input);
+}
+
+.landmark-type-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
   color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 650;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.landmark-type-pill.is-active {
+  color: var(--text-primary);
+  background: var(--surface-elevated);
+  box-shadow: var(--shadow-control);
+}
+
+.landmark-type-pill.is-flower.is-active {
+  background: var(--marker-flower-soft);
+}
+
+.landmark-type-pill.is-mushroom.is-active {
+  background: var(--marker-mushroom-soft);
+}
+
+.landmark-type-pill span:last-child {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.landmark-type-pill strong {
+  color: inherit;
+  font-size: 13px;
+  line-height: 1.15;
+}
+
+.landmark-type-dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  flex: 0 0 11px;
+  border-radius: 999px;
+  background: var(--marker-mushroom);
+  box-shadow:
+    0 0 0 2px var(--surface-elevated),
+    0 0 0 4px var(--marker-mushroom-soft);
+}
+
+.landmark-type-pill.is-flower .landmark-type-dot,
+.landmark-type-dot.is-flower {
+  background: var(--marker-flower);
+  box-shadow:
+    0 0 0 2px var(--surface-elevated),
+    0 0 0 4px var(--marker-flower-soft);
+}
+
+.landmark-type-pill.is-mushroom .landmark-type-dot,
+.landmark-type-dot.is-mushroom {
+  background: var(--marker-mushroom);
+  box-shadow:
+    0 0 0 2px var(--surface-elevated),
+    0 0 0 4px var(--marker-mushroom-soft);
+}
+
+.landmark-create-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-divider);
+}
+
+.landmark-create-actions .primary-button,
+.landmark-create-actions .secondary-button {
+  min-height: var(--control-height);
+  width: auto;
+  min-width: 112px;
+  padding-inline: 14px;
+  border-radius: var(--control-radius);
+  white-space: nowrap;
+}
+
+.landmark-create-note {
+  min-width: 0;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.editing-hint {
+  margin: 0;
+  padding: 5px 8px;
+  border-radius: 999px;
+  border: 1px solid oklch(73% 0.060 145 / 0.45);
+  background: oklch(93% 0.038 145 / 0.60);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
 }
 
 .landmark-import-button {
@@ -1897,12 +2309,17 @@ select {
 
 .landmark-edit-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: 1fr;
   align-content: flex-start;
-  gap: 8px;
-  min-height: 208px;
-  overflow: visible;
-  padding-right: 2px;
+  gap: 7px;
+  min-height: 0;
+  max-height: 100%;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.landmark-edit-list.fly-landmark-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .landmark-edit-item {
@@ -1910,23 +2327,24 @@ select {
   grid-template-columns: minmax(0, 1fr) auto;
   width: 100%;
   max-width: 100%;
-  min-height: 46px;
+  min-height: var(--row-height);
   gap: 8px;
   align-items: center;
-  padding: 5px 6px 5px 12px;
+  padding: 7px 8px 7px 11px;
   border: 1px solid var(--border-light);
-  border-radius: 999px;
-  background: var(--surface-light);
+  border-radius: 12px;
+  background: var(--surface-elevated);
 }
 
 .landmark-edit-item.is-editing {
-  border-color: oklch(70% 0.12 222 / 0.62);
-  background: oklch(94% 0.020 222 / 0.76);
+  border-color: var(--accent);
+  background: color-mix(in oklch, var(--accent) 9%, var(--surface-input));
 }
 
 .landmark-edit-main {
   display: flex;
   align-items: center;
+  gap: 8px;
   min-width: 0;
   min-height: 34px;
   padding: 0;
@@ -1936,6 +2354,7 @@ select {
   text-align: left;
 }
 
+.landmark-row-copy,
 .landmark-edit-main strong,
 .landmark-edit-main span,
 .landmark-edit-main small {
@@ -1944,21 +2363,29 @@ select {
   white-space: nowrap;
 }
 
+.landmark-row-copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
 .landmark-edit-main strong {
   font-size: 13px;
   line-height: 1.2;
+  min-width: 0;
 }
 
-.landmark-edit-main span {
+.landmark-row-copy span {
   font-size: 11px;
   color: var(--text-muted);
 }
 
 .landmark-edit-main small {
   width: fit-content;
+  flex: 0 0 auto;
   padding: 2px 7px;
   border-radius: 999px;
-  background: oklch(91% 0.012 var(--hue) / 0.90);
+  background: oklch(93% 0.006 var(--hue) / 0.90);
   color: var(--text-secondary);
   font-size: 11px;
   font-weight: 700;
@@ -2084,13 +2511,20 @@ select {
 .modal-body .primary-button,
 .modal-body .secondary-button,
 .modal-body .accent-button {
-  min-height: 42px;
+  min-height: 40px;
   border-radius: 10px;
 }
 
-.modal-body .primary-button {
+.modal-body .modal-actions .primary-button,
+.modal-body .modal-stack-button.primary-button {
   width: 100%;
   min-width: 0;
+}
+
+.modal-body .landmark-create-actions .primary-button,
+.modal-body .landmark-create-actions .secondary-button {
+  width: auto;
+  min-width: 112px;
 }
 
 .modal-stack-button {
@@ -2098,22 +2532,19 @@ select {
   min-width: 0;
 }
 
-.modal-section .modal-stack-button,
-.modal-section .primary-button {
+.modal-section .modal-stack-button {
   background: var(--surface-btn-secondary-a);
   color: var(--text-primary);
   border-color: var(--border-ghost);
   box-shadow: var(--btn-shadow);
 }
 
-.modal-section .modal-stack-button:hover:not(:disabled),
-.modal-section .primary-button:hover:not(:disabled) {
+.modal-section .modal-stack-button:hover:not(:disabled) {
   background: var(--surface-btn-secondary-b);
   border-color: var(--border-medium);
 }
 
-.modal-section .modal-stack-button:active:not(:disabled),
-.modal-section .primary-button:active:not(:disabled) {
+.modal-section .modal-stack-button:active:not(:disabled) {
   transform: translateY(0);
 }
 
@@ -2137,6 +2568,61 @@ select {
     gap: 10px;
   }
 
+  .landmark-manager-panel {
+    height: min(680px, calc(100vh - 20px));
+    padding: 14px;
+  }
+
+  .manager-modal-header {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .manager-workspace {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .modal-body.manager-workspace {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .manager-sidebar {
+    gap: 10px;
+  }
+
+  .manager-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .manager-sidebar-note {
+    display: none;
+  }
+
+  .landmark-subtabs {
+    width: 100%;
+  }
+
+  .landmark-subtabs > button {
+    flex: 1 1 0;
+  }
+
+  .landmark-form-grid,
+  .landmark-type-row {
+    grid-template-columns: 1fr;
+  }
+
+  .landmark-create-actions {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+  }
+
+  .landmark-create-actions .primary-button,
+  .landmark-create-actions .secondary-button {
+    width: 100%;
+  }
+
   .modal-body-split {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -2150,6 +2636,14 @@ select {
     grid-template-columns: 1fr;
   }
 
+  .fly-landmark-list {
+    grid-template-columns: 1fr;
+  }
+
+  .fly-landmark-item {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
   .landmark-edit-actions {
     justify-content: flex-end;
   }
@@ -2157,6 +2651,22 @@ select {
   .landmark-toolbar {
     grid-template-columns: 1fr;
     align-items: stretch;
+  }
+
+  .route-manager-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .route-import-field {
+    justify-items: stretch;
+  }
+
+  .route-import-field > span {
+    display: none;
+  }
+
+  .route-manager-import-button {
+    width: 100%;
   }
 }
 
@@ -2276,35 +2786,39 @@ select {
 }
 
 .map-style-btn.is-active {
-  background: oklch(14% 0.034 var(--hue));
+  background: var(--accent);
   color: oklch(99% 0.006 var(--hue));
 }
 
 .postcard-map-point {
   position: relative;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: 999px;
-  background: oklch(97% 0.018 78 / 0.96);
-  border: 2px solid oklch(63% 0.15 68);
-  box-shadow: 0 6px 16px oklch(16% 0.02 var(--hue) / 0.20);
+  background: oklch(99% 0.002 var(--hue));
+  border: 3px solid var(--marker-flower);
+  box-shadow:
+    0 0 0 2px oklch(99% 0.002 var(--hue) / 0.96),
+    0 7px 18px oklch(18% 0.012 var(--hue) / 0.26);
 }
 
 .postcard-map-point span {
   position: absolute;
   inset: 5px;
   border-radius: inherit;
-  background: oklch(62% 0.16 68);
+  background: var(--marker-flower);
 }
 
 .postcard-map-point.is-focused {
-  border-color: oklch(46% 0.15 55);
-  background: oklch(92% 0.08 76 / 0.98);
-  box-shadow: 0 0 0 7px oklch(80% 0.11 76 / 0.34), 0 10px 24px oklch(18% 0.04 68 / 0.26);
+  border-color: oklch(46% 0.190 350);
+  background: oklch(99% 0.002 var(--hue));
+  box-shadow:
+    0 0 0 7px oklch(78% 0.130 350 / 0.34),
+    0 10px 24px oklch(18% 0.030 350 / 0.28);
 }
 
 .postcard-map-point.is-focused span {
-  background: oklch(48% 0.16 55);
+  background: oklch(48% 0.205 350);
 }
 
 .postcard-popup {
@@ -2438,9 +2952,9 @@ select {
 }
 
 .action-row .secondary-button.is-active {
-  background: oklch(90% 0.03 214 / 0.98);
-  border-color: oklch(66% 0.07 214 / 0.72);
-  color: oklch(28% 0.04 214);
+  background: var(--surface-light-sel);
+  border-color: var(--btn-primary-border);
+  color: var(--marker-start-text);
 }
 
 

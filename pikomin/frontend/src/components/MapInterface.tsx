@@ -34,6 +34,24 @@ const TILE_STYLES = [
 
 type TileStyleId = (typeof TILE_STYLES)[number]['id']
 
+const MAP_COLORS = {
+  currentStroke: '#0066cc',
+  currentFill: '#4da3ff',
+  routeStroke: '#0066cc',
+  routeStartBg: '#32d74b',
+  routeStartBorder: '#0b6f25',
+  routeStartText: '#0f2515',
+  routePointBg: '#ffffff',
+  routePointBorder: '#ff9f0a',
+  routePointText: '#3a2500',
+  flowerBg: '#ffffff',
+  flowerBorder: '#c2185b',
+  flowerFill: '#ff2d55',
+  mushroomBg: '#ffffff',
+  mushroomBorder: '#7a4b1f',
+  mushroomFill: '#a15c21',
+} as const
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, '&amp;')
@@ -41,6 +59,10 @@ function escapeHtml(value: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;')
+}
+
+function landmarkTypeLabel(type: SavedLandmark['landmarkType']): string {
+  return type === 'flower' ? '花點' : '菇點'
 }
 
 interface MapInterfaceProps {
@@ -199,7 +221,13 @@ export default function MapInterface({
     if (currentPosition) {
       currentMarkerRef.current = L.circleMarker(
         [currentPosition.latitude, currentPosition.longitude],
-        { radius: 10, color: '#1d4ed8', fillColor: '#3b82f6', fillOpacity: 0.9, weight: 2 }
+        {
+          radius: 10,
+          color: MAP_COLORS.currentStroke,
+          fillColor: MAP_COLORS.currentFill,
+          fillOpacity: 0.95,
+          weight: 3,
+        }
       ).addTo(map)
 
       if (!prevPositionRef.current) {
@@ -239,24 +267,25 @@ export default function MapInterface({
     }
 
     waypoints.forEach((wp, index) => {
+      const isStart = index === 0
       const icon = L.divIcon({
         className: '',
-        html: `<div style="
-          background: #f97316;
-          color: white;
+        html: `<div class="${isStart ? 'route-start-map-marker' : 'route-map-marker'}" title="${isStart ? '路徑起點' : `路徑點 ${index + 1}`}" style="
+          background: ${isStart ? MAP_COLORS.routeStartBg : MAP_COLORS.routePointBg};
+          color: ${isStart ? MAP_COLORS.routeStartText : MAP_COLORS.routePointText};
           border-radius: 50%;
-          width: 28px;
-          height: 28px;
+          width: ${isStart ? 32 : 28}px;
+          height: ${isStart ? 32 : 28}px;
           display: flex;
           align-items: center;
           justify-content: center;
           font-size: 13px;
-          font-weight: bold;
-          border: 2px solid #ea580c;
-          box-shadow: 0 1px 4px rgba(0,0,0,0.4);
-        ">${index + 1}</div>`,
-        iconSize: [28, 28],
-        iconAnchor: [14, 14],
+          font-weight: 800;
+          border: ${isStart ? 3 : 2}px solid ${isStart ? MAP_COLORS.routeStartBorder : MAP_COLORS.routePointBorder};
+          box-shadow: ${isStart ? '0 0 0 5px rgba(50, 215, 75, 0.30), 0 7px 18px rgba(15,37,21,0.30)' : '0 3px 10px rgba(58,37,0,0.24)'};
+        ">${isStart ? '起' : index + 1}</div>`,
+        iconSize: isStart ? [32, 32] : [28, 28],
+        iconAnchor: isStart ? [16, 16] : [14, 14],
       })
 
       const marker = L.marker([wp.latitude, wp.longitude], { icon }).addTo(map)
@@ -295,9 +324,9 @@ export default function MapInterface({
         [waypoints[0].latitude, waypoints[0].longitude] as L.LatLngTuple,
       ]
       polylineRef.current = L.polyline(latlngs, {
-        color: '#16a34a',
-        weight: 4,
-        opacity: 0.9,
+        color: MAP_COLORS.routeStroke,
+        weight: 5,
+        opacity: 0.86,
       }).addTo(map)
     }
   }, [waypoints, mode, canEditWaypoints, onWaypointMove, showGeneratedFlowerRoute])
@@ -335,9 +364,33 @@ export default function MapInterface({
     landmarkMarkersRef.current = []
 
     savedLandmarks.forEach((landmark) => {
-      const marker = L.marker([landmark.coordinate.latitude, landmark.coordinate.longitude]).addTo(map)
+      const isFlower = landmark.landmarkType === 'flower'
+      const label = landmarkTypeLabel(landmark.landmarkType)
+      const icon = L.divIcon({
+        className: '',
+        html: `<div class="${isFlower ? 'landmark-map-marker is-flower' : 'landmark-map-marker is-mushroom'}" title="${escapeHtml(`${label}：${landmark.name}`)}" style="
+          position: relative;
+          width: 24px;
+          height: 24px;
+          border-radius: ${isFlower ? '50%' : '8px 8px 12px 12px'};
+          background: ${isFlower ? MAP_COLORS.flowerBg : MAP_COLORS.mushroomBg};
+          border: 3px solid ${isFlower ? MAP_COLORS.flowerBorder : MAP_COLORS.mushroomBorder};
+          box-shadow: 0 0 0 2px rgba(255,255,255,0.96), 0 7px 18px rgba(18, 18, 20, 0.28);
+        ">
+          <span style="
+            position: absolute;
+            inset: 5px;
+            border-radius: inherit;
+            background: ${isFlower ? MAP_COLORS.flowerFill : MAP_COLORS.mushroomFill};
+          "></span>
+        </div>`,
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+        popupAnchor: [0, -12],
+      })
+      const marker = L.marker([landmark.coordinate.latitude, landmark.coordinate.longitude], { icon }).addTo(map)
       marker.bindPopup(
-        `<strong>${landmark.name}</strong><br/>${landmark.coordinate.latitude.toFixed(6)}, ${landmark.coordinate.longitude.toFixed(6)}`
+        `<strong>${escapeHtml(landmark.name)}</strong><br/><span>${label}</span><br/>${landmark.coordinate.latitude.toFixed(6)}, ${landmark.coordinate.longitude.toFixed(6)}`
       )
       landmarkMarkersRef.current.push(marker)
     })

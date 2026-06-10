@@ -1,5 +1,59 @@
 [
   {
+    "id": "1781077522115-73",
+    "name": "女王頭",
+    "coordinate": {
+      "latitude": 25.208873,
+      "longitude": 121.693166
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781077395855-72",
+    "name": "畢卡索",
+    "coordinate": {
+      "latitude": 18.954191,
+      "longitude": -99.496714
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781076780204-71",
+    "name": "聖馬格努斯教堂",
+    "coordinate": {
+      "latitude": 59.12961260328405,
+      "longitude": -3.315459368944294
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781074871194-70",
+    "name": "情島燈台",
+    "coordinate": {
+      "latitude": 33.953497,
+      "longitude": 132.473903
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781074226014-69",
+    "name": "樹屋",
+    "coordinate": {
+      "latitude": 59.947246,
+      "longitude": 9.827267
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781072681782-68",
+    "name": "片浜北公園",
+    "coordinate": {
+      "latitude": 35.110485429580436,
+      "longitude": 138.8431693509101
+    },
+    "landmarkType": "mushroom"
+  },
+  {
     "id": "1780967232018-67",
     "name": "別所谷八幡神社",
     "coordinate": {
