@@ -1,5 +1,41 @@
 [
   {
+    "id": "1781166945341-88",
+    "name": "越南驚奇洞",
+    "coordinate": {
+      "latitude": 20.844185,
+      "longitude": 107.091276
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781166891219-87",
+    "name": "迷宮花園",
+    "coordinate": {
+      "latitude": 45.428583,
+      "longitude": 12.344256
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781166847598-86",
+    "name": "Rifugio Fuciade（富恰德山屋）",
+    "coordinate": {
+      "latitude": 46.3927,
+      "longitude": 11.82805
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781166735762-85",
+    "name": "津嶋神社(長井市草岡)",
+    "coordinate": {
+      "latitude": 38.138975847876196,
+      "longitude": 140.01859579895003
+    },
+    "landmarkType": "mushroom"
+  },
+  {
     "id": "1781145559367-84",
     "name": "The Rusted hulk",
     "coordinate": {
