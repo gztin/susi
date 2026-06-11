@@ -1,5 +1,104 @@
 [
   {
+    "id": "1781145559367-84",
+    "name": "The Rusted hulk",
+    "coordinate": {
+      "latitude": 25.720482,
+      "longitude": -79.30156
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781145300382-83",
+    "name": "Ambleside Pier",
+    "coordinate": {
+      "latitude": 54.41996489539152,
+      "longitude": -2.962596188359903
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781144782773-82",
+    "name": "Green Tree",
+    "coordinate": {
+      "latitude": 43.066607,
+      "longitude": -77.640633
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781144659642-81",
+    "name": "Think",
+    "coordinate": {
+      "latitude": 35.905656,
+      "longitude": -78.850085
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781144497159-80",
+    "name": "勝長寺講堂",
+    "coordinate": {
+      "latitude": 37.564329085573156,
+      "longitude": 139.8721920074099
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781144006506-79",
+    "name": "海上小島津嶋神社",
+    "coordinate": {
+      "latitude": 34.24175438774239,
+      "longitude": 133.70322436072803
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781143441348-78",
+    "name": "藍洞",
+    "coordinate": {
+      "latitude": 42.980329,
+      "longitude": 16.022534
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781143333544-77",
+    "name": "Ouverture au Monde",
+    "coordinate": {
+      "latitude": 46.50478,
+      "longitude": 6.625732
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781143185659-76",
+    "name": "Pully CGN",
+    "coordinate": {
+      "latitude": 46.504825,
+      "longitude": 6.661168
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781141794229-75",
+    "name": "白金青池",
+    "coordinate": {
+      "latitude": 43.493474,
+      "longitude": 142.614214
+    },
+    "landmarkType": "mushroom"
+  },
+  {
+    "id": "1781140737020-74",
+    "name": "西岸驛",
+    "coordinate": {
+      "latitude": 37.147062,
+      "longitude": 136.873298
+    },
+    "landmarkType": "mushroom"
+  },
+  {
     "id": "1781077522115-73",
     "name": "女王頭",
     "coordinate": {

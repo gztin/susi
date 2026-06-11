@@ -35,9 +35,9 @@ const TILE_STYLES = [
 type TileStyleId = (typeof TILE_STYLES)[number]['id']
 
 const MAP_COLORS = {
-  currentStroke: '#0066cc',
-  currentFill: '#4da3ff',
-  routeStroke: '#0066cc',
+  currentStroke: '#ff385c',
+  currentFill: '#ff8aa0',
+  routeStroke: '#ff385c',
   routeStartBg: '#32d74b',
   routeStartBorder: '#0b6f25',
   routeStartText: '#0f2515',

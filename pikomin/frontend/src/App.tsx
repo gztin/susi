@@ -345,9 +345,11 @@ export default function App() {
   const [landmarkNameInput, setLandmarkNameInput] = useState('')
   const [landmarkCoordInput, setLandmarkCoordInput] = useState('')
   const [landmarkSearchInput, setLandmarkSearchInput] = useState('')
+  const [flyLandmarkSearchInput, setFlyLandmarkSearchInput] = useState('')
   const [routeSearchInput, setRouteSearchInput] = useState('')
   const [landmarkTypeInput, setLandmarkTypeInput] = useState<'flower' | 'mushroom'>('mushroom')
   const [landmarkTypeFilter, setLandmarkTypeFilter] = useState<'all' | 'flower' | 'mushroom'>('all')
+  const [flyLandmarkTypeFilter, setFlyLandmarkTypeFilter] = useState<'all' | 'flower' | 'mushroom'>('all')
   const [landmarkFormTouched, setLandmarkFormTouched] = useState(false)
   const [landmarkSaving, setLandmarkSaving] = useState(false)
   const [editingLandmarkId, setEditingLandmarkId] = useState('')
@@ -365,6 +367,7 @@ export default function App() {
   const [managerTab, setManagerTab] = useState<ManagerTab>('landmarks')
   const [landmarkManagerTab, setLandmarkManagerTab] = useState<LandmarkManagerTab>('create')
   const [landmarkPage, setLandmarkPage] = useState(1)
+  const [flyLandmarkPage, setFlyLandmarkPage] = useState(1)
   const [routePage, setRoutePage] = useState(1)
   const [showPostcards, setShowPostcards] = useState(false)
   const [mapBounds, setMapBounds] = useState<MapBounds | null>(null)
@@ -554,6 +557,10 @@ export default function App() {
   useEffect(() => {
     setLandmarkPage(1)
   }, [landmarkSearchInput, landmarkTypeFilter])
+
+  useEffect(() => {
+    setFlyLandmarkPage(1)
+  }, [flyLandmarkSearchInput, flyLandmarkTypeFilter])
 
   useEffect(() => {
     setRoutePage(1)
@@ -1218,6 +1225,21 @@ export default function App() {
   const pagedLandmarks = filteredLandmarks.slice(
     (safeLandmarkPage - 1) * LANDMARKS_PER_PAGE,
     safeLandmarkPage * LANDMARKS_PER_PAGE,
+  )
+  const normalizedFlyLandmarkSearchKeyword = flyLandmarkSearchInput.trim().toLowerCase()
+  const filteredFlyLandmarks = savedLandmarks.filter((landmark) => {
+    const typeMatched = flyLandmarkTypeFilter === 'all' || landmark.landmarkType === flyLandmarkTypeFilter
+    if (!normalizedFlyLandmarkSearchKeyword) return typeMatched
+    const nameMatched = landmark.name.toLowerCase().includes(normalizedFlyLandmarkSearchKeyword)
+    const coordText = formatCoordinate(landmark.coordinate).toLowerCase()
+    const coordMatched = coordText.includes(normalizedFlyLandmarkSearchKeyword)
+    return typeMatched && (nameMatched || coordMatched)
+  })
+  const flyLandmarkPageCount = Math.max(1, Math.ceil(filteredFlyLandmarks.length / LANDMARKS_PER_PAGE))
+  const safeFlyLandmarkPage = Math.min(flyLandmarkPage, flyLandmarkPageCount)
+  const pagedFlyLandmarks = filteredFlyLandmarks.slice(
+    (safeFlyLandmarkPage - 1) * LANDMARKS_PER_PAGE,
+    safeFlyLandmarkPage * LANDMARKS_PER_PAGE,
   )
   const normalizedRouteSearchKeyword = routeSearchInput.trim().toLowerCase()
   const filteredSavedRoutes = savedRoutes.filter((route) => {
@@ -1902,8 +1924,8 @@ export default function App() {
                     <label className="field landmark-search-field">
                       <span>搜尋地標</span>
                       <input
-                        value={landmarkSearchInput}
-                        onChange={(e) => setLandmarkSearchInput(e.target.value)}
+                        value={flyLandmarkSearchInput}
+                        onChange={(e) => setFlyLandmarkSearchInput(e.target.value)}
                         placeholder="輸入名稱或座標快速搜尋"
                       />
                     </label>
@@ -1912,22 +1934,22 @@ export default function App() {
                       <div className="segmented-control" role="tablist" aria-label="地標類型篩選">
                         <button
                           type="button"
-                          className={landmarkTypeFilter === 'all' ? 'is-active' : ''}
-                          onClick={() => setLandmarkTypeFilter('all')}
+                          className={flyLandmarkTypeFilter === 'all' ? 'is-active' : ''}
+                          onClick={() => setFlyLandmarkTypeFilter('all')}
                         >
                           全部
                         </button>
                         <button
                           type="button"
-                          className={landmarkTypeFilter === 'flower' ? 'is-active' : ''}
-                          onClick={() => setLandmarkTypeFilter('flower')}
+                          className={flyLandmarkTypeFilter === 'flower' ? 'is-active' : ''}
+                          onClick={() => setFlyLandmarkTypeFilter('flower')}
                         >
                           花點
                         </button>
                         <button
                           type="button"
-                          className={landmarkTypeFilter === 'mushroom' ? 'is-active' : ''}
-                          onClick={() => setLandmarkTypeFilter('mushroom')}
+                          className={flyLandmarkTypeFilter === 'mushroom' ? 'is-active' : ''}
+                          onClick={() => setFlyLandmarkTypeFilter('mushroom')}
                         >
                           菇點
                         </button>
@@ -1936,16 +1958,16 @@ export default function App() {
                   </div>
                   <div className="landmark-section-head">
                     <span>已新增地標</span>
-                    <small>{filteredLandmarks.length} / {savedLandmarks.length} 筆</small>
+                    <small>符合 {filteredFlyLandmarks.length} 筆，共 {savedLandmarks.length} 筆</small>
                   </div>
                   {savedLandmarks.length === 0 ? (
                     <p className="landmark-empty">目前還沒有地標，先到「地標管理」新增一筆。</p>
-                  ) : filteredLandmarks.length === 0 ? (
+                  ) : filteredFlyLandmarks.length === 0 ? (
                     <p className="landmark-empty">找不到符合條件的地標，請調整搜尋關鍵字。</p>
                   ) : (
                     <>
                       <div className="landmark-edit-list fly-landmark-list">
-                        {pagedLandmarks.map((landmark) => (
+                        {pagedFlyLandmarks.map((landmark) => (
                           <div key={landmark.id} className="landmark-edit-item fly-landmark-item">
                             <button className="landmark-edit-main" onClick={() => handleSelectLandmarkToFly(landmark.name)} type="button">
                               <span className={`landmark-type-dot is-${landmark.landmarkType}`} aria-hidden="true" />
@@ -1961,27 +1983,27 @@ export default function App() {
                               title={`刪除 ${landmark.name}`}
                               type="button"
                             >
-                              ×
+                              <Trash2 aria-hidden="true" size={15} strokeWidth={2.4} />
                             </button>
                           </div>
                         ))}
                       </div>
-                      {landmarkPageCount > 1 && (
+                      {flyLandmarkPageCount > 1 && (
                         <div className="landmark-pagination" aria-label="飛行設定地標分頁">
                           <button
                             className="ghost-button"
                             type="button"
-                            onClick={() => setLandmarkPage((page) => Math.max(1, page - 1))}
-                            disabled={safeLandmarkPage <= 1}
+                            onClick={() => setFlyLandmarkPage((page) => Math.max(1, page - 1))}
+                            disabled={safeFlyLandmarkPage <= 1}
                           >
                             上一頁
                           </button>
-                          <span>{safeLandmarkPage} / {landmarkPageCount}</span>
+                          <span>第 {safeFlyLandmarkPage} / {flyLandmarkPageCount} 頁</span>
                           <button
                             className="ghost-button"
                             type="button"
-                            onClick={() => setLandmarkPage((page) => Math.min(landmarkPageCount, page + 1))}
-                            disabled={safeLandmarkPage >= landmarkPageCount}
+                            onClick={() => setFlyLandmarkPage((page) => Math.min(flyLandmarkPageCount, page + 1))}
+                            disabled={safeFlyLandmarkPage >= flyLandmarkPageCount}
                           >
                             下一頁
                           </button>
@@ -2204,7 +2226,7 @@ export default function App() {
                     </div>
                     <div className="landmark-section-head">
                       <span>已儲存地標</span>
-                      <small>{filteredLandmarks.length} / {savedLandmarks.length} 筆</small>
+                      <small>符合 {filteredLandmarks.length} 筆，共 {savedLandmarks.length} 筆</small>
                     </div>
                     {savedLandmarks.length === 0 ? (
                       <p className="landmark-empty">目前還沒有地標，先到新增地標分頁建立一筆。</p>
@@ -2292,7 +2314,7 @@ export default function App() {
                             >
                               上一頁
                             </button>
-                            <span>{safeLandmarkPage} / {landmarkPageCount}</span>
+                            <span>第 {safeLandmarkPage} / {landmarkPageCount} 頁</span>
                             <button
                               className="ghost-button"
                               type="button"
@@ -2342,7 +2364,7 @@ export default function App() {
                   </div>
                   <div className="landmark-section-head">
                     <span>已儲存路徑</span>
-                    <small>{filteredSavedRoutes.length} / {savedRoutes.length} 筆</small>
+                    <small>符合 {filteredSavedRoutes.length} 筆，共 {savedRoutes.length} 筆</small>
                   </div>
                   {savedRoutes.length === 0 ? (
                     <p className="route-empty route-manager-empty">還沒有儲存路徑，先在路徑模式儲存目前路徑，或匯入路徑 JSON 檔案。</p>
@@ -2420,7 +2442,7 @@ export default function App() {
                           >
                             上一頁
                           </button>
-                          <span>{safeRoutePage} / {routePageCount}</span>
+                          <span>第 {safeRoutePage} / {routePageCount} 頁</span>
                           <button
                             className="ghost-button"
                             type="button"
