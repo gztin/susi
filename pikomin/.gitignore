@@ -9,6 +9,7 @@ frontend/node_modules/
 # Runtime data
 logs/
 .bridge-temp/
+backend/app/data/landmark-images/
 .gitconfig-codex
 release/npm-cache/
 release/python-cache/
