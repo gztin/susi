@@ -5,6 +5,10 @@ import type {
   RouteStatus,
   StatusUpdate,
   SavedRoute,
+  SavedLandmark,
+  SavedMushroom,
+  MushroomElementType,
+  MushroomType,
   PostcardLandmark,
 } from '../types'
 
@@ -247,7 +251,7 @@ export const apiClient = {
 
 
 
-  async getLandmarks(): Promise<{ id: string; name: string; coordinate: { latitude: number; longitude: number }; landmarkType: 'flower' | 'mushroom' }[]> {
+  async getLandmarks(): Promise<SavedLandmark[]> {
     return request('/api/landmarks')
   },
 
@@ -255,7 +259,8 @@ export const apiClient = {
     name: string
     coordinate: { latitude: number; longitude: number }
     landmarkType: 'flower' | 'mushroom'
-  }): Promise<{ id: string; name: string; coordinate: { latitude: number; longitude: number }; landmarkType: 'flower' | 'mushroom' }> {
+    imageUrl?: string | null
+  }): Promise<SavedLandmark> {
     return request('/api/landmarks', {
       method: 'POST',
       body: JSON.stringify(payload),
@@ -266,7 +271,7 @@ export const apiClient = {
     name: string
     coordinate: { latitude: number; longitude: number }
     landmarkType: 'flower' | 'mushroom'
-  }): Promise<{ id: string; name: string; coordinate: { latitude: number; longitude: number }; landmarkType: 'flower' | 'mushroom' }> {
+  }): Promise<SavedLandmark> {
     return request(`/api/landmarks/${landmarkId}`, {
       method: 'PUT',
       body: JSON.stringify(payload),
@@ -303,6 +308,28 @@ export const apiClient = {
 
   async deleteSavedRoute(routeId: string): Promise<void> {
     await request(`/api/saved-routes/${routeId}`, { method: 'DELETE' })
+  },
+
+  async getMushrooms(): Promise<SavedMushroom[]> {
+    return request('/api/mushrooms')
+  },
+
+  async createMushroom(payload: {
+    name: string
+    coordinate: { latitude: number; longitude: number }
+    mushroomType: MushroomType
+    elementType?: MushroomElementType | null
+    remainingSlots?: number | null
+    remainingMinutes?: number | null
+  }): Promise<SavedMushroom> {
+    return request('/api/mushrooms', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    })
+  },
+
+  async deleteMushroom(mushroomId: string): Promise<void> {
+    await request(`/api/mushrooms/${mushroomId}`, { method: 'DELETE' })
   },
 
   async getTunnelStatus(): Promise<{

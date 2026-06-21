@@ -8,6 +8,7 @@ export interface SavedLandmark {
   name: string
   coordinate: GPSCoordinate
   landmarkType: 'flower' | 'mushroom'
+  imageUrl?: string | null
 }
 
 export interface PostcardLandmark {
@@ -31,6 +32,21 @@ export interface SavedRoute {
   id: string
   name: string
   waypoints: GPSCoordinate[]
+  createdAt: string
+  updatedAt: string
+}
+
+export type MushroomType = 'giant' | 'element'
+export type MushroomElementType = 'water' | 'fire' | 'electric' | 'poison' | 'crystal'
+
+export interface SavedMushroom {
+  id: string
+  name: string
+  coordinate: GPSCoordinate
+  mushroomType: MushroomType
+  elementType?: MushroomElementType | null
+  remainingSlots?: number | null
+  expiresAt: string
   createdAt: string
   updatedAt: string
 }

@@ -1230,6 +1230,7 @@ select {
 .segmented-control {
   display: inline-flex;
   gap: 2px;
+  flex-wrap: wrap;
   padding: 2px;
   border-radius: 12px;
   border: 1px solid var(--border-light);
@@ -1487,11 +1488,20 @@ select {
   overflow: hidden;
 }
 
+.fly-settings-panel {
+  width: min(760px, calc(100vw - 56px));
+  overflow: hidden;
+}
+
 .modal-panel:has(.modal-body-split) {
   width: min(560px, calc(100vw - 56px));
 }
 
 .landmark-manager-panel:has(.modal-body-split) {
+  width: min(760px, calc(100vw - 56px));
+}
+
+.fly-settings-panel:has(.modal-body-split) {
   width: min(760px, calc(100vw - 56px));
 }
 
@@ -1565,6 +1575,208 @@ select {
   width: fit-content;
 }
 
+.mushroom-create-panel {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+.mushroom-create-panel > .primary-button,
+.mushroom-create-panel > .mushroom-form-preview {
+  grid-column: 1 / -1;
+}
+
+.mushroom-form-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 9px 11px;
+  border-radius: 14px;
+  border: 1px solid var(--border-light);
+  background: var(--surface-light);
+}
+
+.mushroom-form-preview small {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mushroom-list {
+  display: grid;
+  gap: 8px;
+  max-height: 430px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.mushroom-search-head {
+  margin-top: 12px;
+}
+
+.mushroom-search-list {
+  max-height: 260px;
+}
+
+.fly-mushroom-list {
+  max-height: 420px;
+}
+
+.mushroom-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 16px;
+  align-items: center;
+  min-height: 72px;
+  padding: 12px 14px 12px 16px;
+  border: 1px solid oklch(82% 0.018 var(--hue) / 0.82);
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, oklch(97% 0.010 var(--hue) / 0.96), oklch(93.5% 0.014 205 / 0.86)),
+    var(--surface-light);
+  box-shadow: inset 0 1px 0 oklch(100% 0.004 var(--hue) / 0.72);
+}
+
+.mushroom-item-main {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.mushroom-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.mushroom-name-group,
+.mushroom-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.mushroom-name-group strong {
+  color: var(--text-primary);
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mushroom-item-main > span {
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.mushroom-meta-row small {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: oklch(93% 0.010 var(--hue));
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.mushroom-countdown {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  align-self: center;
+  justify-self: end;
+  flex: 0 0 auto;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent !important;
+  color: oklch(32% 0.070 68) !important;
+  font-family: "SFMono-Regular", "Cascadia Mono", "Roboto Mono", monospace;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+}
+
+.mushroom-tag {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.mushroom-tag.is-giant {
+  border: 1px solid oklch(73% 0.060 34 / 0.62);
+  background: oklch(94% 0.032 34 / 0.76);
+  color: oklch(35% 0.070 34);
+}
+
+.mushroom-tag.is-element {
+  border: 1px solid oklch(72% 0.072 205 / 0.56);
+  background: oklch(93% 0.030 205 / 0.72);
+  color: oklch(31% 0.070 205);
+}
+
+.mushroom-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mushroom-fly-button {
+  border-color: oklch(63% 0.074 205 / 0.72);
+  background: oklch(82% 0.072 205 / 0.92);
+  color: oklch(24% 0.042 215);
+}
+
+.mushroom-fly-button:hover:not(:disabled) {
+  border-color: oklch(58% 0.084 205 / 0.82);
+  background: oklch(76% 0.086 205 / 0.96);
+}
+
+.mushroom-actions .icon-button {
+  width: 38px;
+  min-width: 38px;
+  height: 38px;
+  min-height: 38px;
+  border-radius: 14px;
+  border-color: oklch(82% 0.016 var(--hue) / 0.9);
+  background: oklch(97% 0.007 var(--hue) / 0.9);
+  color: var(--text-secondary);
+  box-shadow: 0 6px 14px oklch(42% 0.014 var(--hue) / 0.08);
+}
+
+.mushroom-actions .icon-button:hover:not(:disabled) {
+  border-color: oklch(72% 0.020 var(--hue) / 0.95);
+  background: oklch(94% 0.012 var(--hue) / 0.96);
+}
+
+.mushroom-actions .icon-button.danger {
+  border-color: oklch(82% 0.040 25 / 0.72);
+  background: oklch(97% 0.018 25 / 0.72);
+  color: var(--state-err-text);
+}
+
+.mushroom-actions .icon-button.danger:hover:not(:disabled) {
+  border-color: var(--state-err-border);
+  background: var(--state-err-bg);
+  color: var(--state-err);
+}
+
 .landmark-create-panel,
 .landmark-manager-list-panel {
   min-height: 0;
@@ -1595,6 +1807,13 @@ select {
   padding-right: 2px;
 }
 
+.fly-landmark-list {
+  min-height: 260px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
 .landmark-edit-item {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -1609,9 +1828,94 @@ select {
   background: var(--surface-light);
 }
 
+.landmark-edit-content {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
 .landmark-edit-item.is-editing {
   border-color: oklch(70% 0.12 222 / 0.62);
   background: oklch(94% 0.020 222 / 0.76);
+}
+
+.landmark-thumb-button {
+  position: relative;
+  display: block;
+  width: 38px;
+  height: 38px;
+  min-height: 38px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid oklch(79% 0.026 var(--hue) / 0.82);
+  border-radius: 999px;
+  background: oklch(94% 0.010 var(--hue));
+  color: var(--text-primary);
+  box-shadow: inset 0 1px 0 oklch(99% 0.006 var(--hue) / 0.8);
+}
+
+.landmark-thumb-placeholder {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px dashed oklch(80% 0.018 var(--hue) / 0.84);
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, oklch(96% 0.008 var(--hue)), oklch(91% 0.012 var(--hue)));
+  color: oklch(48% 0.014 var(--hue));
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+.landmark-thumb-button img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.landmark-thumb-zoom {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: oklch(99% 0.006 var(--hue) / 0.92);
+  color: oklch(28% 0.022 var(--hue));
+  box-shadow: 0 2px 7px oklch(20% 0.018 var(--hue) / 0.22);
+}
+
+.landmark-thumb-button:hover:not(:disabled) {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 3px var(--accent-glow),
+    inset 0 1px 0 oklch(99% 0.006 var(--hue) / 0.8);
+}
+
+.landmark-thumb-button.is-image-missing {
+  display: inline-grid;
+  place-items: center;
+  border-style: dashed;
+  box-shadow: none;
+}
+
+.landmark-thumb-button.is-image-missing::before {
+  content: "無圖";
+  color: oklch(48% 0.014 var(--hue));
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.landmark-thumb-button.is-image-missing .landmark-thumb-zoom {
+  display: none;
 }
 
 .landmark-edit-main {
@@ -1670,6 +1974,14 @@ select {
   min-width: 34px;
 }
 
+.fly-landmark-select {
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
 .landmark-action-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -1706,6 +2018,79 @@ select {
 
 .landmark-action-menu button.danger {
   color: oklch(42% 0.11 24);
+}
+
+.image-preview-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9800;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: oklch(24% 0.018 var(--hue) / 0.48);
+  backdrop-filter: blur(5px);
+}
+
+.image-preview-panel {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  width: min(620px, calc(100vw - 36px));
+  max-height: calc(100vh - 36px);
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--border-medium);
+  border-radius: 22px;
+  background: linear-gradient(180deg, var(--surface-modal-a), var(--surface-modal-b));
+  box-shadow: 0 22px 62px oklch(18% 0.020 var(--hue) / 0.28);
+}
+
+.image-preview-panel img {
+  display: block;
+  width: 100%;
+  max-height: min(68vh, 560px);
+  object-fit: contain;
+  border-radius: 16px;
+  background: oklch(93% 0.008 var(--hue));
+}
+
+.image-preview-panel figcaption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 4px 2px;
+  color: var(--text-secondary);
+}
+
+.image-preview-panel figcaption strong,
+.image-preview-panel figcaption span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.image-preview-panel figcaption strong {
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.image-preview-panel figcaption span {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.image-preview-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  min-height: 34px;
+  border-radius: 999px;
+  background: oklch(99% 0.006 var(--hue) / 0.92);
+  box-shadow: 0 8px 18px oklch(18% 0.020 var(--hue) / 0.24);
 }
 
 .landmark-pagination {
@@ -1828,6 +2213,7 @@ select {
 
   .landmark-edit-item {
     grid-template-columns: 1fr;
+    border-radius: 18px;
   }
 
   .landmark-edit-actions {
@@ -1837,6 +2223,19 @@ select {
   .landmark-toolbar {
     grid-template-columns: 1fr;
     align-items: stretch;
+  }
+
+  .mushroom-create-panel,
+  .mushroom-item {
+    grid-template-columns: 1fr;
+  }
+
+  .mushroom-countdown {
+    justify-self: start;
+  }
+
+  .mushroom-actions {
+    justify-content: flex-end;
   }
 }
 
@@ -1986,6 +2385,144 @@ select {
   border-right: 1px solid oklch(86% 0.035 220);
   border-bottom: 1px solid oklch(86% 0.035 220);
   transform: translateX(-50%) rotate(45deg);
+}
+
+.mushroom-map-marker {
+  --mushroom-marker-bg: oklch(83% 0.070 35);
+  --mushroom-marker-border: oklch(55% 0.080 35);
+  --mushroom-marker-text: oklch(24% 0.032 35);
+  position: relative;
+  display: grid;
+  justify-items: center;
+  width: 94px;
+  height: 84px;
+  pointer-events: auto;
+}
+
+.mushroom-map-countdown {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  min-width: 78px;
+  max-width: 94px;
+  min-height: 30px;
+  padding: 3px 8px 4px;
+  border: 1px solid var(--mushroom-marker-border);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, oklch(99% 0.006 var(--hue) / 0.98), oklch(94% 0.012 var(--hue) / 0.96)),
+    oklch(98% 0.006 var(--hue));
+  color: var(--mushroom-marker-text);
+  box-shadow:
+    0 6px 14px oklch(18% 0.020 var(--hue) / 0.20),
+    inset 0 1px 0 oklch(100% 0.004 var(--hue) / 0.72);
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.mushroom-map-countdown-label {
+  color: oklch(42% 0.024 var(--hue));
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.mushroom-map-countdown strong {
+  color: var(--mushroom-marker-text);
+  font-family: "SFMono-Regular", "Cascadia Mono", "Roboto Mono", monospace;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.mushroom-map-pin-wrap {
+  position: relative;
+  width: 34px;
+  height: 42px;
+  margin-top: 3px;
+}
+
+.mushroom-map-pin-wrap::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  bottom: 1px;
+  width: 20px;
+  height: 7px;
+  border-radius: 999px;
+  background: oklch(18% 0.020 var(--hue) / 0.24);
+  filter: blur(0.5px);
+}
+
+.mushroom-map-pin {
+  position: absolute;
+  left: 2px;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--mushroom-marker-border);
+  border-radius: 50% 50% 50% 0;
+  background:
+    linear-gradient(145deg, oklch(100% 0.004 var(--hue) / 0.22), transparent 46%),
+    var(--mushroom-marker-bg);
+  box-shadow:
+    0 5px 10px oklch(16% 0.020 var(--hue) / 0.20),
+    inset 0 1px 0 oklch(100% 0.004 var(--hue) / 0.54);
+  transform: rotate(-45deg);
+  transform-origin: 50% 50%;
+}
+
+.mushroom-map-pin::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: oklch(99% 0.006 var(--hue));
+  box-shadow: inset 0 0 0 1px oklch(100% 0.004 var(--hue) / 0.7);
+  transform: translate(-50%, -50%);
+}
+
+.mushroom-map-marker.is-giant {
+  --mushroom-marker-bg: oklch(86% 0.062 34);
+  --mushroom-marker-border: oklch(58% 0.085 34);
+  --mushroom-marker-text: oklch(28% 0.050 34);
+}
+
+.mushroom-map-marker.is-water {
+  --mushroom-marker-bg: oklch(82% 0.074 220);
+  --mushroom-marker-border: oklch(55% 0.105 224);
+  --mushroom-marker-text: oklch(24% 0.062 230);
+}
+
+.mushroom-map-marker.is-fire {
+  --mushroom-marker-bg: oklch(80% 0.115 42);
+  --mushroom-marker-border: oklch(54% 0.135 38);
+  --mushroom-marker-text: oklch(25% 0.070 34);
+}
+
+.mushroom-map-marker.is-electric {
+  --mushroom-marker-bg: oklch(90% 0.125 96);
+  --mushroom-marker-border: oklch(62% 0.125 92);
+  --mushroom-marker-text: oklch(27% 0.055 92);
+}
+
+.mushroom-map-marker.is-poison {
+  --mushroom-marker-bg: oklch(78% 0.105 320);
+  --mushroom-marker-border: oklch(50% 0.118 318);
+  --mushroom-marker-text: oklch(24% 0.070 320);
+}
+
+.mushroom-map-marker.is-crystal,
+.mushroom-map-marker.is-element {
+  --mushroom-marker-bg: oklch(86% 0.058 185);
+  --mushroom-marker-border: oklch(58% 0.090 185);
+  --mushroom-marker-text: oklch(22% 0.050 190);
 }
 
 .postcard-map-thumb {

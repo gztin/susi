@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1782007259288-5",
+    "name": "巨菇05",
+    "coordinate": {
+      "latitude": 46.618844,
+      "longitude": 8.567839
+    },
+    "mushroomType": "giant",
+    "expiresAt": "2026-06-22T02:00:00+08:00",
+    "createdAt": "2026-06-21T10:00:59+08:00",
+    "updatedAt": "2026-06-21T10:00:59+08:00"
+  },
+  {
+    "id": "1782006155582-4",
+    "name": "巨菇04",
+    "coordinate": {
+      "latitude": 46.760833,
+      "longitude": 8.651105
+    },
+    "mushroomType": "giant",
+    "expiresAt": "2026-06-22T02:00:00+08:00",
+    "createdAt": "2026-06-21T09:42:35+08:00",
+    "updatedAt": "2026-06-21T09:42:35+08:00"
+  },
+  {
+    "id": "1782006085368-3",
+    "name": "巨菇03",
+    "coordinate": {
+      "latitude": 46.812024,
+      "longitude": 8.658346
+    },
+    "mushroomType": "giant",
+    "expiresAt": "2026-06-22T02:00:00+08:00",
+    "createdAt": "2026-06-21T09:41:25+08:00",
+    "updatedAt": "2026-06-21T09:41:25+08:00"
+  },
+  {
+    "id": "1782005924796-2",
+    "name": "巨菇02",
+    "coordinate": {
+      "latitude": 46.85769,
+      "longitude": 8.643829
+    },
+    "mushroomType": "giant",
+    "expiresAt": "2026-06-22T02:00:00+08:00",
+    "createdAt": "2026-06-21T09:38:44+08:00",
+    "updatedAt": "2026-06-21T09:38:44+08:00"
+  },
+  {
+    "id": "1782004597085-1",
+    "name": "巨菇01",
+    "coordinate": {
+      "latitude": 46.911434,
+      "longitude": 8.629194
+    },
+    "mushroomType": "giant",
+    "expiresAt": "2026-06-22T02:00:00+08:00",
+    "createdAt": "2026-06-21T09:16:37+08:00",
+    "updatedAt": "2026-06-21T09:16:37+08:00"
+  }
+]

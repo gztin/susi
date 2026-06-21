@@ -20,12 +20,14 @@ class Landmark(BaseModel):
     name: str = Field(..., min_length=1)
     coordinate: GPSCoordinate
     landmarkType: Literal["flower", "mushroom"] = "mushroom"
+    imageUrl: str | None = None
 
 
 class LandmarkCreateRequest(BaseModel):
     name: str = Field(..., min_length=1)
     coordinate: GPSCoordinate
     landmarkType: Literal["flower", "mushroom"] = "mushroom"
+    imageUrl: str | None = None
 
 
 class LandmarkUpdateRequest(BaseModel):
@@ -48,7 +50,7 @@ def _read_landmarks() -> list[Landmark]:
 
 def _write_landmarks(landmarks: list[Landmark]) -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    payload = [item.model_dump() for item in landmarks]
+    payload = [item.model_dump(exclude_none=True) for item in landmarks]
     DATA_FILE.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
@@ -66,6 +68,7 @@ async def create_landmark(req: LandmarkCreateRequest) -> Landmark:
         name=req.name.strip(),
         coordinate=req.coordinate,
         landmarkType=req.landmarkType,
+        imageUrl=req.imageUrl.strip() if req.imageUrl else None,
     )
     landmarks.insert(0, item)
     _write_landmarks(landmarks)
@@ -83,6 +86,7 @@ async def update_landmark(landmark_id: str, req: LandmarkUpdateRequest) -> Landm
             name=req.name.strip(),
             coordinate=req.coordinate,
             landmarkType=req.landmarkType,
+            imageUrl=item.imageUrl,
         )
         landmarks[index] = updated
         _write_landmarks(landmarks)

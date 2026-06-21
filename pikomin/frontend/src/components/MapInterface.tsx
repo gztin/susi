@@ -2,7 +2,7 @@ import { Copy, MapPinPlus } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import type { GPSCoordinate, PostcardLandmark, SavedLandmark } from '../types'
+import type { GPSCoordinate, MushroomElementType, PostcardLandmark, SavedLandmark, SavedMushroom } from '../types'
 
 delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl
 L.Icon.Default.mergeOptions({
@@ -43,6 +43,49 @@ function escapeHtml(value: string): string {
     .replace(/'/g, '&#39;')
 }
 
+const mushroomElementClassMap: Record<MushroomElementType, string> = {
+  water: 'is-water',
+  fire: 'is-fire',
+  electric: 'is-electric',
+  poison: 'is-poison',
+  crystal: 'is-crystal',
+}
+
+const mushroomElementLabelMap: Record<MushroomElementType, string> = {
+  water: '水菇',
+  fire: '火菇',
+  electric: '雷菇',
+  poison: '毒菇',
+  crystal: '水晶菇',
+}
+
+function getMushroomMarkerClass(mushroom: SavedMushroom): string {
+  if (mushroom.mushroomType === 'giant') return 'is-giant'
+  return mushroom.elementType ? mushroomElementClassMap[mushroom.elementType] : 'is-element'
+}
+
+function getMushroomMarkerLabel(mushroom: SavedMushroom): string {
+  if (mushroom.mushroomType === 'giant') return '巨菇'
+  return mushroom.elementType ? mushroomElementLabelMap[mushroom.elementType] : '元素菇'
+}
+
+function formatMapMushroomCountdown(expiresAt: string, nowMs: number): string {
+  const expiresMs = new Date(expiresAt).getTime()
+  if (!Number.isFinite(expiresMs)) return '未設定'
+  const diffMs = expiresMs - nowMs
+  if (diffMs <= 0) return '已結束'
+  const totalSeconds = Math.ceil(diffMs / 1000)
+  const days = Math.floor(totalSeconds / 86400)
+  const hours = Math.floor((totalSeconds % 86400) / 3600)
+  const minutes = Math.floor((totalSeconds % 3600) / 60)
+  const seconds = totalSeconds % 60
+  const paddedMinutes = String(minutes).padStart(2, '0')
+  const paddedSeconds = String(seconds).padStart(2, '0')
+  if (days > 0) return `${days}天 ${String(hours).padStart(2, '0')}:${paddedMinutes}:${paddedSeconds}`
+  if (hours > 0) return `${hours}:${paddedMinutes}:${paddedSeconds}`
+  return `${minutes}:${paddedSeconds}`
+}
+
 interface MapInterfaceProps {
   mode: 'single' | 'route'
   currentPosition: GPSCoordinate | null
@@ -51,6 +94,8 @@ interface MapInterfaceProps {
   waypointStartIndex?: number
   showRouteLine?: boolean
   savedLandmarks: SavedLandmark[]
+  savedMushrooms?: SavedMushroom[]
+  mushroomNowMs?: number
   postcardLandmarks?: PostcardLandmark[]
   showPostcards?: boolean
   onViewportChange?: (bounds: { north: number; south: number; east: number; west: number }) => void
@@ -84,6 +129,8 @@ export default function MapInterface({
   waypointStartIndex = 0,
   showRouteLine = false,
   savedLandmarks,
+  savedMushrooms = [],
+  mushroomNowMs = Date.now(),
   postcardLandmarks = [],
   showPostcards = false,
   onViewportChange,
@@ -102,6 +149,7 @@ export default function MapInterface({
   const currentMarkerRef = useRef<L.CircleMarker | null>(null)
   const waypointMarkersRef = useRef<L.Marker[]>([])
   const landmarkMarkersRef = useRef<L.Marker[]>([])
+  const mushroomMarkersRef = useRef<L.Marker[]>([])
   const postcardMarkersRef = useRef<L.Marker[]>([])
   const polylineRef = useRef<L.Polyline | null>(null)
   const prevPositionRef = useRef<GPSCoordinate | null>(null)
@@ -344,6 +392,45 @@ export default function MapInterface({
       landmarkMarkersRef.current.push(marker)
     })
   }, [savedLandmarks])
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map) return
+
+    mushroomMarkersRef.current.forEach((m) => m.remove())
+    mushroomMarkersRef.current = []
+
+    savedMushrooms.forEach((mushroom) => {
+      const name = escapeHtml(mushroom.name)
+      const label = escapeHtml(getMushroomMarkerLabel(mushroom))
+      const countdown = escapeHtml(formatMapMushroomCountdown(mushroom.expiresAt, mushroomNowMs))
+      const markerClass = getMushroomMarkerClass(mushroom)
+      const coordinateText = `${mushroom.coordinate.latitude.toFixed(6)}, ${mushroom.coordinate.longitude.toFixed(6)}`
+      const icon = L.divIcon({
+        className: '',
+        html: `<div class="mushroom-map-marker ${markerClass}">
+          <div class="mushroom-map-countdown">
+            <span class="mushroom-map-countdown-label">倒數</span>
+            <strong>${countdown}</strong>
+          </div>
+          <div class="mushroom-map-pin-wrap" aria-label="${label}">
+            <div class="mushroom-map-pin"></div>
+          </div>
+        </div>`,
+        iconSize: [94, 82],
+        iconAnchor: [47, 78],
+        popupAnchor: [0, -72],
+      })
+      const marker = L.marker(
+        [mushroom.coordinate.latitude, mushroom.coordinate.longitude],
+        { icon },
+      ).addTo(map)
+      marker.bindPopup(
+        `<strong>${name}</strong><br/>${label}<br/>${coordinateText}<br/>倒數 ${countdown}`,
+      )
+      mushroomMarkersRef.current.push(marker)
+    })
+  }, [mushroomNowMs, savedMushrooms])
 
   useEffect(() => {
     const map = mapRef.current

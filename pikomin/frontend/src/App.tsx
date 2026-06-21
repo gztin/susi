@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Church, Copy, Download, FileInput, FolderOpen, HelpCircle, Layers3, Loader2, Lock, Mail, Map, MoreHorizontal, MousePointerClick, Pencil, Radar, Save, Trees, Trash2, Zap } from 'lucide-react'
+import { Church, Copy, Download, FileInput, FolderOpen, HelpCircle, Layers3, Loader2, Lock, Mail, Map, MoreHorizontal, MousePointerClick, Pencil, Radar, Save, Send, Trees, Trash2, X, Zap, ZoomIn } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -7,12 +7,14 @@ import MapInterface from './components/MapInterface'
 import { RoutePanel } from './components/RoutePanel'
 import { useDevice } from './hooks/useDevice'
 import { useRoute } from './hooks/useRoute'
-import type { GPSCoordinate, PostcardLandmark, SavedLandmark, SavedRoute } from './types'
+import type { GPSCoordinate, MushroomElementType, MushroomType, PostcardLandmark, SavedLandmark, SavedMushroom, SavedRoute } from './types'
 
 type Mode = 'single' | 'route'
 type FlyMode = 'coordinate' | 'landmark'
 type ManagerTab = 'landmarks' | 'routes'
-type LandmarkManagerTab = 'create' | 'search'
+type MushroomManagerTab = 'createGiant' | 'createElement' | 'giantList' | 'elementList'
+type LandmarkManagerTab = 'create' | 'search' | MushroomManagerTab
+type LandmarkTypeFilter = 'flower' | 'mushroom' | 'giant' | 'element'
 type PostcardFilterType = 'temple' | 'transformer' | 'church' | 'park'
 const LANDMARKS_PER_PAGE = 12
 const ROUTES_PER_PAGE = 12
@@ -147,6 +149,7 @@ interface LandmarkFilePayload {
   exportedAt?: unknown
   coordinate?: unknown
   landmarkType?: unknown
+  imageUrl?: unknown
 }
 
 interface MapBounds {
@@ -170,7 +173,41 @@ const INITIAL_POSTCARD_FILTERS: Record<PostcardFilterType, boolean> = {
   park: true,
 }
 
+const LANDMARK_TYPE_FILTERS: { id: LandmarkTypeFilter; label: string }[] = [
+  { id: 'flower', label: '花點' },
+  { id: 'mushroom', label: '菇點' },
+  { id: 'giant', label: '巨菇' },
+  { id: 'element', label: '元素菇' },
+]
+
+const MUSHROOM_ELEMENT_OPTIONS: { id: MushroomElementType; label: string }[] = [
+  { id: 'water', label: '水' },
+  { id: 'fire', label: '火' },
+  { id: 'electric', label: '雷' },
+  { id: 'poison', label: '毒' },
+  { id: 'crystal', label: '水晶' },
+]
+
+const MUSHROOM_TAB_LABELS: Record<MushroomManagerTab, string> = {
+  createGiant: '新增巨菇',
+  createElement: '新增元素菇',
+  giantList: '巨菇',
+  elementList: '元素菇',
+}
+
+const LANDMARK_MANAGER_TAB_LABELS: Record<LandmarkManagerTab, string> = {
+  create: '新增地標',
+  search: '搜尋地標',
+  ...MUSHROOM_TAB_LABELS,
+}
+
+const elementLabelMap = Object.fromEntries(
+  MUSHROOM_ELEMENT_OPTIONS.map((option) => [option.id, option.label]),
+) as Record<MushroomElementType, string>
+
 function TempleIcon({ size = 18 }: { size?: number }) {
+
+
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
       <path
@@ -186,6 +223,7 @@ let toastIdCounter = 0
 function parseCoordinateInput(value: string): GPSCoordinate | null {
   const normalized = value
     .replace(/，/g, ',')
+    .replace(/[()（）]/g, '')
     .trim()
     .replace(/\s+/g, ' ')
 
@@ -202,6 +240,28 @@ function parseCoordinateInput(value: string): GPSCoordinate | null {
 function formatCoordinate(coord: GPSCoordinate | null): string {
   if (!coord) return '尚未設定'
   return `${coord.latitude.toFixed(6)}, ${coord.longitude.toFixed(6)}`
+}
+
+function formatMushroomCountdown(expiresAt: string, nowMs: number): string {
+  const expiresMs = new Date(expiresAt).getTime()
+  if (!Number.isFinite(expiresMs)) return '時間未設定'
+  const diffMs = expiresMs - nowMs
+  if (diffMs <= 0) return '已結束'
+  const totalSeconds = Math.ceil(diffMs / 1000)
+  const days = Math.floor(totalSeconds / 86400)
+  const hours = Math.floor((totalSeconds % 86400) / 3600)
+  const minutes = Math.floor((totalSeconds % 3600) / 60)
+  const seconds = totalSeconds % 60
+  const paddedMinutes = String(minutes).padStart(2, '0')
+  const paddedSeconds = String(seconds).padStart(2, '0')
+  if (days > 0) return `${days}天 ${String(hours).padStart(2, '0')}:${paddedMinutes}:${paddedSeconds}`
+  if (hours > 0) return `${hours}:${paddedMinutes}:${paddedSeconds}`
+  return `${minutes}:${paddedSeconds}`
+}
+
+function getMushroomTag(item: SavedMushroom): string {
+  if (item.mushroomType === 'giant') return '巨菇'
+  return item.elementType ? `${elementLabelMap[item.elementType]}菇` : '元素菇'
 }
 
 function distanceMeters(a: GPSCoordinate, b: GPSCoordinate): number {
@@ -346,6 +406,7 @@ function normalizeImportedLandmark(payload: LandmarkFilePayload): {
   name: string
   coordinate: GPSCoordinate
   landmarkType: 'flower' | 'mushroom'
+  imageUrl?: string
 } {
   const name = typeof payload.name === 'string' ? payload.name.trim() : ''
   if (!name) {
@@ -357,10 +418,22 @@ function normalizeImportedLandmark(payload: LandmarkFilePayload): {
   if (payload.landmarkType !== 'flower' && payload.landmarkType !== 'mushroom') {
     throw new Error('地標檔案格式錯誤，地標類型必須是 flower 或 mushroom')
   }
+  const imageUrl = typeof payload.imageUrl === 'string' ? payload.imageUrl.trim() : ''
+  if (payload.imageUrl !== undefined) {
+    try {
+      const parsed = new URL(imageUrl)
+      if (!['http:', 'https:'].includes(parsed.protocol)) {
+        throw new Error('unsupported protocol')
+      }
+    } catch {
+      throw new Error('地標檔案格式錯誤，圖片網址必須是有效的 http 或 https URL')
+    }
+  }
   return {
     name,
     coordinate: payload.coordinate,
     landmarkType: payload.landmarkType,
+    ...(imageUrl ? { imageUrl } : {}),
   }
 }
 
@@ -384,7 +457,7 @@ export default function App() {
   const [landmarkSearchInput, setLandmarkSearchInput] = useState('')
   const [routeSearchInput, setRouteSearchInput] = useState('')
   const [landmarkTypeInput, setLandmarkTypeInput] = useState<'flower' | 'mushroom'>('mushroom')
-  const [landmarkTypeFilter, setLandmarkTypeFilter] = useState<'all' | 'flower' | 'mushroom'>('all')
+  const [landmarkTypeFilter, setLandmarkTypeFilter] = useState<LandmarkTypeFilter>('mushroom')
   const [landmarkFormTouched, setLandmarkFormTouched] = useState(false)
   const [landmarkSaving, setLandmarkSaving] = useState(false)
   const [editingLandmarkId, setEditingLandmarkId] = useState('')
@@ -392,15 +465,18 @@ export default function App() {
   const [openLandmarkActionId, setOpenLandmarkActionId] = useState('')
   const [openRouteActionId, setOpenRouteActionId] = useState('')
   const [savedRoutes, setSavedRoutes] = useState<SavedRoute[]>([])
+  const [savedMushrooms, setSavedMushrooms] = useState<SavedMushroom[]>([])
   const [routeSaving, setRouteSaving] = useState(false)
   const [isManageModalOpen, setIsManageModalOpen] = useState(false)
   const [isFlySettingsOpen, setIsFlySettingsOpen] = useState(false)
   const [isLandmarkManagerOpen, setIsLandmarkManagerOpen] = useState(false)
+  const [isMushroomOnlyManager, setIsMushroomOnlyManager] = useState(false)
   const [isRouteLibraryOpen, setIsRouteLibraryOpen] = useState(false)
   const [isSaveRouteModalOpen, setIsSaveRouteModalOpen] = useState(false)
   const [isDisconnectHelpOpen, setIsDisconnectHelpOpen] = useState(false)
   const [managerTab, setManagerTab] = useState<ManagerTab>('landmarks')
   const [landmarkManagerTab, setLandmarkManagerTab] = useState<LandmarkManagerTab>('create')
+  const [mushroomManagerTab, setMushroomManagerTab] = useState<MushroomManagerTab>('giantList')
   const [landmarkPage, setLandmarkPage] = useState(1)
   const [routePage, setRoutePage] = useState(1)
   const [waypointStartIndex, setWaypointStartIndex] = useState(0)
@@ -411,8 +487,17 @@ export default function App() {
   const [postcardFilters, setPostcardFilters] = useState<Record<PostcardFilterType, boolean>>(INITIAL_POSTCARD_FILTERS)
   const [isScanningPostcards, setIsScanningPostcards] = useState(false)
   const [routeNameInput, setRouteNameInput] = useState('')
+  const [mushroomNameInput, setMushroomNameInput] = useState('')
+  const [mushroomCoordInput, setMushroomCoordInput] = useState('')
+  const [mushroomSlotsInput, setMushroomSlotsInput] = useState('')
+  const [mushroomMinutesInput, setMushroomMinutesInput] = useState('')
+  const [mushroomElementInput, setMushroomElementInput] = useState<MushroomElementType>('water')
+  const [mushroomFormTouched, setMushroomFormTouched] = useState(false)
+  const [mushroomSaving, setMushroomSaving] = useState(false)
+  const [nowMs, setNowMs] = useState(() => Date.now())
   const [flyMode, setFlyMode] = useState<FlyMode>('coordinate')
   const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
+  const [previewLandmark, setPreviewLandmark] = useState<SavedLandmark | null>(null)
   const showToastRef = useRef<(message: string) => void>(() => {})
   const routeImportInputRef = useRef<HTMLInputElement | null>(null)
   const landmarkImportInputRef = useRef<HTMLInputElement | null>(null)
@@ -461,6 +546,23 @@ export default function App() {
   }, [])
 
   useEffect(() => {
+    let cancelled = false
+    void apiClient.getMushrooms()
+      .then((items) => {
+        if (!cancelled) setSavedMushrooms(items)
+      })
+      .catch(() => {
+        if (!cancelled) setSavedMushrooms([])
+      })
+    return () => { cancelled = true }
+  }, [])
+
+  useEffect(() => {
+    const interval = window.setInterval(() => setNowMs(Date.now()), 1000)
+    return () => window.clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
     if (navigator.geolocation && selectedDevice && !myPosition && !hasResetGPS) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
@@ -484,6 +586,19 @@ export default function App() {
   useEffect(() => {
     showToastRef.current = showToast
   }, [showToast])
+
+  useEffect(() => {
+    const expired = savedMushrooms.filter((item) => {
+      const expiresMs = new Date(item.expiresAt).getTime()
+      return Number.isFinite(expiresMs) && expiresMs <= nowMs
+    })
+    if (expired.length === 0) return
+    setSavedMushrooms((prev) => prev.filter((item) => !expired.some((expiredItem) => expiredItem.id === item.id)))
+    expired.forEach((item) => {
+      void apiClient.deleteMushroom(item.id).catch(() => {})
+    })
+    showToast(`已自動移除 ${expired.length} 筆倒數結束的蘑菇資料`)
+  }, [nowMs, savedMushrooms, showToast])
 
   const handleScanPostcards = useCallback(async () => {
     if (!mapBounds) {
@@ -818,6 +933,99 @@ export default function App() {
     }
   }, [destinationInput, savedLandmarks, selectedDevice?.id, sendLocationFast, showToast, syncCurrentPosition])
 
+  const handleFlyToMushroom = useCallback(async (mushroom: SavedMushroom) => {
+    setIsFlying(true)
+    try {
+      const ok = await sendLocationFast(mushroom.coordinate, selectedDevice?.id)
+      if (!ok) return
+      setMode('single')
+      setMyPosition(mushroom.coordinate)
+      syncCurrentPosition(mushroom.coordinate, 'idle')
+      setViewTarget(mushroom.coordinate)
+      setDestinationInput(mushroom.name)
+      setHasResetGPS(false)
+      showToast(`已飛行到${getMushroomTag(mushroom)}：${mushroom.name}`)
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : '飛行失敗')
+    } finally {
+      setIsFlying(false)
+    }
+  }, [selectedDevice?.id, sendLocationFast, showToast, syncCurrentPosition])
+
+  const resetMushroomForm = useCallback(() => {
+    setMushroomNameInput('')
+    setMushroomCoordInput('')
+    setMushroomSlotsInput('')
+    setMushroomMinutesInput('')
+    setMushroomElementInput('water')
+    setMushroomFormTouched(false)
+  }, [])
+
+  const handleCreateMushroom = useCallback(async (mushroomType: MushroomType) => {
+    setMushroomFormTouched(true)
+    const name = mushroomNameInput.trim()
+    const coordinate = parseCoordinateInput(mushroomCoordInput)
+    if (!name || !coordinate) {
+      showToast('請輸入蘑菇名稱與正確座標')
+      return
+    }
+
+    const trimmedSlots = mushroomSlotsInput.trim()
+    let remainingSlots: number | null = null
+    if (trimmedSlots) {
+      const slotValue = Number.parseInt(trimmedSlots, 10)
+      if (!Number.isInteger(slotValue) || slotValue < 0 || slotValue > 5) {
+        showToast('剩餘空位請輸入 0 到 5')
+        return
+      }
+      remainingSlots = slotValue
+    }
+
+    const shouldReadTime = remainingSlots !== null && remainingSlots < 5
+    const trimmedMinutes = mushroomMinutesInput.trim()
+    let remainingMinutes: number | null = null
+    if (shouldReadTime && trimmedMinutes) {
+      const minuteValue = Number.parseInt(trimmedMinutes, 10)
+      if (!Number.isInteger(minuteValue) || minuteValue <= 0) {
+        showToast('剩餘時間請輸入正整數分鐘')
+        return
+      }
+      remainingMinutes = minuteValue
+    }
+
+    setMushroomSaving(true)
+    try {
+      const created = await apiClient.createMushroom({
+        name,
+        coordinate,
+        mushroomType,
+        elementType: mushroomType === 'element' ? mushroomElementInput : null,
+        remainingSlots,
+        remainingMinutes,
+      })
+      setSavedMushrooms((prev) => [created, ...prev])
+      setNowMs(Date.now())
+      resetMushroomForm()
+      setMushroomManagerTab(mushroomType === 'giant' ? 'giantList' : 'elementList')
+      setLandmarkManagerTab(mushroomType === 'giant' ? 'giantList' : 'elementList')
+      showToast(`已新增${getMushroomTag(created)}：${created.name}`)
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : '新增蘑菇資料失敗')
+    } finally {
+      setMushroomSaving(false)
+    }
+  }, [mushroomCoordInput, mushroomElementInput, mushroomMinutesInput, mushroomNameInput, mushroomSlotsInput, resetMushroomForm, showToast])
+
+  const handleDeleteMushroom = useCallback(async (mushroomId: string) => {
+    try {
+      await apiClient.deleteMushroom(mushroomId)
+      setSavedMushrooms((prev) => prev.filter((item) => item.id !== mushroomId))
+      showToast('已刪除蘑菇資料')
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : '刪除蘑菇資料失敗')
+    }
+  }, [showToast])
+
   const selectedFlyLandmark = savedLandmarks.find((item) => item.id === selectedLandmarkId) ?? null
   const flyTargetText = flyMode === 'landmark'
     ? (selectedFlyLandmark?.name || '尚未選擇地標')
@@ -901,6 +1109,7 @@ export default function App() {
       name: landmark.name,
       coordinate: landmark.coordinate,
       landmarkType: landmark.landmarkType,
+      ...(landmark.imageUrl ? { imageUrl: landmark.imageUrl } : {}),
     }
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
@@ -1055,6 +1264,16 @@ export default function App() {
     }
   }, [showToast])
 
+  const handleCopyMushroomCoordinate = useCallback(async (mushroom: SavedMushroom) => {
+    const text = formatCoordinate(mushroom.coordinate)
+    try {
+      await navigator.clipboard.writeText(text)
+      showToast(`已複製座標：${mushroom.name}`)
+    } catch {
+      showToast('複製失敗，請確認瀏覽器剪貼簿權限')
+    }
+  }, [showToast])
+
   const handleImportRouteFile = useCallback(async (file: File | null) => {
     if (!file) return
     if (!file.name.toLowerCase().endsWith('.json')) {
@@ -1093,8 +1312,10 @@ export default function App() {
   const coordError = landmarkFormTouched && !parsedLandmarkCoord ? '座標格式錯誤，請用 25.033, 121.565' : ''
   const isLandmarkFormValid = Boolean(trimmedLandmarkName && parsedLandmarkCoord)
   const normalizedSearchKeyword = landmarkSearchInput.trim().toLowerCase()
+  const isMushroomTypeFilter = landmarkTypeFilter === 'giant' || landmarkTypeFilter === 'element'
   const filteredLandmarks = savedLandmarks.filter((landmark) => {
-    const typeMatched = landmarkTypeFilter === 'all' || landmark.landmarkType === landmarkTypeFilter
+    if (isMushroomTypeFilter) return false
+    const typeMatched = landmark.landmarkType === landmarkTypeFilter
     if (!normalizedSearchKeyword) return typeMatched
     const nameMatched = landmark.name.toLowerCase().includes(normalizedSearchKeyword)
     const coordText = formatCoordinate(landmark.coordinate).toLowerCase()
@@ -1118,6 +1339,33 @@ export default function App() {
     (safeRoutePage - 1) * ROUTES_PER_PAGE,
     safeRoutePage * ROUTES_PER_PAGE,
   )
+  const trimmedMushroomName = mushroomNameInput.trim()
+  const parsedMushroomCoord = parseCoordinateInput(mushroomCoordInput)
+  const trimmedMushroomSlots = mushroomSlotsInput.trim()
+  const parsedMushroomSlotsValue = trimmedMushroomSlots ? Number.parseInt(trimmedMushroomSlots, 10) : Number.NaN
+  const mushroomSlotsInvalid = Boolean(trimmedMushroomSlots) && (
+    !Number.isInteger(parsedMushroomSlotsValue) ||
+    parsedMushroomSlotsValue < 0 ||
+    parsedMushroomSlotsValue > 5
+  )
+  const shouldShowMushroomTimeInput = Boolean(trimmedMushroomSlots) && !mushroomSlotsInvalid && parsedMushroomSlotsValue < 5
+  const mushroomNameError = mushroomFormTouched && !trimmedMushroomName ? '請輸入蘑菇名稱' : ''
+  const mushroomCoordError = mushroomFormTouched && !parsedMushroomCoord ? '座標格式錯誤，請用 25.033, 121.565' : ''
+  const mushroomSlotsError = mushroomFormTouched && mushroomSlotsInvalid ? '空位請輸入 0 到 5' : ''
+  const isMushroomFormValid = Boolean(trimmedMushroomName && parsedMushroomCoord && !mushroomSlotsError)
+  const giantMushrooms = savedMushrooms.filter((item) => item.mushroomType === 'giant')
+  const elementMushrooms = savedMushrooms.filter((item) => item.mushroomType === 'element')
+  const filteredMushroomSearchResults = savedMushrooms.filter((mushroom) => {
+    if (!isMushroomTypeFilter) return false
+    if (landmarkTypeFilter === 'giant' && mushroom.mushroomType !== 'giant') return false
+    if (landmarkTypeFilter === 'element' && mushroom.mushroomType !== 'element') return false
+    if (!normalizedSearchKeyword) return true
+    const nameMatched = mushroom.name.toLowerCase().includes(normalizedSearchKeyword)
+    const coordMatched = formatCoordinate(mushroom.coordinate).toLowerCase().includes(normalizedSearchKeyword)
+    const tagMatched = getMushroomTag(mushroom).toLowerCase().includes(normalizedSearchKeyword)
+    return nameMatched || coordMatched || tagMatched
+  })
+  const activeMushroomTotal = landmarkTypeFilter === 'giant' ? giantMushrooms.length : elementMushrooms.length
   const canEditRouteWaypoints = mode === 'route' && (
     routeStatus.state === 'idle' ||
     routeStatus.state === 'paused'
@@ -1133,6 +1381,144 @@ export default function App() {
     waypoints.length >= 3 &&
     (isRouteOptimized || routeStatus.state === 'moving' || routeStatus.state === 'paused')
 
+  const mushroomManagementSection = (
+    mushroomManagerTab === 'createGiant' || mushroomManagerTab === 'createElement' ? (
+      <section className="modal-section mushroom-create-panel">
+        <label className="field">
+          <span>名稱</span>
+          <input
+            value={mushroomNameInput}
+            onChange={(e) => setMushroomNameInput(e.target.value)}
+            onBlur={() => setMushroomFormTouched(true)}
+            placeholder={mushroomManagerTab === 'createGiant' ? '例如：中央公園巨菇' : '例如：水晶菇集合點'}
+            aria-invalid={Boolean(mushroomNameError)}
+          />
+          {mushroomNameError && <p className="helper-text helper-text--error">{mushroomNameError}</p>}
+        </label>
+        <label className="field">
+          <span>座標</span>
+          <input
+            value={mushroomCoordInput}
+            onChange={(e) => setMushroomCoordInput(e.target.value)}
+            onBlur={() => setMushroomFormTouched(true)}
+            placeholder="例如：(46.7608330, 8.6511050)"
+            aria-invalid={Boolean(mushroomCoordError)}
+          />
+          {mushroomCoordError && <p className="helper-text helper-text--error">{mushroomCoordError}</p>}
+        </label>
+        {mushroomManagerTab === 'createElement' && (
+          <label className="field">
+            <span>元素類型</span>
+            <select value={mushroomElementInput} onChange={(e) => setMushroomElementInput(e.target.value as MushroomElementType)}>
+              {MUSHROOM_ELEMENT_OPTIONS.map((option) => (
+                <option key={option.id} value={option.id}>{option.label}</option>
+              ))}
+            </select>
+          </label>
+        )}
+        <label className="field">
+          <span>剩餘空位（選填）</span>
+          <input
+            value={mushroomSlotsInput}
+            onChange={(e) => setMushroomSlotsInput(e.target.value)}
+            onBlur={() => setMushroomFormTouched(true)}
+            inputMode="numeric"
+            placeholder="0 到 5，不填則直接倒數到凌晨 2 點"
+            aria-invalid={Boolean(mushroomSlotsError)}
+          />
+          {mushroomSlotsError && <p className="helper-text helper-text--error">{mushroomSlotsError}</p>}
+        </label>
+        {shouldShowMushroomTimeInput && (
+          <label className="field">
+            <span>剩餘時間（分鐘，選填）</span>
+            <input
+              value={mushroomMinutesInput}
+              onChange={(e) => setMushroomMinutesInput(e.target.value)}
+              inputMode="numeric"
+              placeholder="例如：90；不填則到下一個凌晨 2 點"
+            />
+          </label>
+        )}
+        <div className="mushroom-form-preview">
+          <span className={`mushroom-tag ${mushroomManagerTab === 'createGiant' ? 'is-giant' : 'is-element'}`}>
+            {mushroomManagerTab === 'createGiant' ? '巨菇' : `${elementLabelMap[mushroomElementInput]}菇`}
+          </span>
+          <small>{shouldShowMushroomTimeInput ? '空位少於 5，可填剩餘時間。' : '未填剩餘時間時，會預設倒數到下一個凌晨 2 點。'}</small>
+        </div>
+        <button
+          className="primary-button"
+          onClick={() => void handleCreateMushroom(mushroomManagerTab === 'createElement' ? 'element' : 'giant')}
+          disabled={!isMushroomFormValid || mushroomSaving}
+          type="button"
+        >
+          {mushroomSaving ? '新增中...' : `新增${mushroomManagerTab === 'createElement' ? '元素菇' : '巨菇'}`}
+        </button>
+      </section>
+    ) : (
+      <section className="modal-section mushroom-list-panel">
+        <div className="landmark-section-head">
+          <span>{mushroomManagerTab === 'giantList' ? '巨菇列表' : '元素菇列表'}</span>
+          <small>{mushroomManagerTab === 'giantList' ? giantMushrooms.length : elementMushrooms.length} 筆</small>
+        </div>
+        {(mushroomManagerTab === 'giantList' ? giantMushrooms : elementMushrooms).length === 0 ? (
+          <p className="landmark-empty">目前還沒有{mushroomManagerTab === 'giantList' ? '巨菇' : '元素菇'}資料。</p>
+        ) : (
+          <div className="mushroom-list">
+            {(mushroomManagerTab === 'giantList' ? giantMushrooms : elementMushrooms).map((mushroom) => (
+              <div key={mushroom.id} className="mushroom-item">
+                <div className="mushroom-item-main">
+                  <div className="mushroom-title-row">
+                    <div className="mushroom-name-group">
+                      <strong>{mushroom.name}</strong>
+                      <span className={`mushroom-tag ${mushroom.mushroomType === 'giant' ? 'is-giant' : 'is-element'}`}>{getMushroomTag(mushroom)}</span>
+                    </div>
+                  </div>
+                  <span>{formatCoordinate(mushroom.coordinate)}</span>
+                  <div className="mushroom-meta-row">
+                    {mushroom.remainingSlots !== null && mushroom.remainingSlots !== undefined && (
+                      <small>{mushroom.remainingSlots} 空位</small>
+                    )}
+                  </div>
+                </div>
+                <small className="mushroom-countdown">倒數 {formatMushroomCountdown(mushroom.expiresAt, nowMs)}</small>
+                <div className="mushroom-actions">
+                  <button
+                    className="icon-button mushroom-fly-button"
+                    onClick={() => void handleFlyToMushroom(mushroom)}
+                    disabled={isFlying}
+                    aria-label={`飛行到 ${mushroom.name}`}
+                    title={`飛行到 ${mushroom.name}`}
+                    type="button"
+                  >
+                    <Send aria-hidden="true" size={16} strokeWidth={2.5} />
+                  </button>
+                  <button
+                    className="icon-button"
+                    onClick={() => void handleCopyMushroomCoordinate(mushroom)}
+                    aria-label={`複製座標：${mushroom.name}`}
+                    title={`複製 ${mushroom.name} 座標`}
+                    type="button"
+                  >
+                    <Copy aria-hidden="true" size={16} strokeWidth={2.4} />
+                  </button>
+                  <button
+                    className="icon-button danger"
+                    onClick={() => void handleDeleteMushroom(mushroom.id)}
+                    aria-label={`刪除蘑菇資料：${mushroom.name}`}
+                    title={`刪除 ${mushroom.name}`}
+                    type="button"
+                  >
+                    <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+    )
+  )
+
   return (
     <div className="app-shell">
       <section className="map-stage map-stage-full">
@@ -1144,6 +1530,8 @@ export default function App() {
           waypointStartIndex={waypointStartIndex}
           showRouteLine={shouldShowRouteLine}
           savedLandmarks={savedLandmarks}
+          savedMushrooms={savedMushrooms}
+          mushroomNowMs={nowMs}
           postcardLandmarks={visiblePostcards}
           showPostcards={showPostcards}
           onViewportChange={setMapBounds}
@@ -1337,6 +1725,21 @@ export default function App() {
               >
                 <Mail aria-hidden="true" size={28} strokeWidth={3} />
               </button>
+              <button
+                className="icon-button route-toolbar-button"
+                onClick={() => {
+                  setManagerTab('landmarks')
+                  setLandmarkManagerTab('giantList')
+                  setMushroomManagerTab('giantList')
+                  setIsMushroomOnlyManager(true)
+                  setIsLandmarkManagerOpen(true)
+                }}
+                aria-label={`開啟蘑菇資料，共 ${savedMushrooms.length} 筆`}
+                title={`蘑菇資料：${savedMushrooms.length} 筆`}
+                type="button"
+              >
+                <Trees aria-hidden="true" size={22} strokeWidth={2.8} />
+              </button>
               {mode === 'route' && routeStatus.state === 'idle' && (
                   <>
                     {waypoints.length > 0 && (
@@ -1415,7 +1818,7 @@ export default function App() {
 
       {isManageModalOpen && (
         <div className="modal-backdrop" onClick={() => setIsManageModalOpen(false)}>
-          <div className="modal-panel" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-panel fly-settings-panel" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h3>位置資訊設定</h3>
             </div>
@@ -1428,6 +1831,7 @@ export default function App() {
                   className="ghost-button modal-stack-button"
                   onClick={() => {
                     setManagerTab('landmarks')
+                    setIsMushroomOnlyManager(false)
                     setIsLandmarkManagerOpen(true)
                   }}
                 >
@@ -1622,56 +2026,139 @@ export default function App() {
                     <div className="field">
                       <span>篩選</span>
                       <div className="segmented-control" role="tablist" aria-label="地標類型篩選">
-                        <button
-                          type="button"
-                          className={landmarkTypeFilter === 'all' ? 'is-active' : ''}
-                          onClick={() => setLandmarkTypeFilter('all')}
-                        >
-                          全部
-                        </button>
-                        <button
-                          type="button"
-                          className={landmarkTypeFilter === 'flower' ? 'is-active' : ''}
-                          onClick={() => setLandmarkTypeFilter('flower')}
-                        >
-                          花點
-                        </button>
-                        <button
-                          type="button"
-                          className={landmarkTypeFilter === 'mushroom' ? 'is-active' : ''}
-                          onClick={() => setLandmarkTypeFilter('mushroom')}
-                        >
-                          菇點
-                        </button>
+                        {LANDMARK_TYPE_FILTERS.map((filter) => (
+                          <button
+                            key={filter.id}
+                            type="button"
+                            className={landmarkTypeFilter === filter.id ? 'is-active' : ''}
+                            onClick={() => setLandmarkTypeFilter(filter.id)}
+                          >
+                            {filter.label}
+                          </button>
+                        ))}
                       </div>
                     </div>
                   </div>
                   <div className="landmark-section-head">
-                    <span>已新增地標</span>
-                    <small>{filteredLandmarks.length} / {savedLandmarks.length} 筆</small>
+                    <span>{isMushroomTypeFilter ? (landmarkTypeFilter === 'giant' ? '巨菇資料' : '元素菇資料') : '已新增地標'}</span>
+                    <small>
+                      {isMushroomTypeFilter
+                        ? `${filteredMushroomSearchResults.length} / ${activeMushroomTotal} 筆`
+                        : `${filteredLandmarks.length} / ${savedLandmarks.length} 筆`}
+                    </small>
                   </div>
-                  {savedLandmarks.length === 0 ? (
+                  {isMushroomTypeFilter ? (
+                    activeMushroomTotal === 0 ? (
+                      <p className="landmark-empty">目前還沒有{landmarkTypeFilter === 'giant' ? '巨菇' : '元素菇'}資料，先到「地標管理」新增一筆。</p>
+                    ) : filteredMushroomSearchResults.length === 0 ? (
+                      <p className="landmark-empty">找不到符合條件的{landmarkTypeFilter === 'giant' ? '巨菇' : '元素菇'}資料，請調整搜尋關鍵字。</p>
+                    ) : (
+                      <div className="mushroom-list fly-mushroom-list">
+                        {filteredMushroomSearchResults.map((mushroom) => (
+                          <div key={mushroom.id} className="mushroom-item">
+                            <div className="mushroom-item-main">
+                              <div className="mushroom-title-row">
+                                <div className="mushroom-name-group">
+                                  <strong>{mushroom.name}</strong>
+                                  <span className={`mushroom-tag ${mushroom.mushroomType === 'giant' ? 'is-giant' : 'is-element'}`}>{getMushroomTag(mushroom)}</span>
+                                </div>
+                              </div>
+                              <span>{formatCoordinate(mushroom.coordinate)}</span>
+                              <div className="mushroom-meta-row">
+                                {mushroom.remainingSlots !== null && mushroom.remainingSlots !== undefined && (
+                                  <small>{mushroom.remainingSlots} 空位</small>
+                                )}
+                              </div>
+                            </div>
+                            <small className="mushroom-countdown">倒數 {formatMushroomCountdown(mushroom.expiresAt, nowMs)}</small>
+                            <div className="mushroom-actions">
+                              <button
+                                className="icon-button mushroom-fly-button"
+                                onClick={() => void handleFlyToMushroom(mushroom)}
+                                disabled={isFlying}
+                                aria-label={`飛行到 ${mushroom.name}`}
+                                title={`飛行到 ${mushroom.name}`}
+                                type="button"
+                              >
+                                <Send aria-hidden="true" size={16} strokeWidth={2.5} />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  ) : savedLandmarks.length === 0 ? (
                     <p className="landmark-empty">目前還沒有地標，先到「地標管理」新增一筆。</p>
                   ) : filteredLandmarks.length === 0 ? (
                     <p className="landmark-empty">找不到符合條件的地標，請調整搜尋關鍵字。</p>
                   ) : (
-                    <div className="landmark-list">
-                      {filteredLandmarks.map((landmark) => (
-                        <div key={landmark.id} className="landmark-item">
-                          <button className="landmark-main" onClick={() => handleSelectLandmarkToFly(landmark.name)} type="button">
-                            <strong>{landmark.name}</strong>
-                          </button>
+                    <>
+                      <div className="landmark-edit-list fly-landmark-list">
+                        {pagedLandmarks.map((landmark) => (
+                          <div key={landmark.id} className={`landmark-edit-item${destinationInput.trim() === landmark.name ? ' is-editing' : ''}`}>
+                            <div className="landmark-edit-content">
+                              {landmark.imageUrl ? (
+                                <button
+                                  className="landmark-thumb-button"
+                                  onClick={() => setPreviewLandmark(landmark)}
+                                  type="button"
+                                  aria-label={`放大查看 ${landmark.name} 的圖片`}
+                                  title={`放大查看 ${landmark.name}`}
+                                >
+                                  <img
+                                    src={landmark.imageUrl}
+                                    alt={`${landmark.name} 縮圖`}
+                                    loading="lazy"
+                                    onError={(event) => {
+                                      event.currentTarget.style.display = 'none'
+                                      event.currentTarget.parentElement?.classList.add('is-image-missing')
+                                    }}
+                                  />
+                                  <span className="landmark-thumb-zoom" aria-hidden="true">
+                                    <ZoomIn size={13} strokeWidth={2.6} />
+                                  </span>
+                                </button>
+                              ) : (
+                                <span className="landmark-thumb-placeholder" title="這筆地標沒有圖片資料" aria-label="沒有圖片資料">
+                                  無圖
+                                </span>
+                              )}
+                              <button className="landmark-edit-main" onClick={() => handleSelectLandmarkToFly(landmark.name)} type="button">
+                                <strong>{landmark.name}</strong>
+                              </button>
+                            </div>
+                            <button
+                              className="ghost-button fly-landmark-select"
+                              onClick={() => handleSelectLandmarkToFly(landmark.name)}
+                              type="button"
+                            >
+                              選取
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                      {landmarkPageCount > 1 && (
+                        <div className="landmark-pagination" aria-label="地標分頁">
                           <button
-                            className="waypoint-remove landmark-remove-icon"
-                            onClick={() => void handleDeleteLandmark(landmark.id)}
-                            aria-label={`刪除地標 ${landmark.name}`}
-                            title={`刪除 ${landmark.name}`}
+                            className="ghost-button"
+                            type="button"
+                            onClick={() => setLandmarkPage((page) => Math.max(1, page - 1))}
+                            disabled={safeLandmarkPage <= 1}
                           >
-                            ×
+                            上一頁
+                          </button>
+                          <span>{safeLandmarkPage} / {landmarkPageCount}</span>
+                          <button
+                            className="ghost-button"
+                            type="button"
+                            onClick={() => setLandmarkPage((page) => Math.min(landmarkPageCount, page + 1))}
+                            disabled={safeLandmarkPage >= landmarkPageCount}
+                          >
+                            下一頁
                           </button>
                         </div>
-                      ))}
-                    </div>
+                      )}
+                    </>
                   )}
                 </section>
               )}
@@ -1684,41 +2171,47 @@ export default function App() {
         <div className="modal-backdrop" onClick={() => setIsLandmarkManagerOpen(false)}>
           <div className="modal-panel landmark-manager-panel" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header manager-modal-header">
-              <h3>地標 / 路徑管理</h3>
-              <div className="segmented-control manager-tabs" role="tablist" aria-label="管理類型">
-                <button
-                  type="button"
-                  className={managerTab === 'landmarks' ? 'is-active' : ''}
-                  onClick={() => setManagerTab('landmarks')}
-                >
-                  地標
-                </button>
-                <button
-                  type="button"
-                  className={managerTab === 'routes' ? 'is-active' : ''}
-                  onClick={() => setManagerTab('routes')}
-                >
-                  路徑
-                </button>
-              </div>
+              <h3>{isMushroomOnlyManager ? '蘑菇資料' : '地標 / 路徑管理'}</h3>
+              {!isMushroomOnlyManager && (
+                <div className="segmented-control manager-tabs" role="tablist" aria-label="管理類型">
+                  <button
+                    type="button"
+                    className={managerTab === 'landmarks' ? 'is-active' : ''}
+                    onClick={() => setManagerTab('landmarks')}
+                  >
+                    地標
+                  </button>
+                  <button
+                    type="button"
+                    className={managerTab === 'routes' ? 'is-active' : ''}
+                    onClick={() => setManagerTab('routes')}
+                  >
+                    路徑
+                  </button>
+                </div>
+              )}
             </div>
             {managerTab === 'landmarks' ? (
               <div className="modal-body landmark-manager-layout">
                 <div className="segmented-control landmark-subtabs" role="tablist" aria-label="地標管理功能">
-                  <button
-                    type="button"
-                    className={landmarkManagerTab === 'create' ? 'is-active' : ''}
-                    onClick={() => setLandmarkManagerTab('create')}
-                  >
-                    新增地標
-                  </button>
-                  <button
-                    type="button"
-                    className={landmarkManagerTab === 'search' ? 'is-active' : ''}
-                    onClick={() => setLandmarkManagerTab('search')}
-                  >
-                    搜尋地標
-                  </button>
+                  {(isMushroomOnlyManager
+                    ? (['giantList', 'elementList'] as LandmarkManagerTab[])
+                    : (['create', 'search', 'createGiant', 'createElement', 'giantList', 'elementList'] as LandmarkManagerTab[])
+                  ).map((tab) => (
+                    <button
+                      key={tab}
+                      type="button"
+                      className={landmarkManagerTab === tab ? 'is-active' : ''}
+                      onClick={() => {
+                        setLandmarkManagerTab(tab)
+                        if (tab !== 'create' && tab !== 'search') {
+                          setMushroomManagerTab(tab)
+                        }
+                      }}
+                    >
+                      {LANDMARK_MANAGER_TAB_LABELS[tab]}
+                    </button>
+                  ))}
                 </div>
                 {landmarkManagerTab === 'create' ? (
                   <section className="modal-section landmark-create-panel">
@@ -1783,7 +2276,7 @@ export default function App() {
                     )}
                     <p className="helper-text">{editingLandmarkId ? '更新成功後欄位會自動清空，搜尋分頁清單會同步更新。' : '儲存成功後欄位會自動清空，點選地標可帶入目的地。'}</p>
                   </section>
-                ) : (
+                ) : landmarkManagerTab === 'search' ? (
                   <section className="modal-section landmark-manager-list-panel">
                     <div className="landmark-toolbar">
                       <label className="field landmark-search-field">
@@ -1797,27 +2290,16 @@ export default function App() {
                       <div className="field">
                         <span>篩選</span>
                         <div className="segmented-control" role="tablist" aria-label="地標管理類型篩選">
-                          <button
-                            type="button"
-                            className={landmarkTypeFilter === 'all' ? 'is-active' : ''}
-                            onClick={() => setLandmarkTypeFilter('all')}
-                          >
-                            全部
-                          </button>
-                          <button
-                            type="button"
-                            className={landmarkTypeFilter === 'flower' ? 'is-active' : ''}
-                            onClick={() => setLandmarkTypeFilter('flower')}
-                          >
-                            花點
-                          </button>
-                          <button
-                            type="button"
-                            className={landmarkTypeFilter === 'mushroom' ? 'is-active' : ''}
-                            onClick={() => setLandmarkTypeFilter('mushroom')}
-                          >
-                            菇點
-                          </button>
+                          {LANDMARK_TYPE_FILTERS.map((filter) => (
+                            <button
+                              key={filter.id}
+                              type="button"
+                              className={landmarkTypeFilter === filter.id ? 'is-active' : ''}
+                              onClick={() => setLandmarkTypeFilter(filter.id)}
+                            >
+                              {filter.label}
+                            </button>
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -1834,9 +2316,37 @@ export default function App() {
                         <div className="landmark-edit-list">
                           {pagedLandmarks.map((landmark) => (
                             <div key={landmark.id} className={`landmark-edit-item${editingLandmarkId === landmark.id ? ' is-editing' : ''}`}>
-                              <button className="landmark-edit-main" onClick={() => handleSelectLandmarkToFly(landmark.name)} type="button">
-                                <strong>{landmark.name}</strong>
-                              </button>
+                              <div className="landmark-edit-content">
+                                {landmark.imageUrl ? (
+                                  <button
+                                    className="landmark-thumb-button"
+                                    onClick={() => setPreviewLandmark(landmark)}
+                                    type="button"
+                                    aria-label={`放大查看 ${landmark.name} 的圖片`}
+                                    title={`放大查看 ${landmark.name}`}
+                                  >
+                                    <img
+                                      src={landmark.imageUrl}
+                                      alt={`${landmark.name} 縮圖`}
+                                      loading="lazy"
+                                      onError={(event) => {
+                                        event.currentTarget.style.display = 'none'
+                                        event.currentTarget.parentElement?.classList.add('is-image-missing')
+                                      }}
+                                    />
+                                    <span className="landmark-thumb-zoom" aria-hidden="true">
+                                      <ZoomIn size={13} strokeWidth={2.6} />
+                                    </span>
+                                  </button>
+                                ) : (
+                                  <span className="landmark-thumb-placeholder" title="這筆地標沒有圖片資料" aria-label="沒有圖片資料">
+                                    無圖
+                                  </span>
+                                )}
+                                <button className="landmark-edit-main" onClick={() => handleSelectLandmarkToFly(landmark.name)} type="button">
+                                  <strong>{landmark.name}</strong>
+                                </button>
+                              </div>
                               <div className="landmark-edit-actions">
                                 <button
                                   className="icon-button"
@@ -1910,7 +2420,68 @@ export default function App() {
                         )}
                       </>
                     )}
+                    {filteredMushroomSearchResults.length > 0 && (
+                      <>
+                        <div className="landmark-section-head mushroom-search-head">
+                          <span>{landmarkTypeFilter === 'giant' ? '巨菇資料' : landmarkTypeFilter === 'element' ? '元素菇資料' : '符合搜尋的蘑菇'}</span>
+                          <small>{filteredMushroomSearchResults.length} / {savedMushrooms.length} 筆</small>
+                        </div>
+                        <div className="mushroom-list mushroom-search-list">
+                          {filteredMushroomSearchResults.map((mushroom) => (
+                            <div key={mushroom.id} className="mushroom-item">
+                              <div className="mushroom-item-main">
+                                <div className="mushroom-title-row">
+                                  <div className="mushroom-name-group">
+                                    <strong>{mushroom.name}</strong>
+                                    <span className={`mushroom-tag ${mushroom.mushroomType === 'giant' ? 'is-giant' : 'is-element'}`}>{getMushroomTag(mushroom)}</span>
+                                  </div>
+                                </div>
+                                <span>{formatCoordinate(mushroom.coordinate)}</span>
+                                <div className="mushroom-meta-row">
+                                  {mushroom.remainingSlots !== null && mushroom.remainingSlots !== undefined && (
+                                    <small>{mushroom.remainingSlots} 空位</small>
+                                  )}
+                                </div>
+                              </div>
+                              <small className="mushroom-countdown">倒數 {formatMushroomCountdown(mushroom.expiresAt, nowMs)}</small>
+                              <div className="mushroom-actions">
+                                <button
+                                  className="icon-button mushroom-fly-button"
+                                  onClick={() => void handleFlyToMushroom(mushroom)}
+                                  disabled={isFlying}
+                                  aria-label={`飛行到 ${mushroom.name}`}
+                                  title={`飛行到 ${mushroom.name}`}
+                                  type="button"
+                                >
+                                  <Send aria-hidden="true" size={16} strokeWidth={2.5} />
+                                </button>
+                                <button
+                                  className="icon-button"
+                                  onClick={() => void handleCopyMushroomCoordinate(mushroom)}
+                                  aria-label={`複製座標：${mushroom.name}`}
+                                  title={`複製 ${mushroom.name} 座標`}
+                                  type="button"
+                                >
+                                  <Copy aria-hidden="true" size={16} strokeWidth={2.4} />
+                                </button>
+                                <button
+                                  className="icon-button danger"
+                                  onClick={() => void handleDeleteMushroom(mushroom.id)}
+                                  aria-label={`刪除蘑菇資料：${mushroom.name}`}
+                                  title={`刪除 ${mushroom.name}`}
+                                  type="button"
+                                >
+                                  <Trash2 aria-hidden="true" size={16} strokeWidth={2.4} />
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </>
+                    )}
                   </section>
+                ) : (
+                  mushroomManagementSection
                 )}
               </div>
             ) : (
@@ -2018,6 +2589,27 @@ export default function App() {
               </div>
             )}
           </div>
+        </div>
+      )}
+
+      {previewLandmark?.imageUrl && (
+        <div className="image-preview-backdrop" onClick={() => setPreviewLandmark(null)}>
+          <figure className="image-preview-panel" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="icon-button image-preview-close"
+              onClick={() => setPreviewLandmark(null)}
+              type="button"
+              aria-label="關閉圖片預覽"
+              title="關閉圖片預覽"
+            >
+              <X aria-hidden="true" size={18} strokeWidth={2.4} />
+            </button>
+            <img src={previewLandmark.imageUrl} alt={`${previewLandmark.name} 圖片預覽`} />
+            <figcaption>
+              <strong>{previewLandmark.name}</strong>
+              <span>{formatCoordinate(previewLandmark.coordinate)}</span>
+            </figcaption>
+          </figure>
         </div>
       )}
 
