@@ -490,6 +490,8 @@ export default function App() {
   const [mushroomNameInput, setMushroomNameInput] = useState('')
   const [mushroomCoordInput, setMushroomCoordInput] = useState('')
   const [mushroomSlotsInput, setMushroomSlotsInput] = useState('')
+  const [mushroomDaysInput, setMushroomDaysInput] = useState('')
+  const [mushroomHoursInput, setMushroomHoursInput] = useState('')
   const [mushroomMinutesInput, setMushroomMinutesInput] = useState('')
   const [mushroomElementInput, setMushroomElementInput] = useState<MushroomElementType>('water')
   const [mushroomFormTouched, setMushroomFormTouched] = useState(false)
@@ -956,6 +958,8 @@ export default function App() {
     setMushroomNameInput('')
     setMushroomCoordInput('')
     setMushroomSlotsInput('')
+    setMushroomDaysInput('')
+    setMushroomHoursInput('')
     setMushroomMinutesInput('')
     setMushroomElementInput('water')
     setMushroomFormTouched(false)
@@ -982,15 +986,29 @@ export default function App() {
     }
 
     const shouldReadTime = remainingSlots !== null && remainingSlots < 5
+    const trimmedDays = mushroomDaysInput.trim()
+    const trimmedHours = mushroomHoursInput.trim()
     const trimmedMinutes = mushroomMinutesInput.trim()
     let remainingMinutes: number | null = null
-    if (shouldReadTime && trimmedMinutes) {
-      const minuteValue = Number.parseInt(trimmedMinutes, 10)
-      if (!Number.isInteger(minuteValue) || minuteValue <= 0) {
-        showToast('剩餘時間請輸入正整數分鐘')
+    if (shouldReadTime) {
+      const dayValue = trimmedDays ? Number.parseInt(trimmedDays, 10) : 0
+      const hourValue = trimmedHours ? Number.parseInt(trimmedHours, 10) : 0
+      const minuteValue = trimmedMinutes ? Number.parseInt(trimmedMinutes, 10) : Number.NaN
+      if (
+        (trimmedDays && (!Number.isInteger(dayValue) || dayValue < 0)) ||
+        (trimmedHours && (!Number.isInteger(hourValue) || hourValue < 0 || hourValue > 23)) ||
+        !Number.isInteger(minuteValue) ||
+        minuteValue < 0 ||
+        minuteValue > 59
+      ) {
+        showToast('剩餘時間請輸入有效的日、時、分')
         return
       }
-      remainingMinutes = minuteValue
+      remainingMinutes = dayValue * 1440 + hourValue * 60 + minuteValue
+      if (remainingMinutes <= 0) {
+        showToast('剩餘時間至少要 1 分鐘')
+        return
+      }
     }
 
     setMushroomSaving(true)
@@ -1014,7 +1032,7 @@ export default function App() {
     } finally {
       setMushroomSaving(false)
     }
-  }, [mushroomCoordInput, mushroomElementInput, mushroomMinutesInput, mushroomNameInput, mushroomSlotsInput, resetMushroomForm, showToast])
+  }, [mushroomCoordInput, mushroomDaysInput, mushroomElementInput, mushroomHoursInput, mushroomMinutesInput, mushroomNameInput, mushroomSlotsInput, resetMushroomForm, showToast])
 
   const handleDeleteMushroom = useCallback(async (mushroomId: string) => {
     try {
@@ -1349,10 +1367,25 @@ export default function App() {
     parsedMushroomSlotsValue > 5
   )
   const shouldShowMushroomTimeInput = Boolean(trimmedMushroomSlots) && !mushroomSlotsInvalid && parsedMushroomSlotsValue < 5
+  const trimmedMushroomDays = mushroomDaysInput.trim()
+  const trimmedMushroomHours = mushroomHoursInput.trim()
+  const trimmedMushroomMinutes = mushroomMinutesInput.trim()
+  const parsedMushroomDaysValue = trimmedMushroomDays ? Number.parseInt(trimmedMushroomDays, 10) : 0
+  const parsedMushroomHoursValue = trimmedMushroomHours ? Number.parseInt(trimmedMushroomHours, 10) : 0
+  const parsedMushroomMinutesValue = trimmedMushroomMinutes ? Number.parseInt(trimmedMushroomMinutes, 10) : Number.NaN
+  const mushroomTimeInvalid = shouldShowMushroomTimeInput && (
+    (Boolean(trimmedMushroomDays) && (!Number.isInteger(parsedMushroomDaysValue) || parsedMushroomDaysValue < 0)) ||
+    (Boolean(trimmedMushroomHours) && (!Number.isInteger(parsedMushroomHoursValue) || parsedMushroomHoursValue < 0 || parsedMushroomHoursValue > 23)) ||
+    !Number.isInteger(parsedMushroomMinutesValue) ||
+    parsedMushroomMinutesValue < 0 ||
+    parsedMushroomMinutesValue > 59 ||
+    (parsedMushroomDaysValue * 1440 + parsedMushroomHoursValue * 60 + parsedMushroomMinutesValue <= 0)
+  )
   const mushroomNameError = mushroomFormTouched && !trimmedMushroomName ? '請輸入蘑菇名稱' : ''
   const mushroomCoordError = mushroomFormTouched && !parsedMushroomCoord ? '座標格式錯誤，請用 25.033, 121.565' : ''
   const mushroomSlotsError = mushroomFormTouched && mushroomSlotsInvalid ? '空位請輸入 0 到 5' : ''
-  const isMushroomFormValid = Boolean(trimmedMushroomName && parsedMushroomCoord && !mushroomSlotsError)
+  const mushroomTimeError = mushroomFormTouched && mushroomTimeInvalid ? '剩餘時間請輸入有效的日、時、分，且至少 1 分鐘' : ''
+  const isMushroomFormValid = Boolean(trimmedMushroomName && parsedMushroomCoord && !mushroomSlotsInvalid && !mushroomTimeInvalid)
   const giantMushrooms = savedMushrooms.filter((item) => item.mushroomType === 'giant')
   const elementMushrooms = savedMushrooms.filter((item) => item.mushroomType === 'element')
   const filteredMushroomSearchResults = savedMushrooms.filter((mushroom) => {
@@ -1430,20 +1463,50 @@ export default function App() {
         </label>
         {shouldShowMushroomTimeInput && (
           <label className="field">
-            <span>剩餘時間（分鐘，選填）</span>
-            <input
-              value={mushroomMinutesInput}
-              onChange={(e) => setMushroomMinutesInput(e.target.value)}
-              inputMode="numeric"
-              placeholder="例如：90；不填則到下一個凌晨 2 點"
-            />
+            <span>剩餘時間（日 / 時 / 分，分必填）</span>
+            <div className="mushroom-time-grid">
+              <label>
+                <span>日</span>
+                <input
+                  value={mushroomDaysInput}
+                  onChange={(e) => setMushroomDaysInput(e.target.value)}
+                  onBlur={() => setMushroomFormTouched(true)}
+                  inputMode="numeric"
+                  placeholder="0"
+                  aria-invalid={Boolean(mushroomTimeError)}
+                />
+              </label>
+              <label>
+                <span>時</span>
+                <input
+                  value={mushroomHoursInput}
+                  onChange={(e) => setMushroomHoursInput(e.target.value)}
+                  onBlur={() => setMushroomFormTouched(true)}
+                  inputMode="numeric"
+                  placeholder="0"
+                  aria-invalid={Boolean(mushroomTimeError)}
+                />
+              </label>
+              <label>
+                <span>分</span>
+                <input
+                  value={mushroomMinutesInput}
+                  onChange={(e) => setMushroomMinutesInput(e.target.value)}
+                  onBlur={() => setMushroomFormTouched(true)}
+                  inputMode="numeric"
+                  placeholder="至少 1"
+                  aria-invalid={Boolean(mushroomTimeError)}
+                />
+              </label>
+            </div>
+            {mushroomTimeError && <p className="helper-text helper-text--error">{mushroomTimeError}</p>}
           </label>
         )}
         <div className="mushroom-form-preview">
           <span className={`mushroom-tag ${mushroomManagerTab === 'createGiant' ? 'is-giant' : 'is-element'}`}>
             {mushroomManagerTab === 'createGiant' ? '巨菇' : `${elementLabelMap[mushroomElementInput]}菇`}
           </span>
-          <small>{shouldShowMushroomTimeInput ? '空位少於 5，可填剩餘時間。' : '未填剩餘時間時，會預設倒數到下一個凌晨 2 點。'}</small>
+          <small>{shouldShowMushroomTimeInput ? '空位少於 5 時需填剩餘時間，會換算成總分鐘。' : '未填空位時，會預設倒數到下一個凌晨 2 點。'}</small>
         </div>
         <button
           className="primary-button"

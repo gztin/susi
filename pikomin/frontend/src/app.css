@@ -1602,6 +1602,32 @@ select {
   font-weight: 700;
 }
 
+.mushroom-time-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 8px;
+}
+
+.mushroom-time-grid label {
+  display: grid;
+  gap: 5px;
+  width: 78px;
+}
+
+.mushroom-time-grid label span {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.mushroom-time-grid input {
+  min-height: 38px;
+  padding-left: 8px;
+  padding-right: 8px;
+  text-align: center;
+}
+
 .mushroom-list {
   display: grid;
   gap: 8px;
