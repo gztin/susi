@@ -1466,37 +1466,40 @@ export default function App() {
             <span>剩餘時間（日 / 時 / 分，分必填）</span>
             <div className="mushroom-time-grid">
               <label>
-                <span>日</span>
                 <input
                   value={mushroomDaysInput}
                   onChange={(e) => setMushroomDaysInput(e.target.value)}
                   onBlur={() => setMushroomFormTouched(true)}
                   inputMode="numeric"
                   placeholder="0"
+                  aria-label="剩餘天數"
                   aria-invalid={Boolean(mushroomTimeError)}
                 />
+                <span>日</span>
               </label>
               <label>
-                <span>時</span>
                 <input
                   value={mushroomHoursInput}
                   onChange={(e) => setMushroomHoursInput(e.target.value)}
                   onBlur={() => setMushroomFormTouched(true)}
                   inputMode="numeric"
                   placeholder="0"
+                  aria-label="剩餘小時"
                   aria-invalid={Boolean(mushroomTimeError)}
                 />
+                <span>時</span>
               </label>
               <label>
-                <span>分</span>
                 <input
                   value={mushroomMinutesInput}
                   onChange={(e) => setMushroomMinutesInput(e.target.value)}
                   onBlur={() => setMushroomFormTouched(true)}
                   inputMode="numeric"
                   placeholder="至少 1"
+                  aria-label="剩餘分鐘"
                   aria-invalid={Boolean(mushroomTimeError)}
                 />
+                <span>分</span>
               </label>
             </div>
             {mushroomTimeError && <p className="helper-text helper-text--error">{mushroomTimeError}</p>}

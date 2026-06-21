@@ -1611,13 +1611,15 @@ select {
 
 .mushroom-time-grid label {
   display: grid;
-  gap: 5px;
-  width: 78px;
+  grid-template-columns: 68px auto;
+  align-items: center;
+  gap: 6px;
+  width: auto;
 }
 
 .mushroom-time-grid label span {
   color: var(--text-muted);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
 }
 
