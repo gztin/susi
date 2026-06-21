@@ -259,6 +259,22 @@ function formatMushroomCountdown(expiresAt: string, nowMs: number): string {
   return `${minutes}:${paddedSeconds}`
 }
 
+function getRemainingTimeFields(expiresAt: string, nowMs: number): { days: string; hours: string; minutes: string } {
+  const expiresMs = new Date(expiresAt).getTime()
+  if (!Number.isFinite(expiresMs) || expiresMs <= nowMs) {
+    return { days: '', hours: '', minutes: '1' }
+  }
+  const totalMinutes = Math.max(1, Math.ceil((expiresMs - nowMs) / 60000))
+  const days = Math.floor(totalMinutes / 1440)
+  const hours = Math.floor((totalMinutes % 1440) / 60)
+  const minutes = totalMinutes % 60
+  return {
+    days: days ? String(days) : '',
+    hours: hours ? String(hours) : '',
+    minutes: String(minutes),
+  }
+}
+
 function getMushroomTag(item: SavedMushroom): string {
   if (item.mushroomType === 'giant') return '巨菇'
   return item.elementType ? `${elementLabelMap[item.elementType]}菇` : '元素菇'
@@ -496,6 +512,7 @@ export default function App() {
   const [mushroomElementInput, setMushroomElementInput] = useState<MushroomElementType>('water')
   const [mushroomFormTouched, setMushroomFormTouched] = useState(false)
   const [mushroomSaving, setMushroomSaving] = useState(false)
+  const [editingMushroomId, setEditingMushroomId] = useState('')
   const [nowMs, setNowMs] = useState(() => Date.now())
   const [flyMode, setFlyMode] = useState<FlyMode>('coordinate')
   const [savedLandmarks, setSavedLandmarks] = useState<SavedLandmark[]>([])
@@ -955,6 +972,7 @@ export default function App() {
   }, [selectedDevice?.id, sendLocationFast, showToast, syncCurrentPosition])
 
   const resetMushroomForm = useCallback(() => {
+    setEditingMushroomId('')
     setMushroomNameInput('')
     setMushroomCoordInput('')
     setMushroomSlotsInput('')
@@ -1011,28 +1029,54 @@ export default function App() {
       }
     }
 
+    const payload = {
+      name,
+      coordinate,
+      mushroomType,
+      elementType: mushroomType === 'element' ? mushroomElementInput : null,
+      remainingSlots,
+      remainingMinutes,
+    }
+
     setMushroomSaving(true)
     try {
-      const created = await apiClient.createMushroom({
-        name,
-        coordinate,
-        mushroomType,
-        elementType: mushroomType === 'element' ? mushroomElementInput : null,
-        remainingSlots,
-        remainingMinutes,
-      })
-      setSavedMushrooms((prev) => [created, ...prev])
+      const saved = editingMushroomId
+        ? await apiClient.updateMushroom(editingMushroomId, payload)
+        : await apiClient.createMushroom(payload)
+      setSavedMushrooms((prev) => (
+        editingMushroomId
+          ? prev.map((item) => (item.id === saved.id ? saved : item))
+          : [saved, ...prev]
+      ))
       setNowMs(Date.now())
       resetMushroomForm()
       setMushroomManagerTab(mushroomType === 'giant' ? 'giantList' : 'elementList')
       setLandmarkManagerTab(mushroomType === 'giant' ? 'giantList' : 'elementList')
-      showToast(`已新增${getMushroomTag(created)}：${created.name}`)
+      showToast(`已${editingMushroomId ? '更新' : '新增'}${getMushroomTag(saved)}：${saved.name}`)
     } catch (err) {
-      showToast(err instanceof Error ? err.message : '新增蘑菇資料失敗')
+      showToast(err instanceof Error ? err.message : `${editingMushroomId ? '更新' : '新增'}蘑菇資料失敗`)
     } finally {
       setMushroomSaving(false)
     }
-  }, [mushroomCoordInput, mushroomDaysInput, mushroomElementInput, mushroomHoursInput, mushroomMinutesInput, mushroomNameInput, mushroomSlotsInput, resetMushroomForm, showToast])
+  }, [editingMushroomId, mushroomCoordInput, mushroomDaysInput, mushroomElementInput, mushroomHoursInput, mushroomMinutesInput, mushroomNameInput, mushroomSlotsInput, resetMushroomForm, showToast])
+
+  const handleEditMushroom = useCallback((mushroom: SavedMushroom) => {
+    const nextTab = mushroom.mushroomType === 'giant' ? 'createGiant' : 'createElement'
+    const shouldFillTime = mushroom.remainingSlots !== null && mushroom.remainingSlots !== undefined && mushroom.remainingSlots < 5
+    const remainingTime = shouldFillTime ? getRemainingTimeFields(mushroom.expiresAt, Date.now()) : { days: '', hours: '', minutes: '' }
+
+    setEditingMushroomId(mushroom.id)
+    setMushroomNameInput(mushroom.name)
+    setMushroomCoordInput(formatCoordinate(mushroom.coordinate))
+    setMushroomSlotsInput(mushroom.remainingSlots === null || mushroom.remainingSlots === undefined ? '' : String(mushroom.remainingSlots))
+    setMushroomDaysInput(remainingTime.days)
+    setMushroomHoursInput(remainingTime.hours)
+    setMushroomMinutesInput(remainingTime.minutes)
+    setMushroomElementInput(mushroom.elementType ?? 'water')
+    setMushroomFormTouched(false)
+    setMushroomManagerTab(nextTab)
+    setLandmarkManagerTab(nextTab)
+  }, [])
 
   const handleDeleteMushroom = useCallback(async (mushroomId: string) => {
     try {
@@ -1517,8 +1561,15 @@ export default function App() {
           disabled={!isMushroomFormValid || mushroomSaving}
           type="button"
         >
-          {mushroomSaving ? '新增中...' : `新增${mushroomManagerTab === 'createElement' ? '元素菇' : '巨菇'}`}
+          {mushroomSaving
+            ? (editingMushroomId ? '更新中...' : '新增中...')
+            : `${editingMushroomId ? '更新' : '新增'}${mushroomManagerTab === 'createElement' ? '元素菇' : '巨菇'}`}
         </button>
+        {editingMushroomId && (
+          <button className="ghost-button modal-stack-button" onClick={resetMushroomForm} type="button">
+            取消編輯
+          </button>
+        )}
       </section>
     ) : (
       <section className="modal-section mushroom-list-panel">
@@ -1557,6 +1608,15 @@ export default function App() {
                     type="button"
                   >
                     <Send aria-hidden="true" size={16} strokeWidth={2.5} />
+                  </button>
+                  <button
+                    className="icon-button"
+                    onClick={() => handleEditMushroom(mushroom)}
+                    aria-label={`編輯蘑菇資料：${mushroom.name}`}
+                    title={`編輯 ${mushroom.name}`}
+                    type="button"
+                  >
+                    <Pencil aria-hidden="true" size={16} strokeWidth={2.4} />
                   </button>
                   <button
                     className="icon-button"
@@ -2520,6 +2580,15 @@ export default function App() {
                                   type="button"
                                 >
                                   <Send aria-hidden="true" size={16} strokeWidth={2.5} />
+                                </button>
+                                <button
+                                  className="icon-button"
+                                  onClick={() => handleEditMushroom(mushroom)}
+                                  aria-label={`編輯蘑菇資料：${mushroom.name}`}
+                                  title={`編輯 ${mushroom.name}`}
+                                  type="button"
+                                >
+                                  <Pencil aria-hidden="true" size={16} strokeWidth={2.4} />
                                 </button>
                                 <button
                                   className="icon-button"

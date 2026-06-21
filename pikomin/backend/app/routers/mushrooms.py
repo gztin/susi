@@ -135,6 +135,30 @@ async def create_mushroom(req: MushroomCreateRequest) -> SavedMushroom:
     return item
 
 
+@router.put("/{mushroom_id}", response_model=SavedMushroom)
+async def update_mushroom(mushroom_id: str, req: MushroomCreateRequest) -> SavedMushroom:
+    _validate_kind(req)
+    mushrooms = _read_mushrooms()
+    for index, item in enumerate(mushrooms):
+        if item.id != mushroom_id:
+            continue
+        updated = SavedMushroom(
+            id=item.id,
+            name=_clean_name(req.name),
+            coordinate=req.coordinate,
+            mushroomType=req.mushroomType,
+            elementType=req.elementType,
+            remainingSlots=req.remainingSlots,
+            expiresAt=_expiry_from_request(req),
+            createdAt=item.createdAt,
+            updatedAt=_now_text(),
+        )
+        mushrooms[index] = updated
+        _write_mushrooms(mushrooms)
+        return updated
+    raise HTTPException(status_code=404, detail={"error": "Mushroom not found", "code": "MUSHROOM_NOT_FOUND"})
+
+
 @router.delete("/{mushroom_id}")
 async def delete_mushroom(mushroom_id: str) -> dict:
     mushrooms = _read_mushrooms()

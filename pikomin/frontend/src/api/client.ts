@@ -328,6 +328,20 @@ export const apiClient = {
     })
   },
 
+  async updateMushroom(mushroomId: string, payload: {
+    name: string
+    coordinate: { latitude: number; longitude: number }
+    mushroomType: MushroomType
+    elementType?: MushroomElementType | null
+    remainingSlots?: number | null
+    remainingMinutes?: number | null
+  }): Promise<SavedMushroom> {
+    return request(`/api/mushrooms/${mushroomId}`, {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+    })
+  },
+
   async deleteMushroom(mushroomId: string): Promise<void> {
     await request(`/api/mushrooms/${mushroomId}`, { method: 'DELETE' })
   },
