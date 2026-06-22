@@ -1265,6 +1265,64 @@ select {
   color: var(--text-muted);
 }
 
+.mushroom-list-head-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.mushroom-export-button {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+.mushroom-coordinate-import {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  background: oklch(96% 0.008 var(--hue) / 0.82);
+}
+
+.mushroom-coordinate-import textarea {
+  width: 100%;
+  min-height: 92px;
+  resize: vertical;
+  border: 1px solid var(--border-medium);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: var(--surface-input);
+  color: var(--text-primary);
+  font: inherit;
+  line-height: 1.45;
+}
+
+.mushroom-coordinate-import textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: var(--focus-ring);
+}
+
+.mushroom-coordinate-import-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mushroom-coordinate-import-actions small {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
 .landmark-empty {
   margin: 0;
   padding: 10px 12px;
@@ -1486,6 +1544,8 @@ select {
 .landmark-manager-panel {
   width: min(760px, calc(100vw - 56px));
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .fly-settings-panel {
@@ -1569,6 +1629,8 @@ select {
 .landmark-manager-layout {
   display: grid;
   gap: 14px;
+  min-height: 0;
+  flex: 1 1 auto;
 }
 
 .landmark-subtabs {
@@ -1582,6 +1644,10 @@ select {
 
 .mushroom-create-panel > .primary-button,
 .mushroom-create-panel > .mushroom-form-preview {
+  grid-column: 1 / -1;
+}
+
+.mushroom-time-field {
   grid-column: 1 / -1;
 }
 
@@ -1603,15 +1669,15 @@ select {
 }
 
 .mushroom-time-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
   align-items: end;
-  gap: 8px;
+  gap: 10px;
 }
 
 .mushroom-time-grid label {
   display: grid;
-  grid-template-columns: 68px auto;
+  grid-template-columns: 82px auto;
   align-items: center;
   gap: 6px;
   width: auto;
@@ -1638,6 +1704,18 @@ select {
   padding-right: 4px;
 }
 
+.landmark-manager-layout .mushroom-list-panel {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.landmark-manager-layout .mushroom-list-panel > .mushroom-list {
+  min-height: 0;
+  max-height: none;
+  flex: 1 1 auto;
+}
+
 .mushroom-search-head {
   margin-top: 12px;
 }
@@ -1652,8 +1730,8 @@ select {
 
 .mushroom-item {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) minmax(84px, auto) auto;
+  gap: 12px;
   align-items: center;
   min-height: 72px;
   padding: 12px 14px 12px 16px;
@@ -1679,8 +1757,7 @@ select {
   min-width: 0;
 }
 
-.mushroom-name-group,
-.mushroom-meta-row {
+.mushroom-name-group {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1704,9 +1781,18 @@ select {
   letter-spacing: 0.01em;
 }
 
-.mushroom-meta-row small {
+.mushroom-side-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 84px;
+}
+
+.mushroom-slot-pill {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   min-height: 22px;
   padding: 0 8px;
   border-radius: 999px;
@@ -1714,15 +1800,13 @@ select {
   color: var(--text-secondary);
   font-size: 11px;
   font-weight: 800;
+  white-space: nowrap;
 }
 
 .mushroom-countdown {
   display: inline-flex;
   align-items: center;
   justify-content: flex-end;
-  align-self: center;
-  justify-self: end;
-  flex: 0 0 auto;
   min-height: 32px;
   padding: 0;
   border: 0;
@@ -2258,8 +2342,18 @@ select {
     grid-template-columns: 1fr;
   }
 
+  .mushroom-time-grid {
+    grid-template-columns: repeat(3, minmax(0, max-content));
+    overflow-x: auto;
+  }
+
   .mushroom-countdown {
     justify-self: start;
+  }
+
+  .mushroom-side-info {
+    justify-content: flex-start;
+    min-width: 0;
   }
 
   .mushroom-actions {

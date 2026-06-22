@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Church, Copy, Download, FileInput, FolderOpen, HelpCircle, Layers3, Loader2, Lock, Mail, Map, MoreHorizontal, MousePointerClick, Pencil, Radar, Save, Send, Trees, Trash2, X, Zap, ZoomIn } from 'lucide-react'
+import { Church, ClipboardPaste, Copy, Download, FileInput, FolderOpen, HelpCircle, Layers3, Loader2, Lock, Mail, Map, MoreHorizontal, MousePointerClick, Pencil, Radar, Save, Send, Trees, Trash2, X, Zap, ZoomIn } from 'lucide-react'
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
@@ -16,8 +16,17 @@ type MushroomManagerTab = 'createGiant' | 'createElement' | 'giantList' | 'eleme
 type LandmarkManagerTab = 'create' | 'search' | MushroomManagerTab
 type LandmarkTypeFilter = 'flower' | 'mushroom' | 'giant' | 'element'
 type PostcardFilterType = 'temple' | 'transformer' | 'church' | 'park'
+type MushroomCreatePayload = {
+  name: string
+  coordinate: GPSCoordinate
+  mushroomType: MushroomType
+  elementType?: MushroomElementType | null
+  remainingSlots?: number | null
+  remainingMinutes?: number | null
+}
 const LANDMARKS_PER_PAGE = 12
 const ROUTES_PER_PAGE = 12
+const MUSHROOM_MAX_REMAINING_MINUTES = 40 * 24 * 60
 
 function formatRouteCoordinates(waypoints: GPSCoordinate[]): string {
   return waypoints
@@ -205,6 +214,37 @@ const elementLabelMap = Object.fromEntries(
   MUSHROOM_ELEMENT_OPTIONS.map((option) => [option.id, option.label]),
 ) as Record<MushroomElementType, string>
 
+function formatMushroomSequence(value: number): string {
+  return String(value).padStart(2, '0')
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function getMushroomNamePrefix(mushroomType: MushroomType, elementType: MushroomElementType): string {
+  return mushroomType === 'giant' ? '巨菇' : `大${elementLabelMap[elementType]}菇`
+}
+
+function getNextMushroomName(
+  mushrooms: SavedMushroom[],
+  mushroomType: MushroomType,
+  elementType: MushroomElementType,
+  editingId = '',
+): string {
+  const prefix = getMushroomNamePrefix(mushroomType, elementType)
+  const pattern = new RegExp(`^${escapeRegExp(prefix)}(\\d+)$`)
+  const maxSequence = mushrooms.reduce((max, mushroom) => {
+    if (mushroom.id === editingId) return max
+    if (mushroom.mushroomType !== mushroomType) return max
+    if (mushroomType === 'element' && mushroom.elementType !== elementType) return max
+    const matched = mushroom.name.match(pattern)
+    const sequence = matched ? Number.parseInt(matched[1], 10) : 0
+    return Number.isInteger(sequence) ? Math.max(max, sequence) : max
+  }, 0)
+  return `${prefix}${formatMushroomSequence(maxSequence + 1)}`
+}
+
 function TempleIcon({ size = 18 }: { size?: number }) {
 
 
@@ -240,6 +280,146 @@ function parseCoordinateInput(value: string): GPSCoordinate | null {
 function formatCoordinate(coord: GPSCoordinate | null): string {
   if (!coord) return '尚未設定'
   return `${coord.latitude.toFixed(6)}, ${coord.longitude.toFixed(6)}`
+}
+
+function mushroomCoordinateKey(coord: GPSCoordinate): string {
+  return `${coord.latitude.toFixed(6)},${coord.longitude.toFixed(6)}`
+}
+
+function isMushroomElementType(value: unknown): value is MushroomElementType {
+  return typeof value === 'string' && MUSHROOM_ELEMENT_OPTIONS.some((option) => option.id === value)
+}
+
+function isMushroomType(value: unknown): value is MushroomType {
+  return value === 'giant' || value === 'element'
+}
+
+function remainingMinutesFromExpiresAt(expiresAt: unknown): number | null {
+  if (typeof expiresAt !== 'string') return null
+  const expiresMs = new Date(expiresAt).getTime()
+  if (!Number.isFinite(expiresMs)) return null
+  const minutes = Math.ceil((expiresMs - Date.now()) / 60000)
+  if (minutes < 1 || minutes > MUSHROOM_MAX_REMAINING_MINUTES) return null
+  return minutes
+}
+
+function remainingMinutesFromCountdownText(value: string): number | null {
+  const normalized = value.trim().replace(/^倒數\s*/, '')
+  const dayMatched = normalized.match(/(\d+)\s*天/)
+  const days = dayMatched ? Number.parseInt(dayMatched[1], 10) : 0
+  const timeMatched = normalized.match(/(\d{1,2}):(\d{2})(?::(\d{2}))?/)
+  if (!timeMatched) return null
+  const first = Number.parseInt(timeMatched[1], 10)
+  const second = Number.parseInt(timeMatched[2], 10)
+  const third = timeMatched[3] ? Number.parseInt(timeMatched[3], 10) : 0
+  const hours = timeMatched[3] ? first : 0
+  const minutes = timeMatched[3] ? second : first
+  const seconds = timeMatched[3] ? third : second
+  if ([days, hours, minutes, seconds].some((item) => !Number.isInteger(item)) || minutes > 59 || seconds > 59) return null
+  const totalMinutes = days * 1440 + hours * 60 + minutes + (seconds > 0 ? 1 : 0)
+  if (totalMinutes < 1 || totalMinutes > MUSHROOM_MAX_REMAINING_MINUTES) return null
+  return totalMinutes
+}
+
+function parseMushroomCoordinateDetail(value: string): {
+  coordinate: GPSCoordinate | null
+  remainingSlots: number | null
+  remainingMinutes: number | null
+} {
+  const coordMatched = value.match(/(-?\d+(?:\.\d+)?)\s*[,，\s]\s*(-?\d+(?:\.\d+)?)/)
+  const coordinate = coordMatched
+    ? {
+      latitude: Number.parseFloat(coordMatched[1]),
+      longitude: Number.parseFloat(coordMatched[2]),
+    }
+    : parseCoordinateInput(value)
+  const slotMatched = value.match(/(\d+)\s*空位/)
+  const remainingSlots = slotMatched ? Number.parseInt(slotMatched[1], 10) : null
+  const countdownMatched = value.match(/倒數\s*(.+)$/)
+  return {
+    coordinate,
+    remainingSlots: remainingSlots !== null && remainingSlots >= 0 && remainingSlots <= 5 ? remainingSlots : null,
+    remainingMinutes: countdownMatched ? remainingMinutesFromCountdownText(countdownMatched[0]) : null,
+  }
+}
+
+function formatMushroomCopyLine(mushroom: SavedMushroom, nowMs: number): string {
+  const parts = [`${mushroom.name}: ${formatCoordinate(mushroom.coordinate)}`]
+  if (mushroom.remainingSlots !== null && mushroom.remainingSlots !== undefined) {
+    parts.push(`${mushroom.remainingSlots} 空位`)
+    const countdown = formatMushroomCountdown(mushroom.expiresAt, nowMs)
+    if (countdown !== '時間未設定' && countdown !== '已結束') {
+      parts.push(`倒數 ${countdown}`)
+    }
+  }
+  return parts.join(', ')
+}
+
+function parseMushroomCoordinateLines(text: string, mushroomType: MushroomType, label: string, startIndex: number): MushroomCreatePayload[] {
+  return text
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, index): MushroomCreatePayload | null => {
+      const matched = line.match(/^(.*?)[：:]\s*(.+)$/)
+      const rawName = matched?.[1]?.trim()
+      const rawCoordinate = matched?.[2]?.trim() ?? line
+      const detail = parseMushroomCoordinateDetail(rawCoordinate)
+      const coordinate = detail.coordinate
+      if (!coordinate) return null
+      return {
+        name: rawName || `${label}${String(startIndex + index + 1).padStart(2, '0')}`,
+        coordinate,
+        mushroomType,
+        elementType: mushroomType === 'element' ? 'water' : null,
+        remainingSlots: detail.remainingSlots,
+        remainingMinutes: detail.remainingMinutes,
+      }
+    })
+    .filter((item): item is MushroomCreatePayload => item !== null)
+}
+
+function normalizeMushroomImportPayload(payload: unknown, fallbackType: MushroomType): MushroomCreatePayload[] {
+  const rawItems = Array.isArray(payload)
+    ? payload
+    : (typeof payload === 'object' && payload !== null && Array.isArray((payload as { items?: unknown }).items))
+      ? (payload as { items: unknown[] }).items
+      : []
+
+  return rawItems
+    .map((item): MushroomCreatePayload | null => {
+      if (typeof item !== 'object' || item === null) return null
+      const source = item as {
+        name?: unknown
+        coordinate?: unknown
+        mushroomType?: unknown
+        elementType?: unknown
+        remainingSlots?: unknown
+        expiresAt?: unknown
+      }
+      const coordinateSource = source.coordinate as Partial<GPSCoordinate> | null
+      const coordinate = coordinateSource && typeof coordinateSource === 'object'
+        ? {
+          latitude: Number(coordinateSource.latitude),
+          longitude: Number(coordinateSource.longitude),
+        }
+        : null
+      if (!coordinate || Number.isNaN(coordinate.latitude) || Number.isNaN(coordinate.longitude)) return null
+
+      const mushroomType = isMushroomType(source.mushroomType) ? source.mushroomType : fallbackType
+      const remainingSlots = typeof source.remainingSlots === 'number' && Number.isInteger(source.remainingSlots) && source.remainingSlots >= 0 && source.remainingSlots <= 5
+        ? source.remainingSlots
+        : null
+      return {
+        name: typeof source.name === 'string' && source.name.trim() ? source.name.trim() : mushroomType === 'giant' ? '巨菇' : '元素菇',
+        coordinate,
+        mushroomType,
+        elementType: mushroomType === 'element' ? (isMushroomElementType(source.elementType) ? source.elementType : 'water') : null,
+        remainingSlots,
+        remainingMinutes: remainingSlots !== null && remainingSlots < 5 ? remainingMinutesFromExpiresAt(source.expiresAt) : null,
+      }
+    })
+    .filter((item): item is MushroomCreatePayload => item !== null)
 }
 
 function formatMushroomCountdown(expiresAt: string, nowMs: number): string {
@@ -503,7 +683,6 @@ export default function App() {
   const [postcardFilters, setPostcardFilters] = useState<Record<PostcardFilterType, boolean>>(INITIAL_POSTCARD_FILTERS)
   const [isScanningPostcards, setIsScanningPostcards] = useState(false)
   const [routeNameInput, setRouteNameInput] = useState('')
-  const [mushroomNameInput, setMushroomNameInput] = useState('')
   const [mushroomCoordInput, setMushroomCoordInput] = useState('')
   const [mushroomSlotsInput, setMushroomSlotsInput] = useState('')
   const [mushroomDaysInput, setMushroomDaysInput] = useState('')
@@ -512,6 +691,9 @@ export default function App() {
   const [mushroomElementInput, setMushroomElementInput] = useState<MushroomElementType>('water')
   const [mushroomFormTouched, setMushroomFormTouched] = useState(false)
   const [mushroomSaving, setMushroomSaving] = useState(false)
+  const [mushroomImporting, setMushroomImporting] = useState(false)
+  const [mushroomCoordinateImportOpen, setMushroomCoordinateImportOpen] = useState(false)
+  const [mushroomCoordinateImportText, setMushroomCoordinateImportText] = useState('')
   const [editingMushroomId, setEditingMushroomId] = useState('')
   const [nowMs, setNowMs] = useState(() => Date.now())
   const [flyMode, setFlyMode] = useState<FlyMode>('coordinate')
@@ -520,6 +702,7 @@ export default function App() {
   const showToastRef = useRef<(message: string) => void>(() => {})
   const routeImportInputRef = useRef<HTMLInputElement | null>(null)
   const landmarkImportInputRef = useRef<HTMLInputElement | null>(null)
+  const mushroomImportInputRef = useRef<HTMLInputElement | null>(null)
   const handleRouteError = useCallback((message: string) => {
     showToastRef.current(`路徑推送失敗：${message}`)
   }, [])
@@ -973,7 +1156,6 @@ export default function App() {
 
   const resetMushroomForm = useCallback(() => {
     setEditingMushroomId('')
-    setMushroomNameInput('')
     setMushroomCoordInput('')
     setMushroomSlotsInput('')
     setMushroomDaysInput('')
@@ -985,10 +1167,28 @@ export default function App() {
 
   const handleCreateMushroom = useCallback(async (mushroomType: MushroomType) => {
     setMushroomFormTouched(true)
-    const name = mushroomNameInput.trim()
     const coordinate = parseCoordinateInput(mushroomCoordInput)
-    if (!name || !coordinate) {
-      showToast('請輸入蘑菇名稱與正確座標')
+    if (!coordinate) {
+      showToast('請輸入正確座標')
+      return
+    }
+    const selectedElementType = mushroomType === 'element' ? mushroomElementInput : 'water'
+    const editingMushroom = editingMushroomId ? savedMushrooms.find((item) => item.id === editingMushroomId) : null
+    const shouldGenerateName = (
+      !editingMushroom ||
+      editingMushroom.mushroomType !== mushroomType ||
+      (mushroomType === 'element' && editingMushroom.elementType !== selectedElementType)
+    )
+    const name = shouldGenerateName
+      ? getNextMushroomName(savedMushrooms, mushroomType, selectedElementType, editingMushroomId)
+      : editingMushroom.name
+
+    const duplicatedMushroom = savedMushrooms.find((mushroom) => (
+      mushroom.id !== editingMushroomId &&
+      mushroomCoordinateKey(mushroom.coordinate) === mushroomCoordinateKey(coordinate)
+    ))
+    if (duplicatedMushroom) {
+      showToast(`座標已存在：${duplicatedMushroom.name}`)
       return
     }
 
@@ -1029,11 +1229,16 @@ export default function App() {
       }
     }
 
+    if (remainingMinutes !== null && remainingMinutes > MUSHROOM_MAX_REMAINING_MINUTES) {
+      showToast('剩餘時間最多 40 天')
+      return
+    }
+
     const payload = {
       name,
       coordinate,
       mushroomType,
-      elementType: mushroomType === 'element' ? mushroomElementInput : null,
+      elementType: mushroomType === 'element' ? selectedElementType : null,
       remainingSlots,
       remainingMinutes,
     }
@@ -1058,7 +1263,7 @@ export default function App() {
     } finally {
       setMushroomSaving(false)
     }
-  }, [editingMushroomId, mushroomCoordInput, mushroomDaysInput, mushroomElementInput, mushroomHoursInput, mushroomMinutesInput, mushroomNameInput, mushroomSlotsInput, resetMushroomForm, showToast])
+  }, [editingMushroomId, mushroomCoordInput, mushroomDaysInput, mushroomElementInput, mushroomHoursInput, mushroomMinutesInput, mushroomSlotsInput, resetMushroomForm, savedMushrooms, showToast])
 
   const handleEditMushroom = useCallback((mushroom: SavedMushroom) => {
     const nextTab = mushroom.mushroomType === 'giant' ? 'createGiant' : 'createElement'
@@ -1066,7 +1271,6 @@ export default function App() {
     const remainingTime = shouldFillTime ? getRemainingTimeFields(mushroom.expiresAt, Date.now()) : { days: '', hours: '', minutes: '' }
 
     setEditingMushroomId(mushroom.id)
-    setMushroomNameInput(mushroom.name)
     setMushroomCoordInput(formatCoordinate(mushroom.coordinate))
     setMushroomSlotsInput(mushroom.remainingSlots === null || mushroom.remainingSlots === undefined ? '' : String(mushroom.remainingSlots))
     setMushroomDaysInput(remainingTime.days)
@@ -1316,6 +1520,115 @@ export default function App() {
     showToast(`已匯出路徑：${route.name}`)
   }, [showToast])
 
+  const handleExportMushroomCoordinates = useCallback((mushrooms: SavedMushroom[], mushroomType: MushroomType) => {
+    const label = mushroomType === 'giant' ? '巨菇' : '元素菇'
+    if (mushrooms.length === 0) {
+      showToast(`沒有可匯出的${label}資料`)
+      return
+    }
+
+    const payload = mushrooms.map((mushroom) => ({
+      name: mushroom.name,
+      coordinate: mushroom.coordinate,
+      mushroomType: mushroom.mushroomType,
+      ...(mushroom.elementType ? { elementType: mushroom.elementType } : {}),
+      ...(mushroom.remainingSlots !== null && mushroom.remainingSlots !== undefined
+        ? { remainingSlots: mushroom.remainingSlots }
+        : {}),
+      expiresAt: mushroom.expiresAt,
+    }))
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `pikomin-${mushroomType}-mushrooms-coordinates.json`
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+    URL.revokeObjectURL(url)
+    showToast(`已匯出${label}座標：${mushrooms.length} 筆`)
+  }, [showToast])
+
+  const handleCopyMushroomCoordinates = useCallback(async (mushrooms: SavedMushroom[], mushroomType: MushroomType) => {
+    const label = mushroomType === 'giant' ? '巨菇' : '元素菇'
+    if (mushrooms.length === 0) {
+      showToast(`沒有可複製的${label}資料`)
+      return
+    }
+    const text = mushrooms
+      .map((mushroom) => formatMushroomCopyLine(mushroom, nowMs))
+      .join('\n')
+    try {
+      await navigator.clipboard.writeText(text)
+      showToast(`已複製${label}座標：${mushrooms.length} 筆`)
+    } catch {
+      showToast('複製失敗，請確認瀏覽器剪貼簿權限')
+    }
+  }, [nowMs, showToast])
+
+  const createImportedMushrooms = useCallback(async (items: MushroomCreatePayload[], label: string) => {
+    if (items.length === 0) {
+      showToast(`沒有可匯入的${label}資料`)
+      return
+    }
+    const knownCoordinates = new globalThis.Map(savedMushrooms.map((mushroom) => [mushroomCoordinateKey(mushroom.coordinate), mushroom.name]))
+    const uniqueItems: MushroomCreatePayload[] = []
+    let skippedCount = 0
+    for (const item of items) {
+      const key = mushroomCoordinateKey(item.coordinate)
+      if (knownCoordinates.has(key)) {
+        skippedCount += 1
+        continue
+      }
+      knownCoordinates.set(key, item.name)
+      uniqueItems.push(item)
+    }
+    if (uniqueItems.length === 0) {
+      showToast(`座標都已存在，略過 ${skippedCount} 筆`)
+      return
+    }
+    setMushroomImporting(true)
+    try {
+      const created: SavedMushroom[] = []
+      for (const item of uniqueItems) {
+        created.push(await apiClient.createMushroom(item))
+      }
+      setSavedMushrooms((prev) => [...created.reverse(), ...prev])
+      setNowMs(Date.now())
+      showToast(`已匯入${label}：${created.length} 筆${skippedCount ? `，略過重複 ${skippedCount} 筆` : ''}`)
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : `匯入${label}失敗`)
+    } finally {
+      setMushroomImporting(false)
+    }
+  }, [savedMushrooms, showToast])
+
+  const handleImportMushroomFile = useCallback(async (file: File | null, fallbackType: MushroomType) => {
+    if (!file) return
+    if (!file.name.toLowerCase().endsWith('.json')) {
+      showToast('請選擇 JSON 檔案')
+      return
+    }
+    try {
+      const text = await file.text()
+      const payload = JSON.parse(text) as unknown
+      const items = normalizeMushroomImportPayload(payload, fallbackType)
+      const label = fallbackType === 'giant' ? '蘑菇檔案' : '蘑菇檔案'
+      await createImportedMushrooms(items, label)
+    } catch (err) {
+      showToast(err instanceof SyntaxError ? 'JSON 格式錯誤' : err instanceof Error ? err.message : '匯入檔案失敗')
+    }
+  }, [createImportedMushrooms, showToast])
+
+  const handleImportMushroomCoordinateText = useCallback(async (mushroomType: MushroomType, label: string, currentCount: number) => {
+    const items = parseMushroomCoordinateLines(mushroomCoordinateImportText, mushroomType, label, currentCount)
+    await createImportedMushrooms(items, `${label}座標`)
+    if (items.length > 0) {
+      setMushroomCoordinateImportText('')
+      setMushroomCoordinateImportOpen(false)
+    }
+  }, [createImportedMushrooms, mushroomCoordinateImportText])
+
   const handleCopySavedRouteCoordinates = useCallback(async (route: SavedRoute) => {
     const text = formatRouteCoordinates(route.waypoints)
     try {
@@ -1401,7 +1714,6 @@ export default function App() {
     (safeRoutePage - 1) * ROUTES_PER_PAGE,
     safeRoutePage * ROUTES_PER_PAGE,
   )
-  const trimmedMushroomName = mushroomNameInput.trim()
   const parsedMushroomCoord = parseCoordinateInput(mushroomCoordInput)
   const trimmedMushroomSlots = mushroomSlotsInput.trim()
   const parsedMushroomSlotsValue = trimmedMushroomSlots ? Number.parseInt(trimmedMushroomSlots, 10) : Number.NaN
@@ -1423,15 +1735,28 @@ export default function App() {
     !Number.isInteger(parsedMushroomMinutesValue) ||
     parsedMushroomMinutesValue < 0 ||
     parsedMushroomMinutesValue > 59 ||
-    (parsedMushroomDaysValue * 1440 + parsedMushroomHoursValue * 60 + parsedMushroomMinutesValue <= 0)
+    (parsedMushroomDaysValue * 1440 + parsedMushroomHoursValue * 60 + parsedMushroomMinutesValue <= 0) ||
+    (parsedMushroomDaysValue * 1440 + parsedMushroomHoursValue * 60 + parsedMushroomMinutesValue > MUSHROOM_MAX_REMAINING_MINUTES)
   )
-  const mushroomNameError = mushroomFormTouched && !trimmedMushroomName ? '請輸入蘑菇名稱' : ''
   const mushroomCoordError = mushroomFormTouched && !parsedMushroomCoord ? '座標格式錯誤，請用 25.033, 121.565' : ''
   const mushroomSlotsError = mushroomFormTouched && mushroomSlotsInvalid ? '空位請輸入 0 到 5' : ''
-  const mushroomTimeError = mushroomFormTouched && mushroomTimeInvalid ? '剩餘時間請輸入有效的日、時、分，且至少 1 分鐘' : ''
-  const isMushroomFormValid = Boolean(trimmedMushroomName && parsedMushroomCoord && !mushroomSlotsInvalid && !mushroomTimeInvalid)
+  const mushroomTimeError = mushroomFormTouched && mushroomTimeInvalid ? '剩餘時間請輸入 1 分鐘到 40 天內' : ''
+  const isMushroomFormValid = Boolean(parsedMushroomCoord && !mushroomSlotsInvalid && !mushroomTimeInvalid)
   const giantMushrooms = savedMushrooms.filter((item) => item.mushroomType === 'giant')
   const elementMushrooms = savedMushrooms.filter((item) => item.mushroomType === 'element')
+  const managedMushrooms = mushroomManagerTab === 'giantList' ? giantMushrooms : elementMushrooms
+  const managedMushroomType: MushroomType = mushroomManagerTab === 'giantList' ? 'giant' : 'element'
+  const managedMushroomLabel = mushroomManagerTab === 'giantList' ? '巨菇' : '元素菇'
+  const formMushroomType: MushroomType = mushroomManagerTab === 'createElement' ? 'element' : 'giant'
+  const formMushroomElementType = formMushroomType === 'element' ? mushroomElementInput : 'water'
+  const formEditingMushroom = editingMushroomId ? savedMushrooms.find((item) => item.id === editingMushroomId) : null
+  const formMushroomName = (
+    formEditingMushroom &&
+    formEditingMushroom.mushroomType === formMushroomType &&
+    (formMushroomType === 'giant' || formEditingMushroom.elementType === formMushroomElementType)
+  )
+    ? formEditingMushroom.name
+    : getNextMushroomName(savedMushrooms, formMushroomType, formMushroomElementType, editingMushroomId)
   const filteredMushroomSearchResults = savedMushrooms.filter((mushroom) => {
     if (!isMushroomTypeFilter) return false
     if (landmarkTypeFilter === 'giant' && mushroom.mushroomType !== 'giant') return false
@@ -1461,17 +1786,6 @@ export default function App() {
   const mushroomManagementSection = (
     mushroomManagerTab === 'createGiant' || mushroomManagerTab === 'createElement' ? (
       <section className="modal-section mushroom-create-panel">
-        <label className="field">
-          <span>名稱</span>
-          <input
-            value={mushroomNameInput}
-            onChange={(e) => setMushroomNameInput(e.target.value)}
-            onBlur={() => setMushroomFormTouched(true)}
-            placeholder={mushroomManagerTab === 'createGiant' ? '例如：中央公園巨菇' : '例如：水晶菇集合點'}
-            aria-invalid={Boolean(mushroomNameError)}
-          />
-          {mushroomNameError && <p className="helper-text helper-text--error">{mushroomNameError}</p>}
-        </label>
         <label className="field">
           <span>座標</span>
           <input
@@ -1506,7 +1820,7 @@ export default function App() {
           {mushroomSlotsError && <p className="helper-text helper-text--error">{mushroomSlotsError}</p>}
         </label>
         {shouldShowMushroomTimeInput && (
-          <label className="field">
+          <label className="field mushroom-time-field">
             <span>剩餘時間（日 / 時 / 分，分必填）</span>
             <div className="mushroom-time-grid">
               <label>
@@ -1553,7 +1867,7 @@ export default function App() {
           <span className={`mushroom-tag ${mushroomManagerTab === 'createGiant' ? 'is-giant' : 'is-element'}`}>
             {mushroomManagerTab === 'createGiant' ? '巨菇' : `${elementLabelMap[mushroomElementInput]}菇`}
           </span>
-          <small>{shouldShowMushroomTimeInput ? '空位少於 5 時需填剩餘時間，會換算成總分鐘。' : '未填空位時，會預設倒數到下一個凌晨 2 點。'}</small>
+          <small>{formMushroomName}，{shouldShowMushroomTimeInput ? '空位少於 5 時需填剩餘時間。' : '未填空位時會倒數到下一個凌晨 2 點。'}</small>
         </div>
         <button
           className="primary-button"
@@ -1574,14 +1888,88 @@ export default function App() {
     ) : (
       <section className="modal-section mushroom-list-panel">
         <div className="landmark-section-head">
-          <span>{mushroomManagerTab === 'giantList' ? '巨菇列表' : '元素菇列表'}</span>
-          <small>{mushroomManagerTab === 'giantList' ? giantMushrooms.length : elementMushrooms.length} 筆</small>
+          <span>{managedMushroomLabel}列表</span>
+          <div className="mushroom-list-head-actions">
+            <small>{managedMushrooms.length} 筆</small>
+            <button
+              className="icon-button mushroom-export-button"
+              onClick={() => handleExportMushroomCoordinates(managedMushrooms, managedMushroomType)}
+              disabled={managedMushrooms.length === 0}
+              aria-label={`匯出全部${managedMushroomLabel}座標資料`}
+              title={`匯出全部${managedMushroomLabel}座標資料`}
+              type="button"
+            >
+              <Download aria-hidden="true" size={15} strokeWidth={2.4} />
+            </button>
+            <button
+              className="icon-button mushroom-export-button"
+              onClick={() => void handleCopyMushroomCoordinates(managedMushrooms, managedMushroomType)}
+              disabled={managedMushrooms.length === 0}
+              aria-label={`複製全部${managedMushroomLabel}座標`}
+              title={`複製全部${managedMushroomLabel}座標`}
+              type="button"
+            >
+              <Copy aria-hidden="true" size={15} strokeWidth={2.4} />
+            </button>
+            <button
+              className="icon-button mushroom-export-button"
+              onClick={() => mushroomImportInputRef.current?.click()}
+              disabled={mushroomImporting}
+              aria-label={`匯入${managedMushroomLabel}檔案`}
+              title={`匯入${managedMushroomLabel}檔案`}
+              type="button"
+            >
+              <FileInput aria-hidden="true" size={15} strokeWidth={2.4} />
+            </button>
+            <button
+              className="icon-button mushroom-export-button"
+              onClick={() => setMushroomCoordinateImportOpen((value) => !value)}
+              disabled={mushroomImporting}
+              aria-label={`貼上${managedMushroomLabel}座標`}
+              title={`貼上${managedMushroomLabel}座標`}
+              type="button"
+            >
+              <ClipboardPaste aria-hidden="true" size={15} strokeWidth={2.4} />
+            </button>
+          </div>
         </div>
-        {(mushroomManagerTab === 'giantList' ? giantMushrooms : elementMushrooms).length === 0 ? (
-          <p className="landmark-empty">目前還沒有{mushroomManagerTab === 'giantList' ? '巨菇' : '元素菇'}資料。</p>
+        <input
+          ref={mushroomImportInputRef}
+          type="file"
+          accept="application/json,.json"
+          className="hidden-file-input"
+          onChange={(event) => {
+            const file = event.currentTarget.files?.[0] ?? null
+            void handleImportMushroomFile(file, managedMushroomType)
+            event.currentTarget.value = ''
+          }}
+        />
+        {mushroomCoordinateImportOpen && (
+          <div className="mushroom-coordinate-import">
+            <textarea
+              value={mushroomCoordinateImportText}
+              onChange={(event) => setMushroomCoordinateImportText(event.target.value)}
+              placeholder={`${managedMushroomLabel}01: 25.033000, 121.565000\n25.034000, 121.566000`}
+              rows={4}
+            />
+            <div className="mushroom-coordinate-import-actions">
+              <small>每行一筆，可輸入「名稱: 座標」或只輸入座標。</small>
+              <button
+                className="ghost-button"
+                onClick={() => void handleImportMushroomCoordinateText(managedMushroomType, managedMushroomLabel, managedMushrooms.length)}
+                disabled={mushroomImporting || !mushroomCoordinateImportText.trim()}
+                type="button"
+              >
+                {mushroomImporting ? '匯入中...' : '匯入座標'}
+              </button>
+            </div>
+          </div>
+        )}
+        {managedMushrooms.length === 0 ? (
+          <p className="landmark-empty">目前還沒有{managedMushroomLabel}資料。</p>
         ) : (
           <div className="mushroom-list">
-            {(mushroomManagerTab === 'giantList' ? giantMushrooms : elementMushrooms).map((mushroom) => (
+            {managedMushrooms.map((mushroom) => (
               <div key={mushroom.id} className="mushroom-item">
                 <div className="mushroom-item-main">
                   <div className="mushroom-title-row">
@@ -1591,13 +1979,13 @@ export default function App() {
                     </div>
                   </div>
                   <span>{formatCoordinate(mushroom.coordinate)}</span>
-                  <div className="mushroom-meta-row">
-                    {mushroom.remainingSlots !== null && mushroom.remainingSlots !== undefined && (
-                      <small>{mushroom.remainingSlots} 空位</small>
-                    )}
-                  </div>
                 </div>
-                <small className="mushroom-countdown">倒數 {formatMushroomCountdown(mushroom.expiresAt, nowMs)}</small>
+                <div className="mushroom-side-info">
+                  {mushroom.remainingSlots !== null && mushroom.remainingSlots !== undefined && (
+                    <small className="mushroom-slot-pill">{mushroom.remainingSlots} 空位</small>
+                  )}
+                  <small className="mushroom-countdown">倒數 {formatMushroomCountdown(mushroom.expiresAt, nowMs)}</small>
+                </div>
                 <div className="mushroom-actions">
                   <button
                     className="icon-button mushroom-fly-button"
@@ -2190,13 +2578,13 @@ export default function App() {
                                 </div>
                               </div>
                               <span>{formatCoordinate(mushroom.coordinate)}</span>
-                              <div className="mushroom-meta-row">
-                                {mushroom.remainingSlots !== null && mushroom.remainingSlots !== undefined && (
-                                  <small>{mushroom.remainingSlots} 空位</small>
-                                )}
-                              </div>
                             </div>
-                            <small className="mushroom-countdown">倒數 {formatMushroomCountdown(mushroom.expiresAt, nowMs)}</small>
+                            <div className="mushroom-side-info">
+                              {mushroom.remainingSlots !== null && mushroom.remainingSlots !== undefined && (
+                                <small className="mushroom-slot-pill">{mushroom.remainingSlots} 空位</small>
+                              )}
+                              <small className="mushroom-countdown">倒數 {formatMushroomCountdown(mushroom.expiresAt, nowMs)}</small>
+                            </div>
                             <div className="mushroom-actions">
                               <button
                                 className="icon-button mushroom-fly-button"
@@ -2563,13 +2951,13 @@ export default function App() {
                                   </div>
                                 </div>
                                 <span>{formatCoordinate(mushroom.coordinate)}</span>
-                                <div className="mushroom-meta-row">
-                                  {mushroom.remainingSlots !== null && mushroom.remainingSlots !== undefined && (
-                                    <small>{mushroom.remainingSlots} 空位</small>
-                                  )}
-                                </div>
                               </div>
-                              <small className="mushroom-countdown">倒數 {formatMushroomCountdown(mushroom.expiresAt, nowMs)}</small>
+                              <div className="mushroom-side-info">
+                                {mushroom.remainingSlots !== null && mushroom.remainingSlots !== undefined && (
+                                  <small className="mushroom-slot-pill">{mushroom.remainingSlots} 空位</small>
+                                )}
+                                <small className="mushroom-countdown">倒數 {formatMushroomCountdown(mushroom.expiresAt, nowMs)}</small>
+                              </div>
                               <div className="mushroom-actions">
                                 <button
                                   className="icon-button mushroom-fly-button"

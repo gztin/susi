@@ -17,6 +17,7 @@ router = APIRouter()
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 DATA_FILE = DATA_DIR / "mushrooms.json"
 TAIWAN_TZ = ZoneInfo("Asia/Taipei")
+MAX_REMAINING_MINUTES = 40 * 24 * 60
 
 MushroomType = Literal["giant", "element"]
 ElementType = Literal["water", "fire", "electric", "poison", "crystal"]
@@ -40,7 +41,7 @@ class MushroomCreateRequest(BaseModel):
     mushroomType: MushroomType
     elementType: ElementType | None = None
     remainingSlots: int | None = Field(default=None, ge=0, le=5)
-    remainingMinutes: int | None = Field(default=None, ge=1, le=10080)
+    remainingMinutes: int | None = Field(default=None, ge=1, le=MAX_REMAINING_MINUTES)
 
 
 def _now() -> datetime:
