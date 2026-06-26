@@ -1,44 +1,5 @@
 [
   {
-    "id": "1782140838109-20",
-    "name": "巨菇18",
-    "coordinate": {
-      "latitude": 42.118063,
-      "longitude": 3.14713
-    },
-    "mushroomType": "giant",
-    "remainingSlots": 1,
-    "expiresAt": "2026-06-26T22:44:18+08:00",
-    "createdAt": "2026-06-22T23:07:18+08:00",
-    "updatedAt": "2026-06-22T23:07:18+08:00"
-  },
-  {
-    "id": "1782140738350-19",
-    "name": "巨菇17",
-    "coordinate": {
-      "latitude": 42.051731,
-      "longitude": 3.205238
-    },
-    "mushroomType": "giant",
-    "remainingSlots": 3,
-    "expiresAt": "2026-06-24T00:06:38+08:00",
-    "createdAt": "2026-06-22T23:05:38+08:00",
-    "updatedAt": "2026-06-22T23:05:38+08:00"
-  },
-  {
-    "id": "1782139820726-18",
-    "name": "巨菇16",
-    "coordinate": {
-      "latitude": 41.89225,
-      "longitude": 3.179935
-    },
-    "mushroomType": "giant",
-    "remainingSlots": 1,
-    "expiresAt": "2026-06-27T01:12:20+08:00",
-    "createdAt": "2026-06-22T22:50:20+08:00",
-    "updatedAt": "2026-06-22T22:50:20+08:00"
-  },
-  {
     "id": "1782136712034-19",
     "name": "大火菇01",
     "coordinate": {
@@ -51,19 +12,6 @@
     "expiresAt": "2026-06-29T10:54:32+08:00",
     "createdAt": "2026-06-22T21:58:32+08:00",
     "updatedAt": "2026-06-22T21:58:32+08:00"
-  },
-  {
-    "id": "1782136315773-18",
-    "name": "巨菇15",
-    "coordinate": {
-      "latitude": 41.646862,
-      "longitude": 2.763039
-    },
-    "mushroomType": "giant",
-    "remainingSlots": 1,
-    "expiresAt": "2026-06-24T07:06:55+08:00",
-    "createdAt": "2026-06-22T21:51:55+08:00",
-    "updatedAt": "2026-06-22T21:51:55+08:00"
   },
   {
     "id": "1782062687208-26",
@@ -131,32 +79,6 @@
     "updatedAt": "2026-06-22T00:52:49+08:00"
   },
   {
-    "id": "1782060419136-19",
-    "name": "巨菇09",
-    "coordinate": {
-      "latitude": 41.585981,
-      "longitude": 2.545997
-    },
-    "mushroomType": "giant",
-    "remainingSlots": 1,
-    "expiresAt": "2026-06-24T00:05:59+08:00",
-    "createdAt": "2026-06-22T00:46:59+08:00",
-    "updatedAt": "2026-06-22T00:46:59+08:00"
-  },
-  {
-    "id": "1782060284775-18",
-    "name": "巨菇08",
-    "coordinate": {
-      "latitude": 41.589915,
-      "longitude": 2.546648
-    },
-    "mushroomType": "giant",
-    "remainingSlots": 1,
-    "expiresAt": "2026-06-25T23:10:44+08:00",
-    "createdAt": "2026-06-22T00:44:44+08:00",
-    "updatedAt": "2026-06-22T00:44:44+08:00"
-  },
-  {
     "id": "1782060190130-17",
     "name": "巨菇07",
     "coordinate": {
@@ -183,46 +105,6 @@
     "updatedAt": "2026-06-22T00:42:18+08:00"
   },
   {
-    "id": "1782059351805-15",
-    "name": "巨菇05",
-    "coordinate": {
-      "latitude": 46.861547,
-      "longitude": 8.653343
-    },
-    "mushroomType": "giant",
-    "remainingSlots": 1,
-    "expiresAt": "2026-06-24T16:51:11+08:00",
-    "createdAt": "2026-06-22T00:29:11+08:00",
-    "updatedAt": "2026-06-22T00:29:11+08:00"
-  },
-  {
-    "id": "1782057658479-13",
-    "name": "巨菇04",
-    "coordinate": {
-      "latitude": 40.645131,
-      "longitude": 17.508597
-    },
-    "mushroomType": "giant",
-    "remainingSlots": 1,
-    "expiresAt": "2026-06-25T16:02:58+08:00",
-    "createdAt": "2026-06-22T00:00:58+08:00",
-    "updatedAt": "2026-06-22T00:00:58+08:00"
-  },
-  {
-    "id": "1782057315274-12",
-    "name": "大水晶菇01",
-    "coordinate": {
-      "latitude": 40.811778,
-      "longitude": 17.411343
-    },
-    "mushroomType": "element",
-    "elementType": "crystal",
-    "remainingSlots": 2,
-    "expiresAt": "2026-06-23T01:54:15+08:00",
-    "createdAt": "2026-06-21T23:55:15+08:00",
-    "updatedAt": "2026-06-21T23:55:15+08:00"
-  },
-  {
     "id": "1782057098906-11",
     "name": "巨菇03",
     "coordinate": {
@@ -234,19 +116,6 @@
     "expiresAt": "2026-07-11T10:58:38+08:00",
     "createdAt": "2026-06-21T23:51:38+08:00",
     "updatedAt": "2026-06-21T23:51:38+08:00"
-  },
-  {
-    "id": "1782056206065-9",
-    "name": "巨菇02",
-    "coordinate": {
-      "latitude": 40.733473,
-      "longitude": 16.846377
-    },
-    "mushroomType": "giant",
-    "remainingSlots": 1,
-    "expiresAt": "2026-06-26T02:49:46+08:00",
-    "createdAt": "2026-06-21T23:36:46+08:00",
-    "updatedAt": "2026-06-21T23:36:46+08:00"
   },
   {
     "id": "1782056048170-8",

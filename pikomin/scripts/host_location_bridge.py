@@ -74,6 +74,15 @@ def _pmd3_cmd(*args: str) -> list[str]:
     return [*PMD3, *args]
 
 
+def _load_json_array_from_output(output: str) -> list[dict]:
+    lines = output.splitlines()
+    json_start = next((i for i, line in enumerate(lines) if line.strip().startswith("[")), None)
+    if json_start is None:
+        return []
+    data = json.loads("\n".join(lines[json_start:]))
+    return data if isinstance(data, list) else []
+
+
 def _spawn_location_process(cmd: list[str]) -> subprocess.Popen[str]:
     with open(LOG_PATH, "a", encoding="utf-8") as f:
         f.write(f"\n[{datetime.now().isoformat()}] SPAWN {' '.join(cmd)}\n")
@@ -219,7 +228,7 @@ def list_usb_devices() -> list[UsbDeviceResp]:
         detail = (proc.stderr or proc.stdout or "command failed").strip()
         raise HTTPException(status_code=400, detail=detail)
 
-    data = json.loads(proc.stdout or "[]")
+    data = _load_json_array_from_output(proc.stdout or "[]")
     devices: list[UsbDeviceResp] = []
     for entry in data:
         if entry.get("ConnectionType") != "USB":

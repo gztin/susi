@@ -264,16 +264,19 @@ class DeviceManager:
             devices = [DeviceInfo.model_validate(item) for item in resp.json()]
         except Exception as exc:  # noqa: BLE001
             logger.warning("host bridge USB 裝置查詢失敗: %s", exc)
-            return [
-                device
-                for device_id, device in self._registry.items()
-                if device_id not in self._tunneld_device_ids
-            ]
+            return list(self._registry.values())
 
         for device in devices:
             self._registry[device.id] = device
             self._tunneld_device_ids.discard(device.id)
-        return devices
+
+        usb_ids = {device.id for device in devices}
+        tunneld_devices = [
+            device
+            for device_id, device in self._registry.items()
+            if device_id in self._tunneld_device_ids and device_id not in usb_ids
+        ]
+        return [*devices, *tunneld_devices]
 
     def get_device(self, device_id: str) -> DeviceInfo | None:
         """取得單一裝置資訊，不存在回傳 None。"""

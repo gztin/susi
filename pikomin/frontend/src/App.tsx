@@ -1418,6 +1418,7 @@ export default function App() {
         name: postcard.name,
         coordinate: postcard.coordinate,
         landmarkType: 'flower',
+        imageUrl: postcard.imageUrl,
       })
       setSavedLandmarks((prev) => {
         if (prev.some((landmark) => landmark.id === created.id)) return prev
