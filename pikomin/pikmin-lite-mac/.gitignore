@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+*.log
+
+# Local datasets
+app/data/landmarks.json
+app/data/pikoohiong_postcards.json
+app/data/routes.json
+app/data/images/
