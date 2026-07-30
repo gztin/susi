@@ -13,6 +13,26 @@ const BASE_URL = (typeof import.meta !== 'undefined' && (import.meta as { env?: 
 // 空字串 = 相對路徑，走 Vite proxy；有設定 VITE_API_URL 時用絕對路徑
 const WS_BASE_URL = BASE_URL ? BASE_URL.replace(/^http/, 'ws') : `ws://${window.location.host}`
 
+export function getConnectionEndpoints(): {
+  frontend: string
+  api: string
+  websocket: string
+  integrated: boolean
+} {
+  const frontend = window.location.origin
+  const api = BASE_URL || (
+    window.location.port === '5678'
+      ? `${window.location.protocol}//${window.location.hostname}:5679`
+      : frontend
+  )
+  return {
+    frontend,
+    api,
+    websocket: WS_BASE_URL,
+    integrated: !BASE_URL && window.location.port === '5688',
+  }
+}
+
 async function request<T>(
   path: string,
   options?: RequestInit & { timeoutMs?: number }
@@ -324,7 +344,8 @@ const MAX_RETRIES = 5
 const BASE_DELAY_MS = 1000
 
 export function createStatusWebSocket(
-  onMessage: (status: StatusUpdate) => void
+  onMessage: (status: StatusUpdate) => void,
+  onConnectionChange?: (state: 'connected' | 'reconnecting' | 'disconnected') => void,
 ): WebSocket {
   let ws: WebSocket
   let retryCount = 0
@@ -345,11 +366,13 @@ export function createStatusWebSocket(
     socket.addEventListener('close', () => {
       if (closed) return
       if (retryCount >= MAX_RETRIES) {
+        onConnectionChange?.('disconnected')
         onMessage({ type: 'status', data: { connected: false, reconnecting: false } })
         return
       }
       const delay = BASE_DELAY_MS * Math.pow(2, retryCount) // 1s, 2s, 4s, 8s, 16s
       retryCount++
+      onConnectionChange?.('reconnecting')
       onMessage({ type: 'status', data: { connected: false, reconnecting: true, attempt: retryCount } })
       setTimeout(() => {
         if (!closed) {
@@ -360,6 +383,7 @@ export function createStatusWebSocket(
 
     socket.addEventListener('open', () => {
       retryCount = 0
+      onConnectionChange?.('connected')
       onMessage({ type: 'status', data: { connected: true, reconnecting: false } })
     })
 

@@ -13,6 +13,8 @@ interface ActiveRouteOptions {
   loop: boolean
 }
 
+export type WebSocketConnectionState = 'connected' | 'reconnecting' | 'disconnected'
+
 export function useRoute(
   deviceId: string | null,
   initialPosition?: GPSCoordinate | null,
@@ -25,6 +27,7 @@ export function useRoute(
   removeWaypoint: (index: number) => void
   clearWaypoints: () => void
   routeStatus: RouteStatus
+  websocketState: WebSocketConnectionState
   startRoute: (speed: number, loop: boolean) => Promise<void>
   pauseRoute: () => Promise<void>
   resumeRoute: () => Promise<void>
@@ -34,6 +37,7 @@ export function useRoute(
 } {
   const [waypoints, setWaypoints] = useState<GPSCoordinate[]>([])
   const [routeStatus, setRouteStatus] = useState<RouteStatus>(INITIAL_ROUTE_STATUS)
+  const [websocketState, setWebsocketState] = useState<WebSocketConnectionState>('reconnecting')
   const currentPositionRef = useRef<GPSCoordinate | null>(initialPosition ?? null)
   const lastWsPositionAtRef = useRef(0)
   const activeRouteOptionsRef = useRef<ActiveRouteOptions | null>(null)
@@ -96,7 +100,7 @@ export function useRoute(
   }, [onRouteError])
 
   useEffect(() => {
-    const ws = createStatusWebSocket(handleWsMessage)
+    const ws = createStatusWebSocket(handleWsMessage, setWebsocketState)
     return () => {
       ws.close()
     }
@@ -211,6 +215,7 @@ export function useRoute(
     removeWaypoint,
     clearWaypoints,
     routeStatus,
+    websocketState,
     startRoute,
     pauseRoute,
     resumeRoute,
