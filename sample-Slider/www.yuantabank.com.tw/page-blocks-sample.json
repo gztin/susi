@@ -1,0 +1,132 @@
+[
+  {
+    "type": "heading",
+    "sortOrder": 1,
+    "content": {
+      "text": "金融商品創新與服務"
+    }
+  },
+  {
+    "type": "subheading",
+    "sortOrder": 2,
+    "content": {
+      "text": "數位金融服務"
+    }
+  },
+  {
+    "type": "text",
+    "sortOrder": 3,
+    "content": {
+      "html": "<p>提供便利、安全且貼近客戶需求的數位金融服務。</p><ul><li>線上申辦</li><li>行動理財</li></ul>"
+    }
+  },
+  {
+    "type": "image",
+    "sortOrder": 4,
+    "content": {
+      "url": "/resources/images/service-banner.jpg",
+      "alt": "數位金融服務示意圖"
+    }
+  },
+  {
+    "type": "image-group",
+    "sortOrder": 5,
+    "content": {
+      "columns": 3,
+      "images": [
+        {
+          "url": "/resources/images/service-01.jpg",
+          "alt": "服務圖片一"
+        },
+        {
+          "url": "/resources/images/service-02.jpg",
+          "alt": "服務圖片二"
+        },
+        {
+          "url": "/resources/images/service-03.jpg",
+          "alt": "服務圖片三"
+        }
+      ]
+    }
+  },
+  {
+    "type": "file",
+    "sortOrder": 6,
+    "content": {
+      "headers": ["檔案名稱", "下載"],
+      "rows": [
+        {
+          "name": "金融服務說明文件",
+          "url": "/resources/files/financial-service.pdf"
+        },
+        {
+          "name": "產品申請表",
+          "url": "/resources/files/application-form.doc"
+        }
+      ]
+    }
+  },
+  {
+    "type": "upload-file",
+    "sortOrder": 7,
+    "content": {
+      "headers": ["檔案名稱", "上傳"],
+      "rows": [
+        {
+          "name": "已上傳附件.pdf",
+          "fileName": "已上傳附件.pdf",
+          "url": "/uploads/page/attachment.pdf"
+        }
+      ]
+    }
+  },
+  {
+    "type": "table",
+    "sortOrder": 8,
+    "content": {
+      "headers": ["項目", "說明"],
+      "rows": [
+        ["服務時間", "24 小時線上服務"],
+        ["適用對象", "本行個人金融客戶"]
+      ]
+    }
+  },
+  {
+    "type": "fold",
+    "sortOrder": 9,
+    "content": {
+      "title": "常見問題",
+      "children": [
+        {
+          "type": "subheading",
+          "content": {
+            "text": "如何申請服務？"
+          }
+        },
+        {
+          "type": "text",
+          "content": {
+            "html": "<p>登入網路銀行後，依畫面指示完成申請即可。</p>"
+          }
+        },
+        {
+          "type": "image",
+          "content": {
+            "url": "/resources/images/faq-step.jpg",
+            "alt": "申請流程說明"
+          }
+        },
+        {
+          "type": "table",
+          "content": {
+            "headers": ["步驟", "操作說明"],
+            "rows": [
+              ["1", "登入網路銀行"],
+              ["2", "選擇欲申請的服務"]
+            ]
+          }
+        }
+      ]
+    }
+  }
+]

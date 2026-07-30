@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>測試頁面</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: oklch(93% 0.02 80);
+      font-family: 'Microsoft JhengHei', sans-serif;
+      padding: 40px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    /* 第一層 */
+    .list-lv1 > li {
+      border-bottom: 1px solid #e0d9ce;
+      padding: 12px 0;
+    }
+    .list-lv1 > li > .lv1-label {
+      font-size: 16px;
+      font-weight: 500;
+      color: #bb9157;
+      padding-left: 12px;
+      border-left: 4px solid #bb9157;
+      margin-bottom: 8px;
+    }
+
+    /* 第二層 */
+    .list-lv2 {
+      padding-left: 24px;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .list-lv2 > li {
+      font-size: 14px;
+      color: #4c4c4c;
+      padding: 6px 12px;
+      background: oklch(99% 0.005 80);
+      border: 1px solid oklch(88% 0.025 80);
+    }
+    .list-lv2 > li::before {
+      content: '–';
+      margin-right: 8px;
+      color: #bb9157;
+    }
+  </style>
+</head>
+<body>
+
+  <ul class="list-lv1">
+    <li>
+      <div class="lv1-label">分類一</div>
+      <ul class="list-lv2">
+        <li>項目 1-1</li>
+        <li>項目 1-2</li>
+        <li>項目 1-3</li>
+      </ul>
+    </li>
+    <li>
+      <div class="lv1-label">分類二</div>
+      <ul class="list-lv2">
+        <li>項目 2-1</li>
+        <li>項目 2-2</li>
+      </ul>
+    </li>
+    <li>
+      <div class="lv1-label">分類三</div>
+      <ul class="list-lv2">
+        <li>項目 3-1</li>
+        <li>項目 3-2</li>
+        <li>項目 3-3</li>
+        <li>項目 3-4</li>
+      </ul>
+    </li>
+  </ul>
+
+</body>
+</html>

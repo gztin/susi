@@ -1,0 +1,208 @@
+Spring MVC 4.3.20 / JDK 8 參考語法
+此檔僅說明前端 form 的 pageBlocksJson 如何在後端新增、修改與回填畫面，不包含完整 DAO 或資料表實作。
+
+1. 前端 form 欄位
+
+<input type="hidden" name="pageBlocksJson">
+
+前端會以 POST 送出 pageBlocksJson，內容為 pageBlocks 陣列；每個項目包含：
+type、sortOrder、content；修改資料可額外帶回 id、cateId。
+
+2. 新增或修改接收
+
+@PostMapping("/editor/save")
+public String save(@RequestParam("pageBlocksJson") String pageBlocksJson) throws IOException {
+    ObjectMapper objectMapper = new ObjectMapper();
+    List<Map<String, Object>> blocks = objectMapper.readValue(
+        pageBlocksJson,
+        new TypeReference<List<Map<String, Object>>>() {}
+    );
+
+    // TODO 新增：依 blocks 的 type、content、sortOrder 寫入 YB_CATE、YB_MAIN、YB_DETAIL。
+    // TODO 修改：依 id / cateId 找到既有資料後更新；拖曳後直接使用新的 sortOrder。
+    // pageService.save(blocks);
+
+    return "redirect:/editor/list";
+}
+
+3. 修改頁查詢並回填
+
+@GetMapping("/editor/update")
+public String update(@RequestParam("cateId") Long cateId, Model model) throws IOException {
+    // TODO 由 YB_CATE、YB_MAIN、YB_DETAIL 查出資料，並組回前端 pageBlocks 格式。
+    List<Map<String, Object>> pageBlocks = pageService.findPageBlocks(cateId);
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    String pageBlocksJson = objectMapper.writeValueAsString(pageBlocks);
+    model.addAttribute("pageBlocksJson", pageBlocksJson);
+
+    return "update";
+}
+
+4. 回傳前端的 pageBlocksJson 格式
+
+[
+  {
+    "id": 101,
+    "cateId": 10,
+    "type": "heading",
+    "sortOrder": 1,
+    "content": { "text": "主標題" }
+  },
+  {
+    "id": 102,
+    "cateId": 10,
+    "type": "text",
+    "sortOrder": 2,
+    "content": { "html": "<p>內文</p>" }
+  }
+]
+
+update.jsp 會將 pageBlocksJson 傳入 window.loadPageBlocks()，依 sortOrder 顯示在編輯器中。
+
+5. 依範例資料使用 org.json 組成 pageBlocksJson
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+JSONArray pageBlocks = new JSONArray();
+
+JSONObject heading = new JSONObject();
+heading.put("type", "heading");
+heading.put("sortOrder", 1);
+heading.put("content", new JSONObject().put("text", "金融商品創新與服務"));
+pageBlocks.put(heading);
+
+JSONObject subheading = new JSONObject();
+subheading.put("type", "subheading");
+subheading.put("sortOrder", 2);
+subheading.put("content", new JSONObject().put("text", "數位金融服務"));
+pageBlocks.put(subheading);
+
+JSONObject text = new JSONObject();
+text.put("type", "text");
+text.put("sortOrder", 3);
+text.put("content", new JSONObject().put(
+    "html", "<p>提供便利、安全且貼近客戶需求的數位金融服務。</p><ul><li>線上申辦</li><li>行動理財</li></ul>"
+));
+pageBlocks.put(text);
+
+JSONObject image = new JSONObject();
+image.put("type", "image");
+image.put("sortOrder", 4);
+image.put("content", new JSONObject()
+    .put("url", "/resources/images/service-banner.jpg")
+    .put("alt", "數位金融服務示意圖")
+);
+pageBlocks.put(image);
+
+JSONArray groupImages = new JSONArray();
+groupImages.put(new JSONObject()
+    .put("url", "/resources/images/service-01.jpg")
+    .put("alt", "服務圖片一"));
+groupImages.put(new JSONObject()
+    .put("url", "/resources/images/service-02.jpg")
+    .put("alt", "服務圖片二"));
+groupImages.put(new JSONObject()
+    .put("url", "/resources/images/service-03.jpg")
+    .put("alt", "服務圖片三"));
+
+JSONObject imageGroup = new JSONObject();
+imageGroup.put("type", "image-group");
+imageGroup.put("sortOrder", 5);
+imageGroup.put("content", new JSONObject()
+    .put("columns", 3)
+    .put("images", groupImages)
+);
+pageBlocks.put(imageGroup);
+
+JSONArray fileHeaders = new JSONArray();
+fileHeaders.put("檔案名稱");
+fileHeaders.put("下載");
+JSONArray fileRows = new JSONArray();
+fileRows.put(new JSONObject()
+    .put("name", "金融服務說明文件")
+    .put("url", "/resources/files/financial-service.pdf"));
+fileRows.put(new JSONObject()
+    .put("name", "產品申請表")
+    .put("url", "/resources/files/application-form.doc"));
+
+JSONObject file = new JSONObject();
+file.put("type", "file");
+file.put("sortOrder", 6);
+file.put("content", new JSONObject()
+    .put("headers", fileHeaders)
+    .put("rows", fileRows)
+);
+pageBlocks.put(file);
+
+JSONArray uploadHeaders = new JSONArray();
+uploadHeaders.put("檔案名稱");
+uploadHeaders.put("上傳");
+JSONArray uploadRows = new JSONArray();
+uploadRows.put(new JSONObject()
+    .put("name", "已上傳附件.pdf")
+    .put("fileName", "已上傳附件.pdf")
+    .put("url", "/uploads/page/attachment.pdf"));
+
+JSONObject uploadFile = new JSONObject();
+uploadFile.put("type", "upload-file");
+uploadFile.put("sortOrder", 7);
+uploadFile.put("content", new JSONObject()
+    .put("headers", uploadHeaders)
+    .put("rows", uploadRows)
+);
+pageBlocks.put(uploadFile);
+
+JSONArray tableHeaders = new JSONArray();
+tableHeaders.put("項目");
+tableHeaders.put("說明");
+JSONArray tableRows = new JSONArray();
+tableRows.put(new JSONArray().put("服務時間").put("24 小時線上服務"));
+tableRows.put(new JSONArray().put("適用對象").put("本行個人金融客戶"));
+
+JSONObject table = new JSONObject();
+table.put("type", "table");
+table.put("sortOrder", 8);
+table.put("content", new JSONObject()
+    .put("headers", tableHeaders)
+    .put("rows", tableRows)
+);
+pageBlocks.put(table);
+
+JSONArray foldChildren = new JSONArray();
+foldChildren.put(new JSONObject()
+    .put("type", "subheading")
+    .put("content", new JSONObject().put("text", "如何申請服務？")));
+foldChildren.put(new JSONObject()
+    .put("type", "text")
+    .put("content", new JSONObject().put("html", "<p>登入網路銀行後，依畫面指示完成申請即可。</p>")));
+foldChildren.put(new JSONObject()
+    .put("type", "image")
+    .put("content", new JSONObject()
+        .put("url", "/resources/images/faq-step.jpg")
+        .put("alt", "申請流程說明")));
+
+JSONArray foldTableHeaders = new JSONArray();
+foldTableHeaders.put("步驟");
+foldTableHeaders.put("操作說明");
+JSONArray foldTableRows = new JSONArray();
+foldTableRows.put(new JSONArray().put("1").put("登入網路銀行"));
+foldTableRows.put(new JSONArray().put("2").put("選擇欲申請的服務"));
+foldChildren.put(new JSONObject()
+    .put("type", "table")
+    .put("content", new JSONObject()
+        .put("headers", foldTableHeaders)
+        .put("rows", foldTableRows)));
+
+JSONObject fold = new JSONObject();
+fold.put("type", "fold");
+fold.put("sortOrder", 9);
+fold.put("content", new JSONObject()
+    .put("title", "常見問題")
+    .put("children", foldChildren)
+);
+pageBlocks.put(fold);
+
+String pageBlocksJson = pageBlocks.toString();
+model.addAttribute("pageBlocksJson", pageBlocksJson);
