@@ -117,6 +117,14 @@
             text-decoration: underline;
         }
 
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 12px;
@@ -131,6 +139,11 @@
 
 <body>
 <div class="container">
+    <a class="back-link" href="index.html">
+        <span aria-hidden="true">←</span>
+        返回 AURA 首頁
+    </a>
+
     <h1>AURA 隱私權政策</h1>
 
     <p class="app-description">
@@ -312,8 +325,8 @@
 
         <p>
             電子郵件：
-            <a href="mailto:atharsfake@gmail.com">
-                atharsfake@gmail.com
+            <a href="mailto:aura.recordservice@gmail.com">
+                aura.recordservice@gmail.com
             </a>
         </p>
     </div>
