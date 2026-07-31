@@ -240,6 +240,14 @@ a {
   font-style: normal;
 }
 
+.hero h1 {
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+}
+
+.hero-title-line {
+  white-space: nowrap;
+}
+
 .hero-lead {
   max-width: 610px;
   margin: 28px 0 30px;
@@ -1021,7 +1029,7 @@ a {
 }
 
 .site-footer p {
-  justify-self: end;
+  justify-self: center;
   margin: 0;
   color: var(--ink-soft);
   font-size: 0.72rem;
@@ -1077,13 +1085,6 @@ a {
     justify-self: start;
   }
 
-  .site-footer {
-    grid-template-columns: 1fr auto;
-  }
-
-  .site-footer nav {
-    display: none;
-  }
 }
 
 @media (max-width: 680px) {
@@ -1113,7 +1114,7 @@ a {
   }
 
   .hero h1 {
-    font-size: clamp(2.35rem, 12vw, 3.4rem);
+    font-size: clamp(1.65rem, 8.5vw, 3rem);
   }
 
   .hero-lead {
