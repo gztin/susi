@@ -1,0 +1,158 @@
+name: AURA Monthly Draw
+
+run-name: >-
+  AURA lottery —
+  ${{ github.event_name == 'workflow_dispatch' && inputs.mode || github.event_name }}
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "5 0 1 * *"
+      timezone: "Asia/Taipei"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Choose whether to preview or publish the monthly draw
+        required: true
+        default: dry-run
+        type: choice
+        options:
+          - dry-run
+          - publish
+
+concurrency:
+  group: aura-monthly-draw-pages
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: Test monthly draw generator
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+      - name: Use Node.js 22
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - name: Run tests
+        run: node --test scripts/generate-aura-monthly-draw.test.mjs
+
+  dry-run:
+    name: Preview monthly draw
+    if: github.event_name == 'workflow_dispatch' && inputs.mode == 'dry-run'
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+      - name: Use Node.js 22
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - name: Preview previous month's draw
+        run: node scripts/generate-aura-monthly-draw.mjs --mode dry-run
+
+  publish:
+    name: Publish monthly draw
+    if: >-
+      github.event_name == 'schedule' ||
+      (github.event_name == 'workflow_dispatch' && inputs.mode == 'publish')
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      changed: ${{ steps.draw.outputs.changed }}
+      period: ${{ steps.draw.outputs.period }}
+      status: ${{ steps.draw.outputs.status }}
+    steps:
+      - name: Check out latest master
+        uses: actions/checkout@v6
+        with:
+          ref: master
+          fetch-depth: 0
+      - name: Use Node.js 22
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - name: Generate previous month's draw
+        id: draw
+        run: node scripts/generate-aura-monthly-draw.mjs --mode publish
+      - name: Commit and push draw JSON
+        if: steps.draw.outputs.changed == 'true'
+        env:
+          DRAW_PERIOD: ${{ steps.draw.outputs.period }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- \
+            "aura-lottery/latest.json" \
+            "aura-lottery/draws/${DRAW_PERIOD}.json"
+          if git diff --cached --quiet; then
+            echo "No JSON changes to commit."
+            exit 0
+          fi
+          git commit -m "chore(aura-lottery): publish draw for ${DRAW_PERIOD}"
+          git pull --rebase origin master
+          git push origin HEAD:master
+
+  build-pages:
+    name: Build complete Pages artifact
+    if: >-
+      always() &&
+      needs.test.result == 'success' &&
+      (
+        github.event_name == 'push' ||
+        (
+          needs.publish.result == 'success' &&
+          needs.publish.outputs.changed == 'true'
+        )
+      )
+    needs:
+      - test
+      - publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out latest master
+        uses: actions/checkout@v6
+        with:
+          ref: master
+          fetch-depth: 0
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Prepare complete static site
+        run: |
+          mkdir -p _site
+          git archive --format=tar HEAD | tar -xf - -C _site
+          find _site -type l -delete
+          rm -rf _site/.github _site/scripts
+          touch _site/.nojekyll
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy-pages:
+    name: Deploy GitHub Pages
+    if: needs.build-pages.result == 'success'
+    needs: build-pages
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
