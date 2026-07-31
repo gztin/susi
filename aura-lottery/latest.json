@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "period": "2026-07",
+  "winningSuffix": "K5R",
+  "characterSet": "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "matchLength": 3,
+  "reward": {
+    "type": "theme-color",
+    "id": "theme-ocean-blue",
+    "name": "深海藍"
+  },
+  "drawnAt": "2026-08-01T01:45:31+08:00",
+  "claimDeadline": "2026-08-31T23:59:59+08:00"
+}
