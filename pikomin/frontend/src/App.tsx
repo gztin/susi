@@ -3,6 +3,7 @@ import { Church, Copy, Download, FileInput, FolderOpen, Layers3, Loader2, Lock, 
 import './app.css'
 import { apiClient } from './api/client'
 import { DeviceStatus } from './components/DeviceStatus'
+import { ConnectionStatus } from './components/ConnectionStatus'
 import MapInterface from './components/MapInterface'
 import { RoutePanel } from './components/RoutePanel'
 import { useDevice } from './hooks/useDevice'
@@ -402,6 +403,7 @@ export default function App() {
     removeWaypoint,
     clearWaypoints,
     routeStatus,
+    websocketState,
     startRoute,
     pauseRoute,
     resumeRoute,
@@ -1581,6 +1583,8 @@ export default function App() {
           </section>
         </aside>
       </div>
+
+      <ConnectionStatus websocketState={websocketState} />
 
       <div className="toast-container" role="status" aria-live="polite" aria-atomic="false">
         {toasts.map((toast) => (

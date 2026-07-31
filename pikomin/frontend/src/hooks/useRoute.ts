@@ -8,6 +8,8 @@ const INITIAL_ROUTE_STATUS: RouteStatus = {
   progress: 0,
 }
 
+export type WebSocketConnectionState = 'connected' | 'reconnecting' | 'disconnected'
+
 interface ActiveRouteOptions {
   speed: number
   loop: boolean
@@ -25,6 +27,7 @@ export function useRoute(
   removeWaypoint: (index: number) => void
   clearWaypoints: () => void
   routeStatus: RouteStatus
+  websocketState: WebSocketConnectionState
   startRoute: (speed: number, loop: boolean) => Promise<void>
   pauseRoute: () => Promise<void>
   resumeRoute: () => Promise<void>
@@ -34,6 +37,7 @@ export function useRoute(
 } {
   const [waypoints, setWaypoints] = useState<GPSCoordinate[]>([])
   const [routeStatus, setRouteStatus] = useState<RouteStatus>(INITIAL_ROUTE_STATUS)
+  const [websocketState, setWebsocketState] = useState<WebSocketConnectionState>('reconnecting')
   const currentPositionRef = useRef<GPSCoordinate | null>(initialPosition ?? null)
   const lastWsPositionAtRef = useRef(0)
   const activeRouteOptionsRef = useRef<ActiveRouteOptions | null>(null)
@@ -45,6 +49,17 @@ export function useRoute(
   }, [initialPosition])
 
   const handleWsMessage = useCallback((update: StatusUpdate) => {
+    if (update.type === 'status') {
+      const connectionData = update.data as { connected?: boolean; reconnecting?: boolean }
+      if (connectionData.connected === true) {
+        setWebsocketState('connected')
+      } else if (connectionData.reconnecting === true) {
+        setWebsocketState('reconnecting')
+      } else if (connectionData.connected === false) {
+        setWebsocketState('disconnected')
+      }
+    }
+
     if (update.type === 'position') {
       const data = update.data as { latitude?: number; longitude?: number; progress?: number }
       if (data.latitude !== undefined && data.longitude !== undefined) {
@@ -211,6 +226,7 @@ export function useRoute(
     removeWaypoint,
     clearWaypoints,
     routeStatus,
+    websocketState,
     startRoute,
     pauseRoute,
     resumeRoute,
