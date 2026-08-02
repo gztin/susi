@@ -33,7 +33,7 @@
     <title>AURA｜Agent Usage Records</title>
     <link rel="icon" type="image/png" href="assets/app-icon.png" />
     <link rel="apple-touch-icon" href="assets/app-icon.png" />
-    <link rel="stylesheet" href="assets/landing.css?v=20260731-1" />
+    <link rel="stylesheet" href="assets/landing.css?v=20260802-1" />
   </head>
 
   <body>
@@ -115,27 +115,89 @@
           <div
             class="lottery-status-card"
             data-lottery-card
-            data-state="countdown"
-            aria-live="polite"
+            data-state="result"
           >
-            <div class="lottery-status-heading">
-              <div>
-                <p class="lottery-period">2026-09-01</p>
-                <h3>距離開獎還有</h3>
+            <div class="lottery-tabs" role="tablist" aria-label="兌獎資訊">
+              <button
+                id="lottery-result-tab"
+                class="lottery-tab"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                aria-controls="lottery-result-panel"
+                data-lottery-tab="result"
+              >
+                本期開獎資訊
+              </button>
+              <button
+                id="lottery-countdown-tab"
+                class="lottery-tab"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="lottery-countdown-panel"
+                tabindex="-1"
+                data-lottery-tab="countdown"
+              >
+                開獎倒數時間
+              </button>
+            </div>
+
+            <section
+              id="lottery-result-panel"
+              class="lottery-tab-panel"
+              role="tabpanel"
+              aria-labelledby="lottery-result-tab"
+              aria-live="polite"
+              data-lottery-panel="result"
+            >
+              <div class="lottery-status-heading">
+                <div>
+                  <p class="lottery-period" data-result-period>本期開獎</p>
+                  <h3>本期開獎結果</h3>
+                </div>
+                <span class="lottery-status-badge">已開獎</span>
               </div>
-              <span class="lottery-status-badge" data-lottery-badge>倒數中</span>
-            </div>
 
-            <div class="lottery-countdown" data-lottery-countdown>
-              <div><strong data-countdown-days>--</strong><span>天</span></div>
-              <div><strong data-countdown-hours>--</strong><span>時</span></div>
-              <div><strong data-countdown-minutes>--</strong><span>分</span></div>
-              <div><strong data-countdown-seconds>--</strong><span>秒</span></div>
-            </div>
+              <div class="lottery-result">
+                <p>本期中獎末三碼</p>
+                <strong data-winning-suffix>---</strong>
+                <small data-claim-deadline>開獎資訊載入中</small>
+              </div>
 
-            <p class="lottery-status-message" data-lottery-message>
-              中獎號碼將在倒數結束後公布
-            </p>
+              <p class="lottery-status-message" data-result-message>
+                請在 AURA App 內比對發票末三碼
+              </p>
+            </section>
+
+            <section
+              id="lottery-countdown-panel"
+              class="lottery-tab-panel"
+              role="tabpanel"
+              aria-labelledby="lottery-countdown-tab"
+              aria-live="polite"
+              data-lottery-panel="countdown"
+              hidden
+            >
+              <div class="lottery-status-heading">
+                <div>
+                  <p class="lottery-period">2026-09-01</p>
+                  <h3>距離開獎還有</h3>
+                </div>
+                <span class="lottery-status-badge" data-countdown-badge>倒數中</span>
+              </div>
+
+              <div class="lottery-countdown">
+                <div><strong data-countdown-days>--</strong><span>天</span></div>
+                <div><strong data-countdown-hours>--</strong><span>時</span></div>
+                <div><strong data-countdown-minutes>--</strong><span>分</span></div>
+                <div><strong data-countdown-seconds>--</strong><span>秒</span></div>
+              </div>
+
+              <p class="lottery-status-message" data-countdown-message>
+                中獎號碼將在倒數結束後公布
+              </p>
+            </section>
           </div>
         </div>
       </section>
@@ -299,17 +361,82 @@
         if (!card) return;
 
         const drawAt = Date.parse("2026-09-01T00:05:00+08:00");
-        const badge = card.querySelector("[data-lottery-badge]");
-        const message = card.querySelector("[data-lottery-message]");
+        const tabs = [...card.querySelectorAll("[data-lottery-tab]")];
+        const panels = [...card.querySelectorAll("[data-lottery-panel]")];
+        const countdownBadge = card.querySelector("[data-countdown-badge]");
+        const countdownMessage = card.querySelector("[data-countdown-message]");
+        const resultPeriod = card.querySelector("[data-result-period]");
+        const resultMessage = card.querySelector("[data-result-message]");
+        const winningSuffix = card.querySelector("[data-winning-suffix]");
+        const claimDeadline = card.querySelector("[data-claim-deadline]");
         const units = {
           days: card.querySelector("[data-countdown-days]"),
           hours: card.querySelector("[data-countdown-hours]"),
           minutes: card.querySelector("[data-countdown-minutes]"),
           seconds: card.querySelector("[data-countdown-seconds]"),
         };
+        const validSuffix = /^[0-9A-Z]{3}$/;
+
+        function selectTab(name, focus = false) {
+          tabs.forEach((tab) => {
+            const selected = tab.dataset.lotteryTab === name;
+            tab.setAttribute("aria-selected", String(selected));
+            tab.tabIndex = selected ? 0 : -1;
+            if (selected && focus) tab.focus();
+          });
+          panels.forEach((panel) => {
+            panel.hidden = panel.dataset.lotteryPanel !== name;
+          });
+          card.dataset.state = name;
+        }
+
+        tabs.forEach((tab, index) => {
+          tab.addEventListener("click", () => selectTab(tab.dataset.lotteryTab));
+          tab.addEventListener("keydown", (event) => {
+            if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+            event.preventDefault();
+            let nextIndex = index;
+            if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+            if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+            if (event.key === "Home") nextIndex = 0;
+            if (event.key === "End") nextIndex = tabs.length - 1;
+            selectTab(tabs[nextIndex].dataset.lotteryTab, true);
+          });
+        });
 
         function pad(value) {
           return String(value).padStart(2, "0");
+        }
+
+        function formatDeadline(value) {
+          const match = /^(\d{4})-(\d{2})-(\d{2})T/.exec(value ?? "");
+          if (!match) return "";
+          return `兌獎期限：${match[1]} 年 ${Number(match[2])} 月 ${Number(match[3])} 日`;
+        }
+
+        async function loadLatestDraw() {
+          try {
+            const response = await fetch(`../aura-lottery/latest.json?t=${Date.now()}`, {
+              cache: "no-store",
+            });
+            if (!response.ok) throw new Error("Draw result unavailable");
+            const draw = await response.json();
+            const validDraw =
+              [1, 2].includes(draw.schemaVersion) &&
+              /^\d{4}-(0[1-9]|1[0-2])$/.test(draw.period) &&
+              validSuffix.test(draw.winningSuffix) &&
+              typeof draw.claimDeadline === "string";
+            if (!validDraw) throw new Error("Invalid draw result");
+
+            resultPeriod.textContent = `${draw.period} 期`;
+            winningSuffix.textContent = draw.winningSuffix;
+            claimDeadline.textContent = formatDeadline(draw.claimDeadline);
+          } catch {
+            resultPeriod.textContent = "本期開獎";
+            winningSuffix.textContent = "---";
+            claimDeadline.textContent = "目前無法取得開獎資訊";
+            resultMessage.textContent = "請稍後重新整理頁面再試";
+          }
         }
 
         function updateCountdown() {
@@ -322,11 +449,12 @@
           units.seconds.textContent = pad(totalSeconds % 60);
 
           if (remaining === 0) {
-            badge.textContent = "開獎中";
-            message.textContent = "結果發布中，請稍候";
+            countdownBadge.textContent = "開獎中";
+            countdownMessage.textContent = "結果發布中，請稍候";
           }
         }
 
+        loadLatestDraw();
         updateCountdown();
         const countdownTimer = window.setInterval(updateCountdown, 1000);
         window.addEventListener("pagehide", () => {
