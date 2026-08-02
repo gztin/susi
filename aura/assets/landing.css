@@ -1132,6 +1132,10 @@ a {
   outline-offset: 2px;
 }
 
+.lottery-tab-panel {
+  min-height: 272px;
+}
+
 .lottery-tab-panel[hidden] {
   display: none;
 }
@@ -1454,6 +1458,10 @@ a {
   .lottery-tabs {
     display: grid;
     margin-bottom: 24px;
+  }
+
+  .lottery-tab-panel {
+    min-height: 264px;
   }
 
   .lottery-tab {

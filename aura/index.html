@@ -33,7 +33,7 @@
     <title>AURA｜Agent Usage Records</title>
     <link rel="icon" type="image/png" href="assets/app-icon.png" />
     <link rel="apple-touch-icon" href="assets/app-icon.png" />
-    <link rel="stylesheet" href="assets/landing.css?v=20260802-1" />
+    <link rel="stylesheet" href="assets/landing.css?v=20260802-2" />
   </head>
 
   <body>
@@ -165,9 +165,6 @@
                 <small data-claim-deadline>開獎資訊載入中</small>
               </div>
 
-              <p class="lottery-status-message" data-result-message>
-                請在 AURA App 內比對發票末三碼
-              </p>
             </section>
 
             <section
@@ -366,7 +363,6 @@
         const countdownBadge = card.querySelector("[data-countdown-badge]");
         const countdownMessage = card.querySelector("[data-countdown-message]");
         const resultPeriod = card.querySelector("[data-result-period]");
-        const resultMessage = card.querySelector("[data-result-message]");
         const winningSuffix = card.querySelector("[data-winning-suffix]");
         const claimDeadline = card.querySelector("[data-claim-deadline]");
         const units = {
@@ -434,8 +430,7 @@
           } catch {
             resultPeriod.textContent = "本期開獎";
             winningSuffix.textContent = "---";
-            claimDeadline.textContent = "目前無法取得開獎資訊";
-            resultMessage.textContent = "請稍後重新整理頁面再試";
+            claimDeadline.textContent = "目前無法取得開獎資訊，請稍後再試";
           }
         }
 
