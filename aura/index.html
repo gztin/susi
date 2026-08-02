@@ -50,6 +50,7 @@
 
       <nav aria-label="主要導覽">
         <a href="#top">功能</a>
+        <a href="#lottery">兌獎專區</a>
         <a href="#personalize">安裝與個人化</a>
         <a href="#privacy-details">隱私說明</a>
       </nav>
@@ -96,6 +97,46 @@
             src="assets/mission-invoice-receipt.png"
             alt="Mission Invoice 任務發票，顯示任務、模型、耗時與 Token 使用量"
           />
+        </div>
+      </section>
+
+      <section id="lottery" class="lottery-section">
+        <div class="section-shell lottery-panel">
+          <div class="lottery-copy">
+            <p class="eyebrow"><span></span> MONTHLY LOTTERY</p>
+            <h2>AURA 每月發票<br />趣味兌獎</h2>
+            <p>
+              AURA 每個月會自動比對你的本機發票紀錄並進行兌獎，
+              中獎後即可解鎖限定主題模板或收據樣式獎勵。
+            </p>
+            <p class="lottery-time-note">9 月 1 日 00:05（台北時間）開獎</p>
+          </div>
+
+          <div
+            class="lottery-status-card"
+            data-lottery-card
+            data-state="countdown"
+            aria-live="polite"
+          >
+            <div class="lottery-status-heading">
+              <div>
+                <p class="lottery-period">2026-09-01</p>
+                <h3>距離開獎還有</h3>
+              </div>
+              <span class="lottery-status-badge" data-lottery-badge>倒數中</span>
+            </div>
+
+            <div class="lottery-countdown" data-lottery-countdown>
+              <div><strong data-countdown-days>--</strong><span>天</span></div>
+              <div><strong data-countdown-hours>--</strong><span>時</span></div>
+              <div><strong data-countdown-minutes>--</strong><span>分</span></div>
+              <div><strong data-countdown-seconds>--</strong><span>秒</span></div>
+            </div>
+
+            <p class="lottery-status-message" data-lottery-message>
+              中獎號碼將在倒數結束後公布
+            </p>
+          </div>
         </div>
       </section>
 
@@ -252,6 +293,46 @@
           }
         });
       });
+
+      (() => {
+        const card = document.querySelector("[data-lottery-card]");
+        if (!card) return;
+
+        const drawAt = Date.parse("2026-09-01T00:05:00+08:00");
+        const badge = card.querySelector("[data-lottery-badge]");
+        const message = card.querySelector("[data-lottery-message]");
+        const units = {
+          days: card.querySelector("[data-countdown-days]"),
+          hours: card.querySelector("[data-countdown-hours]"),
+          minutes: card.querySelector("[data-countdown-minutes]"),
+          seconds: card.querySelector("[data-countdown-seconds]"),
+        };
+
+        function pad(value) {
+          return String(value).padStart(2, "0");
+        }
+
+        function updateCountdown() {
+          const remaining = Math.max(0, drawAt - Date.now());
+          const totalSeconds = Math.floor(remaining / 1000);
+
+          units.days.textContent = pad(Math.floor(totalSeconds / 86400));
+          units.hours.textContent = pad(Math.floor((totalSeconds % 86400) / 3600));
+          units.minutes.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
+          units.seconds.textContent = pad(totalSeconds % 60);
+
+          if (remaining === 0) {
+            badge.textContent = "開獎中";
+            message.textContent = "結果發布中，請稍候";
+          }
+        }
+
+        updateCountdown();
+        const countdownTimer = window.setInterval(updateCountdown, 1000);
+        window.addEventListener("pagehide", () => {
+          window.clearInterval(countdownTimer);
+        });
+      })();
 
     </script>
   </body>
