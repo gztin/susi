@@ -14,11 +14,6 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 export const CHARACTER_SET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 export const MATCH_LENGTH = 3;
 export const TIME_ZONE = "Asia/Taipei";
-export const REWARD = Object.freeze({
-  type: "theme-color",
-  id: "theme-ocean-blue",
-  name: "深海藍",
-});
 
 const SCRIPT_DIRECTORY = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(SCRIPT_DIRECTORY, "..");
@@ -29,11 +24,9 @@ const DRAW_KEYS = [
   "drawnAt",
   "matchLength",
   "period",
-  "reward",
   "schemaVersion",
   "winningSuffix",
 ];
-const REWARD_KEYS = ["id", "name", "type"];
 const PERIOD_PATTERN = /^\d{4}-(0[1-9]|1[0-2])$/;
 const TAIPEI_ISO_PATTERN =
   /^\d{4}-(0[1-9]|1[0-2])-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\+08:00$/;
@@ -104,12 +97,11 @@ export function generateWinningSuffix() {
 
 export function createDraw(date = new Date()) {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     period: getPreviousPeriod(date),
     winningSuffix: generateWinningSuffix(),
     characterSet: CHARACTER_SET,
     matchLength: MATCH_LENGTH,
-    reward: { ...REWARD },
     drawnAt: formatTaipeiIso(date),
     claimDeadline: getClaimDeadline(date),
   };
@@ -126,7 +118,7 @@ export function validateDraw(draw) {
   ) {
     errors.push("Draw contains missing or unexpected fields.");
   }
-  if (draw.schemaVersion !== 1) errors.push("schemaVersion must be 1.");
+  if (draw.schemaVersion !== 2) errors.push("schemaVersion must be 2.");
   if (!PERIOD_PATTERN.test(draw.period ?? "")) {
     errors.push("period must use YYYY-MM.");
   }
@@ -144,18 +136,6 @@ export function validateDraw(draw) {
   }
   if (draw.matchLength !== MATCH_LENGTH) {
     errors.push("matchLength must be 3.");
-  }
-  if (
-    !draw.reward ||
-    typeof draw.reward !== "object" ||
-    Array.isArray(draw.reward) ||
-    JSON.stringify(Object.keys(draw.reward).sort()) !==
-      JSON.stringify(REWARD_KEYS) ||
-    draw.reward.type !== REWARD.type ||
-    draw.reward.id !== REWARD.id ||
-    draw.reward.name !== REWARD.name
-  ) {
-    errors.push("reward is incomplete or unsupported.");
   }
   if (!TAIPEI_ISO_PATTERN.test(draw.drawnAt ?? "")) {
     errors.push("drawnAt must be a Taipei ISO timestamp with +08:00.");

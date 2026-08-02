@@ -109,7 +109,7 @@
               AURA 每個月會自動比對你的本機發票紀錄並進行兌獎，
               中獎後即可解鎖限定主題模板或收據樣式獎勵。
             </p>
-            <p class="lottery-time-note">每月 1 日 00:05（台北時間）開出上一月份結果</p>
+            <p class="lottery-time-note">9 月 1 日 00:05（台北時間）開獎</p>
           </div>
 
           <div
@@ -120,8 +120,8 @@
           >
             <div class="lottery-status-heading">
               <div>
-                <p class="lottery-period" data-lottery-period>下期開獎</p>
-                <h3 data-lottery-title>距離開獎還有</h3>
+                <p class="lottery-period">2026-09-01</p>
+                <h3>距離開獎還有</h3>
               </div>
               <span class="lottery-status-badge" data-lottery-badge>倒數中</span>
             </div>
@@ -131,16 +131,6 @@
               <div><strong data-countdown-hours>--</strong><span>時</span></div>
               <div><strong data-countdown-minutes>--</strong><span>分</span></div>
               <div><strong data-countdown-seconds>--</strong><span>秒</span></div>
-            </div>
-
-            <div class="lottery-result" data-lottery-result hidden>
-              <p>本期中獎末三碼</p>
-              <strong data-winning-suffix>---</strong>
-              <div class="lottery-reward">
-                <span>解鎖獎勵</span>
-                <b data-lottery-reward>主題色彩</b>
-              </div>
-              <small data-claim-deadline></small>
             </div>
 
             <p class="lottery-status-message" data-lottery-message>
@@ -308,137 +298,24 @@
         const card = document.querySelector("[data-lottery-card]");
         if (!card) return;
 
-        const countdown = card.querySelector("[data-lottery-countdown]");
-        const result = card.querySelector("[data-lottery-result]");
-        const period = card.querySelector("[data-lottery-period]");
-        const title = card.querySelector("[data-lottery-title]");
+        const drawAt = Date.parse("2026-09-01T00:05:00+08:00");
         const badge = card.querySelector("[data-lottery-badge]");
         const message = card.querySelector("[data-lottery-message]");
-        const suffix = card.querySelector("[data-winning-suffix]");
-        const reward = card.querySelector("[data-lottery-reward]");
-        const deadline = card.querySelector("[data-claim-deadline]");
         const units = {
           days: card.querySelector("[data-countdown-days]"),
           hours: card.querySelector("[data-countdown-hours]"),
           minutes: card.querySelector("[data-countdown-minutes]"),
           seconds: card.querySelector("[data-countdown-seconds]"),
         };
-        const taipeiFormatter = new Intl.DateTimeFormat("en-CA", {
-          timeZone: "Asia/Taipei",
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hourCycle: "h23",
-        });
-        const validSuffix = /^[0-9A-Z]{3}$/;
-        let publishedPeriod = null;
-        let refreshTimer = null;
-
-        function taipeiParts(date) {
-          return Object.fromEntries(
-            taipeiFormatter
-              .formatToParts(date)
-              .filter((part) => part.type !== "literal")
-              .map((part) => [part.type, Number(part.value)]),
-          );
-        }
 
         function pad(value) {
           return String(value).padStart(2, "0");
         }
 
-        function nextDraw(now = new Date()) {
-          const parts = taipeiParts(now);
-          const thisMonthDraw = Date.UTC(
-            parts.year,
-            parts.month - 1,
-            1,
-            0 - 8,
-            5,
-          );
-          const target =
-            now.getTime() < thisMonthDraw
-              ? thisMonthDraw
-              : Date.UTC(parts.year, parts.month, 1, 0 - 8, 5);
-          const targetParts = taipeiParts(new Date(target));
-          const drawPeriodDate = new Date(
-            Date.UTC(targetParts.year, targetParts.month - 2, 1),
-          );
-          const drawPeriod = `${drawPeriodDate.getUTCFullYear()}-${pad(
-            drawPeriodDate.getUTCMonth() + 1,
-          )}`;
-          return { target, period: drawPeriod };
-        }
-
-        const scheduledDraw = nextDraw();
-
-        function formatDeadline(value) {
-          const match = /^(\d{4})-(\d{2})-(\d{2})T/.exec(value ?? "");
-          if (!match) return "";
-          return `兌獎期限：${match[1]} 年 ${Number(match[2])} 月 ${Number(
-            match[3],
-          )} 日`;
-        }
-
-        function showResult(draw) {
-          publishedPeriod = draw.period;
-          card.dataset.state = "result";
-          period.textContent = `${draw.period} 期`;
-          title.textContent = "本期開獎結果";
-          badge.textContent = "已開獎";
-          suffix.textContent = draw.winningSuffix;
-          reward.textContent = draw.reward.name;
-          deadline.textContent = formatDeadline(draw.claimDeadline);
-          message.textContent = "請在 AURA App 內比對發票末三碼";
-          countdown.hidden = true;
-          result.hidden = false;
-        }
-
-        function isValidDraw(draw) {
-          return Boolean(
-            draw &&
-              draw.schemaVersion === 1 &&
-              /^\d{4}-(0[1-9]|1[0-2])$/.test(draw.period) &&
-              validSuffix.test(draw.winningSuffix) &&
-              draw.characterSet === "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ" &&
-              draw.matchLength === 3 &&
-              draw.reward &&
-              typeof draw.reward.name === "string" &&
-              typeof draw.claimDeadline === "string",
-          );
-        }
-
-        async function loadLatestDraw() {
-          try {
-            const response = await fetch(
-              `../aura-lottery/latest.json?t=${Date.now()}`,
-              { cache: "no-store" },
-            );
-            if (!response.ok) return;
-            const draw = await response.json();
-            if (isValidDraw(draw)) showResult(draw);
-          } catch {
-            // Keep the countdown available when the public result is offline.
-          }
-        }
-
         function updateCountdown() {
-          const now = new Date();
-          const draw = scheduledDraw;
-          if (publishedPeriod) return;
-
-          card.dataset.state = "countdown";
-          period.textContent = `${draw.period} 期`;
-          title.textContent = "距離開獎還有";
-          badge.textContent = "倒數中";
-          countdown.hidden = false;
-          result.hidden = true;
-
-          const remaining = Math.max(0, draw.target - now.getTime());
+          const remaining = Math.max(0, drawAt - Date.now());
           const totalSeconds = Math.floor(remaining / 1000);
+
           units.days.textContent = pad(Math.floor(totalSeconds / 86400));
           units.hours.textContent = pad(Math.floor((totalSeconds % 86400) / 3600));
           units.minutes.textContent = pad(Math.floor((totalSeconds % 3600) / 60));
@@ -447,22 +324,16 @@
           if (remaining === 0) {
             badge.textContent = "開獎中";
             message.textContent = "結果發布中，請稍候";
-            if (!refreshTimer) {
-              refreshTimer = window.setInterval(loadLatestDraw, 30000);
-            }
-          } else {
-            message.textContent = "中獎號碼將在倒數結束後公布";
           }
         }
 
-        loadLatestDraw();
         updateCountdown();
         const countdownTimer = window.setInterval(updateCountdown, 1000);
         window.addEventListener("pagehide", () => {
           window.clearInterval(countdownTimer);
-          if (refreshTimer) window.clearInterval(refreshTimer);
         });
       })();
+
     </script>
   </body>
 </html>
