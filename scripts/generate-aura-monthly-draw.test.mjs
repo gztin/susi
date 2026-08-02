@@ -62,15 +62,10 @@ test("creates a complete schema-valid draw", () => {
     "winningSuffix",
     "characterSet",
     "matchLength",
-    "reward",
     "drawnAt",
     "claimDeadline",
   ]);
-  assert.deepEqual(draw.reward, {
-    type: "theme-color",
-    id: "theme-ocean-blue",
-    name: "深海藍",
-  });
+  assert.equal(draw.schemaVersion, 2);
 });
 
 test("rejects unexpected public fields", () => {
