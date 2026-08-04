@@ -1274,8 +1274,8 @@ select {
   border-radius: var(--control-radius);
 }
 
-.route-library-panel {
-  width: min(520px, calc(100vw - 48px));
+.modal-panel.route-library-panel {
+  width: min(760px, calc(100vw - 48px));
 }
 
 .route-library-header {
@@ -1309,7 +1309,18 @@ select {
 }
 
 .route-library-list .saved-route-item {
+  grid-template-columns: minmax(260px, 1fr) auto;
   padding: 10px 10px 10px 12px;
+}
+
+@media (max-width: 720px) {
+  .route-library-list .saved-route-item {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .route-library-list .saved-route-actions {
+    justify-content: flex-start;
+  }
 }
 
 .route-manager-list {

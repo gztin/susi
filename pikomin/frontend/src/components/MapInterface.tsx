@@ -389,12 +389,15 @@ export default function MapInterface({
         popupAnchor: [0, -12],
       })
       const marker = L.marker([landmark.coordinate.latitude, landmark.coordinate.longitude], { icon }).addTo(map)
+      const coordinateLine = mode === 'route'
+        ? ''
+        : `<br/>${landmark.coordinate.latitude.toFixed(6)}, ${landmark.coordinate.longitude.toFixed(6)}`
       marker.bindPopup(
-        `<strong>${escapeHtml(landmark.name)}</strong><br/><span>${label}</span><br/>${landmark.coordinate.latitude.toFixed(6)}, ${landmark.coordinate.longitude.toFixed(6)}`
+        `<strong>${escapeHtml(landmark.name)}</strong><br/><span>${label}</span>${coordinateLine}`
       )
       landmarkMarkersRef.current.push(marker)
     })
-  }, [savedLandmarks])
+  }, [mode, savedLandmarks])
 
   useEffect(() => {
     const map = mapRef.current
